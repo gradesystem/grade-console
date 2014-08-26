@@ -9,7 +9,7 @@
   <baseDirectory>/</baseDirectory>
   <fileSets>
     <fileSet>
-      <directory>build</directory>
+      <directory>build/web</directory>
       <outputDirectory>/</outputDirectory>
       <useDefaultExcludes>true</useDefaultExcludes>
     </fileSet>
