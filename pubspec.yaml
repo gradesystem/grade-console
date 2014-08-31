@@ -1,4 +1,6 @@
 name: grade_console
-description: A sample web application
+description: Grade's Administrative Console
 dependencies:
-  browser: any
+  polymer: ">=0.13.0 <0.14.0"
+  core_elements: ">=0.2.0 <0.3.0"
+  paper_elements: ">=0.1.0 <0.2.0"

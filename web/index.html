@@ -1,20 +1,32 @@
 <!DOCTYPE html>
 
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Grade console</title>
-    
-    <script async type="application/dart" src="console.dart"></script>
-    <script async src="packages/browser/dart.js"></script>
-    
-    <link rel="stylesheet" href="grade_console.css">
-  </head>
-  <body>
-    <h1>Grade console</h1>
-    
-    <p>coming soonish.</p>
-  
-  </body>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Grade console</title>
+
+<link href="//fonts.googleapis.com/css?family=Roboto:300,400" rel="stylesheet">
+<link rel="stylesheet" href="console.css">
+
+<script src="packages/web_components/platform.js"></script>
+<script src="packages/web_components/dart_support.js"></script>
+
+<!-- polymer imports -->
+<link rel="import" href="/packages/polymer/polymer.html">
+
+
+</head>
+<body fullbleed unresolved>
+
+	<div class="tall blue" layout horizontal end>
+		<div class="inwhite spaced" layout vertical>
+			<div class="title">Grade Console</div>
+			<div class="subtitle">coming soon.</div>
+		</div>
+	</div>
+
+	<script async type="application/dart" src="console.dart"></script>
+	<script async src="packages/browser/dart.js"></script>
+</body>
 </html>
