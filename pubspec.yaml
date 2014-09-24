@@ -5,3 +5,8 @@ dependencies:
   polymer: any
   core_elements: any
   paper_elements: any
+  di: ">=3.1.0 <4.0.0"
+
+transformers:
+- polymer
+- di
