@@ -9,23 +9,18 @@
 		<link href="//fonts.googleapis.com/css?family=Roboto:300,400" rel="stylesheet">
 		<link rel="stylesheet" href="console.css">
 		
-		<script src="packages/web_components/platform.js"></script>
 		<script src="packages/web_components/dart_support.js"></script>
 		
 		<!-- polymer imports -->
 		<link rel="import" href="packages/polymer/polymer.html">
+		<link rel="import" href="packages/grade_console/grade/grade_console.html">
 	
 	</head>
 	<body fullbleed unresolved>
-	
-		<div class="tall blue" layout horizontal end>
-			<div class="inwhite spaced" layout vertical>
-				<div class="title">Grade Console</div>
-				<div class="subtitle">coming soon, L.</div>
-			</div>
-		</div>
-	
-		<script type="application/dart" src="console.dart"></script>
+
+    <grade-console></grade-console>
+ 
+    <script type="application/dart" src="main.dart"></script>
 		<script type="text/javascript" src="packages/browser/dart.js"></script>
 	</body>
 </html>

@@ -1,0 +1,16 @@
+<link rel="import" href="../../../packages/polymer/polymer.html">
+<link rel="import" href="../../../packages/core_elements/core_pages.html">
+<link rel="import" href="../grade/console_header.html">
+<link rel="import" href="../staging/staging_page.html">
+<link rel="import" href="../home/home_page.html">
+
+<polymer-element name="grade-console"> 
+  <template>
+    <console-header on-areaselected="{{onAreaSelected}}" menubarVisible="{{menubarVisible}}"></console-header>
+		  <core-pages selected='{{model.area}}'>
+				<home-page on-areaselected="{{onAreaSelected}}"></home-page>
+				<staging-page></staging-page>
+		  </core-pages>
+    </template> 
+  <script type="application/dart" src="../grade.dart"></script> 
+</polymer-element>

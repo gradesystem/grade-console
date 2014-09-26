@@ -1,0 +1,69 @@
+<link rel="import" href="../../../packages/polymer/polymer.html">
+<link rel="import" href="../../../packages/core_elements/core_animation.html">
+
+<polymer-element name="console-header" attributes="menubarVisible"> 
+ 
+ <template>
+    <style>
+      .tall {
+        height: 200px;
+      }
+      
+      .blue {
+        background: #5674b8;
+      }
+      
+      .inwhite {
+        color: white;
+      }
+      
+      .title {
+        font-size:3em;
+      }
+      
+      .subtitle {
+        margin-top:-2%;
+        font-size:1.1em;
+      }
+      
+			.spaced {
+			  margin: 10px;
+			}
+    </style>
+    <core-animation id="fadeout" duration="300" fill="forwards">
+		  <core-animation-keyframe>
+		    <core-animation-prop name="opacity" value="1"></core-animation-prop>
+		  </core-animation-keyframe>
+		  <core-animation-keyframe>
+		    <core-animation-prop name="opacity" value="0"></core-animation-prop>
+		  </core-animation-keyframe>
+		</core-animation>
+		
+		<core-animation id="fadein" duration="300" fill="forwards">
+      <core-animation-keyframe>
+        <core-animation-prop name="opacity" value="0"></core-animation-prop>
+      </core-animation-keyframe>
+      <core-animation-keyframe>
+        <core-animation-prop name="opacity" value="1"></core-animation-prop>
+      </core-animation-keyframe>
+    </core-animation>
+		
+    <div class="tall blue" layout horizontal end>
+      <div class="inwhite spaced" layout vertical>
+        <div class="title">Grade Console</div>
+        <div class="subtitle">coming soon, L.</div>
+      </div>
+      <div flex></div>
+      <div horizontal layout justified id="menubar">
+        <button on-click="{{onMenuClick}}" data-area='Home'>Home</button>
+        <button on-click="{{onMenuClick}}" data-area='Area1'>Area1</button>
+        <button on-click="{{onMenuClick}}" data-area='Area2'>Area2</button>
+        <button on-click="{{onMenuClick}}" data-area='Area3'>Area3</button>
+        <button on-click="{{onMenuClick}}" data-area='Area4'>Area4</button>
+      </div>
+    </div>
+ </template> 
+ 
+ <script type="application/dart" src="console_header.dart"></script> 
+ 
+ </polymer-element>

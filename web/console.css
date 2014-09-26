@@ -3,28 +3,3 @@ body {
 	font-family: 'Roboto', sans-serif;
 	font-weight: lighter;
 }
-
-.tall {
-  height: 200px;
-}
-
-.blue {
-	background: #5674b8;
-}
-
-.inwhite {
-	color: white;
-}
-
-.title {
-	font-size:3em;
-}
-
-.subtitle {
-  margin-top:-2%;
-  font-size:1.1em;
-}
-
-.spaced {
-  margin: 10px;
-}
