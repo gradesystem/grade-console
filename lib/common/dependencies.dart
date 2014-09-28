@@ -14,7 +14,7 @@ class Dependencies {
     
     injector= new ModuleInjector(modules);
     
-   }
+  }
   
   static bind(String name, Type type) {
     typemap[name] = type;
@@ -34,7 +34,7 @@ class Dependencies {
            throw new StateError("injector is not initialised");
        
        if (!typemap.containsKey(name))
-         throw new ArgumentError("no registered type for $name");
+         throw new ArgumentError("no type registered for $name");
        
        return instanceOf(typemap[name]);
        

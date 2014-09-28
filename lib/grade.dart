@@ -26,6 +26,8 @@ init() {
    Logger.root.level = Level.ALL;
     Logger.root.onRecord.listen((LogRecord rec) {
       print('${rec.level.name}: ${rec.time}, ${rec.loggerName}: ${rec.message}');
+      if (rec.error!=null)
+        print('error => ${rec.error} \ntrace => ${rec.stackTrace}');
     });
 
     _log.info("initialising...");
