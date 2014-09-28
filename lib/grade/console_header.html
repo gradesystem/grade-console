@@ -1,4 +1,5 @@
 <link rel="import" href="../../../packages/polymer/polymer.html">
+<link rel="import" href="../../../packages/paper_elements/paper_button.html">
 <link rel="import" href="../../../packages/core_elements/core_animation.html">
 
 <polymer-element name="console-header" attributes="menubarVisible"> 
@@ -30,6 +31,7 @@
 			  margin: 10px;
 			}
     </style>
+    
     <core-animation id="fadeout" duration="300" fill="forwards">
 		  <core-animation-keyframe>
 		    <core-animation-prop name="opacity" value="1"></core-animation-prop>
@@ -54,12 +56,12 @@
         <div class="subtitle">coming soon...</div>
       </div>
       <div flex></div>
-      <div horizontal layout justified id="menubar">
-        <button on-click="{{onMenuClick}}" data-area='Home'>Home</button>
-        <button on-click="{{onMenuClick}}" data-area='Production'>Production</button>
-        <button on-click="{{onMenuClick}}" data-area='Deck'>Deck</button>
-        <button on-click="{{onMenuClick}}" data-area='Catalogue'>Catalogue</button>
-        <button on-click="{{onMenuClick}}" data-area='Staging'>Staging</button>
+      <div class="inwhite" horizontal layout justified id="menubar">
+        <paper-button on-click="{{onMenuClick}}" data-area='Home'>Home</paper-button>
+        <paper-button on-click="{{onMenuClick}}" data-area='Production'>Production</paper-button>
+        <paper-button on-click="{{onMenuClick}}" data-area='Deck'>Deck</paper-button>
+        <paper-button on-click="{{onMenuClick}}" data-area='Catalogue'>Catalogue</paper-button>
+        <paper-button on-click="{{onMenuClick}}" data-area='Staging'>Staging</paper-button>
       </div>
     </div>
  </template> 

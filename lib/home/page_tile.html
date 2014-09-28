@@ -1,9 +1,25 @@
 <link rel="import" href="../../../packages/polymer/polymer.html">
+<link rel="import" href="../../../packages/paper_elements/paper_button.html">
 
 <polymer-element name="page-tile"> 
  
  <template>
-    <button on-click="{{onLinkClick}}">{{name}}</button>
+ 
+    <style>
+    
+      paper-button.colored {
+	      color: #5674b8;
+	      fill: #4285f4;
+      }
+
+	    paper-button[raisedButton].colored {
+	      background: #5674b8;
+	      color: #fff;
+	    }
+    
+    </style>
+ 
+    <paper-button raisedbutton class='colored' on-click="{{onLinkClick}}">{{name}}</paper-button>
  </template> 
  
  <script type="application/dart" src="page_tile.dart"></script> 
