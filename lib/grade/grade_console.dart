@@ -6,13 +6,12 @@ class GradeConsole  extends PolymerElement with Dependencies {
  
   static const name = "grade-console";
  
-  GradeConsoleModel model = new GradeConsoleModel();
+  GradeConsoleModel model;
   
   @observable bool menubarVisible;
   
   GradeConsole.created() : super.created() {
     model = instanceOf(GradeConsoleModel);
-    print(model);
     updateMenubarVisible();
   }
   
@@ -40,7 +39,7 @@ class GradeConsoleModel extends Observable {
   void toggleByName(String areaName) {
     switch(areaName) {
       case 'Home': area = 0; break;
-      case 'Area1': area = 1; break;
+      case 'Staging': area = 1; break;
     }
     
     
