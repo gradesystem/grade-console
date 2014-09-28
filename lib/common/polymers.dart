@@ -13,12 +13,12 @@ abstract class Polybase<M> extends PolymerElement with Dependencies {
   attached() {
     
     String modelname = attributes[model_attr];
-
-        
-        if (modelname==null)
-          _log.warning("missing '$model_attr' attribute on $nodeName");
-        else
-          this.model = instanceCalled(modelname);
+       
+    if (modelname==null)
+      _log.warning("missing '$model_attr' attribute on $nodeName");
+  
+    else
+      this.model = instanceCalled(modelname);
         
   }
   

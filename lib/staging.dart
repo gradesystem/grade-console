@@ -20,5 +20,7 @@ init() {
           ..bind(StagingService)
           ..bind(StagingPageModel);
 
+  Dependencies.bind("staging",StagingPageModel);
+  
   Dependencies.add(module);
 }

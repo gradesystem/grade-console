@@ -15,7 +15,7 @@ class StagingPage extends Polybase<StagingPageModel> {
 
 
 @Injectable()
-class StagingPageModel {
+class StagingPageModel extends Object {
   
     EventBus bus;
     

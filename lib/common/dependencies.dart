@@ -13,12 +13,12 @@ class Dependencies {
   static configure() {
     
     injector= new ModuleInjector(modules);
-  
-    injector.types.forEach((type) {
-       typemap[type.toString()]= type;
-     });
     
    }
+  
+  static bind(String name, Type type) {
+    typemap[name] = type;
+  }
    
   instanceOf(Type type, [Type annotation]) {
     
@@ -35,7 +35,7 @@ class Dependencies {
        
        if (!typemap.containsKey(name))
          throw new ArgumentError("no registered type for $name");
-     
+       
        return instanceOf(typemap[name]);
        
     }
