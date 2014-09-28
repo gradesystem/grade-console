@@ -17,33 +17,56 @@ import 'home.dart' as home;
 
 part 'grade/grade_console.dart';
 
-final Logger _log = new Logger('grade');
-
+//lib-level logger
+final Logger log = new Logger('grade');
 
 
 init() {
   
-   Logger.root.level = Level.ALL;
-    Logger.root.onRecord.listen((LogRecord rec) {
-      print('${rec.level.name}: ${rec.time}, ${rec.loggerName}: ${rec.message}');
-      if (rec.error!=null)
-        print('error => ${rec.error} \ntrace => ${rec.stackTrace}');
-    });
+    _initLogging();
 
-    _log.info("initialising...");
+    log.info("initialising modules...");
+        
+    log.fine("initialising modules...");
     
-    staging.init();
-    home.init();
+    _initModules();
 
-    Module module = new Module()
-                        ..bind(GradeConsoleModel)
-                        ..bind(EventBus, toValue: new EventBus());
-
-    
-    Dependencies.add(module);
-      
-    Dependencies.configure(); 
+    log.fine("initialising polymers...");
     
     initPolymer();
+    
+    log.finer("initialised.");
+}
 
+
+
+_initLogging() {
+  
+
+   Logger.root.level = Level.ALL;
+   
+   Logger.root.onRecord.listen((LogRecord rec) {
+   
+     //log format
+     print('${rec.level.name}: ${rec.time}, ${rec.loggerName}: ${rec.message}');
+     
+     //error log format
+     if (rec.error!=null)
+        print('error => ${rec.error} \ntrace => ${rec.stackTrace}');
+    });
+}
+
+_initModules() {
+  
+  staging.init();
+  home.init();
+
+  //add app-level modules
+  Module module = new Module()
+                      ..bind(GradeConsoleModel)
+                      ..bind(EventBus, toValue: new EventBus());
+  
+  Dependencies.add(module);
+  
+  Dependencies.configure(); 
 }
