@@ -1,6 +1,6 @@
 part of common;
 
-abstract class Polybase<M> extends PolymerElement with Dependencies {
+abstract class Polybase extends PolymerElement with Dependencies {
   
   static final Logger _log = new Logger('base-polymer');
   
@@ -8,9 +8,7 @@ abstract class Polybase<M> extends PolymerElement with Dependencies {
   
   @observable var model;
   
-  Polybase.created() : super.created();
-  
-  attached() {
+  Polybase.created() : super.created() {
     
     String modelname = attributes[model_attr];
      

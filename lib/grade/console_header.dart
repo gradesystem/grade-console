@@ -10,6 +10,7 @@ class ConsoleHeader extends PolymerElement {
   static const String FADE_OUT = "fadeout";
 
   @published bool menubarVisible;
+  
   CoreAnimation fadeout;
   CoreAnimation fadein;
   bool isDomReady = false;
