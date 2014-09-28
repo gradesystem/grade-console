@@ -12,12 +12,13 @@ import 'package:logging/logging.dart';
 import 'common.dart';
 
 part 'staging/staging_service.dart';
-part 'staging/staging.dart';
+part 'staging/staging_page.dart';
 
 init() {
   
-  var module = new Module()..bind(StagingService)
-                                    ..bind(StagingPageModel);
+  var module = new Module()
+          ..bind(StagingService)
+          ..bind(StagingPageModel);
 
   Dependencies.add(module);
 }

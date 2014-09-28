@@ -1,13 +1,14 @@
 part of staging;
 
 @CustomTag(StagingPage.name) 
-abstract class StagingPage extends Polybase<StagingPageModel> {
+class StagingPage extends Polybase<StagingPageModel> {
  
   static const name = "staging-page";
   
   StagingPage.created() : super.created();
   
   attached() {
+    super.attached();
     model.activate();
   }
 }

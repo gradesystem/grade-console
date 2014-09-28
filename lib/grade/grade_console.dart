@@ -2,16 +2,17 @@ part of grade;
 
 
 @CustomTag(GradeConsole.name) 
-abstract class GradeConsole  extends PolymerElement with Dependencies {
+class GradeConsole  extends PolymerElement with Dependencies {
  
   static const name = "grade-console";
  
-  GradeConsoleModel model;
+  GradeConsoleModel model = new GradeConsoleModel();
   
   @observable bool menubarVisible;
   
   GradeConsole.created() : super.created() {
     model = instanceOf(GradeConsoleModel);
+    print(model);
     updateMenubarVisible();
   }
   
