@@ -1,16 +1,78 @@
 <link rel="import" href="../../../packages/polymer/polymer.html">
+
 <link rel="import" href="../../../packages/core_elements/core_pages.html">
+<link rel="import" href="../../../packages/core_elements/core_header_panel.html">
+<link rel="import" href="../../../packages/core_elements/core_toolbar.html">
+<link rel="import" href="../../../packages/paper_elements/paper_tabs.html">
+<link rel="import" href="../../../packages/paper_elements/paper_tab.html">
+
 <link rel="import" href="../grade/console_header.html">
 <link rel="import" href="../staging/staging_page.html">
 <link rel="import" href="../home/home_page.html">
 
 <polymer-element name="grade-console"> 
+
   <template>
-    <console-header on-areaselected="{{onAreaSelected}}" menubarVisible="{{menubarVisible}}"></console-header>
-		  <core-pages selected='{{model.area}}'>
-				<home-page on-areaselected="{{onAreaSelected}}"></home-page>
-				<staging-page></staging-page>
-		  </core-pages>
-    </template> 
+ 
+	  <style>
+	  
+      	  .full {
+            height: 100%;
+          }
+          
+	        .title {
+		        font-size:2em;
+		      }
+      
+	       .bordered {
+	         border: 3px solid blue;
+	       }
+	      
+	       .inwhite {
+	        color: white;
+	      }
+              
+	      .blue {
+	        background: #5674b8;
+	      }
+	      
+	        
+	  
+	  </style>
+	  
+	         <core-header-panel class="full inwhite">
+	          
+	           <core-toolbar class="blue">
+			          
+			          <div flex class="title">Grade</div>
+			          
+			          <paper-tabs style="width:300px" selected="{{ model.page }}">
+			             <paper-tab >HOME</paper-tab>
+			             <paper-tab >REPO</paper-tab>
+			             <paper-tab >DECK</paper-tab>
+			             <paper-tab >TASKS</paper-tab>
+			             <paper-tab >STAGE</paper-tab>
+			          </paper-tabs>
+			          
+			       </core-toolbar>
+			    
+			      <div fit vertical layout>
+		         
+		           <core-pages flex selected='{{ model.page }}'>
+                    <home-page on-areaselected="{{ onAreaSelected }}"></home-page>
+                    <staging-page></staging-page>
+                    <staging-page></staging-page>
+                    <staging-page></staging-page>
+                    <staging-page></staging-page>
+               </core-pages>
+             
+               <div class="blue inwhite" layout vertical center>FOOTER</div>
+             
+             </div> 
+             
+		      </core-header-panel>
+		      
+		  </template> 
+    
   <script type="application/dart" src="../grade.dart"></script> 
 </polymer-element>

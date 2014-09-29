@@ -23,23 +23,23 @@ class GradeConsole  extends PolymerElement with Dependencies {
    }
   
   void updateMenubarVisible() {
-    menubarVisible = model != null && model.area!=0; 
+    menubarVisible = model != null && model.page!=0; 
   }
 }
 
 @Injectable()
 class GradeConsoleModel extends Observable {
   
-  @observable int area = 0;
+  @observable int page = 0;
   
   toggle() {
-    area = (area == 0) ? 1 : 0;
+    page = (page == 0) ? 1 : 0;
   }
   
   void toggleByName(String areaName) {
     switch(areaName) {
-      case 'Home': area = 0; break;
-      case 'Staging': area = 1; break;
+      case 'Home': page = 0; break;
+      case 'Staging': page = 4; break;
     }
     
     
