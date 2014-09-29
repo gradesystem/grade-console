@@ -1,15 +1,14 @@
-import "package:polymer/polymer.dart";
-import "dart:html";
+part of home;
 
-@CustomTag("page-tile") 
+@CustomTag("page-tile")
 class PageTile extends PolymerElement {
-  
+
   @published String name;
- 
+
   PageTile.created() : super.created();
-  
+
   void onLinkClick(Event e, var details, Node target) {
-    dispatchEvent(new CustomEvent("areaselected", detail:name));
+    dispatchEvent(new CustomEvent("tile-selected", detail:this));
   }
-    
+
 }

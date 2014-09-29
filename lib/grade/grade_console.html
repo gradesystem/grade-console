@@ -10,12 +10,18 @@
 <link rel="import" href="../staging/staging_page.html">
 <link rel="import" href="../home/home_page.html">
 
+<link rel="import" href="../common/coming_soon.html">
+
 <polymer-element name="grade-console"> 
 
   <template>
  
 	  <style>
 	  
+    	   .hidden {
+            visibility: hidden;
+          }
+          
       	  .full {
             height: 100%;
           }
@@ -36,8 +42,7 @@
 	        background: #5674b8;
 	      }
 	      
-	        
-	  
+	      
 	  </style>
 	  
 	         <core-header-panel class="full inwhite">
@@ -46,7 +51,7 @@
 			          
 			          <div flex class="title">Grade</div>
 			          
-			          <paper-tabs style="width:300px" selected="{{ model.page }}">
+			          <paper-tabs class="{{ { 'hidden' : page == 0 } }}" style="width:300px" selected="{{ page }}">
 			             <paper-tab >HOME</paper-tab>
 			             <paper-tab >REPO</paper-tab>
 			             <paper-tab >DECK</paper-tab>
@@ -58,15 +63,15 @@
 			    
 			      <div fit vertical layout>
 		         
-		           <core-pages flex selected='{{ model.page }}'>
-                    <home-page on-areaselected="{{ onAreaSelected }}"></home-page>
-                    <staging-page></staging-page>
-                    <staging-page></staging-page>
-                    <staging-page></staging-page>
-                    <staging-page></staging-page>
+		           <core-pages flex selected='{{ page }}'>
+                    <home-page on-tile-selected="{{ changePage }}"></home-page>
+                    <coming-soon>PRODUCTION REPOSITORY</coming-soon>
+                    <coming-soon>DECK</coming-soon>
+                    <coming-soon>TASK CATALOGUE</coming-soon>
+                    <coming-soon>STAGING REPOSITORY</coming-soon>
                </core-pages>
              
-               <div class="blue inwhite" layout vertical center>FOOTER</div>
+               <div class="blue inwhite" layout vertical center>coming soon...</div>
              
              </div> 
              

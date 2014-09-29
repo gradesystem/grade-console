@@ -25,3 +25,13 @@ abstract class Polybase extends PolymerElement with Dependencies {
   }
   
 }
+
+
+@CustomTag(ComingSoon.name) 
+class ComingSoon extends PolymerElement {
+ 
+  static const name = "coming-soon";
+  
+  ComingSoon.created() : super.created();
+   
+}

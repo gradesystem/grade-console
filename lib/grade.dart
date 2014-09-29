@@ -3,7 +3,6 @@ library grade;
 import 'package:event_bus/event_bus.dart';
 
 import 'package:di/di.dart';
-import 'package:di/annotations.dart';
 
 import 'package:polymer/polymer.dart';
 
@@ -63,7 +62,6 @@ _initModules() {
 
   //add app-level modules
   Module module = new Module()
-                      ..bind(GradeConsoleModel)
                       ..bind(EventBus, toValue: new EventBus());
   
   Dependencies.add(module);
