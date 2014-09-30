@@ -1,5 +1,5 @@
 <link rel="import" href="../../../packages/polymer/polymer.html">
-<link rel="import" href="../../../packages/paper_elements/paper_button.html">
+<link rel="import" href="../../../packages/core_elements/core_icons.html">
 
 <polymer-element name="page-tile"> 
  
@@ -7,22 +7,65 @@
  
     <style>
     
-      paper-button.colored {
-	      color: #5674b8;
-	      fill: #4285f4;
-      }
-
-	    paper-button[raisedButton].colored {
-	      background: #5674b8;
-	      color: #fff;
-	    }
+	    .page-item {
+			  position: relative;
+			  float: left;
+			  vertical-align: top;
+			  width: 50%;
+			  height: 224px;
+			}
+			
+			.page-tile-bg {
+			  position: absolute !important;
+			}
+			
+			.page-bg-wrapper {
+			  width: 80%;
+			  height: 80%;
+			}
+			
+			.completed .page-bg-wrapper {
+			  width: 96px !important;
+			  height: 96px !important;
+			}
+			
+			.page-name {
+			  height: 48px;
+			  padding: 0 16px;
+			  font-size: 12px;
+			}
+			
+			.tile {
+			  position: relative;
+			  margin: 2px;
+			}
+			
+			@import url("tile-themes.css");
     
     </style>
- 
-    <paper-button raisedbutton class='colored' on-click="{{tileSelected}}" label="{{name}}"></paper-button>
     
+    <div class="page-item {{theme}}-theme" vertical layout>
+      <div class="tile theme-bg-a" dummy fit></div>
+      <div class="tile" flex auto vertical layout>
+        <div flex auto relative>
+          <!-- sizing wrapper -->
+          <div fit layout vertical center center-justified>
+            <div class="page-bg-wrapper" relative>
+              
+            </div>
+          </div>
+        </div>
+        <div class="page-name theme-bg" horizontal center layout>
+          <div flex>
+            <span>{{name}}</span>
+          </div>
+          <core-icon class="theme-bg" icon="arrow-forward" on-click="{{tileSelected}}"></core-icon>
+        </div>
+      </div>
+    </div>
+
  </template> 
  
  <script type="application/dart" src="../home.dart"></script> 
  
- </polymer-element>
+</polymer-element>

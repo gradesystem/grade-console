@@ -4,6 +4,7 @@ part of home;
 class PageTile extends PolymerElement {
 
   @published String name;
+  @published String theme;
   
   PageTile.created() : super.created();
 
