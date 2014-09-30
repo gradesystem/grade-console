@@ -11,7 +11,7 @@
 			  position: relative;
 			  float: left;
 			  vertical-align: top;
-			  width: 50%;
+			  width: 300px;
 			  height: 224px;
 			}
 			
@@ -30,21 +30,28 @@
 			}
 			
 			.page-name {
-			  height: 48px;
+			  height: 40px;
 			  padding: 0 16px;
-			  font-size: 12px;
+			  font-size: 14px;
+			  border-bottom-right-radius: 5px;
+        border-bottom-left-radius: 5px;
 			}
 			
 			.tile {
 			  position: relative;
 			  margin: 2px;
+			  border-radius: 5px;
+			}
+			
+			.page-item > .tile {
+			  margin: 4px;
 			}
 			
 			@import url("tile-themes.css");
     
     </style>
-    
-    <div class="page-item {{theme}}-theme" vertical layout>
+
+    <div class="page-item {{theme}}-theme" vertical layout style="width: calc(300px * {{wratio}});height: calc(400px * {{hratio}});">
       <div class="tile theme-bg-a" dummy fit></div>
       <div class="tile" flex auto vertical layout>
         <div flex auto relative>
@@ -57,7 +64,7 @@
         </div>
         <div class="page-name theme-bg" horizontal center layout>
           <div flex>
-            <span>{{name}}</span>
+            <span>{{name | uppercase}}</span>
           </div>
           <core-icon class="theme-bg" icon="arrow-forward" on-click="{{tileSelected}}"></core-icon>
         </div>

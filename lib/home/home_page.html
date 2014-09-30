@@ -13,20 +13,25 @@
 		  right: 0;
 		  bottom: 0;
 		  left: 0;
-		  padding: 2px 0;
-		  margin: 0 -2px;
+
 		  overflow-y: auto;
 		  overflow-x: hidden;
 		  -webkit-overflow-scrolling: touch;
+		  
+		   padding: 4px 0;
+       margin: 0 -4px;
 		}
+
 	</style>
-	     <div flex vertical layout center>
-		     <div>
-	            <page-tile name='Repo' theme="yellow"></page-tile>
-						  <page-tile name='Deck' theme="red"></page-tile>
-						  <page-tile name='Tasks' theme="green"></page-tile>
-						  <page-tile name='Stage' theme="blue"></page-tile>
-				  </div>
+	     <div flex horizontal layout>
+		        <div layout vertical flex end>
+	            <page-tile name='Repo' theme="yellow" hratio=0.7 wratio=1></page-tile>
+						  <page-tile name='Deck' theme="red" hratio=0.3 wratio=1></page-tile>
+					  </div>
+					  <div layout vertical flex start>
+						  <page-tile name='Tasks' theme="green" hratio=0.6 wratio=1></page-tile>
+						  <page-tile name='Stage' theme="blue" hratio=0.4 wratio=1></page-tile>
+				    </div>
 			  </div>
 	</template> 
 	
