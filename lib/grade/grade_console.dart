@@ -11,16 +11,19 @@ class GradeConsole  extends PolymerElement with Dependencies {
   
   GradeConsole.created() : super.created();
   
-  void changePage(Event e, home.PageTile tile) {
+  void changePage(Event e, String tilename) {
      
       e.stopPropagation();
       
-      switch(tile.name) {
+      switch(tilename) {
         
             case 'Repo': page = 1; break;
             case 'Deck': page = 2; break;
             case 'Tasks': page = 3; break;
             case 'Stage':page = 4; break;
+            default :
+               throw new  ArgumentError("unknown tile $tilename");
+              
         }
    }
   

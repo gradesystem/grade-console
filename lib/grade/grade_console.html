@@ -6,7 +6,6 @@
 <link rel="import" href="../../../packages/paper_elements/paper_tabs.html">
 <link rel="import" href="../../../packages/paper_elements/paper_tab.html">
 
-<link rel="import" href="../grade/console_header.html">
 <link rel="import" href="../staging/staging_page.html">
 <link rel="import" href="../home/home_page.html">
 
@@ -45,9 +44,9 @@
 	      
 	  </style>
 	  
-	         <core-header-panel class="full inwhite">
+	         <core-header-panel class="full inwhite" fit>
 	          
-	           <core-toolbar class="blue">
+	           <core-toolbar class="core-narrow blue">
 			          
 			          <div flex class="title">Grade</div>
 			          
@@ -65,10 +64,10 @@
 		         
 		           <core-pages flex selected='{{ page }}'>
                     <home-page on-tile-selected="{{ changePage }}"></home-page>
-                    <coming-soon>PRODUCTION REPOSITORY</coming-soon>
-                    <coming-soon>DECK</coming-soon>
-                    <coming-soon>TASK CATALOGUE</coming-soon>
-                    <coming-soon>STAGING REPOSITORY</coming-soon>
+                    <coming-soon><h1>PRODUCTION REPOSITORY</h1></coming-soon>
+                    <coming-soon><h1>DECK</h1></coming-soon>
+                    <coming-soon><h1>TASK CATALOGUE</h1></coming-soon>
+                    <coming-soon><h1>STAGING REPOSITORY</h1></coming-soon>
                </core-pages>
              
                <div class="blue inwhite" layout vertical center>coming soon...</div>
