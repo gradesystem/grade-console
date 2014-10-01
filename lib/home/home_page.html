@@ -1,14 +1,37 @@
 <link rel="import" href="../../../packages/polymer/polymer.html">
+<link rel="import" href="../../../packages/core_elements/core_selector.html">
 <link rel="import" href="page_tile.html">
 
 <polymer-element name="home-page" layout horizontal center> 
 
 	<template>	 
-	     <div flex vertical layout center>
-            <page-tile name='Repo'></page-tile>
-					  <page-tile name='Deck'></page-tile>
-					  <page-tile name='Tasks'></page-tile>
-					  <page-tile name='Stage'></page-tile>
+	<style>
+	  .tile-list {
+		  display: block;
+		  position: absolute;
+		  top: 100px;
+		  right: 0;
+		  bottom: 0;
+		  left: 0;
+
+		  overflow-y: auto;
+		  overflow-x: hidden;
+		  -webkit-overflow-scrolling: touch;
+		  
+		   padding: 4px 0;
+       margin: 0 -4px;
+		}
+
+	</style>
+	     <div flex horizontal layout>
+		        <div layout vertical flex end>
+	            <page-tile name='Repo' theme="yellow" hratio=0.7 wratio=1></page-tile>
+						  <page-tile name='Deck' theme="red" hratio=0.3 wratio=1></page-tile>
+					  </div>
+					  <div layout vertical flex start>
+						  <page-tile name='Tasks' theme="green" hratio=0.6 wratio=1></page-tile>
+						  <page-tile name='Stage' theme="blue" hratio=0.4 wratio=1></page-tile>
+				    </div>
 			  </div>
 	</template> 
 	
