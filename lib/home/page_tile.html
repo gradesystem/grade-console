@@ -20,8 +20,6 @@
 			}
 			
 			.page-bg-wrapper {
-/* 			  width: 80%; */
-/* 			  height: 80%; */
 			  padding: 16px;
 			}
 			
@@ -74,17 +72,13 @@
       <div class="tile theme-bg-a" dummy fit></div>
       <div class="tile" flex auto vertical layout>
         <div flex auto relative>
-          <!-- sizing wrapper -->
-<!--           <div fit layout vertical center center-justified> -->
             <div class="page-bg-wrapper" layout horizontal end>
-            <span class="statistic-count">{{statistics.count}}</span>
-            <div class="statistic-info" layout vertical>
-              <span class="statistic-name">{{statistics.name}}</span>
-              <span class="statistic-date">{{statistics.date | format}}</span>
+	            <span class="statistic-count">{{statistics.count}}</span>
+	            <div class="statistic-info" layout vertical>
+	              <span class="statistic-name">{{statistics.name}}</span>
+	              <span class="statistic-date">{{statistics.date | format}}</span>
+	            </div>
             </div>
-            
-            </div>
-<!--           </div> -->
         </div>
         <div class="page-name theme-bg" horizontal center layout>
           <div flex>
