@@ -34,9 +34,8 @@
   background-color: #E41C23;
 }
 
-./* blue theme */
-.blue-theme /deep/ .theme-bg,
-.blue-theme.theme-bg {
+/* blue theme */
+.blue-theme /deep/ .theme-bg, .blue-theme.theme-bg {
   background-color: #0097A7;
   color: #fff;
 }
