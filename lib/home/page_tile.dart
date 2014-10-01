@@ -24,7 +24,6 @@ class PageTile extends PolymerElement {
 
 }
 
-@observable
 class PageStatistics extends Observable {
   
   @observable
@@ -36,5 +35,8 @@ class PageStatistics extends Observable {
   @observable
   DateTime date;
   
-  PageStatistics(this.count, this.name, this.date);
+  @observable
+  ObservableList<String> notifications;
+  
+  PageStatistics(this.count, this.name, this.date, this.notifications);
 }

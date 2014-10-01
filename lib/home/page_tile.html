@@ -1,5 +1,6 @@
 <link rel="import" href="../../../packages/polymer/polymer.html">
 <link rel="import" href="../../../packages/core_elements/core_icons.html">
+<link rel="import" href="../../../packages/core_elements/social_icons.html">
 
 <polymer-element name="page-tile"> 
  
@@ -20,7 +21,8 @@
 			}
 			
 			.page-bg-wrapper {
-			  padding: 16px;
+			  padding-left: 16px;
+			  padding-top: 5px;
 			}
 			
 			.statistic-count {
@@ -39,6 +41,15 @@
 			
 			.statistic-date {
          font-size: 11px;
+      }
+      
+      .notifications-bar {
+        padding-top: 9px;
+        padding-right: 5px;
+      }
+      
+      .notification-icon {
+        padding-left: 2px;
       }
 			
 			.completed .page-bg-wrapper {
@@ -77,6 +88,11 @@
 	            <div class="statistic-info" layout vertical>
 	              <span class="statistic-name">{{statistics.name}}</span>
 	              <span class="statistic-date">{{statistics.date | format}}</span>
+	            </div>
+	            <div flex layout horizontal end-justified self-start class="notifications-bar">
+	              <template repeat="{{ notification in statistics.notifications }}">
+	                 <core-icon class="theme-bg-a notification-icon" icon="{{notification}}"></core-icon>
+	              </template>
 	            </div>
             </div>
         </div>
