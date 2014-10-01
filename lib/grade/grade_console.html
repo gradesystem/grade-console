@@ -15,66 +15,39 @@
 
   <template>
  
-	  <style>
-	  
-    	   .hidden {
-            visibility: hidden;
-          }
+         <core-header-panel fit>
+         
+           <link rel="stylesheet" href="themes.css">  
           
-      	  .full {
-            height: 100%;
-          }
-          
-	        .title {
-		        font-size:2em;
-		      }
-      
-	       .bordered {
-	         border: 3px solid blue;
-	       }
-	      
-	       .inwhite {
-	        color: white;
-	      }
-              
-	      .blue {
-	        background: #5674b8;
-	      }
-	      
-	      
-	  </style>
-	  
-	         <core-header-panel class="full inwhite" fit>
-	          
-	           <core-toolbar class="core-narrow blue">
-			          
-			          <div flex class="title">Grade</div>
-			          
-			          <paper-tabs class="{{ { 'hidden' : page == 0 } }}" style="width:300px" selected="{{ page }}">
-			             <paper-tab >HOME</paper-tab>
-			             <paper-tab >REPO</paper-tab>
-			             <paper-tab >DECK</paper-tab>
-			             <paper-tab >TASKS</paper-tab>
-			             <paper-tab >STAGE</paper-tab>
-			          </paper-tabs>
-			          
-			       </core-toolbar>
-			    
-			      <div fit vertical layout>
-		         
-		           <core-pages flex selected='{{ page }}'>
-                    <home-page on-tile-selected="{{ changePage }}"></home-page>
-                    <coming-soon><h1>PRODUCTION REPOSITORY</h1></coming-soon>
-                    <coming-soon><h1>DECK</h1></coming-soon>
-                    <coming-soon><h1>TASK CATALOGUE</h1></coming-soon>
-                    <coming-soon><h1>STAGING REPOSITORY</h1></coming-soon>
-               </core-pages>
-             
-               <div class="blue inwhite" layout vertical center>coming soon...</div>
-             
-             </div> 
-             
-		      </core-header-panel>
+           <core-toolbar class="theme-{{ page }}">
+		          
+		          <div flex class="title">Grade</div>
+		          
+		          <paper-tabs class="{{ { 'hidden' : page == 0 } }}" style="width:300px" selected="{{ page }}">
+		             <paper-tab >HOME</paper-tab>
+		             <paper-tab >REPO</paper-tab>
+		             <paper-tab >DECK</paper-tab>
+		             <paper-tab >TASKS</paper-tab>
+		             <paper-tab >STAGE</paper-tab>
+		          </paper-tabs>
+		          
+		       </core-toolbar>
+		    
+		      <div fit vertical layout>
+	         
+	           <core-pages flex selected='{{ page }}'>
+                   <home-page on-tile-selected="{{ changePage }}"></home-page>
+                   <coming-soon><h1>PRODUCTION REPOSITORY</h1></coming-soon>
+                   <coming-soon><h1>DECK</h1></coming-soon>
+                   <coming-soon><h1>TASK CATALOGUE</h1></coming-soon>
+                   <coming-soon><h1>STAGING REPOSITORY</h1></coming-soon>
+              </core-pages>
+            
+              <div  class="theme-{{ page }}" layout vertical center>coming soon...</div>
+            
+            </div> 
+            
+	      </core-header-panel>
 		      
 		  </template> 
     

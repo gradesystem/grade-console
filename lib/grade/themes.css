@@ -1,0 +1,36 @@
+         :host {
+            height:100%;
+            background:#F4F4F4;
+            color:white;
+            height: 100%;
+          }
+          
+         .hidden {
+            visibility: hidden;
+          }
+          
+          .title {
+            font-size:2em;
+          }
+          
+          
+      
+         .theme-0 {
+            background: #5674b8;
+         }
+         
+         .theme-1 {
+            background: #0097A7;
+         }
+         
+         .theme-2 {
+            background: #FFA000;
+         }
+         
+         .theme-3 {
+            background: #CF1715;
+         }
+         
+         .theme-4 {
+            background: #225860;
+         }
