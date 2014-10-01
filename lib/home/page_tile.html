@@ -20,9 +20,28 @@
 			}
 			
 			.page-bg-wrapper {
-			  width: 80%;
-			  height: 80%;
+/* 			  width: 80%; */
+/* 			  height: 80%; */
+			  padding: 16px;
 			}
+			
+			.statistic-count {
+			   font-size: 50px;
+			   padding-right: 5px;
+			}
+			
+			.statistic-info {
+			   padding-bottom: 15px;
+			   line-height: 12px;
+			}
+			
+			.statistic-name {
+			   font-size: 14px;
+			}
+			
+			.statistic-date {
+         font-size: 11px;
+      }
 			
 			.completed .page-bg-wrapper {
 			  width: 96px !important;
@@ -56,11 +75,16 @@
       <div class="tile" flex auto vertical layout>
         <div flex auto relative>
           <!-- sizing wrapper -->
-          <div fit layout vertical center center-justified>
-            <div class="page-bg-wrapper" relative>
-              
+<!--           <div fit layout vertical center center-justified> -->
+            <div class="page-bg-wrapper" layout horizontal end>
+            <span class="statistic-count">{{statistics.count}}</span>
+            <div class="statistic-info" layout vertical>
+              <span class="statistic-name">{{statistics.name}}</span>
+              <span class="statistic-date">{{statistics.date | format}}</span>
             </div>
-          </div>
+            
+            </div>
+<!--           </div> -->
         </div>
         <div class="page-name theme-bg" horizontal center layout>
           <div flex>
