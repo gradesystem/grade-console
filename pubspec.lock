@@ -8,7 +8,7 @@ packages:
   args:
     description: args
     source: hosted
-    version: "0.11.0+1"
+    version: "0.12.0+2"
   barback:
     description: barback
     source: hosted
@@ -24,7 +24,7 @@ packages:
   collection:
     description: collection
     source: hosted
-    version: "0.9.4"
+    version: "1.0.0"
   core_elements:
     description: core_elements
     source: hosted
@@ -36,11 +36,15 @@ packages:
   custom_element_apigen:
     description: custom_element_apigen
     source: hosted
-    version: "0.0.2+1"
+    version: "0.0.3"
   di:
     description: di
     source: hosted
     version: "3.1.1"
+  editor_build:
+    description: editor_build
+    source: hosted
+    version: "0.0.4"
   event_bus:
     description: event_bus
     source: hosted
@@ -109,6 +113,10 @@ packages:
     description: string_scanner
     source: hosted
     version: "0.1.0"
+  stylus:
+    description: stylus
+    source: hosted
+    version: "0.1.1"
   template_binding:
     description: template_binding
     source: hosted

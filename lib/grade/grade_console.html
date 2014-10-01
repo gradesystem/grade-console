@@ -15,13 +15,13 @@
 
   <template>
  
+         <link rel="stylesheet" href="themes.css">  
+          
          <core-header-panel fit>
          
-           <link rel="stylesheet" href="themes.css">  
-          
            <core-toolbar class="theme-{{ page }}">
 		          
-		          <div flex class="title">GRADE</div>
+		          <div flex class="bigger">GRADE</div>
 		          
 		          <paper-tabs class="{{ { 'hidden' : page == 0 } }}" style="width:300px" selected="{{ page }}">
 		             <paper-tab >HOME</paper-tab>
@@ -43,7 +43,12 @@
                    <coming-soon><h1>STAGING REPOSITORY</h1></coming-soon>
               </core-pages>
             
-              <div  class="theme-{{ page }}" layout vertical center>coming soon...</div>
+              <div  class="theme-{{ page }} smaller" layout horizontal center>
+                <div>LAST UPDATE: 01/10/2014</div>
+                <div flex class="theme-{{ page }}" layout vertical center>
+                <div>Copyright 2014-2015 GRADE all rights reserved </div>
+                </div>
+              </div>
             
             </div> 
             

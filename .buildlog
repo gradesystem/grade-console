@@ -1,0 +1,457 @@
+---
+build.dart --machine --changed=pubspec.yaml
+Unhandled exception:
+Uncaught Error: FileSystemException: Cannot open file, path = '/Users/fabio/git/grade-console/packages/playground/stylus.dart' (OS Error: No such file or directory, errno = 2)
+Stack Trace:
+#0      _File.open.<anonymous closure> (dart:io/file_impl.dart:349)
+#1      _RootZone.runUnary (dart:async/zone.dart:1082)
+#2      _Future._propagateToListeners.handleValueCallback (dart:async/future_impl.dart:488)
+#3      _Future._propagateToListeners (dart:async/future_impl.dart:571)
+#4      _Future._completeWithValue (dart:async/future_impl.dart:331)
+#5      _Future._asyncComplete.<anonymous closure> (dart:async/future_impl.dart:393)
+#6      _asyncRunCallbackLoop (dart:async/schedule_microtask.dart:41)
+#7      _asyncRunCallback (dart:async/schedule_microtask.dart:48)
+#8      _RawReceivePortImpl._handleMessage (dart:isolate-patch/isolate_patch.dart:126)
+
+#0      _rootHandleUncaughtError.<anonymous closure> (dart:async/zone.dart:820)
+#1      _asyncRunCallbackLoop (dart:async/schedule_microtask.dart:41)
+#2      _asyncRunCallback (dart:async/schedule_microtask.dart:48)
+#3      _RawReceivePortImpl._handleMessage (dart:isolate-patch/isolate_patch.dart:126)
+build.dart finished [67 ms]
+
+---
+build.dart --machine --changed=pubspec.yaml
+
+build.dart finished [102 ms]
+
+---
+build.dart --machine --changed=pubspec.yaml
+
+build.dart finished [97 ms]
+
+---
+build.dart --machine --changed=pubspec.yaml
+
+build.dart finished [104 ms]
+
+---
+build.dart --machine --changed=pubspec.yaml
+
+build.dart finished [121 ms]
+
+---
+build.dart --machine --removed=web/console.css
+
+build.dart finished [110 ms]
+
+---
+build.dart --machine --changed=lib/grade/themes-test.styl
+
+build.dart finished [576 ms]
+
+---
+build.dart --machine --changed=lib/grade/themes-test.css
+
+build.dart finished [144 ms]
+
+---
+build.dart --machine --changed=lib/grade/themes-test.styl
+
+build.dart finished [319 ms]
+
+---
+build.dart --machine --changed=lib/grade/themes-test.css
+
+build.dart finished [110 ms]
+
+---
+build.dart --machine --changed=lib/grade/themes-test.styl
+
+build.dart finished [303 ms]
+
+---
+build.dart --machine --changed=lib/grade/themes-test.css
+
+build.dart finished [99 ms]
+
+---
+build.dart --machine --changed=lib/grade/themes-test.styl
+/usr/local/lib/node_modules/stylus/bin/stylus:644
+              throw err;
+                    ^
+ParseError: lib/grade/themes-test.styl:2:12
+   1| //colors
+   2| background = ##F4F4F4
+-----------------^
+   3| purple = #b4bfe1
+   4| 
+   5| :host {
+
+invalid right-hand side operand in assignment, got "selector ##F4F4F4"
+
+    at Parser.error (/usr/local/lib/node_modules/stylus/lib/parser.js:257:11)
+    at Parser.assignAtblock (/usr/local/lib/node_modules/stylus/lib/parser.js:656:12)
+    at Parser.assignment (/usr/local/lib/node_modules/stylus/lib/parser.js:1494:30)
+    at Parser.ident (/usr/local/lib/node_modules/stylus/lib/parser.js:1232:21)
+    at Parser.stmt (/usr/local/lib/node_modules/stylus/lib/parser.js:759:26)
+    at Parser.statement (/usr/local/lib/node_modules/stylus/lib/parser.js:667:21)
+    at Parser.parse (/usr/local/lib/node_modules/stylus/lib/parser.js:234:25)
+    at Renderer.render (/usr/local/lib/node_modules/stylus/lib/renderer.js:72:22)
+    at /usr/local/lib/node_modules/stylus/bin/stylus:638:15
+    at fs.js:266:14
+build.dart finished [270 ms]
+
+---
+build.dart --machine --changed=lib/grade/themes-test.css
+
+build.dart finished [110 ms]
+
+---
+build.dart --machine --changed=lib/grade/themes-test.styl
+
+build.dart finished [315 ms]
+
+---
+build.dart --machine --changed=lib/grade/themes-test.css
+
+build.dart finished [146 ms]
+
+---
+build.dart --machine --changed=lib/grade/themes.styl --removed=lib/grade/themes.css
+
+build.dart finished [326 ms]
+
+---
+build.dart --machine --changed=lib/grade/themes.css
+
+build.dart finished [124 ms]
+
+---
+build.dart --machine --changed=lib/grade/themes.styl
+/usr/local/lib/node_modules/stylus/bin/stylus:644
+              throw err;
+                    ^
+ParseError: lib/grade/themes.styl:5:7
+   1| 
+   2| 
+   3| //colors
+   4| background = #F4F4F4
+   5| color:white;
+------------^
+   6| purple = #b4bfe1
+   7| 
+   8| 
+
+expected "indent", got ";"
+
+    at Parser.error (/usr/local/lib/node_modules/stylus/lib/parser.js:257:11)
+    at Parser.expect (/usr/local/lib/node_modules/stylus/lib/parser.js:285:12)
+    at Parser.block (/usr/local/lib/node_modules/stylus/lib/parser.js:820:12)
+    at Parser.selector (/usr/local/lib/node_modules/stylus/lib/parser.js:1420:24)
+    at Parser.ident (/usr/local/lib/node_modules/stylus/lib/parser.js:1312:25)
+    at Parser.stmt (/usr/local/lib/node_modules/stylus/lib/parser.js:759:26)
+    at Parser.statement (/usr/local/lib/node_modules/stylus/lib/parser.js:667:21)
+    at Parser.parse (/usr/local/lib/node_modules/stylus/lib/parser.js:234:25)
+    at Renderer.render (/usr/local/lib/node_modules/stylus/lib/renderer.js:72:22)
+    at /usr/local/lib/node_modules/stylus/bin/stylus:638:15
+build.dart finished [277 ms]
+
+---
+build.dart --machine --changed=lib/grade/themes.css
+
+build.dart finished [130 ms]
+
+---
+build.dart --machine --changed=lib/grade/themes.styl --changed=lib/home/home_page.dart
+/usr/local/lib/node_modules/stylus/bin/stylus:644
+              throw err;
+                    ^
+Error: lib/grade/themes.styl:4:7
+   1| 
+   2| 
+   3| //palette
+   4| grade.grey = #F4F4F4
+------------^
+   5| 
+   6| 
+   7| 
+
+grade has no property .grey
+
+    at Evaluator.visitMember (/usr/local/lib/node_modules/stylus/lib/visitor/evaluator.js:318:11)
+    at Evaluator.Visitor.visit (/usr/local/lib/node_modules/stylus/lib/visitor/index.js:28:40)
+    at Evaluator.visit (/usr/local/lib/node_modules/stylus/lib/visitor/evaluator.js:145:18)
+    at Evaluator.visitExpression (/usr/local/lib/node_modules/stylus/lib/visitor/evaluator.js:611:26)
+    at Evaluator.Visitor.visit (/usr/local/lib/node_modules/stylus/lib/visitor/index.js:28:40)
+    at Evaluator.visit (/usr/local/lib/node_modules/stylus/lib/visitor/evaluator.js:145:18)
+    at Evaluator.visitRoot (/usr/local/lib/node_modules/stylus/lib/visitor/evaluator.js:674:27)
+    at Evaluator.Visitor.visit (/usr/local/lib/node_modules/stylus/lib/visitor/index.js:28:40)
+    at Evaluator.visit (/usr/local/lib/node_modules/stylus/lib/visitor/evaluator.js:145:18)
+    at Evaluator.evaluate (/usr/local/lib/node_modules/stylus/lib/visitor/evaluator.js:221:15)
+build.dart finished [375 ms]
+
+---
+build.dart --machine --changed=lib/grade/themes.css
+
+build.dart finished [103 ms]
+
+---
+build.dart --machine --changed=lib/grade/themes.css
+
+build.dart finished [111 ms]
+
+---
+build.dart --machine --changed=lib/grade/themes.styl
+/usr/local/lib/node_modules/stylus/bin/stylus:644
+              throw err;
+                    ^
+Error: lib/grade/themes.styl:9:26
+    5| 
+    6| 
+    7| 
+    8| //grade theme
+    9| grade-background = grade.grey
+-------------------------------^
+   10| grade-text=white
+   11| 
+   12| //home-them
+
+grade has no property .grey
+
+    at Evaluator.visitMember (/usr/local/lib/node_modules/stylus/lib/visitor/evaluator.js:318:11)
+    at Evaluator.Visitor.visit (/usr/local/lib/node_modules/stylus/lib/visitor/index.js:28:40)
+    at Evaluator.visit (/usr/local/lib/node_modules/stylus/lib/visitor/evaluator.js:145:18)
+    at Evaluator.visitExpression (/usr/local/lib/node_modules/stylus/lib/visitor/evaluator.js:611:26)
+    at Evaluator.Visitor.visit (/usr/local/lib/node_modules/stylus/lib/visitor/index.js:28:40)
+    at Evaluator.visit (/usr/local/lib/node_modules/stylus/lib/visitor/evaluator.js:145:18)
+    at Evaluator.visitExpression (/usr/local/lib/node_modules/stylus/lib/visitor/evaluator.js:611:26)
+    at Evaluator.Visitor.visit (/usr/local/lib/node_modules/stylus/lib/visitor/index.js:28:40)
+    at Evaluator.visit (/usr/local/lib/node_modules/stylus/lib/visitor/evaluator.js:145:18)
+    at Evaluator.visitIdent (/usr/local/lib/node_modules/stylus/lib/visitor/evaluator.js:518:22)
+build.dart finished [335 ms]
+
+---
+build.dart --machine --changed=lib/grade/themes.css
+
+build.dart finished [113 ms]
+
+---
+build.dart --machine --changed=lib/grade/themes.css
+
+build.dart finished [112 ms]
+
+---
+build.dart --machine --changed=lib/grade/themes.styl
+/usr/local/lib/node_modules/stylus/bin/stylus:644
+              throw err;
+                    ^
+Error: lib/grade/themes.styl:9:26
+    5| 
+    6| 
+    7| 
+    8| //grade theme
+    9| grade-background = grade.grey
+-------------------------------^
+   10| grade-text=white
+   11| 
+   12| //home-them
+
+grade has no property .grey
+
+    at Evaluator.visitMember (/usr/local/lib/node_modules/stylus/lib/visitor/evaluator.js:318:11)
+    at Evaluator.Visitor.visit (/usr/local/lib/node_modules/stylus/lib/visitor/index.js:28:40)
+    at Evaluator.visit (/usr/local/lib/node_modules/stylus/lib/visitor/evaluator.js:145:18)
+    at Evaluator.visitExpression (/usr/local/lib/node_modules/stylus/lib/visitor/evaluator.js:611:26)
+    at Evaluator.Visitor.visit (/usr/local/lib/node_modules/stylus/lib/visitor/index.js:28:40)
+    at Evaluator.visit (/usr/local/lib/node_modules/stylus/lib/visitor/evaluator.js:145:18)
+    at Evaluator.visitExpression (/usr/local/lib/node_modules/stylus/lib/visitor/evaluator.js:611:26)
+    at Evaluator.Visitor.visit (/usr/local/lib/node_modules/stylus/lib/visitor/index.js:28:40)
+    at Evaluator.visit (/usr/local/lib/node_modules/stylus/lib/visitor/evaluator.js:145:18)
+    at Evaluator.visitIdent (/usr/local/lib/node_modules/stylus/lib/visitor/evaluator.js:518:22)
+build.dart finished [330 ms]
+
+---
+build.dart --machine --changed=lib/grade/themes.css
+
+build.dart finished [105 ms]
+
+---
+build.dart --machine --changed=lib/grade/themes-test.css
+
+build.dart finished [120 ms]
+
+---
+build.dart --machine --changed=lib/grade/themes.styl
+/usr/local/lib/node_modules/stylus/bin/stylus:644
+              throw err;
+                    ^
+Error: lib/grade/themes.styl:9:26
+    5| 
+    6| 
+    7| 
+    8| //grade theme
+    9| grade-background = grade.grey
+-------------------------------^
+   10| grade-text=white
+   11| 
+   12| //home-them
+
+grade has no property .grey
+
+    at Evaluator.visitMember (/usr/local/lib/node_modules/stylus/lib/visitor/evaluator.js:318:11)
+    at Evaluator.Visitor.visit (/usr/local/lib/node_modules/stylus/lib/visitor/index.js:28:40)
+    at Evaluator.visit (/usr/local/lib/node_modules/stylus/lib/visitor/evaluator.js:145:18)
+    at Evaluator.visitExpression (/usr/local/lib/node_modules/stylus/lib/visitor/evaluator.js:611:26)
+    at Evaluator.Visitor.visit (/usr/local/lib/node_modules/stylus/lib/visitor/index.js:28:40)
+    at Evaluator.visit (/usr/local/lib/node_modules/stylus/lib/visitor/evaluator.js:145:18)
+    at Evaluator.visitExpression (/usr/local/lib/node_modules/stylus/lib/visitor/evaluator.js:611:26)
+    at Evaluator.Visitor.visit (/usr/local/lib/node_modules/stylus/lib/visitor/index.js:28:40)
+    at Evaluator.visit (/usr/local/lib/node_modules/stylus/lib/visitor/evaluator.js:145:18)
+    at Evaluator.visitIdent (/usr/local/lib/node_modules/stylus/lib/visitor/evaluator.js:518:22)
+build.dart finished [359 ms]
+
+---
+build.dart --machine --changed=lib/grade/themes.css
+
+build.dart finished [120 ms]
+
+---
+build.dart --machine --changed=lib/grade/themes.css
+
+build.dart finished [99 ms]
+
+---
+build.dart --machine --removed=lib/grade/themes-test.css --removed=lib/grade/themes-test.styl
+
+build.dart finished [115 ms]
+
+---
+build.dart --machine --clean
+
+build.dart finished [93 ms]
+
+---
+build.dart --machine --full
+
+build.dart finished [203 ms]
+
+---
+build.dart --machine --changed=lib/grade/themes.styl
+/usr/local/lib/node_modules/stylus/bin/stylus:644
+              throw err;
+                    ^
+Error: lib/grade/themes.styl:8:26
+    4| 
+    5| 
+    6| 
+    7| //grade theme
+    8| grade-background = grade.grey
+-------------------------------^
+    9| grade-text= white
+   10| 
+   11| //home-them
+
+grade has no property .grey
+
+    at Evaluator.visitMember (/usr/local/lib/node_modules/stylus/lib/visitor/evaluator.js:318:11)
+    at Evaluator.Visitor.visit (/usr/local/lib/node_modules/stylus/lib/visitor/index.js:28:40)
+    at Evaluator.visit (/usr/local/lib/node_modules/stylus/lib/visitor/evaluator.js:145:18)
+    at Evaluator.visitExpression (/usr/local/lib/node_modules/stylus/lib/visitor/evaluator.js:611:26)
+    at Evaluator.Visitor.visit (/usr/local/lib/node_modules/stylus/lib/visitor/index.js:28:40)
+    at Evaluator.visit (/usr/local/lib/node_modules/stylus/lib/visitor/evaluator.js:145:18)
+    at Evaluator.visitExpression (/usr/local/lib/node_modules/stylus/lib/visitor/evaluator.js:611:26)
+    at Evaluator.Visitor.visit (/usr/local/lib/node_modules/stylus/lib/visitor/index.js:28:40)
+    at Evaluator.visit (/usr/local/lib/node_modules/stylus/lib/visitor/evaluator.js:145:18)
+    at Evaluator.visitIdent (/usr/local/lib/node_modules/stylus/lib/visitor/evaluator.js:518:22)
+build.dart finished [313 ms]
+
+---
+build.dart --machine --changed=lib/grade/themes.css
+
+build.dart finished [108 ms]
+
+---
+build.dart --machine --changed=lib/grade/themes.styl
+
+build.dart finished [314 ms]
+
+---
+build.dart --machine --changed=lib/grade/themes.css
+
+build.dart finished [112 ms]
+
+---
+build.dart --machine --changed=web/index.html
+
+build.dart finished [116 ms]
+
+---
+build.dart --machine --clean
+
+build.dart finished [96 ms]
+
+---
+build.dart --machine --full
+
+build.dart finished [204 ms]
+
+---
+build.dart --machine --changed=lib/home/home_page.html
+
+build.dart finished [100 ms]
+
+---
+build.dart --machine --changed=pubspec.lock
+
+build.dart finished [109 ms]
+
+---
+build.dart --machine --full
+
+build.dart finished [242 ms]
+
+---
+build.dart --machine --clean
+
+build.dart finished [239 ms]
+
+---
+build.dart --machine --full
+
+build.dart finished [154 ms]
+
+---
+build.dart --machine --changed=lib/home.dart
+
+build.dart finished [152 ms]
+
+---
+build.dart --machine --clean
+
+build.dart finished [93 ms]
+
+---
+build.dart --machine --full
+
+build.dart finished [183 ms]
+
+---
+build.dart --machine --changed=lib/home.dart
+
+build.dart finished [108 ms]
+
+---
+build.dart --machine --changed=pubspec.yaml
+
+build.dart finished [115 ms]
+
+---
+build.dart --machine --changed=pubspec.lock
+
+build.dart finished [102 ms]
+
+---
+build.dart --machine --changed=lib/home.dart
+
+build.dart finished [104 ms]
+

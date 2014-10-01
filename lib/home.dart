@@ -1,6 +1,5 @@
 library home;
 
-import 'dart:html';
 import 'dart:math';
 import 'package:intl/intl.dart';
 import 'package:polymer/polymer.dart';

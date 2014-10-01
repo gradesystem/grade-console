@@ -9,6 +9,10 @@ dependencies:
   logging: ">=0.9.2 <0.10.0"
   event_bus: any
   intl: any
+  stylus: any
+  
+dependency_overrides: 
+  args: any    #forces later deps than stylus expects
 
 transformers:
 - polymer
