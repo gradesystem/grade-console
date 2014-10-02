@@ -11,6 +11,7 @@ target/
 *.js.deps
 *.js.map
 *.tar.gz
+.buildlog
 
 # Include when developing application packages.
 
