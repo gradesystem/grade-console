@@ -17,10 +17,10 @@ class GradeConsole  extends PolymerElement with Dependencies {
       
       switch(tilename) {
         
-            case 'Repo': page = 1; break;
+            case 'Repository': page = 1; break;
             case 'Deck': page = 2; break;
             case 'Tasks': page = 3; break;
-            case 'Stage':page = 4; break;
+            case 'Staging':page = 4; break;
             default :
                throw new  ArgumentError("unknown tile $tilename");
               

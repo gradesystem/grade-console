@@ -1,44 +1,111 @@
 
-//palette
+///////////////////////////////////// palette
 grade-grey = #F4F4F4
 
+grade-blue = #26699A
 
+grade-cyan = #00BCD4
+grade-dark-cyan = #0097A7
 
-//grade theme
-grade-background = grade-grey
-grade-text= white
+grade-yellow = #FFC107
+grade-dark-yellow = #FFA000
 
-//home-them
-home-background=#26699A
+grade-red = #E41C23
+grade-dark-red = #CF1715
 
-//repo-theme
-repo-background = #b4bfe1
-
-//deck theme
-deck-background= #FFC107
-
-
-//tasks theme
-tasks-background = #E41C23
-
-
-//stage theme
-stage-background= #009587
+grade-teal = #009587
+grade-dark-teal = #207368
 
 
 
- :host
+
+///////////////////////////////////// themes
+
+grade = {
+  bg : grade-grey
+  fg : white
+}
+
+home = {
+  primary : grade-blue
+}
+
+repo = {
+  primary : grade-cyan
+  secondary : grade-dark-cyan
+  elements : repo-page '/deep/ .repo-theme'
+}
+
+deck = {
+  primary : grade-yellow
+  secondary : grade-dark-yellow
+  elements: 'deck-page' '/deep/ .deck-theme'
+}
+
+tasks = {
+  primary : grade-red
+  secondary : grade-dark-red
+  elements: 'tasks-page' '/deep/ .tasks-theme'
+}
+
+stage = {
+  primary : grade-teal
+  secondary : grade-dark-teal
+  elements: 'stage-page' '/deep/ .stage-theme'
+}
+
+
+///////////////////////////////////// theme classes
+
+theme-classes = {
+    
+    bg : {
+        background : "primary"
+    }
+    
+    bg-alt : {
+        background : "secondary"
+    }
+
+}
+
+
+themes = home repo deck tasks stage
+
+
+
+//def generation
+for t, pos in themes
+
+ .theme-{pos}
+    background : t.primary
+      
+ if t.elements
+  for name,class in theme-classes
+    for e in t.elements
+      :host {e} /deep/ .{name} 
+         for prop, val in class
+           {prop} : t[val]
+        
+    
+ 
+ 
+
+
+
+///////////////////////////////////// general
+
+:host
    
     height:100%;
     
     font-family: 'Roboto', sans-serif;
     font-weight: lighter;
     
-    background: grade-background;
-    color:grade-text;
+    background: grade.bg;
+    color:grade.fg;
   
   
-
 
  .hidden
     visibility: hidden
@@ -49,27 +116,3 @@ stage-background= #009587
   .smaller
     font-size:11px
     font-weight: normal
-  
-  a:link					    
-    color: #FFC107;
-
-
- .theme-0
-    background: home-background;            
-
- 
- .theme-1 {
-    background: repo-background;
- }
- 
- .theme-2 {
-    background: deck-background;
- }
- 
- .theme-3 {
-    background: tasks-background;
- }
- 
- .theme-4 {
-    background: stage-background;
- }

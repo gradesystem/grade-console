@@ -5,34 +5,37 @@
 <polymer-element name="home-page" layout horizontal center> 
 
 	<template>	 
-	<style>
-	  .tile-list {
-		  display: block;
-		  position: absolute;
-		  top: 100px;
-		  right: 0;
-		  bottom: 0;
-		  left: 0;
-
-		  overflow-y: auto;
-		  overflow-x: hidden;
-		  -webkit-overflow-scrolling: touch;
-		  
-		   padding: 4px 0;
-       margin: 0 -4px;
-		}
-
-	</style>
-	     <div flex horizontal layout>
-		        <div layout vertical flex end>
-	            <page-tile name='Repo' theme="blue" hratio=0.7 wratio=1 statistics={{generateStatistics()}}></page-tile>
-						  <page-tile name='Tasks' theme="red" hratio=0.3 wratio=1 statistics={{generateStatistics()}}></page-tile>
-					  </div>
-					  <div layout vertical flex start>
-						  <page-tile name='Deck' theme="yellow" hratio=0.6 wratio=1 statistics={{generateStatistics()}}></page-tile>
-						  <page-tile name='Stage' theme="green" hratio=0.4 wratio=1 statistics={{generateStatistics()}}></page-tile>
-				    </div>
+	
+			<style>
+			  .tile-list {
+				  display: block;
+				  position: absolute;
+				  top: 100px;
+				  right: 0;
+				  bottom: 0;
+				  left: 0;
+			
+				  overflow-y: auto;
+				  overflow-x: hidden;
+				  -webkit-overflow-scrolling: touch;
+				  
+				   padding: 4px 0;
+			      margin: 0 -4px;
+				}
+			
+			</style>
+			
+	   <div flex horizontal layout>
+	       <div layout vertical flex end>
+	        <page-tile class="repo-theme" name='Repository' hratio=0.7 wratio=1 statistics={{generateStatistics()}}></page-tile>
+				  <page-tile class="tasks-theme" name='Tasks' hratio=0.3 wratio=1 statistics={{generateStatistics()}}></page-tile>
 			  </div>
+			  <div layout vertical flex start>
+				  <page-tile class="deck-theme" name='Deck' hratio=0.6 wratio=1.2 statistics={{generateStatistics()}}></page-tile>
+				  <page-tile class="stage-theme" name='Staging' hratio=0.4 wratio=1.2 statistics={{generateStatistics()}}></page-tile>
+		    </div>
+	  </div>
+	  
 	</template> 
 	
 	<script type="application/dart" src="../home.dart"></script> 

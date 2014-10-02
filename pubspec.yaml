@@ -13,6 +13,7 @@ dependencies:
   
 dependency_overrides: 
   args: any    #forces later deps than stylus expects
+  web_components: any
 
 transformers:
 - polymer

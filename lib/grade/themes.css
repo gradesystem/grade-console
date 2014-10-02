@@ -1,3 +1,66 @@
+.theme-0 {
+  background: #26699a;
+}
+.theme-1 {
+  background: #00bcd4;
+}
+:host repo-page /deep/ .bg {
+  background: #00bcd4;
+}
+:host /deep/ .repo-theme /deep/ .bg {
+  background: #00bcd4;
+}
+:host repo-page /deep/ .bg-alt {
+  background: #0097a7;
+}
+:host /deep/ .repo-theme /deep/ .bg-alt {
+  background: #0097a7;
+}
+.theme-2 {
+  background: #ffc107;
+}
+:host deck-page /deep/ .bg {
+  background: #ffc107;
+}
+:host /deep/ .deck-theme /deep/ .bg {
+  background: #ffc107;
+}
+:host deck-page /deep/ .bg-alt {
+  background: #ffa000;
+}
+:host /deep/ .deck-theme /deep/ .bg-alt {
+  background: #ffa000;
+}
+.theme-3 {
+  background: #e41c23;
+}
+:host tasks-page /deep/ .bg {
+  background: #e41c23;
+}
+:host /deep/ .tasks-theme /deep/ .bg {
+  background: #e41c23;
+}
+:host tasks-page /deep/ .bg-alt {
+  background: #cf1715;
+}
+:host /deep/ .tasks-theme /deep/ .bg-alt {
+  background: #cf1715;
+}
+.theme-4 {
+  background: #009587;
+}
+:host stage-page /deep/ .bg {
+  background: #009587;
+}
+:host /deep/ .stage-theme /deep/ .bg {
+  background: #009587;
+}
+:host stage-page /deep/ .bg-alt {
+  background: #207368;
+}
+:host /deep/ .stage-theme /deep/ .bg-alt {
+  background: #207368;
+}
 :host {
   height: 100%;
   font-family: 'Roboto', sans-serif;
@@ -14,22 +77,4 @@
 .smaller {
   font-size: 11px;
   font-weight: normal;
-}
-a:link {
-  color: #ffc107;
-}
-.theme-0 {
-  background: #26699a;
-}
-.theme-1 {
-  background: #b4bfe1;
-}
-.theme-2 {
-  background: #ffc107;
-}
-.theme-3 {
-  background: #e41c23;
-}
-.theme-4 {
-  background: #009587;
 }

@@ -3,44 +3,48 @@
 <link rel="import" href="../../../packages/core_elements/social_icons.html">
 
 <polymer-element name="page-tile"> 
+
  
  <template>
  
     <style>
     
-	    .page-item {
-			  position: relative;
-			  float: left;
-			  vertical-align: top;
-			  width: 300px;
-			  height: 224px;
-			}
-			
-			.page-tile-bg {
-			  position: absolute !important;
-			}
-			
-			.page-bg-wrapper {
-			  padding-left: 16px;
-			  padding-top: 5px;
-			}
-			
-			.statistic-count {
-			   font-size: 50px;
-			   padding-right: 5px;
-			}
-			
-			.statistic-info {
-			   padding-bottom: 15px;
-			   line-height: 12px;
-			}
-			
-			.statistic-name {
-			   font-size: 14px;
-			}
-			
-			.statistic-date {
-         font-size: 11px;
+       
+    
+      .page-item {
+        position: relative;
+        vertical-align: top;
+        width: 300px;
+        height: 224px;
+      }
+      
+      .page-tile-bg {
+        position: absolute !important;
+      }
+      
+      .page-bg-wrapper {
+        padding-left: 16px;
+        padding-top: 5px;
+      }
+      
+      .statistic-count {
+         font-size: 50px;
+         font-weight: 100;
+         padding-right: 5px;
+      }
+      
+      .statistic-info {
+         padding-bottom: 15px;
+         line-height: 12px;
+      }
+      
+      .statistic-name {
+         font-size:1.2em;
+         margin-bottom: 5px;
+      }
+      
+      .statistic-date {
+         font-size: .65em;
       }
       
       .notifications-bar {
@@ -51,62 +55,63 @@
       .notification-icon {
         padding-left: 2px;
       }
-			
-			.completed .page-bg-wrapper {
-			  width: 96px !important;
-			  height: 96px !important;
-			}
-			
-			.page-name {
-			  height: 40px;
-			  padding: 0 16px;
-			  font-size: 14px;
-			  border-bottom-right-radius: 5px;
+      
+      .completed .page-bg-wrapper {
+        width: 96px !important;
+        height: 96px !important;
+      }
+      
+      .page-name {
+        height: 40px;
+        padding: 0 16px;
+        font-weight : bolder;
+        border-bottom-right-radius: 5px;
         border-bottom-left-radius: 5px;
-			}
-			
-			.tile {
-			  position: relative;
-			  margin: 2px;
-			  border-radius: 5px;
-			}
-			
-			.page-item > .tile {
-			  margin: 4px;
-			}
-			
-			@import url("tile-themes.css");
+      }
+      
+      .tile {
+        position: relative;
+        margin: 2px;
+        border-radius: 5px;
+      }
+      
+      .page-item > .tile {
+        margin: 4px;
+      }
+      
     
     </style>
-
-    <div class="page-item {{theme}}-theme" vertical layout style="width: calc(300px * {{wratio}});height: calc(400px * {{hratio}});">
-      <div class="tile theme-bg-a" dummy fit></div>
+    
+    <div class="page-item" vertical layout style="width: calc(300px * {{wratio}});height: calc(450px * {{hratio}});">
+      <div class="tile bg" dummy fit></div>
       <div class="tile" flex auto vertical layout>
         <div flex auto relative>
-            <div class="page-bg-wrapper" layout horizontal end>
-	            <span class="statistic-count">{{statistics.count}}</span>
-	            <div class="statistic-info" layout vertical>
-	              <span class="statistic-name">{{statistics.name}}</span>
-	              <span class="statistic-date">{{statistics.date | format}}</span>
-	            </div>
-	            <div flex layout horizontal end-justified self-start class="notifications-bar">
-	              <template repeat="{{ notification in statistics.notifications }}">
-	                 <core-icon class="theme-bg-a notification-icon" icon="{{notification}}"></core-icon>
-	              </template>
-	            </div>
+            <div class="page-bg-wrapper" layout horizontal>
+              <div class="statistic-count">{{statistics.count}}</div>
+              <div class="statistic-info" layout vertical reverse>
+                <div class="statistic-date">{{statistics.date | format}}</div>
+                <div class="statistic-name">{{statistics.name}}</div>
+              </div>
+              <div flex layout horizontal end-justified self-start class="notifications-bar">
+                <template repeat="{{ notification in statistics.notifications }}">
+                   <core-icon class="bg notification-icon" icon="{{notification}}"></core-icon>
+                </template>
+              </div>
             </div>
         </div>
-        <div class="page-name theme-bg" horizontal center layout>
+        <div class="page-name bg-alt" horizontal center layout>
           <div flex>
             <span>{{name | uppercase}}</span>
           </div>
-          <core-icon class="theme-bg" icon="arrow-forward" on-click="{{tileSelected}}"></core-icon>
+          <core-icon icon="arrow-forward" on-click="{{tileSelected}}"></core-icon>
         </div>
       </div>
     </div>
+    
+    
+    <script type="application/dart" src="../home.dart"></script> 
 
  </template> 
  
- <script type="application/dart" src="../home.dart"></script> 
  
-</polymer-element>
+ </polymer-element>
