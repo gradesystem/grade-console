@@ -11,8 +11,9 @@ import 'package:logging/logging.dart';
 import 'dart:html';
 
 import 'common.dart';
-import 'staging.dart' as staging;
 import 'home.dart' as home;
+import 'repo.dart' as repo;
+import 'staging.dart' as staging;
 
 part 'grade/grade_console.dart';
 
@@ -57,8 +58,9 @@ _initLogging() {
 
 _initModules() {
   
-  staging.init();
   home.init();
+  repo.init();
+  staging.init();
 
   //add app-level modules
   Module module = new Module()

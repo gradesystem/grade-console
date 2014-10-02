@@ -6,8 +6,10 @@
 <link rel="import" href="../../../packages/paper_elements/paper_tabs.html">
 <link rel="import" href="../../../packages/paper_elements/paper_tab.html">
 
-<link rel="import" href="../staging/staging_page.html">
+
 <link rel="import" href="../home/home_page.html">
+<link rel="import" href="../repo/repo_page.html">
+<link rel="import" href="../staging/staging_page.html">
 
 <link rel="import" href="../common/coming_soon.html">
          
@@ -37,7 +39,7 @@
 	         
 	           <core-pages flex selected='{{ page }}'>
                    <home-page on-tile-selected="{{ changePage }}"></home-page>
-                   <coming-soon><h1>PRODUCTION REPOSITORY</h1></coming-soon>
+                   <repo-page></repo-page>
                    <coming-soon><h1>DECK</h1></coming-soon>
                    <coming-soon><h1>TASK CATALOGUE</h1></coming-soon>
                    <coming-soon><h1>STAGING REPOSITORY</h1></coming-soon>
