@@ -7,6 +7,7 @@ import 'package:di/di.dart';
 import 'package:polymer/polymer.dart';
 
 import 'package:logging/logging.dart';
+import 'package:logging/logging.dart' as logging;
 
 import 'dart:html';
 
@@ -19,6 +20,8 @@ part 'grade/grade_console.dart';
 
 //lib-level logger
 final Logger log = new Logger('grade');
+
+
 
 
 init() {
@@ -39,13 +42,13 @@ init() {
 }
 
 
-
 _initLogging() {
   
-
-   Logger.root.level = Level.ALL;
+   logging.hierarchicalLoggingEnabled = true;
+  
+   log.level = Level.ALL;
    
-   Logger.root.onRecord.listen((LogRecord rec) {
+   log.onRecord.listen((LogRecord rec) {
    
      //log format
      print('${rec.level.name}: ${rec.time}, ${rec.loggerName}: ${rec.message}');
