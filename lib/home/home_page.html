@@ -2,40 +2,51 @@
 <link rel="import" href="../../../packages/core_elements/core_selector.html">
 <link rel="import" href="page_tile.html">
 
-<polymer-element name="home-page" layout horizontal center> 
+<polymer-element name="home-page" layout horizontal center-justified> 
+
+  <style>
+  
+  
+  
+  </style>
 
 	<template>	 
-	
-			<style>
-			  .tile-list {
-				  display: block;
-				  position: absolute;
-				  top: 100px;
-				  right: 0;
-				  bottom: 0;
-				  left: 0;
-			
-				  overflow-y: auto;
-				  overflow-x: hidden;
-				  -webkit-overflow-scrolling: touch;
-				  
-				   padding: 4px 0;
-			      margin: 0 -4px;
-				}
-			
-			</style>
-			
-	   <div flex horizontal layout>
-	       <div layout vertical flex end>
-	        <page-tile class="repo-theme" name='Repository' hratio=0.7 wratio=1 statistics={{generateStatistics()}}></page-tile>
-				  <page-tile class="tasks-theme" name='Tasks' hratio=0.3 wratio=1 statistics={{generateStatistics()}}></page-tile>
-			  </div>
-			  <div layout vertical flex start>
-				  <page-tile class="deck-theme" name='Deck' hratio=0.6 wratio=1.2 statistics={{generateStatistics()}}></page-tile>
-				  <page-tile class="stage-theme" name='Staging' hratio=0.4 wratio=1.2 statistics={{generateStatistics()}}></page-tile>
-		    </div>
+		
+	   <div style="width:60%; height:70%; min-width:700px; min-height:400px; overflow-x:hidden; overflow-y:hidden" self-center 	   
+	       layout horizontal>
+	   
+	      <div flex layout horizontal>
+	      
+	         <!-- col1 -->
+			     <div  flex two 
+			         layout vertical> 
+				       
+				       <page-tile flex three class=repo-theme
+				                  resource_name=datasets 
+				                  name=Repository></page-tile>
+				        
+				       <page-tile flex two class=tasks-theme
+				                  name=Tasks
+				                  resource_name=tasks></page-tile>
+			     </div>
+			     
+			     <!-- col2 -->
+			     <div flex three
+			         layout vertical> 
+			        
+			        <page-tile flex two class=deck-theme 
+	   		           name=Deck
+	   		           resource_name=running></page-tile>
+			        
+			        <page-tile flex three class=stage-theme 
+			           name=Staging
+			           resource_name=datasets></page-tile>
+			           
+			     </div>
+			     
+	     </div>
 	  </div>
-	  
+    
 	</template> 
 	
 	<script type="application/dart" src="../home.dart"></script> 

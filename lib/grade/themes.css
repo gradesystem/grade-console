@@ -40,7 +40,7 @@
 :host {
   height: 100%;
   font-family: 'Roboto', sans-serif;
-  font-weight: lighter;
+  font-weight: 300;
   background: #f4f4f4;
   color: #fff;
 }

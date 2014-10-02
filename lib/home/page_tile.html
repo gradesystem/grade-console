@@ -2,110 +2,94 @@
 <link rel="import" href="../../../packages/core_elements/core_icons.html">
 <link rel="import" href="../../../packages/core_elements/social_icons.html">
 
-<polymer-element name="page-tile"> 
+<polymer-element name="page-tile" layout vertical> 
 
  
  <template>
  
     <style>
     
-       
-    
-      .page-item {
-        position: relative;
-        vertical-align: top;
-        width: 300px;
-        height: 224px;
-      }
+      .tile {
       
-      .page-tile-bg {
-        position: absolute !important;
-      }
+        min-width: 180px;
+        min-height: 140px;
       
-      .page-bg-wrapper {
-        padding-left: 16px;
+        margin: 5px;
+        border-radius: 5px;
+        
         padding-top: 5px;
+        
+  
       }
+      
+      .tile-content {
+        padding-left: 16px;
+        padding-right: 16px;
+      }
+      
+       .fascia {
+        height: 40px;
+        font-weight : 400;
+        border-bottom-right-radius: 5px;
+        border-bottom-left-radius: 5px;
+      }
+      
       
       .statistic-count {
-         font-size: 50px;
+         font-size: 300%;
          font-weight: 100;
          padding-right: 5px;
       }
       
       .statistic-info {
-         padding-bottom: 15px;
-         line-height: 12px;
+         padding-bottom: 11px;
       }
       
-      .statistic-name {
-         font-size:1.2em;
-         margin-bottom: 5px;
+      .resource-name {
+         font-size:120%;
+         font-weight: 300;
       }
       
       .statistic-date {
-         font-size: .65em;
+         font-size: 65%;
       }
       
       .notifications-bar {
         padding-top: 9px;
-        padding-right: 5px;
       }
       
-      .notification-icon {
-        padding-left: 2px;
-      }
-      
-      .completed .page-bg-wrapper {
-        width: 96px !important;
-        height: 96px !important;
-      }
-      
-      .page-name {
-        height: 40px;
-        padding: 0 16px;
-        font-weight : bolder;
-        border-bottom-right-radius: 5px;
-        border-bottom-left-radius: 5px;
-      }
-      
-      .tile {
-        position: relative;
-        margin: 2px;
-        border-radius: 5px;
-      }
-      
-      .page-item > .tile {
-        margin: 4px;
-      }
-      
-    
     </style>
     
-    <div class="page-item" vertical layout style="width: calc(300px * {{wratio}});height: calc(450px * {{hratio}});">
-      <div class="tile bg" dummy fit></div>
-      <div class="tile" flex auto vertical layout>
-        <div flex auto relative>
-            <div class="page-bg-wrapper" layout horizontal>
-              <div class="statistic-count">{{statistics.count}}</div>
-              <div class="statistic-info" layout vertical reverse>
-                <div class="statistic-date">{{statistics.date | format}}</div>
-                <div class="statistic-name">{{statistics.name}}</div>
-              </div>
-              <div flex layout horizontal end-justified self-start class="notifications-bar">
-                <template repeat="{{ notification in statistics.notifications }}">
-                   <core-icon class="bg notification-icon" icon="{{notification}}"></core-icon>
-                </template>
+    
+    
+    
+    <div flex class="tile bg" vertical layout>
+      
+           <div flex class=tile-content>
+              <div layout horizontal>
+	              <div class=statistic-count>{{statistics.count}}</div>
+	              <div class=statistic-info layout vertical reverse>
+	                    <div class=statistic-date>{{statistics.date | format}}</div>
+                      <div class=resource-name>{{resource_name}}</div>
+		            </div>
+                <div flex end-justified class=notifications-bar
+                   layout horizontal >
+                  <template repeat="{{ notification in statistics.notifications }}">
+                     <core-icon icon="{{notification}}"></core-icon>
+                  </template>
+                </div>
               </div>
             </div>
-        </div>
-        <div class="page-name bg-alt" horizontal center layout>
+        
+        
+        <div class="fascia tile-content bg-alt" 
+              horizontal layout center>
           <div flex>
             <span>{{name | uppercase}}</span>
           </div>
           <core-icon icon="arrow-forward" on-click="{{tileSelected}}"></core-icon>
         </div>
-      </div>
+        
     </div>
     
     
