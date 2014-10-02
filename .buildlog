@@ -7056,3 +7056,123 @@ build.dart --machine --changed=lib/home.dart
 
 build.dart finished [127 ms]
 
+---
+build.dart --machine --changed=lib/grade/themes.styl
+/usr/local/lib/node_modules/stylus/bin/stylus:644
+              throw err;
+                    ^
+ParseError: lib/grade/themes.styl:36:12
+   32| 
+   33| repo = {
+   34|   primary : grade-cyan
+   35|   secondary : grade-dark-cyan
+   36|   elements : .repo-theme'
+------------------^
+   37| }
+   38| 
+   39| deck = {
+
+expected "ident" or "string", got "."
+
+    at Parser.error (/usr/local/lib/node_modules/stylus/lib/parser.js:257:11)
+    at Parser.object (/usr/local/lib/node_modules/stylus/lib/parser.js:1969:21)
+    at Parser.primary (/usr/local/lib/node_modules/stylus/lib/parser.js:2030:21)
+    at Parser.member (/usr/local/lib/node_modules/stylus/lib/parser.js:1936:21)
+    at Parser.subscript (/usr/local/lib/node_modules/stylus/lib/parser.js:1910:21)
+    at Parser.unary (/usr/local/lib/node_modules/stylus/lib/parser.js:1901:17)
+    at Parser.defined (/usr/local/lib/node_modules/stylus/lib/parser.js:1875:21)
+    at Parser.multiplicative (/usr/local/lib/node_modules/stylus/lib/parser.js:1849:21)
+    at Parser.additive (/usr/local/lib/node_modules/stylus/lib/parser.js:1834:21)
+    at Parser.range (/usr/local/lib/node_modules/stylus/lib/parser.js:1818:21)
+build.dart finished [303 ms]
+
+---
+build.dart --machine --changed=lib/grade/themes.css
+
+build.dart finished [115 ms]
+
+---
+build.dart --machine --changed=lib/grade/themes.styl
+/usr/local/lib/node_modules/stylus/bin/stylus:644
+              throw err;
+                    ^
+ParseError: lib/grade/themes.styl:36:12
+   32| 
+   33| repo = {
+   34|   primary : grade-cyan
+   35|   secondary : grade-dark-cyan
+   36|   elements : .repo-theme
+------------------^
+   37| }
+   38| 
+   39| deck = {
+
+expected "ident" or "string", got "."
+
+    at Parser.error (/usr/local/lib/node_modules/stylus/lib/parser.js:257:11)
+    at Parser.object (/usr/local/lib/node_modules/stylus/lib/parser.js:1969:21)
+    at Parser.primary (/usr/local/lib/node_modules/stylus/lib/parser.js:2030:21)
+    at Parser.member (/usr/local/lib/node_modules/stylus/lib/parser.js:1936:21)
+    at Parser.subscript (/usr/local/lib/node_modules/stylus/lib/parser.js:1910:21)
+    at Parser.unary (/usr/local/lib/node_modules/stylus/lib/parser.js:1901:17)
+    at Parser.defined (/usr/local/lib/node_modules/stylus/lib/parser.js:1875:21)
+    at Parser.multiplicative (/usr/local/lib/node_modules/stylus/lib/parser.js:1849:21)
+    at Parser.additive (/usr/local/lib/node_modules/stylus/lib/parser.js:1834:21)
+    at Parser.range (/usr/local/lib/node_modules/stylus/lib/parser.js:1818:21)
+build.dart finished [288 ms]
+
+---
+build.dart --machine --changed=lib/grade/themes.css
+
+build.dart finished [103 ms]
+
+---
+build.dart --machine --changed=lib/grade/themes.styl
+
+build.dart finished [361 ms]
+
+---
+build.dart --machine --changed=lib/grade/themes.css
+
+build.dart finished [130 ms]
+
+---
+build.dart --machine --changed=lib/grade/themes.styl
+
+build.dart finished [385 ms]
+
+---
+build.dart --machine --changed=lib/grade/themes.css
+
+build.dart finished [134 ms]
+
+---
+build.dart --machine --changed=lib/grade/themes.styl
+
+build.dart finished [353 ms]
+
+---
+build.dart --machine --changed=lib/grade/themes.css
+
+build.dart finished [155 ms]
+
+---
+build.dart --machine --changed=lib/grade/themes.styl
+
+build.dart finished [348 ms]
+
+---
+build.dart --machine --changed=lib/grade/themes.css
+
+build.dart finished [136 ms]
+
+---
+build.dart --machine --changed=lib/grade/themes.styl
+
+build.dart finished [377 ms]
+
+---
+build.dart --machine --changed=lib/grade/themes.css
+
+build.dart finished [128 ms]
+
