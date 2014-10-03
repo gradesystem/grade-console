@@ -1,15 +1,9 @@
 part of repo;
 
 @CustomTag("repo-page") 
-class RepoPage extends PolymerElement with Dependencies {
-  
-  RepoPageModel model;
-  
-  RepoPage.created() : super.created() {
-    model = instanceOf(RepoPageModel);
-  }
+class RepoPage extends Polybase {
+  RepoPage.created() : super.createWith(RepoPageModel);
 }
-
 
 @Injectable()
 class RepoPageModel {

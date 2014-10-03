@@ -6,8 +6,6 @@ DateFormat JSON_DATE_FORMAT = new DateFormat('yyyy/MM/dd');
 
 abstract class Delegate {
   
-  
-  
   final Map _bean;
   
   Delegate(this._bean);
