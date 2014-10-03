@@ -3,14 +3,29 @@ part of repo;
 @CustomTag("repo-page") 
 class RepoPage extends PolymerElement with Dependencies {
   
-  Duration TIMEOUT = const Duration(seconds: 3);
-  
-  RepoService service;
+  RepoPageModel model;
   
   RepoPage.created() : super.created() {
-    service = instanceOf(RepoService);
-    
-    new Timer(TIMEOUT, service.init);
+    model = instanceOf(RepoPageModel);
+  }
+}
+
+
+@Injectable()
+class RepoPageModel {
+  
+  RepoService service;
+  Storage storage;
+  EventBus bus;
+  
+  RepoPageModel(this.service, this.storage, this.bus) {
+    bus.on(ApplicationReady).listen((_) {
+      init();
+    });
+  }
+  
+  void init() {
+    storage.data = toObservable(service.getAll());
   }
 }
 
