@@ -25,10 +25,6 @@ part 'repo/repo_service.dart';
 //lib-level logger
 final Logger log = new Logger('grade.repo');
 
-class Filters {
-String lowercase(String s) => s.toLowerCase();
-}
-
 init() {
   
   var module = new Module()

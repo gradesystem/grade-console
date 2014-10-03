@@ -2,13 +2,11 @@ part of repo;
 
 
 @CustomTag("graph-item") 
-class GraphItem extends PolymerElement {
+class GraphItem extends PolymerElement with Filters {
   
   @published
   Graph graph;
   
   GraphItem.created() : super.created();
-  
-  lowercase(String s) => s.toLowerCase();
   
 }

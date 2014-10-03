@@ -2,13 +2,11 @@ part of home;
 
 
 @CustomTag("page-tile")
-class PageTile extends PolymerElement {
+class PageTile extends PolymerElement with Filters {
   
   static List<List<String>> notificationsSets = [[],[],['error', 'social:notifications'],[]];
   
   static Random rng = new Random();
-  
-  static DateFormat formatter = new DateFormat('yyyy-MM-dd');
 
   @published String name;
   @published String resource_name;
@@ -20,9 +18,6 @@ class PageTile extends PolymerElement {
   void tileSelected() {
     this.fire("tile-selected", detail:name);
   }
-  
- uppercase(String str) => str.toUpperCase();
- format(DateTime date) => formatter.format(date);
 
  static PageStatistics dummyStats() {
    
@@ -34,8 +29,6 @@ class PageTile extends PolymerElement {
    return new PageStatistics(count, date, toObservable(notificationsSets[rng.nextInt(4)]));
  }
 }
-
-
 
 class PageStatistics extends Observable {
   

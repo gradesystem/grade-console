@@ -14,7 +14,7 @@ class GradeConsole  extends PolymerElement with Dependencies {
     DocumentFragment instanceTemplate(Element template) =>
         template.createInstance(this, _mySyntax);*/
 
-  @observable int page = 1;
+  @observable int page = 0;
   
   GradeConsole.created() : super.created();
   

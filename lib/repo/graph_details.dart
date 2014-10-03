@@ -1,7 +1,7 @@
 part of repo;
 
 @CustomTag("graph-details") 
-class GraphDetails extends PolymerElement with Dependencies {
+class GraphDetails extends PolymerElement with Dependencies, Filters {
   
   @observable
   DetailsModel model;
