@@ -2,7 +2,11 @@ part of common;
 
 typedef T Generator<T>(Map data);
 
+DateFormat JSON_DATE_FORMAT = new DateFormat('yyyy/MM/dd');
+
 abstract class Delegate {
+  
+  
   
   final Map _bean;
   
@@ -10,9 +14,10 @@ abstract class Delegate {
   
   get bean => _bean;
   
-  _get(String l) => _bean[l];
+  get(String l) => _bean[l];
+  getDate(String l) => JSON_DATE_FORMAT.parse(get(l));
     
-  List _all(String l, Generator gen) => new ListDelegate(_get(l),gen);
+  List _all(String l, Generator gen) => new ListDelegate(get(l),gen);
   
 }
 
