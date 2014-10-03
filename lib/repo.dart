@@ -29,8 +29,7 @@ init() {
           ..bind(RepoPageModel)
           ..bind(Storage)
           ..bind(RepoService)
-          ..bind(GraphsListModel)
-          ..bind(DetailsModel);
+          ..bind(GraphsListModel);
   
   Dependencies.add(module);
 }
