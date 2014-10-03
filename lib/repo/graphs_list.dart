@@ -1,24 +1,14 @@
 part of repo;
 
 @CustomTag("graphs-list") 
-class GraphsList extends PolymerElement with Dependencies {
+class GraphsList extends Polybase with Dependencies {
   
-  @observable GraphsListModel model;
-  
-  GraphsList.created() : super.created() {
-    model = instanceOf(GraphsListModel);
-  }
+  GraphsList.created() : super.createWith(Storage);
   
   void onItemSelected(CustomEvent event) {
-    model.storage.selected = event.detail.data;
+    storage.selected = event.detail.data;
   }
   
-}
-
-@Injectable()
-class GraphsListModel extends Object {
+  Storage get storage => model as Storage;
   
-    Storage storage;
-    
-    GraphsListModel(this.storage);
 }

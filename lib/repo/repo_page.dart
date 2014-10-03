@@ -14,14 +14,10 @@ class RepoPageModel {
   
   RepoPageModel(this.service, this.storage, this.bus) {
     bus.on(ApplicationReady).listen((_) {
-      init();
+      loadAll();
     });
   }
-  
-  void init() {
-    loadAll();
-  }
-  
+ 
   void loadAll() {
     storage.loading = true;
     service.getAll().then((List<Graph> graphs) {storage.data = toObservable(graphs);});

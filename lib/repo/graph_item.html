@@ -1,25 +1,23 @@
 <link rel="import" href="../../../packages/polymer/polymer.html">
 <link rel="import" href="../../../packages/paper_elements/paper_item.html">
 
-
 <polymer-element name="graph-item" center horizontal layout>
-<style>
-  .label {
-    font-weight: bolder;
-    font-size: larger;
-  }
-  
-  .date {
-  }
-</style>
- <template>
-        <paper-item>
-          <div>
-            <div class="label">{{graph.label}}</div>
-            <div class="date">{{graph.date | format}}</div>
-          </div>
-        </paper-item>
- </template>
- 
+	<style>
+	  .label {
+	    font-weight: bolder;
+	    font-size: larger;
+	  }
+	  
+	  .date {
+	  }
+	</style>
+  <template>
+    <paper-item>
+      <div>
+        <div class="label">{{graph.label}}</div>
+        <div class="date">{{graph.date | format}}</div>
+      </div>
+    </paper-item>
+  </template>
   <script type="application/dart" src="../repo.dart"></script> 
 </polymer-element>

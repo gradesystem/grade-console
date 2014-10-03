@@ -18,9 +18,6 @@ part 'repo/graph_item.dart';
 part 'repo/repo_model.dart';
 part 'repo/repo_service.dart';
 
-
-
-//lib-level logger
 final Logger log = new Logger('grade.repo');
 
 init() {
@@ -28,8 +25,7 @@ init() {
   var module = new Module()
           ..bind(RepoPageModel)
           ..bind(Storage)
-          ..bind(RepoService)
-          ..bind(GraphsListModel);
+          ..bind(RepoService);
   
   Dependencies.add(module);
 }

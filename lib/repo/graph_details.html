@@ -1,33 +1,15 @@
 <link rel="import" href="../../../packages/polymer/polymer.html">
 
 <polymer-element name="graph-details" layout vertical> 
- <template>
- <div>
- Label: {{storage.selected.label}}
-  </div>
-   <div>
- Note: {{storage.selected.note}}
-   </div>
-    <div>
- Source Endpoint: {{storage.selected.sourceEndpoint}}
-   </div>  
-   <div>
- Date: {{storage.selected.date | format}}
-   </div>
-    <div>
- License: {{storage.selected.license}}
-   </div>
-   <div>
- Owner: {{storage.selected.owner}}
-   </div>  
-   <div>
- Repository: {{storage.selected.repository}}
-   </div>
-
-   <div>
- Creator: {{storage.selected.creator}}
- </div>
- </template> 
- 
- <script type="application/dart" src="../repo.dart"></script> 
+  <template>
+		<div>Label: {{storage.selected.label}}</div>
+		<div>Note: {{storage.selected.note}}</div>
+		<div>Source Endpoint: {{storage.selected.sourceEndpoint}}</div>
+		<div>Date: {{storage.selected.date | format}}</div>
+		<div>License: {{storage.selected.license}}</div>
+		<div>Owner: {{storage.selected.owner}}</div>
+		<div>Repository: {{storage.selected.repository}}</div>
+		<div>Creator: {{storage.selected.creator}}</div>
+  </template> 
+  <script type="application/dart" src="../repo.dart"></script> 
 </polymer-element>

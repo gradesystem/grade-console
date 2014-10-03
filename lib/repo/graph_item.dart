@@ -1,6 +1,5 @@
 part of repo;
 
-
 @CustomTag("graph-item") 
 class GraphItem extends PolymerElement with Filters {
   

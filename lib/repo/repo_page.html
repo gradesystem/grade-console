@@ -2,17 +2,26 @@
 <link rel="import" href="graph_details.html">
 <link rel="import" href="graphs_list.html">
 
-<polymer-element name="repo-page" layout vertical> 
- <template>
+<polymer-element name="repo-page" layout vertical>  
+  <template>
+    <style>
+      .title {
+        margin:10px; 
+        color:#5674b8;
+      }
+      .content {
+        color:#5674b8;
+      }
+    </style>
 
-   <div style="margin:10px; color:#5674b8" horizontal layout center center-justified>
-    <h1>PRODUCTION REPOSITORY</h1>
-   </div>
-   
-   <div layout horizontal flex style="color:#5674b8">
-   <graphs-list flex two></graphs-list>
-   <graph-details flex one></graph-details>
-   </div>
+		<div class="title" horizontal layout center center-justified>
+		 <h1>PRODUCTION REPOSITORY</h1>
+		</div>
+		
+		<div class="content" flex layout horizontal>
+      <graphs-list flex two></graphs-list>
+		  <graph-details flex one></graph-details>
+		</div>
  </template>
  
  <script type="application/dart" src="../repo.dart"></script> 
