@@ -6,8 +6,15 @@ part of grade;
 class GradeConsole  extends PolymerElement with Dependencies {
  
   static const name = "grade-console";
- 
-  @observable int page = 0;
+  
+/*  var _mySyntax = new PolymerExpressions(globals: {
+      'appName': 'My App',
+    });
+
+    DocumentFragment instanceTemplate(Element template) =>
+        template.createInstance(this, _mySyntax);*/
+
+  @observable int page = 1;
   
   GradeConsole.created() : super.created();
   

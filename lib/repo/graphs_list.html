@@ -5,19 +5,18 @@
 
 <polymer-element name="graphs-list" layout vertical> 
  <template>
-    <style>
-  .selected {
-    background-color: red;
-  }
-
-  
+  <style>
+		  .selected {
+		    background-color: red;
+		  }
   </style>
-    <core-list-dart data={{model.storage.data}} height="80" on-core-activate="{{onItemSelected}}" flex>
-      <template>
-        <graph-item flex class="{{ {selected: selected} }}" graph={{self}}>
-         </graph-item>
-      </template>
-    </core-list-dart>
+  
+  <core-list-dart data={{model.storage.data}} height="80" on-core-activate="{{onItemSelected}}" flex>
+    <template>
+      <graph-item class="{{ {selected: selected} }}" graph={{self}}>
+       </graph-item>
+    </template>
+  </core-list-dart>
  </template>
  
  <script type="application/dart" src="../repo.dart"></script> 
