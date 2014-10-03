@@ -30,8 +30,6 @@ init() {
 
     log.info("initialising modules...");
         
-    log.fine("initialising modules...");
-    
     _initModules();
 
     log.fine("initialising polymers...");
