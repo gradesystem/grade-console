@@ -25,7 +25,13 @@ class RepoPageModel {
   }
   
   void init() {
-    storage.data = toObservable(service.getAll());
+    loadAll();
+  }
+  
+  void loadAll() {
+    storage.loading = true;
+    service.getAll().then((List<Graph> graphs) {storage.data = toObservable(graphs);});
+    storage.loading = false;
   }
 }
 

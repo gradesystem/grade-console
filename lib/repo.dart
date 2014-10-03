@@ -2,7 +2,6 @@ library repo;
 
 import 'dart:html';
 import 'dart:async';
-import 'package:intl/intl.dart';
 import 'package:polymer/polymer.dart';
 import 'package:logging/logging.dart';
 

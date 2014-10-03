@@ -11,5 +11,11 @@ class RepoService {
                                    new Graph("4", "WATER", "n/a", new DateTime(2014,3,23), "SMAC", "G. Verdi")
                                    
                                    ];
-  List<Graph> getAll() => graphs;
+  Future<List<Graph>> getAll() {
+    Completer completer = new Completer();
+    completer.complete(graphs);
+    
+    return completer.future;
+  }
+
 }
