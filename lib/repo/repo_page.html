@@ -1,11 +1,19 @@
 <link rel="import" href="../../../packages/polymer/polymer.html">
+<link rel="import" href="graph_details.html">
+<link rel="import" href="graphs_list.html">
 
-<polymer-element name="repo-page"> 
+<polymer-element name="repo-page" layout vertical> 
  <template>
+
    <div style="margin:10px; color:#5674b8" horizontal layout center center-justified>
     <h1>PRODUCTION REPOSITORY</h1>
    </div>
- </template> 
+   
+   <div layout horizontal flex style="color:#5674b8">
+   <graphs-list flex two></graphs-list>
+   <graph-details flex></graph-details>
+   </div>
+ </template>
  
  <script type="application/dart" src="../repo.dart"></script> 
 </polymer-element>

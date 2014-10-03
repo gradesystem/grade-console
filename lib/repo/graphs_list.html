@@ -1,0 +1,24 @@
+<link rel="import" href="../../../packages/polymer/polymer.html">
+<link rel="import" href="../../../packages/core_elements/core_list_dart.html">
+<link rel="import" href="../../../packages/paper_elements/paper_item.html">
+<link rel="import" href="graph_item.html">
+
+<polymer-element name="graphs-list" layout vertical> 
+ <template>
+    <style>
+  .selected {
+    background-color: red;
+  }
+
+  
+  </style>
+    <core-list-dart data={{model.storage.data}} height="80" on-core-activate="{{onItemSelected}}" flex>
+      <template>
+        <graph-item flex class="{{ {selected: selected} }}" graph={{self}}>
+         </graph-item>
+      </template>
+    </core-list-dart>
+ </template>
+ 
+ <script type="application/dart" src="../repo.dart"></script> 
+</polymer-element>

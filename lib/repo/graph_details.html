@@ -1,0 +1,23 @@
+<link rel="import" href="../../../packages/polymer/polymer.html">
+
+<polymer-element name="graph-details" layout vertical> 
+ <template>
+ <div>
+ Name: {{model.storage.selected.name}}
+  </div>
+   <div>
+ description: {{model.storage.selected.description}}
+   </div>
+   <div>
+ lastUpdate: {{model.storage.selected.lastUpdate}}
+   </div>
+   <div>
+ repository: {{model.storage.selected.repository}}
+   </div>
+   <div>
+ author: {{model.storage.selected.author}}
+ </div>
+ </template> 
+ 
+ <script type="application/dart" src="../repo.dart"></script> 
+</polymer-element>
