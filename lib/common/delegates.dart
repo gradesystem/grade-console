@@ -17,6 +17,11 @@ abstract class Delegate {
     
   List _all(String l, Generator gen) => new ListDelegate(get(l),gen);
   
+  put(String l, value) => _bean[l] = value;
+  
+  noSuchMethod(Invocation invocation) => invocation.isGetter ? get(MirrorSystem.getName(invocation.memberName)):
+    invocation.isSetter ? put(MirrorSystem.getName(invocation.memberName), invocation.positionalArguments[0])
+                        : super.noSuchMethod(invocation);
 }
 
 class ListDelegate<E extends Delegate> extends ListBase<E> {
