@@ -33,25 +33,25 @@ home = {
 repo = {
   primary : grade-cyan
   secondary : grade-dark-cyan
-  elements : repo-page '/deep/ .repo-theme'
+  marker : repo-theme
 }
 
 deck = {
   primary : grade-yellow
   secondary : grade-dark-yellow
-  elements: 'deck-page' '/deep/ .deck-theme'
+  marker: deck-theme
 }
 
 tasks = {
   primary : grade-red
   secondary : grade-dark-red
-  elements: 'tasks-page' '/deep/ .tasks-theme'
+  marker: tasks-theme
 }
 
 stage = {
   primary : grade-teal
   secondary : grade-dark-teal
-  elements: 'stage-page' '/deep/ .stage-theme'
+  marker: stage-theme
 }
 
 
@@ -80,10 +80,9 @@ for t, pos in themes
  .theme-{pos}
     background : t.primary
       
- if t.elements
+ if t.marker
   for name,class in theme-classes
-    for e in t.elements
-      :host {e} /deep/ .{name} 
+    :host /deep/ .{t.marker} /deep/ .{name} 
          for prop, val in class
            {prop} : t[val]
         
@@ -100,7 +99,7 @@ for t, pos in themes
     height:100%;
     
     font-family: 'Roboto', sans-serif;
-    font-weight: lighter;
+    font-weight: 300;
     
     background: grade.bg;
     color:grade.fg;

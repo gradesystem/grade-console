@@ -37,7 +37,7 @@
 		    
 		      <div fit vertical layout>
 	         
-	           <core-pages flex selected='{{ page }}'>
+	           <core-pages style="overflow:hidden" flex selected='{{ page }}'>
                    <home-page on-tile-selected="{{ changePage }}"></home-page>
                    <repo-page></repo-page>
                    <coming-soon><h1>DECK</h1></coming-soon>
@@ -45,8 +45,8 @@
                    <coming-soon><h1>STAGING REPOSITORY</h1></coming-soon>
               </core-pages>
             
-              <div  class="theme-{{ page }} smaller" layout horizontal center>
-                <div>LAST UPDATE: 01/10/2014</div>
+              <div class="theme-{{ page }} smaller" layout horizontal center>
+                <div>Last touched: 02/10/2014</div>
                 <div flex class="theme-{{ page }}" layout vertical center>
                 <div>Copyright 2014-2015 GRADE all rights reserved </div>
                 </div>
