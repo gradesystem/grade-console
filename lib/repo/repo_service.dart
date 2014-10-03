@@ -11,14 +11,11 @@ class RepoService {
                                    new Graph("4", "WATER", "n/a", new DateTime(2014,3,23), "SMAC", "G. Verdi")
                                    
                                    ];
-  
-  Storage storage;
-  
-  RepoService(this.storage);
-  
-  void init() {
+  Future<List<Graph>> getAll() {
+    Completer completer = new Completer();
+    completer.complete(graphs);
     
-    storage.data = toObservable(graphs);
-    log.info("RepoService initialized");
+    return completer.future;
   }
+
 }

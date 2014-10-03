@@ -10,6 +10,7 @@ dependencies:
   event_bus: any
   intl: any
   stylus: any
+  collection: any
   
 dependency_overrides: 
   args: any    #forces later deps than stylus expects

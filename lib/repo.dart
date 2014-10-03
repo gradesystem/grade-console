@@ -2,14 +2,13 @@ library repo;
 
 import 'dart:html';
 import 'dart:async';
-import 'package:intl/intl.dart';
 import 'package:polymer/polymer.dart';
 import 'package:logging/logging.dart';
 
 import 'package:di/di.dart';
 import 'package:di/annotations.dart';
 
-import 'package:paper_elements/paper_item.dart';
+import 'package:event_bus/event_bus.dart';
 
 import 'common.dart';
 
@@ -28,6 +27,7 @@ final Logger log = new Logger('grade.repo');
 init() {
   
   var module = new Module()
+          ..bind(RepoPageModel)
           ..bind(Storage)
           ..bind(RepoService)
           ..bind(GraphsListModel)

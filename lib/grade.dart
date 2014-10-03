@@ -22,7 +22,7 @@ part 'grade/grade_console.dart';
 final Logger log = new Logger('grade');
 
 
-
+EventBus bus;
 
 init() {
   
@@ -34,7 +34,12 @@ init() {
 
     log.fine("initialising polymers...");
     
-    initPolymer();
+    initPolymer().run(() {
+
+        Polymer.onReady.then((_) {
+          bus.fire(const ApplicationReady());
+        });
+      });
     
     log.finer("initialised.");
 }
@@ -62,10 +67,12 @@ _initModules() {
   home.init();
   repo.init();
   staging.init();
+  
+  bus = new EventBus();
 
   //add app-level modules
   Module module = new Module()
-                      ..bind(EventBus, toValue: new EventBus());
+                      ..bind(EventBus, toValue: bus);
   
   Dependencies.add(module);
   

@@ -4,6 +4,7 @@ import 'package:di/di.dart';
 import 'package:polymer/polymer.dart';
 import 'package:logging/logging.dart';
 import 'package:intl/intl.dart';
+import 'dart:collection';
 
 
 part 'common/dependencies.dart';
@@ -12,3 +13,4 @@ part 'common/mvc.dart';
 part 'common/events.dart';
 part 'common/constants.dart';
 part 'common/filters.dart';
+part 'common/delegates.dart';
