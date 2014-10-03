@@ -3,19 +3,29 @@
 <polymer-element name="graph-details" layout vertical> 
  <template>
  <div>
- Name: {{model.storage.selected.name}}
+ Label: {{model.storage.selected.label}}
   </div>
    <div>
- Description: {{model.storage.selected.description}}
+ Note: {{model.storage.selected.note}}
+   </div>
+    <div>
+ Source Endpoint: {{model.storage.selected.sourceEndpoint}}
+   </div>  
+   <div>
+ Date: {{model.storage.selected.date | format}}
+   </div>
+    <div>
+ License: {{model.storage.selected.license}}
    </div>
    <div>
- LastUpdate: {{model.storage.selected.lastUpdate | format}}
-   </div>
+ Owner: {{model.storage.selected.owner}}
+   </div>  
    <div>
  Repository: {{model.storage.selected.repository}}
    </div>
+
    <div>
- Author: {{model.storage.selected.author}}
+ Creator: {{model.storage.selected.creator}}
  </div>
  </template> 
  

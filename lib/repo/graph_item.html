@@ -4,7 +4,7 @@
 
 <polymer-element name="graph-item" center horizontal layout>
 <style>
-  .name {
+  .label {
     font-weight: bolder;
     font-size: larger;
   }
@@ -15,8 +15,8 @@
  <template>
         <paper-item>
           <div>
-            <div class="name">{{graph.name}}</div>
-            <div class="date">{{graph.lastUpdate | format}}</div>
+            <div class="label">{{graph.label}}</div>
+            <div class="date">{{graph.date | format}}</div>
           </div>
         </paper-item>
  </template>

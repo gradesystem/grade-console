@@ -1,10 +1,10 @@
 part of repo;
 
-class Graph extends Delegate with ListItem {
+class Graph extends Delegate with ListItem, Observable {
 
   Graph(Map bean) : super(bean);
   
-  DateTime  get lastUpdate => getDate('lastUpdate');
+  DateTime  get date => getDate('date');
 }
 
 class ListItem {

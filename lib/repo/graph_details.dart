@@ -18,4 +18,7 @@ class DetailsModel {
   Storage storage;
   
   DetailsModel(this.storage);
+  
+  @observable
+  Graph get graph => storage.selected;
 }
