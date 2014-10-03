@@ -72,7 +72,8 @@ _initModules() {
 
   //add app-level modules
   Module module = new Module()
-                      ..bind(EventBus, toValue: bus);
+                      ..bind(EventBus, toValue: bus)
+                      ..bind(HttpService);
   
   Dependencies.add(module);
   

@@ -1,14 +1,16 @@
 part of repo;
 
-class Graph extends ListItem {
-  String id;
-  String name;
-  String description;
-  DateTime lastUpdate;
-  String repository;
-  String author;
+class Graph extends Delegate with ListItem {
+
+  Graph(Map bean) : super(bean);
   
-  Graph(this.id, this.name, this.description, this.lastUpdate, this.repository, this.author);
+  String get id => get('id');
+  
+  String  get name => get('name');
+  String  get description => get('description');
+  DateTime  get lastUpdate => getDate('lastUpdate');
+  String get repository => get('repository');
+  String  get author => get('author');
   
   String toString()=> "Graph id: $id, name: $name";
 }
