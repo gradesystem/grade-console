@@ -1,6 +1,6 @@
 part of common;
 
-abstract class Polybase extends PolymerElement with Dependencies {
+abstract class Polybase extends PolymerElement with Dependencies, Filters {
   
   static final Logger _log = new Logger('grade.basepolymer');
   

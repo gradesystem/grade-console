@@ -29,7 +29,9 @@ init() {
     _initLogging();
 
     log.info("initialising modules...");
-        
+    
+    log.fine("initialising polymers...");
+    
     _initModules();
 
     log.fine("initialising polymers...");

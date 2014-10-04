@@ -1,48 +1,164 @@
 .theme-0 {
   background: #26699a;
+  color: #fff;
+}
+:host /deep/ .spaced {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+:host /deep/ .inset {
+  padding: 10px;
+}
+:host /deep/ .bordered {
+  border: 2px solid #f00;
+}
+:host /deep/ .pageframe {
+  width: 90%;
+  min-width: 600px;
+  min-height: 50%;
 }
 .theme-1 {
   background: #00bcd4;
+  color: #fff;
+}
+:host /deep/ .spaced {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+:host /deep/ .inset {
+  padding: 10px;
+}
+:host /deep/ .bordered {
+  border: 2px solid #f00;
+}
+:host /deep/ .pageframe {
+  width: 90%;
+  min-width: 600px;
+  min-height: 50%;
 }
 :host /deep/ .repo-theme /deep/ .bg {
   background: #00bcd4;
 }
+:host /deep/ .repo-theme /deep/ .fg {
+  color: #00bcd4;
+}
 :host /deep/ .repo-theme /deep/ .bg-alt {
   background: #0097a7;
 }
+:host /deep/ .repo-theme /deep/ .fg-alt {
+  color: #0097a7;
+}
+:host /deep/ .repo-theme /deep/ .selected {
+  background: #80deea;
+}
 .theme-2 {
   background: #ffc107;
+  color: #fff;
+}
+:host /deep/ .spaced {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+:host /deep/ .inset {
+  padding: 10px;
+}
+:host /deep/ .bordered {
+  border: 2px solid #f00;
+}
+:host /deep/ .pageframe {
+  width: 90%;
+  min-width: 600px;
+  min-height: 50%;
 }
 :host /deep/ .deck-theme /deep/ .bg {
   background: #ffc107;
 }
+:host /deep/ .deck-theme /deep/ .fg {
+  color: #ffc107;
+}
 :host /deep/ .deck-theme /deep/ .bg-alt {
   background: #ffa000;
 }
+:host /deep/ .deck-theme /deep/ .fg-alt {
+  color: #ffa000;
+}
+:host /deep/ .deck-theme /deep/ .selected {
+  background: #e5e5e5;
+}
 .theme-3 {
   background: #e41c23;
+  color: #fff;
+}
+:host /deep/ .spaced {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+:host /deep/ .inset {
+  padding: 10px;
+}
+:host /deep/ .bordered {
+  border: 2px solid #f00;
+}
+:host /deep/ .pageframe {
+  width: 90%;
+  min-width: 600px;
+  min-height: 50%;
 }
 :host /deep/ .tasks-theme /deep/ .bg {
   background: #e41c23;
 }
+:host /deep/ .tasks-theme /deep/ .fg {
+  color: #e41c23;
+}
 :host /deep/ .tasks-theme /deep/ .bg-alt {
   background: #cf1715;
 }
+:host /deep/ .tasks-theme /deep/ .fg-alt {
+  color: #cf1715;
+}
+:host /deep/ .tasks-theme /deep/ .selected {
+  background: #f69988;
+}
 .theme-4 {
   background: #009587;
+  color: #fff;
+}
+:host /deep/ .spaced {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+:host /deep/ .inset {
+  padding: 10px;
+}
+:host /deep/ .bordered {
+  border: 2px solid #f00;
+}
+:host /deep/ .pageframe {
+  width: 90%;
+  min-width: 600px;
+  min-height: 50%;
 }
 :host /deep/ .stage-theme /deep/ .bg {
   background: #009587;
 }
+:host /deep/ .stage-theme /deep/ .fg {
+  color: #009587;
+}
 :host /deep/ .stage-theme /deep/ .bg-alt {
   background: #207368;
+}
+:host /deep/ .stage-theme /deep/ .fg-alt {
+  color: #207368;
+}
+:host /deep/ .stage-theme /deep/ .selected {
+  background: #80cbc4;
 }
 :host {
   height: 100%;
   font-family: 'Roboto', sans-serif;
   font-weight: 300;
   background: #f4f4f4;
-  color: #fff;
+  color: #26699a;
 }
 .hidden {
   visibility: hidden;

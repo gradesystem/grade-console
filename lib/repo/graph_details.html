@@ -2,14 +2,14 @@
 
 <polymer-element name="graph-details" layout vertical> 
   <template>
-		<div>Label: {{storage.selected.label}}</div>
-		<div>Note: {{storage.selected.note}}</div>
-		<div>Source Endpoint: {{storage.selected.sourceEndpoint}}</div>
-		<div>Date: {{storage.selected.date | format}}</div>
-		<div>License: {{storage.selected.license}}</div>
-		<div>Owner: {{storage.selected.owner}}</div>
-		<div>Repository: {{storage.selected.repository}}</div>
-		<div>Creator: {{storage.selected.creator}}</div>
+		<div>Label: {{graph.label}}</div>
+		<div>Note: {{graph.note}}</div>
+		<div>Source Endpoint: {{graph.sourceEndpoint}}</div>
+		<div>Date: {{graph.date | format}}</div>
+		<div>License: {{graph.license}}</div>
+		<div>Owner: {{graph.owner}}</div>
+		<div>Repository: {{graph.repository}}</div>
+		<div>Creator: {{graph.creator}}</div>
   </template> 
   <script type="application/dart" src="../repo.dart"></script> 
 </polymer-element>

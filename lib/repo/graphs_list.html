@@ -4,20 +4,24 @@
 <link rel="import" href="graph_item.html">
 
 <polymer-element name="graphs-list" layout vertical> 
+
+ 
  <template>
-  <style>
-		  .selected {
-		    background-color: #99CCFF;
-		  }
-  </style>
   
-  <core-list-dart data={{storage.data}} height="80" on-core-activate="{{onItemSelected}}" flex>
+  <core-list-dart data={{graphs.data}} height="80" on-core-activate={{selectGraph}} flex>
+    
     <template>
-      <graph-item class="{{ {selected: selected} }}" graph={{self}}>
-       </graph-item>
+    
+      <graph-item class="{{ {selected: selected} }}" graph={{self}}></graph-item>
+    
     </template>
+  
   </core-list-dart>
+  
  </template>
  
+
+
  <script type="application/dart" src="../repo.dart"></script> 
+
 </polymer-element>

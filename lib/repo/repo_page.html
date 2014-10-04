@@ -3,24 +3,22 @@
 <link rel="import" href="graphs_list.html">
 
 <polymer-element name="repo-page" layout vertical>  
-  <template>
-    <style>
-      .title {
-        margin:10px; 
-        color:#5674b8;
-      }
-      .content {
-        color:#5674b8;
-      }
-    </style>
 
-		<div class="title" horizontal layout center center-justified>
-		 <h1>PRODUCTION REPOSITORY</h1>
-		</div>
-		
-		<div class="content" flex layout horizontal>
-      <graphs-list flex two></graphs-list>
-		  <graph-details flex one></graph-details>
+  <template>
+  
+   <div class=pageframe flex self-center 
+   
+        vertical layout >
+
+       <div class="spaced fg">
+			   <h1>PRODUCTION REPOSITORY</h1>
+			 </div>
+			
+			<div flex
+			  layout horizontal>
+	      <graphs-list flex two></graphs-list>
+			  <graph-details flex one></graph-details>
+			</div>
 		</div>
  </template>
  

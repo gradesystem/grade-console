@@ -1,7 +1,9 @@
+
 library repo;
 
 import 'dart:html';
 import 'dart:async';
+import 'dart:mirrors';
 
 import 'package:polymer/polymer.dart';
 import 'package:logging/logging.dart';
@@ -24,7 +26,7 @@ init() {
   
   var module = new Module()
           ..bind(RepoPageModel)
-          ..bind(Storage)
+          ..bind(Graphs)
           ..bind(RepoService);
   
   Dependencies.add(module);

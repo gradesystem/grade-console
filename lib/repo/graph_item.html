@@ -2,6 +2,7 @@
 <link rel="import" href="../../../packages/paper_elements/paper_item.html">
 
 <polymer-element name="graph-item" center horizontal layout>
+	
 	<style>
 	  .label {
 	    font-weight: bolder;
@@ -11,13 +12,16 @@
 	  .date {
 	  }
 	</style>
+	
   <template>
     <paper-item flex>
       <div>
-        <div class="label">{{graph.label}}</div>
+        <div class="label">{{graph.label | uppercase }}</div>
         <div class="date">{{graph.date | format}}</div>
       </div>
     </paper-item>
   </template>
+  
   <script type="application/dart" src="../repo.dart"></script> 
+
 </polymer-element>

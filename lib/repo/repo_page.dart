@@ -9,10 +9,9 @@ class RepoPage extends Polybase {
 class RepoPageModel {
   
   RepoService service;
-  Storage storage;
-  EventBus bus;
+  Graphs storage;
   
-  RepoPageModel(this.service, this.storage, this.bus) {
+  RepoPageModel(this.service, this.storage,  EventBus bus) {
     bus.on(ApplicationReady).listen((_) {
       loadAll();
     });

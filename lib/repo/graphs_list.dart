@@ -1,14 +1,16 @@
 part of repo;
 
 @CustomTag("graphs-list") 
-class GraphsList extends Polybase with Dependencies {
+class GraphsList extends Polybase {
   
-  GraphsList.created() : super.createWith(Storage);
+  GraphsList.created() : super.createWith(Graphs);
   
-  void onItemSelected(CustomEvent event) {
-    storage.selected = event.detail.data;
+  void selectGraph(event) {
+    
+    graphs.selected = event.detail.data;
+  
   }
   
-  Storage get storage => model as Storage;
+  Graphs get graphs => model as Graphs;
   
 }

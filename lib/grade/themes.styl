@@ -5,15 +5,19 @@ grade-grey = #F4F4F4
 grade-blue = #26699A
 
 grade-cyan = #00BCD4
+grade-light-cyan = #80deea
 grade-dark-cyan = #0097A7
 
 grade-yellow = #FFC107
+grade-light-yellow = #E5E5E5
 grade-dark-yellow = #FFA000
 
 grade-red = #E41C23
+grade-light-red = #f69988
 grade-dark-red = #CF1715
 
 grade-teal = #009587
+grade-light-teal = #80cbc4
 grade-dark-teal = #207368
 
 
@@ -23,7 +27,7 @@ grade-dark-teal = #207368
 
 grade = {
   bg : grade-grey
-  fg : white
+  fg : grade-blue
 }
 
 home = {
@@ -33,29 +37,56 @@ home = {
 repo = {
   primary : grade-cyan
   secondary : grade-dark-cyan
+  selection: grade-light-cyan
   marker : repo-theme
 }
 
 deck = {
   primary : grade-yellow
   secondary : grade-dark-yellow
+  selection : grade-light-yellow
   marker: deck-theme
 }
 
 tasks = {
   primary : grade-red
   secondary : grade-dark-red
+  selection: grade-light-red
   marker: tasks-theme
 }
 
 stage = {
   primary : grade-teal
   secondary : grade-dark-teal
+  selection: grade-light-teal
   marker: stage-theme
 }
 
 
 ///////////////////////////////////// theme classes
+
+grade-classes = {
+
+  spaced : {
+    margin-top: 10px
+    margin-bottom: 10px
+  }
+  
+  inset : {
+    padding: 10px
+  }
+  
+  bordered : {
+    border: 2px solid red
+  }
+  
+  pageframe : {
+  
+    width : 90%
+    min-width : 600px
+    min-height : 50%
+  }
+}
 
 theme-classes = {
     
@@ -63,8 +94,20 @@ theme-classes = {
         background : "primary"
     }
     
+    fg : {
+        color : "primary"
+    }
+    
     bg-alt : {
         background : "secondary"
+    }
+    
+    fg-alt : {
+        color : "secondary"
+    }
+    
+    selected : {
+      background : "selection"
     }
 
 }
@@ -79,12 +122,25 @@ for t, pos in themes
 
  .theme-{pos}
     background : t.primary
-      
+    color: white
+  
+ for name,class in grade-classes
+    :host /deep/ .{name} 
+         for prop, val in class
+           if val in t
+             {prop} : t[val]
+            else
+             {prop} : val
+               
  if t.marker
   for name,class in theme-classes
     :host /deep/ .{t.marker} /deep/ .{name} 
          for prop, val in class
-           {prop} : t[val]
+            if val in t
+             {prop} : t[val]
+            else
+             {prop} : val
+                            
         
     
  

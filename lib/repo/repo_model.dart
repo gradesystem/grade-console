@@ -1,11 +1,12 @@
 part of repo;
 
-class Graph extends Delegate with ListItem, Observable {
+class Graph extends Delegate with ListItem {
 
   Graph(Map bean) : super(bean);
   
   DateTime  get date => getDate('date');
 }
+
 
 class ListItem {
   
@@ -15,13 +16,13 @@ class ListItem {
 }
 
 @Injectable()
-class Storage extends Observable {
-  
-  @observable
-  List<Graph> data;
+class Graphs extends Observable {
   
   @observable
   Graph selected;
+  
+  @observable
+  List<Graph> data;
   
   @observable
   bool loading;
