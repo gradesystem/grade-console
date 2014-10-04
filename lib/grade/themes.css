@@ -2,15 +2,32 @@
   background: #26699a;
   color: #fff;
 }
+:host /deep/ .hidden {
+  visibility: hidden;
+}
+:host /deep/ .bigger {
+  font-size: 1.5em;
+}
+:host /deep/ .smaller {
+  font-size: 11px;
+  font-weight: normal;
+}
 :host /deep/ .spaced {
   margin-top: 10px;
   margin-bottom: 10px;
+}
+:host /deep/ .small-spaced {
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 :host /deep/ .inset {
   padding: 10px;
 }
 :host /deep/ .bordered {
-  border: 2px solid #f00;
+  border: 2px solid #e41c23;
+}
+:host /deep/ .bordered-blue {
+  border: 2px solid #26699a;
 }
 :host /deep/ .pageframe {
   width: 90%;
@@ -21,15 +38,32 @@
   background: #00bcd4;
   color: #fff;
 }
+:host /deep/ .hidden {
+  visibility: hidden;
+}
+:host /deep/ .bigger {
+  font-size: 1.5em;
+}
+:host /deep/ .smaller {
+  font-size: 11px;
+  font-weight: normal;
+}
 :host /deep/ .spaced {
   margin-top: 10px;
   margin-bottom: 10px;
+}
+:host /deep/ .small-spaced {
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 :host /deep/ .inset {
   padding: 10px;
 }
 :host /deep/ .bordered {
-  border: 2px solid #f00;
+  border: 2px solid #e41c23;
+}
+:host /deep/ .bordered-blue {
+  border: 2px solid #26699a;
 }
 :host /deep/ .pageframe {
   width: 90%;
@@ -55,15 +89,32 @@
   background: #ffc107;
   color: #fff;
 }
+:host /deep/ .hidden {
+  visibility: hidden;
+}
+:host /deep/ .bigger {
+  font-size: 1.5em;
+}
+:host /deep/ .smaller {
+  font-size: 11px;
+  font-weight: normal;
+}
 :host /deep/ .spaced {
   margin-top: 10px;
   margin-bottom: 10px;
+}
+:host /deep/ .small-spaced {
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 :host /deep/ .inset {
   padding: 10px;
 }
 :host /deep/ .bordered {
-  border: 2px solid #f00;
+  border: 2px solid #e41c23;
+}
+:host /deep/ .bordered-blue {
+  border: 2px solid #26699a;
 }
 :host /deep/ .pageframe {
   width: 90%;
@@ -89,15 +140,32 @@
   background: #e41c23;
   color: #fff;
 }
+:host /deep/ .hidden {
+  visibility: hidden;
+}
+:host /deep/ .bigger {
+  font-size: 1.5em;
+}
+:host /deep/ .smaller {
+  font-size: 11px;
+  font-weight: normal;
+}
 :host /deep/ .spaced {
   margin-top: 10px;
   margin-bottom: 10px;
+}
+:host /deep/ .small-spaced {
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 :host /deep/ .inset {
   padding: 10px;
 }
 :host /deep/ .bordered {
-  border: 2px solid #f00;
+  border: 2px solid #e41c23;
+}
+:host /deep/ .bordered-blue {
+  border: 2px solid #26699a;
 }
 :host /deep/ .pageframe {
   width: 90%;
@@ -123,15 +191,32 @@
   background: #009587;
   color: #fff;
 }
+:host /deep/ .hidden {
+  visibility: hidden;
+}
+:host /deep/ .bigger {
+  font-size: 1.5em;
+}
+:host /deep/ .smaller {
+  font-size: 11px;
+  font-weight: normal;
+}
 :host /deep/ .spaced {
   margin-top: 10px;
   margin-bottom: 10px;
+}
+:host /deep/ .small-spaced {
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 :host /deep/ .inset {
   padding: 10px;
 }
 :host /deep/ .bordered {
-  border: 2px solid #f00;
+  border: 2px solid #e41c23;
+}
+:host /deep/ .bordered-blue {
+  border: 2px solid #26699a;
 }
 :host /deep/ .pageframe {
   width: 90%;
@@ -159,14 +244,4 @@
   font-weight: 300;
   background: #f4f4f4;
   color: #26699a;
-}
-.hidden {
-  visibility: hidden;
-}
-.bigger {
-  font-size: 1.5em;
-}
-.smaller {
-  font-size: 11px;
-  font-weight: normal;
 }

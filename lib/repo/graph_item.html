@@ -1,26 +1,32 @@
 <link rel="import" href="../../../packages/polymer/polymer.html">
 <link rel="import" href="../../../packages/paper_elements/paper_item.html">
 
-<polymer-element name="graph-item" center horizontal layout>
-	
-	<style>
-	  .label {
-	    font-weight: bolder;
-	    font-size: larger;
-	  }
-	  
-	  .date {
-	  }
-	</style>
+<polymer-element name="graph-item"  horizontal layout>
 	
   <template>
-    <paper-item flex>
-      <div>
-        <div class="label">{{graph.label | uppercase }}</div>
-        <div class="date">{{graph.date | format}}</div>
-      </div>
+
+	  <style>
+	  
+	    .date {
+	        font-size:x-small
+	    }
+	    
+	  </style>
+    
+    <paper-item>
+      
+      <core-icon self-start icon=chevron-right></core-icon>
+      
+	    <div self-start 
+	      layout vertical >
+	      <div >{{graph.label | uppercase }}</div>
+		    <div class=date >{{graph.date | format}}</div>
+	    </div>
+	    
     </paper-item>
+  
   </template>
+  
   
   <script type="application/dart" src="../repo.dart"></script> 
 

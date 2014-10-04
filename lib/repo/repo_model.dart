@@ -15,6 +15,7 @@ class ListItem {
   dynamic get self => this;
 }
 
+
 @Injectable()
 class Graphs extends Observable {
   
