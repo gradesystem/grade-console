@@ -25,12 +25,7 @@
 			  
 			  .fg {
             color:white
-         }  
-         
-         .pageframe {
-          max-width:90%;
-          min-width:600px;
-         }
+         } 
           
 			  </style>
    
@@ -39,9 +34,15 @@
          
            <core-toolbar class="theme-{{ page }}">
 		          
-		          <div flex class="bigger">GRADE</div>
-		          
-		          <paper-tabs class="{{ { 'hidden' : page == 0 } }}" style="width:300px" selected="{{ page }}">
+		          <core-pages flex class=bigger selected={{page}} style="height:40px">
+			             <div>GRADE</div>
+			             <div>PRODUCTION REPOSITORY</div>
+			             <div>DECK</div>
+			             <div>TASK CATALOGUE</div>
+			             <div>STAGING REPOSITORY</div>
+			       </core-pages>
+	            
+	            <paper-tabs class="{{ { 'hidden' : page == 0 } }}" style="width:300px" selected="{{ page }}">
 		             <paper-tab >HOME</paper-tab>
 		             <paper-tab >REPO</paper-tab>
 		             <paper-tab >DECK</paper-tab>
