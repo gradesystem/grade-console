@@ -1,133 +1,137 @@
 :host /deep/ [hide] {
   visibility: hidden;
 }
-:host /deep/ [bigger] {
-  font-size: 1.5em;
-}
-:host /deep/ [smaller] {
-  font-size: 11px;
-  font-weight: normal;
-}
-:host /deep/ [spaced] {
-  margin-top: 10px;
-  margin-bottom: 10px;
-}
 :host /deep/ [small-spaced] {
   margin-top: 5px;
   margin-bottom: 5px;
 }
+:host /deep/ [spaced] {
+  margin: 10px;
+}
 :host /deep/ [inset] {
   padding: 10px;
 }
-:host /deep/ [bordered] {
-  border: 2px solid #e41c23;
+:host /deep/ [filled] {
+  background: #eee;
 }
-:host /deep/ [bordered-blue] {
-  border: 2px solid #26699a;
+:host /deep/ [wired] {
+  border: 2px solid #eee;
 }
-:host /deep/ [pageframe] {
-  width: 90%;
-  min-width: 600px;
-  min-height: 50%;
+:host /deep/ [bleed] {
+  height: 100%;
 }
-.theme-0 {
+:host /deep/ [rounded] {
+  border-radius: 5px;
+}
+:host /deep/ [large] {
+  font-size: xx-large;
+}
+:host /deep/ [larger] {
+  font-size: larger;
+}
+:host /deep/ [smaller] {
+  font-size: smaller;
+}
+:host /deep/ [small] {
+  font-size: x-small;
+}
+:host /deep/ [scrollable] {
+  min-width: 700px;
+  overflow: scroll;
+}
+.home-scaffold {
   background: #26699a;
   color: #fff;
 }
-.theme-1 {
+:host /deep/ .home /deep/ [bg] {
+  background: #26699a;
+}
+:host /deep/ .home /deep/ [fg] {
+  color: #26699a;
+}
+:host /deep/ .home /deep/ [bg-alt] {
+  background: #f4f4f4;
+}
+:host /deep/ .home /deep/ [fg-alt] {
+  color: #f4f4f4;
+}
+:host /deep/ .home /deep/ [selection] {
+  background: #eee;
+}
+.repo-scaffold {
   background: #00bcd4;
   color: #fff;
 }
-:host /deep/ .repo-theme /deep/ [header] {
-  font-size: 1.2em;
-  background: #00bcd4;
-  color: #fff;
-}
-:host /deep/ .repo-theme /deep/ [bg] {
+:host /deep/ .repo /deep/ [bg] {
   background: #00bcd4;
 }
-:host /deep/ .repo-theme /deep/ [fg] {
+:host /deep/ .repo /deep/ [fg] {
   color: #00bcd4;
 }
-:host /deep/ .repo-theme /deep/ [bg-alt] {
+:host /deep/ .repo /deep/ [bg-alt] {
   background: #0097a7;
 }
-:host /deep/ .repo-theme /deep/ [fg-alt] {
+:host /deep/ .repo /deep/ [fg-alt] {
   color: #0097a7;
 }
-:host /deep/ .repo-theme /deep/ [selected] {
+:host /deep/ .repo /deep/ [selection] {
   background: #80deea;
 }
-.theme-2 {
+.deck-scaffold {
   background: #ffc107;
   color: #fff;
 }
-:host /deep/ .deck-theme /deep/ [header] {
-  font-size: 1.2em;
-  background: #ffc107;
-  color: #fff;
-}
-:host /deep/ .deck-theme /deep/ [bg] {
+:host /deep/ .deck /deep/ [bg] {
   background: #ffc107;
 }
-:host /deep/ .deck-theme /deep/ [fg] {
+:host /deep/ .deck /deep/ [fg] {
   color: #ffc107;
 }
-:host /deep/ .deck-theme /deep/ [bg-alt] {
+:host /deep/ .deck /deep/ [bg-alt] {
   background: #ffa000;
 }
-:host /deep/ .deck-theme /deep/ [fg-alt] {
+:host /deep/ .deck /deep/ [fg-alt] {
   color: #ffa000;
 }
-:host /deep/ .deck-theme /deep/ [selected] {
-  background: #e5e5e5;
+:host /deep/ .deck /deep/ [selection] {
+  background: #ffdf82;
 }
-.theme-3 {
+.tasks-scaffold {
   background: #e41c23;
   color: #fff;
 }
-:host /deep/ .tasks-theme /deep/ [header] {
-  font-size: 1.2em;
-  background: #e41c23;
-  color: #fff;
-}
-:host /deep/ .tasks-theme /deep/ [bg] {
+:host /deep/ .tasks /deep/ [bg] {
   background: #e41c23;
 }
-:host /deep/ .tasks-theme /deep/ [fg] {
+:host /deep/ .tasks /deep/ [fg] {
   color: #e41c23;
 }
-:host /deep/ .tasks-theme /deep/ [bg-alt] {
+:host /deep/ .tasks /deep/ [bg-alt] {
   background: #cf1715;
 }
-:host /deep/ .tasks-theme /deep/ [fg-alt] {
+:host /deep/ .tasks /deep/ [fg-alt] {
   color: #cf1715;
 }
-:host /deep/ .tasks-theme /deep/ [selected] {
+:host /deep/ .tasks /deep/ [selection] {
   background: #f69988;
 }
-.theme-4 {
+.stage-scaffold {
   background: #009587;
   color: #fff;
 }
-:host /deep/ .stage-theme /deep/ [header] {
-  font-size: 1.2em;
-  background: #009587;
-  color: #fff;
-}
-:host /deep/ .stage-theme /deep/ [bg] {
+:host /deep/ .stage /deep/ [bg] {
   background: #009587;
 }
-:host /deep/ .stage-theme /deep/ [fg] {
+:host /deep/ .stage /deep/ [fg] {
   color: #009587;
 }
-:host /deep/ .stage-theme /deep/ [bg-alt] {
+:host /deep/ .stage /deep/ [bg-alt] {
   background: #207368;
 }
-:host /deep/ .stage-theme /deep/ [fg-alt] {
+:host /deep/ .stage /deep/ [fg-alt] {
   color: #207368;
 }
-:host /deep/ .stage-theme /deep/ [selected] {
+:host /deep/ .stage /deep/ [selection] {
   background: #80cbc4;
 }
 :host {

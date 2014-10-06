@@ -3,8 +3,14 @@ part of grade;
 
 
 @CustomTag(GradeConsole.name) 
-class GradeConsole  extends PolymerElement with Dependencies {
+class GradeConsole  extends PolymerElement with Dependencies, Filters {
  
+  List<Page> pages = [new Page("Grade","Home"),
+                      new Page("Repository","Repo"),
+                      new Page("Deck","Deck"),
+                      new Page("Catalogue","Tasks"),
+                      new Page("Staging","Stage")];
+   
   static const name = "grade-console";
   
 /*  var _mySyntax = new PolymerExpressions(globals: {
@@ -34,4 +40,13 @@ class GradeConsole  extends PolymerElement with Dependencies {
         }
    }
   
+}
+
+
+class Page {
+  
+  final String name;
+  final String tab;
+  
+  Page(this.name, this.tab);
 }
