@@ -32,9 +32,9 @@
    
          <core-header-panel fit>
          
-           <core-toolbar class="theme-{{ page }}">
+           <core-toolbar class="theme-{{page}}">
 		          
-		          <core-pages flex class=bigger selected={{page}} style="height:40px">
+		          <core-pages flex bigger selected={{page}} style="height:40px">
 			             <div>GRADE</div>
 			             <div>PRODUCTION REPOSITORY</div>
 			             <div>DECK</div>
@@ -42,7 +42,7 @@
 			             <div>STAGING REPOSITORY</div>
 			       </core-pages>
 	            
-	            <paper-tabs class="{{ { 'hidden' : page == 0 } }}" style="width:300px" selected="{{ page }}">
+	            <paper-tabs hide?="{{page == 0}}" style="width:300px" selected="{{ page }}">
 		             <paper-tab >HOME</paper-tab>
 		             <paper-tab >REPO</paper-tab>
 		             <paper-tab >DECK</paper-tab>
@@ -57,14 +57,14 @@
 	           <core-pages style="overflow:scroll" flex selected={{page}}>
                    <home-page on-tile-selected={{changePage}}></home-page>
                    <repo-page class=repo-theme></repo-page>
-                   <coming-soon class=deck-theme><h1>DECK</h1></coming-soon>
-                   <coming-soon class=tasks-theme><h1>TASK CATALOGUE</h1></coming-soon>
-                   <coming-soon class=stage-theme><h1>STAGING REPOSITORY</h1></coming-soon>
+                   <coming-soon class=deck-theme bigger></coming-soon>
+                   <coming-soon class=tasks-theme bigger></coming-soon>
+                   <coming-soon class=stage-theme bigger></coming-soon>
               </core-pages>
             
-              <div class="theme-{{ page }} smaller" layout horizontal center>
+              <div class="theme-{{page}}" smaller layout horizontal center>
                 <div>Last deployed: 04/10/2014</div>
-                <div flex class="theme-{{ page }}" layout vertical center>
+                <div flex layout vertical center>
                 <div>Copyright 2014-2015 GRADE all rights reserved </div>
                 </div>
               </div>

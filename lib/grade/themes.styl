@@ -1,6 +1,8 @@
 
 ///////////////////////////////////// palette
 grade-grey = #F4F4F4
+grade-light-grey= #eeeeee
+
 
 grade-blue = #26699A
 
@@ -65,13 +67,11 @@ stage = {
 
 ///////////////////////////////////// theme classes
 
+:host /deep/ [hide] {
+  visibility:hidden
+}
+
 grade-classes = {
-
-  
-
-  hidden : {
-    visibility: hidden
-  }
   
   bigger : {
     font-size:1.5em
@@ -114,6 +114,13 @@ grade-classes = {
 
 theme-classes = {
     
+    header : {
+    
+      font-size : 1.2em
+      background : "primary"
+      color : white
+    }
+    
     bg : {
         background : "primary"
     }
@@ -139,7 +146,11 @@ theme-classes = {
 
 themes = home repo deck tasks stage
 
-
+for name,class in grade-classes
+   :host /deep/ [{name}] 
+       for prop, val in class
+         {prop} : val
+             
 
 //def generation
 for t, pos in themes
@@ -147,18 +158,10 @@ for t, pos in themes
  .theme-{pos}
     background : t.primary
     color: white
-  
- for name,class in grade-classes
-    :host /deep/ .{name} 
-         for prop, val in class
-           if val in t
-             {prop} : t[val]
-            else
-             {prop} : val
                
  if t.marker
   for name,class in theme-classes
-    :host /deep/ .{t.marker} /deep/ .{name} 
+    :host /deep/ .{t.marker} /deep/ [{name}] 
          for prop, val in class
             if val in t
              {prop} : t[val]
