@@ -10,6 +10,7 @@
 <link rel="import" href="../home/home_page.html">
 <link rel="import" href="../repo/repo_page.html">
 <link rel="import" href="../staging/staging_page.html">
+<link rel="import" href="../tasks/tasks_page.html">
 
 <link rel="import" href="../common/coming_soon.html">
          
@@ -57,8 +58,8 @@
                    <home-page on-tile-selected={{changePage}}></home-page>
                    <repo-page class=repo-theme></repo-page>
                    <coming-soon class=deck-theme><h1>DECK</h1></coming-soon>
-                   <coming-soon class=tasks-theme><h1>TASK CATALOGUE</h1></coming-soon>
-                   <coming-soon class=stage-theme><h1>STAGING REPOSITORY</h1></coming-soon>
+                   <tasks-page class=tasks-theme></tasks-page>
+                   <staging-page class=stage-theme></staging-page>
               </core-pages>
             
               <div class="theme-{{ page }} smaller" layout horizontal center>
