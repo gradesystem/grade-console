@@ -10,7 +10,7 @@
     <style>
     
      
-      .tile {
+      [tile] {
       
         color:white;
       
@@ -25,12 +25,12 @@
   
       }
       
-      .tile-content {
+      [content] {
         padding-left: 16px;
         padding-right: 16px;
       }
       
-       .fascia {
+       [fascia] {
         height: 40px;
         font-weight : 400;
         border-bottom-right-radius: 5px;
@@ -38,26 +38,26 @@
       }
       
       
-      .statistic-count {
+      [count] {
          font-size: 300%;
          font-weight: 100;
          padding-right: 5px;
       }
       
-      .statistic-info {
+      [info] {
          padding-bottom: 11px;
       }
       
-      .resource-name {
+      [name] {
          font-size:120%;
          font-weight: 300;
       }
       
-      .statistic-date {
+      [date] {
          font-size: 65%;
       }
       
-      .notifications-bar {
+      [notifs] {
         padding-top: 9px;
       }
       
@@ -66,16 +66,16 @@
     
     
     
-    <div flex class="tile bg" vertical layout>
+    <div flex tile bg vertical layout>
       
-           <div flex class=tile-content>
+           <div flex content>
               <div layout horizontal>
-	              <div class=statistic-count>{{statistics.count}}</div>
-	              <div class=statistic-info layout vertical reverse>
-	                    <div class=statistic-date>{{statistics.date | format}}</div>
-                      <div class=resource-name>{{resource_name}}</div>
+	              <div count>{{statistics.count}}</div>
+	              <div info layout vertical reverse>
+	                    <div date>{{statistics.date | format}}</div>
+                      <div name>{{resource_name}}</div>
 		            </div>
-                <div flex end-justified class=notifications-bar
+                <div flex end-justified notifs
                    layout horizontal >
                   <template repeat="{{ notification in statistics.notifications }}">
                      <core-icon icon="{{notification}}"></core-icon>
@@ -85,7 +85,7 @@
             </div>
         
         
-        <div class="fascia tile-content bg-alt" 
+        <div fascia content bg-alt 
               horizontal layout center>
           <div flex>
             <span>{{name | uppercase}}</span>

@@ -26,48 +26,50 @@
 			  
 			  .fg {
             color:white
-         }  
-         
-         .pageframe {
-          max-width:90%;
-          min-width:600px;
-         }
+         } 
           
 			  </style>
    
    
-         <core-header-panel fit>
+         <core-header-panel fit scrollable>
          
-           <core-toolbar class="theme-{{ page }}">
-		          
-		          <div flex class="bigger">GRADE</div>
-		          
-		          <paper-tabs class="{{ { 'hidden' : page == 0 } }}" style="width:300px" selected="{{ page }}">
-		             <paper-tab >HOME</paper-tab>
-		             <paper-tab >REPO</paper-tab>
-		             <paper-tab >DECK</paper-tab>
-		             <paper-tab >TASKS</paper-tab>
-		             <paper-tab >STAGE</paper-tab>
+           <core-toolbar class="{{pages[page].tab | lowercase }}-scaffold">
+           
+              <div flex large>
+              
+                <div>{{pages[page].name | uppercase}}</div>
+            
+			       </div>
+	            
+	            <paper-tabs hide?="{{page == 0}}" style="width:300px" selected="{{ page }}">
+	               <template repeat="{{page in pages}}">
+	                 <paper-tab >{{page.tab | uppercase}}</paper-tab>
+	               </template>
 		          </paper-tabs>
 		          
 		       </core-toolbar>
 		    
 		      <div fit vertical layout>
-	         
-	           <core-pages style="overflow:scroll" flex selected={{page}}>
-                   <home-page on-tile-selected={{changePage}}></home-page>
-                   <repo-page class=repo-theme></repo-page>
-                   <coming-soon class=deck-theme><h1>DECK</h1></coming-soon>
-                   <tasks-page class=tasks-theme></tasks-page>
-                   <staging-page class=stage-theme></staging-page>
+
+	           <core-pages scrollable flex selected={{page}}>
+	              
+	                 <home-page on-tile-selected={{changePage}}></home-page>
+                   <repo-page class="repo"></repo-page>
+                   <coming-soon larger class="deck" bigger></coming-soon>
+                   <tasks-page larger class="tasks" bigger></tasks-page>
+                   <staging-page larger class="stage" bigger></staging-page>
+              
               </core-pages>
             
-              <div class="theme-{{ page }} smaller" layout horizontal center>
-                <div>Last deployed: 04/10/2014</div>
-                <div flex class="theme-{{ page }}" layout vertical center>
-                <div>Copyright 2014-2015 GRADE all rights reserved </div>
+              <div class="{{ pages[page].tab | lowercase}}-scaffold"  small
+                  layout horizontal center>
+                
+                <div>Last deployed: 06/10/2014</div>
+                <div flex layout vertical center>
+                    <div>Copyright 2014-2015 GRADE all rights reserved </div>
                 </div>
               </div>
+              
             
             </div> 
             

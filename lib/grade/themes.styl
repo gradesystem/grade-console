@@ -1,6 +1,8 @@
 
 ///////////////////////////////////// palette
 grade-grey = #F4F4F4
+grade-light-grey= #eeeeee
+
 
 grade-blue = #26699A
 
@@ -9,7 +11,7 @@ grade-light-cyan = #80deea
 grade-dark-cyan = #0097A7
 
 grade-yellow = #FFC107
-grade-light-yellow = #E5E5E5
+grade-light-yellow = #FFDF82
 grade-dark-yellow = #FFA000
 
 grade-red = #E41C23
@@ -30,86 +32,106 @@ grade = {
   fg : grade-blue
 }
 
-home = {
-  primary : grade-blue
-}
 
-repo = {
-  primary : grade-cyan
-  secondary : grade-dark-cyan
-  selection: grade-light-cyan
-  marker : repo-theme
-}
+themes = {
 
-deck = {
-  primary : grade-yellow
-  secondary : grade-dark-yellow
-  selection : grade-light-yellow
-  marker: deck-theme
+  home :{
+    
+    primary : grade-blue
+    secondary: grade-grey
+    selection: grade-light-grey
+  }
+  
+  repo : {
+    primary : grade-cyan
+    secondary : grade-dark-cyan
+    selection: grade-light-cyan
+  }
+  
+  deck : {
+    primary : grade-yellow
+    secondary : grade-dark-yellow
+    selection : grade-light-yellow
+  }
+  
+  tasks : {
+    primary : grade-red
+    secondary : grade-dark-red
+    selection: grade-light-red
+  }
+  
+  stage : {
+    primary : grade-teal
+    secondary : grade-dark-teal
+    selection: grade-light-teal
+  }
 }
-
-tasks = {
-  primary : grade-red
-  secondary : grade-dark-red
-  selection: grade-light-red
-  marker: tasks-theme
-}
-
-stage = {
-  primary : grade-teal
-  secondary : grade-dark-teal
-  selection: grade-light-teal
-  marker: stage-theme
-}
-
 
 ///////////////////////////////////// theme classes
 
+:host /deep/ [hide] {
+  visibility:hidden
+}
+
 grade-classes = {
-
-  
-
-  hidden : {
-    visibility: hidden
-  }
-  
-  bigger : {
-    font-size:1.5em
-  }
-  
-  smaller : {
-    font-size:11px
-    font-weight: normal
-  }
-  
-  spaced : {
-    margin-top: 10px
-    margin-bottom: 10px
-  }
   
   small-spaced : {
     margin-top: 5px
     margin-bottom: 5px
   }
   
+  spaced: {
+         
+     margin:10px
+  }
+  
   inset : {
     padding: 10px
   }
   
-  bordered : {
-    border: 2px solid grade-red
+  filled : {
+     background : grade-light-grey
+  }
+        
+  wired : {
+     border:2px solid grade-light-grey
+  } 
+        
+  bleed : {
+          
+     height:100%
   }
   
-  bordered-blue : {
-    border: 2px solid grade-blue
+  rounded : {
+          
+     border-radius:5px
+  }
+
+  large : {
+         
+     font-size : xx-large
+  }
+           
+  larger : {
+         
+     font-size :larger
   }
   
-  pageframe : {
-  
-    width : 90%
-    min-width : 600px
-    min-height : 50%
+  smaller : {
+         
+     font-size :smaller
   }
+  
+  small : {
+         
+     font-size :x-small
+  }
+         
+  scrollable : {
+         
+       min-width : 700px  
+       overflow : scroll
+   }
 }
 
 theme-classes = {
@@ -130,35 +152,28 @@ theme-classes = {
         color : "secondary"
     }
     
-    selected : {
+    selection : {
       background : "selection"
     }
 
 }
 
 
-themes = home repo deck tasks stage
-
-
+for name,class in grade-classes
+   :host /deep/ [{name}] 
+       for prop, val in class
+         {prop} : val
+             
 
 //def generation
-for t, pos in themes
+for theme-name,t in themes
 
- .theme-{pos}
+ .{theme-name}-scaffold
     background : t.primary
     color: white
-  
- for name,class in grade-classes
-    :host /deep/ .{name} 
-         for prop, val in class
-           if val in t
-             {prop} : t[val]
-            else
-             {prop} : val
-               
- if t.marker
-  for name,class in theme-classes
-    :host /deep/ .{t.marker} /deep/ .{name} 
+
+ for name,class in theme-classes
+    :host /deep/ .{theme-name} /deep/ [{name}] 
          for prop, val in class
             if val in t
              {prop} : t[val]
