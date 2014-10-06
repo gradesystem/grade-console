@@ -1,14 +1,17 @@
 <link rel="import" href="../../../packages/polymer/polymer.html">
 <link rel="import" href="../../../packages/core_elements/core_list_dart.html">
 <link rel="import" href="../../../packages/paper_elements/paper_item.html">
+<link rel="import" href="../../../packages/paper_elements/paper_input.html">
 <link rel="import" href="graph_item.html">
 
 <polymer-element name="graphs-list" layout vertical> 
 
  
  <template>
+ 
+  <paper-input label="Search" placeholder="Search" inputValue="{{ searchTerm }}"></paper-input>
   
-  <core-list-dart data={{graphs.data}} height="80" on-core-activate={{selectGraph}} flex>
+  <core-list-dart id="list" data="{{graphs.data | filter(searchTerm, itemFilter)}}" height="80" on-core-activate={{selectGraph}} flex>
     
     <template>
     
