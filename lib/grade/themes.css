@@ -1,24 +1,34 @@
+:host /deep/ [trim] {
+  padding: 0px;
+  margin: 0px;
+}
+:host /deep/ [framing] {
+  background: #fafafa;
+  border: 0px;
+}
 :host /deep/ [hide] {
   visibility: hidden;
 }
 :host /deep/ [small-spaced] {
-  margin-top: 5px;
-  margin-bottom: 5px;
+  margin: 5px;
 }
 :host /deep/ [spaced] {
   margin: 10px;
 }
 :host /deep/ [inset] {
-  padding: 10px;
+  padding: 5px;
 }
 :host /deep/ [filled] {
-  background: #eee;
+  background: #fafafa;
+}
+:host /deep/ [filled-blue] {
+  background: grade-light-blue;
 }
 :host /deep/ [wired] {
-  border: 2px solid #eee;
+  border: 2px solid #f4f4f4;
 }
-:host /deep/ [bleed] {
-  height: 100%;
+:host /deep/ [wired-blue] {
+  border: 2px solid #26699a;
 }
 :host /deep/ [rounded] {
   border-radius: 5px;
@@ -29,15 +39,24 @@
 :host /deep/ [larger] {
   font-size: larger;
 }
+:host /deep/ [bolder] {
+  font-weight: bolder;
+}
 :host /deep/ [smaller] {
   font-size: smaller;
+}
+:host /deep/ [lighter] {
+  font-weight: lighter;
 }
 :host /deep/ [small] {
   font-size: x-small;
 }
 :host /deep/ [scrollable] {
-  min-width: 700px;
+  min-width: 640px;
   overflow: scroll;
+}
+:host /deep/ [bg-selected] /deep/ core-icon {
+  color: #ffff7a;
 }
 .home-scaffold {
   background: #26699a;
@@ -55,8 +74,43 @@
 :host /deep/ .home /deep/ [fg-alt] {
   color: #f4f4f4;
 }
-:host /deep/ .home /deep/ [selection] {
-  background: #eee;
+:host /deep/ .home /deep/ [bg-selected] {
+  background: "tertiary";
+  color: #fff;
+}
+:host /deep/ .home /deep/ [header] {
+  background: #f4f4f4;
+  color: #26699a;
+}
+:host /deep/ .home /deep/ paper-tabs::shadow #selectionBar {
+  background-color: #26699a;
+}
+:host /deep/ .home /deep/ paper-tabs paper-tab::shadow #ink {
+  color: "tertiary";
+}
+:host /deep/ .home /deep/ paper-input[focused]::shadow .floated-label .label-text {
+  color: #f4f4f4;
+}
+:host /deep/ .home /deep/ paper-input::shadow .focused-underline {
+  background-color: #26699a;
+}
+:host /deep/ .home /deep/ paper-input::shadow .cursor {
+  background-color: #26699a;
+}
+:host /deep/ .home /deep/ paper-input.invalid[focused]::shadow .floated-label {
+  color: #e41c23;
+}
+:host /deep/ .home /deep/ paper-input[focused]::shadow .error-text {
+  color: #e41c23;
+}
+:host /deep/ .home /deep/ paper-input[focused]::shadow .error-icon {
+  color: #e41c23;
+}
+:host /deep/ .home /deep/ paper-input.invalid::shadow .focused-underline {
+  background-color: #f69988;
+}
+:host /deep/ .home /deep/ paper-input.invalid::shadow .cursor {
+  background-color: #f69988;
 }
 .repo-scaffold {
   background: #00bcd4;
@@ -74,8 +128,43 @@
 :host /deep/ .repo /deep/ [fg-alt] {
   color: #0097a7;
 }
-:host /deep/ .repo /deep/ [selection] {
+:host /deep/ .repo /deep/ [bg-selected] {
   background: #80deea;
+  color: #fff;
+}
+:host /deep/ .repo /deep/ [header] {
+  background: #f4f4f4;
+  color: #00bcd4;
+}
+:host /deep/ .repo /deep/ paper-tabs::shadow #selectionBar {
+  background-color: #00bcd4;
+}
+:host /deep/ .repo /deep/ paper-tabs paper-tab::shadow #ink {
+  color: #80deea;
+}
+:host /deep/ .repo /deep/ paper-input[focused]::shadow .floated-label .label-text {
+  color: #0097a7;
+}
+:host /deep/ .repo /deep/ paper-input::shadow .focused-underline {
+  background-color: #00bcd4;
+}
+:host /deep/ .repo /deep/ paper-input::shadow .cursor {
+  background-color: #00bcd4;
+}
+:host /deep/ .repo /deep/ paper-input.invalid[focused]::shadow .floated-label {
+  color: #e41c23;
+}
+:host /deep/ .repo /deep/ paper-input[focused]::shadow .error-text {
+  color: #e41c23;
+}
+:host /deep/ .repo /deep/ paper-input[focused]::shadow .error-icon {
+  color: #e41c23;
+}
+:host /deep/ .repo /deep/ paper-input.invalid::shadow .focused-underline {
+  background-color: #f69988;
+}
+:host /deep/ .repo /deep/ paper-input.invalid::shadow .cursor {
+  background-color: #f69988;
 }
 .deck-scaffold {
   background: #ffc107;
@@ -93,8 +182,43 @@
 :host /deep/ .deck /deep/ [fg-alt] {
   color: #ffa000;
 }
-:host /deep/ .deck /deep/ [selection] {
+:host /deep/ .deck /deep/ [bg-selected] {
   background: #ffdf82;
+  color: #fff;
+}
+:host /deep/ .deck /deep/ [header] {
+  background: #f4f4f4;
+  color: #ffc107;
+}
+:host /deep/ .deck /deep/ paper-tabs::shadow #selectionBar {
+  background-color: #ffc107;
+}
+:host /deep/ .deck /deep/ paper-tabs paper-tab::shadow #ink {
+  color: #ffdf82;
+}
+:host /deep/ .deck /deep/ paper-input[focused]::shadow .floated-label .label-text {
+  color: #ffa000;
+}
+:host /deep/ .deck /deep/ paper-input::shadow .focused-underline {
+  background-color: #ffc107;
+}
+:host /deep/ .deck /deep/ paper-input::shadow .cursor {
+  background-color: #ffc107;
+}
+:host /deep/ .deck /deep/ paper-input.invalid[focused]::shadow .floated-label {
+  color: #e41c23;
+}
+:host /deep/ .deck /deep/ paper-input[focused]::shadow .error-text {
+  color: #e41c23;
+}
+:host /deep/ .deck /deep/ paper-input[focused]::shadow .error-icon {
+  color: #e41c23;
+}
+:host /deep/ .deck /deep/ paper-input.invalid::shadow .focused-underline {
+  background-color: #f69988;
+}
+:host /deep/ .deck /deep/ paper-input.invalid::shadow .cursor {
+  background-color: #f69988;
 }
 .tasks-scaffold {
   background: #e41c23;
@@ -112,8 +236,43 @@
 :host /deep/ .tasks /deep/ [fg-alt] {
   color: #cf1715;
 }
-:host /deep/ .tasks /deep/ [selection] {
+:host /deep/ .tasks /deep/ [bg-selected] {
   background: #f69988;
+  color: #fff;
+}
+:host /deep/ .tasks /deep/ [header] {
+  background: #f4f4f4;
+  color: #e41c23;
+}
+:host /deep/ .tasks /deep/ paper-tabs::shadow #selectionBar {
+  background-color: #e41c23;
+}
+:host /deep/ .tasks /deep/ paper-tabs paper-tab::shadow #ink {
+  color: #f69988;
+}
+:host /deep/ .tasks /deep/ paper-input[focused]::shadow .floated-label .label-text {
+  color: #cf1715;
+}
+:host /deep/ .tasks /deep/ paper-input::shadow .focused-underline {
+  background-color: #e41c23;
+}
+:host /deep/ .tasks /deep/ paper-input::shadow .cursor {
+  background-color: #e41c23;
+}
+:host /deep/ .tasks /deep/ paper-input.invalid[focused]::shadow .floated-label {
+  color: #e41c23;
+}
+:host /deep/ .tasks /deep/ paper-input[focused]::shadow .error-text {
+  color: #e41c23;
+}
+:host /deep/ .tasks /deep/ paper-input[focused]::shadow .error-icon {
+  color: #e41c23;
+}
+:host /deep/ .tasks /deep/ paper-input.invalid::shadow .focused-underline {
+  background-color: #f69988;
+}
+:host /deep/ .tasks /deep/ paper-input.invalid::shadow .cursor {
+  background-color: #f69988;
 }
 .stage-scaffold {
   background: #009587;
@@ -131,13 +290,48 @@
 :host /deep/ .stage /deep/ [fg-alt] {
   color: #207368;
 }
-:host /deep/ .stage /deep/ [selection] {
+:host /deep/ .stage /deep/ [bg-selected] {
   background: #80cbc4;
+  color: #fff;
+}
+:host /deep/ .stage /deep/ [header] {
+  background: #f4f4f4;
+  color: #009587;
+}
+:host /deep/ .stage /deep/ paper-tabs::shadow #selectionBar {
+  background-color: #009587;
+}
+:host /deep/ .stage /deep/ paper-tabs paper-tab::shadow #ink {
+  color: #80cbc4;
+}
+:host /deep/ .stage /deep/ paper-input[focused]::shadow .floated-label .label-text {
+  color: #207368;
+}
+:host /deep/ .stage /deep/ paper-input::shadow .focused-underline {
+  background-color: #009587;
+}
+:host /deep/ .stage /deep/ paper-input::shadow .cursor {
+  background-color: #009587;
+}
+:host /deep/ .stage /deep/ paper-input.invalid[focused]::shadow .floated-label {
+  color: #e41c23;
+}
+:host /deep/ .stage /deep/ paper-input[focused]::shadow .error-text {
+  color: #e41c23;
+}
+:host /deep/ .stage /deep/ paper-input[focused]::shadow .error-icon {
+  color: #e41c23;
+}
+:host /deep/ .stage /deep/ paper-input.invalid::shadow .focused-underline {
+  background-color: #f69988;
+}
+:host /deep/ .stage /deep/ paper-input.invalid::shadow .cursor {
+  background-color: #f69988;
 }
 :host {
   height: 100%;
   font-family: 'Roboto', sans-serif;
   font-weight: 300;
-  background: #f4f4f4;
-  color: #26699a;
+  background: #f00;
+  color: #424242;
 }

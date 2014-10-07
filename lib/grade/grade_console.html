@@ -18,47 +18,44 @@
 
   <template>
 
-        <style>
-			  
-			   /* allows subsequent page customisations, <rel> doesnt */
-			   @import url("themes.css");
-			  
-			  .fg {
-            color:white
-         } 
-          
-			  </style>
-   
-   
-         <core-header-panel fit scrollable>
+        <link rel="stylesheet" href="themes.css">
          
-           <core-toolbar class="{{pages[page].tab | lowercase }}-scaffold">
+        <core-header-panel fit scrollable>
+         
            
-              <div flex large>
+        <core-toolbar class="{{pages[page].tab | lowercase }}-scaffold">
+           
+              <div flex large>{{pages[page].name | uppercase}}</div>
               
-                <div>{{pages[page].name | uppercase}}</div>
-            
-			       </div>
-	            
 	            <paper-tabs hide?="{{page == 0}}" style="width:300px" selected="{{ page }}">
+	           
 	               <template repeat="{{page in pages}}">
+	               
 	                 <paper-tab >{{page.tab | uppercase}}</paper-tab>
+	               
 	               </template>
+		         
 		          </paper-tabs>
 		          
 		       </core-toolbar>
+		       
+		       
 		    
 		      <div fit vertical layout>
 	         
-	           <core-pages scrollable flex selected={{page}}>
+	          <core-pages flex scrollable selected={{page}}>
+		              
+	                   <home-page on-tile-selected={{changePage}}></home-page>
+	                   
+	                   <repo-page class="repo"></repo-page>
+	                   
+	                   <coming-soon class="deck" larger></coming-soon>
+	                   
+	                   <coming-soon class="tasks" larger></coming-soon>
+	                   
+	                   <coming-soon class="stage" larger></coming-soon>
 	              
-	                 <home-page on-tile-selected={{changePage}}></home-page>
-                   <repo-page class="repo"></repo-page>
-                   <coming-soon larger class="deck" bigger></coming-soon>
-                   <coming-soon larger class="tasks" bigger></coming-soon>
-                   <coming-soon larger class="stage" bigger></coming-soon>
-              
-              </core-pages>
+	            </core-pages>
             
               <div class="{{ pages[page].tab | lowercase}}-scaffold"  small
                   layout horizontal center>

@@ -1,15 +1,40 @@
 <link rel="import" href="../../../packages/polymer/polymer.html">
+<link rel="import" href="../../../packages/core_elements/core_icon.html">
 
 <polymer-element name="graph-details" layout vertical> 
+  
+  
   <template>
-		<div>Label: {{graph.label}}</div>
-		<div>Note: {{graph.note}}</div>
-		<div>Source Endpoint: {{graph.sourceEndpoint}}</div>
-		<div>Date: {{graph.date | format}}</div>
-		<div>License: {{graph.license}}</div>
-		<div>Owner: {{graph.owner}}</div>
-		<div>Repository: {{graph.repository}}</div>
-		<div>Creator: {{graph.creator}}</div>
+  
+      <style>
+      
+        [smallicon] {
+          margin:5px;
+          height:12px;
+          width:12px;
+        
+        }
+      
+      
+      </style>
+  
+      <template repeat="{{key in graph.bean.keys}}">
+      
+          <div layout horizontal start-justified small-spaced>
+        
+              <core-icon fg icon=check-circle-outline-blank smallicon></core-icon>
+              
+			        <div layout vertical>
+			        
+				        <div bolder>{{graph.bean[key]}}</div>
+				        <div fg smaller>{{key}}</div>
+			      
+			       </div>
+      
+	       </div>
+	       
+      </template>    
+		
   </template> 
   <script type="application/dart" src="../repo.dart"></script> 
 </polymer-element>

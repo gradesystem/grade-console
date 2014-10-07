@@ -3,24 +3,19 @@
 
 <polymer-element name="graph-item"  horizontal layout>
 	
+	
   <template>
-
-	  <style>
-	  
-	    .date {
-	        font-size:x-small
-	    }
-	    
-	  </style>
-    
-    <paper-item flex>
+  
+    <paper-item flex trim>
       
       <core-icon self-start icon=chevron-right></core-icon>
       
 	    <div self-start 
 	      layout vertical >
-	      <div >{{graph.label | uppercase }}</div>
-		    <div class=date >{{graph.date | format}}</div>
+	      
+	      <div bolder>{{graph.label | uppercase }}</div>
+		    <div small>{{graph.date | format}}</div>
+	    
 	    </div>
 	    
     </paper-item>
