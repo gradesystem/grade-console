@@ -13,6 +13,7 @@ dependencies:
   collection: any
   
 dependency_overrides: 
+  args: any #workaround to pub infinite loop
   web_components: any
 
 transformers:
