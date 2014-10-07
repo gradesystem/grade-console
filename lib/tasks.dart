@@ -1,4 +1,5 @@
-library staging;
+
+library tasks;
 
 import 'dart:html';
 import 'dart:async';
@@ -12,14 +13,14 @@ import 'package:event_bus/event_bus.dart';
 
 import 'common.dart';
 
-part 'staging/staging_page.dart';
+part 'tasks/tasks_page.dart';
 
-final Logger log = new Logger('grade.staging');
+final Logger log = new Logger('grade.tasks');
 
 init() {
   
   var module = new Module()
-          ..bind(StagingPageModel);
+          ..bind(TasksPageModel);
   
   Dependencies.add(module);
 }

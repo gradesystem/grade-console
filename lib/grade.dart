@@ -15,6 +15,7 @@ import 'common.dart';
 import 'home.dart' as home;
 import 'repo.dart' as repo;
 import 'staging.dart' as staging;
+import 'tasks.dart' as tasks;
 
 part 'grade/grade_console.dart';
 
@@ -69,6 +70,7 @@ _initModules() {
   home.init();
   repo.init();
   staging.init();
+  tasks.init();
   
   bus = new EventBus();
 

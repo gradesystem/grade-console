@@ -19,20 +19,7 @@
 <polymer-element name="repo-page" layout horizontal>  
 
   <template>
-  
-  <style>
-  
-		  /* drawer is always visible on a wide screen
-		   so menu button isn't required 
-		core-drawer-panel:not([narrow]) #navicon {
-		  display: none;
-		}
-		*/
-		
-		 
-  
-  </style>
-       
+         
         <core-header-panel mode="seamed" wired rounded spaced flex four>
         
             <core-toolbar header> 
@@ -73,98 +60,12 @@
             
             <div fit layout vertical>
             
-            
                 <graph-details spaced></graph-details> 
-               
-<!--               <core-pages flex selected={{tab}}>
-              
-              
-                <graph-details></graph-details>
-              
-                <coming-soon></coming-soon>
-              
-                <coming-soon></coming-soon>
-              
-              </core-pages> -->
-              
             
             </div>
                         
         </core-header-panel>
         
-        
-        
-      
-<!--       <div relative spaced flex> bleed out
-   
- 	      <div inset layout horizontal>
-	         
-               <core-header-panel flex>
-        
-				          <core-toolbar header rounded> 
-				          
-				            <div>GRAPHS</div>
-				            
-				          </core-toolbar>
-				
-				          <div rounded>
-				              
-				              items
-				              
-				          </div> 
-				                
-				       </core-header-panel>
-				       
-				       <core-splitter direction="left"></core-splitter>
-	         	         
-	         	   <div flex>details</div> 
-	         
-	         </div>
-	         
-	
-      </div> -->
-      
-        
-  
- <!--        <core-drawer-panel rightDrawer drawerWidth="30%">
-	   
-	           <div main class=frame layout vertical>
-				    
-				        <div class=header>GRAPHS</div>
-
-				        <graphs-list flex></graphs-list>
-
-					  </div>
-					 
-					  <div class=frame drawer>
-					  
-					  details
-					     <core-toolbar class=fg>
-              
-                <div flex class="bigger">Properties</div>
-              
-              </core-toolbar>
-              
-					     <graph-details></graph-details> 
-					  </div>
-					  
-          </core-drawer-panel>
-				
-<!-- 				<div class=pageframe flex self-center 
-     
-          vertical layout >
-  
-         <div class="spaced fg">
-           <h1>PRODUCTION REPOSITORY</h1>
-         </div>
-         
-        <core-drawer-panel rightDrawer>
-         
-          <graphs-list main></graphs-list>
-          <graph-details drawer></graph-details>
-          
-        </div> -->
-			
  </template>
  
  <script type="application/dart" src="../repo.dart"></script> 

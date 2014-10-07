@@ -10,6 +10,7 @@
 <link rel="import" href="../home/home_page.html">
 <link rel="import" href="../repo/repo_page.html">
 <link rel="import" href="../staging/staging_page.html">
+<link rel="import" href="../tasks/tasks_page.html">
 
 <link rel="import" href="../common/coming_soon.html">
          
@@ -42,25 +43,25 @@
 		       
 		    
 		      <div fit vertical layout>
-	         
-	          <core-pages flex scrollable selected={{page}}>
+
+         <core-pages flex scrollable selected={{page}}>
 		              
 	                   <home-page on-tile-selected={{changePage}}></home-page>
 	                   
 	                   <repo-page class="repo"></repo-page>
 	                   
-	                   <coming-soon class="deck" larger></coming-soon>
-	                   
-	                   <coming-soon class="tasks" larger></coming-soon>
-	                   
-	                   <coming-soon class="stage" larger></coming-soon>
-	              
-	            </core-pages>
+	                   <coming-soon larger class="deck"></coming-soon>
+        
+                     <tasks-page larger class="tasks"></tasks-page>
+        
+                     <staging-page larger class="stage"></staging-page>
+              
+              </core-pages>
             
               <div class="{{ pages[page].tab | lowercase}}-scaffold"  small
                   layout horizontal center>
                 
-                <div>Last deployed: 06/10/2014</div>
+                <div>Last deployed: 07/10/2014</div>
                 <div flex layout vertical center>
                     <div>Copyright 2014-2015 GRADE all rights reserved </div>
                 </div>

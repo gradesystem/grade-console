@@ -1,28 +1,11 @@
 part of staging;
 
-@CustomTag(StagingPage.name) 
+@CustomTag("staging-page") 
 class StagingPage extends Polybase {
- 
-  static const name = "staging-page";
-  
-  StagingPage.created() : super.created();
-  
-  attached() {
-    model.activate();
-  }
+  StagingPage.created() : super.createWith(StagingPageModel);
 }
-
 
 @Injectable()
-class StagingPageModel extends Object {
-  
-    EventBus bus;
-    
-    StagingPageModel(this.bus);
-    
-    activate() {
-      
-      bus.fire(const Activation());
-
-    } 
+class StagingPageModel {
 }
+
