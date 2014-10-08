@@ -53,10 +53,21 @@
 }
 :host /deep/ [scrollable] {
   min-width: 640px;
-  overflow: scroll;
+  overflow: auto;
 }
 :host /deep/ [bg-selected] /deep/ core-icon {
   color: #ffff7a;
+}
+:host /deep/ [fascia-title] {
+  font-weight: bolder;
+}
+:host /deep/ [fascia-subtitle] {
+  font-size: x-small;
+}
+:host /deep/ [smallicon] {
+  margin: 5px;
+  height: 12px;
+  width: 12px;
 }
 .home-scaffold {
   background: #26699a;
