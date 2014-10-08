@@ -40,7 +40,7 @@ packages:
   di:
     description: di
     source: hosted
-    version: "3.3.0"
+    version: "3.3.1"
   editor_build:
     description: editor_build
     source: hosted
