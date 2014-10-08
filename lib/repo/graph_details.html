@@ -1,40 +1,30 @@
 <link rel="import" href="../../../packages/polymer/polymer.html">
 <link rel="import" href="../../../packages/core_elements/core_icon.html">
+<link rel="import" href="../../../packages/paper_elements/paper_item.html">
 
 <polymer-element name="graph-details" layout vertical> 
   
   
   <template>
   
-      <style>
-      
-        [smallicon] {
-          margin:5px;
-          height:12px;
-          width:12px;
-        
-        }
-      
-      
-      </style>
-  
       <template repeat="{{key in graph.bean.keys}}">
       
-          <div layout horizontal start-justified small-spaced>
-        
-              <core-icon fg icon=check-circle-outline-blank smallicon></core-icon>
-              
-			        <div layout vertical>
-			        
-				        <div bolder>{{graph.bean[key]}}</div>
-				        <div fg smaller>{{key}}</div>
-			      
-			       </div>
-      
-	       </div>
+          <paper-item trim>
+          
+	           <core-icon self-start fg icon=check-circle-outline-blank smallicon></core-icon>
+	              
+		         <div self-start layout vertical>
+		        
+			        <div fascia-title>{{graph.bean[key]}}</div>
+			        <div fascia-subtitle>{{ key | uppercase }}</div>
+		      
+		        </div>
+            
+	       </paper-item>
 	       
       </template>    
 		
   </template> 
+  
   <script type="application/dart" src="../repo.dart"></script> 
 </polymer-element>

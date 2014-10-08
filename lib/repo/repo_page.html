@@ -1,12 +1,9 @@
 <link rel="import" href="../../../packages/polymer/polymer.html">
 
-<link rel="import" href="../../../packages/core_elements/core_drawer_panel.html">
 <link rel="import" href="../../../packages/core_elements/core_header_panel.html">
 <link rel="import" href="../../../packages/core_elements/core_toolbar.html">
-<link rel="import" href="../../../packages/core_elements/core_splitter.html">
 <link rel="import" href="../../../packages/core_elements/core_pages.html">
 
-<link rel="import" href="../../../packages/paper_elements/paper_icon_button.html">
 <link rel="import" href="../../../packages/paper_elements/paper_input.html">
 <link rel="import" href="../../../packages/paper_elements/paper_tabs.html">
 <link rel="import" href="../../../packages/paper_elements/paper_tab.html">
@@ -19,12 +16,12 @@
 <polymer-element name="repo-page" layout horizontal>  
 
   <template>
-         
-        <core-header-panel mode="seamed" wired rounded spaced flex four>
+  
+        <core-header-panel mode="seamed" wired rounded spaced flex three>
         
             <core-toolbar header> 
             
-              <div flex>GRAPHS</div>
+              <div bolder flex>DATASETS</div>
               
               <paper-input id="filter" 
                           smaller style="width:200px" 
@@ -42,10 +39,7 @@
         </core-header-panel>
         
         
-        <!-- <core-splitter minSize=30% direction=right></core-splitter> -->
-        
-        
-        <core-header-panel flex two mode="seamed" wired rounded spaced>
+        <core-header-panel mode="seamed" wired rounded spaced flex two relative>
         
             <core-toolbar header>
             
@@ -58,7 +52,7 @@
                          
             </core-toolbar>
             
-            <div fit layout vertical>
+            <div fit layout vertical scrollable style="min-height:500px">
             
                 <graph-details spaced></graph-details> 
             
