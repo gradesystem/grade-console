@@ -6,14 +6,8 @@
 
 <polymer-element name="graphs-list"> 
 
-
-
- 
  <template>
  
- 
-   <!-- <paper-input label="Search" placeholder="Search" inputValue="{{ searchTerm }}"></paper-input> -->
-	  
 	  <core-list-dart id="list" data="{{graphs.data | filter(searchTerm, itemFilter)}}" height="80" on-core-activate={{selectGraph}} flex>
 	    
 	    <template>
@@ -25,10 +19,7 @@
 	  </core-list-dart>
   
  </template>
- 
 
- 
- 
  <script type="application/dart" src="../repo.dart"></script> 
 
 </polymer-element>
