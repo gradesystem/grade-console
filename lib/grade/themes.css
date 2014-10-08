@@ -51,6 +51,11 @@
 :host /deep/ [small] {
   font-size: x-small;
 }
+:host /deep/ [truncate] {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 :host /deep/ [scrollable] {
   min-width: 640px;
   overflow: auto;
@@ -68,6 +73,7 @@
   margin: 5px;
   height: 12px;
   width: 12px;
+  min-width: 12px;
 }
 .home-scaffold {
   background: #26699a;
