@@ -20,12 +20,12 @@ class ListItem {
 class Graphs extends Observable {
   
   @observable
-  Graph selected;
+  Graph selected = null;
   
   @observable
-  List<Graph> data;
+  ObservableList<Graph> data = new ObservableList();
   
   @observable
-  bool loading;
+  bool loading = false;
 }
 

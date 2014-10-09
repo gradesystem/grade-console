@@ -2,13 +2,15 @@
 <link rel="import" href="../../../packages/core_elements/core_list_dart.html">
 <link rel="import" href="../../../packages/paper_elements/paper_item.html">
 <link rel="import" href="../../../packages/paper_elements/paper_input.html">
+<link rel="import" href="../../../packages/paper_elements/paper_progress.html">
 <link rel="import" href="graph_item.html">
+<link rel="import" href="infinite_progress.html">
 
 <polymer-element name="graphs-list"> 
 
  <template>
- 
-	  <core-list-dart id="list" data="{{graphs.data | filter(searchTerm, itemFilter)}}" height="80" on-core-activate={{selectGraph}} flex>
+
+	  <core-list-dart id="list" hidden?="{{graphs.loading}}" data="{{graphs.data | filter(searchTerm, itemFilter)}}" height="80" on-core-activate={{selectGraph}} flex>
 	    
 	    <template>
 	    
@@ -17,7 +19,10 @@
 	    </template>
 	  
 	  </core-list-dart>
-  
+    
+    <div fit hidden?={{!graphs.loading}} horizontal center center-justified layout>
+      <infinite-progress run={{graphs.loading}}></infinite-progress>
+    </div>
  </template>
 
  <script type="application/dart" src="../repo.dart"></script> 

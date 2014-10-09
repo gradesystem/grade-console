@@ -12,6 +12,7 @@
 <link rel="import" href="graph_details.html">
 <link rel="import" href="graphs_list.html">
 <link rel="import" href="../common/coming_soon.html">
+<link rel="import" href="../../../packages/core_elements/core_icons.html">
 
 <polymer-element name="repo-page" layout horizontal>  
 
@@ -27,6 +28,7 @@
                           smaller style="width:200px" 
                           label="filter" placeholder="keyword" 
                           inputValue={{kfilter}}></paper-input>
+              <core-icon icon="refresh" on-click="{{refresh}}"></core-icon>
               
             </core-toolbar>
             

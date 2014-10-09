@@ -12,6 +12,13 @@ class RepoPage extends Polybase {
   
   RepoPage.created() : super.createWith(RepoPageModel);
   
+  void refresh() {
+    repoModel.loadAll();
+  }
+  
+  
+  RepoPageModel get repoModel => model as RepoPageModel;
+  
 }
 
 @Injectable()
@@ -28,8 +35,20 @@ class RepoPageModel {
  
   void loadAll() {
     storage.loading = true;
-    service.getAll().then((List<Graph> graphs) {storage.data = toObservable(graphs);});
-    storage.loading = false;
+    storage.selected = null;
+    service.getAll().then(_setData);
+    
+  }
+  
+  void _setData(List<Graph> graphs) {
+
+    //simulate slowness
+    new Timer(new Duration(seconds: 3), (){
+      storage.data.clear();
+      storage.data.addAll(graphs);
+      storage.loading = false;
+    });
+    
   }
 }
 

@@ -1,9 +1,7 @@
 
 library repo;
 
-import 'dart:html';
 import 'dart:async';
-import 'dart:mirrors';
 
 import 'package:polymer/polymer.dart';
 import 'package:logging/logging.dart';

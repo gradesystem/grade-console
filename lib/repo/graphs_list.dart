@@ -13,11 +13,13 @@ class GraphsList extends Polybase {
   
   void ready() {
     list = $['list'] as CoreList;
-    onPropertyChange(list, #data, selecteFirstItem);
+    
+    list.data.changes.listen((_){selecteFirstItem();});
   }
   
   void selecteFirstItem() {
-    if (list.data != null && list.selection == null && list.data.isNotEmpty) {
+    log.info("selecteFirstItem");
+    if (list.data != null && list.data.isNotEmpty) {
       
       list.selectItem(0);
       //we are not notified about the selection
@@ -30,5 +32,5 @@ class GraphsList extends Polybase {
   }
   
   Graphs get graphs => model as Graphs;
-  
+ 
 }

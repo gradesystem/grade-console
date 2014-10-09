@@ -99,6 +99,9 @@
   background: #f4f4f4;
   color: #26699a;
 }
+:host /deep/ .home /deep/ paper-progress::shadow #activeProgress {
+  background-color: #26699a;
+}
 :host /deep/ .home /deep/ paper-tabs::shadow #selectionBar {
   background-color: #26699a;
 }
@@ -152,6 +155,9 @@
 :host /deep/ .repo /deep/ [header] {
   background: #f4f4f4;
   color: #00bcd4;
+}
+:host /deep/ .repo /deep/ paper-progress::shadow #activeProgress {
+  background-color: #00bcd4;
 }
 :host /deep/ .repo /deep/ paper-tabs::shadow #selectionBar {
   background-color: #00bcd4;
@@ -207,6 +213,9 @@
   background: #f4f4f4;
   color: #ffc107;
 }
+:host /deep/ .deck /deep/ paper-progress::shadow #activeProgress {
+  background-color: #ffc107;
+}
 :host /deep/ .deck /deep/ paper-tabs::shadow #selectionBar {
   background-color: #ffc107;
 }
@@ -261,6 +270,9 @@
   background: #f4f4f4;
   color: #e41c23;
 }
+:host /deep/ .tasks /deep/ paper-progress::shadow #activeProgress {
+  background-color: #e41c23;
+}
 :host /deep/ .tasks /deep/ paper-tabs::shadow #selectionBar {
   background-color: #e41c23;
 }
@@ -314,6 +326,9 @@
 :host /deep/ .stage /deep/ [header] {
   background: #f4f4f4;
   color: #009587;
+}
+:host /deep/ .stage /deep/ paper-progress::shadow #activeProgress {
+  background-color: #009587;
 }
 :host /deep/ .stage /deep/ paper-tabs::shadow #selectionBar {
   background-color: #009587;
