@@ -3,12 +3,12 @@ part of common;
 @Injectable()
 class HttpService {
 
-  Future<Map> get(String url) {
-    Completer<Map> completer = new Completer<Map>();
+  Future<List> get(String url) {
+    Completer<List> completer = new Completer<List>();
     HttpRequest.getString(url).then((String response) {
 
       try {
-        Map json = JSON.decode(response);
+        List json = JSON.decode(response);
         completer.complete(json);
       } catch (error) {
         completer.completeError(error);

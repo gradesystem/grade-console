@@ -12,8 +12,8 @@ class RepoService {
   Future<List<Graph>> getAll() {
     Completer<List<Graph>> completer = new Completer<List<Graph>>();
     
-    http.get(url).then((Map json){
-      completer.complete(toGraphs(json, 'list'));
+    http.get(url).then((List json){
+      completer.complete(new ListDelegate(json, toGraph));
     });
     return completer.future;
   }
@@ -21,9 +21,4 @@ class RepoService {
   Graph toGraph(Map json) {
     return new Graph(json);
   }
-  
-  List<Graph> toGraphs(Map json, String field) {
-    return new ListDelegate(json[field], toGraph);
-  }
-
 }

@@ -1,5 +1,4 @@
-{
-  "list": [
+[
     {
       "id":"0", 
       "label":"SPECIES", 
@@ -181,4 +180,3 @@
       "creator":"G. Verdi"
     }
   ]
-}
