@@ -12,6 +12,9 @@
       <directory>build/web</directory>
       <outputDirectory>/</outputDirectory>
       <useDefaultExcludes>true</useDefaultExcludes>
+      <excludes>
+          <exclude>service/**</exclude>
+      </excludes>
     </fileSet>
   </fileSets>
 </assembly>

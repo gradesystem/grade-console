@@ -3,7 +3,7 @@ part of repo;
 @Injectable()
 class RepoService {
   
-  String url = "graphs.json";
+  String url = "service/prod/datasets";
   
   HttpService http;
   
