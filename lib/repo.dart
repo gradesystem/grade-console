@@ -21,8 +21,9 @@ init() {
   
   var module = new Module()
           ..bind(RepoPageModel)
-          ..bind(Graphs)
+          ..bind(RepoGraphs)
           ..bind(RepoService);
   
   Dependencies.add(module);
+  Dependencies.bind("RepoGraphs", RepoGraphs);
 }

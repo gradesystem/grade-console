@@ -9,7 +9,7 @@ class GraphsList extends Polybase {
   
   FilterFunction itemFilter = (item, String term) => item.label.toLowerCase().contains(term.toLowerCase()) || item.note.toLowerCase().contains(term.toLowerCase());
   
-  GraphsList.created() : super.createWith(Graphs);
+  GraphsList.created() : super.created();
   
   void ready() {
     list = $['list'] as CoreList;

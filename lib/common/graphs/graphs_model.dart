@@ -16,8 +16,7 @@ class ListItem {
 }
 
 
-@Injectable()
-class Graphs extends Observable {
+abstract class Graphs extends Observable {
   
   @observable
   Graph selected = null;

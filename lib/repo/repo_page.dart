@@ -25,7 +25,7 @@ class RepoPage extends Polybase {
 class RepoPageModel {
   
   RepoService service;
-  Graphs storage;
+  RepoGraphs storage;
   
   RepoPageModel(this.service, this.storage,  EventBus bus) {
     bus.on(ApplicationReady).listen((_) {
@@ -50,5 +50,10 @@ class RepoPageModel {
     });
     
   }
+}
+
+@Injectable()
+class RepoGraphs extends Graphs {
+  
 }
 
