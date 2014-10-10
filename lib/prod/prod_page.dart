@@ -6,12 +6,12 @@ class ProdPage extends Polybase {
   ProdPage.created() : super.createWith(ProdPageModel);
   
   void refresh() {
-    repoModel.loadAll();
+    prodModel.loadAll();
   }
   
-  ProdPageModel get repoModel => model as ProdPageModel;
+  ProdPageModel get prodModel => model as ProdPageModel;
   
-  ProdDatasets get datasets => repoModel.storage;
+  ProdDatasets get datasets => prodModel.storage;
   
 }
 
