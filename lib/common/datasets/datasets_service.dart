@@ -9,7 +9,7 @@ abstract class DatasetService {
   HttpService http;
   
   DatasetService(this.http, String path) {
-    service_url = "$base_url/$path/";
+    service_url = "$base_url/$path";
   }
   
   Future<List<Dataset>> getAll() {
