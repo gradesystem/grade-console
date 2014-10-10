@@ -3,15 +3,11 @@ part of repo;
 @CustomTag("repo-page") 
 class RepoPage extends Polybase {
   
-  @observable
-  int tab=0;
-  
   RepoPage.created() : super.createWith(RepoPageModel);
   
   void refresh() {
     repoModel.loadAll();
   }
-  
   
   RepoPageModel get repoModel => model as RepoPageModel;
   
