@@ -14,7 +14,7 @@ import 'dart:html';
 import 'common.dart';
 import 'home.dart' as home;
 import 'prod.dart' as prod;
-import 'staging.dart' as staging;
+import 'stage.dart' as staging;
 import 'tasks.dart' as tasks;
 
 part 'grade/grade_console.dart';
