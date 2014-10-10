@@ -2,5 +2,5 @@ part of tasks;
 
 @Injectable()
 class TasksService extends DatasetService {
-  TasksService(HttpService http) : super(http, "tasks");
+  TasksService(HttpService http) : super(http, "prod");
 }
