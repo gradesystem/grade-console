@@ -1,0 +1,38 @@
+<link rel="import" href="../../../../packages/polymer/polymer.html">
+
+<link rel="import" href="../../../../packages/core_elements/core_header_panel.html">
+<link rel="import" href="../../../../packages/core_elements/core_toolbar.html">
+
+<link rel="import" href="../../../../packages/paper_elements/paper_input.html">
+<link rel="import" href="../../../../packages/paper_elements/paper_tabs.html">
+<link rel="import" href="../../../../packages/paper_elements/paper_tab.html">
+<link rel="import" href="graph_details.html">
+
+<polymer-element name="graph-details-panel" horizontal layout>
+  <template>
+  
+  <core-header-panel mode="seamed" flex>
+        
+            <core-toolbar header>
+            
+                 
+              <paper-tabs self-center id="tabs" selected="0" style="width:170px">
+                <paper-tab>PROPERTIES</paper-tab>
+                <paper-tab>OTHER</paper-tab>
+              </paper-tabs> 
+                         
+            </core-toolbar>
+            
+            <div fit layout vertical style="min-height:500px">
+            
+                <graph-details graph="{{graphs.selected}}" spaced></graph-details> 
+            
+            </div>
+                        
+        </core-header-panel>
+  
+  </template>
+  
+  <script type="application/dart" src="graphs.dart"></script> 
+  
+</polymer-element>

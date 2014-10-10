@@ -1,11 +1,11 @@
 part of graphs;
 
 @CustomTag("graph-details") 
-class GraphDetails extends Polybase {
+class GraphDetails extends PolymerElement with Filters {
   
- GraphDetails.created() : super.created();
- 
- @ComputedProperty('model.selected') 
- Graph get graph => readValue(#graph);
+  @published
+  Graph graph;
+  
+  GraphDetails.created() : super.created();
   
 }
