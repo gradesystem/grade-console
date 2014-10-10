@@ -1,4 +1,4 @@
-part of repo;
+part of graphs;
 
 @CustomTag("graph-details") 
 class GraphDetails extends Polybase {

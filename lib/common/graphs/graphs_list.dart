@@ -1,4 +1,4 @@
-part of repo;
+part of graphs;
 
 @CustomTag("graphs-list") 
 class GraphsList extends Polybase {
@@ -18,7 +18,6 @@ class GraphsList extends Polybase {
   }
   
   void selecteFirstItem() {
-    log.info("selecteFirstItem");
     if (list.data != null && list.data.isNotEmpty) {
       
       list.selectItem(0);

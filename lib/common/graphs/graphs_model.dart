@@ -1,4 +1,4 @@
-part of repo;
+part of graphs;
 
 class Graph extends Delegate with ListItem {
 
