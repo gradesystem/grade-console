@@ -9,7 +9,7 @@ import 'package:di/annotations.dart';
 import 'package:event_bus/event_bus.dart';
 
 import 'common.dart';
-import 'common/graphs/graphs.dart';
+import 'common/datasets/datasets.dart';
 
 part 'prod/prod_page.dart';
 part 'prod/prod_service.dart';
@@ -20,7 +20,7 @@ init() {
   
   var module = new Module()
           ..bind(ProdPageModel)
-          ..bind(ProdGraphs)
+          ..bind(ProdDatasets)
           ..bind(ProdService);
   
   Dependencies.add(module);

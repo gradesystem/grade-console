@@ -9,8 +9,8 @@ class ProdService {
   
   ProdService(this.http);
   
-  Future<List<Graph>> getAll() {
-    Completer<List<Graph>> completer = new Completer<List<Graph>>();
+  Future<List<Dataset>> getAll() {
+    Completer<List<Dataset>> completer = new Completer<List<Dataset>>();
     
     http.get(url).then((List json){
       completer.complete(new ListDelegate(json, toGraph));
@@ -18,7 +18,7 @@ class ProdService {
     return completer.future;
   }
   
-  Graph toGraph(Map json) {
-    return new Graph(json);
+  Dataset toGraph(Map json) {
+    return new Dataset(json);
   }
 }

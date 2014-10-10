@@ -1,19 +1,19 @@
-part of graphs;
+part of datasets;
 
-@CustomTag("graphs-list") 
-class GraphsList extends PolymerElement with Filters {
+@CustomTag("datasets-list") 
+class DatasetsList extends PolymerElement with Filters {
   
   @published
   String searchTerm = '';
   
   @published
-  Graphs graphs;
+  Datasets datasets;
   
   CoreList list;
   
   FilterFunction itemFilter = (item, String term) => item.label.toLowerCase().contains(term.toLowerCase()) || item.note.toLowerCase().contains(term.toLowerCase());
   
-  GraphsList.created() : super.created();
+  DatasetsList.created() : super.created();
   
   void ready() {
     list = $['list'] as CoreList;
@@ -25,12 +25,12 @@ class GraphsList extends PolymerElement with Filters {
       
       list.selectItem(0);
       //we are not notified about the selection
-      graphs.selected = list.selection;
+      datasets.selected = list.selection;
     }
   }
   
-  void selectGraph(event) {
-    graphs.selected = event.detail.data;
+  void selectDataset(event) {
+    datasets.selected = event.detail.data;
   }
  
 }

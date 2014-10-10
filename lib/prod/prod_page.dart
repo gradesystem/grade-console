@@ -11,7 +11,7 @@ class ProdPage extends Polybase {
   
   ProdPageModel get repoModel => model as ProdPageModel;
   
-  ProdGraphs get graphs => repoModel.storage;
+  ProdDatasets get datasets => repoModel.storage;
   
 }
 
@@ -19,7 +19,7 @@ class ProdPage extends Polybase {
 class ProdPageModel {
   
   ProdService service;
-  ProdGraphs storage;
+  ProdDatasets storage;
   
   ProdPageModel(this.service, this.storage,  EventBus bus) {
     bus.on(ApplicationReady).listen((_) {
@@ -34,7 +34,7 @@ class ProdPageModel {
     
   }
   
-  void _setData(List<Graph> graphs) {
+  void _setData(List<Dataset> graphs) {
 
     //simulate slowness
     new Timer(new Duration(seconds: 3), (){
@@ -47,7 +47,7 @@ class ProdPageModel {
 }
 
 @Injectable()
-class ProdGraphs extends Graphs {
+class ProdDatasets extends Datasets {
   
 }
 

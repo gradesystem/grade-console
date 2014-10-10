@@ -1,8 +1,7 @@
 <link rel="import" href="../../../../packages/polymer/polymer.html">
 <link rel="import" href="../../../../packages/paper_elements/paper_item.html">
 
-<polymer-element name="graph-item"  horizontal layout>
-	
+<polymer-element name="dataset-item"  horizontal layout>
 	
   <template>
   
@@ -13,8 +12,8 @@
 	    <div self-start 
 	      layout vertical >
 	      
-	      <div bolder>{{graph.label | uppercase }}</div>
-		    <div small>{{graph.date | format}}</div>
+	      <div bolder>{{item.label | uppercase }}</div>
+		    <div small>{{item.date | format}}</div>
 	    
 	    </div>
 	    
@@ -22,6 +21,6 @@
   
   </template>
   
-  <script type="application/dart" src="graphs.dart"></script> 
+  <script type="application/dart" src="datasets.dart"></script> 
 
 </polymer-element>

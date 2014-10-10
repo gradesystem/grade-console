@@ -4,9 +4,9 @@
 <link rel="import" href="../../../../packages/core_elements/core_header_panel.html">
 <link rel="import" href="../../../../packages/core_elements/core_toolbar.html">
 
-<link rel="import" href="graphs_list.html">
+<link rel="import" href="datasets_list.html">
 
-<polymer-element name="graphs-panel" horizontal layout>
+<polymer-element name="datasets-panel" horizontal layout>
   <template>
     <core-header-panel mode="seamed" flex>
         
@@ -24,14 +24,14 @@
             
             <div fit layout vertical spaced>
  
-              <graphs-list graphs="{{graphs}}" searchTerm="{{kfilter}}" flex></graphs-list>
+              <datasets-list datasets="{{datasets}}" searchTerm="{{kfilter}}" flex></datasets-list>
             
             </div>
                         
      </core-header-panel>
   </template>
   
-  <script type="application/dart" src="graphs.dart"></script> 
+  <script type="application/dart" src="datasets.dart"></script> 
   
 </polymer-element>
  

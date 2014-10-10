@@ -3,28 +3,28 @@
 <link rel="import" href="../../../../packages/paper_elements/paper_item.html">
 <link rel="import" href="../../../../packages/paper_elements/paper_input.html">
 <link rel="import" href="../../../../packages/paper_elements/paper_progress.html">
-<link rel="import" href="graph_item.html">
+<link rel="import" href="dataset_item.html">
 <link rel="import" href="../components/infinite_progress.html">
 
-<polymer-element name="graphs-list"> 
+<polymer-element name="datasets-list"> 
 
  <template>
 
-	  <core-list-dart id="list" hidden?="{{graphs.loading}}" data="{{graphs.data | filter(searchTerm, itemFilter)}}" height="80" on-core-activate={{selectGraph}} flex>
+	  <core-list-dart id="list" hidden?="{{datasets.loading}}" data="{{datasets.data | filter(searchTerm, itemFilter)}}" height="80" on-core-activate={{selectDataset}} flex>
 	    
 	    <template>
 	    
-	      <graph-item bg-selected?="{{selected}}" graph={{self}}></graph-item>
+	      <dataset-item bg-selected?="{{selected}}" item={{self}}></dataset-item>
 	    
 	    </template>
 	  
 	  </core-list-dart>
     
-    <div fit hidden?={{!graphs.loading}} horizontal center center-justified layout>
-      <infinite-progress run={{graphs.loading}}></infinite-progress>
+    <div fit hidden?={{!datasets.loading}} horizontal center center-justified layout>
+      <infinite-progress run={{datasets.loading}}></infinite-progress>
     </div>
  </template>
 
- <script type="application/dart" src="graphs.dart"></script> 
+ <script type="application/dart" src="datasets.dart"></script> 
 
 </polymer-element>

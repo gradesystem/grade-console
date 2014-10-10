@@ -6,12 +6,13 @@
 <link rel="import" href="../../../../packages/paper_elements/paper_input.html">
 <link rel="import" href="../../../../packages/paper_elements/paper_tabs.html">
 <link rel="import" href="../../../../packages/paper_elements/paper_tab.html">
-<link rel="import" href="graph_details.html">
 
-<polymer-element name="graph-details-panel" horizontal layout>
+<link rel="import" href="dataset_details.html">
+
+<polymer-element name="dataset-details-panel" horizontal layout>
   <template>
   
-  <core-header-panel mode="seamed" flex>
+        <core-header-panel mode="seamed" flex>
         
             <core-toolbar header>
             
@@ -25,7 +26,7 @@
             
             <div fit layout vertical style="min-height:500px">
             
-                <graph-details graph="{{graphs.selected}}" spaced></graph-details> 
+                <dataset-details item="{{datasets.selected}}" spaced></dataset-details> 
             
             </div>
                         
@@ -33,6 +34,6 @@
   
   </template>
   
-  <script type="application/dart" src="graphs.dart"></script> 
+  <script type="application/dart" src="datasets.dart"></script> 
   
 </polymer-element>

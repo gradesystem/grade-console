@@ -1,7 +1,7 @@
 <link rel="import" href="../../../packages/polymer/polymer.html">
 
-<link rel="import" href="../common/graphs/graphs_panel.html">
-<link rel="import" href="../common/graphs/graph_details_panel.html">
+<link rel="import" href="../common/datasets/datasets_panel.html">
+<link rel="import" href="../common/datasets/dataset_details_panel.html">
 <link rel="import" href="../common/components/grade_scaffold.html">
 
 <polymer-element name="prod-page" layout horizontal  style="border: 1px solid purple">  
@@ -9,8 +9,8 @@
   <template>
 
     <grade-scaffold flex>
-        <graphs-panel main flex title="DATASETS" graphs="{{graphs}}" on-refresh="{{refresh}}"></graphs-panel>
-        <graph-details-panel side flex graphs="{{graphs}}"></graph-details-panel>
+        <datasets-panel main flex title="DATASETS" datasets="{{datasets}}" on-refresh="{{refresh}}"></datasets-panel>
+        <dataset-details-panel side flex datasets="{{datasets}}"></dataset-details-panel>
     </grade-scaffold>
 
  </template>
