@@ -4,7 +4,6 @@ part of stage;
 class StagePage extends Polybase {
   StagePage.created() : super.createWith(StagePageModel);
   
-  
   void refresh() {
     stageModel.loadAll();
   }

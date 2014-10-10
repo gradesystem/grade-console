@@ -1,18 +1,18 @@
 <link rel="import" href="../../../packages/polymer/polymer.html">
 
+<link rel="import" href="../common/datasets/datasets_panel.html">
+<link rel="import" href="../common/datasets/dataset_details_panel.html">
+<link rel="import" href="../common/components/grade_scaffold.html">
+
 <polymer-element name="tasks-page" layout vertical>  
 
   <template>
-  
-   <div class=pageframe flex self-center vertical layout >
 
-      <div class=fg style="margin:10px" vertical layout center bigger>
-	       <div class="spaced fg">
-				   <h1>TASK CATALOGUE</h1>
-				 </div>
-		      <div>coming soon...</div>
-		   </div>
-		</div>
+    <grade-scaffold flex>
+        <datasets-panel main flex title="TASK CATALOGUE" datasets="{{datasets}}" on-refresh="{{refresh}}"></datasets-panel>
+        <dataset-details-panel side flex datasets="{{datasets}}"></dataset-details-panel>
+    </grade-scaffold>
+		
  </template>
  
  <script type="application/dart" src="../tasks.dart"></script> 
