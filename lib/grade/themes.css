@@ -132,61 +132,61 @@
 :host /deep/ .home /deep/ paper-input.invalid::shadow .cursor {
   background-color: #f69988;
 }
-.repo-scaffold {
+.prod-scaffold {
   background: #00bcd4;
   color: #fff;
 }
-:host /deep/ .repo /deep/ [bg] {
+:host /deep/ .prod /deep/ [bg] {
   background: #00bcd4;
 }
-:host /deep/ .repo /deep/ [fg] {
+:host /deep/ .prod /deep/ [fg] {
   color: #00bcd4;
 }
-:host /deep/ .repo /deep/ [bg-alt] {
+:host /deep/ .prod /deep/ [bg-alt] {
   background: #0097a7;
 }
-:host /deep/ .repo /deep/ [fg-alt] {
+:host /deep/ .prod /deep/ [fg-alt] {
   color: #0097a7;
 }
-:host /deep/ .repo /deep/ [bg-selected] {
+:host /deep/ .prod /deep/ [bg-selected] {
   background: #80deea;
   color: #fff;
 }
-:host /deep/ .repo /deep/ [header] {
+:host /deep/ .prod /deep/ [header] {
   background: #f4f4f4;
   color: #00bcd4;
 }
-:host /deep/ .repo /deep/ paper-progress::shadow #activeProgress {
+:host /deep/ .prod /deep/ paper-progress::shadow #activeProgress {
   background-color: #00bcd4;
 }
-:host /deep/ .repo /deep/ paper-tabs::shadow #selectionBar {
+:host /deep/ .prod /deep/ paper-tabs::shadow #selectionBar {
   background-color: #00bcd4;
 }
-:host /deep/ .repo /deep/ paper-tabs paper-tab::shadow #ink {
+:host /deep/ .prod /deep/ paper-tabs paper-tab::shadow #ink {
   color: #80deea;
 }
-:host /deep/ .repo /deep/ paper-input[focused]::shadow .floated-label .label-text {
+:host /deep/ .prod /deep/ paper-input[focused]::shadow .floated-label .label-text {
   color: #0097a7;
 }
-:host /deep/ .repo /deep/ paper-input::shadow .focused-underline {
+:host /deep/ .prod /deep/ paper-input::shadow .focused-underline {
   background-color: #00bcd4;
 }
-:host /deep/ .repo /deep/ paper-input::shadow .cursor {
+:host /deep/ .prod /deep/ paper-input::shadow .cursor {
   background-color: #00bcd4;
 }
-:host /deep/ .repo /deep/ paper-input.invalid[focused]::shadow .floated-label {
+:host /deep/ .prod /deep/ paper-input.invalid[focused]::shadow .floated-label {
   color: #e41c23;
 }
-:host /deep/ .repo /deep/ paper-input[focused]::shadow .error-text {
+:host /deep/ .prod /deep/ paper-input[focused]::shadow .error-text {
   color: #e41c23;
 }
-:host /deep/ .repo /deep/ paper-input[focused]::shadow .error-icon {
+:host /deep/ .prod /deep/ paper-input[focused]::shadow .error-icon {
   color: #e41c23;
 }
-:host /deep/ .repo /deep/ paper-input.invalid::shadow .focused-underline {
+:host /deep/ .prod /deep/ paper-input.invalid::shadow .focused-underline {
   background-color: #f69988;
 }
-:host /deep/ .repo /deep/ paper-input.invalid::shadow .cursor {
+:host /deep/ .prod /deep/ paper-input.invalid::shadow .cursor {
   background-color: #f69988;
 }
 .deck-scaffold {

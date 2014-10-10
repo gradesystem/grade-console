@@ -1,13 +1,13 @@
-part of repo;
+part of prod;
 
 @Injectable()
-class RepoService {
+class ProdService {
   
   String url = "service/prod/datasets";
   
   HttpService http;
   
-  RepoService(this.http);
+  ProdService(this.http);
   
   Future<List<Graph>> getAll() {
     Completer<List<Graph>> completer = new Completer<List<Graph>>();

@@ -13,7 +13,7 @@ import 'dart:html';
 
 import 'common.dart';
 import 'home.dart' as home;
-import 'repo.dart' as repo;
+import 'prod.dart' as prod;
 import 'staging.dart' as staging;
 import 'tasks.dart' as tasks;
 
@@ -68,7 +68,7 @@ _initLogging() {
 _initModules() {
   
   home.init();
-  repo.init();
+  prod.init();
   staging.init();
   tasks.init();
   

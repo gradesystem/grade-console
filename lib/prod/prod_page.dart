@@ -1,27 +1,27 @@
-part of repo;
+part of prod;
 
-@CustomTag("repo-page") 
-class RepoPage extends Polybase {
+@CustomTag("prod-page") 
+class ProdPage extends Polybase {
   
-  RepoPage.created() : super.createWith(RepoPageModel);
+  ProdPage.created() : super.createWith(ProdPageModel);
   
   void refresh() {
     repoModel.loadAll();
   }
   
-  RepoPageModel get repoModel => model as RepoPageModel;
+  ProdPageModel get repoModel => model as ProdPageModel;
   
-  RepoGraphs get graphs => repoModel.storage;
+  ProdGraphs get graphs => repoModel.storage;
   
 }
 
 @Injectable()
-class RepoPageModel {
+class ProdPageModel {
   
-  RepoService service;
-  RepoGraphs storage;
+  ProdService service;
+  ProdGraphs storage;
   
-  RepoPageModel(this.service, this.storage,  EventBus bus) {
+  ProdPageModel(this.service, this.storage,  EventBus bus) {
     bus.on(ApplicationReady).listen((_) {
       loadAll();
     });
@@ -47,7 +47,7 @@ class RepoPageModel {
 }
 
 @Injectable()
-class RepoGraphs extends Graphs {
+class ProdGraphs extends Graphs {
   
 }
 

@@ -1,5 +1,4 @@
-
-library repo;
+library prod;
 
 import 'dart:async';
 
@@ -12,18 +11,17 @@ import 'package:event_bus/event_bus.dart';
 import 'common.dart';
 import 'common/graphs/graphs.dart';
 
-part 'repo/repo_page.dart';
-part 'repo/repo_service.dart';
+part 'prod/prod_page.dart';
+part 'prod/prod_service.dart';
 
-final Logger log = new Logger('grade.repo');
+final Logger log = new Logger('grade.prod');
 
 init() {
   
   var module = new Module()
-          ..bind(RepoPageModel)
-          ..bind(RepoGraphs)
-          ..bind(RepoService);
+          ..bind(ProdPageModel)
+          ..bind(ProdGraphs)
+          ..bind(ProdService);
   
   Dependencies.add(module);
-  Dependencies.bind("RepoGraphs", RepoGraphs);
 }

@@ -5,21 +5,14 @@ part of grade;
 @CustomTag(GradeConsole.name) 
 class GradeConsole  extends PolymerElement with Dependencies, Filters {
  
-  List<Page> pages = [new Page("Grade","Home"),
-                      new Page("Repository","Repo"),
-                      new Page("Deck","Deck"),
-                      new Page("Catalogue","Tasks"),
-                      new Page("Staging","Stage")];
+  List<Page> pages = [new Page("Grade","Home", "home"),
+                      new Page("Repository","Repo", "prod"),
+                      new Page("Deck","Deck", "deck"),
+                      new Page("Catalogue","Tasks", "tasks"),
+                      new Page("Staging","Stage", "stage")];
    
   static const name = "grade-console";
   
-/*  var _mySyntax = new PolymerExpressions(globals: {
-      'appName': 'My App',
-    });
-
-    DocumentFragment instanceTemplate(Element template) =>
-        template.createInstance(this, _mySyntax);*/
-
   @observable int page = 0;
   
   GradeConsole.created() : super.created();
@@ -47,6 +40,7 @@ class Page {
   
   final String name;
   final String tab;
+  final String style;
   
-  Page(this.name, this.tab);
+  Page(this.name, this.tab, this.style);
 }
