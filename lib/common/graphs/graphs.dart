@@ -11,3 +11,4 @@ part 'graphs_model.dart';
 part 'graphs_list.dart';
 part 'graph_item.dart';
 part 'graph_details.dart';
+part 'graphs_panel.dart';

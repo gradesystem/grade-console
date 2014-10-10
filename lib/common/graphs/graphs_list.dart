@@ -1,10 +1,14 @@
 part of graphs;
 
 @CustomTag("graphs-list") 
-class GraphsList extends Polybase {
+class GraphsList extends PolymerElement with Filters {
   
   @published
   String searchTerm = '';
+  
+  @published
+  Graphs graphs;
+  
   CoreList list;
   
   FilterFunction itemFilter = (item, String term) => item.label.toLowerCase().contains(term.toLowerCase()) || item.note.toLowerCase().contains(term.toLowerCase());
@@ -13,7 +17,6 @@ class GraphsList extends Polybase {
   
   void ready() {
     list = $['list'] as CoreList;
-    
     list.data.changes.listen((_){selecteFirstItem();});
   }
   
@@ -29,7 +32,5 @@ class GraphsList extends Polybase {
   void selectGraph(event) {
     graphs.selected = event.detail.data;
   }
-  
-  Graphs get graphs => model as Graphs;
  
 }

@@ -9,6 +9,7 @@
 <link rel="import" href="../../../packages/paper_elements/paper_tab.html">
 
 
+<link rel="import" href="../common/graphs/graphs_panel.html">
 <link rel="import" href="../common/graphs/graph_details.html">
 <link rel="import" href="../common/graphs/graphs_list.html">
 <link rel="import" href="../common/coming_soon.html">
@@ -20,28 +21,7 @@
   <template>
 
     <grade-scaffold flex>
-        <core-header-panel mode="seamed" main flex>
-        
-            <core-toolbar header> 
-            
-              <div bolder flex>DATASETS</div>
-              
-              <paper-input id="filter" 
-                          smaller style="width:200px" 
-                          label="filter" placeholder="keyword" 
-                          inputValue={{kfilter}}></paper-input>
-              <core-icon icon="refresh" on-click="{{refresh}}"></core-icon>
-              
-            </core-toolbar>
-            
-            <div fit layout vertical spaced>
-  
-              <graphs-list model="RepoGraphs" searchTerm="{{kfilter}}" flex></graphs-list>
-            
-            </div>
-                        
-        </core-header-panel>
-        
+        <graphs-panel main flex title="DATASETS" graphs="{{graphs}}" on-refresh="{{refresh}}"></graphs-panel>
         
         <core-header-panel mode="seamed" side flex>
         

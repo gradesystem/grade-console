@@ -1,0 +1,37 @@
+<link rel="import" href="../../../../packages/polymer/polymer.html">
+
+<link rel="import" href="../../../../packages/paper_elements/paper_input.html">
+<link rel="import" href="../../../../packages/core_elements/core_header_panel.html">
+<link rel="import" href="../../../../packages/core_elements/core_toolbar.html">
+
+<link rel="import" href="graphs_list.html">
+
+<polymer-element name="graphs-panel" horizontal layout>
+  <template>
+    <core-header-panel mode="seamed" main flex>
+        
+            <core-toolbar header> 
+            
+              <div bolder flex>{{title}}</div>
+              
+              <paper-input id="filter" 
+                          smaller style="width:200px" 
+                          label="filter" placeholder="keyword" 
+                          inputValue={{kfilter}}></paper-input>
+              <core-icon icon="refresh" on-click="{{refresh}}"></core-icon>
+              
+            </core-toolbar>
+            
+            <div fit layout vertical spaced>
+ 
+              <graphs-list graphs="{{graphs}}" searchTerm="{{kfilter}}" flex></graphs-list>
+            
+            </div>
+                        
+        </core-header-panel>
+  </template>
+  
+  <script type="application/dart" src="graphs.dart"></script> 
+  
+</polymer-element>
+ 

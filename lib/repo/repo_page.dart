@@ -6,10 +6,6 @@ class RepoPage extends Polybase {
   @observable
   int tab=0;
   
-  @observable
-  String kfilter='';
-  
-  
   RepoPage.created() : super.createWith(RepoPageModel);
   
   void refresh() {
@@ -18,6 +14,8 @@ class RepoPage extends Polybase {
   
   
   RepoPageModel get repoModel => model as RepoPageModel;
+  
+  RepoGraphs get graphs => repoModel.storage;
   
 }
 
