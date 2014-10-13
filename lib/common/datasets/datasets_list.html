@@ -1,16 +1,17 @@
 <link rel="import" href="../../../../packages/polymer/polymer.html">
 <link rel="import" href="../../../../packages/core_elements/core_list_dart.html">
 <link rel="import" href="../../../../packages/paper_elements/paper_item.html">
-<link rel="import" href="../../../../packages/paper_elements/paper_input.html">
 <link rel="import" href="../../../../packages/paper_elements/paper_progress.html">
 <link rel="import" href="dataset_item.html">
-<link rel="import" href="../components/infinite_progress.html">
+<link rel="import" href="../components/loading_panel.html">
 
 <polymer-element name="datasets-list"> 
 
  <template>
 
-	  <core-list-dart id="list" hidden?="{{datasets.loading}}" data="{{datasets.data | filter(searchTerm, itemFilter)}}" height="80" on-core-activate={{selectDataset}} flex>
+  <loading-panel loading="{{datasets.loading}}" message="loading datasets">
+
+	  <core-list-dart id="list" data="{{datasets.data | filter(searchTerm, itemFilter)}}" height="80" on-core-activate={{selectDataset}} flex>
 	    
 	    <template>
 	    
@@ -19,10 +20,8 @@
 	    </template>
 	  
 	  </core-list-dart>
-    
-    <div fit hidden?={{!datasets.loading}} horizontal center center-justified layout>
-      <infinite-progress run={{datasets.loading}}></infinite-progress>
-    </div>
+	  
+  </loading-panel>
  </template>
 
  <script type="application/dart" src="datasets.dart"></script> 
