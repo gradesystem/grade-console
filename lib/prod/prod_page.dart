@@ -37,7 +37,7 @@ class ProdPageModel {
   void _setData(List<Dataset> graphs) {
 
     //simulate slowness
-    new Timer(new Duration(seconds: 3), (){
+    new Timer(new Duration(seconds: 1), (){
       storage.data.clear();
       storage.data.addAll(graphs);
       storage.loading = false;
