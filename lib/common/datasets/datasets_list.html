@@ -11,7 +11,7 @@
 
   <loading-panel loading="{{datasets.loading}}" message="loading datasets">
 
-	  <core-list-dart id="list" data="{{datasets.data | filter(searchTerm, itemFilter)}}" height="80" on-core-activate={{selectDataset}} flex>
+	  <core-list-dart id="list" hidden?={{datasets.data.isEmpty}} data="{{datasets.data | filter(searchTerm, itemFilter)}}" height="80" on-core-activate={{selectDataset}} flex>
 	    
 	    <template>
 	    
@@ -20,6 +20,10 @@
 	    </template>
 	  
 	  </core-list-dart>
+	  
+	  <div fit hidden?={{datasets.data.isNotEmpty}} layout vertical center center-justified>
+      <div fg>Ops.. We've found no datasets</div>
+    </div>
 	  
   </loading-panel>
  </template>
