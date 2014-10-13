@@ -50,7 +50,7 @@ class ProdPageModel {
   void _onError(e, callback) {
     storage.data.clear();
     storage.loading = false;
-    bus.fire(new ToastMessage.alert("Error: $e", callback));
+    bus.fire(new ToastMessage.alert("Error occurred", callback));
   }
 }
 

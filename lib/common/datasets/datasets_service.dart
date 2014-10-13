@@ -13,12 +13,7 @@ abstract class DatasetService {
   }
   
   Future<List<Dataset>> getAll() {
-    Completer<List<Dataset>> completer = new Completer<List<Dataset>>();
-    
-    http.get("$service_url/datasets").then((List json){
-      completer.complete(new ListDelegate(json, toDataset));
-    }).catchError((e) => completer.completeError(e));
-    return completer.future;
+    return http.get("$service_url/datasets").then((json)=>new ListDelegate(json, toDataset));
   }
   
   Dataset toDataset(Map json) {
