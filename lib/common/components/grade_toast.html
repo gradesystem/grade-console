@@ -1,0 +1,11 @@
+<link rel="import" href="../../../../packages/polymer/polymer.html">
+<link rel="import" href="../../../../packages/paper_elements/paper_toast.html">
+
+<polymer-element name="grade-toast">
+    <template>
+	    <paper-toast role="{{role}}" text="{{text}}" opened={{opened}}>
+	      <div hidden?="{{callback==null}}" style="color: #eeff41;" on-click="{{onRetry}}">Retry</div>
+	    </paper-toast>
+    </template>
+  <script type="application/dart" src="grade_toast.dart"></script> 
+</polymer-element>

@@ -17,7 +17,7 @@ abstract class DatasetService {
     
     http.get("$service_url/datasets").then((List json){
       completer.complete(new ListDelegate(json, toDataset));
-    });
+    }).catchError((e) => completer.completeError(e));
     return completer.future;
   }
   

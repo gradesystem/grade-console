@@ -18,10 +18,11 @@ class ProdPage extends Polybase {
 @Injectable()
 class ProdPageModel {
   
+  EventBus bus;
   ProdService service;
   ProdDatasets storage;
   
-  ProdPageModel(this.service, this.storage,  EventBus bus) {
+  ProdPageModel(this.bus, this.service, this.storage) {
     bus.on(ApplicationReady).listen((_) {
       loadAll();
     });
@@ -30,7 +31,7 @@ class ProdPageModel {
   void loadAll() {
     storage.loading = true;
     storage.selected = null;
-    service.getAll().then(_setData);
+    service.getAll().then(_setData).catchError((e)=>_onError(e, loadAll));
     
   }
   
@@ -43,6 +44,13 @@ class ProdPageModel {
       storage.loading = false;
     });
     
+  }
+  
+  
+  void _onError(e, callback) {
+    storage.data.clear();
+    storage.loading = false;
+    bus.fire(new ToastMessage.alert("Error: $e", callback));
   }
 }
 

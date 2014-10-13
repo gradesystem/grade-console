@@ -4,7 +4,7 @@ import 'dart:async';
 import 'package:polymer/polymer.dart';
 import 'package:core_elements/core_list_dart.dart';
 
-import 'package:grade_console/common.dart';
+import '../../common.dart';
 
 part 'datasets_model.dart';
 part 'datasets_list.dart';

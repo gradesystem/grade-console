@@ -14,9 +14,7 @@ class HttpService {
         completer.completeError(error);
       }
 
-    }).catchError((Error error) {
-      completer.completeError(error);
-    });
+    }).catchError((e) => completer.completeError(e));
 
     return completer.future;
   }
