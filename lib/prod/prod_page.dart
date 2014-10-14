@@ -48,9 +48,10 @@ class ProdPageModel {
   
   
   void _onError(e, callback) {
+    log.severe("service error", e);
     storage.data.clear();
     storage.loading = false;
-    bus.fire(new ToastMessage.alert("Error occurred", callback));
+    bus.fire(new ToastMessage.alert("Ops we are having some problems communicating with the server", callback));
   }
 }
 
