@@ -6,13 +6,15 @@ class Dataset extends Delegate with ListItem {
   
    static final String id = "http://gradesystem.io/onto#/id";
    static final List<String> labels = [
-                         "http://www.w3.org/2000/01/rdf-schema#label",
-                         "http://purl.org/dc/terms/title"
-                         ];
+                                       "label",
+                                       "http://www.w3.org/2000/01/rdf-schema#label",
+                                       "http://purl.org/dc/terms/title"
+                                      ];
    
    static final List<String> dates = [
-                            "http://purl.org/dc/terms/date"
-                            ];
+                                      "date",
+                                      "http://purl.org/dc/terms/date"
+                                      ];
   
   String get label {
                     

@@ -11,7 +11,7 @@ class DatasetsList extends PolymerElement with Filters {
   
   CoreList list;
   
-  FilterFunction itemFilter = (item, String term) => item.label.toLowerCase().contains(term.toLowerCase()) || item.note.toLowerCase().contains(term.toLowerCase());
+  FilterFunction itemFilter = (item, String term) => item.label != null && item.label.toLowerCase().contains(term.toLowerCase());
   
   DatasetsList.created() : super.created();
   
