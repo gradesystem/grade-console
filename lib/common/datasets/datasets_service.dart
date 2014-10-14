@@ -13,7 +13,7 @@ abstract class DatasetService {
   }
   
   Future<List<Dataset>> getAll() {
-    return http.get("$service_url/datasets").then((json)=>new ListDelegate(json, toDataset));
+    return http.get("$service_url/datasets/fakes").then((json)=>new ListDelegate(json, toDataset));
   }
   
   Dataset toDataset(Map json) {
