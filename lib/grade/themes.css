@@ -108,6 +108,9 @@
 :host /deep/ .home /deep/ paper-tabs paper-tab::shadow #ink {
   color: "tertiary";
 }
+:host /deep/ .home /deep/ paper-menu-button::shadow core-icon {
+  color: "tertiary";
+}
 :host /deep/ .home /deep/ paper-input[focused]::shadow .floated-label .label-text {
   color: #f4f4f4;
 }
@@ -163,6 +166,9 @@
   background-color: #00bcd4;
 }
 :host /deep/ .prod /deep/ paper-tabs paper-tab::shadow #ink {
+  color: #80deea;
+}
+:host /deep/ .prod /deep/ paper-menu-button::shadow core-icon {
   color: #80deea;
 }
 :host /deep/ .prod /deep/ paper-input[focused]::shadow .floated-label .label-text {
@@ -222,6 +228,9 @@
 :host /deep/ .deck /deep/ paper-tabs paper-tab::shadow #ink {
   color: #ffdf82;
 }
+:host /deep/ .deck /deep/ paper-menu-button::shadow core-icon {
+  color: #ffdf82;
+}
 :host /deep/ .deck /deep/ paper-input[focused]::shadow .floated-label .label-text {
   color: #ffa000;
 }
@@ -279,6 +288,9 @@
 :host /deep/ .tasks /deep/ paper-tabs paper-tab::shadow #ink {
   color: #f69988;
 }
+:host /deep/ .tasks /deep/ paper-menu-button::shadow core-icon {
+  color: #f69988;
+}
 :host /deep/ .tasks /deep/ paper-input[focused]::shadow .floated-label .label-text {
   color: #cf1715;
 }
@@ -334,6 +346,9 @@
   background-color: #009587;
 }
 :host /deep/ .stage /deep/ paper-tabs paper-tab::shadow #ink {
+  color: #80cbc4;
+}
+:host /deep/ .stage /deep/ paper-menu-button::shadow core-icon {
   color: #80cbc4;
 }
 :host /deep/ .stage /deep/ paper-input[focused]::shadow .floated-label .label-text {

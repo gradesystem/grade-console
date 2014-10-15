@@ -1,0 +1,20 @@
+<link rel="import" href="../../../../packages/polymer/polymer.html">
+    
+<link rel="import" href="../../../../packages/paper_elements/paper_item.html">
+<link rel="import" href="../../../../packages/core_elements/core_icons.html">
+<link rel="import" href="../../../../packages/paper_elements/paper_menu_button.html">
+
+<polymer-element name="page-menu" layout horizontal center>
+	<template>
+	<style>
+	      paper-menu-button { 
+      font-size: 0px;
+    }
+	</style>
+    <paper-menu-button flex icon="menu" on-core-select="{{ onItemSelected }}">
+	    <paper-item label="Datasets"></paper-item>
+	    <paper-item label="Queries"></paper-item>
+    </paper-menu-button>
+	</template>
+  <script type="application/dart" src="page_menu.dart"></script>
+</polymer-element>
