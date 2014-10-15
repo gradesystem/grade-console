@@ -35,7 +35,7 @@ class Dataset extends Delegate with ListItem {
              return label;
     }
 
-    return get(id);
+    return "";
     
   }
    
