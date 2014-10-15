@@ -15,10 +15,12 @@ class TasksPage extends Polybase {
 
 @Injectable()
 class TasksPageModel {
+  
+  EventBus bus;
   TasksService service;
   TasksDatasets storage;
    
-   TasksPageModel(this.service, this.storage,  EventBus bus) {
+   TasksPageModel(this.bus, this.service, this.storage) {
      bus.on(ApplicationReady).listen((_) {
        loadAll();
      });
@@ -27,7 +29,7 @@ class TasksPageModel {
    void loadAll() {
      storage.loading = true;
      storage.selected = null;
-     service.getAll().then(_setData);
+     service.getAll().then(_setData).catchError((e)=>_onError(e, loadAll));
      
    }
    
@@ -40,6 +42,13 @@ class TasksPageModel {
        storage.loading = false;
      });
      
+   }
+   
+   void _onError(e, callback) {
+     log.severe("service error", e);
+     storage.data.clear();
+     storage.loading = false;
+     bus.fire(new ToastMessage.alert("Ops we are having some problems communicating with the server", callback));
    }
  }
 
