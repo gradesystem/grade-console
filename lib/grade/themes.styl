@@ -241,10 +241,6 @@ theme-classes = {
     "paper-tabs paper-tab::shadow #ink" : {
       color: "tertiary"
     }
-    
-    "paper-menu-button::shadow core-icon" : {
-      color: "tertiary"
-    }
 
   // inputs 
 
@@ -326,4 +322,6 @@ for theme-name,t in themes
     background: red;
     color:grade.fg;
   
-
+     core-pages > :not(.core-selected) /deep/ core-pages > .core-selected {
+       visibility: hidden;
+     }
