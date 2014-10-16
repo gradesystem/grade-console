@@ -7,13 +7,14 @@
 <polymer-element name="page-menu" layout horizontal center>
 	<template>
 	<style>
-	      paper-menu-button { 
+	  /* Fixes alignment issue */
+	  paper-menu-button { 
       font-size: 0px;
     }
 	</style>
-    <paper-menu-button flex icon="menu" on-core-select="{{ onItemSelected }}">
-	    <paper-item label="Datasets"></paper-item>
-	    <paper-item label="Queries"></paper-item>
+    <paper-menu-button flex icon="menu">
+	    <paper-item id="datasets" label="Datasets" on-tap="{{onTap}}"></paper-item>
+	    <paper-item id="queries" label="Queries" on-tap="{{onTap}}"></paper-item>
     </paper-menu-button>
 	</template>
   <script type="application/dart" src="page_menu.dart"></script>

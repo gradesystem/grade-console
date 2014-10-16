@@ -3,6 +3,16 @@ part of prod;
 @CustomTag("prod-page") 
 class ProdPage extends Polybase {
   
+  @observable
+  int subpage = 0;
+  
+  void onMenuItemSelected(event, detail, target) {
+    switch (detail) {
+      case 'datasets': subpage = 0; break;
+      case 'queries': subpage = 1; break;
+    }
+  }
+  
   ProdPage.created() : super.createWith(ProdPageModel);
   
   void refresh() {

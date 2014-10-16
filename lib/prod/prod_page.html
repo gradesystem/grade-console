@@ -4,14 +4,25 @@
 <link rel="import" href="../common/datasets/dataset_details_panel.html">
 <link rel="import" href="../common/components/grade_scaffold.html">
 
+<link rel="import" href="../../../packages/core_elements/core_pages.html">
+
 <polymer-element name="prod-page" layout horizontal>  
 
   <template>
 
-    <grade-scaffold flex>
-        <datasets-panel main flex title="DATASETS" datasets="{{datasets}}" on-refresh="{{refresh}}"></datasets-panel>
-        <dataset-details-panel side flex datasets="{{datasets}}"></dataset-details-panel>
-    </grade-scaffold>
+<!--     <core-pages flex selected={{subpage}} on-menu-item-selected={{onMenuItemSelected}}> -->
+    
+	    <grade-scaffold flex>
+	        <datasets-panel main flex title="DATASETS" datasets="{{datasets}}" on-refresh="{{refresh}}"></datasets-panel>
+	        <dataset-details-panel side flex datasets="{{datasets}}"></dataset-details-panel>
+	    </grade-scaffold>
+	    
+<!-- 	    <grade-scaffold flex> -->
+<!-- 	        <datasets-panel main flex title="QUERIES" datasets="{{datasets}}" on-refresh="{{refresh}}"></datasets-panel> -->
+<!-- 	        <dataset-details-panel side flex datasets="{{datasets}}"></dataset-details-panel> -->
+<!-- 	    </grade-scaffold> -->
+    
+<!--     </core-pages> -->
 
  </template>
  

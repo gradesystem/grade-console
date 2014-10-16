@@ -4,20 +4,32 @@
 <link rel="import" href="../../../../packages/core_elements/core_header_panel.html">
 <link rel="import" href="../../../../packages/core_elements/core_toolbar.html">
 
+<link rel="import" href="../components/page_menu.html">
+
 <link rel="import" href="datasets_list.html">
 
 <polymer-element name="datasets-panel" horizontal layout>
   <template>
+    <style>
+	    /** fixes the vertical alignment**/
+	    .title {
+	      margin-bottom: 1px;
+	    }
+	  
+	  </style>
     <core-header-panel mode="seamed" flex>
         
             <core-toolbar header> 
+        
+<!--               <page-menu></page-menu> -->
             
-              <div bolder flex>{{title}}</div>
+              <div class="title" bolder flex>{{title}}</div>
               
               <paper-input id="filter" 
                           smaller style="width:200px" 
                           label="filter" placeholder="keyword" 
                           inputValue={{kfilter}}></paper-input>
+                          
               <core-icon icon="refresh" on-click="{{refresh}}"></core-icon>
               
             </core-toolbar>
