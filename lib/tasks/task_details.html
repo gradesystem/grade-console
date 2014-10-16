@@ -1,0 +1,29 @@
+<link rel="import" href="../../../packages/polymer/polymer.html">
+<link rel="import" href="../../../packages/core_elements/core_icon.html">
+<link rel="import" href="../../../packages/paper_elements/paper_item.html">
+
+<polymer-element name="task-details" layout vertical> 
+
+  <template>
+  
+      <template repeat="{{key in item.bean.keys}}">
+      
+          <paper-item trim>
+          
+	           <core-icon self-start fg icon=check-circle-outline-blank smallicon></core-icon>
+	              
+		         <div self-start layout vertical>
+		        
+			        <div fascia-title truncate title="{{item.bean[key]}}">{{item.bean[key]}}</div>
+			        <div fascia-subtitle>{{ key | uppercase }}</div>
+		      
+		        </div>
+            
+	       </paper-item>
+	       
+      </template>    
+		
+  </template> 
+  
+  <script type="application/dart" src="../tasks.dart"></script> 
+</polymer-element>

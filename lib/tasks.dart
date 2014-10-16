@@ -13,6 +13,7 @@ import 'common.dart';
 import 'common/datasets/datasets.dart';
 
 part 'tasks/tasks_page.dart';
+part 'tasks/task_details.dart';
 part 'tasks/tasks_service.dart';
 
 final Logger log = new Logger('grade.tasks');
