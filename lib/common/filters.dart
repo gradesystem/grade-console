@@ -10,5 +10,17 @@ class Filters {
   String lowercase(String str) => str.toLowerCase();
   String format(DateTime date) => formatter.format(date);
   
+  String suffix(String str) {
+    int index = str.lastIndexOf(new RegExp(r'(/|#)'));
+    if (index<0) return "";
+    return str.substring(index+1);
+  }
+  
+  String start(String str) {
+    int index = str.lastIndexOf(new RegExp(r'(/|#)'));
+    if (index<0) return str;
+    return str.substring(0,index+1);
+  }
+  
   filter(String term, FilterFunction filterFunction) => (List items) => term.isEmpty ? items : toObservable(items.where((item)=>filterFunction(item, term)).toList());
 }
