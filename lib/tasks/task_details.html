@@ -1,36 +1,27 @@
 <link rel="import" href="../../../packages/polymer/polymer.html">
 <link rel="import" href="../../../packages/core_elements/core_icon.html">
+          <link rel="import" href="../../../packages/paper_elements/paper_input.html">
 
 <polymer-element name="task-details" layout vertical> 
 
   <template>
   
 		  <style>
-			  .item {
-					position: relative;
-					font-size: 16px;
-					box-sizing: border-box;
-					height: 48px;
-					white-space: nowrap;
+			  
+			  [limitheight] {
+			     height: 150px;
 			  }
+			  
+			  
 		  </style>
-  
-      <template repeat="{{key in item.bean | partialOrdering(orderedFields)}}">
-      
-        <div class="item" trim center horizontal layout>
-          
-          <core-icon self-start fg icon=check-circle-outline-blank smallicon></core-icon>
-              
-          <div self-start layout vertical>
-	        
-            <div fascia-title truncate title="{{item.bean[key]}}">{{item.bean[key]}}</div>
-		        <div fascia-subtitle><span>{{ key | uppercase | start}}</span><span fg>{{ key | uppercase | suffix}}</span></div>
+ 
+		  <div style="overflow-y: auto;">
+		      <template repeat="{{key in item.bean | partialOrdering(orderedFields)}}">
+		          
+		          <paper-input style="width: 100%;" disabled?={{!editable}} floatingLabel multiline?="{{isAreaField(key)}}" limitheight?="{{isAreaField(key)}}" label="{{ key | uppercase | suffix}}" value="{{item.bean[key]}}"></paper-input>
 		      
-          </div>
-          
-        </div>
-        
-      </template>    
+		      </template>   
+      </div> 
 		
   </template> 
   
