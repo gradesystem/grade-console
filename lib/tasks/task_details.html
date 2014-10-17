@@ -12,19 +12,17 @@
 			     height: 150px;
 			  }
 			  
-			  
-		.custom[disabled] /deep/ .underline {
-      border-bottom: none;
-      
-    }
-			  
-			  
+			  paper-input[disabled] /deep/ .underline {
+				  border-bottom: none;
+				}
+
 		  </style>
  
 		  <div style="overflow-y: auto;">
 		      <template repeat="{{key in item.bean | partialOrdering(orderedFields)}}">
-		          
-		          <paper-input class="custom" style="width: 100%;" disabled?={{!editable}} floatingLabel multiline?="{{isAreaField(key)}}" limitheight?="{{isAreaField(key)}}" label="{{ key | uppercase | suffix}}" value="{{item.bean[key]}}"></paper-input>
+
+		         <paper-input fascia-title style="width: 100%;" disabled?={{!editable}} floatingLabel multiline?="{{isAreaField(key)}}" limitheight?="{{isAreaField(key)}}" label="{{ key | uppercase | suffix}}" value="{{item.bean[key]}}"></paper-input>
+
 		      
 		      </template>   
       </div> 
