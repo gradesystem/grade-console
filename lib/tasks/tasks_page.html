@@ -6,15 +6,51 @@
 
 <link rel="import" href="task_details.html">
 
+<link rel="import" href="../../../packages/paper_elements/paper_button.html">
+<link rel="import" href="../../../packages/core_elements/core_tooltip.html">
+<link rel="import" href="../../../packages/core_elements/core_icon.html">
+
 <polymer-element name="tasks-page" layout vertical>  
 
   <template>
 
     <grade-scaffold flex>
-        <grade-list-panel main flex title="TASKS" listitems="{{tasks}}" on-refresh="{{refresh}}"></grade-list-panel>
+        
+        <grade-list-panel main flex title="TASKS" listitems="{{tasks}}" on-refresh="{{refresh}}">
+        
+          <div bottombar layout horizontal center-justified>
+                
+                <core-tooltip position="top">
+                  
+                   <div tip>
+                      <core-icon icon="info">
+                      </core-icon><span>coming soon...</span>
+                   </div>
+                    
+                  <paper-button button raisedButton label="add"></paper-button>
+                  
+                </core-tooltip>    
+                
+               <paper-button button raisedButton disabled label="remove">
+               </paper-button>
+          
+            </div>
+        
+        </grade-list-panel>
+ 
+ 
          <details-scaffold side flex>
-            <task-details item="{{tasks.selected}}" spaced></task-details> 
+            
+            <task-details body item="{{tasks.selected}}" spaced></task-details> 
+             
+             <div bottombar layout horizontal center-justified>
+                    
+               <paper-button button bg raisedButton label="edit"></paper-button>
+                
+            </div>
+            
         </details-scaffold>
+ 
     </grade-scaffold>
 		
  </template>

@@ -7,7 +7,7 @@
 <link rel="import" href="../../../../packages/paper_elements/paper_tabs.html">
 <link rel="import" href="../../../../packages/paper_elements/paper_tab.html">
 
-<polymer-element name="details-scaffold" horizontal layout noscript>
+<polymer-element name="details-scaffold" vertical layout noscript>
   <template>
   
         <core-header-panel mode="seamed" flex>
@@ -24,11 +24,15 @@
             
             <div fit layout vertical style="min-height:500px">
             
-              <content></content>
+              <content select="[body]"></content>
             
             </div>
-                        
+            
         </core-header-panel>
+  
+        <div spaced>
+          <content select="[bottombar]"></content>
+       </div>
   
   </template>
   

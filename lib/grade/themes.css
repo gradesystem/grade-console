@@ -108,6 +108,16 @@
 :host /deep/ .home /deep/ paper-tabs paper-tab::shadow #ink {
   color: "tertiary";
 }
+:host /deep/ .home /deep/ [button] {
+  margin-left: 2px;
+  margin-right: 2px;
+  font-size: smaller;
+  background: #26699a;
+  color: #fff;
+}
+:host /deep/ .home /deep/ [paper-button::shadow #ripple] {
+  color: #ffff7a;
+}
 :host /deep/ .home /deep/ paper-input[focused]::shadow .floated-label .label-text {
   color: #f4f4f4;
 }
@@ -164,6 +174,16 @@
 }
 :host /deep/ .prod /deep/ paper-tabs paper-tab::shadow #ink {
   color: #80deea;
+}
+:host /deep/ .prod /deep/ [button] {
+  margin-left: 2px;
+  margin-right: 2px;
+  font-size: smaller;
+  background: #00bcd4;
+  color: #fff;
+}
+:host /deep/ .prod /deep/ [paper-button::shadow #ripple] {
+  color: #ffff7a;
 }
 :host /deep/ .prod /deep/ paper-input[focused]::shadow .floated-label .label-text {
   color: #0097a7;
@@ -222,6 +242,16 @@
 :host /deep/ .deck /deep/ paper-tabs paper-tab::shadow #ink {
   color: #ffdf82;
 }
+:host /deep/ .deck /deep/ [button] {
+  margin-left: 2px;
+  margin-right: 2px;
+  font-size: smaller;
+  background: #ffc107;
+  color: #fff;
+}
+:host /deep/ .deck /deep/ [paper-button::shadow #ripple] {
+  color: #ffff7a;
+}
 :host /deep/ .deck /deep/ paper-input[focused]::shadow .floated-label .label-text {
   color: #ffa000;
 }
@@ -279,6 +309,16 @@
 :host /deep/ .tasks /deep/ paper-tabs paper-tab::shadow #ink {
   color: #f69988;
 }
+:host /deep/ .tasks /deep/ [button] {
+  margin-left: 2px;
+  margin-right: 2px;
+  font-size: smaller;
+  background: #e41c23;
+  color: #fff;
+}
+:host /deep/ .tasks /deep/ [paper-button::shadow #ripple] {
+  color: #ffff7a;
+}
 :host /deep/ .tasks /deep/ paper-input[focused]::shadow .floated-label .label-text {
   color: #cf1715;
 }
@@ -335,6 +375,16 @@
 }
 :host /deep/ .stage /deep/ paper-tabs paper-tab::shadow #ink {
   color: #80cbc4;
+}
+:host /deep/ .stage /deep/ [button] {
+  margin-left: 2px;
+  margin-right: 2px;
+  font-size: smaller;
+  background: #009587;
+  color: #fff;
+}
+:host /deep/ .stage /deep/ [paper-button::shadow #ripple] {
+  color: #ffff7a;
 }
 :host /deep/ .stage /deep/ paper-input[focused]::shadow .floated-label .label-text {
   color: #207368;

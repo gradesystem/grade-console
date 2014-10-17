@@ -6,8 +6,9 @@
 
 <link rel="import" href="grade_list.html">
 
-<polymer-element name="grade-list-panel" horizontal layout>
+<polymer-element name="grade-list-panel" vertical layout>
   <template>
+  
     <style>
 	    /** fixes the vertical alignment**/
 	    .title {
@@ -24,7 +25,7 @@
               <div class="title" bolder flex>{{title}}</div>
               
               <paper-input id="filter" 
-                          smaller style="width:200px" 
+                          smaller style="width:150px" 
                           label="filter" placeholder="keyword" 
                           inputValue={{kfilter}}></paper-input>
                           
@@ -34,13 +35,18 @@
               
             </core-toolbar>
             
-            <div fit layout vertical spaced>
+            <div small-spaced>
  
-              <grade-list listitems="{{listitems}}" searchTerm="{{kfilter}}" flex></grade-list>
-            
+              <grade-list listitems="{{listitems}}" searchTerm="{{kfilter}}"></grade-list>
+
             </div>
-                        
+            
      </core-header-panel>
+     
+     <div spaced>
+       <content select="[bottombar]"></content>
+      </div>
+  
   </template>
   
   <script type="application/dart" src="lists.dart"></script> 
