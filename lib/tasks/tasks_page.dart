@@ -13,7 +13,6 @@ class TasksPage extends Polybase {
   }
   
   void onEdit() {
-    print('ON EDIT');
     editable = !editable;
   }
   
