@@ -10,7 +10,7 @@ class TasksPage extends Polybase {
   
   TasksPageModel get tasksModel => model as TasksPageModel;
   
-  TasksDatasets get datasets => tasksModel.storage;
+  Tasks get tasks => tasksModel.storage;
 }
 
 @Injectable()
@@ -18,7 +18,7 @@ class TasksPageModel {
   
   EventBus bus;
   TasksService service;
-  TasksDatasets storage;
+  Tasks storage;
    
    TasksPageModel(this.bus, this.service, this.storage) {
      bus.on(ApplicationReady).listen((_) {
@@ -33,12 +33,12 @@ class TasksPageModel {
      
    }
    
-   void _setData(List<Dataset> graphs) {
+   void _setData(List<Task> tasks) {
 
      //simulate slowness
      new Timer(new Duration(seconds: 1), (){
        storage.data.clear();
-       storage.data.addAll(graphs);
+       storage.data.addAll(tasks);
        storage.loading = false;
      });
      
@@ -52,7 +52,3 @@ class TasksPageModel {
    }
  }
 
- @Injectable()
- class TasksDatasets extends Datasets {
-   
- }

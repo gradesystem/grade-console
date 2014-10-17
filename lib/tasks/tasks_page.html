@@ -1,6 +1,6 @@
 <link rel="import" href="../../../packages/polymer/polymer.html">
 
-<link rel="import" href="../common/datasets/datasets_panel.html">
+<link rel="import" href="../common/lists/grade_list_panel.html">
 <link rel="import" href="../common/components/grade_scaffold.html">
 <link rel="import" href="../common/components/details_scaffold.html">
 
@@ -11,9 +11,9 @@
   <template>
 
     <grade-scaffold flex>
-        <datasets-panel main flex title="TASKS" datasets="{{datasets}}" on-refresh="{{refresh}}"></datasets-panel>
+        <grade-list-panel main flex title="TASKS" listitems="{{tasks}}" on-refresh="{{refresh}}"></grade-list-panel>
          <details-scaffold side flex>
-            <task-details item="{{datasets.selected}}" spaced></task-details> 
+            <task-details item="{{tasks.selected}}" spaced></task-details> 
         </details-scaffold>
     </grade-scaffold>
 		

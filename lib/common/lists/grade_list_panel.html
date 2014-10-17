@@ -4,11 +4,9 @@
 <link rel="import" href="../../../../packages/core_elements/core_header_panel.html">
 <link rel="import" href="../../../../packages/core_elements/core_toolbar.html">
 
-<link rel="import" href="../components/page_menu.html">
+<link rel="import" href="grade_list.html">
 
-<link rel="import" href="datasets_list.html">
-
-<polymer-element name="datasets-panel" horizontal layout>
+<polymer-element name="grade-list-panel" horizontal layout>
   <template>
     <style>
 	    /** fixes the vertical alignment**/
@@ -21,7 +19,7 @@
         
             <core-toolbar header> 
         
-<!--               <page-menu></page-menu> -->
+              <content select="[menu]"></content>
             
               <div class="title" bolder flex>{{title}}</div>
               
@@ -32,18 +30,20 @@
                           
               <core-icon icon="refresh" on-click="{{refresh}}"></core-icon>
               
+              <content select="[toolbar]"></content>
+              
             </core-toolbar>
             
             <div fit layout vertical spaced>
  
-              <datasets-list datasets="{{datasets}}" searchTerm="{{kfilter}}" flex></datasets-list>
+              <grade-list listitems="{{listitems}}" searchTerm="{{kfilter}}" flex></grade-list>
             
             </div>
                         
      </core-header-panel>
   </template>
   
-  <script type="application/dart" src="datasets.dart"></script> 
+  <script type="application/dart" src="lists.dart"></script> 
   
 </polymer-element>
  

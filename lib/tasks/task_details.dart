@@ -4,7 +4,7 @@ part of tasks;
 class TaskDetails extends PolymerElement with Filters {
   
   @published
-  Dataset item;
+  Task item;
   
   TaskDetails.created() : super.created();
   

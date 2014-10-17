@@ -16,7 +16,7 @@ class Dataset extends Delegate with ListItem {
                                       "http://purl.org/dc/terms/date"
                                       ];
   
-  String get label {
+  String get title {
                     
       for (String lbl in labels) {
          String label = get(lbl);
@@ -27,7 +27,7 @@ class Dataset extends Delegate with ListItem {
       return get(id);
    }
   
-  String get date {
+  String get subTitle {
     
     for (String lbl in dates) {
        String label = get(lbl);
@@ -42,23 +42,6 @@ class Dataset extends Delegate with ListItem {
 }
 
 
-class ListItem {
- 
-  bool selected;
-  
-  dynamic get self => this;
-}
-
-
-abstract class Datasets extends Observable {
-  
-  @observable
-  Dataset selected = null;
-  
-  @observable
-  ObservableList<Dataset> data = new ObservableList();
-  
-  @observable
-  bool loading = false;
+abstract class Datasets extends ListItems<Dataset> {
 }
 

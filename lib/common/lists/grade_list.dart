@@ -1,19 +1,19 @@
-part of datasets;
+part of lists;
 
-@CustomTag("datasets-list") 
-class DatasetsList extends PolymerElement with Filters {
+@CustomTag("grade-list") 
+class GradeList extends PolymerElement with Filters {
   
   @published
   String searchTerm = '';
   
   @published
-  Datasets datasets;
+  ListItems listitems;
   
   CoreList list;
   
-  FilterFunction itemFilter = (item, String term) => item.label != null && item.label.toLowerCase().contains(term.toLowerCase());
+  FilterFunction itemFilter = (ListItem item, String term) => item.title != null && item.title.toLowerCase().contains(term.toLowerCase());
   
-  DatasetsList.created() : super.created();
+  GradeList.created() : super.created();
   
   void ready() {
     list = $['list'] as CoreList;
@@ -25,12 +25,12 @@ class DatasetsList extends PolymerElement with Filters {
       
       list.selectItem(0);
       //we are not notified about the selection
-      datasets.selected = list.selection;
+      listitems.selected = list.selection;
     }
   }
   
   void selectDataset(event) {
-    datasets.selected = event.detail.data;
+    listitems.selected = event.detail.data;
   }
  
 }
