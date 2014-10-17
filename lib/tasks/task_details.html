@@ -1,26 +1,35 @@
 <link rel="import" href="../../../packages/polymer/polymer.html">
 <link rel="import" href="../../../packages/core_elements/core_icon.html">
-<link rel="import" href="../../../packages/paper_elements/paper_item.html">
 
 <polymer-element name="task-details" layout vertical> 
 
   <template>
   
+		  <style>
+			  .item {
+					position: relative;
+					font-size: 16px;
+					box-sizing: border-box;
+					height: 48px;
+					white-space: nowrap;
+			  }
+		  </style>
+  
       <template repeat="{{key in item.bean.keys}}">
       
-          <paper-item trim>
+        <div class="item" trim center horizontal layout>
           
-	           <core-icon self-start fg icon=check-circle-outline-blank smallicon></core-icon>
-	              
-		         <div self-start layout vertical>
-		        
-			        <div fascia-title truncate title="{{item.bean[key]}}">{{item.bean[key]}}</div>
-			        <div fascia-subtitle><span>{{ key | uppercase | start}}</span><span fg>{{ key | uppercase | suffix}}</span></div>
+          <core-icon self-start fg icon=check-circle-outline-blank smallicon></core-icon>
+              
+          <div self-start layout vertical>
+	        
+            <div fascia-title truncate title="{{item.bean[key]}}">{{item.bean[key]}}</div>
+		        <div fascia-subtitle><span>{{ key | uppercase | start}}</span><span fg>{{ key | uppercase | suffix}}</span></div>
 		      
-		        </div>
-            
-	       </paper-item>
-	       
+          </div>
+          
+        </div>
+        
       </template>    
 		
   </template> 
