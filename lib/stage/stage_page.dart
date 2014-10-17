@@ -14,37 +14,11 @@ class StagePage extends Polybase {
 }
 
 @Injectable()
-class StagePageModel {
-   StageService service;
-   StageDatasets storage;
-   
-   StagePageModel(this.service, this.storage,  EventBus bus) {
-     bus.on(ApplicationReady).listen((_) {
-       loadAll();
-     });
-   }
-  
-   void loadAll() {
-     storage.loading = true;
-     storage.selected = null;
-     service.getAll().then(_setData);
-     
-   }
-   
-   void _setData(List<Dataset> graphs) {
+class StagePageModel extends PageModel<Dataset> {
+   StagePageModel(EventBus bus, StageService service, StageDatasets storage) : super(bus, service, storage);
+}
 
-     //simulate slowness
-     new Timer(new Duration(seconds: 1), (){
-       storage.data.clear();
-       storage.data.addAll(graphs);
-       storage.loading = false;
-     });
-     
-   }
- }
-
- @Injectable()
- class StageDatasets extends Datasets {
-   
- }
+@Injectable()
+class StageDatasets extends Datasets {
+}
 

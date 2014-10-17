@@ -9,8 +9,8 @@ import 'package:di/annotations.dart';
 import 'package:event_bus/event_bus.dart';
 
 import 'common.dart';
-import 'common/datasets/datasets.dart';
 import 'common/lists/lists.dart';
+import 'common/pages/pages.dart';
 
 part 'tasks/tasks_page.dart';
 part 'tasks/task_details.dart';

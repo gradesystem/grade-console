@@ -1,7 +1,5 @@
 library prod;
 
-import 'dart:async';
-
 import 'package:polymer/polymer.dart';
 import 'package:logging/logging.dart';
 import 'package:di/di.dart';
@@ -10,7 +8,7 @@ import 'package:event_bus/event_bus.dart';
 
 import 'common.dart';
 import 'common/datasets/datasets.dart';
-import 'common/lists/lists.dart';
+import 'common/pages/pages.dart';
 
 part 'prod/prod_page.dart';
 part 'prod/prod_service.dart';
