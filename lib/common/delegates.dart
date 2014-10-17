@@ -14,6 +14,8 @@ abstract class Delegate {
   
   get(String l) => _bean[l];
   getDate(String l) => JSON_DATE_FORMAT.parse(get(l));
+  
+  set(String l, value) => _bean[l] = value;
     
   List _all(String l, Generator gen) => new ListDelegate(get(l),gen);
   
