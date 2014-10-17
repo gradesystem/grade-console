@@ -15,7 +15,7 @@
 			  }
 		  </style>
   
-      <template repeat="{{key in item.bean.keys}}">
+      <template repeat="{{key in item.bean | partialOrdering(orderedFields)}}">
       
         <div class="item" trim center horizontal layout>
           
