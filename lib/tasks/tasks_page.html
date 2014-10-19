@@ -36,11 +36,11 @@
  
          <details-scaffold side flex>
             
-            <task-details id="details" body item="{{tasks.selected}}" spaced></task-details> 
+            <task-details body item="{{tasks.selected}}" editable="{{editable}}" spaced></task-details> 
              
              <div bottombar layout horizontal center-justified>
                     
-               <paper-button button bg raisedButton label="edit" on-click="{{make_editable}}"></paper-button>
+               <paper-button button bg raisedButton label="edit" on-click="{{onEdit}}"></paper-button>
                 
             </div>
             

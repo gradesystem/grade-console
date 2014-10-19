@@ -2,19 +2,23 @@ part of tasks;
 
 @CustomTag("tasks-page") 
 class TasksPage extends Polybase {
+  
+  @published
+  bool editable = false;
+  
   TasksPage.created() : super.createWith(TasksPageModel);
   
   void refresh() {
     tasksModel.loadAll();
   }
   
+  void onEdit() {
+    editable = !editable;
+  }
+  
   TasksPageModel get tasksModel => model as TasksPageModel;
   
   Tasks get tasks => tasksModel.storage;
-  
-  make_editable() {
-    this.$['details'].editable=true;
-  }
 }
 
 @Injectable()
