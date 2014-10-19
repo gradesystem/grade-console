@@ -63,18 +63,6 @@
 :host /deep/ [bg-selected] /deep/ core-icon {
   color: #ffff7a;
 }
-:host /deep/ [fascia-title] {
-  font-weight: bolder;
-}
-:host /deep/ [fascia-subtitle] {
-  font-size: x-small;
-}
-:host /deep/ [smallicon] {
-  margin: 5px;
-  height: 12px;
-  width: 12px;
-  min-width: 12px;
-}
 .home-scaffold {
   background: #26699a;
   color: #fff;
@@ -118,17 +106,11 @@
 :host /deep/ .home /deep/ [paper-button::shadow #ripple] {
   color: #ffff7a;
 }
-:host /deep/ .home /deep/ paper-input[focused]::shadow .floated-label .label-text {
-  color: #f4f4f4;
-}
 :host /deep/ .home /deep/ paper-input::shadow .focused-underline {
-  background-color: #26699a;
+  background-color: "tertiary";
 }
 :host /deep/ .home /deep/ paper-input::shadow .cursor {
-  background-color: #26699a;
-}
-:host /deep/ .home /deep/ paper-input.invalid[focused]::shadow .floated-label {
-  color: #e41c23;
+  background: "tertiary";
 }
 :host /deep/ .home /deep/ paper-input[focused]::shadow .error-text {
   color: #e41c23;
@@ -185,17 +167,11 @@
 :host /deep/ .prod /deep/ [paper-button::shadow #ripple] {
   color: #ffff7a;
 }
-:host /deep/ .prod /deep/ paper-input[focused]::shadow .floated-label .label-text {
-  color: #0097a7;
-}
 :host /deep/ .prod /deep/ paper-input::shadow .focused-underline {
-  background-color: #00bcd4;
+  background-color: #80deea;
 }
 :host /deep/ .prod /deep/ paper-input::shadow .cursor {
-  background-color: #00bcd4;
-}
-:host /deep/ .prod /deep/ paper-input.invalid[focused]::shadow .floated-label {
-  color: #e41c23;
+  background: #80deea;
 }
 :host /deep/ .prod /deep/ paper-input[focused]::shadow .error-text {
   color: #e41c23;
@@ -252,17 +228,11 @@
 :host /deep/ .deck /deep/ [paper-button::shadow #ripple] {
   color: #ffff7a;
 }
-:host /deep/ .deck /deep/ paper-input[focused]::shadow .floated-label .label-text {
-  color: #ffa000;
-}
 :host /deep/ .deck /deep/ paper-input::shadow .focused-underline {
-  background-color: #ffc107;
+  background-color: #ffdf82;
 }
 :host /deep/ .deck /deep/ paper-input::shadow .cursor {
-  background-color: #ffc107;
-}
-:host /deep/ .deck /deep/ paper-input.invalid[focused]::shadow .floated-label {
-  color: #e41c23;
+  background: #ffdf82;
 }
 :host /deep/ .deck /deep/ paper-input[focused]::shadow .error-text {
   color: #e41c23;
@@ -319,17 +289,11 @@
 :host /deep/ .tasks /deep/ [paper-button::shadow #ripple] {
   color: #ffff7a;
 }
-:host /deep/ .tasks /deep/ paper-input[focused]::shadow .floated-label .label-text {
-  color: #cf1715;
-}
 :host /deep/ .tasks /deep/ paper-input::shadow .focused-underline {
-  background-color: #e41c23;
+  background-color: #f69988;
 }
 :host /deep/ .tasks /deep/ paper-input::shadow .cursor {
-  background-color: #e41c23;
-}
-:host /deep/ .tasks /deep/ paper-input.invalid[focused]::shadow .floated-label {
-  color: #e41c23;
+  background: #f69988;
 }
 :host /deep/ .tasks /deep/ paper-input[focused]::shadow .error-text {
   color: #e41c23;
@@ -386,17 +350,11 @@
 :host /deep/ .stage /deep/ [paper-button::shadow #ripple] {
   color: #ffff7a;
 }
-:host /deep/ .stage /deep/ paper-input[focused]::shadow .floated-label .label-text {
-  color: #207368;
-}
 :host /deep/ .stage /deep/ paper-input::shadow .focused-underline {
-  background-color: #009587;
+  background-color: #80cbc4;
 }
 :host /deep/ .stage /deep/ paper-input::shadow .cursor {
-  background-color: #009587;
-}
-:host /deep/ .stage /deep/ paper-input.invalid[focused]::shadow .floated-label {
-  color: #e41c23;
+  background: #80cbc4;
 }
 :host /deep/ .stage /deep/ paper-input[focused]::shadow .error-text {
   color: #e41c23;

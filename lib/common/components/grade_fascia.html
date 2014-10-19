@@ -1,0 +1,47 @@
+<link rel="import" href="../../../../packages/polymer/polymer.html">
+
+
+<link rel="import" href="../../../../packages/core_elements/core_icon.html">
+<link rel="import" href="../../../../packages/paper_elements/paper_input.html">
+
+
+<polymer-element name="grade-fascia" attributes="title" noscript>
+
+    <template>
+
+
+      <style>  
+      
+        [fascia-title]  {
+          font-weight : bolder
+        }
+    
+        [fascia-subtitle] {
+          font-size : x-small
+        }
+      
+      </style>
+      
+        <div layout vertical >
+        
+           <template if="{{title.length>0 }}">
+              <div truncate fascia-title>
+	            <span truncate fascia-title>{{title}}</span>
+	           </div>
+           </template>
+           <template if="{{title.length==0 }}">
+             <div truncate fascia-title>
+              <content select="[fascia-title]"></content>
+             </div>
+           </template>
+
+           <div truncate fascia-subtitle>
+             <content select="[fascia-subtitle]"></content>
+           </div>
+             
+        </div>
+    
+    </template>
+
+
+</polymer-element>

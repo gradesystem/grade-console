@@ -1,0 +1,64 @@
+<link rel="import" href="../../../../packages/polymer/polymer.html">
+
+
+<link rel="import" href="../../../../packages/paper_elements/paper_input.html">
+
+
+<polymer-element name="grade-input" attributes="value, label, multiline, disabled" noscript>
+
+    <template>
+
+
+      <style>   
+      
+        /* spacing */
+      
+        :host paper-input, 
+        :host paper-input::shadow .mirror-text, 
+        :host paper-input::shadow .label  
+        
+        {
+          padding: 0px;
+          width: 100%;
+        }
+
+        
+        :host paper-input::shadow .input-container {
+          top:0;
+          bottom:0;
+        }
+        
+        /* underline */
+        
+        :host paper-input::shadow .underline {
+          height:1px
+        }
+        
+        :host paper-input::shadow .unfocused-underline {
+          background:lightgrey
+        }
+        
+        :host paper-input[disabled]::shadow .underline {
+          border:none
+        }
+        
+      
+       </style>
+      
+        <div>
+
+		        <paper-input truncate 
+		                disabled?="{{disabled}}"
+		                label="{{label}}?" 
+		                multiline="{{multiline}}" 
+		                height?="{{multiline}}" 
+		                value="{{value}}">
+		        </paper-input>
+		        
+             
+        </div>
+    
+    </template>
+
+
+</polymer-element>

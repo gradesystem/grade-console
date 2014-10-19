@@ -1,6 +1,8 @@
 <link rel="import" href="../../../packages/polymer/polymer.html">
-<link rel="import" href="../../../packages/core_elements/core_icon.html">
-          <link rel="import" href="../../../packages/paper_elements/paper_input.html">
+
+<link rel="import" href="../common/components/grade_input.html">
+<link rel="import" href="../common/components/grade_item.html">
+<link rel="import" href="../common/components/grade_fascia.html">
 
 <polymer-element name="task-details" layout vertical> 
 
@@ -8,23 +10,34 @@
   
 		  <style>
 			  
-			  [limitheight] {
+			  grade-input::shadow [multiheight] {
 			     height: 150px;
 			  }
-			  
-			  paper-input[disabled] /deep/ .underline {
-				  border-bottom: none;
-				}
-				
-      
-    }
 			  
 		  </style>
  
 		  <div style="overflow-y: auto;">
+		  
 		      <template repeat="{{key in item.bean | partialOrdering(orderedFields)}}">
 		          
-		          <paper-input fascia-title style="width: 100%;" disabled?={{!editable}} floatingLabel multiline?="{{isAreaField(key)}}" limitheight?="{{isAreaField(key)}}" label="{{ key | uppercase | suffix}}" value="{{item.bean[key]}}"></paper-input>
+ 		          <grade-item icon=check-circle-outline-blank smallicon="true">
+                  
+                  <grade-fascia>
+                  
+                     <grade-input fascia-title 
+                                  disabled="{{!editable}}" 
+                                  multiline?="{{isAreaField(key)}}" 
+                                  label="{{ key | uppercase | suffix}}" 
+                                  value="{{item.bean[key]}}">
+                     </grade-input>
+                           
+                    <div fascia-subtitle>
+	                      <span>{{ key | uppercase | start}}</span><span fg>{{ key | uppercase | suffix}}</span>
+	                   </div>
+                  
+                   </grade-fascia>   
+                  
+              </grade-item>
 		      
 		      </template>   
       </div> 

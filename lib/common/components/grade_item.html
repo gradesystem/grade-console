@@ -1,0 +1,41 @@
+<link rel="import" href="../../../../packages/polymer/polymer.html">
+
+
+<link rel="import" href="../../../../packages/core_elements/core_icon.html">
+
+
+<polymer-element name="grade-item" attributes="icon,smallicon" noscript>
+
+    <template>
+
+
+      <style>  
+      
+        :host [item] {
+          margin-bottom:15px;
+        } 
+        
+       :host core-icon[smallicon] {
+          height: 12px;
+          font width: 12px;
+          min-width: 12px;
+        }
+        
+        :host core-icon {
+          margin: 5px;
+        }
+      
+      </style>
+      
+        <div item layout horizontal >
+
+           <core-icon self-start fg icon="{{icon}}" smallicon?="{{smallicon}}"></core-icon>
+		      
+		       <content></content>
+             
+        </div>
+    
+    </template>
+
+
+</polymer-element>

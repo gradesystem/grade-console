@@ -1,22 +1,24 @@
 <link rel="import" href="../../../../packages/polymer/polymer.html">
 <link rel="import" href="../../../../packages/paper_elements/paper_item.html">
 
+<link rel="import" href="../components/grade_item.html">
+<link rel="import" href="../components/grade_fascia.html">
+
 <polymer-element name="grade-list-item"  horizontal layout>
 	
   <template>
   
     <paper-item flex trim>
+    
+      <grade-item icon=chevron-right>
       
-      <core-icon self-start icon=chevron-right></core-icon>
-      
-	    <div self-start 
-	      layout vertical >
-	      
-	      <div truncate bolder>{{item.title | uppercase }}</div>
-		    <div truncate small>{{item.subTitle}}</div>
-	    
-	    </div>
-	    
+        <grade-fascia>
+          <div fascia-title>{{item.title | uppercase }}</div>
+	        <div fascia-subtitle>{{item.subTitle}}</div>
+        </grade-fascia>
+        
+      </grade-item>
+      	    
     </paper-item>
   
   </template>

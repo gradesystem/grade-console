@@ -1,34 +1,23 @@
 <link rel="import" href="../../../../packages/polymer/polymer.html">
 <link rel="import" href="../../../../packages/core_elements/core_icon.html">
 
+<link rel="import" href="../components/grade_item.html">
+<link rel="import" href="../components/grade_fascia.html">
+
 <polymer-element name="dataset-details" layout vertical> 
 
   <template>
   
-      <style>
-        .item {
-          position: relative;
-          font-size: 16px;
-          box-sizing: border-box;
-          height: 48px;
-          white-space: nowrap;
-        }
-      </style>
-  
       <template repeat="{{key in item.bean.keys}}">
       
-         <div class="item" trim center horizontal layout>
+          <grade-item icon=check-circle-outline-blank smallicon=true>
           
-	           <core-icon self-start fg icon=check-circle-outline-blank smallicon></core-icon>
-	              
-		         <div self-start layout vertical>
-		        
-			        <div fascia-title truncate title="{{item.bean[key]}}">{{item.bean[key]}}</div>
-			        <div fascia-subtitle><span>{{ key | uppercase | start}}</span><span fg>{{ key | uppercase | suffix}}</span></div>
-		      
-		        </div>
-            
-	       </div>
+            <grade-fascia>
+                <span fascia-title>{{item.bean[key]}}</span>
+                <div fascia-subtitle><span>{{ key | uppercase | start}}</span><span fg>{{ key | uppercase | suffix}}</span></div>
+            </grade-fascia>
+              
+          </grade-item>
 	       
       </template>    
 		

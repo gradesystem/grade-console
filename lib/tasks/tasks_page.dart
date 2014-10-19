@@ -11,6 +11,10 @@ class TasksPage extends Polybase {
   TasksPageModel get tasksModel => model as TasksPageModel;
   
   Tasks get tasks => tasksModel.storage;
+  
+  make_editable() {
+    this.$['details'].editable=true;
+  }
 }
 
 @Injectable()
