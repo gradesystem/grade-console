@@ -2,6 +2,20 @@ part of stage;
 
 @CustomTag("stage-page") 
 class StagePage extends Polybase {
+  
+  @observable
+  int subpage = 0;
+  
+  @observable
+  StageQueries queries = new StageQueries();
+  
+  void onMenuItemSelected(event, detail, target) {
+    switch (detail) {
+      case 'datasets': subpage = 0; break;
+      case 'queries': subpage = 1; break;
+    }
+  }
+  
   StagePage.created() : super.createWith(StagePageModel);
   
   void refresh() {
@@ -20,5 +34,8 @@ class StagePageModel extends PageModel<Dataset> {
 
 @Injectable()
 class StageDatasets extends Datasets {
+}
+
+class StageQueries extends Queries {
 }
 

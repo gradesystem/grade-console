@@ -3,15 +3,32 @@
 <link rel="import" href="../common/lists/grade_list_panel.html">
 <link rel="import" href="../common/datasets/dataset_details_panel.html">
 <link rel="import" href="../common/components/grade_scaffold.html">
+<link rel="import" href="../common/components/page_menu.html">
+<link rel="import" href="../common/queries/query_details_panel.html">
+
+<link rel="import" href="../../../packages/core_elements/core_pages.html">
 
 <polymer-element name="stage-page" layout vertical>  
 
   <template>
+  
+    <core-pages flex selected={{subpage}} on-menu-item-selected={{onMenuItemSelected}}>
 
     <grade-scaffold flex>
-        <grade-list-panel main flex title="DATASETS" listitems="{{datasets}}" on-refresh="{{refresh}}"></grade-list-panel>
+        <grade-list-panel main flex title="DATASETS" listitems="{{datasets}}" on-refresh="{{refresh}}">
+        <page-menu menu></page-menu>
+        </grade-list-panel>
         <dataset-details-panel side flex datasets="{{datasets}}"></dataset-details-panel>
     </grade-scaffold>
+          
+      <grade-scaffold flex>
+          <grade-list-panel main flex title="QUERIES" listitems="{{queries}}" on-refresh="{{refresh}}">
+          <page-menu menu></page-menu>
+          </grade-list-panel>
+          <query-details-panel side flex queries="{{queries}}"></query-details-panel>
+      </grade-scaffold>
+    
+    </core-pages>
 
  </template>
  

@@ -1,0 +1,18 @@
+<link rel="import" href="../../../../packages/polymer/polymer.html">
+
+<link rel="import" href="query_details.html">
+
+<link rel="import" href="../components/details_scaffold.html">
+
+<polymer-element name="query-details-panel" horizontal layout>
+  <template>
+  
+	  <details-scaffold flex>
+	    <query-details body item="{{queries.selected}}" spaced></query-details> 
+	  </details-scaffold>
+  
+  </template>
+  
+  <script type="application/dart" src="queries.dart"></script> 
+  
+</polymer-element>
