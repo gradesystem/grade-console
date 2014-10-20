@@ -5,6 +5,7 @@
 <link rel="import" href="../../../../packages/core_elements/core_toolbar.html">
 
 <link rel="import" href="grade_list.html">
+<link rel="import" href="../components/grade_button.html">
 
 <polymer-element name="grade-list-panel" vertical layout>
   <template>
@@ -28,10 +29,11 @@
                           smaller style="width:150px" 
                           label="filter" placeholder="keyword" 
                           inputValue={{kfilter}}></paper-input>
-                          
-              <core-icon icon="refresh" on-click="{{refresh}}"></core-icon>
               
-              <content select="[toolbar]"></content>
+              <div layout horizontal end-justified>            
+                <grade-button icon="refresh" on-click="{{refresh}}"></grade-button>
+                <content select="[toolbar]"></content>
+              </div>
               
             </core-toolbar>
             

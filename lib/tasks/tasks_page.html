@@ -19,17 +19,8 @@
         
         <grade-list-panel main flex title="TASKS" listitems="{{tasks}}" on-refresh="{{refresh}}">
         
-          <div bottombar layout horizontal center-justified>
-                
-                <core-tooltip position="top" label>
-                                      
-                </core-tooltip>    
-               
-               <grade-button small-spaced label="add"></grade-button>
-               <grade-button small-spaced disabled label="remove"></grade-button>
+         <grade-button toolbar icon="add"></grade-button>
                                        
-            </div>
-        
         </grade-list-panel>
  
  
@@ -37,11 +28,8 @@
             
             <task-details body item="{{tasks.selected}}" editable="{{editable}}" spaced></task-details> 
              
-             <div bottombar layout horizontal center-justified>
-                    
-               <grade-button label="edit" on-click="{{onEdit}}"></grade-button>
-                
-            </div>
+            <grade-button toolbar icon="create" on-click="{{onEdit}}"></grade-button>
+              
             
         </details-scaffold>
  
