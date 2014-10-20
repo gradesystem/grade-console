@@ -9,6 +9,15 @@
 <polymer-element name="grade-button" attributes="icon,label" noscript>
 
     <template>
+    
+        <style>
+        
+            :host paper-icon-button::shadow #icon  {
+              margin:0px;
+              
+            }
+        
+        </style>
 
         <core-tooltip label={{label}} position="bottom">
           <paper-icon-button fg icon={{icon}}></paper-icon-button>

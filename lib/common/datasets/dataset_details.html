@@ -8,20 +8,24 @@
 
   <template>
   
-      <template repeat="{{key in item.bean.keys}}">
+    <div style="overflow-y: auto;">
       
-          <grade-item icon=check-circle-outline-blank smallicon=true>
-          
-            <grade-fascia>
-                <span fascia-title>{{item.bean[key]}}</span>
-                <div fascia-subtitle><span>{{ key | uppercase | start}}</span><span fg>{{ key | uppercase | suffix}}</span></div>
-            </grade-fascia>
-              
-          </grade-item>
-	       
-      </template>    
-		
+	      <template repeat="{{key in item.bean.keys}}">
+	      
+	          <grade-item icon=check-circle-outline-blank smallicon=true>
+	          
+	            <grade-fascia>
+	                <span fascia-title>{{item.bean[key]}}</span>
+	                <div fascia-subtitle><span>{{ key | uppercase | start}}</span><span fg>{{ key | uppercase | suffix}}</span></div>
+	            </grade-fascia>
+	              
+	          </grade-item>
+		       
+	      </template>    
+		</div>
+  
   </template> 
   
   <script type="application/dart" src="datasets.dart"></script> 
+  
 </polymer-element>
