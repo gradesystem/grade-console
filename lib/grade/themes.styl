@@ -164,7 +164,13 @@ grade-classes = {
      font-size :x-small
   }
   
-  "[truncate]" : {
+  "[truncate] *" : {
+    white-space: nowrap
+    overflow: hidden
+    text-overflow: ellipsis
+  }
+  
+  "[truncate] /deep/ *" : {
     white-space: nowrap
     overflow: hidden
     text-overflow: ellipsis
@@ -310,7 +316,6 @@ for theme-name,t in themes
     font-family: 'Roboto', sans-serif;
     font-weight: 300;
     
-    background: red;
     color:grade.fg;
   
      core-pages > :not(.core-selected) /deep/ core-pages > .core-selected {
