@@ -1,0 +1,27 @@
+<link rel="import" href="../../../../packages/polymer/polymer.html">
+<link rel="import" href="../../../../packages/core_elements/core_icon.html">
+
+<link rel="import" href="../components/grade_item.html">
+<link rel="import" href="../components/grade_fascia.html">
+
+<polymer-element name="query-details" layout vertical> 
+
+  <template>
+  
+      <template repeat="{{key in item.bean.keys}}">
+      
+          <grade-item icon=check-circle-outline-blank smallicon=true>
+          
+            <grade-fascia>
+                <span fascia-title>{{item.bean[key]}}</span>
+                <div fascia-subtitle><span>{{ key | uppercase | start}}</span><span fg>{{ key | uppercase | suffix}}</span></div>
+            </grade-fascia>
+              
+          </grade-item>
+	       
+      </template>    
+		
+  </template> 
+  
+  <script type="application/dart" src="queries.dart"></script> 
+</polymer-element>
