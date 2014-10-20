@@ -12,7 +12,6 @@
  
     <style>
     
-     
       [tile] {
       
         color:white;
@@ -22,14 +21,11 @@
       
         margin: 5px;
         border-radius: 5px;
-        
-        padding-top: 5px;
-        
-  
       }
       
       
       [content] {
+        padding-top: 5px;
         padding-left: 16px;
         padding-right: 16px;
       }
@@ -37,11 +33,10 @@
        [fascia] {
         height: 40px;
         font-weight : 400;
-        border-bottom-right-radius: 5px;
-        border-bottom-left-radius: 5px;
+        border-top-right-radius: 5px;
+        border-top-left-radius: 5px;
         cursor: pointer;
       }
-      
       
       [count] {
          font-size: 300%;
@@ -69,17 +64,23 @@
       :host grade-button /deep/ [fg] {
       
         color:white !important;
-      
       }
       
     </style>
-    
-    
-    
-    
+
     <div flex tile bg vertical layout>
+    
+      <div fascia content bg-alt 
+              horizontal layout center on-click="{{tileSelected}}">
+            <div flex>
+              <span>{{name | uppercase}}</span>
+            </div>
+          
+          <grade-button notooltip icon="arrow-forward" label="enter area"></grade-button>
+       
+        </div>
       
-           <div flex content>
+           <div flex content vertical layout end-justified>
               <div layout horizontal>
 	              <div count>{{statistics.count}}</div>
 	              <div info layout vertical reverse>
@@ -96,15 +97,7 @@
             </div>
         
         
-        <div fascia content bg-alt 
-              horizontal layout center on-click="{{tileSelected}}">
-	          <div flex>
-	            <span>{{name | uppercase}}</span>
-	          </div>
-          
-          <grade-button notooltip icon="arrow-forward" label="enter area"></grade-button>
        
-        </div>
         
     </div>
     
