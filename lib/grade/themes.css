@@ -51,7 +51,12 @@
 :host /deep/ [small] {
   font-size: x-small;
 }
-:host /deep/ [truncate] {
+:host /deep/ [truncate] * {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+:host /deep/ [truncate] /deep/ * {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -372,7 +377,6 @@
   height: 100%;
   font-family: 'Roboto', sans-serif;
   font-weight: 300;
-  background: #f00;
   color: #424242;
 }
 :host core-pages > :not(.core-selected) /deep/ core-pages > .core-selected {

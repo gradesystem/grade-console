@@ -27,12 +27,12 @@
                      <grade-input fascia-title 
                                   disabled="{{!editable}}" 
                                   multiline?="{{isAreaField(key)}}" 
-                                  label="{{ key | uppercase | suffix}}" 
+                                  label="{{ key | suffix}}" 
                                   value="{{item.bean[key]}}">
                      </grade-input>
                            
                     <div fascia-subtitle>
-	                      <span>{{ key | uppercase | start}}</span><span fg>{{ key | uppercase | suffix}}</span>
+	                      <span>{{ key | start}}</span><span fg>{{ key | suffix}}</span>
 	                   </div>
                   
                    </grade-fascia>   

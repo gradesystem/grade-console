@@ -3,6 +3,7 @@
 <link rel="import" href="../common/lists/grade_list_panel.html">
 <link rel="import" href="../common/datasets/dataset_details_panel.html">
 <link rel="import" href="../common/components/grade_scaffold.html">
+<link rel="import" href="../common/components/page_menu.html">
 
 <link rel="import" href="../../../packages/core_elements/core_pages.html">
 
@@ -10,19 +11,23 @@
 
   <template>
   
-<!--     <core-pages flex selected={{subpage}} on-menu-item-selected={{onMenuItemSelected}}> -->
+  <core-pages flex selected={{subpage}} on-menu-item-selected={{onMenuItemSelected}}>
     
 	    <grade-scaffold flex>
-	        <grade-list-panel main flex title="DATASETS" listitems="{{datasets}}" on-refresh="{{refresh}}"></grade-list-panel>
+	        <grade-list-panel main flex title="DATASETS" listitems="{{datasets}}" on-refresh="{{refresh}}">
+	         <page-menu menu></page-menu>
+	        </grade-list-panel>
 	        <dataset-details-panel side flex datasets="{{datasets}}"></dataset-details-panel>
 	    </grade-scaffold>
 	    
-<!-- 	    <grade-scaffold flex> -->
-<!-- 	        <datasets-panel main flex title="QUERIES" datasets="{{datasets}}" on-refresh="{{refresh}}"></datasets-panel> -->
-<!-- 	        <dataset-details-panel side flex datasets="{{datasets}}"></dataset-details-panel> -->
-<!-- 	    </grade-scaffold> -->
+      <grade-scaffold flex>
+	        <grade-list-panel main flex title="QUERIES" listitems="{{datasets}}" on-refresh="{{refresh}}">
+	        <page-menu menu></page-menu>
+	        </grade-list-panel>
+	        <dataset-details-panel side flex datasets="{{datasets}}"></dataset-details-panel>
+	    </grade-scaffold>
     
-<!--     </core-pages> -->
+    </core-pages>
 
  </template>
  

@@ -5,7 +5,7 @@
 <link rel="import" href="../../../../packages/paper_elements/paper_input.html">
 
 
-<polymer-element name="grade-fascia" attributes="title" noscript>
+<polymer-element name="grade-fascia" noscript truncate>
 
     <template>
 
@@ -13,32 +13,27 @@
       <style>  
       
         [fascia-title]  {
-          font-weight : bolder
+          font-weight : bolder;
+          text-transform: uppercase;
         }
     
         [fascia-subtitle] {
-          font-size : x-small
+          font-size : x-small;
+          text-transform: uppercase;
         }
       
       </style>
       
         <div layout vertical >
         
-           <template if="{{title.length>0 }}">
-              <div truncate fascia-title>
-	            <span truncate fascia-title>{{title}}</span>
-	           </div>
-           </template>
-           <template if="{{title.length==0 }}">
-             <div truncate fascia-title>
+           <div fascia-title>
               <content select="[fascia-title]"></content>
-             </div>
-           </template>
-
-           <div truncate fascia-subtitle>
-             <content select="[fascia-subtitle]"></content>
-           </div>
-             
+            </div>
+           
+           <div fascia-subtitle>
+	             <content select="[fascia-subtitle]"></content>
+	         </div>
+           
         </div>
     
     </template>

@@ -3,6 +3,7 @@
 <link rel="import" href="../common/lists/grade_list_panel.html">
 <link rel="import" href="../common/components/grade_scaffold.html">
 <link rel="import" href="../common/components/details_scaffold.html">
+<link rel="import" href="../common/components/grade_button.html">
 
 <link rel="import" href="task_details.html">
 
@@ -24,11 +25,9 @@
                                       
                 </core-tooltip>    
                
-               <paper-button button raisedButton label="add"></paper-button>
-                
-               <paper-button button raisedButton disabled label="remove">
-               </paper-button>
-          
+               <grade-button small-spaced label="add"></grade-button>
+               <grade-button small-spaced disabled label="remove"></grade-button>
+                                       
             </div>
         
         </grade-list-panel>
@@ -40,7 +39,7 @@
              
              <div bottombar layout horizontal center-justified>
                     
-               <paper-button button bg raisedButton label="edit" on-click="{{onEdit}}"></paper-button>
+               <grade-button label="edit" on-click="{{onEdit}}"></grade-button>
                 
             </div>
             
