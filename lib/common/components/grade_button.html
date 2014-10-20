@@ -6,7 +6,7 @@
 <link rel="import" href="../../../../packages/paper_elements/paper_icon_button.html">
 
 
-<polymer-element name="grade-button" attributes="icon,label" noscript>
+<polymer-element name="grade-button" attributes="icon,label, notooltip" noscript>
 
     <template>
     
@@ -19,10 +19,15 @@
         
         </style>
 
-        <core-tooltip label={{label}} position="bottom">
-          <paper-icon-button fg icon={{icon}}></paper-icon-button>
-        </core-tooltip>
+        <template if="{{notooltip==null}}">
+	        <core-tooltip label={{label}} position="bottom">
+	          <paper-icon-button fg icon={{icon}}></paper-icon-button>
+	        </core-tooltip>
+        </template>
         
+        <template if="{{notooltip!=null}}">
+          <paper-icon-button fg icon={{icon}}></paper-icon-button>
+        </template>
     </template>
 
 

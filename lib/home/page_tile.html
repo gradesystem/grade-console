@@ -2,6 +2,9 @@
 <link rel="import" href="../../../packages/core_elements/core_icons.html">
 <link rel="import" href="../../../packages/core_elements/social_icons.html">
 
+
+<link rel="import" href="../common/components/grade_button.html">
+
 <polymer-element name="page-tile" layout vertical> 
 
  
@@ -24,6 +27,7 @@
         
   
       }
+      
       
       [content] {
         padding-left: 16px;
@@ -62,6 +66,12 @@
         padding-top: 9px;
       }
       
+      :host grade-button /deep/ [fg] {
+      
+        color:white !important;
+      
+      }
+      
     </style>
     
     
@@ -91,7 +101,9 @@
 	          <div flex>
 	            <span>{{name | uppercase}}</span>
 	          </div>
-          <core-icon icon="arrow-forward"></core-icon>
+          
+          <grade-button notooltip icon="arrow-forward" label="enter area"></grade-button>
+       
         </div>
         
     </div>
