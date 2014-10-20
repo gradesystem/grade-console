@@ -1,0 +1,12 @@
+<link rel="import" href="../../../../packages/polymer/polymer.html">
+<link rel="import" href="../../../../packages/core_elements/core_pages.html">
+
+<polymer-element name="grade-subpages" layout horizontal>
+  <template>
+		<core-pages flex selected={{subpage}} on-menu-item-selected={{onMenuItemSelected}}>
+		  <content select="[datasets]"></content>
+		  <content select="[queries]"></content>
+		</core-pages>
+  </template>
+  <script type="application/dart" src="grade_subpages.dart"></script>
+</polymer-element>
