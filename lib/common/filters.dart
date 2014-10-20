@@ -8,6 +8,8 @@ class Filters {
   
   String uppercase(String str) => str.toUpperCase();
   String lowercase(String str) => str.toLowerCase();
+  String trim(String str) => str.trim();
+  
   String format(DateTime date) => formatter.format(date);
   
   String suffix(String str) {
@@ -32,9 +34,9 @@ class Filters {
         if (toOrder.containsKey(orderedValue)) ordered.add(orderedValue);
       }
       
-      for (String toOrderValue in toOrder.keys) {
-         if (!ordered.contains(toOrderValue)) ordered.add(toOrderValue);
-      }
+//      for (String toOrderValue in toOrder.keys) {
+//         if (!ordered.contains(toOrderValue)) ordered.add(toOrderValue);
+//      }
       return ordered;
     };
   }

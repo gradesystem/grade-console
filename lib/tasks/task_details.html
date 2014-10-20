@@ -10,8 +10,8 @@
   
 		  <style>
 			  
-			  grade-input::shadow [multiheight] {
-			     height: 150px;
+			  grade-input::shadow [height] {
+			     max-height: 150px;
 			  }
 			  
 		  </style>
@@ -26,9 +26,10 @@
                   
                      <grade-input fascia-title 
                                   disabled="{{!editable}}" 
+                                  maxRows="5"
                                   multiline?="{{isAreaField(key)}}" 
                                   label="{{ key | suffix}}" 
-                                  value="{{item.bean[key]}}">
+                                  value="{{item.bean[key] | trim}}">
                      </grade-input>
                            
                     <div fascia-subtitle>
