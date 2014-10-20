@@ -1,5 +1,7 @@
 <link rel="import" href="../../../../packages/polymer/polymer.html">
 
+<link rel="import" href="../../../../packages/core_elements/core_tooltip.html">
+
 <link rel="import" href="../../../../packages/paper_elements/paper_button.html">
 <link rel="import" href="../../../../packages/paper_elements/paper_icon_button.html">
 
@@ -8,7 +10,9 @@
 
     <template>
 
-        <paper-icon-button fg icon={{icon}} label={{label}}></paper-icon-button>
+        <core-tooltip label={{label}} position="bottom">
+          <paper-icon-button fg icon={{icon}}></paper-icon-button>
+        </core-tooltip>
         
     </template>
 

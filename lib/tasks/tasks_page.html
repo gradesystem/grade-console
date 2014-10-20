@@ -19,7 +19,7 @@
         
         <grade-list-panel main flex title="TASKS" listitems="{{tasks}}" on-refresh="{{refresh}}">
         
-         <grade-button toolbar icon="add"></grade-button>
+         <grade-button toolbar icon="add" label="add task"></grade-button>
                                        
         </grade-list-panel>
  
@@ -28,7 +28,7 @@
             
             <task-details body item="{{tasks.selected}}" editable="{{editable}}" spaced></task-details> 
              
-            <grade-button toolbar icon="create" on-click="{{onEdit}}"></grade-button>
+            <grade-button toolbar icon="create" label="edit task" on-click="{{onEdit}}"></grade-button>
               
             
         </details-scaffold>
