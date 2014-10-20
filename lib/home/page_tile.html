@@ -35,6 +35,7 @@
         font-weight : 400;
         border-bottom-right-radius: 5px;
         border-bottom-left-radius: 5px;
+        cursor: pointer;
       }
       
       
@@ -86,11 +87,11 @@
         
         
         <div fascia content bg-alt 
-              horizontal layout center>
-          <div flex>
-            <span>{{name | uppercase}}</span>
-          </div>
-          <core-icon icon="arrow-forward" on-click="{{tileSelected}}"></core-icon>
+              horizontal layout center on-click="{{tileSelected}}">
+	          <div flex>
+	            <span>{{name | uppercase}}</span>
+	          </div>
+          <core-icon icon="arrow-forward"></core-icon>
         </div>
         
     </div>
