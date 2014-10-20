@@ -52,12 +52,10 @@
   font-size: x-small;
 }
 :host /deep/ [truncate] * {
-  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 :host /deep/ [truncate] /deep/ * {
-  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
