@@ -1,0 +1,25 @@
+<link rel="import" href="../../../../packages/polymer/polymer.html">
+
+<link rel="import" href="../components/grade_scaffold.html">
+<link rel="import" href="../components/page_menu.html">
+
+<link rel="import" href="../lists/grade_list_panel.html">
+
+
+<link rel="import" href="dataset_details_panel.html">
+
+<polymer-element name="datasets-panel" horizontal layout>
+  <template>
+  
+      <grade-scaffold flex>
+          <grade-list-panel main flex title="DATASETS" listitems="{{datasets}}" on-refresh="{{refresh}}">
+              <page-menu menu></page-menu>
+          </grade-list-panel>
+          <dataset-details-panel side flex datasets="{{datasets}}"></dataset-details-panel>
+      </grade-scaffold>
+  
+  </template>
+  
+  <script type="application/dart" src="datasets.dart"></script> 
+  
+</polymer-element>

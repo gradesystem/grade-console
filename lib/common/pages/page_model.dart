@@ -1,12 +1,12 @@
 part of pages;
 
-abstract class PageModel<T extends ListItem> {
+abstract class SubPageModel<T extends ListItem> {
   
   EventBus bus;
   ListService<T> service;
   ListItems<T> storage;
   
-  PageModel(this.bus, this.service, this.storage) {
+  SubPageModel(this.bus, this.service, this.storage) {
     bus.on(ApplicationReady).listen((_) {
       loadAll();
     });

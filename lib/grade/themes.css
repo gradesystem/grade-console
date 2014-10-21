@@ -380,3 +380,6 @@
 :host core-pages > :not(.core-selected) /deep/ core-pages > .core-selected {
   visibility: hidden;
 }
+:host core-pages > :not(.core-selected) /deep/ grade-subpages > .core-selected {
+  visibility: hidden;
+}

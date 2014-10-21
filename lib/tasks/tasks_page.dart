@@ -3,26 +3,40 @@ part of tasks;
 @CustomTag("tasks-page") 
 class TasksPage extends Polybase {
   
-  @published
-  bool editable = false;
-  
   TasksPage.created() : super.createWith(TasksPageModel);
-  
-  void refresh() {
-    tasksModel.loadAll();
-  }
-  
-  void onEdit() {
-    editable = !editable;
-  }
   
   TasksPageModel get tasksModel => model as TasksPageModel;
   
-  Tasks get tasks => tasksModel.storage;
+  TasksModel get tasks => tasksModel.tasksModel;
+  TasksQueriesModel get queries => tasksModel.queriesModel;
+}
+
+
+@Injectable()
+class TasksPageModel {
+  
+  TasksModel tasksModel;
+  TasksQueriesModel queriesModel;
+  
+  
+  TasksPageModel(this.tasksModel, this.queriesModel);
 }
 
 @Injectable()
-class TasksPageModel extends PageModel<Task> {
-  TasksPageModel(EventBus bus, TasksService service, Tasks storage) : super(bus, service, storage);
+class TasksModel extends SubPageModel<Task> {
+  TasksModel(EventBus bus, TasksService service, Tasks storage) : super(bus, service, storage);
+}
+
+@Injectable()
+class Tasks extends ListItems<Task> {
+}
+
+@Injectable()
+class TasksQueriesModel extends SubPageModel<Query> {
+  TasksQueriesModel(EventBus bus, TasksQueriesService service, TasksQueries storage) : super(bus, service, storage);
+}
+
+@Injectable()
+class TasksQueries extends Queries {
 }
 

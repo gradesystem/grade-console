@@ -11,29 +11,19 @@
 <link rel="import" href="../../../packages/core_elements/core_tooltip.html">
 <link rel="import" href="../../../packages/core_elements/core_icon.html">
 
+<link rel="import" href="../common/components/grade_subpages.html">
+
+<link rel="import" href="tasks_panel.html">
+<link rel="import" href="../common/queries/queries_panel.html">
+
 <polymer-element name="tasks-page" layout vertical>  
 
   <template>
 
-    <grade-scaffold flex>
-        
-        <grade-list-panel main flex title="TASKS" listitems="{{tasks}}" on-refresh="{{refresh}}">
-        
-         <grade-button toolbar icon="add" label="add task"></grade-button>
-                                       
-        </grade-list-panel>
- 
- 
-         <details-scaffold side flex>
-            
-            <task-details body item="{{tasks.selected}}" editable="{{editable}}" spaced></task-details> 
-             
-            <grade-button toolbar icon="create" label="edit task" on-click="{{onEdit}}"></grade-button>
-              
-            
-        </details-scaffold>
- 
-    </grade-scaffold>
+    <grade-subpages flex >
+			    <tasks-panel datasets-subpage model="{{tasks}}"></tasks-panel>
+          <queries-panel queries-subpage model="{{queries}}"></queries-panel>
+    </grade-subpages>
 		
  </template>
  

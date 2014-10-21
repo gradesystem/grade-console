@@ -1,7 +1,5 @@
 library stage;
 
-import 'dart:async';
-
 import 'package:polymer/polymer.dart';
 import 'package:logging/logging.dart';
 import 'package:di/di.dart';
@@ -22,8 +20,15 @@ init() {
   
   var module = new Module()
           ..bind(StagePageModel)          
+          
+          ..bind(StageDatasetsModel)
           ..bind(StageDatasets)
-          ..bind(StageService);
+          
+          ..bind(StageQueriesModel)
+          ..bind(StageQueries)
+          
+          ..bind(StageService)
+          ..bind(StageQueriesService);
   
   Dependencies.add(module);
 }

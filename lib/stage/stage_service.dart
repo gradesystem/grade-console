@@ -4,3 +4,8 @@ part of stage;
 class StageService extends DatasetService {
   StageService() : super("prod");
 }
+
+@Injectable()
+class StageQueriesService extends QueryService {
+  StageQueriesService() : super("prod");
+}

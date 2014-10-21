@@ -8,6 +8,7 @@ import 'package:event_bus/event_bus.dart';
 
 import 'common.dart';
 import 'common/datasets/datasets.dart';
+import 'common/queries/queries.dart';
 import 'common/pages/pages.dart';
 
 part 'prod/prod_page.dart';
@@ -19,8 +20,15 @@ init() {
   
   var module = new Module()
           ..bind(ProdPageModel)
+          
+          ..bind(ProdDatasetsModel)
           ..bind(ProdDatasets)
-          ..bind(ProdService);
+          
+          ..bind(ProdQueriesModel)
+          ..bind(ProdQueries)
+          
+          ..bind(ProdService)
+          ..bind(ProdQueriesService);
   
   Dependencies.add(module);
 }

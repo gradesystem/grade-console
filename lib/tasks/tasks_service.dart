@@ -8,3 +8,8 @@ class TasksService extends ListService<Task> {
     return new Task(json);
   }
 }
+
+@Injectable()
+class TasksQueriesService extends QueryService {
+  TasksQueriesService() : super("catalogue");
+}

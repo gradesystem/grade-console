@@ -1,0 +1,6 @@
+[ {
+  "name" : "all_tasks",
+  "endpoint" : "tasks",
+  "expression" : "prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> construct {?s ?p ?o . ?s rdf:type 'http://gradesystem.io/onto#root'} where { graph ?g { ?s ?p ?o } }",
+  "predefined" : true
+} ]

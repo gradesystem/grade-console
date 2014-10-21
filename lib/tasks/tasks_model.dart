@@ -31,7 +31,3 @@ class Task extends Delegate with ListItem {
   String get subTitle => targetGraph;
    
 }
-
-@Injectable()
-class Tasks extends ListItems<Task> {
-}
