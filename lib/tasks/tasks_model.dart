@@ -31,3 +31,33 @@ class Task extends Delegate with ListItem {
   String get subTitle => targetGraph;
    
 }
+
+
+
+@Injectable()
+class TasksPageModel {
+  
+  TasksModel tasksModel;
+  TasksQueriesModel queriesModel;
+  
+  
+  TasksPageModel(this.tasksModel, this.queriesModel);
+}
+
+@Injectable()
+class TasksModel extends SubPageModel<Task> {
+  TasksModel(EventBus bus, TasksService service, Tasks storage) : super(bus, service, storage);
+}
+
+@Injectable()
+class Tasks extends ListItems<Task> {
+}
+
+@Injectable()
+class TasksQueriesModel extends SubPageModel<Query> {
+  TasksQueriesModel(EventBus bus, TasksQueriesService service, TasksQueries storage) : super(bus, service, storage);
+}
+
+@Injectable()
+class TasksQueries extends Queries {
+}

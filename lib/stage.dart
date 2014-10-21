@@ -13,6 +13,7 @@ import 'common/pages/pages.dart';
 
 part 'stage/stage_page.dart';
 part 'stage/stage_service.dart';
+part 'stage/stage_model.dart';
 
 final Logger log = new Logger('grade.stage');
 
