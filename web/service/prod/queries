@@ -1,6 +1,7 @@
-[ {
-  "name" : "all_datasets",
-  "endpoint" : "production",
-  "expression" : "prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> construct {?g ?p ?o . ?g rdf:type 'http://gradesystem.io/onto#root'} where { graph ?g { ?g ?p ?o } }",
-  "predefined" : true
-} ]
+[{
+  "http://gradesystem.io/onto/query.owl#name" : "all_datasets",
+  "http://gradesystem.io/onto/query.owl#target" : "production",
+  "http://gradesystem.io/onto/query.owl#expression" : "prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> construct {?g ?p ?o . ?g rdf:type 'http://gradesystem.io/onto#root'} where { graph ?g { ?g ?p ?o } }",
+  "http://gradesystem.io/onto/query.owl#note" : null,
+  "http://gradesystem.io/onto/query.owl#predefined" : true
+}]
