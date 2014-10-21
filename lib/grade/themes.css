@@ -101,7 +101,6 @@
 }
 :host /deep/ .home /deep/ paper-item:hover {
   color: #26699a;
-  font-weight: bolder;
 }
 :host /deep/ .home /deep/ paper-button::shadow #ripple {
   color: "tertiary";
@@ -162,7 +161,6 @@
 }
 :host /deep/ .prod /deep/ paper-item:hover {
   color: #00bcd4;
-  font-weight: bolder;
 }
 :host /deep/ .prod /deep/ paper-button::shadow #ripple {
   color: #80deea;
@@ -223,7 +221,6 @@
 }
 :host /deep/ .deck /deep/ paper-item:hover {
   color: #ffc107;
-  font-weight: bolder;
 }
 :host /deep/ .deck /deep/ paper-button::shadow #ripple {
   color: #ffdf82;
@@ -284,7 +281,6 @@
 }
 :host /deep/ .tasks /deep/ paper-item:hover {
   color: #e41c23;
-  font-weight: bolder;
 }
 :host /deep/ .tasks /deep/ paper-button::shadow #ripple {
   color: #f69988;
@@ -345,7 +341,6 @@
 }
 :host /deep/ .stage /deep/ paper-item:hover {
   color: #009587;
-  font-weight: bolder;
 }
 :host /deep/ .stage /deep/ paper-button::shadow #ripple {
   color: #80cbc4;
