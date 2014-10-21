@@ -4,27 +4,26 @@
 <link rel="import" href="../../../../packages/core_elements/core_icons.html">
 <link rel="import" href="../../../../packages/paper_elements/paper_menu_button.html">
 
-
 <link rel="import" href="grade_item.html">
 
 <polymer-element name="page-menu" layout horizontal center>
 	<template>
-	<style>
-
-	  paper-menu-button { 
-	   /* Fixes alignment issue */  
-      font-size: 0px;
-      
-      margin: 0;
-    }
-    
-    [smallish] {
-      font-size: small;
-    }
-    
-	</style>
+		<style>
+	
+		  paper-menu-button { 
+		   /* Fixes alignment issue */  
+	      font-size: 0px;
+	      
+	      margin: 0;
+	    }
+	    
+	    [smallish] {
+	      font-size: small;
+	    }
+	    
+		</style>
     <paper-menu-button flex icon="menu">
-	    <paper-item smallish fg-alt icon="folder-open" id="datasets" label="DATASETS" on-tap="{{onTap}}"></paper-item>
+	    <paper-item smallish fg-alt icon="folder-open" id="main" label="{{mainlabel}}" on-tap="{{onTap}}"></paper-item>
 	    <paper-item smallish fg-alt icon="visibility" id="queries" label="QUERIES" on-tap="{{onTap}}"></paper-item>
     </paper-menu-button>
 	</template>

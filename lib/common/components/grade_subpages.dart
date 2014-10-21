@@ -10,7 +10,7 @@ class GradeSubpages extends PolymerElement {
   
   void onMenuItemSelected(event, detail, target) {
     switch (detail) {
-      case 'datasets': subpage = 0; break;
+      case 'main': subpage = 0; break;
       case 'queries': subpage = 1; break;
     }
   }
