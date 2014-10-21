@@ -32,7 +32,7 @@ class GradeConsole  extends PolymerElement with Dependencies, Filters {
             case 'Linked Data': page = 1; break;
             case 'Control Deck': page = 2; break;
             case 'Task Catalogue': page = 3; break;
-            case 'Sources Data':page = 4; break;
+            case 'Source Data':page = 4; break;
             default :
                throw new  ArgumentError("unknown tile $tilename");
               
