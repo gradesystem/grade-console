@@ -11,23 +11,13 @@ class PageTile extends PolymerElement with Filters {
   @published String name;
   @published String resource_name;
   
-  @published PageStatistics statistics = dummyStats();
+  @published PageStatistics statistics;
   
   PageTile.created() : super.created();
 
   void tileSelected() {
     this.fire("tile-selected", detail:name);
   }
-
- static PageStatistics dummyStats() {
-   
-   int count = 1 + rng.nextInt(20);
-   DateTime date = new DateTime.now().add(new Duration(days: -count));
-   
-   List<List<String>> notificationsSets = [['error'],[],['error', 'social:notifications'],[]];
-   
-   return new PageStatistics(count, date, toObservable(notificationsSets[rng.nextInt(4)]));
- }
 }
 
 class PageStatistics extends Observable {
@@ -39,7 +29,7 @@ class PageStatistics extends Observable {
   DateTime date;
   
   @observable
-  ObservableList<String> notifications = toObservable([]);
+  List<String> notifications = toObservable([]);
   
   PageStatistics(this.count, this.date, this.notifications);
 }

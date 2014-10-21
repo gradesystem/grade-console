@@ -32,10 +32,12 @@
 				       
 				       <page-tile flex three class=prod
 				                  resource_name=datasets 
+				                  statistics={{prod_stats}}
 				                  name="Linked Data"></page-tile>
 				        
 				       <page-tile flex two class=tasks
 				                  name="Task Catalogue"
+				                  statistics={{tasks_stats}}
 				                  resource_name=tasks></page-tile>
 			     </div>
 			     
@@ -45,10 +47,12 @@
 			        
 			        <page-tile flex two class=deck 
 	   		           name="Control Deck"
+	   		           statistics={{deck_stats}}
 	   		           resource_name=running></page-tile>
 			        
 			        <page-tile flex three class=stage 
-			           name="Sources Data"
+			           name="Source Data"
+			           statistics={{stage_stats}}
 			           resource_name=datasets></page-tile>
 			           
 			     </div>

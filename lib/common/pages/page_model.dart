@@ -21,12 +21,9 @@ abstract class SubPageModel<T extends ListItem> {
   
   void _setData(List<T> items) {
 
-    //simulate slowness
-    new Timer(new Duration(seconds: 1), (){
-      storage.data.clear();
-      storage.data.addAll(items);
-      storage.loading = false;
-    });
+    storage.data.clear();
+    storage.data.addAll(items);
+    storage.loading = false;
     
   }
   
