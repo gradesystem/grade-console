@@ -4,8 +4,8 @@ part of queries;
 class QueryDetails extends PolymerElement with Filters {
   
   static List<String> AREA_FIELDS = [
-                                      "http://gradesystem.io/onto/task.owl#query",
-                                      "http://www.w3.org/2004/02/skos/core#editorialNote"
+                                      "http://gradesystem.io/onto/query.owl#expression",
+                                      "http://gradesystem.io/onto/query.owl#note"
                                     ];
   
   @published
