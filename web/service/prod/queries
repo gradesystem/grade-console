@@ -4,4 +4,13 @@
   "http://gradesystem.io/onto/query.owl#expression" : "prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> construct {?g ?p ?o . ?g rdf:type 'http://gradesystem.io/onto#root'} where { graph ?g { ?g ?p ?o } }",
   "http://gradesystem.io/onto/query.owl#note" : null,
   "http://gradesystem.io/onto/query.owl#predefined" : true
-}]
+}
+,
+{
+  "http://gradesystem.io/onto/query.owl#name" : "sample subjects",
+  "http://gradesystem.io/onto/query.owl#target" : "production",
+  "http://gradesystem.io/onto/query.owl#expression" : "select ?s where { ?s ?p ?o }",
+  "http://gradesystem.io/onto/query.owl#note" : "a sample query used during development",
+  "http://gradesystem.io/onto/query.owl#predefined" : false
+}
+]

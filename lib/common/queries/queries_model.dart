@@ -1,46 +1,25 @@
 part of queries;
 
 class Query extends Delegate with ListItem {
-
-  Query(Map bean) : super(bean);
   
-   static final String id = "http://gradesystem.io/onto#/id";
-   static final List<String> labels = [
-                                       "http://gradesystem.io/onto/query.owl#name",
-                                       "http://www.w3.org/2000/01/rdf-schema#label",
-                                       "http://purl.org/dc/terms/title"
-                                      ];
+  static String endpoint_field = "http://gradesystem.io/onto/query.owl#endpoint";
+  static String name_field = "http://gradesystem.io/onto/query.owl#name";  
+  static String note_field= "http://gradesystem.io/onto/query.owl#note";
+  static String target_field="http://gradesystem.io/onto/query.owl#target";
+  static String expression_field="http://gradesystem.io/onto/query.owl#expression";
    
-   static final List<String> dates = [
-                                      "date",
-                                      "http://purl.org/dc/terms/date"
-                                      ];
-  
-  String get title {
-                    
-      for (String lbl in labels) {
-         String label = get(lbl);
-         if (label!=null)
-           return label;
-      }
-
-      return get(id);
-   }
-  
-  String get subTitle {
     
-    for (String lbl in dates) {
-       String label = get(lbl);
-          if (label!=null)
-             return label;
-    }
-
-    return "";
+  Query(this.repo_path, Map bean) : super(bean);
+   
+  final String repo_path;
     
-  }
+  String get endpoint => '../service/${repo_path}/query/${bean[name_field]}/results';
+      
+  String get title => this.get(name_field);
+  
+  String get subTitle =>  this.endpoint;
    
 }
-
 
 abstract class Queries extends ListItems<Query> {
 }

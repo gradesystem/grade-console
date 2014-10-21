@@ -3,7 +3,7 @@ part of tasks;
 @CustomTag("task-details") 
 class TaskDetails extends PolymerElement with Filters {
   
-  static List<String> ORDERED_FIELDS = [
+  List<String> fields = [
                                         "http://gradesystem.io/onto#id",
                                         "http://www.w3.org/2000/01/rdf-schema#label",
                                         "http://gradesystem.io/onto/task.owl#source_graph",
@@ -31,8 +31,6 @@ class TaskDetails extends PolymerElement with Filters {
   Task item;
   
   TaskDetails.created() : super.created();
-  
-  List<String> get orderedFields => ORDERED_FIELDS;
   
   bool isAreaField(String key) {
     return AREA_FIELDS.contains(key);

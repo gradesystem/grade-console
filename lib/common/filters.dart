@@ -6,9 +6,9 @@ class Filters {
   
   static DateFormat formatter = new DateFormat('yyyy-MM-dd');
   
-  String uppercase(String str) => str.toUpperCase();
-  String lowercase(String str) => str.toLowerCase();
-  String trim(String str) => str.trim();
+  uppercase(o) => o is String ? o.toUpperCase() : o;
+  lowercase(o) => o is String ? o.toLowerCase() : o;
+  trim(o)   => o is String ? o.trim() : o;
   
   String format(DateTime date) => formatter.format(date);
   

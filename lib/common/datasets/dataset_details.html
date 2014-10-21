@@ -15,7 +15,7 @@
           <grade-item icon=check-circle-outline-blank smallicon=true>
           
             <grade-fascia>
-                <span fascia-title>{{item.bean[key]}}</span>
+                <span fascia-title>{{item.bean[key] | trim | uppercase}}</span>
                 <div fascia-subtitle><span>{{ key | uppercase | start}}</span><span fg bolder>{{ key | uppercase | suffix}}</span></div>
             </grade-fascia>
               

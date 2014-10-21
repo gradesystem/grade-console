@@ -27,7 +27,7 @@ class Task extends Delegate with ListItem {
   String get creator => get(CREATOR_FIELD);
   String get note => get(NOTE_FIELD);
  
-  String get title => label;
+  String get title => label.toUpperCase();
   String get subTitle => targetGraph;
    
 }

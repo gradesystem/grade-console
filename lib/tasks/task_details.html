@@ -18,7 +18,7 @@
  
 		  <div style="overflow-y: auto;">
 		  
-		      <template repeat="{{key in item.bean | partialOrdering(orderedFields)}}">
+		      <template repeat="{{ key in fields }}">
 		          
  		          <grade-item icon=check-circle-outline-blank smallicon="true">
                   
@@ -29,7 +29,7 @@
                                   maxRows="5"
                                   multiline?="{{isAreaField(key)}}" 
                                   label="{{ key | suffix}}" 
-                                  value="{{item.bean[key] | trim}}">
+                                  value="{{item.bean[key] | trim | uppercase}}">
                      </grade-input>
                            
                     <div fascia-subtitle>
