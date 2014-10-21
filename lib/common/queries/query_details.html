@@ -1,6 +1,7 @@
 <link rel="import" href="../../../../packages/polymer/polymer.html">
 <link rel="import" href="../../../../packages/core_elements/core_icon.html">
 
+<link rel="import" href="../components/grade_input.html">
 <link rel="import" href="../components/grade_item.html">
 <link rel="import" href="../components/grade_fascia.html">
 
@@ -8,18 +9,36 @@
 
   <template>
   
+    
+      <style>
+        
+        grade-input::shadow [height] {
+           max-height: 150px;
+        }
+        
+      </style>
+
+<div style="overflow-y: auto;">
+  
       <template repeat="{{key in item.bean.keys}}">
       
           <grade-item icon=check-circle-outline-blank smallicon=true>
           
             <grade-fascia>
-                <span fascia-title>{{item.bean[key]}}</span>
-                <div fascia-subtitle><span>{{ key | uppercase | start}}</span><span fg>{{ key | uppercase | suffix}}</span></div>
+                                     <grade-input fascia-title 
+                                  disabled="{{!editable}}" 
+                                  maxRows="5"
+                                  multiline?="{{isAreaField(key)}}" 
+                                  label="{{ key | suffix}}" 
+                                  value="{{item.bean[key] | trim}}">
+                     </grade-input>
+                <div fascia-subtitle><span>{{ key | start}}</span><span fg bolder>{{ key | suffix}}</span></div>
             </grade-fascia>
               
           </grade-item>
 	       
-      </template>    
+      </template>  
+      </div>  
 		
   </template> 
   

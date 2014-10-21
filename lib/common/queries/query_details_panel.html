@@ -3,16 +3,18 @@
 <link rel="import" href="query_details.html">
 
 <link rel="import" href="../components/details_scaffold.html">
+<link rel="import" href="../components/grade_button.html">
 
 <polymer-element name="query-details-panel" horizontal layout>
   <template>
-  
-	  <details-scaffold flex>
-	    <query-details body item="{{queries.selected}}" spaced></query-details> 
-	  </details-scaffold>
+     <details-scaffold flex>
+         <query-details body item="{{queries.selected}}"  editable="{{editable}}" spaced></query-details> 
+        <grade-button toolbar icon="create" label="edit task" on-click="{{onEdit}}"></grade-button>
+                
+  </details-scaffold>
   
   </template>
-  
+
   <script type="application/dart" src="queries.dart"></script> 
   
 </polymer-element>

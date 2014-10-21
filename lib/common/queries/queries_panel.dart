@@ -5,6 +5,7 @@ class QueriesPanel extends PolymerElement with Filters {
   
   @published
   SubPageModel<Query> model;
+
   
   QueriesPanel.created() : super.created();
   
