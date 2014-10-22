@@ -12,6 +12,5 @@ part 'datasets_model.dart';
 part 'dataset_details.dart';
 part 'datasets_panel.dart';
 part 'dataset_list.dart';
-part 'dataset_list_item.dart';
 
 part 'datasets_service.dart';
