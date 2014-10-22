@@ -22,7 +22,7 @@
     
       <grade-scaffold flex>
       
-          <grade-header-panel main fit title="TASKS">
+          <grade-header-panel main fit paneltitle="TASKS">
           
             <page-menu menu mainlabel="TASKS"></page-menu>
 
@@ -41,7 +41,7 @@
             
           </grade-header-panel>
           
-          <grade-header-panel side fit title="PROPERTIES">
+          <grade-header-panel side fit paneltitle="PROPERTIES">
               <grade-button toolbar icon="create" label="edit task" on-click="{{onEdit}}"></grade-button>
               <task-details main item="{{tasks.selected}}" editable="{{editable}}" spaced></task-details> 
           </grade-header-panel>
