@@ -5,9 +5,7 @@ abstract class ListItem {
   bool selected;
   
   dynamic get self => this;
-  
-  String get title;
-  String get subTitle;
+
 }
 
 

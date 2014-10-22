@@ -15,7 +15,7 @@ class Dataset extends Delegate with ListItem {
                                       "date",
                                       "http://purl.org/dc/terms/date"
                                       ];
-  
+   
   String get title {
                     
       for (String lbl in labels) {

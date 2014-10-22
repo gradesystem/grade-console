@@ -11,7 +11,7 @@ class TaskList extends PolymerElement with Filters {
   
   CoreList list;
   
-  FilterFunction itemFilter = (ListItem item, String term) => item.title != null && item.title.toLowerCase().contains(term.toLowerCase());
+  FilterFunction itemFilter = (Task item, String term) => item.label != null && item.label.toLowerCase().contains(term.toLowerCase());
   
   TaskList.created() : super.created();
   
@@ -31,6 +31,10 @@ class TaskList extends PolymerElement with Filters {
   
   void selectDataset(event) {
     listitems.selected = event.detail.data;
+  }
+  
+  void removeItem() {
+    listitems.data.remove(listitems.selected);
   }
  
 }
