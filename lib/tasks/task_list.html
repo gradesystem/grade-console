@@ -1,33 +1,46 @@
 <link rel="import" href="../../../packages/polymer/polymer.html">
+
 <link rel="import" href="../../../packages/core_elements/core_list_dart.html">
+<link rel="import" href="../../../packages/core_elements/core_icon.html">
+
 <link rel="import" href="../../../packages/paper_elements/paper_item.html">
 <link rel="import" href="../../../packages/paper_elements/paper_progress.html">
+
 <link rel="import" href="../common/components/list_panel.html">
 <link rel="import" href="../common/components/grade_item.html">
 <link rel="import" href="../common/components/grade_fascia.html">
+<link rel="import" href="../common/components/grade_button.html">
 
 <polymer-element name="task-list">
 
  <template>
+ 
+  <style>
+    .button {
+      padding-top: 5px;
+      padding-right: 5px;
+    }
+  </style>
 
   <list-panel loading="{{listitems.loading}}" empty={{listitems.data.isEmpty}}>
 
 	  <core-list-dart id="list" data="{{listitems.data | filter(kfilter, itemFilter)}}" height="80" on-core-activate={{selectDataset}} flex>
 	    
 	    <template>
-	      
-	      <paper-item flex trim bg-selected?="{{selected}}">
-		    
-		      <grade-item icon=chevron-right>
-		      
-		        <grade-fascia>
-		          <div fascia-title>{{title}}</div>
-		          <div fascia-subtitle>{{subTitle}}</div>
-		        </grade-fascia>
-		        
-		      </grade-item>
-		            
-		    </paper-item>
+		    <paper-item flex trim bg-selected?={{selected}} >
+		   
+		     <grade-item icon=chevron-right flex>
+			     
+			       <grade-fascia flex>
+			         <div fascia-title>{{label | uppercase}}</div>
+			         <div fascia-subtitle><span>{{ targetGraph | start}}</span><span fg bolder>{{ targetGraph | suffix}}</span></div>
+			       </grade-fascia>
+			       
+			       <grade-button class="button" hidden?="{{!selected}}" self-center icon="remove-circle-outline" on-click={{removeItem}}></grade-button>
+			       
+			     </grade-item>
+			
+			   </paper-item>
 	    
 	    </template>
 	  

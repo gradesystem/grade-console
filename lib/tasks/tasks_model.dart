@@ -1,6 +1,6 @@
 part of tasks;
 
-class Task extends Delegate with ListItem {
+class Task extends Delegate with ListItem, Filters {
   
   static final String ID_FIELD = "http://gradesystem.io/onto#id";
   
@@ -26,9 +26,6 @@ class Task extends Delegate with ListItem {
   String get operation => get(OPERATION_FIELD);
   String get creator => get(CREATOR_FIELD);
   String get note => get(NOTE_FIELD);
- 
-  String get title => label.toUpperCase();
-  String get subTitle => targetGraph;
    
 }
 
