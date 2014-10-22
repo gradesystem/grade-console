@@ -4,11 +4,7 @@
 <link rel="import" href="../../../../packages/core_elements/core_header_panel.html">
 <link rel="import" href="../../../../packages/core_elements/core_toolbar.html">
 
-<link rel="import" href="grade_list.html">
-<link rel="import" href="../components/grade_input.html">
-<link rel="import" href="../components/grade_button.html">
-
-<polymer-element name="grade-list-panel" vertical layout>
+<polymer-element name="grade-header-panel" vertical layout noscript attributes="title">
   <template>
   
     <style>
@@ -27,17 +23,8 @@
 	              <content select="[menu]"></content>
 	            
 	              <div class="title" bolder flex>{{title}}</div>
-	              
-	              <grade-input
-	                          id="filter" 
-	                          smaller 
-	                          style="width:120px" 
-	                          label="filter "
-	                          inputValue={{kfilter}}>
-	              </grade-input>
-	              
+
 	              <div layout horizontal end-justified>            
-	                <grade-button icon="refresh" label="refresh list" on-click="{{refresh}}"></grade-button>
 	                <content select="[toolbar]"></content>
 	              </div>
 	              
@@ -45,15 +32,13 @@
 	            
 	            <div small-spaced>
 	 
-	              <grade-list listitems="{{listitems}}" filter="{{kfilter}}"></grade-list>
+	              <content select="[main]"></content>
 	
 	            </div>
 	            
 	     </core-header-panel>
 
   </template>
-  
-  <script type="application/dart" src="lists.dart"></script> 
   
 </polymer-element>
  

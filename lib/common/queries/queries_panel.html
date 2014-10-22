@@ -2,21 +2,46 @@
 
 <link rel="import" href="../components/grade_scaffold.html">
 <link rel="import" href="../components/page_menu.html">
+<link rel="import" href="../components/grade_header_panel.html">
+<link rel="import" href="../components/grade_input.html">
+<link rel="import" href="../components/grade_button.html">
 
-<link rel="import" href="../lists/grade_list_panel.html">
-
-
-<link rel="import" href="query_details_panel.html">
+<link rel="import" href="query_list.html">
+<link rel="import" href="query_details.html">
 
 <polymer-element name="queries-panel" horizontal layout>
-  <template>
-  
+<template>
+    <style>
+      :host grade-header-panel[side] /deep/ .title {
+        font-size: smaller;
+      }
+    </style>
+    
       <grade-scaffold flex>
-          <grade-list-panel main flex title="QUERIES" listitems="{{queries}}" on-refresh="{{refresh}}">
-              <page-menu menu></page-menu>
-              <grade-button toolbar icon="add" label="add task"></grade-button>
-          </grade-list-panel>
-          <query-details-panel side flex queries="{{queries}}"></query-details-panel>
+      
+          <grade-header-panel main fit title="QUERIES">
+          
+            <page-menu menu></page-menu>
+
+                <grade-input toolbar
+                            smaller 
+                            style="width:120px" 
+                            label="filter"
+                            inputValue={{kfilter}}>
+                </grade-input>
+                
+                <grade-button toolbar icon="refresh" label="refresh list" on-click="{{refresh}}"></grade-button>
+                <grade-button toolbar icon="add" label="add task"></grade-button>
+       
+            <query-list main listitems="{{queries}}" kfilter="{{kfilter}}"></query-list>
+            
+          </grade-header-panel>
+          
+          <grade-header-panel side fit title="PROPERTIES">
+              <grade-button toolbar icon="create" label="edit query" on-click="{{onEdit}}"></grade-button>
+              <query-details main item="{{queries.selected}}" editable="{{editable}}" spaced></query-details> 
+          </grade-header-panel>
+
       </grade-scaffold>
   
   </template>

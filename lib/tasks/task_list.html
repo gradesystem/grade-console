@@ -1,0 +1,40 @@
+<link rel="import" href="../../../packages/polymer/polymer.html">
+<link rel="import" href="../../../packages/core_elements/core_list_dart.html">
+<link rel="import" href="../../../packages/paper_elements/paper_item.html">
+<link rel="import" href="../../../packages/paper_elements/paper_progress.html">
+<link rel="import" href="../common/components/list_panel.html">
+<link rel="import" href="../common/components/grade_item.html">
+<link rel="import" href="../common/components/grade_fascia.html">
+
+<polymer-element name="task-list">
+
+ <template>
+
+  <list-panel loading="{{listitems.loading}}" empty={{listitems.data.isEmpty}}>
+
+	  <core-list-dart id="list" data="{{listitems.data | filter(kfilter, itemFilter)}}" height="80" on-core-activate={{selectDataset}} flex>
+	    
+	    <template>
+	      
+	      <paper-item flex trim bg-selected?="{{selected}}">
+		    
+		      <grade-item icon=chevron-right>
+		      
+		        <grade-fascia>
+		          <div fascia-title>{{title}}</div>
+		          <div fascia-subtitle>{{subTitle}}</div>
+		        </grade-fascia>
+		        
+		      </grade-item>
+		            
+		    </paper-item>
+	    
+	    </template>
+	  
+	  </core-list-dart>
+	 </list-panel>
+ </template>
+
+ <script type="application/dart" src="../tasks.dart"></script> 
+
+</polymer-element>

@@ -2,20 +2,46 @@
 
 <link rel="import" href="../components/grade_scaffold.html">
 <link rel="import" href="../components/page_menu.html">
+<link rel="import" href="../components/grade_header_panel.html">
+<link rel="import" href="../components/grade_input.html">
+<link rel="import" href="../components/grade_button.html">
 
 <link rel="import" href="../lists/grade_list_panel.html">
 
-
-<link rel="import" href="dataset_details_panel.html">
+<link rel="import" href="dataset_list.html">
+<link rel="import" href="dataset_details.html">
 
 <polymer-element name="datasets-panel" horizontal layout>
   <template>
-  
+    <style>
+      :host grade-header-panel[side] /deep/ .title {
+        font-size: smaller;
+      }
+    </style>
+    
       <grade-scaffold flex>
-          <grade-list-panel main flex title="DATASETS" listitems="{{datasets}}" on-refresh="{{refresh}}">
-              <page-menu menu></page-menu>
-          </grade-list-panel>
-          <dataset-details-panel side flex datasets="{{datasets}}"></dataset-details-panel>
+      
+          <grade-header-panel main fit title="DATASETS">
+          
+            <page-menu menu></page-menu>
+
+		            <grade-input toolbar
+		                        smaller 
+		                        style="width:120px" 
+		                        label="filter"
+		                        inputValue={{kfilter}}>
+		            </grade-input>
+		            
+		            <grade-button toolbar icon="refresh" label="refresh list" on-click="{{refresh}}"></grade-button>
+       
+            <dataset-list main listitems="{{datasets}}" kfilter="{{kfilter}}"></dataset-list>
+            
+          </grade-header-panel>
+          
+          <grade-header-panel side fit title="PROPERTIES">
+              <dataset-details main item="{{datasets.selected}}" spaced></dataset-details> 
+          </grade-header-panel>
+
       </grade-scaffold>
   
   </template>

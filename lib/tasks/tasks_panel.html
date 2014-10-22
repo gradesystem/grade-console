@@ -1,43 +1,53 @@
 <link rel="import" href="../../../packages/polymer/polymer.html">
+<link rel="import" href="../../../packages/paper_elements/paper_button.html">
+<link rel="import" href="../../../packages/core_elements/core_tooltip.html">
+<link rel="import" href="../../../packages/core_elements/core_icon.html">
 
 <link rel="import" href="../common/lists/grade_list_panel.html">
 <link rel="import" href="../common/components/grade_scaffold.html">
+<link rel="import" href="../common/components/grade_header_panel.html">
 <link rel="import" href="../common/components/details_scaffold.html">
 <link rel="import" href="../common/components/grade_button.html">
 <link rel="import" href="../common/components/page_menu.html">
 
 <link rel="import" href="task_details.html">
-
-<link rel="import" href="../../../packages/paper_elements/paper_button.html">
-<link rel="import" href="../../../packages/core_elements/core_tooltip.html">
-<link rel="import" href="../../../packages/core_elements/core_icon.html">
-
-
-<link rel="import" href="task_details.html">
+<link rel="import" href="task_list.html">
 
 <polymer-element name="tasks-panel" horizontal layout>
-  <template>
-  
-			<grade-scaffold flex>
-			    
-			    <grade-list-panel main flex title="TASKS" listitems="{{tasks}}" on-refresh="{{refresh}}">
-			    
-			       <page-menu menu mainlabel="TASKS"></page-menu>
-			    
-			     <grade-button toolbar icon="add" label="add task"></grade-button>
-			                                   
-			    </grade-list-panel>
-			
-			
-			     <details-scaffold side flex>
-			        
-			        <task-details body item="{{tasks.selected}}" editable="{{editable}}" spaced></task-details> 
-			         
-			        <grade-button toolbar icon="create" label="edit task" on-click="{{onEdit}}"></grade-button>
-			          
-			    </details-scaffold>
-			
-			</grade-scaffold>
+<template>
+    <style>
+      :host grade-header-panel[side] /deep/ .title {
+        font-size: smaller;
+      }
+    </style>
+    
+      <grade-scaffold flex>
+      
+          <grade-header-panel main fit title="TASKS">
+          
+            <page-menu menu mainlabel="TASKS"></page-menu>
+
+                <grade-input toolbar
+                            smaller 
+                            style="width:120px" 
+                            label="filter"
+                            inputValue={{kfilter}}>
+                </grade-input>
+                
+                <grade-button toolbar icon="refresh" label="refresh list" on-click="{{refresh}}"></grade-button>
+                
+                <grade-button toolbar icon="add" label="add task"></grade-button>
+       
+            <task-list main listitems="{{tasks}}" kfilter="{{kfilter}}"></task-list>
+            
+          </grade-header-panel>
+          
+          <grade-header-panel side fit title="PROPERTIES">
+              <grade-button toolbar icon="create" label="edit task" on-click="{{onEdit}}"></grade-button>
+              <task-details main item="{{tasks.selected}}" editable="{{editable}}" spaced></task-details> 
+          </grade-header-panel>
+
+      </grade-scaffold>
   
   </template>
   

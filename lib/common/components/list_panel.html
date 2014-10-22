@@ -1,0 +1,24 @@
+<link rel="import" href="../../../../packages/polymer/polymer.html">
+<link rel="import" href="../../../../packages/core_elements/core_list_dart.html">
+<link rel="import" href="../../../../packages/paper_elements/paper_item.html">
+<link rel="import" href="../../../../packages/paper_elements/paper_progress.html">
+<link rel="import" href="loading_panel.html">
+
+<polymer-element name="list-panel" attributes="loading, empty" noscript> 
+
+ <template>
+
+  <loading-panel loading="{{loading}}" message="loading items">
+
+    <div hidden?={{empty}} flex>
+      <content></content>
+    </div>
+    	  
+	  <div fit hidden?={{!empty}} layout vertical center center-justified>
+      <div fg>Ops.. We've found no items</div>
+    </div>
+	  
+  </loading-panel>
+ </template>
+
+</polymer-element>

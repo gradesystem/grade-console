@@ -3,6 +3,9 @@ part of tasks;
 @CustomTag("tasks-panel") 
 class TasksPanel extends PolymerElement with Filters {
   
+  @observable
+  String kfilter='';
+  
   @published
   SubPageModel<Task> model;
   
