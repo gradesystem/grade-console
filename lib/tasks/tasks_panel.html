@@ -42,8 +42,10 @@
           </grade-header-panel>
           
           <grade-header-panel side fit paneltitle="PROPERTIES">
-              <grade-button toolbar icon="create" label="edit task" on-click="{{onEdit}}"></grade-button>
-              <task-details main item="{{tasks.selected}}" editable="{{editable}}" spaced></task-details> 
+              <grade-button toolbar icon="create" label="edit task" on-click="{{onEdit}}" hidden?={{edit}}></grade-button>
+              <grade-button toolbar icon="cancel" label="cancel" on-click="{{onCancel}}" hidden?={{!edit}}></grade-button>
+              <grade-button toolbar icon="save" label="save" on-click="{{onSave}}" hidden?={{!edit}}></grade-button>
+              <task-details main item="{{tasks.selected}}" editable="{{edit}}" spaced></task-details> 
           </grade-header-panel>
 
       </grade-scaffold>

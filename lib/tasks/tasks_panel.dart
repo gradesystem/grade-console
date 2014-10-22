@@ -10,7 +10,7 @@ class TasksPanel extends PolymerElement with Filters {
   SubPageModel<Task> model;
   
   @published
-  bool editable = false;
+  bool edit = false;
   
   TasksPanel.created() : super.created();
   
@@ -21,7 +21,18 @@ class TasksPanel extends PolymerElement with Filters {
   }
   
   void onEdit() {
-    editable = !editable;
+    log.info("onEdit");
+    edit = true;
+  }
+  
+  void onCancel() {
+    log.info("onCancel");
+    edit = false;
+  }
+  
+  void onSave() {
+    log.info("onSave");
+    edit = false;
   }
  
 }
