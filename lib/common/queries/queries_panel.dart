@@ -19,5 +19,9 @@ class QueriesPanel extends PolymerElement with Filters {
   void refresh() {
     model.loadAll();
   }
+  
+  void onEdit() {
+    editable = !editable;
+  }
  
 }
