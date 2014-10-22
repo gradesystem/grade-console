@@ -63,8 +63,8 @@
   min-width: 640px;
   overflow: auto;
 }
-:host /deep/ [bg-selected] /deep/ core-icon {
-  color: #ffff7a;
+:host /deep/ [bg-selected] /deep/ [fg] {
+  color: #fff !important;
 }
 :host /deep/ grade-header-panel[side] /deep/ .title {
   font-size: smaller;
