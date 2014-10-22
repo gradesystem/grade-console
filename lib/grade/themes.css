@@ -66,6 +66,9 @@
 :host /deep/ [bg-selected] /deep/ core-icon {
   color: #ffff7a;
 }
+:host /deep/ grade-header-panel[side] /deep/ .title {
+  font-size: smaller;
+}
 .home-scaffold {
   background: #26699a;
   color: #fff;

@@ -14,11 +14,7 @@
 
 <polymer-element name="tasks-panel" horizontal layout>
 <template>
-    <style>
-      :host grade-header-panel[side] /deep/ .title {
-        font-size: smaller;
-      }
-    </style>
+
     
       <grade-scaffold flex>
       
@@ -28,7 +24,7 @@
 
                 <grade-input toolbar
                             smaller 
-                            style="width:120px" 
+                            style="width:120px; margin-right:10px" 
                             label="filter"
                             inputValue={{kfilter}}>
                 </grade-input>
