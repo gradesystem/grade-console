@@ -13,38 +13,38 @@
 <link rel="import" href="task_list.html">
 
 <polymer-element name="tasks-panel" horizontal layout>
-<template>
 
-    
-      <grade-scaffold flex>
-      
-          <grade-header-panel main fit paneltitle="TASKS">
-          
-            <page-menu menu mainlabel="TASKS"></page-menu>
+  <template>
 
-                <grade-input toolbar
-                            smaller 
-                            style="width:120px; margin-right:10px" 
-                            label="filter"
-                            inputValue={{kfilter}}>
-                </grade-input>
-                
-                <grade-button toolbar icon="refresh" label="refresh list" on-click="{{refresh}}"></grade-button>
-                
-                <grade-button toolbar icon="add" label="add task"></grade-button>
-       
-            <task-list main listitems="{{tasks}}" kfilter="{{kfilter}}"></task-list>
-            
-          </grade-header-panel>
-          
-          <grade-header-panel side fit paneltitle="PROPERTIES">
-              <grade-button toolbar icon="create" label="edit task" on-click="{{onEdit}}" hidden?={{edit}}></grade-button>
-              <grade-button toolbar icon="cancel" label="cancel" on-click="{{onCancel}}" hidden?={{!edit}}></grade-button>
-              <grade-button toolbar icon="save" label="save" on-click="{{onSave}}" hidden?={{!edit}}></grade-button>
-              <task-details main item="{{tasks.selected}}" editable="{{edit}}" spaced></task-details> 
-          </grade-header-panel>
-
-      </grade-scaffold>
+	  <grade-scaffold flex>
+	  
+	      <grade-header-panel main fit paneltitle="TASKS">
+	      
+	        <page-menu menu mainlabel="TASKS"></page-menu>
+	
+	        <grade-input toolbar
+	                    smaller 
+	                    style="width:120px; margin-right:10px" 
+	                    label="filter"
+	                    inputValue={{kfilter}}>
+	        </grade-input>
+	        
+	        <grade-button toolbar icon="refresh" label="refresh list" on-click="{{refresh}}"></grade-button>
+	        
+	        <grade-button toolbar icon="add" label="add task"></grade-button>
+	   
+	        <task-list main listitems="{{tasks}}" kfilter="{{kfilter}}"></task-list>
+	        
+	      </grade-header-panel>
+	      
+	      <grade-header-panel side fit paneltitle="PROPERTIES">
+	          <grade-button toolbar icon="create" label="edit task" on-click="{{onEdit}}" hidden?={{edit}}></grade-button>
+	          <grade-button toolbar icon="cancel" label="cancel" on-click="{{onCancel}}" hidden?={{!edit}}></grade-button>
+	          <grade-button toolbar icon="save" label="save" on-click="{{onSave}}" hidden?={{!edit}}></grade-button>
+	          <task-details main item="{{tasks.selected}}" editable="{{edit}}" spaced></task-details> 
+	      </grade-header-panel>
+	
+	  </grade-scaffold>
   
   </template>
   
