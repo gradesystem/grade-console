@@ -4,7 +4,7 @@ part of queries;
 class QueryDetailsSummary extends PolymerElement with Filters {
    
   @published
-  Query item;
+  EditableModel<Query> item;
   
   @published
   bool selected;
@@ -16,17 +16,22 @@ class QueryDetailsSummary extends PolymerElement with Filters {
   String get name_key => Query.name_field;
   String get datasets_key => Query.datasets_field;
  
-  bool get predefined => item.bean[Query.predefined_field]==true;
+  bool get predefined => item.model.bean[Query.predefined_field]==true;
   
-  @ComputedProperty("item.bean[name_key]")  
+  @ComputedProperty("item.model.bean[name_key]")  
   String get name => readValue(#name);
 
-  @ComputedProperty("item.bean[datasets_key]")  
+  @ComputedProperty("item.model.bean[datasets_key]")  
   String get datasets {
     
-    List<String> datasets = item.bean[datasets_key];
+    List<String> datasets = item.model.bean[datasets_key];
     
     return (datasets==null || datasets.isEmpty) ? '(all)' :  datasets.toString();
+    
+  }
+  
+  void removeItem() {
+    fire("remove-item", detail:item);
   }
   
 }

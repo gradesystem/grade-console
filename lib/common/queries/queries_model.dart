@@ -1,6 +1,6 @@
 part of queries;
 
-class Query extends Delegate with ListItem, Filters {
+class Query extends Delegate with ListItem, Cloneable<Query>, Observable, Filters {
   
   static String endpoint_field = "http://gradesystem.io/onto/query.owl#endpoint";
   static String datasets_field="http://gradesystem.io/onto/query.owl#datasets";
@@ -12,10 +12,9 @@ class Query extends Delegate with ListItem, Filters {
   static String predefined_field="http://gradesystem.io/onto/query.owl#predefined";
   
   static final RegExp regexp = new RegExp(r"!(\w+)");
- 
-  
-  final String repo_path;
 
+  final String repo_path;
+  
   Query(this.repo_path, Map bean) : super(bean);
   
   
@@ -23,6 +22,9 @@ class Query extends Delegate with ListItem, Filters {
   bool get predefined => get(predefined_field);
   
   
+  Query clone() {
+    return new Query(repo_path, new Map.from(bean));
+  }
   
   //calculates endpoint
   String get endpoint  {
@@ -61,6 +63,81 @@ class Query extends Delegate with ListItem, Filters {
    }
 }
 
-abstract class Queries extends ListItems<Query> {
+abstract class Queries extends ListItems<EditableModel<Query>> {
 }
+
+abstract class QuerySubPageModel {
+  
+  EventBus bus;
+  QueryService service;
+  Queries storage;
+  
+  QuerySubPageModel(this.bus, this.service, this.storage) {
+    bus.on(ApplicationReady).listen((_) {
+      loadAll();
+    });
+  }
+ 
+  void loadAll() {
+    storage.loading = true;
+    storage.selected = null;
+    service.getAll().then(_setData).catchError((e)=>_onError(e, loadAll));
+  }
+  
+  void _setData(List<Query> items) {
+
+    storage.data.clear();
+
+    storage.data.addAll(items.map((Query q)=> new EditableModel(q)));
+    storage.loading = false;
+    
+  }
+  
+  
+  void _onError(e, callback) {
+    storage.data.clear();
+    storage.loading = false;
+    bus.fire(new ToastMessage.alert("Ops we are having some problems communicating with the server", callback));
+  }
+}
+
+class EditableModel<T extends Cloneable<T>> extends Observable with ListItem {
+  
+  @observable
+  bool edit = false;
+  
+  T _original;
+  T _underEdit;
+  
+  EditableModel(this._original);
+  
+  @observable
+  T get model => edit?_underEdit:_original;
+  
+  void startEdit() {
+    edit = true;
+    _underEdit = _original.clone();
+    
+    notifyPropertyChange(#model, _original, _underEdit);
+  }
+  
+  void cancel() {
+    edit = false;
+    notifyPropertyChange(#model, _underEdit, _original);
+  }
+  
+  void save() {
+    _original = _underEdit;
+    edit = false;
+    notifyPropertyChange(#model, _underEdit, _original);
+  }
+
+}
+
+abstract class Cloneable<T> {
+  
+  T clone();
+}
+
+
 

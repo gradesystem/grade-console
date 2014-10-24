@@ -7,12 +7,8 @@ class QueriesPanel extends PolymerElement with Filters {
   String kfilter = '';
 
   
-  
   @published
-  bool edit = false;
-  
-  @published
-  SubPageModel<Query> model;
+  QuerySubPageModel model;
 
   QueriesPanel.created() : super.created();
   
@@ -22,19 +18,20 @@ class QueriesPanel extends PolymerElement with Filters {
     model.loadAll();
   }
   
+  
+  
   void onEdit() {
    // log.info("onEdit");
-    edit = true;
+    queries.selected.startEdit();
   }
   
   void onCancel() {
    // log.info("onCancel");
-    edit = false;
+    queries.selected.cancel();
   }
   
   void onSave() {
    // log.info("onSave");
-    edit = false;
+    queries.selected.save();
   }
- 
 }

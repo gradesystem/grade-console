@@ -16,7 +16,7 @@ class QueryDetails extends PolymerElement with Filters {
   bool editable = false;
   
   @published
-  Query item;
+  EditableModel<Query> item;
   
   QueryDetails.created() : super.created();
   
@@ -31,17 +31,17 @@ class QueryDetails extends PolymerElement with Filters {
   //privately used
   String get expression_key => Query.expression_field;
   
-  @ComputedProperty("item.bean[expression_key]") 
-  String get endpoint => item==null ? '...?' : item.endpoint;
+  @ComputedProperty("item.model.bean[expression_key]") 
+  String get endpoint => item==null ? '...?' : item.model.endpoint;
  
-  @ComputedProperty("item.bean[expression_key]")
+  @ComputedProperty("item.model.bean[expression_key]")
   String get parameters {
     
     String params = '(none)';
     
     if (item!=null) {
       
-      List<String> parameters = item.parameters;
+      List<String> parameters = item.model.parameters;
       params = parameters.isEmpty? params :parameters.toString();
     
     }
@@ -52,15 +52,14 @@ class QueryDetails extends PolymerElement with Filters {
   
   String get datasets_key => Query.datasets_field;
   
-  
-  @ComputedProperty("item.bean[datasets_key]")
+  @ComputedProperty("item.model.bean[datasets_key]")
   String get datasets {
     
      String sets = '(all)';
      
      if (item!=null) {
      
-       List<String> datasets = item.bean[Query.datasets_field];
+       List<String> datasets = item.model.get(Query.datasets_field);
        
        sets = datasets.isEmpty? sets : datasets.toString();
             

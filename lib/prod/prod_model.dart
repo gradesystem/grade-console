@@ -21,7 +21,7 @@ class ProdDatasets extends Datasets {
 }
 
 @Injectable()
-class ProdQueriesModel extends SubPageModel<Query> {
+class ProdQueriesModel extends QuerySubPageModel {
   ProdQueriesModel(EventBus bus, ProdQueriesService service, ProdQueries storage) : super(bus, service, storage);
 }
 

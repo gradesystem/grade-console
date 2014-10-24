@@ -35,10 +35,10 @@
           </grade-header-panel>
           
           <grade-header-panel side fit paneltitle="PROPERTIES">
-              <grade-button toolbar icon="create" label="edit query" on-click="{{onEdit}}" hidden?="{{edit || queries.selected.predefined}}"></grade-button>
-              <grade-button toolbar icon="cancel" label="cancel" on-click="{{onCancel}}" hidden?={{!edit}}></grade-button>
-              <grade-button toolbar icon="save" label="save" on-click="{{onSave}}" hidden?={{!edit}}></grade-button>
-              <query-details main item="{{queries.selected}}" editable="{{edit}}" spaced></query-details> 
+              <grade-button toolbar icon="create" label="edit query" on-click="{{onEdit}}" hidden?="{{queries.selected.edit || queries.selected.model.predefined}}"></grade-button>
+              <grade-button toolbar icon="cancel" label="cancel" on-click="{{onCancel}}" hidden?={{!queries.selected.edit}}></grade-button>
+              <grade-button toolbar icon="save" label="save" on-click="{{onSave}}" hidden?={{!queries.selected.edit}}></grade-button>
+              <query-details main item="{{queries.selected}}" editable="{{queries.selected.edit}}" spaced></query-details> 
           </grade-header-panel>
 
       </grade-scaffold>
