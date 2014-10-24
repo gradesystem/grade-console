@@ -3,6 +3,7 @@ part of queries;
 class Query extends Delegate with ListItem, Filters {
   
   static String endpoint_field = "http://gradesystem.io/onto/query.owl#endpoint";
+  static String datasets_field="http://gradesystem.io/onto/query.owl#datasets";
   static String name_field = "http://gradesystem.io/onto/query.owl#name";  
   static String note_field= "http://gradesystem.io/onto/query.owl#note";
   static String target_field="http://gradesystem.io/onto/query.owl#target";
@@ -13,12 +14,15 @@ class Query extends Delegate with ListItem, Filters {
   static final RegExp regexp = new RegExp(r"!(\w+)");
  
   
-  
   final String repo_path;
 
   Query(this.repo_path, Map bean) : super(bean);
   
+  
+  
   bool get predefined => get(predefined_field);
+  
+  
   
   //calculates endpoint
   String get endpoint  {
@@ -38,6 +42,8 @@ class Query extends Delegate with ListItem, Filters {
     
     return endpoint;
   }
+  
+  
   
   
   List<String> get parameters {

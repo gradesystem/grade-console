@@ -27,7 +27,7 @@ class QueryDetails extends PolymerElement with Filters {
   //used in template to lookup (cannot bind static fields)
   String get endpoint_key => Query.endpoint_field;
   String get parameters_key => Query.parameters_field;
-
+  
   //privately used
   String get expression_key => Query.expression_field;
   
@@ -50,5 +50,27 @@ class QueryDetails extends PolymerElement with Filters {
     
   }
   
+  String get datasets_key => Query.datasets_field;
   
+  
+  @ComputedProperty("item.bean[datasets_key]")
+  String get datasets {
+    
+     String sets = '(all)';
+     
+     if (item!=null) {
+     
+       List<String> datasets = item.bean[Query.datasets_field];
+       
+       sets = datasets.isEmpty? sets : datasets.toString();
+            
+     }
+     else {
+
+       print("here but null");
+       
+     }
+     
+      return sets;
+  }
 }
