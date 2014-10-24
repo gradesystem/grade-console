@@ -4,7 +4,7 @@
 <link rel="import" href="../../../../packages/paper_elements/paper_input.html">
 
 
-<polymer-element name="grade-input" attributes="value, label, multiline, inputValue, disabled" noscript>
+<polymer-element name="grade-input" attributes="value, label, multiline, inputValue, disabled, required" noscript>
 
     <template>
 
@@ -58,6 +58,7 @@
 		                multiline?="{{multiline!=null}}" 
 		                inputValue={{inputValue}}
 		                height?="{{multiline}}" 
+		                required?="{{required}}"
 		                value="{{value}}">
 		        </paper-input>
        

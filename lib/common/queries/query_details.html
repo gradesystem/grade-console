@@ -32,6 +32,7 @@
                                   disabled="{{ !editable }}" 
                                   multiline?="{{ isAreaField(key) }}" 
                                   label="{{ key | suffix }} ?" 
+                                  required="{{ isRequiredField(key) }}"
                                   inputValue="{{ item.model.bean[key]  }}">
                      </grade-input>
                      

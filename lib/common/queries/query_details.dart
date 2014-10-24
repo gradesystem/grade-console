@@ -10,6 +10,12 @@ class QueryDetails extends PolymerElement with Filters {
                          //Query.target_field, 
                          Query.expression_field];
   
+  static List<String> required_fields = [Query.name_field,
+                         Query.datasets_field,
+                         Query.note_field,
+                         //Query.target_field, 
+                         Query.expression_field];
+  
   
   static List<String> area_fields = [Query.expression_field,Query.note_field];
   
@@ -23,6 +29,10 @@ class QueryDetails extends PolymerElement with Filters {
   
   bool isAreaField(String key) {
     return area_fields.contains(key);
+  }
+  
+  bool isRequiredField(String key) {
+    return required_fields.contains(key);
   }
   
   //used in template to lookup (cannot bind static fields)
