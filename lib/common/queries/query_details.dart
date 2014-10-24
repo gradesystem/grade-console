@@ -24,7 +24,9 @@ class QueryDetails extends PolymerElement with Filters {
     return area_fields.contains(key);
   }
   
-  
+  //used in template to lookup (cannot bind static fields)
+  String get endpoint_key => Query.endpoint_field;
+  String get parameters_key => Query.parameters_field;
 
   //privately used
   String get expression_key => Query.expression_field;
