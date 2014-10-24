@@ -18,6 +18,7 @@ class Query extends Delegate with ListItem, Filters {
 
   Query(this.repo_path, Map bean) : super(bean);
   
+  bool get predefined => get(predefined_field);
   
   //calculates endpoint
   String get endpoint  {
