@@ -41,12 +41,24 @@
       </template>  
       
       
+         <grade-item icon=check-circle-outline-blank smallicon=true>
+          
+            <grade-fascia>
+                  
+                  <div fascia-title>{{ parameters }}</div>
+                  <div fascia-subtitle><span>{{ parameters_key | start }}</span><span fg bolder>{{ parameters_key | suffix}}</span></div>
+                  
+              </grade-fascia>
+              
+          </grade-item>
+      
+      
           <grade-item icon=check-circle-outline-blank smallicon=true>
           
 	          <grade-fascia>
-	                
-	                <div fascia-title>{{ item.model.endpoint }}</div>
-	                <div fascia-subtitle><span>{{ endpoint_name | start }}</span><span fg bolder>{{ endpoint_name | suffix}}</span></div>
+
+	                <div fascia-title>{{ endpoint }}</div>
+	                <div fascia-subtitle><span>{{ endpoint_key | start }}</span><span fg bolder>{{ endpoint_key | suffix}}</span></div>
 	                
 	            </grade-fascia>
               

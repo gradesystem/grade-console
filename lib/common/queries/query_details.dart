@@ -24,6 +24,31 @@ class QueryDetails extends PolymerElement with Filters {
     return area_fields.contains(key);
   }
   
-  String get endpoint_name => Query.endpoint_field;
+  //used in template to lookup (cannot bind static fields)
+  String get endpoint_key => Query.endpoint_field;
+  String get parameters_key => Query.parameters_field;
+
+  //privately used
+  String get expression_key => Query.expression_field;
+  
+  @ComputedProperty("item.model.bean[expression_key]") 
+  String get endpoint => item==null ? '...?' : item.model.endpoint;
+ 
+  @ComputedProperty("item.model.bean[expression_key]")
+  String get parameters {
+    
+    String params = '(none)';
+    
+    if (item!=null) {
+      
+      List<String> parameters = item.model.parameters;
+      params = parameters.isEmpty? params :parameters.toString();
+    
+    }
+    
+    return params;
+    
+  }
+  
   
 }

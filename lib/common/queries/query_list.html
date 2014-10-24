@@ -1,18 +1,14 @@
 <link rel="import" href="../../../../packages/polymer/polymer.html">
 
 <link rel="import" href="../../../../packages/core_elements/core_list_dart.html">
-<link rel="import" href="../../../../packages/core_elements/core_icon.html">
-
-<link rel="import" href="../../../../packages/paper_elements/paper_item.html">
 
 <link rel="import" href="../components/list_panel.html">
-<link rel="import" href="../components/grade_item.html">
-<link rel="import" href="../components/grade_fascia.html">
-<link rel="import" href="../components/grade_button.html">
+<link rel="import" href="query_details_summary.html">
 
 <polymer-element name="query-list"> 
 
  <template>
+ 
   <style>
     .button {
       padding-top: 5px;
@@ -25,22 +21,9 @@
 	  <core-list-dart id="list" data="{{listitems.data | filter(kfilter, itemFilter)}}" height="80" on-core-activate={{selectDataset}} flex>
 	    
 	    <template>
-	      
-	        <paper-item flex trim bg-selected?="{{selected}}">
-	        
-				      <grade-item icon=chevron-right flex>
-				        
-				        <grade-fascia flex>
-				          <div fascia-title>{{model.bean["http://gradesystem.io/onto/query.owl#name"]}} edit? {{edit}}</div>
-				          <div fascia-subtitle>{{model.endpoint}}</div>
-				        </grade-fascia>
-				        
-			          <grade-button class="button" hidden?="{{!selected || model.predefined}}" self-center icon="remove-circle-outline" on-click={{removeItem}}></grade-button>
-				        
-				      </grade-item>
-		            
-		    </paper-item>
 	    
+	       <query-details-summary flex item={{self}} selected="{{ selected==true }}"></query-details-summary>
+	     
 	    </template>
 	  
 	  </core-list-dart>

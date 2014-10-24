@@ -6,11 +6,11 @@ DateFormat JSON_DATE_FORMAT = new DateFormat('yyyy/MM/dd');
 
 abstract class Delegate {
   
-  final Map _bean;
+  final Map _bean = new ObservableMap();
   
-  Delegate(this._bean);
-  
-  Delegate.from(Delegate other): this._bean = new Map.from(other._bean);
+  Delegate(Map bean) {
+    _bean.addAll(bean);
+  }
   
   get bean => _bean;
   

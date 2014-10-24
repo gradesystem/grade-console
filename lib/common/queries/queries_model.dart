@@ -1,30 +1,61 @@
 part of queries;
 
-class Query extends Delegate with ListItem, Cloneable<Query>, Observable {
+class Query extends Delegate with ListItem, Cloneable<Query>, Observable, Filters {
   
   static String endpoint_field = "http://gradesystem.io/onto/query.owl#endpoint";
   static String name_field = "http://gradesystem.io/onto/query.owl#name";  
   static String note_field= "http://gradesystem.io/onto/query.owl#note";
   static String target_field="http://gradesystem.io/onto/query.owl#target";
   static String expression_field="http://gradesystem.io/onto/query.owl#expression";
+  static String parameters_field="http://gradesystem.io/onto/query.owl#parameters";
   static String predefined_field="http://gradesystem.io/onto/query.owl#predefined";
-   
-    
-  Query(this.repo_path, Map bean) : super(new ObservableMap.from(bean));
-   
-  final String repo_path;
-
-  @observable
-  String get name => this.get(name_field);
-  void set name(String value) {this.set(name_field, value);}
-    
-  String get endpoint => '../service/${repo_path}/query/${bean[name_field]}/results';
   
+  static final RegExp regexp = new RegExp(r"!(\w+)");
+
+  final String repo_path;
+  
+  Query(this.repo_path, Map bean) : super(bean);
+  
+
   bool get predefined => get(predefined_field);
   
   Query clone() {
     return new Query(repo_path, new Map.from(bean));
   }
+  
+  //calculates endpoint
+  String get endpoint  {
+    
+    String endpoint = '../service/${repo_path}/query/${bean[name_field]}/results';
+  
+    List<String> parameters = this.parameters;
+    
+    if (!parameters.isEmpty) {
+      
+      endpoint = "${endpoint}?";
+    
+      for (String param in parameters)
+        endpoint = endpoint.endsWith("?")?"${endpoint}${param}=...":"${endpoint}&${param}=..."; 
+    
+   }
+    
+    return endpoint;
+  }
+  
+  
+  List<String> get parameters {
+  
+     List<String> params = [];
+     
+     String exp = bean[Query.expression_field];
+     
+     for (Match m in regexp.allMatches(exp))
+       params.add(m.group(1));
+     
+     return params;
+     
+  
+   }
 }
 
 abstract class Queries extends ListItems<EditableModel<Query>> {
@@ -94,13 +125,6 @@ class EditableModel<T extends Cloneable<T>> extends Observable with ListItem {
     _original = _underEdit;
     edit = false;
     notifyPropertyChange(#model, _underEdit, _original);
-  }
-  
-  void dump() {
-    if (_original!=null) print('_original ${_original.bean}');
-    else print('_original null');
-    if (_underEdit!=null) print('_underEdit ${_underEdit.bean}');
-    else print('_underEdit null');
   }
 
 }

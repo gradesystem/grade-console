@@ -34,9 +34,4 @@ class QueriesPanel extends PolymerElement with Filters {
    // log.info("onSave");
     queries.selected.save();
   }
-  
-  void onDump() {
-    queries.selected.dump();
-  }
- 
 }
