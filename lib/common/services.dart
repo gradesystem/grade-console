@@ -9,6 +9,8 @@ class HttpService {
     return getString(url).timeout(timeLimit).then((String response)=>JSON.decode(response));
   }
   
+  
+  
   static Future<String> getString(String url,
         {bool withCredentials, void onProgress(ProgressEvent e)}) {
     return request(url, withCredentials: withCredentials,

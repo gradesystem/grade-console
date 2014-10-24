@@ -99,6 +99,20 @@ abstract class QuerySubPageModel {
     storage.selected = editableModel;
     editableModel.startEdit();
   }
+  
+  void saveQuery(EditableModel<Query> editableModel) {
+    editableModel.sync();
+    service.put(editableModel.model).then((bool result){saveComplete(result, editableModel);}).catchError((e)=>_onError(e, (){saveQuery(editableModel);}));
+
+    new Timer(new Duration(milliseconds: 200), () {
+      editableModel.sync();
+    });
+  }
+  
+  void saveComplete(bool result, EditableModel<Query> editableModel) {
+    editableModel.synched();
+    editableModel.save();
+  }
  
   void loadAll() {
     storage.loading = true;
@@ -127,6 +141,9 @@ class EditableModel<T extends Cloneable<T>> extends Observable with ListItem {
   @observable
   bool edit = false;
   
+  @observable
+  bool synching = false;
+  
   T _original;
   T _underEdit;
   
@@ -151,6 +168,14 @@ class EditableModel<T extends Cloneable<T>> extends Observable with ListItem {
     _original = _underEdit;
     edit = false;
     notifyPropertyChange(#model, _underEdit, _original);
+  }
+  
+  void sync() {
+    synching = true;
+  }
+  
+  void synched() {
+    synching = false;
   }
 
 }

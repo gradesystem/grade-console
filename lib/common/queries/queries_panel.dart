@@ -30,6 +30,6 @@ class QueriesPanel extends PolymerElement with Filters {
   }
   
   void onSave() {
-    queries.selected.save();
+    model.saveQuery(queries.selected);
   }
 }

@@ -4,6 +4,7 @@
 <link rel="import" href="../components/grade_input.html">
 <link rel="import" href="../components/grade_item.html">
 <link rel="import" href="../components/grade_fascia.html">
+<link rel="import" href="../components/loading_panel.html">
 
 <polymer-element name="query-details" layout vertical> 
 
@@ -18,6 +19,7 @@
         
       </style>
 
+  <loading-panel loading="{{item.synching}}" message="saving the query">
    <div style="overflow-y: auto;">
   
       <template repeat="{{key in fields}}">
@@ -64,6 +66,7 @@
           </grade-item>
           
       </div>  
+      </loading-panel>
 		
   </template> 
   

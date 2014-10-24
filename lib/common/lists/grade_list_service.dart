@@ -22,4 +22,12 @@ abstract class ListService<T extends ListItem> extends Dependencies {
   Future<List<T>> getAll() {
     return http.get("$service_url/$all_path").then((json)=>new ListDelegate(json, generator));
   }
+  
+  Future<bool> put(T item) {
+    Completer<bool> completer = new Completer<bool>();
+    new Timer(new Duration(seconds: 3), () {
+         completer.complete(true);
+        });
+    return completer.future;
+  }
 }
