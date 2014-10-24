@@ -9,7 +9,7 @@
 {
   "http://gradesystem.io/onto/query.owl#name" : "sample subjects",
   "http://gradesystem.io/onto/query.owl#target" : "production",
-  "http://gradesystem.io/onto/query.owl#expression" : "select ?s where { ?s ?p ?o }",
+  "http://gradesystem.io/onto/query.owl#expression" : "select ?s where { ?s !predicate ?o }",
   "http://gradesystem.io/onto/query.owl#note" : "a sample query used during development",
   "http://gradesystem.io/onto/query.owl#predefined" : false
 }

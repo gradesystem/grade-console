@@ -1,0 +1,31 @@
+<link rel="import" href="../../../../packages/polymer/polymer.html">
+
+<link rel="import" href="../../../../packages/paper_elements/paper_item.html">
+
+<link rel="import" href="../components/grade_input.html">
+<link rel="import" href="../components/grade_item.html">
+<link rel="import" href="../components/grade_button.html">
+<link rel="import" href="../components/grade_fascia.html">
+
+<polymer-element name="query-details-summary"> 
+
+  <template>
+  
+      <paper-item trim bg-selected?="{{selected}}">
+            
+                <grade-item icon=chevron-right flex>
+                
+                  <grade-fascia flex>
+                    <div fascia-title>{{ name | uppercase }}</div>
+                    <div fascia-subtitle>{{ endpoint }}</div>
+                  </grade-fascia>
+                  <grade-button class="button" hidden?="{{ !selected || predefined }}" self-center icon="remove-circle-outline" on-click={{removeItem}}></grade-button>
+                  
+                </grade-item>
+                  
+      </paper-item>
+  
+  </template> 
+  
+  <script type="application/dart" src="queries.dart"></script> 
+</polymer-element>

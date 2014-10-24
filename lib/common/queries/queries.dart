@@ -10,6 +10,7 @@ import '../pages/pages.dart';
 
 part 'queries_model.dart';
 part 'query_details.dart';
+part 'query_details_summary.dart';
 part 'queries_panel.dart';
 part 'query_list.dart';
 
