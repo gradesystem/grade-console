@@ -16,10 +16,15 @@
  <template>
  
   <style>
-    .button {
+  
+    [delete] {
       padding-top: 5px;
       padding-right: 5px;
     }
+    
+     :host grade-item:not(:hover)  [delete] {
+         visibility: hidden;
+      }
   </style>
 
   <list-panel loading="{{listitems.loading}}" empty={{listitems.data.isEmpty}}>
@@ -36,7 +41,7 @@
 			         <div fascia-subtitle><span>{{ targetGraph | start}}</span><span fg bolder>{{ targetGraph | suffix}}</span></div>
 			       </grade-fascia>
 			       
-			       <grade-button class="button" hidden?="{{!selected}}" self-center icon="remove-circle-outline" on-click={{removeItem}}></grade-button>
+			       <grade-button delete hidden?="{{!selected}}" self-center icon="delete" on-click={{removeItem}}></grade-button>
 			       
 			     </grade-item>
 			
