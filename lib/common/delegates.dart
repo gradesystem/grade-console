@@ -10,6 +10,8 @@ abstract class Delegate {
   
   Delegate(this._bean);
   
+  Delegate.from(Delegate other): this._bean = new Map.from(other._bean);
+  
   get bean => _bean;
   
   get(String l) => _bean[l];

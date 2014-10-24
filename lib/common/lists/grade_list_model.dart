@@ -20,4 +20,3 @@ abstract class ListItems<T extends ListItem> extends Observable {
   @observable
   bool loading = false;
 }
-

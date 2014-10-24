@@ -21,7 +21,7 @@ class StageDatasets extends Datasets {
 }
 
 @Injectable()
-class StageQueriesModel extends SubPageModel<Query> {
+class StageQueriesModel extends QuerySubPageModel {
   StageQueriesModel(EventBus bus, StageQueriesService service, StageQueries storage) : super(bus, service, storage);
 }
 

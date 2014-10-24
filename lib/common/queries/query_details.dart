@@ -16,7 +16,7 @@ class QueryDetails extends PolymerElement with Filters {
   bool editable = false;
   
   @published
-  Query item;
+  EditableModel<Query> item;
   
   QueryDetails.created() : super.created();
   

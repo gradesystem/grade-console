@@ -51,7 +51,7 @@ class Tasks extends ListItems<Task> {
 }
 
 @Injectable()
-class TasksQueriesModel extends SubPageModel<Query> {
+class TasksQueriesModel extends QuerySubPageModel {
   TasksQueriesModel(EventBus bus, TasksQueriesService service, TasksQueries storage) : super(bus, service, storage);
 }
 

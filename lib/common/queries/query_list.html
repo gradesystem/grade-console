@@ -29,12 +29,13 @@
 	        <paper-item flex trim bg-selected?="{{selected}}">
 	        
 				      <grade-item icon=chevron-right flex>
-				      
+				        
 				        <grade-fascia flex>
-				          <div fascia-title>{{name}}</div>
-				          <div fascia-subtitle>{{endpoint}}</div>
+				          <div fascia-title>{{model.bean["http://gradesystem.io/onto/query.owl#name"]}} edit? {{edit}}</div>
+				          <div fascia-subtitle>{{model.endpoint}}</div>
 				        </grade-fascia>
-			          <grade-button class="button" hidden?="{{!selected || predefined}}" self-center icon="remove-circle-outline" on-click={{removeItem}}></grade-button>
+				        
+			          <grade-button class="button" hidden?="{{!selected || model.predefined}}" self-center icon="remove-circle-outline" on-click={{removeItem}}></grade-button>
 				        
 				      </grade-item>
 		            

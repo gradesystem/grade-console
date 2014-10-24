@@ -30,7 +30,7 @@
                                   disabled="{{ !editable }}" 
                                   multiline?="{{ isAreaField(key) }}" 
                                   label="{{ key | suffix }} ?" 
-                                  value="{{ item.bean[key] | trim | uppercase }}">
+                                  inputValue="{{ item.model.bean[key]  }}">
                      </grade-input>
                      
                 <div fascia-subtitle><span>{{ key | start}}</span><span fg bolder>{{ key | suffix}}</span></div>
@@ -45,7 +45,7 @@
           
 	          <grade-fascia>
 	                
-	                <div fascia-title>{{ item.endpoint }}</div>
+	                <div fascia-title>{{ item.model.endpoint }}</div>
 	                <div fascia-subtitle><span>{{ endpoint_name | start }}</span><span fg bolder>{{ endpoint_name | suffix}}</span></div>
 	                
 	            </grade-fascia>
