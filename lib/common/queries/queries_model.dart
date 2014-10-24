@@ -15,14 +15,22 @@ class Query extends Delegate with ListItem, Cloneable<Query>, Observable, Filter
 
   final String repo_path;
   
-  Query.fromBean(this.repo_path, Map bean) : super(bean);
+  Query.fromBean(this.repo_path, Map bean) : super(bean){
+    
+    onBeanChange([name_field, expression_field], notifyEndpointChange);
+  }
   
   Query(this.repo_path) : super({}) {
     put(name_field, "");
     put(expression_field, "");
     put(predefined_field, false);
+     
+    onBeanChange([name_field, expression_field], notifyEndpointChange);
   }
   
+  void notifyEndpointChange() {
+    notifyPropertyChange(#endpoint, null, endpoint);
+  }
   
   bool get predefined => get(predefined_field);
   
@@ -32,6 +40,7 @@ class Query extends Delegate with ListItem, Cloneable<Query>, Observable, Filter
   }
   
   //calculates endpoint
+  @observable
   String get endpoint  {
     
     String endpoint = '../service/${repo_path}/query/${bean[name_field]}/results';

@@ -31,10 +31,7 @@ class QueryDetails extends PolymerElement with Filters {
   
   //privately used
   String get expression_key => Query.expression_field;
-  
-  @ComputedProperty("item.model.bean[expression_key]") 
-  String get endpoint => item==null ? '...?' : item.model.endpoint;
- 
+
   @ComputedProperty("item.model.bean[expression_key]")
   String get parameters {
     

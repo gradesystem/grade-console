@@ -6,13 +6,13 @@ DateFormat JSON_DATE_FORMAT = new DateFormat('yyyy/MM/dd');
 
 abstract class Delegate {
   
-  final Map _bean = new ObservableMap();
+  final ObservableMap _bean = new ObservableMap();
   
   Delegate(Map bean) {
     _bean.addAll(bean);
   }
   
-  get bean => _bean;
+  ObservableMap get bean => _bean;
   
   get(String l) => _bean[l];
   getDate(String l) => JSON_DATE_FORMAT.parse(get(l));
@@ -31,6 +31,12 @@ abstract class Delegate {
                         put(MirrorSystem.getName(invocation.memberName), invocation.positionalArguments[0])
                         : super.noSuchMethod(invocation);
    }
+  
+  void onBeanChange(List<String> keys, void callback()) {
+      bean.changes.expand((List<ChangeRecord> list) => list)
+         .where((ChangeRecord record)=> record is MapChangeRecord)
+         .where((MapChangeRecord record)=> keys.contains(record.key)).listen((_){callback();});
+    }
 }
 
 class ListDelegate<E extends Delegate> extends ListBase<E> {
