@@ -11,37 +11,36 @@
 
 <polymer-element name="queries-panel" horizontal layout>
 
-<template>
+  <template>
 
-    
-      <grade-scaffold flex>
-      
-          <grade-header-panel main fit paneltitle="QUERIES">
-          
-            <page-menu menu></page-menu>
-
-                <grade-input toolbar
-                            smaller 
-                            style="width:120px; margin-right:10px" 
-                            label="filter"
-                            inputValue={{kfilter}}>
-                </grade-input>
-                
-                <grade-button toolbar icon="refresh" label="refresh list" on-click="{{refresh}}"></grade-button>
-                <grade-button toolbar icon="add" label="add query"></grade-button>
-       
-            <query-list main listitems="{{queries}}" kfilter="{{kfilter}}"></query-list>
-            
-          </grade-header-panel>
-          
-          <grade-header-panel side fit paneltitle="PROPERTIES">
-              <grade-button toolbar icon="create" label="edit query" on-click="{{onEdit}}" hidden?="{{queries.selected.edit || queries.selected.model.predefined}}"></grade-button>
-              <grade-button toolbar icon="cancel" label="cancel" on-click="{{onCancel}}" hidden?={{!queries.selected.edit}}></grade-button>
-              <grade-button toolbar icon="save" label="save" on-click="{{onSave}}" hidden?={{!queries.selected.edit}}></grade-button>
-              <query-details main item="{{queries.selected}}" editable="{{queries.selected.edit}}" spaced></query-details> 
-          </grade-header-panel>
-
-      </grade-scaffold>
+	  <grade-scaffold flex>
+	  
+	      <grade-header-panel main fit paneltitle="QUERIES">
+	      
+	        <page-menu menu></page-menu>
+	
+	            <grade-input toolbar
+	                        smaller 
+	                        style="width:120px; margin-right:10px" 
+	                        label="filter"
+	                        inputValue={{kfilter}}>
+	            </grade-input>
+	            
+	            <grade-button toolbar icon="refresh" label="refresh list" on-click="{{refresh}}"></grade-button>
+	            <grade-button toolbar icon="add" label="add query" on-click={{addQuery}}></grade-button>
+	   
+	        <query-list main listitems="{{queries}}" kfilter="{{kfilter}}"></query-list>
+	        
+	      </grade-header-panel>
+	      
+	      <grade-header-panel side fit paneltitle="PROPERTIES">
+	          <grade-button toolbar icon="create" label="edit query" on-click="{{onEdit}}" hidden?="{{queries.selected.edit || queries.selected.model.predefined}}"></grade-button>
+	          <grade-button toolbar icon="cancel" label="cancel" on-click="{{onCancel}}" hidden?={{!queries.selected.edit}}></grade-button>
+	          <grade-button toolbar icon="save" label="save" on-click="{{onSave}}" hidden?={{!queries.selected.edit}}></grade-button>
+	          <query-details main item="{{queries.selected}}" editable="{{queries.selected.edit}}" spaced></query-details> 
+	      </grade-header-panel>
+	
+	  </grade-scaffold>
   
   </template>
   

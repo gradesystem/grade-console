@@ -15,15 +15,20 @@ class Query extends Delegate with ListItem, Cloneable<Query>, Observable, Filter
 
   final String repo_path;
   
-  Query(this.repo_path, Map bean) : super(bean);
+  Query.fromBean(this.repo_path, Map bean) : super(bean);
   
+  Query(this.repo_path) : super({}) {
+    put(name_field, "");
+    put(expression_field, "");
+    put(predefined_field, false);
+  }
   
   
   bool get predefined => get(predefined_field);
   
   
   Query clone() {
-    return new Query(repo_path, new Map.from(bean));
+    return new Query.fromBean(repo_path, new Map.from(bean));
   }
   
   //calculates endpoint
@@ -77,6 +82,14 @@ abstract class QuerySubPageModel {
       loadAll();
     });
   }
+  
+  void addNewQuery() {
+    Query query = new Query(service.path);
+    EditableModel<Query> editableModel = new EditableModel(query);
+    storage.data.add(editableModel);
+    storage.selected = editableModel;
+    editableModel.startEdit();
+  }
  
   void loadAll() {
     storage.loading = true;
@@ -92,7 +105,6 @@ abstract class QuerySubPageModel {
     storage.loading = false;
     
   }
-  
   
   void _onError(e, callback) {
     storage.data.clear();

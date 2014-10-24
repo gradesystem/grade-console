@@ -6,12 +6,14 @@ abstract class ListService<T extends ListItem> extends Dependencies {
   
   Generator<T> generator;
   
+  String path;
+  
   String service_url;
   String all_path;
   
   HttpService http;
   
-  ListService(String path, this.all_path, this.generator) {
+  ListService(this.path, this.all_path, this.generator) {
     this.http = instanceOf(HttpService);
     
     service_url = "$base_url/$path";
