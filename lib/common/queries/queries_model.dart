@@ -102,7 +102,10 @@ abstract class QuerySubPageModel {
   
   void saveQuery(EditableModel<Query> editableModel) {
     editableModel.sync();
-    service.put(editableModel.model).then((bool result){saveComplete(result, editableModel);}).catchError((e)=>_onError(e, (){saveQuery(editableModel);}));
+    service.put(editableModel.model)
+    .then((bool result){saveComplete(result, editableModel);})
+    .catchError((e)=>_onError(e, (){saveQuery(editableModel);}))
+    .whenComplete((){editableModel.synched();});
 
     new Timer(new Duration(milliseconds: 200), () {
       editableModel.sync();
@@ -110,14 +113,18 @@ abstract class QuerySubPageModel {
   }
   
   void saveComplete(bool result, EditableModel<Query> editableModel) {
-    editableModel.synched();
     editableModel.save();
   }
  
   void loadAll() {
     storage.loading = true;
     storage.selected = null;
-    service.getAll().then(_setData).catchError((e)=>_onError(e, loadAll));
+    service.getAll().then(_setData).catchError((e){
+      _onError(e, loadAll);
+      storage.data.clear();
+      storage.loading = false;
+      }
+    );
   }
   
   void _setData(List<Query> items) {
@@ -130,8 +137,6 @@ abstract class QuerySubPageModel {
   }
   
   void _onError(e, callback) {
-    storage.data.clear();
-    storage.loading = false;
     bus.fire(new ToastMessage.alert("Ops we are having some problems communicating with the server", callback));
   }
 }

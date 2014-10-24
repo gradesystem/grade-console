@@ -35,6 +35,9 @@ class QueryDetails extends PolymerElement with Filters {
     return required_fields.contains(key);
   }
   
+  @ComputedProperty("item.synching")
+  bool get loading => item!=null && item.synching;
+  
   //used in template to lookup (cannot bind static fields)
   String get endpoint_key => Query.endpoint_field;
   String get parameters_key => Query.parameters_field;

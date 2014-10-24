@@ -2,6 +2,7 @@ part of lists;
 
 abstract class ListService<T extends ListItem> extends Dependencies {
   
+  static bool fail = true;
   static String base_url = "service";
   
   Generator<T> generator;
@@ -26,7 +27,10 @@ abstract class ListService<T extends ListItem> extends Dependencies {
   Future<bool> put(T item) {
     Completer<bool> completer = new Completer<bool>();
     new Timer(new Duration(seconds: 3), () {
-         completer.complete(true);
+          if (fail) completer.completeError(new Exception("Simulated failure"));
+          else completer.complete(true);
+         
+         fail = !fail;
         });
     return completer.future;
   }
