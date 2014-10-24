@@ -102,7 +102,7 @@
 :host /deep/ .home /deep/ paper-tabs paper-tab::shadow #ink {
   color: "tertiary";
 }
-:host /deep/ .home /deep/ paper-item:hover {
+:host /deep/ .home /deep/ paper-item:not([bg-selected]):hover {
   color: #26699a;
 }
 :host /deep/ .home /deep/ paper-button::shadow #ripple {
@@ -162,7 +162,7 @@
 :host /deep/ .prod /deep/ paper-tabs paper-tab::shadow #ink {
   color: #80deea;
 }
-:host /deep/ .prod /deep/ paper-item:hover {
+:host /deep/ .prod /deep/ paper-item:not([bg-selected]):hover {
   color: #00bcd4;
 }
 :host /deep/ .prod /deep/ paper-button::shadow #ripple {
@@ -222,7 +222,7 @@
 :host /deep/ .deck /deep/ paper-tabs paper-tab::shadow #ink {
   color: #ffdf82;
 }
-:host /deep/ .deck /deep/ paper-item:hover {
+:host /deep/ .deck /deep/ paper-item:not([bg-selected]):hover {
   color: #ffc107;
 }
 :host /deep/ .deck /deep/ paper-button::shadow #ripple {
@@ -282,7 +282,7 @@
 :host /deep/ .tasks /deep/ paper-tabs paper-tab::shadow #ink {
   color: #f69988;
 }
-:host /deep/ .tasks /deep/ paper-item:hover {
+:host /deep/ .tasks /deep/ paper-item:not([bg-selected]):hover {
   color: #e41c23;
 }
 :host /deep/ .tasks /deep/ paper-button::shadow #ripple {
@@ -342,7 +342,7 @@
 :host /deep/ .stage /deep/ paper-tabs paper-tab::shadow #ink {
   color: #80cbc4;
 }
-:host /deep/ .stage /deep/ paper-item:hover {
+:host /deep/ .stage /deep/ paper-item:not([bg-selected]):hover {
   color: #009587;
 }
 :host /deep/ .stage /deep/ paper-button::shadow #ripple {
