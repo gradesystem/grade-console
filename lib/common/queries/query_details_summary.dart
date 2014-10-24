@@ -14,21 +14,29 @@ class QueryDetailsSummary extends PolymerElement with Filters {
   
   //privately used: this is to support refactoring of vocabulary
   String get name_key => Query.name_field;
-  String get datasets_key => Query.datasets_field;
- 
+  
   bool get predefined => item.model.bean[Query.predefined_field]==true;
   
   @ComputedProperty("item.model.bean[name_key]")  
   String get name => readValue(#name);
 
-  @ComputedProperty("item.model.bean[datasets_key]")  
+  String get datasets_key => Query.datasets_field;
+    
+  @ComputedProperty("item.model.bean[datasets_key]")
   String get datasets {
-    
-    List<String> datasets = item.model.bean[datasets_key];
-    
-    return (datasets==null || datasets.isEmpty) ? '(all)' :  datasets.toString();
-    
-  }
+      
+       String sets = '(all)';
+       
+       if (item!=null) {
+       
+         String datasets = item.model.get(Query.datasets_field);
+         
+         sets = (datasets==null || datasets.length==0) ? sets : datasets;
+              
+       }
+       
+        return sets;
+    }
   
   void removeItem() {
     fire("remove-item", detail:item);

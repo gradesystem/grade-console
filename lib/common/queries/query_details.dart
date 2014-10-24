@@ -5,6 +5,7 @@ class QueryDetails extends PolymerElement with Filters {
   
   
   List<String> fields = [Query.name_field,
+                         Query.datasets_field,
                          Query.note_field,
                          //Query.target_field, 
                          Query.expression_field];
@@ -50,21 +51,4 @@ class QueryDetails extends PolymerElement with Filters {
     
   }
   
-  String get datasets_key => Query.datasets_field;
-  
-  @ComputedProperty("item.model.bean[datasets_key]")
-  String get datasets {
-    
-     String sets = '(all)';
-     
-     if (item!=null) {
-     
-       List<String> datasets = item.model.get(Query.datasets_field);
-       
-       sets = datasets.isEmpty? sets : datasets.toString();
-            
-     }
-     
-      return sets;
-  }
 }
