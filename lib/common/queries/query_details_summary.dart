@@ -24,4 +24,8 @@ class QueryDetailsSummary extends PolymerElement with Filters {
   @ComputedProperty("item.model.bean[expression_key]") 
   String get endpoint => item==null ? '...?' : item.model.endpoint;
   
+  void removeItem() {
+    fire("remove-item", detail:item);
+  }
+  
 }

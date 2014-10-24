@@ -11,9 +11,9 @@ class QueryList extends PolymerElement with Filters {
   
   CoreList list;
   
-  FilterFunction itemFilter = (Query item, String term) 
-                    => item.get(Query.name_field) != null && 
-                       item.get(Query.name_field).toLowerCase().contains(term.toLowerCase());
+  FilterFunction itemFilter = (EditableModel<Query> item, String term) 
+                    => item.model.get(Query.name_field) != null && 
+                       item.model.get(Query.name_field).toLowerCase().contains(term.toLowerCase());
   
   QueryList.created() : super.created();
   
@@ -35,8 +35,8 @@ class QueryList extends PolymerElement with Filters {
     listitems.selected = event.detail.data;
   }
   
-  void removeItem() {
-    listitems.data.remove(listitems.selected);
+  void removeItem(event, detail, target) {
+    listitems.data.remove(detail);
   }
  
 }
