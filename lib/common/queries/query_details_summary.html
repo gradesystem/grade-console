@@ -11,19 +11,26 @@
 
   <template>
   
-      <paper-item trim bg-selected?="{{selected}}">
-            
-                <grade-item icon=chevron-right flex>
-                
-                  <grade-fascia flex>
-                    <div fascia-title>{{ name | uppercase }}</div>
-                    <div fascia-subtitle>{{ datasets }}</div>
-                  </grade-fascia>
-                  <grade-button class="button" hidden?="{{ !selected || predefined }}" self-center icon="remove-circle-outline" on-click={{removeItem}}></grade-button>
-                  
-                </grade-item>
-                  
-      </paper-item>
+	  <style>
+	    .button {
+	      padding-top: 5px;
+	      padding-right: 5px;
+	    }
+	  </style>
+ 
+     <paper-item trim bg-selected?="{{selected}}">
+           
+	     <grade-item icon=chevron-right flex>
+	     
+	       <grade-fascia flex>
+	         <div fascia-title>{{ name | uppercase }}</div>
+	         <div fascia-subtitle>{{ datasets }}</div>
+	       </grade-fascia>
+	       <grade-button class="button" hidden?="{{ !selected || predefined }}" self-center icon="delete" on-click={{removeItem}}></grade-button>
+	       
+	     </grade-item>
+                 
+     </paper-item>
   
   </template> 
   
