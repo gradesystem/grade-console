@@ -65,11 +65,6 @@ class QueryDetails extends PolymerElement with Filters {
        sets = datasets.isEmpty? sets : datasets.toString();
             
      }
-     else {
-
-       print("here but null");
-       
-     }
      
       return sets;
   }
