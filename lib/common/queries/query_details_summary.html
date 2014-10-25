@@ -22,8 +22,8 @@
 	       </grade-fascia>
 	       
 	       
-	       <grade-button action onhover hidden?="{{ item.edit || !selected || predefined }}" smallicon label="remove query" icon="delete" on-click={{removeItem}}></grade-button>
-         <grade-button action hidden?="{{ !item.edit }}" smallicon icon="save" label="there are pending changes"></grade-button>
+	       <grade-button action onhover hidden?="{{ item.edit || !selected || predefined }}" smallicon tooltip="left" label="remove query" icon="delete" on-click={{removeItem}}></grade-button>
+         <grade-button action hidden?="{{ !item.edit }}" smallicon icon="save" tooltip="left" label="there are pending changes"></grade-button>
 	       
 	     </grade-item>
                  
