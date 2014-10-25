@@ -14,7 +14,7 @@
 	
      <paper-item trim bg-selected?="{{selected}}">
            
-	     <grade-item icon=chevron-right flex>
+	     <grade-item smallicon icon=search flex>
 	     
 	       <grade-fascia flex>
 	         <div fascia-title>{{ name | uppercase }}</div>
@@ -22,7 +22,7 @@
 	       </grade-fascia>
 	       
 	       
-	       <grade-button action onhover hidden?="{{ item.edit || !selected || predefined }}" smallicon="true" label="remove query" icon="delete" on-click={{removeItem}}></grade-button>
+	       <grade-button action onhover hidden?="{{ item.edit || !selected || predefined }}" smallicon label="remove query" icon="delete" on-click={{removeItem}}></grade-button>
          <grade-button action hidden?="{{ !item.edit }}" smallicon icon="save" label="there are pending changes"></grade-button>
 	       
 	     </grade-item>
