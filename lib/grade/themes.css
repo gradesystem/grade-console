@@ -81,6 +81,9 @@
 :host /deep/ grade-header-panel[side] /deep/ .title {
   font-size: smaller;
 }
+:host /deep/ grade-item:not(:hover) [onhover] {
+  visibility: hidden;
+}
 .home-scaffold {
   background: #26699a;
   color: #fff;
