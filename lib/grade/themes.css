@@ -51,6 +51,18 @@
 :host /deep/ [small] {
   font-size: x-small;
 }
+:host /deep/ [tinyicon] /deep/ core-icon {
+  height: 12px;
+  min-height: 12px;
+  min-width: 12px;
+  width: 12px;
+}
+:host /deep/ [smallicon] /deep/ core-icon {
+  height: 20px;
+  min-height: 20px;
+  min-width: 20px;
+  width: 20px;
+}
 :host /deep/ [truncate] * {
   overflow: hidden;
   text-overflow: ellipsis;

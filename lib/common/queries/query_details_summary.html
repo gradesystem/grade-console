@@ -11,19 +11,7 @@
 
   <template>
   
-	  <style>
-	    [delete] {
-	      padding-top: 5px;
-	      padding-right: 5px;
-	    }
-	    
-	    :host grade-item:not(:hover)  [delete] {
-	       visibility: hidden;
-	    }
-	    
-	    
-	  </style>
- 
+	
      <paper-item trim bg-selected?="{{selected}}">
            
 	     <grade-item icon=chevron-right flex>
@@ -32,7 +20,10 @@
 	         <div fascia-title>{{ name | uppercase }}</div>
 	         <div fascia-subtitle>{{ datasets }}</div>
 	       </grade-fascia>
-	       <grade-button delete hidden?="{{ !selected || predefined }}" self-center icon="delete" on-click={{removeItem}}></grade-button>
+	       
+	       
+	       <grade-button action onhover hidden?="{{ item.edit || !selected || predefined }}" smallicon="true" label="remove query" icon="delete" on-click={{removeItem}}></grade-button>
+         <grade-button action hidden?="{{ !item.edit }}" smallicon icon="save" label="there are pending changes"></grade-button>
 	       
 	     </grade-item>
                  

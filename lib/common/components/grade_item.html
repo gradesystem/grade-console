@@ -4,7 +4,7 @@
 <link rel="import" href="../../../../packages/core_elements/core_icon.html">
 
 
-<polymer-element name="grade-item" attributes="icon,smallicon" noscript>
+<polymer-element name="grade-item" attributes="icon" noscript>
 
     <template>
 
@@ -30,13 +30,29 @@
           min-width: 24px;
         }
       
+      
+	      :host [actions] {
+	      
+    	     margin-right:5px;
+	         margin-left:5px;
+	      }
+	      
+	      :host *:not(:hover) [onhover] {
+        
+           visibility: hidden;
+        }
+      
       </style>
       
-        <div item layout horizontal >
+        <div item layout horizontal>
 
-           <core-icon self-start fg icon="{{icon}}" smallicon?="{{smallicon}}"></core-icon>
-		      
-		       <content></content>
+           <core-icon self-start fg icon="{{icon}}"></core-icon>
+	
+		       <content select="*:not([action])"></content>
+		       
+	        <div actions self-end center layout horizontal>
+              <content select="*[action]"></content>
+           </div>
              
         </div>
     
