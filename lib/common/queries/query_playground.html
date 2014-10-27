@@ -12,6 +12,7 @@
 
 <link rel="import" href="../../../../packages/core_elements/av_icons.html">
 <link rel="import" href="../../../../packages/core_elements/core_pages.html">
+<link rel="import" href="../../../../packages/core_elements/core_animated_pages.html">
 <link rel="import" href="../../../../packages/paper_elements/paper_fab.html">
 <link rel="import" href="../../../../packages/paper_elements/paper_tabs.html">
 <link rel="import" href="../../../../packages/paper_elements/paper_tab.html">
@@ -68,7 +69,7 @@
               <paper-tab>Table</paper-tab>
               <paper-tab>Raw</paper-tab>
             </paper-tabs>
-	          <core-pages selected="{{resultArea}}" spaced >
+	          <core-animated-pages selected="{{resultArea}}" spaced >
 	            <table style="border-collapse: collapse; width:100%">
 			          <tr>
 			            <th template repeat="{{header in editableQuery.lastQueryResult.headers}}" style="border: 1px solid #000">{{header}}</th>
@@ -84,10 +85,10 @@
 		          <div>
 		           {{editableQuery.lastQueryResult.raw}}
 		          </div>
-	          </core-pages>
+	          </core-animated-pages>
 	        </div>
 		      <div layout horizontal center-justified hide?="{{editableQuery.lastQueryResult!=null}}"> 
-	          <div self-center fg  >No results</div>
+	          <div self-center fg>No results</div>
 	        </div>
 	      </loading-panel>
 	    </grade-header-panel>

@@ -22,7 +22,7 @@
 	       </grade-fascia>
 	       
 	      
-	       <grade-button action onhover hidden?="{{ !predefined }}" smallicon tooltip="left" label="predefined query" icon="lock"></grade-button>
+	       <grade-button action hidden?="{{ !predefined }}" smallicon tooltip="left" label="predefined query" icon="lock"></grade-button>
          <grade-button action onhover hidden?="{{ item.edit || !selected || predefined }}" smallicon tooltip="left" label="remove query" icon="delete" on-click={{removeItem}}></grade-button>
          <grade-button action hidden?="{{ !item.edit }}" smallicon icon="save" tooltip="left" label="there are pending changes"></grade-button>
 	       
