@@ -4,7 +4,7 @@ part of queries;
 class QueryDetailsSummary extends PolymerElement with Filters {
    
   @published
-  EditableModel<Query> item;
+  EditableQuery item;
   
   @published
   bool selected;

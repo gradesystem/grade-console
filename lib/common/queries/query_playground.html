@@ -1,0 +1,97 @@
+<link rel="import" href="../../../../packages/polymer/polymer.html">
+
+<link rel="import" href="../coming_soon.html">
+
+<link rel="import" href="../components/grade_input.html">
+<link rel="import" href="../components/grade_item.html">
+<link rel="import" href="../components/grade_fascia.html">
+
+<link rel="import" href="../components/grade_header_panel.html">
+<link rel="import" href="../components/grade_button.html">
+<link rel="import" href="../components/loading_panel.html">
+
+<link rel="import" href="../../../../packages/core_elements/av_icons.html">
+<link rel="import" href="../../../../packages/core_elements/core_pages.html">
+<link rel="import" href="../../../../packages/paper_elements/paper_fab.html">
+<link rel="import" href="../../../../packages/paper_elements/paper_tabs.html">
+<link rel="import" href="../../../../packages/paper_elements/paper_tab.html">
+
+<polymer-element name="query-playground" layout vertical>  
+
+  <template>
+    <div flex two wired rounded spaced layout vertical>
+      <grade-header-panel flex paneltitle={{title}}>
+        <grade-button menu icon="arrow-back" label="back to queries" on-click="{{onBack}}"></grade-button>
+        
+        <div main fit layout vertical>
+          
+          <grade-item>
+            <grade-fascia>     
+							<grade-input fascia-title 
+							             multiline 
+							             editable="{{editable}}"
+							             label="Query" 
+							             inputValue="{{editableQuery.model.bean[expression_key]}}">
+							</grade-input>
+              <div fascia-subtitle><span>HTTP://GRADESYSTEM.IO/ONTO/QUERY.OWL#</span><span fg bolder>EXPRESSION</span></div>
+            </grade-fascia>
+          </grade-item>
+          
+	        <div flex style="overflow-y: auto;" layout vertical>
+						<template repeat="{{key in editableQuery.model.parameters}}">
+              <grade-item flex>
+                <grade-fascia style="min-width:20%">    
+									<grade-input fascia-title 
+									             multiline 
+									             label="{{key}}" 
+									             inputValue="{{editableQuery.parametersValues[key]}}">
+									</grade-input>
+                  <div fascia-subtitle><span fg bolder>{{key}}</span></div>
+						    </grade-fascia>
+						  </grade-item>
+						</template>
+          </div>
+        </div>
+      </grade-header-panel>
+      
+      <div horizontal end-justified layout>
+        <div style="padding:5px">
+          <paper-fab mini="true" icon="av:play-arrow" on-click="{{onRun}}"></paper-fab>
+        </div>
+      </div>
+    </div>
+    <div flex three wired rounded spaced relative>
+      <grade-header-panel fit paneltitle="Results">
+        <loading-panel main loading="{{editableQuery.queryRunning}}" message="retrieving results">
+          <div hide?="{{editableQuery.lastQueryResult==null}}">
+            <paper-tabs selected="{{resultArea}}">
+              <paper-tab>Table</paper-tab>
+              <paper-tab>Raw</paper-tab>
+            </paper-tabs>
+	          <core-pages selected="{{resultArea}}" spaced >
+	            <table style="border-collapse: collapse; width:100%">
+			          <tr>
+			            <th template repeat="{{header in editableQuery.lastQueryResult.headers}}" style="border: 1px solid #000">{{header}}</th>
+			          </tr> 
+			          
+			          <tr template repeat="{{row in editableQuery.lastQueryResult.rows}}">
+				          <td template repeat="{{header in editableQuery.lastQueryResult.headers}}" style="border: 1px solid #000">
+				             {{row[header]["value"]}}
+				          </td>
+			          </tr>
+		
+		          </table>
+		          <div>
+		           {{editableQuery.lastQueryResult.raw}}
+		          </div>
+	          </core-pages>
+	        </div>
+		      <div layout horizontal center-justified hide?="{{editableQuery.lastQueryResult!=null}}"> 
+	          <div self-center fg  >No results</div>
+	        </div>
+	      </loading-panel>
+	    </grade-header-panel>
+	  </div>
+  </template>
+  <script type="application/dart" src="queries.dart"></script> 
+</polymer-element>

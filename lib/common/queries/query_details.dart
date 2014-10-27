@@ -23,7 +23,7 @@ class QueryDetails extends PolymerElement with Filters {
   bool editable = false;
   
   @published
-  EditableModel<Query> item;
+  EditableQuery item;
   
   QueryDetails.created() : super.created();
   
@@ -45,7 +45,7 @@ class QueryDetails extends PolymerElement with Filters {
   //privately used
   String get expression_key => Query.expression_field;
 
-  @ComputedProperty("item.model.bean[expression_key]")
+  @ComputedProperty("item.model.parameters")
   String get parameters {
     
     String params = '(none)';

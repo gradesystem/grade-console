@@ -1,6 +1,7 @@
 <link rel="import" href="../../../../packages/polymer/polymer.html">
 
 <link rel="import" href="../../../../packages/core_elements/core_pages.html">
+<link rel="import" href="../../../../packages/core_elements/core_animated_pages.html">
 
 <link rel="import" href="../components/grade_scaffold.html">
 <link rel="import" href="../components/page_menu.html">
@@ -16,6 +17,8 @@
 <polymer-element name="queries-panel" horizontal layout>
 
   <template>
+  
+  <core-animated-pages flex selected="{{area}}">
 
 	  <grade-scaffold flex>
 	  
@@ -41,11 +44,15 @@
 	          <grade-button toolbar icon="create" label="edit query" on-click="{{onEdit}}" hidden?="{{queries.selected.edit || queries.selected.model.predefined}}"></grade-button>
 	          <grade-button toolbar icon="cancel" label="cancel" on-click="{{onCancel}}" hidden?={{!queries.selected.edit}}></grade-button>
 	          <grade-button toolbar icon="save" label="save" on-click="{{onSave}}" hidden?={{!queries.selected.edit}}></grade-button>
-	          <grade-button toolbar icon="av:play-arrow" label="run" on-click="{{onRun}}"></grade-button>
+	          <grade-button toolbar icon="av:play-arrow" label="run" on-click="{{onQueryPlayground}}"></grade-button>
 	          <query-details main item="{{queries.selected}}" editable="{{queries.selected.edit}}" spaced></query-details> 
 	      </grade-header-panel>
 	
 	  </grade-scaffold>
+
+      <query-playground editableQuery="{{queries.selected}}" on-back="{{onBack}}" on-run="{{onRunQuery}}"></query-playground>
+	  
+	  </core-animated-pages>
   
   </template>
   

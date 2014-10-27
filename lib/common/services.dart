@@ -5,13 +5,11 @@ class HttpService {
   
   Duration timeLimit = new Duration(minutes: 3);
 
-  Future<List> get(String url) {
+  Future get(String url) {
     return getString(url).timeout(timeLimit).then((String response)=>JSON.decode(response));
   }
   
-  
-  
-  static Future<String> getString(String url,
+  Future<String> getString(String url,
         {bool withCredentials, void onProgress(ProgressEvent e)}) {
     return request(url, withCredentials: withCredentials,
         onProgress: onProgress).then((xhr) => xhr.responseText);
