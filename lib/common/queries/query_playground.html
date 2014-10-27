@@ -25,7 +25,7 @@
         <grade-button menu icon="arrow-back" label="back to queries" on-click="{{onBack}}"></grade-button>
         
         <div main fit layout vertical>
-          
+         
           <grade-item>
             <grade-fascia>     
 							<grade-input fascia-title 
@@ -33,25 +33,26 @@
 							             disabled="{{ !editable }}" 
 							             label="Query" 
 							             inputValue="{{editableQuery.model.bean[expression_key]}}">
-							</grade-input>
-              <div fascia-subtitle><span>HTTP://GRADESYSTEM.IO/ONTO/QUERY.OWL#</span><span fg bolder>EXPRESSION</span></div>
-            </grade-fascia>
+							 </grade-input>
+             </grade-fascia>
           </grade-item>
-          
-	        <div flex style="overflow-y: auto;" layout vertical>
-						<template repeat="{{key in editableQuery.model.parameters}}">
-              <grade-item flex>
-                <grade-fascia style="min-width:20%">    
-									<grade-input fascia-title 
-									             multiline 
-									             label="{{key}}" 
-									             inputValue="{{editableQuery.parametersValues[key]}}">
-									</grade-input>
-                  <div fascia-subtitle><span fg bolder>{{key}}</span></div>
-						    </grade-fascia>
-						  </grade-item>
-						</template>
-          </div>
+          <div flex style="overflow-y: auto;" vertical layout>
+              <div>
+								<template repeat="{{key in editableQuery.model.parameters}}">
+		              <grade-item flex>
+		                <grade-fascia style="min-width:20%">    
+											<grade-input fascia-title 
+											             multiline 
+											             label="{{key}}" 
+											             inputValue="{{editableQuery.parametersValues[key]}}">
+											</grade-input>
+		                  <div fascia-subtitle><span fg bolder>{{key}}</span></div>
+								    </grade-fascia>
+								  </grade-item>
+								</template>
+		         
+            </div>
+	        </div>
         </div>
       </grade-header-panel>
       
