@@ -64,13 +64,13 @@
     </div>
     <div flex three wired rounded spaced relative>
       <grade-header-panel fit paneltitle="Results">
+         <paper-tabs toolbar  style="width:200px" selected="{{resultArea}}"  hide?="{{editableQuery.lastQueryResult==null || editableQuery.queryRunning}}">
+          <paper-tab>Table</paper-tab>
+          <paper-tab>Raw</paper-tab>
+        </paper-tabs>
         <loading-panel main loading="{{editableQuery.queryRunning}}" message="retrieving results">
-          <div hide?="{{editableQuery.lastQueryResult==null}}">
-            <paper-tabs selected="{{resultArea}}">
-              <paper-tab>Table</paper-tab>
-              <paper-tab>Raw</paper-tab>
-            </paper-tabs>
-	          <core-animated-pages selected="{{resultArea}}" spaced >
+        
+	          <core-animated-pages selected="{{resultArea}}" spaced  hide?="{{editableQuery.lastQueryResult==null}}">
 	            <table style="border-collapse: collapse; width:100%">
 			          <tr>
 			            <th template repeat="{{header in editableQuery.lastQueryResult.headers}}" style="border: 1px solid #000">{{header}}</th>
@@ -87,7 +87,7 @@
 		           {{editableQuery.lastQueryResult.raw}}
 		          </div>
 	          </core-animated-pages>
-	        </div>
+
 		      <div layout horizontal center-justified hide?="{{editableQuery.lastQueryResult!=null}}"> 
 	          <div self-center fg>No results</div>
 	        </div>
