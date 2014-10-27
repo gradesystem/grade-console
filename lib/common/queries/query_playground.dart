@@ -23,7 +23,7 @@ class QueryPlayground extends PolymerElement with Filters {
   bool get editable => editableQuery!=null?editableQuery.model.bean[Query.predefined_field]==false:false;
   
   @ComputedProperty("editableQuery.model.bean[name_key]")  
-  String get title => "${readValue(#title)}  query playground";
+  String get title => readValue(#title);
   
   
   void onBack() {

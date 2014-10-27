@@ -4,7 +4,7 @@ part of queries;
 class QueriesPanel extends PolymerElement with Filters {
   
   @observable
-  int area = 1;
+  int area = 0;
   
   @published
   String kfilter = '';
