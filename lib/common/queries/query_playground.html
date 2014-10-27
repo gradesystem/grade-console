@@ -29,7 +29,7 @@
             <grade-fascia>     
 							<grade-input fascia-title 
 							             multiline 
-							             editable="{{editable}}"
+							             disabled="{{ !editable }}" 
 							             label="Query" 
 							             inputValue="{{editableQuery.model.bean[expression_key]}}">
 							</grade-input>

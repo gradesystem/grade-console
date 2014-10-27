@@ -16,8 +16,11 @@ class QueryPlayground extends PolymerElement with Filters {
   //privately used: this is to support refactoring of vocabulary
   String get name_key => Query.name_field;
   String get expression_key => Query.expression_field;
+  String get predefined_key => Query.predefined_field;
   
-  bool get editable => editableQuery.model.bean[Query.predefined_field]==true;
+  
+  @ComputedProperty("editableQuery.model.bean[predefined_key]") 
+  bool get editable => editableQuery!=null?editableQuery.model.bean[Query.predefined_field]==false:false;
   
   @ComputedProperty("editableQuery.model.bean[name_key]")  
   String get title => "${readValue(#title)}  query playground";
