@@ -68,7 +68,8 @@
         <div main fit layout vertical>
           <div flex wired rounded spaced layout horizontal style="min-height:75px;">
 	          <paper-input multiline rows="6" maxrows="6" flex layout vertical style="margin: 5px;"
-	          inputValue="{{editableQuery.model.bean[expression_key]}}">
+	          inputValue="{{editableQuery.model.bean[expression_key]}}"
+	          disabled?="{{!editableQuery.edit}}">
 	          </paper-input>
           </div>
           
@@ -77,7 +78,7 @@
               <grade-item style="width:200px"> 
                 <grade-fascia flex>    
                   <grade-input fascia-title 
-                               multiline 
+                               multiline
                                label="{{key}}" 
                                inputValue="{{editableQuery.parametersValues[key]}}">
                   </grade-input>
