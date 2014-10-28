@@ -115,6 +115,14 @@ abstract class QuerySubPageModel {
     editableModel.save();
   }
   
+  void runQueryByName(EditableQuery editableQuery) {
+    editableQuery.queryRunning = true;
+    service.runQueryByName(editableQuery.model, editableQuery.parametersValues).then((QueryResult r){ 
+      editableQuery.lastQueryResult = r;
+      editableQuery.queryRunning = false;
+    });
+  }
+  
   void runQuery(EditableQuery editableQuery) {
     editableQuery.queryRunning = true;
     service.runQuery(editableQuery.model, editableQuery.parametersValues).then((QueryResult r){ 
