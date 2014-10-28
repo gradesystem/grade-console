@@ -9,6 +9,23 @@ class HttpService {
     return getString(url).timeout(timeLimit).then((String response)=>JSON.decode(response));
   }
   
+  Future<String> postJSon(String url, String json,
+        {bool withCredentials, String responseType,
+        Map<String, String> requestHeaders,
+        void onProgress(ProgressEvent e)}) {
+
+      if (requestHeaders == null) {
+        requestHeaders = <String, String>{};
+      }
+      requestHeaders.putIfAbsent('Content-Type',
+          () => 'application/json; charset=UTF-8');
+
+      return request(url, method: 'POST', withCredentials: withCredentials,
+          responseType: responseType,
+          requestHeaders: requestHeaders, sendData: json,
+          onProgress: onProgress).then((xhr) => xhr.responseText);
+    }
+  
   Future<String> getString(String url,
         {bool withCredentials, void onProgress(ProgressEvent e)}) {
     return request(url, withCredentials: withCredentials,
