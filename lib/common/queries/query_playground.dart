@@ -9,9 +9,7 @@ class QueryPlayground extends PolymerElement with Filters {
   @published
   EditableQuery editableQuery;
   
-  QueryPlayground.created() : super.created() {
-
-  }
+  QueryPlayground.created() : super.created();
   
   //privately used: this is to support refactoring of vocabulary
   String get name_key => Query.name_field;
