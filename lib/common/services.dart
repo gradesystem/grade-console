@@ -9,7 +9,7 @@ class HttpService {
     return getString(url).timeout(timeLimit).then((String response)=>JSON.decode(response));
   }
   
-  Future<String> postJSon(String url, String json,
+  Future<HttpRequest> post(String url, String content,
         {bool withCredentials, String responseType,
         Map<String, String> requestHeaders,
         void onProgress(ProgressEvent e)}) {
@@ -22,8 +22,8 @@ class HttpService {
 
       return request(url, method: 'POST', withCredentials: withCredentials,
           responseType: responseType,
-          requestHeaders: requestHeaders, sendData: json,
-          onProgress: onProgress).then((xhr) => xhr.responseText);
+          requestHeaders: requestHeaders, sendData: content,
+          onProgress: onProgress);
     }
   
   Future<String> getString(String url,
@@ -72,11 +72,12 @@ class HttpService {
             xhr.status == 0 || xhr.status == 304) {
           completer.complete(xhr);
         } else {
-          completer.completeError(new HttpRequestException(url, xhr.status, xhr.statusText));
+          completer.completeError(new HttpRequestException(url, xhr.status, xhr.statusText, xhr.responseText));
         }
       });
 
-      xhr.onError.listen((_)=>completer.completeError(new HttpRequestException(url, xhr.status, xhr.statusText)));
+
+      xhr.onError.listen((_)=>completer.completeError(new HttpRequestException(url, xhr.status, xhr.statusText,  xhr.responseText)));
 
       if (sendData != null) {
         xhr.send(sendData);
@@ -93,10 +94,11 @@ class HttpRequestException implements Exception {
   String url;
   int status;
   String statusText;
+  String response;
   
-  HttpRequestException(this.url, this.status, this.statusText);
+  HttpRequestException(this.url, this.status, this.statusText, this.response);
   
-  String toString() => "$url $status error: $statusText";
+  String toString() => "$url $status error: $statusText message: $response";
   
 }
 

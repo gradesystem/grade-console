@@ -19,7 +19,7 @@ abstract class QueryService extends ListService<Query> {
     
     Uri queryUri = new Uri.http("", "$service_url/submit", uriParameters);
     
-    return http.postJSon(queryUri.toString(), JSON.encode(query.bean)).then((json)=>new QueryResult(json, JSON.decode(json)));
+    return http.post(queryUri.toString(), JSON.encode(query.bean)).then((xhr) => new QueryResult(xhr.responseText, JSON.decode(xhr.responseText)));
   }
   
   Map<String,String> _getQueryParameters(Query query, Map<String, String> parameters) {
@@ -30,5 +30,10 @@ abstract class QueryService extends ListService<Query> {
        }
        return uriParameters;
   }
+  
+  
+   Future<bool> putQuery(Query query) {
+     return http.post("$service_url/queries", JSON.encode(query.bean)).then((xhr) => xhr.status == 202);
+   }
 
 }

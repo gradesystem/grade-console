@@ -100,19 +100,18 @@ abstract class QuerySubPageModel {
   }
   
   void saveQuery(EditableQuery editableModel) {
-    editableModel.sync();
-    service.put(editableModel.model)
-    .then((bool result){saveComplete(result, editableModel);})
-    .catchError((e)=>_onError(e, (){saveQuery(editableModel);}))
-    .whenComplete((){editableModel.synched();});
-
-    new Timer(new Duration(milliseconds: 200), () {
+    Timer timer = new Timer(new Duration(milliseconds: 200), () {
       editableModel.sync();
     });
-  }
-  
-  void saveComplete(bool result, EditableQuery editableModel) {
-    editableModel.save();
+    
+    service.putQuery(editableModel.model)
+    .then((bool result)=>editableModel.save())
+    .catchError((e)=>_onError(e, ()=>saveQuery(editableModel)))
+    .whenComplete((){
+      timer.cancel();
+      editableModel.synched();
+    });
+
   }
   
   void runQueryByName(EditableQuery editableQuery) {
@@ -228,6 +227,7 @@ class EditableModel<T extends Cloneable<T>> extends Observable with ListItem {
   
   void synched() {
     synching = false;
+    print('synched $synching');
   }
 
 }
