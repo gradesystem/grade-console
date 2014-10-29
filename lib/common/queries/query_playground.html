@@ -27,7 +27,7 @@
       .runButton {
 				position: absolute;
 				right: 16px;
-				bottom: -27px;
+				bottom: -46px;
 				z-index: 1000;
       }
       
@@ -64,7 +64,7 @@
     
     <div style="height:60%;" wired rounded spaced layout vertical>
       <grade-header-panel flex paneltitle={{title}}>
-        <grade-button menu icon="arrow-back" label="back to queries" on-click="{{onBack}}"></grade-button>
+        <grade-button menu icon="arrow-back" on-click="{{onBack}}"></grade-button>
         <div main fit layout vertical>
           <div flex wired rounded spaced layout horizontal style="min-height:75px;">
 	          <paper-input multiline rows="6" maxrows="6" flex layout vertical style="margin: 5px;"
@@ -78,7 +78,6 @@
               <grade-item style="width:200px"> 
                 <grade-fascia flex>    
                   <grade-input fascia-title 
-                               multiline
                                label="{{key}}" 
                                inputValue="{{editableQuery.parametersValues[key]}}">
                   </grade-input>
