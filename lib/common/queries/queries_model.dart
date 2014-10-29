@@ -116,19 +116,18 @@ abstract class QuerySubPageModel {
   }
   
   void runQueryByName(EditableQuery editableQuery) {
-    editableQuery.queryRunning = true;
-    service.runQueryByName(editableQuery.model, editableQuery.parametersValues).then((QueryResult r){ 
-      editableQuery.lastQueryResult = r;
-      editableQuery.queryRunning = false;
-    });
+    editableQuery.runQuery();
+    
+    service.runQueryByName(editableQuery.model, editableQuery.parametersValues)
+      .then((QueryResult r)=>editableQuery.queryResult(r))
+      .catchError((e)=> editableQuery.queryFailed(e.toString()));
   }
   
   void runQuery(EditableQuery editableQuery) {
-    editableQuery.queryRunning = true;
-    service.runQuery(editableQuery.model, editableQuery.parametersValues).then((QueryResult r){ 
-      editableQuery.lastQueryResult = r;
-      editableQuery.queryRunning = false;
-    });
+    editableQuery.runQuery();
+    service.runQuery(editableQuery.model, editableQuery.parametersValues)
+    .then((QueryResult r)=>editableQuery.queryResult(r))
+    .catchError((e)=> editableQuery.queryFailed(e.toString()));
   }
  
   void loadAll() {
@@ -158,7 +157,11 @@ abstract class QuerySubPageModel {
 
 class EditableQuery extends EditableModel<Query> {
   
+  @observable
   bool queryRunning;
+  
+  @observable
+  String lastError;
   
   @observable
   QueryResult lastQueryResult;
@@ -167,6 +170,21 @@ class EditableQuery extends EditableModel<Query> {
   
   EditableQuery(Query query):super(query);
   
+  void runQuery() {
+    queryRunning = true;
+    lastError = null;
+    lastQueryResult = null;
+  }
+  
+  void queryResult(QueryResult result) {
+    queryRunning = false;
+    lastQueryResult = result;
+  }
+  
+  void queryFailed(String reason) {
+    queryRunning = false;
+    lastError = reason;
+  }
   
 }
 
