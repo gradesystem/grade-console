@@ -17,7 +17,7 @@ class Query extends Delegate with ListItem, Cloneable<Query>, Observable, Filter
   
   Query.fromBean(this.repo_path, Map bean) : super(bean){
     
-    onBeanChange([name_field, expression_field], notifyEndpointChange);
+    _listenChanges();
   }
   
   Query(this.repo_path) : super({}) {
@@ -25,11 +25,12 @@ class Query extends Delegate with ListItem, Cloneable<Query>, Observable, Filter
     put(expression_field, "");
     put(predefined_field, false);
      
-    onBeanChange([name_field, expression_field], notifyEndpointChange);
+    _listenChanges();
   }
   
-  void notifyEndpointChange() {
-    notifyPropertyChange(#endpoint, null, endpoint);
+  void _listenChanges() {
+    onBeanChange([name_field, expression_field], ()=>notifyPropertyChange(#endpoint, null, endpoint) );
+    onBeanChange([expression_field], ()=>notifyPropertyChange(#parameters, null, parameters) );
   }
   
   bool get predefined => get(predefined_field);
@@ -59,9 +60,7 @@ class Query extends Delegate with ListItem, Cloneable<Query>, Observable, Filter
     return endpoint;
   }
   
-  
-  
-  
+  @observable
   List<String> get parameters {
   
      List<String> params = [];
@@ -77,7 +76,7 @@ class Query extends Delegate with ListItem, Cloneable<Query>, Observable, Filter
    }
 }
 
-abstract class Queries extends ListItems<EditableModel<Query>> {
+abstract class Queries extends ListItems<EditableQuery> {
 }
 
 abstract class QuerySubPageModel {
@@ -94,13 +93,13 @@ abstract class QuerySubPageModel {
   
   void addNewQuery() {
     Query query = new Query(service.path);
-    EditableModel<Query> editableModel = new EditableModel(query);
+    EditableQuery editableModel = new EditableQuery(query);
     storage.data.add(editableModel);
     storage.selected = editableModel;
     editableModel.startEdit();
   }
   
-  void saveQuery(EditableModel<Query> editableModel) {
+  void saveQuery(EditableQuery editableModel) {
     editableModel.sync();
     service.put(editableModel.model)
     .then((bool result){saveComplete(result, editableModel);})
@@ -112,8 +111,23 @@ abstract class QuerySubPageModel {
     });
   }
   
-  void saveComplete(bool result, EditableModel<Query> editableModel) {
+  void saveComplete(bool result, EditableQuery editableModel) {
     editableModel.save();
+  }
+  
+  void runQueryByName(EditableQuery editableQuery) {
+    editableQuery.runQuery();
+    
+    service.runQueryByName(editableQuery.model, editableQuery.parametersValues)
+      .then((QueryResult r)=>editableQuery.queryResult(r))
+      .catchError((e)=> editableQuery.queryFailed(e.toString()));
+  }
+  
+  void runQuery(EditableQuery editableQuery) {
+    editableQuery.runQuery();
+    service.runQuery(editableQuery.model, editableQuery.parametersValues)
+    .then((QueryResult r)=>editableQuery.queryResult(r))
+    .catchError((e)=> editableQuery.queryFailed(e.toString()));
   }
  
   void loadAll() {
@@ -131,7 +145,7 @@ abstract class QuerySubPageModel {
 
     storage.data.clear();
 
-    storage.data.addAll(items.map((Query q)=> new EditableModel(q)));
+    storage.data.addAll(items.map((Query q)=> new EditableQuery(q)));
     storage.loading = false;
     
   }
@@ -139,6 +153,39 @@ abstract class QuerySubPageModel {
   void _onError(e, callback) {
     bus.fire(new ToastMessage.alert("Ops we are having some problems communicating with the server", callback));
   }
+}
+
+class EditableQuery extends EditableModel<Query> {
+  
+  @observable
+  bool queryRunning;
+  
+  @observable
+  String lastError;
+  
+  @observable
+  QueryResult lastQueryResult;
+  
+  Map<String,String> parametersValues = {};
+  
+  EditableQuery(Query query):super(query);
+  
+  void runQuery() {
+    queryRunning = true;
+    lastError = null;
+    lastQueryResult = null;
+  }
+  
+  void queryResult(QueryResult result) {
+    queryRunning = false;
+    lastQueryResult = result;
+  }
+  
+  void queryFailed(String reason) {
+    queryRunning = false;
+    lastError = reason;
+  }
+  
 }
 
 class EditableModel<T extends Cloneable<T>> extends Observable with ListItem {
@@ -190,5 +237,12 @@ abstract class Cloneable<T> {
   T clone();
 }
 
-
-
+class QueryResult extends Delegate {
+  
+  String raw;
+  
+  QueryResult(this.raw, Map bean):super(bean);
+  
+  List<String> get headers => get("head")["vars"];
+  List<Map<String,String>> get rows => get("results")["bindings"];
+}

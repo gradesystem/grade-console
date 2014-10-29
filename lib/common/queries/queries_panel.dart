@@ -3,6 +3,9 @@ part of queries;
 @CustomTag("queries-panel") 
 class QueriesPanel extends PolymerElement with Filters {
   
+  @observable
+  int area = 0;
+  
   @published
   String kfilter = '';
 
@@ -31,5 +34,17 @@ class QueriesPanel extends PolymerElement with Filters {
   
   void onSave() {
     model.saveQuery(queries.selected);
+  }
+  
+  void onQueryPlayground() {
+    area = 1;
+  }
+  
+  void onBack() {
+    area = 0;
+  }
+  
+  void onRunQuery(event, detail, target) {
+    model.runQuery(detail);
   }
 }

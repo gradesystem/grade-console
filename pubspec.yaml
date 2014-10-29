@@ -11,11 +11,14 @@ dependencies:
   intl: any
   stylus: any
   collection: any
+  codemirror: any
   
 dependency_overrides: 
   args: any #workaround to pub infinite loop
   web_components: any
 
 transformers:
-- polymer
+- polymer:
+    inline_stylesheets:
+      packages/codemirror/codemirror.css: false
 - di
