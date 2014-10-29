@@ -104,19 +104,21 @@
         </paper-tabs>
         <loading-panel main fit loading="{{editableQuery.queryRunning}}" message="retrieving results" style="overflow:hidden" >
           <core-animated-pages selected="{{resultArea}}" fit spaced style="overflow:hidden" hide?="{{editableQuery.lastQueryResult==null}}">
-            <table style="border-collapse: collapse; width:100%">
-              <tr>
-                <th template repeat="{{header in editableQuery.lastQueryResult.headers}}" style="border: 1px solid #000">{{header}}</th>
-              </tr> 
-               
-              <tr template repeat="{{row in editableQuery.lastQueryResult.rows}}">
-                <td template repeat="{{header in editableQuery.lastQueryResult.headers}}" style="border: 1px solid #000">
-                    {{row[header]["value"]}}
-                </td>
-              </tr>
-            </table>
+            <div style="overflow-y: auto;">
+	            <table style="border-collapse: collapse; width:100%">
+	              <tr>
+	                <th template repeat="{{header in editableQuery.lastQueryResult.headers}}" style="border: 1px solid #000">{{header}}</th>
+	              </tr> 
+	               
+	              <tr template repeat="{{row in editableQuery.lastQueryResult.rows}}">
+	                <td template repeat="{{header in editableQuery.lastQueryResult.headers}}" style="border: 1px solid #000">
+	                    {{row[header]["value"]}}
+	                </td>
+	              </tr>
+	            </table>
+            </div>
              
-						<div>
+						<div style="overflow-y: auto;">
 						 {{editableQuery.lastQueryResult.raw}}
 						</div>
           
