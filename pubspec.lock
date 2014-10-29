@@ -21,6 +21,10 @@ packages:
     description: code_transformers
     source: hosted
     version: "0.2.3+1"
+  codemirror:
+    description: codemirror
+    source: hosted
+    version: "0.0.4+4.4.0"
   collection:
     description: collection
     source: hosted

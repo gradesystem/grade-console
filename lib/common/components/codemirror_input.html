@@ -1,0 +1,22 @@
+<link rel="import" href="../../../../packages/polymer/polymer.html">
+
+<polymer-element name="codemirror-input" relative>
+		<template>
+		<style>
+		        @import 'packages/codemirror/codemirror.css';
+        
+        .CodeMirror {
+          height: inherit;
+        }
+        .CodeMirror-scroll {
+          overflow-y: hidden;
+         /* overflow-x: auto;*/
+        }
+		</style>
+		      <div fit style="height:100%" id="codemirror">
+
+          </div>
+		</template>
+  <script type="application/dart" src="codemirror_input.dart"></script> 
+  <script src="../../../../packages/codemirror/codemirror.js"></script>
+</polymer-element>
