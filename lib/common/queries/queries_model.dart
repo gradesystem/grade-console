@@ -150,6 +150,7 @@ abstract class QuerySubPageModel {
   }
   
   void _onError(e, callback) {
+    log.warning("QueryModel error: $e");
     bus.fire(new ToastMessage.alert("Ops we are having some problems communicating with the server", callback));
   }
 }
@@ -194,14 +195,29 @@ class EditableModel<T extends Cloneable<T>> extends Observable with ListItem {
   
   @observable
   bool synching = false;
+
+  @observable
+  ObservableMap<String,bool> fieldsInvalidity = new ObservableMap();
+  
+  bool _valid;
   
   T _original;
   T _underEdit;
   
-  EditableModel(this._original);
+  EditableModel(this._original) {
+    fieldsInvalidity.changes.listen(_updateValidity);
+  }
+  
+  void _updateValidity(_) {
+    _valid = fieldsInvalidity.values.every((b)=>!b);
+    notifyPropertyChange(#valid, null, _valid);
+  }
   
   @observable
   T get model => edit?_underEdit:_original;
+  
+  @observable
+  bool get valid => _valid; 
   
   void startEdit() {
     edit = true;

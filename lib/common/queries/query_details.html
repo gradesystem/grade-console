@@ -34,6 +34,7 @@
                                   multiline?="{{ isAreaField(key) }}" 
                                   label="{{ key | suffix }} ?" 
                                   required="{{ isRequiredField(key) }}"
+                                  invalid="{{ item.fieldsInvalidity[key] }}"
                                   inputValue="{{ item.model.bean[key]  }}">
                      </grade-input>
                      

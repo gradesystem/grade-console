@@ -6,6 +6,7 @@ import 'dart:convert' show JSON;
 import 'package:polymer/polymer.dart';
 import 'package:core_elements/core_list_dart.dart';
 import 'package:event_bus/event_bus.dart';
+import 'package:logging/logging.dart';
 
 import '../../common.dart';
 
@@ -19,3 +20,5 @@ part 'query_list.dart';
 part 'query_playground.dart';
 
 part 'queries_service.dart';
+
+final Logger log = new Logger('grade.queries');
