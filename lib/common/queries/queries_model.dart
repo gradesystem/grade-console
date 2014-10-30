@@ -188,7 +188,6 @@ class EditableQuery extends EditableModel<Query> {
   void _updateParametersValidity(_) {
     List<String> parameters = model.parameters;
     _validParameters = parameters.every((String name)=>!parametersInvalidity[name]);
-    print('_validParameters: $_validParameters');
     notifyPropertyChange(#validParameters, null, _validParameters);
   }
   
