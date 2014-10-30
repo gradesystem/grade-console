@@ -168,7 +168,24 @@ class EditableQuery extends EditableModel<Query> {
   
   Map<String,String> parametersValues = {};
   
-  EditableQuery(Query query):super(query);
+  @observable
+  ObservableMap<String,bool> parametersInvalidity = new ObservableMap();
+  
+  bool _validParameters;
+  
+  EditableQuery(Query query):super(query) {
+    parametersInvalidity.changes.listen(_updateParametersValidity);
+  }
+  
+  void _updateParametersValidity(_) {
+    List<String> parameters = model.parameters;
+    _validParameters = parameters.every((String name)=>!parametersInvalidity[name]);
+    notifyPropertyChange(#validParameters, null, _validParameters);
+  }
+  
+  @observable
+  bool get validParameters => _validParameters; 
+  
   
   void runQuery() {
     queryRunning = true;

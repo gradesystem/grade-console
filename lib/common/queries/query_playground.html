@@ -69,7 +69,10 @@
           <div flex wired rounded spaced layout horizontal style="min-height:75px;">
 	          <paper-input multiline rows="6" maxrows="6" flex layout vertical style="margin: 5px;"
 	          inputValue="{{editableQuery.model.bean[expression_key]}}"
-	          disabled?="{{!editableQuery.edit}}">
+	          disabled?="{{!editableQuery.edit}}"
+	          required="true"
+	          invalid="{{ editableQuery.fieldsInvalidity[expression_key] }}"
+	          >
 	          </paper-input>
           </div>
           
@@ -79,6 +82,8 @@
                 <grade-fascia flex>    
                   <grade-input fascia-title 
                                label="{{key}}" 
+                               required=true
+                               invalid="{{ editableQuery.parametersInvalidity[key] }}"
                                inputValue="{{editableQuery.parametersValues[key]}}">
                   </grade-input>
                   <div fascia-subtitle><span fg bolder>{{key}}</span></div>
@@ -90,7 +95,7 @@
         
       </grade-header-panel>
       <div style="position: relative; width: 0; height: 0" self-end >
-        <paper-fab class="runButton" mini="true" icon="av:play-arrow" on-click="{{onRun}}"></paper-fab>
+        <paper-fab class="runButton" mini="true" icon="av:play-arrow" on-click="{{onRun}}" disabled="{{!editableQuery.valid || !editableQuery.validParameters}}"></paper-fab>
       </div>
     </div>
   
