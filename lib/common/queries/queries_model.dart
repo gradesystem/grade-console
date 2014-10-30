@@ -176,7 +176,7 @@ abstract class QuerySubPageModel {
 class EditableQuery extends EditableModel<Query> {
   
   @observable
-  bool queryRunning;
+  bool queryRunning = false;
   
   @observable
   String lastError;
@@ -189,7 +189,7 @@ class EditableQuery extends EditableModel<Query> {
   @observable
   ObservableMap<String,bool> parametersInvalidity = new ObservableMap();
   
-  bool _validParameters;
+  bool _validParameters = true;
   
   EditableQuery(Query query):super(query) {
     //we want to listen on parameters value changes
