@@ -11,6 +11,15 @@ class QueriesPanel extends PolymerElement with Filters {
 
   @published
   QuerySubPageModel model;
+  
+  @observable
+  bool removeDialogOpened = false;
+  
+  @observable
+  String removedDialogHeader;
+  
+  EditableQuery deleteCandidate;
+  
 
   QueriesPanel.created() : super.created();
   
@@ -49,6 +58,13 @@ class QueriesPanel extends PolymerElement with Filters {
   }
 
   void removeItem(event, detail, target) {
-    model.removeQuery(detail);
+    deleteCandidate = detail;
+    Query query = deleteCandidate.model;
+    removedDialogHeader = "Remove ${query.bean[Query.name_field]}?";
+    removeDialogOpened = true;
+  }
+  
+  void deleteSelectedQuery() {
+    if (deleteCandidate!=null) model.removeQuery(deleteCandidate);
   }
 }
