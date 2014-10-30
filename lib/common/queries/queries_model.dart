@@ -174,12 +174,21 @@ class EditableQuery extends EditableModel<Query> {
   bool _validParameters;
   
   EditableQuery(Query query):super(query) {
+    //we want to listen on parameters value changes
     parametersInvalidity.changes.listen(_updateParametersValidity);
+    
+    //we need to listen on the expression changes in the current model
+    onPropertyChange(this, #model, (){
+      onPropertyChange(model, #parameters, ()=>_updateParametersValidity(null));
+      _updateParametersValidity(null);
+    });
+    
   }
   
   void _updateParametersValidity(_) {
     List<String> parameters = model.parameters;
     _validParameters = parameters.every((String name)=>!parametersInvalidity[name]);
+    print('_validParameters: $_validParameters');
     notifyPropertyChange(#validParameters, null, _validParameters);
   }
   
@@ -246,6 +255,7 @@ class EditableModel<T extends Cloneable<T>> extends Observable with ListItem {
   void cancel() {
     edit = false;
     notifyPropertyChange(#model, _underEdit, _original);
+    fieldsInvalidity.clear();
   }
   
   void save() {
