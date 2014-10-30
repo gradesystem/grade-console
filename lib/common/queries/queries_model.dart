@@ -114,6 +114,24 @@ abstract class QuerySubPageModel {
 
   }
   
+  void removeQuery(EditableQuery editableModel) {
+    Timer timer = new Timer(new Duration(milliseconds: 200), () {
+      editableModel.sync();
+    });
+    
+    service.deleteQuery(editableModel.model)
+    .then((bool result){
+      storage.data.remove(editableModel);
+      storage.selected = null;
+    })
+    .catchError((e)=>_onError(e, ()=>saveQuery(editableModel)))
+    .whenComplete((){
+      timer.cancel();
+      editableModel.synched();
+    });
+
+  }
+  
   void runQueryByName(EditableQuery editableQuery) {
     editableQuery.runQuery();
     
@@ -269,7 +287,6 @@ class EditableModel<T extends Cloneable<T>> extends Observable with ListItem {
   
   void synched() {
     synching = false;
-    print('synched $synching');
   }
 
 }

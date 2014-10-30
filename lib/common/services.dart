@@ -2,104 +2,95 @@ part of common;
 
 @Injectable()
 class HttpService {
-  
+
   Duration timeLimit = new Duration(minutes: 3);
 
   Future get(String url) {
-    return getString(url).timeout(timeLimit).then((String response)=>JSON.decode(response));
+    return getString(url).timeout(timeLimit).then((String response) => JSON.decode(response));
   }
   
-  Future<HttpRequest> post(String url, String content,
-        {bool withCredentials, String responseType,
-        Map<String, String> requestHeaders,
-        void onProgress(ProgressEvent e)}) {
+  Future<HttpRequest> delete(String url, {bool withCredentials, String responseType, Map<String, String> requestHeaders, void onProgress(ProgressEvent e)}) {
 
-      if (requestHeaders == null) {
-        requestHeaders = <String, String>{};
-      }
-      requestHeaders.putIfAbsent('Content-Type',
-          () => 'application/json; charset=UTF-8');
+    return request(url, method: 'DELETE', withCredentials: withCredentials, responseType: responseType, requestHeaders: requestHeaders, onProgress: onProgress);
+  }
 
-      return request(url, method: 'POST', withCredentials: withCredentials,
-          responseType: responseType,
-          requestHeaders: requestHeaders, sendData: content,
-          onProgress: onProgress);
+  Future<HttpRequest> post(String url, String content, {bool withCredentials, String responseType, Map<String, String> requestHeaders, void onProgress(ProgressEvent e)}) {
+
+    if (requestHeaders == null) {
+      requestHeaders = <String, String>{};
     }
-  
-  Future<String> getString(String url,
-        {bool withCredentials, void onProgress(ProgressEvent e)}) {
-    return request(url, withCredentials: withCredentials,
-        onProgress: onProgress).then((xhr) => xhr.responseText);
+    requestHeaders.putIfAbsent('Content-Type', () => 'application/json; charset=UTF-8');
+
+    return request(url, method: 'POST', withCredentials: withCredentials, responseType: responseType, requestHeaders: requestHeaders, sendData: content, onProgress: onProgress);
   }
-  
-  static Future<HttpRequest> request(String url,
-        {String method, bool withCredentials, String responseType,
-        String mimeType, Map<String, String> requestHeaders, sendData,
-        void onProgress(ProgressEvent e)}) {
-      var completer = new Completer<HttpRequest>();
 
-      var xhr = new HttpRequest();
-      if (method == null) {
-        method = 'GET';
-      }
-      xhr.open(method, url, async: true);
+  Future<String> getString(String url, {bool withCredentials, void onProgress(ProgressEvent e)}) {
+    return request(url, withCredentials: withCredentials, onProgress: onProgress).then((xhr) => xhr.responseText);
+  }
 
-      if (withCredentials != null) {
-        xhr.withCredentials = withCredentials;
-      }
+  static Future<HttpRequest> request(String url, {String method, bool withCredentials, String responseType, String mimeType, Map<String, String> requestHeaders, sendData, void onProgress(ProgressEvent e)}) {
+    var completer = new Completer<HttpRequest>();
 
-      if (responseType != null) {
-        xhr.responseType = responseType;
-      }
+    var xhr = new HttpRequest();
+    if (method == null) {
+      method = 'GET';
+    }
+    xhr.open(method, url, async: true);
 
-      if (mimeType != null) {
-        xhr.overrideMimeType(mimeType);
-      }
+    if (withCredentials != null) {
+      xhr.withCredentials = withCredentials;
+    }
 
-      if (requestHeaders != null) {
-        requestHeaders.forEach((header, value) {
-          xhr.setRequestHeader(header, value);
-        });
-      }
+    if (responseType != null) {
+      xhr.responseType = responseType;
+    }
 
-      if (onProgress != null) {
-        xhr.onProgress.listen(onProgress);
-      }
+    if (mimeType != null) {
+      xhr.overrideMimeType(mimeType);
+    }
 
-      xhr.onLoad.listen((e) {
-        // Note: file:// URIs have status of 0.
-        if ((xhr.status >= 200 && xhr.status < 300) ||
-            xhr.status == 0 || xhr.status == 304) {
-          completer.complete(xhr);
-        } else {
-          completer.completeError(new HttpRequestException(url, xhr.status, xhr.statusText, xhr.responseText));
-        }
+    if (requestHeaders != null) {
+      requestHeaders.forEach((header, value) {
+        xhr.setRequestHeader(header, value);
       });
-
-
-      xhr.onError.listen((_)=>completer.completeError(new HttpRequestException(url, xhr.status, xhr.statusText,  xhr.responseText)));
-
-      if (sendData != null) {
-        xhr.send(sendData);
-      } else {
-        xhr.send();
-      }
-
-      return completer.future;
     }
+
+    if (onProgress != null) {
+      xhr.onProgress.listen(onProgress);
+    }
+
+    xhr.onLoad.listen((e) {
+      // Note: file:// URIs have status of 0.
+      if ((xhr.status >= 200 && xhr.status < 300) || xhr.status == 0 || xhr.status == 304) {
+        completer.complete(xhr);
+      } else {
+        completer.completeError(new HttpRequestException(url, xhr.status, xhr.statusText, xhr.responseText));
+      }
+    });
+
+
+    xhr.onError.listen((_) => completer.completeError(new HttpRequestException(url, xhr.status, xhr.statusText, xhr.responseText)));
+
+    if (sendData != null) {
+      xhr.send(sendData);
+    } else {
+      xhr.send();
+    }
+
+    return completer.future;
+  }
 }
 
 class HttpRequestException implements Exception {
-  
+
   String url;
   int status;
   String statusText;
   String response;
-  
-  HttpRequestException(this.url, this.status, this.statusText, this.response);
-  
-  String toString() => "$url $status error: $statusText message: $response";
-  
-}
 
+  HttpRequestException(this.url, this.status, this.statusText, this.response);
+
+  String toString() => "$url $status error: $statusText message: $response";
+
+}
 

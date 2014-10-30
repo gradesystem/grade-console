@@ -48,9 +48,6 @@ class QueryList extends PolymerElement with Filters {
   void selectDataset(event) {
     listitems.selected = event.detail.data;
   }
-  
-  void removeItem(event, detail, target) {
-    listitems.data.remove(detail);
-  }
+
  
 }

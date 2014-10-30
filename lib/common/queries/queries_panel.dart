@@ -47,4 +47,8 @@ class QueriesPanel extends PolymerElement with Filters {
   void onRunQuery(event, detail, target) {
     model.runQuery(detail);
   }
+
+  void removeItem(event, detail, target) {
+    model.removeQuery(detail);
+  }
 }
