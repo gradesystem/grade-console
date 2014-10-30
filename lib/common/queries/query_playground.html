@@ -95,7 +95,7 @@
         
       </grade-header-panel>
       <div style="position: relative; width: 0; height: 0" self-end >
-        <paper-fab class="runButton" mini="true" icon="av:play-arrow" on-click="{{onRun}}" disabled="{{!editableQuery.valid || !editableQuery.validParameters}}"></paper-fab>
+        <paper-fab class="runButton" mini="true" icon="av:play-arrow" on-click="{{onRun}}" hide?="{{!editableQuery.valid || !editableQuery.validParameters}}"></paper-fab>
       </div>
     </div>
   
