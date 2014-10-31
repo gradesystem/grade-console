@@ -5,6 +5,7 @@ import 'dart:convert' show JSON;
 
 import 'package:polymer/polymer.dart';
 import 'package:core_elements/core_list_dart.dart';
+import 'package:core_elements/core_collapse.dart';
 import 'package:event_bus/event_bus.dart';
 import 'package:logging/logging.dart';
 
