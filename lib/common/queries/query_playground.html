@@ -112,11 +112,11 @@
             <div style="overflow-y: auto;">
 	            <table style="border-collapse: collapse; width:100%">
 	              <tr>
-	                <th template repeat="{{header in editableQuery.lastQueryResult.headers}}" style="border: 1px solid #000">{{header}}</th>
+	                <th template repeat="{{header in editableQuery.lastQueryResult.headers}}" result-table?="{{!editableQuery.dirty}}" result-table-disabled?="{{editableQuery.dirty}}">{{header}}</th>
 	              </tr> 
 	               
 	              <tr template repeat="{{row in editableQuery.lastQueryResult.rows}}">
-	                <td template repeat="{{header in editableQuery.lastQueryResult.headers}}" style="border: 1px solid #000">
+	                <td template repeat="{{header in editableQuery.lastQueryResult.headers}}" result-table?="{{!editableQuery.dirty}}" result-table-disabled?="{{editableQuery.dirty}}">
 	                    {{row[header]["value"]}}
 	                </td>
 	              </tr>

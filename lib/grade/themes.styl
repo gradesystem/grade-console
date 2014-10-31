@@ -1,6 +1,7 @@
 
 ///////////////////////////////////// palette
 grade-grey = #F4F4F4
+grade-darker-grey= #C3C3C3
 grade-dark-grey= #424242
 grade-light-grey= #fafafa
 
@@ -325,6 +326,20 @@ theme-classes = {
   
   "paper-input.invalid::shadow .cursor" : {
       background-color: grade-light-red
+  }
+  
+  //result table
+      
+  "[result-table]" : {
+    background : grade-light-grey
+    color : "primary"
+    border: 1px solid grade-dark-grey
+  }
+    
+  "[result-table-disabled]" : {
+    background : grade-light-grey
+    color : grade-darker-grey
+    border: 1px solid grade-dark-grey
   }
 }
 

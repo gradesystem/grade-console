@@ -192,15 +192,19 @@ class EditableQuery extends EditableModel<Query> {
   
   bool _validParameters = true;
   
+  bool _dirty = false;
+  
   EditableQuery(Query query):super(query) {
     //we want to listen on parameters value changes
     parametersInvalidity.changes.listen(_updateParametersValidity);
     
-    //when parameters are edited we reset the last error
-    parametersValues.changes.listen((_)=>resetLastError());
+    parametersValues.changes.listen((_)=>_setDirty(true));
     
     //we need to listen on the expression changes in the current model
     onPropertyChange(this, #model, _listenNewModel);
+    
+    //when query or parameters are edited we reset the last error
+    onPropertyChange(this, #dirty, (){if (dirty) resetLastError();});
     
   }
   
@@ -208,10 +212,17 @@ class EditableQuery extends EditableModel<Query> {
     //when parameters list change we re-calculate the parameters validity
     onPropertyChange(model, #parameters, ()=>_updateParametersValidity(null));
     _updateParametersValidity(null);
-    
-    //when the model is edited we reset the last error
-    model.changes.listen((_)=>resetLastError());
+
+    model.changes.listen((_)=>_setDirty(true));
   }
+  
+  void _setDirty(bool dirty) {
+    _dirty = dirty;
+   notifyPropertyChange(#dirty, null, _dirty); 
+  }
+  
+  //true if the query or his parameters have been modified after last editing
+  bool get dirty => _dirty;
   
   void resetLastError() {
     lastError = null;
@@ -229,6 +240,7 @@ class EditableQuery extends EditableModel<Query> {
   
   void runQuery() {
     queryRunning = true;
+    _setDirty(false);
     resetLastError();
     lastQueryResult = null;
   }
