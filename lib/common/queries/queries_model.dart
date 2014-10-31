@@ -50,21 +50,22 @@ class Query extends Delegate with ListItem, Cloneable<Query>, Observable, Filter
   //calculates endpoint
   @observable
   String get endpoint  {
+
+    Map<String,String> endpointParameters = {};
+    for (String parameter in parameters) endpointParameters[parameter]="...";
     
-    String endpoint = '../service/${repo_path}/query/${bean[name_field]}/results';
-  
-    List<String> parameters = this.parameters;
+    Uri uri = new Uri.http("", '../service/${repo_path}/query/${bean[name_field]}/results', endpointParameters);
     
-    if (!parameters.isEmpty) {
-      
-      endpoint = "${endpoint}?";
+    String endpoint = uri.toString();
     
-      for (String param in parameters)
-        endpoint = endpoint.endsWith("?")?"${endpoint}${param}=...":"${endpoint}&${param}=..."; 
+    //we remove the schema
+    endpoint = endpoint.substring(5);
     
-   }
+    //we remove the final question mark
+    if (endpoint.endsWith("?")) endpoint = endpoint.substring(0, endpoint.length-1);
     
     return endpoint;
+
   }
   
   @observable
