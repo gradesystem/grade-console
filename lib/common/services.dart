@@ -77,15 +77,15 @@ class ErrorResponse {
 class HttpService {
   
   static String MEDIA_TYPE_JSON = "application/json; charset=UTF-8";
-  static String MEDIA_TYPE_SPARQL_JSON = "application/sparql-results+json; charset=UTF-8";
+  static String MEDIA_TYPE_SPARQL_JSON = "application/sparql-results+json";
   
   static Future<HttpRequest> delete(String url, {bool withCredentials, String responseType, Map<String, String> requestHeaders, void onProgress(ProgressEvent e)}) {
 
-    return request(url, method: 'DELETE', withCredentials: withCredentials, responseType: responseType, requestHeaders: {'Content-Type':MEDIA_TYPE_JSON, 'Accept':"application/sparql-results+json; charset=UTF-8"}, onProgress: onProgress);
+    return request(url, method: 'DELETE', withCredentials: withCredentials, responseType: responseType, requestHeaders: {'Content-Type':MEDIA_TYPE_JSON, 'Accept':MEDIA_TYPE_SPARQL_JSON}, onProgress: onProgress);
   }
 
   static Future<HttpRequest> post(String url, String content, {bool withCredentials, String responseType, Map<String, String> requestHeaders, void onProgress(ProgressEvent e)}) {
-    return request(url, method: 'POST', withCredentials: withCredentials, responseType: responseType, requestHeaders: {'Content-Type':MEDIA_TYPE_JSON, 'Accept':"application/sparql-results+json; charset=UTF-8"}, sendData: content, onProgress: onProgress);
+    return request(url, method: 'POST', withCredentials: withCredentials, responseType: responseType, requestHeaders: {'Content-Type':MEDIA_TYPE_JSON, 'Accept':MEDIA_TYPE_SPARQL_JSON}, sendData: content, onProgress: onProgress);
   }
 
   static Future<String> getString(String url, {bool withCredentials, void onProgress(ProgressEvent e)}) {
