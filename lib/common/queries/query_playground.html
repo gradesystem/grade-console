@@ -136,7 +136,7 @@
          <div layout vertical center-justified spaced hide?="{{editableQuery.lastError==null}}"> 
             <div self-center><span fg>{{editableQuery.lastError.message}}</span><span id="detailsbutton" small on-click="{{showErrorDetails}}"> (details)</span></div>
 						<core-collapse id="errorDetails">
-						  <div  style="overflow-y: auto;"">
+						  <div  style="overflow-y: auto;">
 						  <pre fg>{{editableQuery.lastError.stacktrace}}</pre>
 						  </div>
 						</core-collapse>
