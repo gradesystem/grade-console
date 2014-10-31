@@ -14,8 +14,16 @@ class GradeService {
     Uri url = new Uri.http("", "$base_path/$path", parameters);
     return HttpService.getString(url.toString())
         .timeout(timeLimit)
-        .then((String response) => JSON.decode(response))
+        .then(_decode)
         .catchError(_onError);
+  }
+  
+  dynamic _decode(String json) {
+    try {
+      return JSON.decode(json);
+    } catch(e) {
+      throw new ErrorResponse(-1, "Failed parsing response", "Response: $json");
+    }
   }
   
   Future get(String path, [Map<String, String> parameters]) {
@@ -68,25 +76,20 @@ class ErrorResponse {
 
 class HttpService {
   
-  static String CONTENT_TYPE = "application/json; charset=UTF-8";
+  static String MEDIA_TYPE_JSON = "application/json; charset=UTF-8";
+  static String MEDIA_TYPE_SPARQL_JSON = "application/sparql-results+json; charset=UTF-8";
   
   static Future<HttpRequest> delete(String url, {bool withCredentials, String responseType, Map<String, String> requestHeaders, void onProgress(ProgressEvent e)}) {
 
-    return request(url, method: 'DELETE', withCredentials: withCredentials, responseType: responseType, requestHeaders: requestHeaders, onProgress: onProgress);
+    return request(url, method: 'DELETE', withCredentials: withCredentials, responseType: responseType, requestHeaders: {'Content-Type':MEDIA_TYPE_JSON, 'Accept':"application/sparql-results+json; charset=UTF-8"}, onProgress: onProgress);
   }
 
   static Future<HttpRequest> post(String url, String content, {bool withCredentials, String responseType, Map<String, String> requestHeaders, void onProgress(ProgressEvent e)}) {
-
-    if (requestHeaders == null) {
-      requestHeaders = <String, String>{};
-    }
-    requestHeaders.putIfAbsent('Content-Type', () => CONTENT_TYPE);
-
-    return request(url, method: 'POST', withCredentials: withCredentials, responseType: responseType, requestHeaders: requestHeaders, sendData: content, onProgress: onProgress);
+    return request(url, method: 'POST', withCredentials: withCredentials, responseType: responseType, requestHeaders: {'Content-Type':MEDIA_TYPE_JSON, 'Accept':"application/sparql-results+json; charset=UTF-8"}, sendData: content, onProgress: onProgress);
   }
 
   static Future<String> getString(String url, {bool withCredentials, void onProgress(ProgressEvent e)}) {
-    return request(url, withCredentials: withCredentials, onProgress: onProgress).then((xhr) => xhr.responseText);
+    return request(url, withCredentials: withCredentials, onProgress: onProgress, requestHeaders: {'Content-Type': MEDIA_TYPE_JSON, 'Accept':MEDIA_TYPE_JSON}).then((xhr) => xhr.responseText);
   }
 
   static Future<HttpRequest> request(String url, {String method, bool withCredentials, String responseType, String mimeType, Map<String, String> requestHeaders, sendData, void onProgress(ProgressEvent e)}) {

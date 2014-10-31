@@ -10,7 +10,7 @@ abstract class QueryService extends ListService<Query> {
 
     String path = "query/${query.name}/results";
 
-    return http.get(path, uriParameters).then((response) => new QueryResult(response, JSON.decode(response)));
+    return http.get(path, uriParameters).then((response) => new QueryResult(response, _decode(response)));
   }
 
   Future<QueryResult> runQuery(Query query, Map<String, String> parameters) {
@@ -19,7 +19,15 @@ abstract class QueryService extends ListService<Query> {
 
     String path = "submit";
 
-    return http.post(path, JSON.encode(query.bean), uriParameters).then((response) => new QueryResult(response, JSON.decode(response)));
+    return http.post(path, JSON.encode(query.bean), uriParameters).then((response) => new QueryResult(response, _decode(response)));
+  }
+  
+  dynamic _decode(String json) {
+    try {
+      return JSON.decode(json);
+    } catch(e) {
+      throw new ErrorResponse(-1, "Failed parsing response", "Response: $json");
+    }
   }
 
   Map<String, String> _getQueryParameters(Query query, Map<String, String> parameters) {
