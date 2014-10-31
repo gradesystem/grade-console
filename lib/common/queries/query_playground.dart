@@ -30,4 +30,10 @@ class QueryPlayground extends PolymerElement with Filters {
     fire("run", detail:editableQuery);
   }
   
+  void showErrorDetails() {
+    CoreCollapse collapse = $["errorDetails"] as CoreCollapse;
+    collapse.toggle();
+    //($["detailsbutton"] as Element).text = collapse.opened?"Hide details":"Show details";
+  }
+  
 }

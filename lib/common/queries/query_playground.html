@@ -14,6 +14,7 @@
 <link rel="import" href="../../../../packages/core_elements/core_pages.html">
 <link rel="import" href="../../../../packages/core_elements/core_splitter.html">
 <link rel="import" href="../../../../packages/core_elements/core_animated_pages.html">
+<link rel="import" href="../../../../packages/core_elements/core_collapse.html">
 <link rel="import" href="../../../../packages/paper_elements/paper_fab.html">
 <link rel="import" href="../../../../packages/paper_elements/paper_tabs.html">
 <link rel="import" href="../../../../packages/paper_elements/paper_tab.html">
@@ -101,14 +102,14 @@
   
     <core-splitter direction="up" allowOverflow minSize="170px"></core-splitter>
     
-    <div flex style="overflow:hidden" wired rounded spaced layout vertical>
+    <div flex wired rounded spaced layout vertical>
       <grade-header-panel flex paneltitle="Results">
          <paper-tabs toolbar  style="width:200px" selected="{{resultArea}}" hide?="{{editableQuery.lastQueryResult==null || editableQuery.queryRunning || editableQuery.lastError!=null}}" >
           <paper-tab>Table</paper-tab>
           <paper-tab>Raw</paper-tab>
         </paper-tabs>
-        <loading-panel main fit loading="{{editableQuery.queryRunning}}" message="retrieving results" style="overflow:hidden" >
-          <core-animated-pages selected="{{resultArea}}" fit spaced style="overflow:hidden" hide?="{{editableQuery.lastQueryResult==null}}">
+        <loading-panel main fit loading="{{editableQuery.queryRunning}}" message="retrieving results">
+          <core-animated-pages selected="{{resultArea}}" fit spaced hide?="{{editableQuery.lastQueryResult==null}}">
             <div style="overflow-y: auto;">
 	            <table style="border-collapse: collapse; width:100%">
 	              <tr>
@@ -132,8 +133,13 @@
           </core-animated-pages>
          <div layout horizontal center-justified hide?="{{editableQuery.lastQueryResult!=null || editableQuery.lastError!=null}}" style="overflow:hidden"> 
          </div>
-         <div layout horizontal center-justified hide?="{{editableQuery.lastError==null}}" style="overflow:hidden"> 
-           <div fg>{{editableQuery.lastError}}</div>
+         <div layout vertical center-justified spaced hide?="{{editableQuery.lastError==null}}"> 
+            <div self-center><span fg>{{editableQuery.lastError.message}}</span><span id="detailsbutton" small on-click="{{showErrorDetails}}"> (details)</span></div>
+						<core-collapse id="errorDetails">
+						  <div  style="overflow-y: auto;"">
+						  <pre fg>{{editableQuery.lastError.stacktrace}}</pre>
+						  </div>
+						</core-collapse>
          </div>
         </loading-panel>
       </grade-header-panel>
