@@ -25,6 +25,9 @@ class QueryDetails extends PolymerElement with Filters {
   @published
   EditableQuery item;
   
+  @published
+  QueryValidator validator;
+  
   QueryDetails.created() : super.created();
   
   bool isAreaField(String key) {

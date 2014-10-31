@@ -11,6 +11,7 @@ import 'package:di/annotations.dart';
 import 'package:polymer/polymer.dart';
 import 'package:logging/logging.dart';
 import 'package:intl/intl.dart';
+import 'package:polymer_expressions/filter.dart';
 
 part 'common/dependencies.dart';
 part 'common/polymers.dart';

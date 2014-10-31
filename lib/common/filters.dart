@@ -40,4 +40,48 @@ class Filters {
       return ordered;
     };
   }
+  
+  Transformer<ValidationResult, String> validate(String key, Validator validator) {
+    return new ValidatorTransformer(key, validator);
+  }
+
+}
+
+class ValidatorTransformer extends Transformer<ValidationResult, String> {
+  
+  String key;
+  Validator validator;
+  
+  ValidatorTransformer(this.key, this.validator);
+  
+  ValidationResult forward(String value) {
+    return validator.isValid(key, value);
+  }
+  
+  String reverse(ValidationResult t) {
+    return null;
+  }
+  
+}
+
+abstract class Validator {
+
+  ValidationResult isValid(String key, String value);
+}
+
+class ValidationResult {
+  bool isvalid;
+  String message;
+  
+  ValidationResult.valid(){
+    isvalid=true;
+    message = "";
+  }
+  
+  ValidationResult.invalid(this.message){
+    isvalid=false;
+  }
+  
+  String toString() => "ValidationResult isvalid: $isvalid message: $message";
+  
 }
