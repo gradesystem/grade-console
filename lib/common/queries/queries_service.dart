@@ -8,18 +8,18 @@ abstract class QueryService extends ListService<Query> {
 
     Map<String, String> uriParameters = _getQueryParameters(query, parameters);
 
-    Uri queryUri = new Uri.http("", "$service_url/query/${query.name}/results", uriParameters);
+    String path = "query/${query.name}/results";
 
-    return http.getString(queryUri.toString()).then((json) => new QueryResult(json, JSON.decode(json)));
+    return http.get(path, uriParameters).then((response) => new QueryResult(response, JSON.decode(response)));
   }
 
   Future<QueryResult> runQuery(Query query, Map<String, String> parameters) {
 
     Map<String, String> uriParameters = _getQueryParameters(query, parameters);
 
-    Uri queryUri = new Uri.http("", "$service_url/submit", uriParameters);
+    String path = "submit";
 
-    return http.post(queryUri.toString(), JSON.encode(query.bean)).then((xhr) => new QueryResult(xhr.responseText, JSON.decode(xhr.responseText)));
+    return http.post(path, JSON.encode(query.bean), uriParameters).then((response) => new QueryResult(response, JSON.decode(response)));
   }
 
   Map<String, String> _getQueryParameters(Query query, Map<String, String> parameters) {
@@ -33,10 +33,10 @@ abstract class QueryService extends ListService<Query> {
 
 
   Future<bool> putQuery(Query query) {
-    return http.post("$service_url/queries", JSON.encode(query.bean)).then((xhr) => xhr.status == 204);
+    return http.post("queries", JSON.encode(query.bean)).then((response) => true);
   }
 
   Future<bool> deleteQuery(Query query) {
-    return http.delete("$service_url/query/${query.name}").then((xhr) => xhr.status == 204);
+    return http.delete("query/${query.name}").then((response) => true);
   }
 }

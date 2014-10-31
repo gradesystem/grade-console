@@ -156,14 +156,14 @@ abstract class QuerySubPageModel {
     
     service.runQueryByName(editableQuery.model, editableQuery.parametersValues)
       .then((QueryResult r)=>editableQuery.queryResult(r))
-      .catchError((e)=> editableQuery.queryFailed(e.toString()));
+      .catchError((e)=> editableQuery.queryFailed(e));
   }
   
   void runQuery(EditableQuery editableQuery) {
     editableQuery.runQuery();
     service.runQuery(editableQuery.model, editableQuery.parametersValues)
     .then((QueryResult r)=>editableQuery.queryResult(r))
-    .catchError((e)=> editableQuery.queryFailed(e.toString()));
+    .catchError((e)=>editableQuery.queryFailed(e));
   }
  
   void loadAll() {
@@ -198,7 +198,7 @@ class EditableQuery extends EditableModel<Query> {
   bool queryRunning = false;
   
   @observable
-  String lastError;
+  ErrorResponse lastError;
   
   @observable
   QueryResult lastQueryResult;
@@ -269,7 +269,7 @@ class EditableQuery extends EditableModel<Query> {
     lastQueryResult = result;
   }
   
-  void queryFailed(String reason) {
+  void queryFailed(ErrorResponse reason) {
     queryRunning = false;
     lastError = reason;
   }
