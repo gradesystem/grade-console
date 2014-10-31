@@ -31,7 +31,10 @@ class Query extends Delegate with ListItem, Cloneable<Query>, Observable, Filter
   void _listenChanges() {
     onBeanChange([name_field, expression_field], ()=>notifyPropertyChange(#endpoint, null, endpoint) );
     onBeanChange([expression_field], ()=>notifyPropertyChange(#parameters, null, parameters) );
+    onBeanChange([name_field], ()=>notifyPropertyChange(#name, null, name) );
   }
+  
+  String get name => get(name_field);
   
   bool get predefined => get(predefined_field);
   
@@ -77,6 +80,8 @@ class Query extends Delegate with ListItem, Cloneable<Query>, Observable, Filter
 }
 
 abstract class Queries extends ListItems<EditableQuery> {
+  
+ // bool containsName(String name) => data.any((EditableQuery eq)=>
 }
 
 abstract class QuerySubPageModel {

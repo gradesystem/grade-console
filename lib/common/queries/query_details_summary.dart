@@ -10,15 +10,8 @@ class QueryDetailsSummary extends PolymerElement with Filters {
   bool selected;
   
   QueryDetailsSummary.created() : super.created();
-  
-  
-  //privately used: this is to support refactoring of vocabulary
-  String get name_key => Query.name_field;
-  
+
   bool get predefined => item.model.bean[Query.predefined_field]==true;
-  
-  @ComputedProperty("item.model.bean[name_key]")  
-  String get name => readValue(#name);
 
   String get datasets_key => Query.datasets_field;
     

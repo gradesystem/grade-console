@@ -8,7 +8,7 @@ abstract class QueryService extends ListService<Query> {
 
     Map<String, String> uriParameters = _getQueryParameters(query, parameters);
 
-    Uri queryUri = new Uri.http("", "$service_url/query/${query.bean[Query.name_field]}/results", uriParameters);
+    Uri queryUri = new Uri.http("", "$service_url/query/${query.name}/results", uriParameters);
 
     return http.getString(queryUri.toString()).then((json) => new QueryResult(json, JSON.decode(json)));
   }
@@ -37,6 +37,6 @@ abstract class QueryService extends ListService<Query> {
   }
 
   Future<bool> deleteQuery(Query query) {
-    return http.delete("$service_url/query/${query.bean[Query.name_field]}").then((xhr) => xhr.status == 204);
+    return http.delete("$service_url/query/${query.name}").then((xhr) => xhr.status == 204);
   }
 }
