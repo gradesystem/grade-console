@@ -242,7 +242,7 @@ class EditableModel<T extends Cloneable<T>> extends Observable with ListItem {
   @observable
   ObservableMap<String,bool> fieldsInvalidity = new ObservableMap();
   
-  bool _valid;
+  bool _valid = true;
   
   T _original;
   T _underEdit;
