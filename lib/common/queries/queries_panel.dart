@@ -67,4 +67,8 @@ class QueriesPanel extends PolymerElement with Filters {
   void deleteSelectedQuery() {
     if (deleteCandidate!=null) model.removeQuery(deleteCandidate);
   }
+  
+  void cloneItem(event, detail, target) {
+    model.cloneQuery(detail);
+  }
 }

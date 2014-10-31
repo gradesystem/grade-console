@@ -99,6 +99,13 @@ abstract class QuerySubPageModel {
     editableModel.startEdit();
   }
   
+  void cloneQuery(EditableQuery original) {
+    EditableQuery editableModel = new EditableQuery(original.model.clone());
+    storage.data.add(editableModel);
+    storage.selected = editableModel;
+    editableModel.startEdit();
+  }
+  
   void saveQuery(EditableQuery editableModel) {
     Timer timer = new Timer(new Duration(milliseconds: 200), () {
       editableModel.sync();
@@ -230,7 +237,7 @@ class EditableQuery extends EditableModel<Query> {
   
   void _updateParametersValidity(_) {
     List<String> parameters = model.parameters;
-    _validParameters = parameters.every((String name)=>!parametersInvalidity[name]);
+    _validParameters = parameters.every((String name)=>parametersInvalidity.containsKey(name) && !parametersInvalidity[name]);
     notifyPropertyChange(#validParameters, null, _validParameters);
   }
   

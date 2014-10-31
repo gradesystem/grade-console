@@ -42,4 +42,8 @@ class QueryDetailsSummary extends PolymerElement with Filters {
     fire("remove-item", detail:item);
   }
   
+  void cloneItem() {
+    fire("clone-item", detail:item);
+  }
+  
 }
