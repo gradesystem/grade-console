@@ -184,7 +184,8 @@ class EditableQuery extends EditableModel<Query> {
   @observable
   QueryResult lastQueryResult;
   
-  Map<String,String> parametersValues = {};
+  @observable
+  ObservableMap<String,String> parametersValues = new ObservableMap();
   
   @observable
   ObservableMap<String,bool> parametersInvalidity = new ObservableMap();
@@ -195,12 +196,25 @@ class EditableQuery extends EditableModel<Query> {
     //we want to listen on parameters value changes
     parametersInvalidity.changes.listen(_updateParametersValidity);
     
-    //we need to listen on the expression changes in the current model
-    onPropertyChange(this, #model, (){
-      onPropertyChange(model, #parameters, ()=>_updateParametersValidity(null));
-      _updateParametersValidity(null);
-    });
+    //when parameters are edited we reset the last error
+    parametersValues.changes.listen((_)=>resetLastError());
     
+    //we need to listen on the expression changes in the current model
+    onPropertyChange(this, #model, _listenNewModel);
+    
+  }
+  
+  void _listenNewModel() {
+    //when parameters list change we re-calculate the parameters validity
+    onPropertyChange(model, #parameters, ()=>_updateParametersValidity(null));
+    _updateParametersValidity(null);
+    
+    //when the model is edited we reset the last error
+    model.changes.listen((_)=>resetLastError());
+  }
+  
+  void resetLastError() {
+    lastError = null;
   }
   
   void _updateParametersValidity(_) {
@@ -215,7 +229,7 @@ class EditableQuery extends EditableModel<Query> {
   
   void runQuery() {
     queryRunning = true;
-    lastError = null;
+    resetLastError();
     lastQueryResult = null;
   }
   
