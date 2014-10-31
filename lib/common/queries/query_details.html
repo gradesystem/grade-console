@@ -31,7 +31,7 @@
                      
                      <grade-input fascia-title 
                                   disabled="{{ !editable }}" 
-                                  multiline?="{{ isAreaField(key) }}" 
+                                  multiline="{{ isAreaField(key) }}"
                                   label="{{ key | suffix }} ?" 
                                   required="{{ isRequiredField(key) }}"
                                   invalid="{{ item.fieldsInvalidity[key] }}"
