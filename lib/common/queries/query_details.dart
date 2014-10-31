@@ -7,13 +7,13 @@ class QueryDetails extends PolymerElement with Filters {
   List<String> fields = [Query.name_field,
                          Query.datasets_field,
                          Query.note_field,
-                         //Query.target_field, 
+                         Query.target_field, 
                          Query.expression_field];
   
   static List<String> required_fields = [Query.name_field,
                          Query.datasets_field,
                          Query.note_field,
-                         //Query.target_field, 
+                         Query.target_field, 
                          Query.expression_field];
   
   
