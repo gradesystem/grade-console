@@ -229,7 +229,14 @@ grade-classes = {
   
       visibility:hidden
     
-    }      
+    }  
+    
+    
+    "*:hover[option]" : {
+      font-weight:bolder
+    }
+    
+    
 }
 
 theme-classes = {
@@ -260,6 +267,11 @@ theme-classes = {
       color : "primary"
     }
     
+     "[wired-fg]" : {
+        border:1px solid
+        border-color: "primary"
+    }
+    
     "paper-progress::shadow #activeProgress" : {
       background-color: "primary"
     }
@@ -280,6 +292,11 @@ theme-classes = {
 
     //buttons
 
+    "grade-dialog [option]" : {
+      color : "primary"
+    }
+    
+    
     "paper-button::shadow #ripple" : {
       color : "tertiary"
     }

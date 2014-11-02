@@ -56,10 +56,11 @@
 	  
 	  </core-animated-pages>
 	  
-	  <grade-dialog opened={{removeDialogOpened}} header={{removedDialogHeader}}>
-	   <div main>There is no going back here. Are you sure?</div>
-	   <paper-button label="Abort" affirmative></paper-button>
-     <paper-button label="Remove" affirmative autofocus on-click={{deleteSelectedQuery}}></paper-button>
+	  <grade-dialog opened={{removeDialogOpened}} heading={{removedDialogHeader}}>
+	   <div main>There is no going back here</div>
+	   <div main>Are you sure?</div>
+	   <paper-button fg label="NO" dismissive option></paper-button>
+     <paper-button fg label="YES" affirmative option autofocus on-click={{deleteSelectedQuery}}></paper-button>
 	  </grade-dialog>
   
   </template>
