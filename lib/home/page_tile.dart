@@ -28,6 +28,9 @@ class PageStatistics extends Observable {
   @observable
   DateTime date;
   
+  @observable 
+  bool loaded = false;
+  
   @observable
   List<String> notifications = toObservable([]);
   

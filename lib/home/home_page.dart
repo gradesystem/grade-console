@@ -40,27 +40,41 @@ class HomePage extends PolymerElement with Dependencies {
   PageStatistics deck_stats;
   
   
+  @ObserveProperty('prod.loading') 
   @ObserveProperty('prod.data') 
   onProdChange() {
     
+    prod_stats.loaded=!prod.loading;
     prod_stats.count=prod.data.length;
     prod_stats.date= new DateTime.now();
         
   }
   
+  @ObserveProperty('stage.loading') 
   @ObserveProperty('stage.data') 
   onStageChange() {
       
+    stage_stats.loaded=!stage.loading;
       stage_stats.count=stage.data.length;
       stage_stats.date= new DateTime.now();
           
   }
   
+  @ObserveProperty('tasks.loading') 
   @ObserveProperty('tasks.data') 
   ontasksChange() {
-        
+      
+        tasks_stats.loaded=!tasks.loading;
         tasks_stats.count=tasks.data.length;
         tasks_stats.date= new DateTime.now();
+            
+  }
+  
+  @ObserveProperty('tasks.loading') 
+  ondeckChange() {
+      
+    deck_stats.loaded=!tasks.loading;
+    deck_stats.date= new DateTime.now();
             
   }
 }

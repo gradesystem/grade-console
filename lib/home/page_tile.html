@@ -44,6 +44,11 @@
          padding-right: 5px;
       }
       
+       [nostats] {
+         font-size: 200%;
+         padding-right: 5px;
+      }
+      
       [info] {
          padding-bottom: 11px;
       }
@@ -82,7 +87,14 @@
       
            <div flex content vertical layout end-justified>
               <div layout horizontal>
-	              <div count>{{statistics.count}}</div>
+                
+                <div count>
+                  <template if={{statistics.loaded}}>
+                    {{statistics.count}}
+                  </template>	         
+                  <template if={{!statistics.loaded}}>??</template>          
+                </div>
+                
 	              <div info layout vertical reverse>
 	                    <div date>{{statistics.date | format}}</div>
                       <div name>{{resource_name}}</div>
