@@ -92,7 +92,7 @@
                   <template if={{statistics.loaded}}>
                     {{statistics.count}}
                   </template>	         
-                  <template if={{!statistics.loaded}}>??</template>          
+                  <template if={{!statistics.loaded}}>...</template>          
                 </div>
                 
 	              <div info layout vertical reverse>
@@ -109,6 +109,34 @@
             </div>
         
         
+       <!--             <template if="{{statistics.loaded}}">
+                 
+                 <div layout horizontal>
+                 
+                     <div count>{{statistics.count}}</div>
+                     
+                     <div info layout vertical reverse>
+                   
+                           <div date>{{statistics.date | format}}</div>
+                           <div name>{{resource_name}}</div>
+                   
+                     </div>
+                   
+                     <div flex end-justified notifs
+                        layout horizontal >
+                       <template repeat="{{ notification in statistics.notifications }}">
+                          <core-icon icon="{{notification}}"></core-icon>
+                       </template>
+                   
+                     </div>
+                 </div>
+             </template>
+             
+              <template if="{{!statistics.loaded}}">
+                <div flex layout horizontal center>
+                  <infinite-progress content run="{{ true }}"></infinite-progress>
+                </div>
+            </template>  -->
        
         
     </div>

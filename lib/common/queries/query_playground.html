@@ -8,6 +8,7 @@
 
 <link rel="import" href="../components/grade_header_panel.html">
 <link rel="import" href="../components/grade_button.html">
+<link rel="import" href="../components/grade_error.html">
 <link rel="import" href="../components/loading_panel.html">
 
 <link rel="import" href="../../../../packages/core_elements/av_icons.html">
@@ -131,16 +132,21 @@
 						</div>
           
           </core-animated-pages>
-         <div layout horizontal center-justified hide?="{{editableQuery.lastQueryResult!=null || editableQuery.lastError!=null}}" style="overflow:hidden"> 
+          
+         <div layout horizontal center-justified 
+               hide?="{{editableQuery.lastQueryResult!=null || editableQuery.lastError!=null}}" style="overflow:hidden"> 
          </div>
-         <div layout vertical center-justified spaced hide?="{{editableQuery.lastError==null}}"> 
-            <div self-center><span fg>{{editableQuery.lastError.message}}</span><span id="detailsbutton" small on-click="{{showErrorDetails}}"> (details)</span></div>
-						<core-collapse id="errorDetails">
-						  <div  style="overflow-y: auto;">
-						  <pre fg>{{editableQuery.lastError.stacktrace}}</pre>
-						  </div>
-						</core-collapse>
-         </div>
+         
+         <template if="{{editableQuery.lastError!=null}}">
+
+            <grade-error one="{{errorMessage()}}"
+                 two = {{editableQuery.lastError.message}}
+                 three = {{editableQuery.lastError.stacktrace}}>
+            </grade-error>
+                  
+         </template>
+            
+            
         </loading-panel>
       </grade-header-panel>
     </div>

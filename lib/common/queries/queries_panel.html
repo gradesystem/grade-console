@@ -46,7 +46,7 @@
 	          <grade-button toolbar icon="create" label="edit query" on-click="{{onEdit}}" hidden?="{{queries.selected.edit || queries.selected.model.predefined}}"></grade-button>
 	          <grade-button toolbar icon="cancel" label="discard changes" on-click="{{onCancel}}" hidden?={{!queries.selected.edit}}></grade-button>
 	          <grade-button toolbar icon="save" label="save changes" on-click="{{onSave}}" hidden?={{!queries.selected.edit}} disabled={{!queries.selected.valid}}></grade-button>
-	          <grade-button toolbar icon="av:play-arrow" label="run query" on-click="{{onQueryPlayground}}" disabled={{!queries.selected.valid}}></grade-button>
+	          <grade-button toolbar icon="arrow-forward" label="run query" on-click="{{onQueryPlayground}}" disabled={{!queries.selected.valid}}></grade-button>
 	          <query-details main item="{{queries.selected}}" editable="{{queries.selected.edit}}" validator={{model.validator}} spaced></query-details> 
 	      </grade-header-panel>
 	
@@ -57,8 +57,8 @@
 	  </core-animated-pages>
 	  
 	  <grade-dialog opened={{removeDialogOpened}} heading={{removedDialogHeader}}>
-	   <div main>There is no going back here</div>
-	   <div main>Are you sure?</div>
+	   <div main>There is no going back here.</div>
+	   <div main bolder>Are you sure?</div>
 	   <paper-button fg label="NO" dismissive option></paper-button>
      <paper-button fg label="YES" affirmative option autofocus on-click={{deleteSelectedQuery}}></paper-button>
 	  </grade-dialog>

@@ -61,6 +61,10 @@ class ErrorResponse {
 
   ErrorResponse(this.code, this.message, this.stacktrace);
   ErrorResponse.fromJSon(Map bean) : this(bean["code"], bean["msg"], bean["stacktrace"]);
+  
+  bool isClientError() {
+    return (code>=400 && code<500);
+  }
 
   String toString() => "Error: $code $message $stacktrace";
 }
