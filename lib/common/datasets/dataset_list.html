@@ -5,6 +5,8 @@
 <link rel="import" href="../components/grade_item.html">
 <link rel="import" href="../components/grade_fascia.html">
 
+<link rel="import" href="datasets.html">
+
 <polymer-element name="dataset-list"> 
 
  <template>
@@ -20,7 +22,7 @@
 		      <grade-item icon=drive-document smallicon>
 		      
 		        <grade-fascia>
-		          <div fascia-title>{{title }}</div>
+		          <div fascia-title>{{title}}</div>
 		          <div fascia-subtitle>{{subTitle}}</div>
 		        </grade-fascia>
 		        
@@ -33,7 +35,5 @@
 	  </core-list-dart>
 	 </list-panel>
  </template>
-
- <script type="application/dart" src="datasets.dart"></script> 
 
 </polymer-element>
