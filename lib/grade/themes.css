@@ -52,10 +52,10 @@
   font-size: x-small;
 }
 :host /deep/ [tinyicon] /deep/ core-icon {
-  height: 12px;
-  min-height: 12px;
-  min-width: 12px;
-  width: 12px;
+  height: 14px;
+  min-height: 14px;
+  min-width: 14px;
+  width: 14px;
 }
 :host /deep/ [smallicon] /deep/ core-icon {
   height: 20px;
@@ -68,6 +68,12 @@
   min-height: 24px;
   min-width: 24px;
   width: 24px;
+}
+:host /deep/ [largeicon] /deep/ core-icon {
+  height: 32px;
+  min-height: 32px;
+  min-width: 32px;
+  width: 32px;
 }
 :host /deep/ [truncate] * {
   overflow: hidden;

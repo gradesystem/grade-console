@@ -60,7 +60,7 @@ class QueriesPanel extends PolymerElement with Filters {
   void removeItem(event, detail, target) {
     deleteCandidate = detail;
     Query query = deleteCandidate.model;
-    removedDialogHeader = "Remove ${query.bean[Query.name_field]} ?";
+    removedDialogHeader = "Remove ${query.bean[Query.name_field]}";
     removeDialogOpened = true;
   }
   

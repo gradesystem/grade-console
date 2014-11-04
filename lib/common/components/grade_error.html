@@ -1,0 +1,81 @@
+<link rel="import" href="../../../../packages/polymer/polymer.html">
+
+<link rel="import" href="../../../../packages/core_elements/core_icon.html">
+<link rel="import" href="../../../../packages/core_elements/core_icons.html">
+
+<link rel="import" href="grade_button.html">
+
+
+<polymer-element name="grade-error">
+
+    <template>
+    
+        <style>
+        
+          :host [meme] {
+          
+            width:40px;
+            height:40px;
+            color: red;
+            margin-right: 5px;
+          }
+          
+          :host [more] /deep/ core-icon {
+          
+            position:relative;
+            top:-6px;
+            color:lightgrey;
+          
+          }
+         
+          :host [two] {        
+            margin-top:10px; 
+            max-width: 400px;
+          }
+           
+          :host [three] {
+            margin-top:10px;        
+            max-width: 400px;
+            
+            border-radius:5px;
+            
+            background: #fafafa;
+            padding: 10px;
+          }
+          
+          :host [hidden] {
+            visibility:hidden
+          }
+
+				    
+        </style>
+
+        <div layout vertical center spaced>
+            
+            <div layout horizontal center>
+	            
+	            <core-icon large meme icon="error"></core-icon>
+	            <div larger fg>{{one}}</div>
+		          <grade-button more hide?="{{level>1}}" tinyicon icon=help label="more info?" on-click={{levelUp}}></grade-button>
+             
+             </div>
+
+             <template if="{{two!=null && level>=2}}">
+	             <div layout horizontal center>
+	               <div two fg-alt>{{two}}</div>
+	               <grade-button more hide?="{{level!=2}}" tinyicon icon=help label="all the ugly details?" on-click={{levelUp}}></grade-button>
+	             </div>
+             </template>   
+             
+            <template if="{{three!=null && level==3}}">
+                <div fg-alt three smaller>{{three}}</div>
+             </template>              
+              
+        </div>
+        
+        <script type="application/dart" src="grade_error.dart"></script> 
+
+    </template>
+
+
+</polymer-element>
