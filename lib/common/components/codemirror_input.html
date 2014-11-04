@@ -3,7 +3,7 @@
 <polymer-element name="codemirror-input" relative>
 		<template>
 		<style>
-		        @import 'packages/codemirror/codemirror.css';
+		    @import 'packages/codemirror/codemirror.css';
         
         .CodeMirror {
           height: inherit;
@@ -11,6 +11,10 @@
         .CodeMirror-scroll {
           overflow-y: hidden;
          /* overflow-x: auto;*/
+        }
+        
+        :host {
+        display: block;
         }
 		</style>
 		      <div fit style="height:100%" id="codemirror">
