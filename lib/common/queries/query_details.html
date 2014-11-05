@@ -15,7 +15,7 @@
     
       <style>
         
-        grade-input::shadow [height] {
+        grade-input::shadow [multiline] {
            max-height: 150px;
         }
         
@@ -33,9 +33,10 @@
                      
                      <grade-input fascia-title 
                                   disabled="{{ !editable }}" 
-                                  multiline="{{ isAreaField(key) }}"
+                                  multiline?="{{ isAreaField(key) }}"
                                   label="{{ key | suffix }} ?" 
-                                  required="{{ isRequiredField(key) }}"
+                                  required?="{{ isRequiredField(key) }}"
+                                  validators="{{ validatorsFor(key)}}"
                                   invalid="{{ item.fieldsInvalidity[key] }}"
                                   inputValue="{{ item.model.bean[key]  }}">
                      </grade-input>

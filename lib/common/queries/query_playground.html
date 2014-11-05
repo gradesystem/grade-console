@@ -1,4 +1,4 @@
-<link rel="import" href="../../../../packages/polymer/polymer.html">
+ <link rel="import" href="../../../../packages/polymer/polymer.html">
 
 <link rel="import" href="../coming_soon.html">
 
@@ -10,6 +10,7 @@
 <link rel="import" href="../components/grade_button.html">
 <link rel="import" href="../components/grade_error.html">
 <link rel="import" href="../components/loading_panel.html">
+<link rel="import" href="../components/codemirror_input.html">
 
 <link rel="import" href="../../../../packages/core_elements/av_icons.html">
 <link rel="import" href="../../../../packages/core_elements/core_pages.html">
@@ -71,13 +72,12 @@
         <grade-button menu icon="arrow-back" on-click="{{onBack}}"></grade-button>
         <div main fit layout vertical>
           <div flex wired rounded spaced layout horizontal style="min-height:75px;">
-	          <paper-input multiline rows="6" maxrows="6" flex layout vertical style="margin: 5px;"
-	          inputValue="{{editableQuery.model.bean[expression_key]}}"
-	          disabled?="{{!editableQuery.edit}}"
-	          required="true"
-	          invalid="{{ editableQuery.fieldsInvalidity[expression_key] }}"
-	          >
-	          </paper-input>
+	          
+	          <codemirror-input flex
+	          active={{isactive}} 
+	          mode="sparql" 
+	          value={{editableQuery.model.bean[expression_key]}}
+	          disabled="{{!editableQuery.edit}}"></codemirror-input>
           </div>
           
           <div horizontal layout wrap style="overflow-y: auto; min-height:50px;">
@@ -99,7 +99,7 @@
         
       </grade-header-panel>
       <div style="position: relative; width: 0; height: 0" self-end >
-        <paper-fab class="runButton" mini="true" icon="av:play-arrow" on-click="{{onRun}}" hide?="{{!editableQuery.valid || !editableQuery.validParameters}}"></paper-fab>
+        <paper-fab class="runButton" mini="true" icon="av:play-arrow" on-click="{{onRun}}" hide?="{{editableQuery.fieldsInvalidity[expression_key] || editableQuery.fieldsInvalidity[target_key] || !editableQuery.validParameters}}"></paper-fab>
       </div>
     </div>
   
@@ -116,7 +116,7 @@
             <div style="overflow-y: auto;">
 	            <table style="border-collapse: collapse; width:100%">
 	              <tr>
-	                <th template repeat="{{header in editableQuery.lastQueryResult.headers}}" result-table?="{{!editableQuery.dirty}}" result-table-disabled?="{{editableQuery.dirty}}">{{header}}</th>
+	                <th fg template repeat="{{header in editableQuery.lastQueryResult.headers}}" result-table?="{{!editableQuery.dirty}}" result-table-disabled?="{{editableQuery.dirty}}">{{header}}</th>
 	              </tr> 
 	               
 	              <tr template repeat="{{row in editableQuery.lastQueryResult.rows}}">
@@ -154,3 +154,4 @@
     </div>
   </template>
 </polymer-element>
+

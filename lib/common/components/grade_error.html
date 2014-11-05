@@ -16,27 +16,25 @@
           
             width:40px;
             height:40px;
-            color: red;
+            color: #E41C23;
             margin-right: 5px;
           }
           
           :host [more] /deep/ core-icon {
           
             position:relative;
-            top:-6px;
             color:lightgrey;
           
           }
          
           :host [two] {        
             margin-top:10px; 
-            max-width: 400px;
+            max-width:95%;
           }
            
           :host [three] {
             margin-top:10px;        
-            max-width: 400px;
-            
+            max-width:95%;
             border-radius:5px;
             
             background: #fafafa;
@@ -47,28 +45,28 @@
             visibility:hidden
           }
 
-				    
+            
         </style>
 
         <div layout vertical center spaced>
             
             <div layout horizontal center>
-	            
-	            <core-icon large meme icon="error"></core-icon>
-	            <div larger fg>{{one}}</div>
-		          <grade-button more hide?="{{level>1}}" tinyicon icon=help label="more info?" on-click={{levelUp}}></grade-button>
+              
+              <core-icon large meme icon="warning"></core-icon>
+              <div larger fg>{{one}}</div>
+              <grade-button more hide?="{{level>1}}" tinyicon icon=help label="more info?" on-click={{levelUp}}></grade-button>
              
              </div>
 
              <template if="{{two!=null && level>=2}}">
-	             <div layout horizontal center>
-	               <div two fg-alt>{{two}}</div>
-	               <grade-button more hide?="{{level!=2}}" tinyicon icon=help label="all the ugly details?" on-click={{levelUp}}></grade-button>
-	             </div>
+               <div layout horizontal center-justified>
+                 <div two fg-alt>{{two}}</div>
+                 <grade-button more hide?="{{level!=2}}" tinyicon icon=help label="all the ugly details?" on-click={{levelUp}}></grade-button>
+               </div>
              </template>   
              
             <template if="{{three!=null && level==3}}">
-                <div fg-alt three smaller>{{three}}</div>
+                <div self-center fg-alt three smaller>{{three}}</div>
              </template>              
               
         </div>

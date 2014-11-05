@@ -2,7 +2,7 @@
 
 <link rel="import" href="../../../../packages/paper_elements/paper_input.html">
 
-<polymer-element name="grade-input" attributes="value, label, multiline, inputValue, disabled, required, invalid" noscript>
+<polymer-element name="grade-input" >
 
     <template>
 
@@ -39,39 +39,31 @@
           border:none
         }
         
-        :host paper-input [height] {
+        :host paper-input [multiline] {
           
              overflow:auto;
         }
         
       
       </style>
-      
+               
       <div>
-        <!-- workaround for multiple attribute setting -->
-        <template if="{{multiline==null || multiline==false}}">
-             <paper-input 
-                     disabled?="{{disabled}}"
-                     label="{{label}}" 
+      
+             <paper-input id="input" 
+                     disabled?={{disabled}}
+                     label={{label}} 
+                     value={{value}}
+                     multiline?={{multiline}}
                      inputValue={{inputValue}}
-                     required?="{{required}}"
-                     invalid={{invalid}}
-                     value="{{value}}">
+                     invalid={{invalid}}>
              </paper-input>
-         </template>
-         <template if="{{multiline!=null && multiline==true}}">
-         
-           <paper-input 
-                   disabled?="{{disabled}}"
-                   label="{{label}}" 
-                   multiline=true
-                   inputValue={{inputValue}}
-                   required?="{{required}}"
-                   invalid={{invalid}}
-                   value="{{value}}">
-           </paper-input>
-        </template>
+        
+        
       </div>
+ 
+    <script type="application/dart" src="grade_input.dart"></script> 
+       
+ 
     
     </template>
 

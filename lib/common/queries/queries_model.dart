@@ -86,7 +86,7 @@ class Query extends Delegate with ListItem, Cloneable<Query>, Observable, Filter
 
 abstract class Queries extends ListItems<EditableQuery> {
   
-  bool containsName(String name) => data.any((EditableQuery eq)=>eq!=selected && eq.model.name == name);
+  bool containsName(String name) => data.any((EditableQuery eq)=>eq!=selected && eq.model.name.toLowerCase() == name.toLowerCase());
 }
 
 abstract class QuerySubPageModel {
@@ -94,21 +94,26 @@ abstract class QuerySubPageModel {
   EventBus bus;
   QueryService service;
   Queries storage;
-  QueryValidator validator;
   
   QuerySubPageModel(this.bus, this.service, this.storage) {
     bus.on(ApplicationReady).listen((_) {
       loadAll();
     });
-    validator = new QueryValidator(storage);
   }
   
   void addNewQuery() {
     Query query = new Query(service.path);
     EditableQuery editableModel = new EditableQuery(query);
+    editableModel.newModel = true;
+    
     storage.data.add(editableModel);
     storage.selected = editableModel;
     editableModel.startEdit();
+  }
+  
+  void cancelEditing(EditableQuery query) {
+    query.cancel();
+    if (query.newModel) storage.data.remove(query);
   }
   
   void cloneQuery(EditableQuery original) {
@@ -225,7 +230,7 @@ class EditableQuery extends EditableModel<Query> {
     onPropertyChange(this, #model, _listenNewModel);
     
     //when query or parameters are edited we reset the last error
-    onPropertyChange(this, #dirty, (){if (dirty) resetLastError();});
+    onPropertyChange(this, #dirty, resetLastError);
     
   }
   
@@ -235,9 +240,12 @@ class EditableQuery extends EditableModel<Query> {
     _updateParametersValidity(null);
 
     model.changes.listen((_)=>_setDirty(true));
+    
+    onPropertyChange(this, #model, ()=>_setDirty(false));
   }
   
   void _setDirty(bool dirty) {
+    print('update dirty: old: $_dirty new: $_dirty');
     _dirty = dirty;
    notifyPropertyChange(#dirty, null, _dirty); 
   }
@@ -281,6 +289,9 @@ class EditableQuery extends EditableModel<Query> {
 class EditableModel<T extends Cloneable<T>> extends Observable with ListItem {
   
   @observable
+  bool newModel = false;
+  
+  @observable
   bool edit = false;
   
   @observable
@@ -302,6 +313,8 @@ class EditableModel<T extends Cloneable<T>> extends Observable with ListItem {
     _valid = fieldsInvalidity.values.every((b)=>!b);
     notifyPropertyChange(#valid, null, _valid);
   }
+  
+  bool isValid(String fieldName) => fieldsInvalidity.containsKey(fieldName) && !fieldsInvalidity[fieldName];
   
   @observable
   T get model => edit?_underEdit:_original;
@@ -334,6 +347,7 @@ class EditableModel<T extends Cloneable<T>> extends Observable with ListItem {
   
   void synched() {
     synching = false;
+    newModel = false;
   }
 
 }
@@ -351,28 +365,4 @@ class QueryResult extends Delegate {
   
   List<String> get headers => get("head")["vars"];
   List<Map<String,String>> get rows => get("results")["bindings"];
-}
-
-class QueryValidator extends Validator {
-  
-  static final ValidationResult VALID = new ValidationResult.valid();
-  static final ValidationResult EMPTY_VALUE = new ValidationResult.invalid("Please fill out this field.");
-  static final ValidationResult NAME_NOT_UNIQUE = new ValidationResult.invalid("Query name already taken");
-  
-  Queries queries;
-  
-  QueryValidator(this.queries);
-  
-  ValidationResult isValid(String key, String value) {
-    print('validating key: $key value: $value');
-    if (key == Query.name_field && queries.containsName(value)) {
-      print('result: $NAME_NOT_UNIQUE');
-      return NAME_NOT_UNIQUE;
-    }
-    ValidationResult result = value.isEmpty?EMPTY_VALUE:VALID;
-    
-    print('result: $result');
-    return result;
-    
-  }
 }

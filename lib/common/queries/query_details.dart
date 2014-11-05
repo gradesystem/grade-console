@@ -10,25 +10,29 @@ class QueryDetails extends PolymerElement with Filters {
                          Query.target_field, 
                          Query.expression_field];
   
-  static List<String> required_fields = [Query.name_field,
-                         Query.datasets_field,
-                         Query.note_field,
-                         Query.target_field, 
+  static List<String> required_fields = [
+                         Query.name_field,
+                         Query.target_field,
                          Query.expression_field];
   
   
+  Map<String,List<Validator>> validators = {};
+  
   static List<String> area_fields = [Query.expression_field,Query.note_field];
   
-  @published
-  bool editable = false;
+  @ComputedProperty('item.edit')
+  bool get editable => item==null?false:item.edit;
+  
+  @ComputedProperty('queries.selected')
+  EditableQuery get item => queries==null?null:queries.selected;
   
   @published
-  EditableQuery item;
+  Queries queries;
   
-  @published
-  QueryValidator validator;
-  
-  QueryDetails.created() : super.created();
+  QueryDetails.created() : super.created() {
+    validators[
+       Query.name_field]=[($) => queries.containsName($)?"Not original enough, try again.":null];
+  }
   
   bool isAreaField(String key) {
     return area_fields.contains(key);
@@ -36,6 +40,11 @@ class QueryDetails extends PolymerElement with Filters {
   
   bool isRequiredField(String key) {
     return required_fields.contains(key);
+  }
+  
+  List<Validator> validatorsFor(String key) {
+    List<Validator> validators = this.validators[key];
+    return validators==null?[]:validators;
   }
   
   @ComputedProperty("item.synching")

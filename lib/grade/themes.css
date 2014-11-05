@@ -174,7 +174,6 @@
 }
 :host /deep/ .home /deep/ [result-table] {
   background: #fafafa;
-  color: #26699a;
   border: 1px solid #424242;
 }
 :host /deep/ .home /deep/ [result-table-disabled] {
@@ -257,7 +256,6 @@
 }
 :host /deep/ .prod /deep/ [result-table] {
   background: #fafafa;
-  color: #00bcd4;
   border: 1px solid #424242;
 }
 :host /deep/ .prod /deep/ [result-table-disabled] {
@@ -340,7 +338,6 @@
 }
 :host /deep/ .deck /deep/ [result-table] {
   background: #fafafa;
-  color: #ffc107;
   border: 1px solid #424242;
 }
 :host /deep/ .deck /deep/ [result-table-disabled] {
@@ -423,7 +420,6 @@
 }
 :host /deep/ .tasks /deep/ [result-table] {
   background: #fafafa;
-  color: #e41c23;
   border: 1px solid #424242;
 }
 :host /deep/ .tasks /deep/ [result-table-disabled] {
@@ -506,7 +502,6 @@
 }
 :host /deep/ .stage /deep/ [result-table] {
   background: #fafafa;
-  color: #009587;
   border: 1px solid #424242;
 }
 :host /deep/ .stage /deep/ [result-table-disabled] {

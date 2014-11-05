@@ -9,18 +9,26 @@ class QueryPlayground extends PolymerElement with Filters {
   @published
   EditableQuery editableQuery;
   
+  @observable
+  bool isactive;
+  
   QueryPlayground.created() : super.created();
+  
+  void attributeChanged(name, oldValue, newValue) {
+     super.attributeChanged(name, oldValue, newValue);
+     if (name == "active") isactive =  attributes.containsKey('active');
+   }
   
   //privately used: this is to support refactoring of vocabulary
   String get expression_key => Query.expression_field;
   String get predefined_key => Query.predefined_field;
-  
+  String get target_key => Query.target_field;
   
   @ComputedProperty("editableQuery.model.bean[predefined_key]") 
   bool get editable => editableQuery!=null?editableQuery.model.bean[Query.predefined_field]==false:false;
   
   @ComputedProperty("editableQuery.model.name")  
-  String get title => editableQuery!=null?editableQuery.model.name:"";
+  String get title => editableQuery!=null?(editableQuery.model.name == null || editableQuery.model.name.isEmpty?"(name?)":editableQuery.model.name):"";
   
   String errorMessage()   {
   
