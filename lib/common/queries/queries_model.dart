@@ -245,7 +245,6 @@ class EditableQuery extends EditableModel<Query> {
   }
   
   void _setDirty(bool dirty) {
-    print('update dirty: old: $_dirty new: $_dirty');
     _dirty = dirty;
    notifyPropertyChange(#dirty, null, _dirty); 
   }

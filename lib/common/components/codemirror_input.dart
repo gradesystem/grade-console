@@ -26,7 +26,6 @@ class CodemirrorInput extends PolymerElement {
   }
 
   void refresh() {
-    print('refreshing codemirror');
     editor.refresh();
   }
   
