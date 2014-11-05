@@ -45,22 +45,17 @@ class CodemirrorInput extends PolymerElement {
     editor.setLineNumbers(true);
 
     onPropertyChange(this, #value, (){
-      //print('onPropertyChange');
       if (value!=editor.getDoc().getValue()) {
-        //print('setting value');
         editor.getDoc().setValue(value);
         editor.refresh();
       }
-      //else print('skipping update');
     });
     
     editor.onChange.listen((_){
-      //print('editor.onChange.listen');
       value = editor.getDoc().getValue();
     });
     
     onPropertyChange(this, #disabled, (){
-//      print('readOnly $disabled');
       editor.setOption("readOnly", disabled?"nocursor":false);
     });
 
