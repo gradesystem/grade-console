@@ -11,10 +11,21 @@ class CodemirrorInput extends PolymerElement {
   
   @published
   String value;
+  
+  @published
+  bool active;
 
+  CodeMirror editor;
 
-  CodemirrorInput.created() : super.created();
+  
+  CodemirrorInput.created() : super.created() {
+    onPropertyChange(this, #active, refresh);
+  }
 
+  void refresh() {
+    print('refreshing codemirror');
+    editor.refresh();
+  }
   
   void ready() {
     
@@ -22,38 +33,33 @@ class CodemirrorInput extends PolymerElement {
       'mode':  mode
     };
 
-    CodeMirror editor = new CodeMirror.fromElement(
+    editor = new CodeMirror.fromElement(
         $['codemirror'], options: options);
 
     onPropertyChange(this, #value, (){
       print('onPropertyChange');
-      editor.setOption("value", value);
+      if (value!=editor.getDoc().getValue()) {
+        print('setting value');
+        editor.getDoc().setValue(value);
+        editor.refresh();
+      }
+      else print('skipping update');
     });
     
     editor.onChange.listen((_){
       print('editor.onChange.listen');
       value = editor.getDoc().getValue();
     });
-    
-   
-   /* changes.listen((records) {
-        for (var record in records) {
-          if (record is PropertyChangeRecord &&
-              (record as PropertyChangeRecord).name ==  #value) {
-            PropertyChangeRecord changeRecord = record as PropertyChangeRecord;
-            if (changeRecord.newValue!=null && changeRecord.oldValue!=LOCAL_UPDATE) editor.setOption("value", value);
-            break;
-          }
-        }
-      });
-    
-    editor.onChange.listen((_){
-         print('changes');
-         local_value = editor.getDoc().getValue();
-         print('value: $value');
-         notifyPropertyChange(#value, LOCAL_UPDATE, editor.getDoc().getValue());
-       });*/
+
   }
+  
+  /**
+   * How to listen to attributes changes, for parent refresh notification:
+   void attributeChanged(name, oldValue, newValue) {
+    super.attributeChanged(name, oldValue, newValue);
+    if (name == "active") isactive =  attributes.containsKey('active');
+  }
+   */
 
   
 }
