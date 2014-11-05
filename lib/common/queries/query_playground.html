@@ -1,4 +1,4 @@
-<link rel="import" href="../../../../packages/polymer/polymer.html">
+ <link rel="import" href="../../../../packages/polymer/polymer.html">
 
 <link rel="import" href="../coming_soon.html">
 
@@ -69,13 +69,11 @@
         <grade-button menu icon="arrow-back" on-click="{{onBack}}"></grade-button>
         <div main fit layout vertical>
           <div flex wired rounded spaced layout horizontal style="min-height:75px;">
-	          <paper-input multiline rows="6" maxrows="6" flex layout vertical style="margin: 5px;"
-	          inputValue="{{editableQuery.model.bean[expression_key]}}"
-	          disabled?="{{!editableQuery.edit}}"
-	          required="true"
-	          invalid="{{ editableQuery.fieldsInvalidity[expression_key] }}"
-	          >
-	          </paper-input>
+	          <grade-input multiline rows="6" maxrows="6" flex layout vertical style="margin: 5px;"
+			          inputValue="{{editableQuery.model.bean[expression_key]}}"
+			          disabled?="{{!editableQuery.edit}}"
+			          required>
+	          </grade-input>
           </div>
           
           <div horizontal layout wrap style="overflow-y: auto; min-height:50px;">
