@@ -55,35 +55,10 @@
                      value={{value}}
                      multiline?={{multiline}}
                      inputValue={{inputValue}}
-                     invalid={{invalid}}>
+                     invalid={{invalid}}
+                     rows={{rows}}
+                     maxrows={{maxrows}}>
              </paper-input>
-             
-<!--         workaround for multiple attribute setting
-        <template if="{{multiline==null || multiline==false}}">
-             <paper-input id="input" 
-                     disabled?="{{disabled}}"
-                     label="{{label}}" 
-                     value="{{value}}"
-                     multiline?={{multiline}}
-                     inputValue={{inputValue}}
-                     required?="{{required}}"
-                     invalid={{invalid}}>
-             </paper-input>
-         </template> -->
-<!--          <template if="{{multiline!=null && multiline==true}}">
-         
-           <paper-input
-                   disabled?="{{disabled}}"
-                   label="{{label}}" 
-                   multiline=true
-                   inputValue={{inputValue}}
-                   required?="{{required}}"
-                   invalid={{invalid}}
-                   value="{{value}}">
-           </paper-input>
-           
-           
-        </template> -->
         
         
       </div>
