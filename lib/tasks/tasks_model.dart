@@ -1,6 +1,6 @@
 part of tasks;
 
-class Task extends Delegate with ListItem, Filters {
+class Task extends Delegate with Filters {
   
   static final String ID_FIELD = "http://gradesystem.io/onto#id";
   
