@@ -104,6 +104,8 @@ abstract class QuerySubPageModel {
   void addNewQuery() {
     Query query = new Query(service.path);
     EditableQuery editableModel = new EditableQuery(query);
+    editableModel.newModel = true;
+    
     storage.data.add(editableModel);
     storage.selected = editableModel;
     editableModel.startEdit();
@@ -284,7 +286,7 @@ class EditableQuery extends EditableModel<Query> {
 class EditableModel<T extends Cloneable<T>> extends Observable with ListItem {
   
   @observable
-  bool newModel = true;
+  bool newModel = false;
   
   @observable
   bool edit = false;
