@@ -86,7 +86,7 @@ class Query extends Delegate with ListItem, Cloneable<Query>, Observable, Filter
 
 abstract class Queries extends ListItems<EditableQuery> {
   
-  bool containsName(String name) => data.any((EditableQuery eq)=>eq!=selected && eq.model.name == name);
+  bool containsName(String name) => data.any((EditableQuery eq)=>eq!=selected && eq.model.name.toLowerCase() == name.toLowerCase());
 }
 
 abstract class QuerySubPageModel {
@@ -94,13 +94,11 @@ abstract class QuerySubPageModel {
   EventBus bus;
   QueryService service;
   Queries storage;
-  QueryValidator validator;
   
   QuerySubPageModel(this.bus, this.service, this.storage) {
     bus.on(ApplicationReady).listen((_) {
       loadAll();
     });
-    validator = new QueryValidator(storage);
   }
   
   void addNewQuery() {
@@ -351,28 +349,4 @@ class QueryResult extends Delegate {
   
   List<String> get headers => get("head")["vars"];
   List<Map<String,String>> get rows => get("results")["bindings"];
-}
-
-class QueryValidator extends Validator {
-  
-  static final ValidationResult VALID = new ValidationResult.valid();
-  static final ValidationResult EMPTY_VALUE = new ValidationResult.invalid("Please fill out this field.");
-  static final ValidationResult NAME_NOT_UNIQUE = new ValidationResult.invalid("Query name already taken");
-  
-  Queries queries;
-  
-  QueryValidator(this.queries);
-  
-  ValidationResult isValid(String key, String value) {
-    print('validating key: $key value: $value');
-    if (key == Query.name_field && queries.containsName(value)) {
-      print('result: $NAME_NOT_UNIQUE');
-      return NAME_NOT_UNIQUE;
-    }
-    ValidationResult result = value.isEmpty?EMPTY_VALUE:VALID;
-    
-    print('result: $result');
-    return result;
-    
-  }
 }
