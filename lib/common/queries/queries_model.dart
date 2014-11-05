@@ -230,7 +230,7 @@ class EditableQuery extends EditableModel<Query> {
     onPropertyChange(this, #model, _listenNewModel);
     
     //when query or parameters are edited we reset the last error
-    onPropertyChange(this, #dirty, (){if (dirty) resetLastError();});
+    onPropertyChange(this, #dirty, resetLastError);
     
   }
   
@@ -240,9 +240,12 @@ class EditableQuery extends EditableModel<Query> {
     _updateParametersValidity(null);
 
     model.changes.listen((_)=>_setDirty(true));
+    
+    onPropertyChange(this, #model, ()=>_setDirty(false));
   }
   
   void _setDirty(bool dirty) {
+    print('update dirty: old: $_dirty new: $_dirty');
     _dirty = dirty;
    notifyPropertyChange(#dirty, null, _dirty); 
   }
