@@ -1,6 +1,6 @@
 part of lists;
 
-abstract class ListService<T extends ListItem> extends Dependencies {
+abstract class ListService<T> extends Dependencies {
    
   Generator<T> generator;
   

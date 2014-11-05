@@ -1,15 +1,7 @@
 part of lists;
 
-abstract class ListItem {
- 
-  bool selected;
-  
-  dynamic get self => this;
 
-}
-
-
-abstract class ListItems<T extends ListItem> extends Observable {
+abstract class ListItems<T> extends Observable {
   
   @observable
   T selected = null;

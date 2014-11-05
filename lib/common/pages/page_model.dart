@@ -1,6 +1,6 @@
 part of pages;
 
-abstract class SubPageModel<T extends ListItem> {
+abstract class SubPageModel<T> {
   
   EventBus bus;
   ListService<T> service;

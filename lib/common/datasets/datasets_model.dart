@@ -1,6 +1,6 @@
 part of datasets;
 
-class Dataset extends Delegate with ListItem {
+class Dataset extends Delegate {
 
   Dataset(Map bean) : super(bean);
   

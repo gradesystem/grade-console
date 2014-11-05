@@ -1,6 +1,6 @@
 part of queries;
 
-class Query extends Delegate with ListItem, Cloneable<Query>, Observable, Filters {
+class Query extends Delegate with Cloneable<Query>, Observable, Filters {
   
   static String endpoint_field = "http://gradesystem.io/onto/query.owl#endpoint";
   static String datasets_field="http://gradesystem.io/onto/query.owl#datasets";
@@ -286,7 +286,7 @@ class EditableQuery extends EditableModel<Query> {
   
 }
 
-class EditableModel<T extends Cloneable<T>> extends Observable with ListItem {
+class EditableModel<T extends Cloneable<T>> extends Observable {
   
   @observable
   bool newModel = false;
