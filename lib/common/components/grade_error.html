@@ -23,20 +23,18 @@
           :host [more] /deep/ core-icon {
           
             position:relative;
-            top:-6px;
             color:lightgrey;
           
           }
          
           :host [two] {        
             margin-top:10px; 
-            max-width: 400px;
+            max-width:95%;
           }
            
           :host [three] {
             margin-top:10px;        
-            max-width: 400px;
-            
+            max-width:95%;
             border-radius:5px;
             
             background: #fafafa;
@@ -61,14 +59,14 @@
              </div>
 
              <template if="{{two!=null && level>=2}}">
-               <div layout horizontal center>
+               <div layout horizontal center-justified>
                  <div two fg-alt>{{two}}</div>
                  <grade-button more hide?="{{level!=2}}" tinyicon icon=help label="all the ugly details?" on-click={{levelUp}}></grade-button>
                </div>
              </template>   
              
             <template if="{{three!=null && level==3}}">
-                <div fg-alt three smaller>{{three}}</div>
+                <div self-center fg-alt three smaller>{{three}}</div>
              </template>              
               
         </div>
