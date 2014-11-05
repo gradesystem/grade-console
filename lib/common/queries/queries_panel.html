@@ -46,7 +46,7 @@
 	          <grade-button toolbar icon="create" label="edit query" on-click="{{onEdit}}" hidden?="{{queries.selected.edit || queries.selected.model.predefined}}"></grade-button>
 	          <grade-button toolbar icon="cancel" label="discard changes" on-click="{{onCancel}}" hidden?={{!queries.selected.edit}}></grade-button>
 	          <grade-button toolbar icon="save" label="save changes" on-click="{{onSave}}" hidden?={{!queries.selected.edit}} disabled={{!queries.selected.valid}}></grade-button>
-	          <grade-button toolbar icon="arrow-forward" label="run query" on-click="{{onQueryPlayground}}" disabled={{!queries.selected.valid}}></grade-button>
+	          <grade-button toolbar icon="arrow-forward" label="run query" on-click="{{onQueryPlayground}}"></grade-button>
 	          <query-details main queries={{queries}} spaced></query-details> 
 	      </grade-header-panel>
 	

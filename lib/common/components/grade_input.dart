@@ -25,12 +25,10 @@ class GradeInput extends PolymerElement {
   bool disabled=false;
   
   @published
-  List<Validator> validators = [];
+  bool invalid=false;
   
-  void set invalid(bool b) {
-    if (inner!=null)
-      inner.invalid=b;
-  }
+  @published
+  List<Validator> validators = [];
   
   //hides low-level access
   @observable
