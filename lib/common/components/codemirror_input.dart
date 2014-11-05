@@ -14,17 +14,24 @@ class CodemirrorInput extends PolymerElement {
   
   @published
   bool active;
+  
+  @published
+  bool disabled;
 
   CodeMirror editor;
 
   
   CodemirrorInput.created() : super.created() {
-    onPropertyChange(this, #active, refresh);
+    onPropertyChange(this, #active, refresh);        
   }
 
   void refresh() {
     print('refreshing codemirror');
     editor.refresh();
+  }
+  
+  void readonly() {
+    
   }
   
   void ready() {
@@ -37,18 +44,23 @@ class CodemirrorInput extends PolymerElement {
         $['codemirror'], options: options);
 
     onPropertyChange(this, #value, (){
-      print('onPropertyChange');
+      //print('onPropertyChange');
       if (value!=editor.getDoc().getValue()) {
-        print('setting value');
+        //print('setting value');
         editor.getDoc().setValue(value);
         editor.refresh();
       }
-      else print('skipping update');
+      //else print('skipping update');
     });
     
     editor.onChange.listen((_){
-      print('editor.onChange.listen');
+      //print('editor.onChange.listen');
       value = editor.getDoc().getValue();
+    });
+    
+    onPropertyChange(this, #disabled, (){
+//      print('readOnly $disabled');
+      editor.setOption("readOnly", disabled?"nocursor":false);
     });
 
   }

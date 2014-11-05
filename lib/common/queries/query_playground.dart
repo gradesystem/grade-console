@@ -9,7 +9,15 @@ class QueryPlayground extends PolymerElement with Filters {
   @published
   EditableQuery editableQuery;
   
+  @observable
+  bool isactive;
+  
   QueryPlayground.created() : super.created();
+  
+  void attributeChanged(name, oldValue, newValue) {
+     super.attributeChanged(name, oldValue, newValue);
+     if (name == "active") isactive =  attributes.containsKey('active');
+   }
   
   //privately used: this is to support refactoring of vocabulary
   String get expression_key => Query.expression_field;
