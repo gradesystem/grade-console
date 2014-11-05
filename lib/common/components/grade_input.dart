@@ -15,11 +15,11 @@ class GradeInput extends PolymerElement {
   @published
   bool multiline;
   
-  @published
+/*  @published
   int rows;
   
   @published
-  int maxrows;
+  int maxrows;*/
 
   @published
   String label;
