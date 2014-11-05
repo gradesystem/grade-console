@@ -309,6 +309,8 @@ class EditableModel<T extends Cloneable<T>> extends Observable with ListItem {
     notifyPropertyChange(#valid, null, _valid);
   }
   
+  bool isValid(String fieldName) => fieldsInvalidity.containsKey(fieldName) && !fieldsInvalidity[fieldName];
+  
   @observable
   T get model => edit?_underEdit:_original;
   

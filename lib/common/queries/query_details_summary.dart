@@ -19,7 +19,7 @@ class QueryDetailsSummary extends PolymerElement with Filters {
   @ComputedProperty("item.model.bean[name_key]")
   String get name {
   
-    String name = "(new query)";
+    String name = "(name?)";
     
     if (item!=null) {
       
