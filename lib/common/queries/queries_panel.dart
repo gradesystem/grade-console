@@ -38,7 +38,7 @@ class QueriesPanel extends PolymerElement with Filters {
   }
   
   void onCancel() {
-    queries.selected.cancel();
+    model.cancelEditing(queries.selected);
   }
   
   void onSave() {

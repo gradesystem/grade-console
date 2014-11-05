@@ -109,6 +109,11 @@ abstract class QuerySubPageModel {
     editableModel.startEdit();
   }
   
+  void cancelEditing(EditableQuery query) {
+    query.cancel();
+    if (query.newModel) storage.data.remove(query);
+  }
+  
   void cloneQuery(EditableQuery original) {
     Query cloned = original.model.clone();
     cloned.name = cloned.name + "_cloned";
@@ -279,6 +284,9 @@ class EditableQuery extends EditableModel<Query> {
 class EditableModel<T extends Cloneable<T>> extends Observable with ListItem {
   
   @observable
+  bool newModel = true;
+  
+  @observable
   bool edit = false;
   
   @observable
@@ -332,6 +340,7 @@ class EditableModel<T extends Cloneable<T>> extends Observable with ListItem {
   
   void synched() {
     synching = false;
+    newModel = false;
   }
 
 }
