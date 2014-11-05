@@ -42,6 +42,7 @@ class CodemirrorInput extends PolymerElement {
 
     editor = new CodeMirror.fromElement(
         $['codemirror'], options: options);
+    editor.setLineNumbers(true);
 
     onPropertyChange(this, #value, (){
       //print('onPropertyChange');
