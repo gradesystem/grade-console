@@ -152,7 +152,7 @@
   color: #26699a;
 }
 :host /deep/ .home /deep/ paper-fab {
-  background-color: "tertiary";
+  background-color: #26699a;
 }
 :host /deep/ .home /deep/ paper-input::shadow .focused-underline {
   background-color: "tertiary";
@@ -234,7 +234,7 @@
   color: #00bcd4;
 }
 :host /deep/ .prod /deep/ paper-fab {
-  background-color: #80deea;
+  background-color: #00bcd4;
 }
 :host /deep/ .prod /deep/ paper-input::shadow .focused-underline {
   background-color: #80deea;
@@ -316,7 +316,7 @@
   color: #ffc107;
 }
 :host /deep/ .deck /deep/ paper-fab {
-  background-color: #ffdf82;
+  background-color: #ffc107;
 }
 :host /deep/ .deck /deep/ paper-input::shadow .focused-underline {
   background-color: #ffdf82;
@@ -398,7 +398,7 @@
   color: #e41c23;
 }
 :host /deep/ .tasks /deep/ paper-fab {
-  background-color: #f69988;
+  background-color: #e41c23;
 }
 :host /deep/ .tasks /deep/ paper-input::shadow .focused-underline {
   background-color: #f69988;
@@ -480,7 +480,7 @@
   color: #009587;
 }
 :host /deep/ .stage /deep/ paper-fab {
-  background-color: #80cbc4;
+  background-color: #009587;
 }
 :host /deep/ .stage /deep/ paper-input::shadow .focused-underline {
   background-color: #80cbc4;
