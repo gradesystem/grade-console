@@ -2,14 +2,14 @@ import 'package:polymer/polymer.dart';
 
 @CustomTag('page-menu')
 class PageMenu extends PolymerElement {
+ 
+ final String selection_event = "page-selected"; 
+ final String page_attribute = "page";
+      
+ PageMenu.created() : super.created();
   
-  @published
-  String mainlabel = "DATASETS";
-  
-  PageMenu.created() : super.created();
-  
-  void onTap(event, detail, target) {
-    this.fire("menu-item-selected", detail:target.id);
+  void notifyPageChange(event, detail, target) {
+    this.fire(selection_event, detail:int.parse(target.attributes[page_attribute]));
   }
   
 }

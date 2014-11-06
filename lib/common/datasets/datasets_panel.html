@@ -20,14 +20,14 @@
           
             <page-menu menu></page-menu>
 
-		            <grade-input toolbar
-		                        smaller 
-		                        style="width:120px; margin-right:10px" 
-		                        label="filter"
-		                        inputValue={{kfilter}}>
-		            </grade-input>
-		            
-		            <grade-button toolbar icon="refresh" label="refresh list" on-click="{{refresh}}"></grade-button>
+            <grade-input toolbar
+                        smaller 
+                        style="width:120px; margin-right:10px" 
+                        label="filter"
+                        inputValue={{kfilter}}>
+            </grade-input>
+            
+            <grade-button toolbar icon="refresh" label="refresh list" on-click="{{refresh}}"></grade-button>
        
             <dataset-list main listitems="{{datasets}}" kfilter="{{kfilter}}"></dataset-list>
             

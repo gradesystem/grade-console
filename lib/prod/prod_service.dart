@@ -1,11 +1,13 @@
 part of prod;
 
+final String path = "prod";
+
 @Injectable()
-class ProdService extends DatasetService {
-  ProdService() : super("prod");
+class ProdDatasetService extends DatasetService {
+  ProdDatasetService() : super(path);
 }
 
 @Injectable()
 class ProdQueriesService extends QueryService {
-  ProdQueriesService() : super("prod");
+  ProdQueriesService() : super(path);
 }

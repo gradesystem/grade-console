@@ -13,7 +13,7 @@ class ProdPageModel {
 
 @Injectable()
 class ProdDatasetsModel extends SubPageModel<Dataset> {
-  ProdDatasetsModel(EventBus bus, ProdService service, ProdDatasets storage) : super(bus, service, storage);
+  ProdDatasetsModel(EventBus bus, ProdDatasetService service, ProdDatasets storage) : super(bus, service, storage);
 }
 
 @Injectable()

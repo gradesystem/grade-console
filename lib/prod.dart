@@ -28,7 +28,7 @@ init() {
           ..bind(ProdQueriesModel)
           ..bind(ProdQueries)
           
-          ..bind(ProdService)
+          ..bind(ProdDatasetService)
           ..bind(ProdQueriesService);
   
   Dependencies.add(module);
