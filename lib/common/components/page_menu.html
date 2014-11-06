@@ -6,26 +6,24 @@
 
 <link rel="import" href="grade_item.html">
 
-<polymer-element name="page-menu" layout horizontal center>
-	<template>
-		<style>
-	
-		  paper-menu-button { 
-		   /* Fixes alignment issue */  
-	      font-size: 0px;
-	      padding: 0;
-	      margin: 0;
-	    }
-	    
-	    [smallish] {
-	      font-size: small;
-	    }
-	    
-		</style>
+<polymer-element name="page-menu" layout horizontal center noscript>
+  <template>
+    
+    <style>
+  
+      :host paper-menu-button { 
+       /* Fixes alignment issue */  
+        font-size: 0px;
+        padding: 0;
+        margin: 0;
+      }
+      
+    </style>
+    
     <paper-menu-button flex icon="menu">
-	    <paper-item smallish fg-alt icon="drive-document" page="0" label="DATASETS" on-tap="{{notifyPageChange}}"></paper-item>
-	    <paper-item smallish fg-alt icon="search" page="1" label="QUERIES" on-tap="{{notifyPageChange}}"></paper-item>
+      <content></content>
     </paper-menu-button>
-	</template>
-  <script type="application/dart" src="page_menu.dart"></script>
+  
+  </template>
+  
 </polymer-element>

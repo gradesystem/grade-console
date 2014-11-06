@@ -45,6 +45,9 @@
 :host /deep/ [smaller] {
   font-size: smaller;
 }
+:host /deep/ [smallish] {
+  font-size: small;
+}
 :host /deep/ [lighter] {
   font-weight: lighter;
 }

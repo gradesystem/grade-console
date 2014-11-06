@@ -6,6 +6,9 @@
 
 <link rel="import" href="task_details.html">
 
+<link rel="import" href="../common/components/page_menu.html">
+<link rel="import" href="../common/components/page_menu_item.html">
+
 <link rel="import" href="../../../packages/paper_elements/paper_button.html">
 <link rel="import" href="../../../packages/core_elements/core_tooltip.html">
 <link rel="import" href="../../../packages/core_elements/core_icon.html">
@@ -21,10 +24,28 @@
 
   <template>
 
+    <template id=menu>
+    
+        <page-menu menu>
+        
+            <page-menu-item label="TASKS" icon="drive-document" page=0></page-menu-item>
+            <page-menu-item label="QUERIES"  icon="search" page=1></page-menu-item>
+ 
+         </page-menu>
+   
+    </template>
+    
     <grade-subpages flex >
-			    <tasks-panel model="{{tasks}}"></tasks-panel>
-          <queries-panel model="{{queries}}"></queries-panel>
-    </grade-subpages>
+    
+      <tasks-panel model="{{tasks}}">
+        <template bind ref="menu"></template>
+      </tasks-panel>
+      
+      <queries-panel  model="{{queries}}">
+        <template bind ref="menu"></template>
+      </queries-panel>
+      
+    </grade-subpages>    
 		
  </template>
 
