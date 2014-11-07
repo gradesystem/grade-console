@@ -1,0 +1,16 @@
+<link rel="import" href="../../../../packages/polymer/polymer.html">
+    
+<link rel="import" href="../../../../packages/paper_elements/paper_item.html">
+<link rel="import" href="../../../../packages/core_elements/core_icons.html">
+<link rel="import" href="../../../../packages/paper_elements/paper_menu_button.html">
+
+<link rel="import" href="grade_item.html">
+
+<polymer-element name="page-menu-item" layout horizontal center>
+  <template>
+    
+    <paper-item smallish fg-alt label="{{label}}" icon="{{icon}}" on-tap="{{notifyPageChange}}"></paper-item>
+    
+  </template>
+  <script type="application/dart" src="page_menu_item.dart"></script>
+</polymer-element>
