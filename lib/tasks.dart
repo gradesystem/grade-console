@@ -11,6 +11,7 @@ import 'common.dart';
 import 'common/lists/lists.dart';
 import 'common/pages/pages.dart';
 import 'common/queries/queries.dart';
+import 'common/endpoints/endpoints.dart';
 
 part 'tasks/tasks_page.dart';
 part 'tasks/task_details.dart';
@@ -26,14 +27,17 @@ init() {
   var module = new Module()
           ..bind(TasksPageModel)          
           
+          ..bind(TasksService)
           ..bind(TasksModel)
           ..bind(Tasks)
-          
+
+          ..bind(TasksQueriesService)
           ..bind(TasksQueriesModel)
           ..bind(TasksQueries)
           
-          ..bind(TasksService)
-          ..bind(TasksQueriesService);
+          ..bind(TasksEndpointsModel)
+          ..bind(TasksEndpoints)
+          ..bind(TasksEndpointsService);
   
   Dependencies.add(module);
 }

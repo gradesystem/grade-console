@@ -13,3 +13,8 @@ class TasksService extends ListService<Task> {
 class TasksQueriesService extends QueryService {
   TasksQueriesService() : super("catalogue");
 }
+
+@Injectable()
+class TasksEndpointsService extends EndpointsService {
+  TasksEndpointsService() : super("catalogue");
+}

@@ -36,9 +36,9 @@ class TasksPageModel {
   
   TasksModel tasksModel;
   TasksQueriesModel queriesModel;
+  TasksEndpointsModel endpointsModel;
   
-  
-  TasksPageModel(this.tasksModel, this.queriesModel);
+  TasksPageModel(this.tasksModel, this.queriesModel, this.endpointsModel);
 }
 
 @Injectable()
@@ -57,4 +57,13 @@ class TasksQueriesModel extends QuerySubPageModel {
 
 @Injectable()
 class TasksQueries extends Queries {
+}
+
+@Injectable()
+class TasksEndpointsModel extends EndpointSubPageModel {
+  TasksEndpointsModel(EventBus bus, TasksEndpointsService service, TasksEndpoints storage) : super(bus, service, storage);
+}
+
+@Injectable()
+class TasksEndpoints extends Endpoints {
 }
