@@ -1,0 +1,5 @@
+[ {
+  "http://gradesystem.io/onto/endpoint.owl#name" : "catalogue",
+  "http://gradesystem.io/onto/endpoint.owl#uri" : "http://grade.ddns.net:3030/sr_tasks/query",
+  "http://gradesystem.io/onto/endpoint.owl#predefined" : true
+} ]

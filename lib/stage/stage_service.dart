@@ -1,11 +1,18 @@
 part of stage;
 
+final String _path = "stage";
+
 @Injectable()
 class StageService extends DatasetService {
-  StageService() : super("prod");
+  StageService() : super(_path);
 }
 
 @Injectable()
 class StageQueriesService extends QueryService {
-  StageQueriesService() : super("prod");
+  StageQueriesService() : super(_path);
+}
+
+@Injectable()
+class StageEndpointsService extends EndpointsService {
+  StageEndpointsService() : super(_path);
 }

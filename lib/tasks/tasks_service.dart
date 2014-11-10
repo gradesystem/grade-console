@@ -1,8 +1,11 @@
+
 part of tasks;
+
+final String _path = "catalogue";
 
 @Injectable()
 class TasksService extends ListService<Task> {
-  TasksService() : super("catalogue", "tasks", "task", toTask);
+  TasksService() : super(_path, "tasks", "task", toTask);
   
   static Task toTask(Map json) {
     return new Task(json);
@@ -11,5 +14,10 @@ class TasksService extends ListService<Task> {
 
 @Injectable()
 class TasksQueriesService extends QueryService {
-  TasksQueriesService() : super("catalogue");
+  TasksQueriesService() : super(_path);
+}
+
+@Injectable()
+class TasksEndpointsService extends EndpointsService {
+  TasksEndpointsService() : super(_path);
 }

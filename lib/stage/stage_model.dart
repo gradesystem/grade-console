@@ -6,9 +6,10 @@ class StagePageModel {
   
   StageDatasetsModel datasetsModel;
   StageQueriesModel queriesModel;
+  StageEndpointsModel endpointsModel;
   
   
-  StagePageModel(this.datasetsModel, this.queriesModel);
+  StagePageModel(this.datasetsModel, this.queriesModel,this.endpointsModel);
 }
 
 @Injectable()
@@ -27,4 +28,13 @@ class StageQueriesModel extends QuerySubPageModel {
 
 @Injectable()
 class StageQueries extends Queries {
+}
+
+@Injectable()
+class StageEndpointsModel extends EndpointSubPageModel {
+  StageEndpointsModel(EventBus bus, StageEndpointsService service, StageEndpoints storage) : super(bus, service, storage);
+}
+
+@Injectable()
+class StageEndpoints extends Endpoints {
 }

@@ -10,6 +10,7 @@ import 'common.dart';
 import 'common/datasets/datasets.dart';
 import 'common/queries/queries.dart';
 import 'common/pages/pages.dart';
+import 'common/endpoints/endpoints.dart';
 
 part 'stage/stage_page.dart';
 part 'stage/stage_service.dart';
@@ -29,7 +30,12 @@ init() {
           ..bind(StageQueries)
           
           ..bind(StageService)
-          ..bind(StageQueriesService);
+          ..bind(StageQueriesService)
+          
+          
+           ..bind(StageEndpointsModel)
+           ..bind(StageEndpoints)
+           ..bind(StageEndpointsService);
   
   Dependencies.add(module);
 }
