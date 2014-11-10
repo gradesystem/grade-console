@@ -32,7 +32,19 @@
 				      padding:0px;
 				    }
 				    
+				    :host([disabled="true"]) {
+			        pointer-events: none;
+			      }
+							    
         </style>
+        
+        <template if={{disabled}}>
+			    <style>
+			      :host {
+			        pointer-events: none;
+			      }
+			    </style>
+			  </template>
 
         <template if="{{notooltip==null}}">
 	        <core-tooltip label={{label}} position="{{ tooltip || bottom}}">
