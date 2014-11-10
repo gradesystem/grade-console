@@ -6,6 +6,7 @@
 
 <link rel="import" href="../common/datasets/datasets_panel.html">
 <link rel="import" href="../common/queries/queries_panel.html"> 
+<link rel="import" href="../common/endpoints/endpoints_panel.html"> 
 
 <polymer-element name="prod-page" layout horizontal>
 
@@ -18,7 +19,7 @@
         
 	          <page-menu-item label="DATASETS" icon="drive-document" page=0></page-menu-item>
 	          <page-menu-item label="QUERIES"  icon="search" page=1></page-menu-item>
- 
+            <page-menu-item label="ENDPOINTS"  icon="cloud-circle" page=2></page-menu-item>
          </page-menu>
    
     </template>
@@ -32,6 +33,11 @@
 		  <queries-panel  model="{{queries}}">
 		    <template bind ref="menu"></template>
 		  </queries-panel>
+		  
+		  <endpoints-panel  model="{{endpoints}}">
+        <template bind ref="menu"></template>
+      </endpoints-panel>
+		  
     </grade-subpages>
     
  </template>

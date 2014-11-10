@@ -6,9 +6,9 @@ class ProdPageModel {
   
   ProdDatasetsModel datasetsModel;
   ProdQueriesModel queriesModel;
+  ProdEndpointsModel endpointsModel;
   
-  
-  ProdPageModel(this.datasetsModel, this.queriesModel);
+  ProdPageModel(this.datasetsModel, this.queriesModel, this.endpointsModel);
 }
 
 @Injectable()
@@ -27,5 +27,15 @@ class ProdQueriesModel extends QuerySubPageModel {
 
 @Injectable()
 class ProdQueries extends Queries {
+}
+
+
+@Injectable()
+class ProdEndpointsModel extends EndpointSubPageModel {
+  ProdEndpointsModel(EventBus bus, ProdEndpointsService service, ProdEndpoints storage) : super(bus, service, storage);
+}
+
+@Injectable()
+class ProdEndpoints extends Endpoints {
 }
 

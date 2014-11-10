@@ -11,3 +11,8 @@ class ProdDatasetService extends DatasetService {
 class ProdQueriesService extends QueryService {
   ProdQueriesService() : super(path);
 }
+
+@Injectable()
+class ProdEndpointsService extends EndpointsService {
+  ProdEndpointsService() : super(path);
+}

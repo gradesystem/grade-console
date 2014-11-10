@@ -10,6 +10,7 @@ import 'common.dart';
 import 'common/datasets/datasets.dart';
 import 'common/queries/queries.dart';
 import 'common/pages/pages.dart';
+import 'common/endpoints/endpoints.dart';
 
 part 'prod/prod_page.dart';
 part 'prod/prod_service.dart';
@@ -24,12 +25,16 @@ init() {
           
           ..bind(ProdDatasetsModel)
           ..bind(ProdDatasets)
+          ..bind(ProdDatasetService)
           
           ..bind(ProdQueriesModel)
           ..bind(ProdQueries)
+          ..bind(ProdQueriesService)
           
-          ..bind(ProdDatasetService)
-          ..bind(ProdQueriesService);
+          ..bind(ProdEndpointsModel)
+          ..bind(ProdEndpoints)
+          ..bind(ProdEndpointsService);
+  
   
   Dependencies.add(module);
 }

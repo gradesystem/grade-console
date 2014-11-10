@@ -1,0 +1,28 @@
+<link rel="import" href="../../../../packages/polymer/polymer.html">
+
+<link rel="import" href="../../../../packages/core_elements/core_list_dart.html">
+
+<link rel="import" href="../components/list_panel.html">
+<link rel="import" href="endpoint_details_summary.html">
+
+<link rel="import" href="endpoints.html">
+
+<polymer-element name="endpoint-list"> 
+
+ <template>
+
+  <list-panel loading="{{listitems.loading}}" empty={{listitems.data.isEmpty}}>
+
+	  <core-list-dart id="list" data="{{listitems.data | filter(kfilter, itemFilter)}}" height="80" on-core-activate={{selectDataset}} flex>
+	    
+	    <template>
+
+ 	       <endpoint-details-summary flex item="{{model}}" selected="{{ selected==true }}"></endpoint-details-summary>
+	     
+	    </template>
+	  
+	  </core-list-dart>
+	 </list-panel>
+ </template>
+
+</polymer-element>

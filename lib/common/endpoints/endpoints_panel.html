@@ -1,0 +1,65 @@
+<link rel="import" href="../../../../packages/polymer/polymer.html">
+
+<link rel="import" href="../../../../packages/core_elements/core_pages.html">
+<link rel="import" href="../../../../packages/core_elements/core_animated_pages.html">
+
+<link rel="import" href="../components/grade_scaffold.html">
+<link rel="import" href="../components/grade_header_panel.html">
+<link rel="import" href="../components/grade_input.html">
+<link rel="import" href="../components/grade_button.html">
+<link rel="import" href="../components/grade_dialog.html">
+
+<link rel="import" href="endpoint_list.html">
+<link rel="import" href="endpoint_details.html">
+
+<link rel="import" href="endpoints.html">
+
+<polymer-element name="endpoints-panel" horizontal layout>
+
+  <template>
+  
+  <core-animated-pages flex selected="{{area}}">
+
+	  <grade-scaffold flex>
+	  
+	      <grade-header-panel main fit paneltitle="ENDPOINTS">
+	      
+	        <content select="[menu]"></content>
+	
+	            <grade-input toolbar
+	                        smaller 
+	                        style="width:120px; margin-right:10px" 
+	                        label="filter"
+	                        inputValue={{kfilter}}>
+	            </grade-input>
+	            
+	            <grade-button toolbar icon="refresh" label="refresh list" on-click="{{refresh}}"></grade-button>
+	            <grade-button toolbar icon="add" label="add endpoint" on-click={{addEndpoint}}></grade-button>
+	   
+	        <endpoint-list main listitems="{{items}}" kfilter="{{kfilter}}" on-remove-item={{removeItem}}  on-clone-item={{cloneItem}}></endpoint-list>
+	        
+	      </grade-header-panel>
+	      
+	      <grade-header-panel side fit paneltitle="PROPERTIES">
+    	      <grade-button toolbar icon="lock" nohover tooltip=left label="predefined endpoint is locked" hidden?="{{ !items.selected.model.predefined}}"></grade-button>
+	          <grade-button toolbar icon="create" label="edit endpoint" on-click="{{onEdit}}" hidden?="{{items.selected.edit || items.selected.model.predefined}}"></grade-button>
+	          <grade-button toolbar icon="cancel" label="discard changes" on-click="{{onCancel}}" hidden?={{!items.selected.edit}}></grade-button>
+	          <grade-button toolbar icon="save" label="save changes" on-click="{{onSave}}" hidden?={{!items.selected.edit}} disabled={{!items.selected.valid}}></grade-button>
+	          <endpoint-details main items={{items}} spaced></endpoint-details> 
+	      </grade-header-panel>
+	
+	  </grade-scaffold>
+
+	  
+	  </core-animated-pages>
+	  
+	  <grade-dialog opened={{removeDialogOpened}} heading={{removedDialogHeader}}>
+	   <div main>There is no going back here.</div>
+	   <div main bolder>Are you sure?</div>
+	   <paper-button fg dismissive option>NO</paper-button>
+     <paper-button fg affirmative option autofocus on-click={{deleteSelectedItem}}>YES</paper-button>
+	  </grade-dialog>
+  
+  </template>
+  
+</polymer-element>
