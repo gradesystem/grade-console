@@ -32,7 +32,7 @@ packages:
   core_elements:
     description: core_elements
     source: hosted
-    version: "0.4.0+3"
+    version: "0.4.0+5"
   csslib:
     description: csslib
     source: hosted
@@ -116,7 +116,7 @@ packages:
   string_scanner:
     description: string_scanner
     source: hosted
-    version: "0.1.1"
+    version: "0.1.2"
   stylus:
     description: stylus
     source: hosted
