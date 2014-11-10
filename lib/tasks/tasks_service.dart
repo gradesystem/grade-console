@@ -2,7 +2,7 @@ part of tasks;
 
 @Injectable()
 class TasksService extends ListService<Task> {
-  TasksService() : super("catalogue", "tasks", toTask);
+  TasksService() : super("catalogue", "tasks", "task", toTask);
   
   static Task toTask(Map json) {
     return new Task(json);

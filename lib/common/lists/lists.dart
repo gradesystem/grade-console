@@ -1,6 +1,7 @@
 library lists;
 
 import 'dart:async';
+import 'dart:convert' show JSON;
 
 import 'package:polymer/polymer.dart';
 

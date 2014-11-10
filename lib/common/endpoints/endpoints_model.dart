@@ -86,7 +86,7 @@ abstract class EndpointSubPageModel {
       editableModel.sync();
     });
     
-    service.putEndpoint(editableModel.model)
+    service.put(editableModel.model)
     .then((bool result)=>editableModel.save())
     .catchError((e)=>_onError(e, ()=>saveEndpoint(editableModel)))
     .whenComplete((){

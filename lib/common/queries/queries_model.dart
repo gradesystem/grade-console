@@ -130,7 +130,7 @@ abstract class QuerySubPageModel {
       editableModel.sync();
     });
     
-    service.putQuery(editableModel.model)
+    service.put(editableModel.model)
     .then((bool result)=>editableModel.save())
     .catchError((e)=>_onError(e, ()=>saveQuery(editableModel)))
     .whenComplete((){

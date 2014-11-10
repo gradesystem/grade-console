@@ -2,7 +2,7 @@ part of queries;
 
 abstract class QueryService extends ListService<Query> {
 
-  QueryService(String path) : super(path, "queries", (Map json) => new Query.fromBean(path, json));
+  QueryService(String path) : super(path, "queries", "query", (Map json) => new Query.fromBean(path, json));
 
   Future<QueryResult> runQueryByName(Query query, Map<String, String> parameters) {
 
@@ -39,12 +39,7 @@ abstract class QueryService extends ListService<Query> {
     return uriParameters;
   }
 
-
-  Future<bool> putQuery(Query query) {
-    return http.post("queries", JSON.encode(query.bean)).then((response) => true);
-  }
-
   Future<bool> deleteQuery(Query query) {
-    return http.delete("query/${query.name}").then((response) => true);
+    return delete(query, query.name);
   }
 }
