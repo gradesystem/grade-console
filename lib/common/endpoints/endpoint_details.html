@@ -23,30 +23,44 @@
     <loading-panel loading="{{loading}}" message="saving the query">
    
       <div style="overflow-y: auto;">
-  
-        <template repeat="{{key in fields}}">
       
-          <grade-item icon=chevron-right>
+      <grade-item icon=chevron-right>
           
-            <grade-fascia truncate>
-                     
-							<grade-input fascia-title 
-							             disabled="{{ !editable }}" 
-							             multiline?="{{ isAreaField(key) }}"
-							             label="{{ key | suffix }} ?" 
-							             required?="{{ isRequiredField(key) }}"
-							             validators="{{ validatorsFor(key)}}"
-							             invalid="{{ item.fieldsInvalidity[key] }}"
-							             inputValue="{{ item.model.bean[key]  }}"
-							             type="{{fieldType(key)}}">
-							</grade-input>
-                     
-                <div fascia-subtitle><span>{{ key | start}}</span><span fg bolder>{{ key | suffix}}</span></div>
-            </grade-fascia>
-              
-          </grade-item>
-	       
-        </template>  
+          <grade-fascia truncate>
+                   
+            <grade-input fascia-title 
+                         disabled="{{ !editable }}" 
+                         label="{{ name_key | suffix }} ?" 
+                         required
+                         validators="{{ name_validators}}"
+                         invalid="{{ item.fieldsInvalidity[name_key] }}"
+                         inputValue="{{ item.model.bean[name_key]  }}"
+                         >
+            </grade-input>
+                   
+            <div fascia-subtitle><span>{{ name_key | start}}</span><span fg bolder>{{ name_key | suffix}}</span></div>
+          </grade-fascia>
+            
+        </grade-item>
+          
+        <grade-item icon=chevron-right>
+          
+          <grade-fascia truncate>
+                   
+            <grade-input fascia-title 
+                         disabled="{{ !editable }}" 
+                         label="{{ uri_key | suffix }} ?" 
+                         required
+                         invalid="{{ item.fieldsInvalidity[uri_key] }}"
+                         inputValue="{{ item.model.bean[uri_key]  }}"
+                         type="URL"
+                         >
+            </grade-input>
+                   
+            <div fascia-subtitle><span>{{ uri_key | start}}</span><span fg bolder>{{ uri_key | suffix}}</span></div>
+          </grade-fascia>
+            
+        </grade-item>
           
       </div>  
     </loading-panel>
