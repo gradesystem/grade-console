@@ -54,6 +54,7 @@ class EditableModel<T extends Cloneable<T>> extends Observable {
   void save() {
     _original = _underEdit;
     edit = false;
+    newModel = false;
     notifyPropertyChange(#model, _underEdit, _original);
   }
   
@@ -63,7 +64,6 @@ class EditableModel<T extends Cloneable<T>> extends Observable {
   
   void synched() {
     synching = false;
-    newModel = false;
   }
 
 }
