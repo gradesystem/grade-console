@@ -34,6 +34,9 @@ class GradeInput extends PolymerElement {
   bool invalid=false;
   
   @published
+  String type;
+  
+  @published
   List<Validator> validators = [];
   
   //hides low-level access

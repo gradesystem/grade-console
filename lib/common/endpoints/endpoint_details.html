@@ -37,7 +37,8 @@
 							             required?="{{ isRequiredField(key) }}"
 							             validators="{{ validatorsFor(key)}}"
 							             invalid="{{ item.fieldsInvalidity[key] }}"
-							             inputValue="{{ item.model.bean[key]  }}">
+							             inputValue="{{ item.model.bean[key]  }}"
+							             type="{{fieldType(key)}}">
 							</grade-input>
                      
                 <div fascia-subtitle><span>{{ key | start}}</span><span fg bolder>{{ key | suffix}}</span></div>
