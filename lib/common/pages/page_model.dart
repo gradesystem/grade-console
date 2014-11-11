@@ -1,6 +1,6 @@
 part of pages;
 
-abstract class SubPageModel<T> {
+abstract class SubPageModel<T extends Delegate> {
   
   EventBus bus;
   ListService<T> service;
