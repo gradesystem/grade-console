@@ -86,7 +86,7 @@ class Query extends Delegate with Cloneable<Query>, Observable, Filters {
 
 abstract class Queries extends ListItems<EditableQuery> {
   
-  bool containsName(String name) => data.any((EditableQuery eq)=>eq!=selected && eq.model.name.toLowerCase() == name.toLowerCase());
+  bool containsName(String name) => data.any((EditableQuery eq)=>eq!=selected && eq.model.name!=null && eq.model.name.toLowerCase() == name.toLowerCase());
 }
 
 abstract class QuerySubPageModel {

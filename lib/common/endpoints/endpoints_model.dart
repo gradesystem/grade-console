@@ -42,7 +42,7 @@ class Endpoint extends Delegate with Cloneable<Endpoint>, Observable, Filters {
 
 abstract class Endpoints extends ListItems<EditableEndpoint> {
   
-  bool containsName(String name) => data.any((EditableEndpoint eq)=>eq!=selected && eq.model.name.toLowerCase() == name.toLowerCase());
+  bool containsName(String name) => data.any((EditableEndpoint eq)=>eq!=selected && eq.model.name!=null && eq.model.name.toLowerCase() == name.toLowerCase());
 }
 
 abstract class EndpointSubPageModel {

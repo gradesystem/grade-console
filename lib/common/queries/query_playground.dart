@@ -24,6 +24,11 @@ class QueryPlayground extends PolymerElement with Filters {
   String get predefined_key => Query.predefined_field;
   String get target_key => Query.target_field;
   
+  @ComputedProperty("editableQuery.model.bean[expression_key]") 
+  String get expression => editableQuery!=null?editableQuery.model.bean[Query.expression_field]:"";
+  void set expression(String exp) {editableQuery.model.bean[Query.expression_field] = exp;}
+  
+  
   @ComputedProperty("editableQuery.model.bean[predefined_key]") 
   bool get editable => editableQuery!=null?editableQuery.model.bean[Query.predefined_field]==false:false;
   

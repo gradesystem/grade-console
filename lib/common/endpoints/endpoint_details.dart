@@ -15,7 +15,7 @@ class EndpointDetails extends PolymerElement with Filters {
   String get name_key =>  Endpoint.name_field;
   String get uri_key =>  Endpoint.uri_field;
   
-  List<Validator> get name_validators => [($) => items.containsName($)?"Not original enough, try again.":null];
+  List<Validator> get name_validators => [($) => $!=null && items.containsName($)?"Not original enough, try again.":null];
   
   EndpointDetails.created() : super.created();
   

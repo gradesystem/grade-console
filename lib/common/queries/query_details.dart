@@ -33,7 +33,7 @@ class QueryDetails extends PolymerElement with Filters {
    
   QueryDetails.created() : super.created() {
     validators[
-       Query.name_field]=[($) => queries.containsName($)?"Not original enough, try again.":null];
+       Query.name_field]=[($) =>  $!=null && queries.containsName($)?"Not original enough, try again.":null];
   }
   
   bool isAreaField(String key) {
