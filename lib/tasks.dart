@@ -34,7 +34,7 @@ init() {
           ..bind(TasksQueriesService)
           ..bind(TasksQueriesModel)
           ..bind(TasksQueries)
-          
+
           ..bind(TasksEndpointsModel)
           ..bind(TasksEndpoints)
           ..bind(TasksEndpointsService);

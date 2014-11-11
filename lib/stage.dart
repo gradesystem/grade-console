@@ -30,10 +30,11 @@ init() {
           ..bind(StageQueriesService)
           ..bind(StageQueriesModel)
           ..bind(StageQueries)
-          
+
           ..bind(StageEndpointsModel)
           ..bind(StageEndpoints)
           ..bind(StageEndpointsService);
+
   
   Dependencies.add(module);
 }

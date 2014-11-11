@@ -37,7 +37,7 @@ class TasksPageModel {
   TasksModel tasksModel;
   TasksQueriesModel queriesModel;
   TasksEndpointsModel endpointsModel;
-  
+
   TasksPageModel(this.tasksModel, this.queriesModel, this.endpointsModel);
 }
 

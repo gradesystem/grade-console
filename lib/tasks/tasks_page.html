@@ -17,7 +17,7 @@
 
 <link rel="import" href="tasks_panel.html">
 <link rel="import" href="../common/queries/queries_panel.html">
-<link rel="import" href="../common/endpoints/endpoints_panel.html"> 
+<link rel="import" href="../common/endpoints/endpoints_panel.html">
 
 <link rel="import" href="tasks.html">
 
@@ -48,6 +48,10 @@
       </queries-panel>
                   
       <endpoints-panel model="{{endpoints}}">
+        <template bind ref="menu"></template>
+      </endpoints-panel>
+      
+      <endpoints-panel  model="{{endpoints}}">
         <template bind ref="menu"></template>
       </endpoints-panel>
       

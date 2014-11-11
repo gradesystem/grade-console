@@ -9,6 +9,7 @@ class StagePageModel {
   StageEndpointsModel endpointsModel;
   
   StagePageModel(this.datasetsModel, this.queriesModel, this.endpointsModel);
+
 }
 
 @Injectable()
