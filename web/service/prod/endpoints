@@ -2,4 +2,17 @@
   "http://gradesystem.io/onto/endpoint.owl#name" : "production",
   "http://gradesystem.io/onto/endpoint.owl#uri" : "http://grade.ddns.net:3030/sr_public/query",
   "http://gradesystem.io/onto/endpoint.owl#predefined" : true
-} ]
+} ,
+{
+  "http://gradesystem.io/onto/endpoint.owl#name" : "test1",
+  "http://gradesystem.io/onto/endpoint.owl#uri" : "http://grade.ddns.net:3030/sr_public/query",
+  "http://gradesystem.io/onto/endpoint.owl#predefined" : true
+} ,
+{
+  "http://gradesystem.io/onto/endpoint.owl#name" : "test2",
+  "http://gradesystem.io/onto/endpoint.owl#uri" : "http://grade.ddns.net:3030/sr_public/query",
+  "http://gradesystem.io/onto/endpoint.owl#predefined" : true
+}
+
+
+]

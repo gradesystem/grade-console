@@ -1,0 +1,47 @@
+<link rel="import" href="../../../../packages/polymer/polymer.html">
+
+<link rel="import" href="../../../../packages/paper_elements/paper_dropdown_menu.html">
+<link rel="import" href="../../../../packages/paper_elements/paper_item.html">
+
+<polymer-element name="grade-dropdown">
+	<template>
+		<style>
+			
+			paper-dropdown-menu::shadow  #control {
+        border: none;
+			}
+			
+			paper-dropdown-menu {
+        padding: 0px;
+			}
+			
+			paper-dropdown-menu::shadow  #control > div {
+        padding: 0px;
+		  }
+		  
+		  paper-dropdown-menu::shadow  #arrow {
+        margin: 0px;
+		  }
+		  
+		  [label] {
+		    height: 24px;
+		    color: black;
+		  }
+
+		</style>
+	  <template if={{!disabled}}>
+	    <paper-dropdown-menu selected={{selected}} valueattr="label" label={{label}}>
+			  <template repeat="{{item in items}}">
+			    <paper-item label={{item}}></paper-item>
+			  </template>
+			</paper-dropdown-menu>
+	  </template>
+			
+	  <template if={{disabled}}>
+			<div truncate label>{{selected}}</div>
+	  </template>
+	</template>
+	
+	<script type="application/dart" src="grade_dropdown.dart"></script> 
+	
+</polymer-element>

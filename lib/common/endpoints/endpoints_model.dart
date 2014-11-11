@@ -58,8 +58,8 @@ abstract class EndpointSubPageModel {
   }
   
   void addNewEndpoint() {
-    Endpoint query = new Endpoint();
-    EditableEndpoint editableModel = new EditableEndpoint(query);
+    Endpoint endpoint = new Endpoint();
+    EditableEndpoint editableModel = new EditableEndpoint(endpoint);
     editableModel.newModel = true;
     
     storage.data.add(editableModel);
@@ -67,9 +67,9 @@ abstract class EndpointSubPageModel {
     editableModel.startEdit();
   }
   
-  void cancelEditing(EditableEndpoint query) {
-    query.cancel();
-    if (query.newModel) storage.data.remove(query);
+  void cancelEditing(EditableEndpoint endpoint) {
+    endpoint.cancel();
+    if (endpoint.newModel) storage.data.remove(endpoint);
   }
   
   void cloneEndpoint(EditableEndpoint original) {
@@ -130,6 +130,7 @@ abstract class EndpointSubPageModel {
     storage.data.clear();
 
     storage.data.addAll(items.map((Endpoint q)=> new EditableEndpoint(q)));
+    
     storage.loading = false;
     
   }

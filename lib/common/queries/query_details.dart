@@ -7,7 +7,6 @@ class QueryDetails extends PolymerElement with Filters {
   List<String> fields = [Query.name_field,
                          Query.datasets_field,
                          Query.note_field,
-                         Query.target_field, 
                          Query.expression_field];
   
   static List<String> required_fields = [
@@ -29,6 +28,9 @@ class QueryDetails extends PolymerElement with Filters {
   @published
   Queries queries;
   
+  @published
+  Endpoints endpoints;
+   
   QueryDetails.created() : super.created() {
     validators[
        Query.name_field]=[($) => queries.containsName($)?"Not original enough, try again.":null];
@@ -53,9 +55,16 @@ class QueryDetails extends PolymerElement with Filters {
   //used in template to lookup (cannot bind static fields)
   String get endpoint_key => Query.endpoint_field;
   String get parameters_key => Query.parameters_field;
+  String get target_key => Query.target_field;
   
   //privately used
   String get expression_key => Query.expression_field;
+  
+  //we need to listen to length in order to be notified
+  @ComputedProperty("endpoints.data.length")
+  List<String> get targets {
+    return endpoints==null?[]:endpoints.data.skipWhile((EditableEndpoint e)=>e.newModel).map((EditableEndpoint e)=> e.model.name).toList();
+  }
 
   @ComputedProperty("item.model.parameters")
   String get parameters {
@@ -73,4 +82,8 @@ class QueryDetails extends PolymerElement with Filters {
     
   }
   
+}
+
+class Test extends Observable {
+  ObservableList items = new ObservableList();
 }

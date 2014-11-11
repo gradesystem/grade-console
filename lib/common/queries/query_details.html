@@ -2,6 +2,7 @@
 <link rel="import" href="../../../../packages/core_elements/core_icon.html">
 
 <link rel="import" href="../components/grade_input.html">
+<link rel="import" href="../components/grade_dropdown.html">
 <link rel="import" href="../components/grade_item.html">
 <link rel="import" href="../components/grade_fascia.html">
 <link rel="import" href="../components/loading_panel.html">
@@ -12,67 +13,88 @@
 
   <template>
   
-    
-      <style>
-        
-        grade-input::shadow [multiline] {
-           max-height: 150px;
-        }
-        
-      </style>
+		<style>
+		  
+		  grade-input::shadow [multiline] {
+		     max-height: 150px;
+		  }
+		  
+		  [truncate] {
+		    overflow: hidden;
+		    text-overflow: ellipsis;
+		  }
+		  
+		</style>
 
-  <loading-panel loading="{{loading}}" message="saving the query">
+    <loading-panel loading="{{loading}}" message="saving the query">
    
-   <div style="overflow-y: auto;">
+      <div style="overflow-y: auto;">
   
-      <template repeat="{{key in fields}}">
+        <template repeat="{{key in fields}}">
       
           <grade-item icon=chevron-right>
           
-            <grade-fascia>
+            <grade-fascia truncate>
                      
-                     <grade-input fascia-title 
-                                  disabled="{{ !editable }}" 
-                                  multiline?="{{ isAreaField(key) }}"
-                                  label="{{ key | suffix }} ?" 
-                                  required?="{{ isRequiredField(key) }}"
-                                  validators="{{ validatorsFor(key)}}"
-                                  invalid="{{ item.fieldsInvalidity[key] }}"
-                                  inputValue="{{ item.model.bean[key]  }}">
-                     </grade-input>
+							<grade-input fascia-title 
+							             disabled="{{ !editable }}" 
+							             multiline?="{{ isAreaField(key) }}"
+							             label="{{ key | suffix }} ?" 
+							             required?="{{ isRequiredField(key) }}"
+							             validators="{{ validatorsFor(key)}}"
+							             invalid="{{ item.fieldsInvalidity[key] }}"
+							             inputValue="{{ item.model.bean[key]  }}">
+							</grade-input>
                      
                 <div fascia-subtitle><span>{{ key | start}}</span><span fg bolder>{{ key | suffix}}</span></div>
             </grade-fascia>
               
           </grade-item>
 	       
-      </template>  
+        </template>  
+ 
+        <grade-item icon=chevron-right>
+			
+          <grade-fascia>
+			        
+            <grade-dropdown fascia-title 
+                 disabled="{{ !editable }}" 
+                 selected="{{ item.model.bean[target_key] }}"
+			           label="{{ target_key | suffix }} ?" 
+			           items="{{targets}}"
+			           >
+            </grade-dropdown>
+            <div fascia-subtitle truncate><span>{{ target_key | start }}</span><span fg bolder>{{ target_key | suffix}}</span></div>
+			        
+          </grade-fascia>
+			    
+        </grade-item>
 
-         <grade-item icon=chevron-right>
-          
-            <grade-fascia>
-                  
-                  <div fascia-title>{{ parameters }}</div>
-                  <div fascia-subtitle><span>{{ parameters_key | start }}</span><span fg bolder>{{ parameters_key | suffix}}</span></div>
-                  
-              </grade-fascia>
-              
-          </grade-item>
-      
-      
-          <grade-item icon=chevron-right>
-          
-	          <grade-fascia>
-
-	                <div fascia-title>{{ item.model.endpoint }}</div>
-	                <div fascia-subtitle><span>{{ endpoint_key | start }}</span><span fg bolder>{{ endpoint_key | suffix}}</span></div>
-	                
-	            </grade-fascia>
-              
-          </grade-item>
+	      <grade-item icon=chevron-right>
+	       
+					<grade-fascia truncate>
+					      
+						<div fascia-title>{{ parameters }}</div>
+					  <div fascia-subtitle><span>{{ parameters_key | start }}</span><span fg bolder>{{ parameters_key | suffix}}</span></div>
+					      
+					</grade-fascia>
+	           
+	      </grade-item>
+	   
+	   
+	      <grade-item icon=chevron-right>
+	       
+					<grade-fascia truncate>
+					
+						<div fascia-title>{{ item.model.endpoint }}</div>
+						<div fascia-subtitle><span>{{ endpoint_key | start }}</span><span fg bolder>{{ endpoint_key | suffix}}</span></div>
+					     
+					</grade-fascia>
+	           
+	      </grade-item>
           
       </div>  
-      </loading-panel>
+    </loading-panel>
 		
   </template> 
 </polymer-element>

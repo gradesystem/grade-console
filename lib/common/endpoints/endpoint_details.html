@@ -11,45 +11,44 @@
 <polymer-element name="endpoint-details" layout vertical> 
 
   <template>
-  
     
-      <style>
-        
-        grade-input::shadow [multiline] {
-           max-height: 150px;
-        }
-        
-      </style>
+		<style>
+		
+			grade-input::shadow [multiline] {
+        max-height: 150px;
+			}
+		
+		</style>
 
-  <loading-panel loading="{{loading}}" message="saving the query">
+    <loading-panel loading="{{loading}}" message="saving the query">
    
-   <div style="overflow-y: auto;">
+      <div style="overflow-y: auto;">
   
-      <template repeat="{{key in fields}}">
+        <template repeat="{{key in fields}}">
       
           <grade-item icon=chevron-right>
           
-            <grade-fascia>
+            <grade-fascia truncate>
                      
-                     <grade-input fascia-title 
-                                  disabled="{{ !editable }}" 
-                                  multiline?="{{ isAreaField(key) }}"
-                                  label="{{ key | suffix }} ?" 
-                                  required?="{{ isRequiredField(key) }}"
-                                  validators="{{ validatorsFor(key)}}"
-                                  invalid="{{ item.fieldsInvalidity[key] }}"
-                                  inputValue="{{ item.model.bean[key]  }}">
-                     </grade-input>
+							<grade-input fascia-title 
+							             disabled="{{ !editable }}" 
+							             multiline?="{{ isAreaField(key) }}"
+							             label="{{ key | suffix }} ?" 
+							             required?="{{ isRequiredField(key) }}"
+							             validators="{{ validatorsFor(key)}}"
+							             invalid="{{ item.fieldsInvalidity[key] }}"
+							             inputValue="{{ item.model.bean[key]  }}">
+							</grade-input>
                      
                 <div fascia-subtitle><span>{{ key | start}}</span><span fg bolder>{{ key | suffix}}</span></div>
             </grade-fascia>
               
           </grade-item>
 	       
-      </template>  
+        </template>  
           
       </div>  
-      </loading-panel>
+    </loading-panel>
 		
   </template> 
 </polymer-element>

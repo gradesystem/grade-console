@@ -12,6 +12,7 @@ import 'package:logging/logging.dart';
 import '../../common.dart';
 
 import '../lists/lists.dart';
+import '../endpoints/endpoints.dart';
 
 part 'queries_model.dart';
 part 'query_details.dart';

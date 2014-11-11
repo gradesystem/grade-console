@@ -30,11 +30,11 @@
 		    <template bind ref="menu"></template>
 		  </datasets-panel>
 		  
-		  <queries-panel  model="{{queries}}">
+		  <queries-panel model="{{queries}}" endpoints={{endpoints.storage}}>
 		    <template bind ref="menu"></template>
 		  </queries-panel>
 		  
-		  <endpoints-panel  model="{{endpoints}}">
+		  <endpoints-panel model="{{endpoints}}">
         <template bind ref="menu"></template>
       </endpoints-panel>
 		  
