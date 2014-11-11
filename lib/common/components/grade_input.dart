@@ -45,18 +45,12 @@ class GradeInput extends PolymerElement {
   
   
   void set error(String e) {
-    inner.jsElement.callMethod('setCustomValidity', [e]); //fixed in later versions
+    inner.setCustomValidity(e);
   }
   
- 
   Validator missing_validator = ($) => $==null || $.isEmpty? "Please fill in this field.":null;
 
-  
   GradeInput.created() : super.created();
-  
-  
-  
-  
   
   @ObserveProperty('inputValue') 
   onModelChange() {
