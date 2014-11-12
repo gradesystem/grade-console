@@ -4,6 +4,8 @@ class Endpoint extends Delegate with Cloneable<Endpoint>, Observable, Filters {
   
   static String name_field = "http://gradesystem.io/onto/endpoint.owl#name";  
   static String uri_field= "http://gradesystem.io/onto/endpoint.owl#uri";
+  static String graphs_field= "http://gradesystem.io/onto/endpoint.owl#graph";
+  static String graphs_last_update_field= "http://gradesystem.io/onto/endpoint.owl#graphs_last_update";
   static String predefined_field="http://gradesystem.io/onto/endpoint.owl#predefined";
   
   Endpoint.fromBean(Map bean) : super(bean){
@@ -19,21 +21,39 @@ class Endpoint extends Delegate with Cloneable<Endpoint>, Observable, Filters {
   void _listenChanges() {
     onBeanChange([name_field], ()=>notifyPropertyChange(#name, null, name) );
     onBeanChange([uri_field], ()=>notifyPropertyChange(#uri, null, uri) );
+    onBeanChange([graphs_field], ()=>notifyPropertyChange(#graphs, null, graphs) );
   }
   
-  
+  @observable
   String get name => get(name_field);
   set name(String value) {
     set(name_field, value);
+    notifyPropertyChange(#name, null, value);
   }
-  
+   
+  @observable
   String get uri => get(uri_field);
   set uri(String value) {
     set(uri_field, value);
+    notifyPropertyChange(#uri, null, value);
   }
   
   bool get predefined => get(predefined_field);
   
+  @observable
+  List<String> get graphs => get(graphs_field);
+  set graphs(List<String> newgraphs) {
+    set(graphs_field, newgraphs);
+    graphsLastUpdate = Filters.formatter.format(new DateTime.now()); 
+    notifyPropertyChange(#graphs, null, newgraphs);
+  }
+  
+  @observable
+  String get graphsLastUpdate => get(graphs_last_update_field);
+  set graphsLastUpdate(String graphsLastUpdate) {
+      set(graphs_last_update_field, graphsLastUpdate);
+      notifyPropertyChange(#graphsLastUpdate, null, graphsLastUpdate);
+  }
   
   Endpoint clone() {
     return new Endpoint.fromBean(new Map.from(bean));
@@ -96,6 +116,18 @@ abstract class EndpointSubPageModel {
 
   }
   
+  void refreshGraphs(EditableEndpoint editableModel) {
+    
+    editableModel.loadingGraphs = true;
+    Endpoint endpoint = editableModel.model; 
+    service.get(endpoint.name)
+    .then((Endpoint result){endpoint.graphs = result.graphs;})
+    .catchError((e)=>_onError(e, ()=>refreshGraphs(editableModel)))
+    .whenComplete((){
+      editableModel.loadingGraphs = false;
+    });
+  }
+  
   void removeEndpoint(EditableEndpoint editableModel) {
     Timer timer = new Timer(new Duration(milliseconds: 200), () {
       editableModel.sync();
@@ -142,8 +174,9 @@ abstract class EndpointSubPageModel {
 }
 
 class EditableEndpoint extends EditableModel<Endpoint> {
-  
-  bool _validParameters = true;
+
+  @observable
+  bool loadingGraphs = false;
   
   bool _dirty = false;
   

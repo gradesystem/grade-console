@@ -18,6 +18,10 @@ abstract class ListService<T extends Delegate> extends Dependencies {
     return http.getJSon(all_path).then((json)=>new ListDelegate(json, generator));
   }
   
+  Future<T> get(String name) {
+    return http.getJSon("$single_item_path/$name").then(generator);
+  }
+  
   Future<bool> put(T item) {
     return http.post(all_path, JSON.encode(item.bean)).then((response) => true);
   }

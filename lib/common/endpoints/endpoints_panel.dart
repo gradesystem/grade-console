@@ -66,4 +66,8 @@ class EndpointsPanel extends PolymerElement with Filters {
   void cloneItem(event, detail, target) {
     model.cloneEndpoint(detail);
   }
+  
+  void onRefreshGraphs(event, detail, target) {
+    model.refreshGraphs(detail);
+  }
 }
