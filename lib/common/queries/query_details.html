@@ -29,6 +29,25 @@
     <loading-panel loading="{{loading}}" message="saving the query">
    
       <div style="overflow-y: auto;">
+      
+      <grade-item icon=chevron-right>
+          
+            <grade-fascia truncate>
+                     
+              <grade-input fascia-title 
+                           disabled="{{ !editable || !item.newModel }}" 
+                           multiline?="{{ isAreaField(name_key) }}"
+                           label="{{ name_key | suffix }} ?" 
+                           required?="{{ isRequiredField(name_key) }}"
+                           validators="{{ validatorsFor(name_key)}}"
+                           invalid="{{ item.fieldsInvalidity[name_key] }}"
+                           inputValue="{{ item.model.bean[name_key]  }}">
+              </grade-input>
+                     
+              <div fascia-subtitle><span>{{ name_key | start}}</span><span fg bolder>{{ name_key | suffix}}</span></div>
+            </grade-fascia>
+              
+          </grade-item>
   
         <template repeat="{{key in fields}}">
       
@@ -46,7 +65,7 @@
 							             inputValue="{{ item.model.bean[key]  }}">
 							</grade-input>
                      
-                <div fascia-subtitle><span>{{ key | start}}</span><span fg bolder>{{ key | suffix}}</span></div>
+              <div fascia-subtitle><span>{{ key | start}}</span><span fg bolder>{{ key | suffix}}</span></div>
             </grade-fascia>
               
           </grade-item>

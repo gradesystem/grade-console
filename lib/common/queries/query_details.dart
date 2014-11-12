@@ -4,8 +4,7 @@ part of queries;
 class QueryDetails extends PolymerElement with Filters {
   
   
-  List<String> fields = [Query.name_field,
-                         Query.datasets_field,
+  List<String> fields = [Query.datasets_field,
                          Query.note_field,
                          Query.expression_field];
   
@@ -36,6 +35,13 @@ class QueryDetails extends PolymerElement with Filters {
        Query.name_field]=[($) =>  $!=null && queries.containsName($)?"Not original enough, try again.":null];
   }
   
+  //used in template to lookup (cannot bind static fields)
+  String get endpoint_key => Query.endpoint_field;
+  String get parameters_key => Query.parameters_field;
+  String get target_key => Query.target_field;
+  String get expression_key => Query.expression_field;
+  String get name_key => Query.name_field;
+  
   bool isAreaField(String key) {
     return area_fields.contains(key);
   }
@@ -52,13 +58,7 @@ class QueryDetails extends PolymerElement with Filters {
   @ComputedProperty("item.synching")
   bool get loading => item!=null && item.synching;
   
-  //used in template to lookup (cannot bind static fields)
-  String get endpoint_key => Query.endpoint_field;
-  String get parameters_key => Query.parameters_field;
-  String get target_key => Query.target_field;
-  
-  //privately used
-  String get expression_key => Query.expression_field;
+
   
   //we need to listen to length in order to be notified
   @ComputedProperty("endpoints.data.length")
