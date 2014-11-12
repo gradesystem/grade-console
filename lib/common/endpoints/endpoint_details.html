@@ -77,11 +77,11 @@
                 <div flex></div>
                 <grade-button toolbar icon="refresh" label="refresh graphs" on-click="{{refreshGraphs}}"></grade-button>
               </div>
-              <div wired rounded style="min-height:200px;" relative>
+              <div wired rounded style="min-height:160px;" relative>
 	              <loading-panel fit loading="{{item.loadingGraphs}}" message="loading the graphs" style="overflow-y:auto;">
 	                 <div small-spaced>
 				              <template repeat="{{graph in item.model.graphs}}">
-				                <div>{{graph}}</div>
+				                <div smaller><span>{{ graph | start}}</span><span fg>{{ graph | suffix}}</span></div>
 				              </template>
 		                </div>
 	              </loading-panel>
