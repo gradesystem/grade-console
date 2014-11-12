@@ -2,7 +2,7 @@ part of tasks;
 
 class Task extends Delegate with Filters {
   
-  static final String ID_FIELD = "http://gradesystem.io/onto#id";
+  static final String ID_FIELD = "http://gradesystem.io/onto#uri";
   
   static final String LABEL_FIELD = "http://www.w3.org/2000/01/rdf-schema#label";
   static final String SOURCE_GRAPH_FIELD = "http://gradesystem.io/onto/task.owl#source_graph";

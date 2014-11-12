@@ -4,7 +4,7 @@ part of tasks;
 class TaskDetails extends PolymerElement with Filters {
   
   List<String> fields = [
-                                        "http://gradesystem.io/onto#id",
+                                        "http://gradesystem.io/onto#uri",
                                         "http://www.w3.org/2000/01/rdf-schema#label",
                                         "http://gradesystem.io/onto/task.owl#source_graph",
                                         "http://gradesystem.io/onto/task.owl#target_graph",

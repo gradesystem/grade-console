@@ -4,7 +4,7 @@ class Dataset extends Delegate {
 
   Dataset(Map bean) : super(bean);
   
-   static final String id = "http://gradesystem.io/onto#/id";
+   static final String id = "http://gradesystem.io/onto#uri";
    static final List<String> labels = [
                                        "label",
                                        "http://www.w3.org/2000/01/rdf-schema#label",
