@@ -30,7 +30,7 @@
           <grade-fascia truncate>
                    
             <grade-input fascia-title 
-                         disabled="{{ !editable }}" 
+                         disabled="{{ !editable || !item.newModel }}" 
                          label="{{ name_key | suffix }} ?" 
                          required
                          validators="{{ name_validators}}"
