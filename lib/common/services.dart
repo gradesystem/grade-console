@@ -30,7 +30,12 @@ class GradeService {
 
   Future<String> post(String path, String content, [Map<String, String> parameters]) {
     Uri url = new Uri.http("", "$base_path/$path", parameters);
-    return HttpService.post(url.toString(), content).timeout(timeLimit).then((xhr) => xhr.responseText).catchError(_onError);
+    return HttpService.post(url.toString(), content, acceptedMediaType:MediaType.SPARQL_JSON).timeout(timeLimit).then((xhr) => xhr.responseText).catchError(_onError);
+  }
+  
+  Future postJSon(String path, String content, [Map<String, String> parameters]) {
+    Uri url = new Uri.http("", "$base_path/$path", parameters);
+    return HttpService.post(url.toString(), content, acceptedMediaType:MediaType.JSON).timeout(timeLimit).then((xhr) => xhr.responseText).then(_decode).catchError(_onError);
   }
 
   Future<String> delete(String path) {
@@ -51,6 +56,18 @@ class GradeService {
     throw new ErrorResponse(-1, "", e.toString());
   }
 
+}
+
+class MediaType {
+   
+  final _value;
+  const MediaType._internal(this._value);
+  toString() => 'MediaType.$_value';
+  
+  String get value => _value;
+   
+  static const SPARQL_JSON = const MediaType._internal('application/sparql-results+json');
+  static const JSON = const MediaType._internal('application/json; charset=UTF-8');
 }
 
 class ErrorResponse {
@@ -82,10 +99,10 @@ class HttpService {
     }, onProgress: onProgress);
   }
 
-  static Future<HttpRequest> post(String url, String content, {bool withCredentials, String responseType, Map<String, String> requestHeaders, void onProgress(ProgressEvent e)}) {
+  static Future<HttpRequest> post(String url, String content, {bool withCredentials, String responseType, MediaType acceptedMediaType, void onProgress(ProgressEvent e)}) {
     return request(url, method: 'POST', withCredentials: withCredentials, responseType: responseType, requestHeaders: {
       'Content-Type': MEDIA_TYPE_JSON,
-      'Accept': MEDIA_TYPE_SPARQL_JSON
+      'Accept': acceptedMediaType.value
     }, sendData: content, onProgress: onProgress);
   }
 
@@ -98,6 +115,8 @@ class HttpService {
 
   static Future<HttpRequest> request(String url, {String method, bool withCredentials, String responseType, String mimeType, Map<String, String> requestHeaders, sendData, void onProgress(ProgressEvent e)}) {
     var completer = new Completer<HttpRequest>();
+    
+    print('request: $url');
 
     var xhr = new HttpRequest();
     if (method == null) {

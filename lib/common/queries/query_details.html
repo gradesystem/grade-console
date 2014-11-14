@@ -35,7 +35,7 @@
             <grade-fascia truncate>
                      
               <grade-input fascia-title 
-                           disabled="{{ !editable || !item.newModel }}" 
+                           disabled="{{ !editable }}" 
                            multiline?="{{ isAreaField(name_key) }}"
                            label="{{ name_key | suffix }} ?" 
                            required?="{{ isRequiredField(name_key) }}"
@@ -81,6 +81,8 @@
                  selected="{{ item.model.bean[target_key] }}"
 			           label="{{ target_key | suffix }} ?" 
 			           items="{{targets}}"
+			           itemLabelProvider={{endpointLabelProvider}}
+                 itemIdProvider={{endpointIdProvider}}
 			           >
             </grade-dropdown>
             <div fascia-subtitle truncate><span>{{ target_key | start }}</span><span fg bolder>{{ target_key | suffix}}</span></div>

@@ -25,9 +25,6 @@ class TaskDetails extends PolymerElement with Filters, Dependencies {
   ItemIdProvider get operationIdProvider => (Operation item)=>item.value;
   
   @observable
-  List<String> graphs = ["http://semanticrepository/public/graph/CL_FAO_VESSEL_TYPES"];
-  
-  @observable
   ObservableList<String> myselected = new ObservableList();
       
   void printBean(){
@@ -38,16 +35,16 @@ class TaskDetails extends PolymerElement with Filters, Dependencies {
   @ComputedProperty("item.bean[source_endpoint_key]")
   String get sourceEnpointId => item!=null?item.bean[source_endpoint_key]:null;
   
-  @ComputedProperty("sourceEnpointId")
-  GradeEndpoint get sourceEndpoint => gradeEndpoints!=null?gradeEndpoints.find(sourceEnpointId):null;
+  @ComputedProperty("sourceEnpointId") //modify after model update
+  GradeEndpoint get sourceEndpoint => gradeEndpoints!=null?gradeEndpoints.findByURI(sourceEnpointId):null;
   
-  @ObserveProperty("sourceEndpoint")
+  @ObserveProperty("item sourceEndpoint")
   void refreshSourceEnpointGraphs() {
     if (sourceEndpoint!=null && sourceEndpoint.endpoint.graphs == null) sourceEndpoint.refresh();
   }
   
   ItemLabelProvider get endpointLabelProvider => (GradeEndpoint item)=>item.endpoint.name;
-  ItemIdProvider get endpointIdProvider => (GradeEndpoint item)=>item.id;
+  ItemIdProvider get endpointIdProvider => (GradeEndpoint item)=>item.uri;
 
   @published
   bool editable = false;
@@ -55,7 +52,6 @@ class TaskDetails extends PolymerElement with Filters, Dependencies {
   @published
   Task item;
   
-
   GradeEnpoints gradeEndpoints;
 
   TaskDetails.created() : super.created() {

@@ -51,8 +51,8 @@ class EditableModel<T extends Cloneable<T>> extends Observable {
     fieldsInvalidity.clear();
   }
   
-  void save() {
-    _original = _underEdit;
+  void save(T saved) {
+    _original = saved;
     edit = false;
     newModel = false;
     notifyPropertyChange(#model, _underEdit, _original);

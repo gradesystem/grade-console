@@ -58,12 +58,14 @@ class QueryDetails extends PolymerElement with Filters {
   @ComputedProperty("item.synching")
   bool get loading => item!=null && item.synching;
   
+  ItemLabelProvider get endpointLabelProvider => (Endpoint item)=>item.name;
+  ItemIdProvider get endpointIdProvider => (Endpoint item)=>item.id;
 
   
   //we need to listen to length in order to be notified
   @ComputedProperty("endpoints.data.length")
-  List<String> get targets {
-    return endpoints==null?[]:endpoints.data.skipWhile((EditableEndpoint e)=>e.newModel).map((EditableEndpoint e)=> e.model.name).toList();
+  List<Endpoint> get targets {
+    return endpoints==null?[]:endpoints.data.skipWhile((EditableEndpoint e)=>e.newModel).map((EditableEndpoint e)=> e.model).toList();
   }
 
   @ComputedProperty("item.model.parameters")

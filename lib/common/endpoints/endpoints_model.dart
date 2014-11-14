@@ -2,7 +2,7 @@ part of endpoints;
 
 class Endpoint extends Delegate with Cloneable<Endpoint>, Observable, Filters {
   
-  static String id_field = "http://gradesystem.io/onto/endpoint.owl#id";  
+  static String id_field = "http://gradesystem.io/onto#id";  
   static String name_field = "http://gradesystem.io/onto/endpoint.owl#name";  
   static String uri_field= "http://gradesystem.io/onto/endpoint.owl#uri";
   static String graphs_field= "http://gradesystem.io/onto/endpoint.owl#graph";
@@ -119,7 +119,7 @@ abstract class EndpointSubPageModel {
     });
     
     service.put(editableModel.model)
-    .then((bool result)=>editableModel.save())
+    .then((Endpoint result)=> editableModel.save(result))
     .catchError((e)=>_onError(e, ()=>saveEndpoint(editableModel)))
     .whenComplete((){
       timer.cancel();
@@ -181,7 +181,7 @@ abstract class EndpointSubPageModel {
   }
   
   void _onError(e, callback) {
-    log.warning("QueryModel error: $e");
+    log.warning("EndpointsModel error: $e");
     bus.fire(new ToastMessage.alert("Ops we are having some problems communicating with the server", callback));
   }
 }
@@ -243,6 +243,8 @@ class GradeEnpoints extends Observable {
   
   GradeEndpoint find(String id) => union.firstWhere((GradeEndpoint e) => e.id == id, orElse:()=>null);
   
+  //remove after model update
+  GradeEndpoint findByURI(String uri) => union.firstWhere((GradeEndpoint e) => e.uri == uri, orElse:()=>null);
 }
 
 typedef void Refresh(EditableEndpoint);
@@ -264,9 +266,15 @@ class GradeEndpoint extends Observable {
   GradeEndpoint(this.editableEndpoint, this._refresh, this.area) {
     onPropertyChange(editableEndpoint, #loadingGraphs, ()=>notifyPropertyChange(#loadingGraphs, null, loadingGraphs));
     onPropertyChange(endpoint, #graphs, ()=>notifyPropertyChange(#graphs, null, graphs));
+    
+    //maybe avoid the bridge?
+    onPropertyChange(endpoint, #id, ()=>notifyPropertyChange(#id, null, id));
+    onPropertyChange(endpoint, #uri, ()=>notifyPropertyChange(#uri, null, uri));
   }
   
   String get id => endpoint.id;
+  
+  String get uri => endpoint.uri;
   
   Endpoint get endpoint => editableEndpoint.model;
   

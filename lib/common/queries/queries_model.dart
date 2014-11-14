@@ -2,6 +2,7 @@ part of queries;
 
 class Query extends Delegate with Cloneable<Query>, Observable, Filters {
   
+  static String id_field = "http://gradesystem.io/onto/endpoint.owl#id";
   static String endpoint_field = "http://gradesystem.io/onto/query.owl#endpoint";
   static String datasets_field="http://gradesystem.io/onto/query.owl#datasets";
   static String name_field = "http://gradesystem.io/onto/query.owl#name";  
@@ -131,7 +132,7 @@ abstract class QuerySubPageModel {
     });
     
     service.put(editableModel.model)
-    .then((bool result)=>editableModel.save())
+    .then((Query result)=>editableModel.save(result))
     .catchError((e)=>_onError(e, ()=>saveQuery(editableModel)))
     .whenComplete((){
       timer.cancel();
