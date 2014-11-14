@@ -30,15 +30,15 @@
 
 		</style>
 	  <template if={{!disabled}}>
-	    <paper-dropdown-menu selected={{selected}} valueattr="label" label={{label}}>
+	    <paper-dropdown-menu selected={{selected}} valueattr="item" label={{label}}>
 			  <template repeat="{{item in items}}">
-			    <paper-item label={{item}}></paper-item>
+			    <paper-item label="{{item | itemLabel}}" item="{{item | itemId}}"></paper-item>
 			  </template>
 			</paper-dropdown-menu>
 	  </template>
 			
 	  <template if={{disabled}}>
-			<div truncate label>{{selected}}</div>
+			<div truncate label>{{singleItemLabel}}</div>
 	  </template>
 	</template>
 	

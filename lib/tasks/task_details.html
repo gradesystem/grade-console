@@ -1,49 +1,169 @@
 <link rel="import" href="../../../packages/polymer/polymer.html">
 
+<link rel="import" href="../../../packages/core_elements/core_selector.html">
+
 <link rel="import" href="../common/components/grade_input.html">
 <link rel="import" href="../common/components/grade_item.html">
 <link rel="import" href="../common/components/grade_fascia.html">
+<link rel="import" href="../common/components/grade_dropdown.html">
 
 <link rel="import" href="tasks.html">
 
 <polymer-element name="task-details" layout vertical> 
-
   <template>
-  
-		  <style>
+    <style>
 			  
 			  grade-input::shadow [height] {
 			     max-height: 150px;
 			  }
 			  
-		  </style>
+    </style>
  
-		  <div style="overflow-y: auto;">
+    <div style="overflow-y: auto;">
 		  
-		      <template repeat="{{ key in fields }}">
-		          
- 		          <grade-item icon=chevron-right>
-                  
-                  <grade-fascia truncate>
-                  
-                     <grade-input fascia-title 
-                                  disabled="{{!editable}}" 
-                                  maxRows="5"
-                                  multiline?="{{isAreaField(key)}}" 
-                                  label="{{ key | suffix}}" 
-                                  value="{{item.bean[key] | trim | uppercase}}">
-                     </grade-input>
-                           
-                    <div fascia-subtitle>
-	                      <span>{{ key | start}}</span><span fg bolder>{{ key | suffix}}</span>
-	                   </div>
-                  
-                   </grade-fascia>   
-                  
-              </grade-item>
-		      
-		      </template>   
-      </div> 
+      <!-- name -->
+      <grade-item icon=chevron-right>
+        <grade-fascia truncate>
+          <grade-input  fascia-title 
+                        disabled="{{!editable}}" 
+                        label="{{ name_key | suffix}}" 
+                        value="{{item.bean[name_key] | trim | uppercase}}">
+          </grade-input>
+          <div fascia-subtitle>
+            <span>{{ name_key | start}}</span><span fg bolder>{{ name_key | suffix}}</span>
+          </div>
+        </grade-fascia>   
+      </grade-item>
+      
+      <!-- label -->
+      <grade-item icon=chevron-right>
+        <grade-fascia truncate>
+          <grade-input  fascia-title 
+                        disabled="{{!editable}}" 
+                        label="{{ label_key | suffix}}" 
+                        value="{{item.bean[label_key] | trim | uppercase}}">
+          </grade-input>
+          <div fascia-subtitle>
+            <span>{{ label_key | start}}</span><span fg bolder>{{ label_key | suffix}}</span>
+          </div>
+        </grade-fascia>   
+      </grade-item>
+      
+      <!-- operation -->
+      <grade-item icon=chevron-right>
+        <grade-fascia>
+          <grade-dropdown fascia-title 
+                 disabled="{{ !editable }}" 
+                 selected="{{ item.bean[operation_key] }}"
+                 label="{{ operation_key | suffix }} ?" 
+                 items="{{operations}}"
+                 itemLabelProvider={{operationLabelProvider}}
+                 itemIdProvider={{operationIdProvider}}
+                 ></grade-dropdown>
+          <div fascia-subtitle truncate>
+            <span>{{ operation_key | start}}</span><span fg bolder>{{ operation_key | suffix}}</span>
+          </div>
+        </grade-fascia>   
+      </grade-item>
+      
+      <!-- SOURCE -->
+      <fieldset horizontal layout wired rounded>
+        <legend>Source</legend>
+      
+        <!-- source endpoint -->
+	        <grade-fascia>
+	           <grade-dropdown fascia-title 
+                 disabled="{{ !editable }}" 
+                 selected="{{ item.bean[source_endpoint_key] }}"
+                 label="{{ source_endpoint_key | suffix }} ?" 
+                 items="{{gradeEndpoints.items}}"
+                 itemLabelProvider={{endpointLabelProvider}}
+                 itemIdProvider={{endpointIdProvider}}
+                 ></grade-dropdown>
+	          <div fascia-subtitle truncate>
+	            <span>{{ source_endpoint_key | start}}</span><span fg bolder>{{ source_endpoint_key | suffix}}</span>
+	          </div>
+	        </grade-fascia>   
+	      
+	       <!-- source graphs -->
+          <grade-fascia truncate>
+
+	            <core-selector id="sourceGraphsSelector" selected="{{item.bean[source_graph_key]}}" multi valueattr="item" selectedAttribute="bg-selected" fascia-title>
+	               <template repeat="{{graph in sourceEndpoint.graphs}}">
+	                  <paper-item label="{{graph}}" item={{graph}}></paper-item>
+	                </template>
+	            </core-selector>
+            <div fascia-subtitle>
+              <span>{{ source_graph_key | start}}</span><span fg bolder>{{ source_graph_key | suffix}}</span>
+            </div>
+          </grade-fascia>   
+          
+<!--                     <button on-click={{printBean}}>BEAN</button> -->
+
+      </fieldset>
+      
+      <!-- TARGET -->
+      <fieldset horizontal layout wired rounded>
+        <legend>Target</legend>
+      
+        <!-- target endpoint -->
+          <grade-fascia truncate>
+            <grade-input  fascia-title 
+                          disabled="{{!editable}}" 
+                          label="{{ target_endpoint_key | suffix}}" 
+                          value="{{item.bean[target_endpoint_key] | trim | uppercase}}">
+            </grade-input>
+            <div fascia-subtitle>
+              <span>{{ target_endpoint_key | start}}</span><span fg bolder>{{ target_endpoint_key | suffix}}</span>
+            </div>
+          </grade-fascia>   
+        
+         <!-- target graphs -->
+          <grade-fascia truncate>
+            <grade-input  fascia-title 
+                          disabled="{{!editable}}" 
+                          label="{{ target_graph_key | suffix}}" 
+                          value="{{item.bean[target_graph_key] | trim | uppercase}}">
+            </grade-input>
+            <div fascia-subtitle>
+              <span>{{ target_graph_key | start}}</span><span fg bolder>{{ target_graph_key | suffix}}</span>
+            </div>
+          </grade-fascia>   
+      
+      </fieldset>
+      
+      <!-- query -->
+      <grade-item icon=chevron-right>
+        <grade-fascia truncate>
+          <grade-input  fascia-title 
+                        disabled="{{!editable}}" 
+                        maxRows="5"
+                        multiline
+                        label="{{ query_key | suffix}}" 
+                        value="{{item.bean[query_key] | trim | uppercase}}">
+          </grade-input>
+          <div fascia-subtitle>
+            <span>{{ query_key | start}}</span><span fg bolder>{{ query_key | suffix}}</span>
+          </div>
+        </grade-fascia>   
+      </grade-item>
+      
+      <!-- note -->
+      <grade-item icon=chevron-right>
+        <grade-fascia truncate>
+          <grade-input  fascia-title 
+                        disabled="{{!editable}}" 
+                        maxRows="5"
+                        multiline
+                        label="{{ note_key | suffix}}" 
+                        value="{{item.bean[note_key] | trim | uppercase}}">
+          </grade-input>
+          <div fascia-subtitle>
+            <span>{{ note_key | start}}</span><span fg bolder>{{ note_key | suffix}}</span>
+          </div>
+        </grade-fascia>   
+      </grade-item>
+    </div> 
 		
   </template> 
 </polymer-element>
