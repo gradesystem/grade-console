@@ -1,4 +1,5 @@
 [ {
+  "http://gradesystem.io/onto/endpoint.owl#id" : "6",
   "http://gradesystem.io/onto/endpoint.owl#name" : "staging",
   "http://gradesystem.io/onto/endpoint.owl#uri" : "http://grade.ddns.net:3030/sr_staging/query",
   "http://gradesystem.io/onto/endpoint.owl#predefined" : true

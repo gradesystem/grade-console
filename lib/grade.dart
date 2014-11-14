@@ -17,6 +17,8 @@ import 'prod.dart' as prod;
 import 'stage.dart' as staging;
 import 'tasks.dart' as tasks;
 
+import 'common/endpoints/endpoints.dart';
+
 part 'grade/grade_console.dart';
 
 //lib-level logger
@@ -71,12 +73,18 @@ _initModules() {
   tasks.init();
   
   bus = new EventBus();
+  GradeEnpoints gradeEnpoints = new GradeEnpoints();
 
   //add app-level modules
   Module module = new Module()
-                      ..bind(EventBus, toValue: bus);
+                      ..bind(EventBus, toValue: bus)
+                      ..bind(GradeEnpoints, toValue: gradeEnpoints);
   
   Dependencies.add(module);
   
   Dependencies.configure(); 
+  
+  gradeEnpoints.addList(Dependencies.injector.get(prod.ProdEndpoints).data, Dependencies.injector.get(prod.ProdEndpointsModel).refreshGraphs, "Production");
+  gradeEnpoints.addList(Dependencies.injector.get(staging.StageEndpoints).data, Dependencies.injector.get(staging.StageEndpointsModel).refreshGraphs, "Stage");
+  gradeEnpoints.addList(Dependencies.injector.get(tasks.TasksEndpoints).data, Dependencies.injector.get(tasks.TasksEndpointsModel).refreshGraphs, "Tasks");
 }

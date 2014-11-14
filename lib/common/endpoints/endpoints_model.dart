@@ -2,6 +2,7 @@ part of endpoints;
 
 class Endpoint extends Delegate with Cloneable<Endpoint>, Observable, Filters {
   
+  static String id_field = "http://gradesystem.io/onto/endpoint.owl#id";  
   static String name_field = "http://gradesystem.io/onto/endpoint.owl#name";  
   static String uri_field= "http://gradesystem.io/onto/endpoint.owl#uri";
   static String graphs_field= "http://gradesystem.io/onto/endpoint.owl#graph";
@@ -14,14 +15,23 @@ class Endpoint extends Delegate with Cloneable<Endpoint>, Observable, Filters {
   }
   
   Endpoint() : this.fromBean({
+    id_field:"", 
     name_field:"", 
     uri_field:"", 
     predefined_field:false});
   
   void _listenChanges() {
-    onBeanChange([name_field], ()=>notifyPropertyChange(#name, null, name) );
-    onBeanChange([uri_field], ()=>notifyPropertyChange(#uri, null, uri) );
-    onBeanChange([graphs_field], ()=>notifyPropertyChange(#graphs, null, graphs) );
+    onBeanChange([id_field], ()=>notifyPropertyChange(#id, null, id));
+    onBeanChange([name_field], ()=>notifyPropertyChange(#name, null, name));
+    onBeanChange([uri_field], ()=>notifyPropertyChange(#uri, null, uri));
+    onBeanChange([graphs_field], ()=>notifyPropertyChange(#graphs, null, graphs));
+  }
+  
+  @observable
+  String get id => get(id_field);
+  set id(String value) {
+    set(id_field, value);
+    notifyPropertyChange(#id, null, value);
   }
   
   @observable
@@ -58,6 +68,8 @@ class Endpoint extends Delegate with Cloneable<Endpoint>, Observable, Filters {
   Endpoint clone() {
     return new Endpoint.fromBean(new Map.from(bean));
   }
+  
+  String toString() => "Endpoint id: $id name: $name ur: $uri graphs: $graphs hashCode: $hashCode";
 }
 
 abstract class Endpoints extends ListItems<EditableEndpoint> {
@@ -120,6 +132,7 @@ abstract class EndpointSubPageModel {
     
     editableModel.loadingGraphs = true;
     Endpoint endpoint = editableModel.model; 
+    print('refreshing $endpoint');
     service.get(endpoint.name)
     .then((Endpoint result){endpoint.graphs = result.graphs;})
     .catchError((e)=>_onError(e, ()=>refreshGraphs(editableModel)))
@@ -204,3 +217,67 @@ class EditableEndpoint extends EditableModel<Endpoint> {
 
 }
 
+
+class GradeEnpoints extends Observable {
+  
+  ObservableList<AreaEndpoints> areaEndpoints = new ObservableList();
+  ObservableList<GradeEndpoint> union = new ObservableList();
+  
+  void addList(ObservableList<EditableEndpoint> endpoints, Refresh refresh, String area) {
+    areaEndpoints.add(new AreaEndpoints(endpoints, refresh, area));
+    endpoints.listChanges.forEach((_){updateUnion();});
+  }
+  
+  void updateUnion() {
+    union.clear();
+   
+    //list.skipWhile((GradeEndpoint e)=>e.editableEndpoint.newModel)
+    areaEndpoints.forEach((AreaEndpoints areaEndpoints){ 
+      union.addAll(areaEndpoints.endpoints.map((EditableEndpoint e)=> new GradeEndpoint(e, areaEndpoints.refresh, areaEndpoints.area)));
+    });
+    
+    notifyPropertyChange(#items, null, items);
+  }
+  
+  ObservableList<GradeEndpoint> get items => union;
+  
+  GradeEndpoint find(String id) => union.firstWhere((GradeEndpoint e) => e.id == id, orElse:()=>null);
+  
+}
+
+typedef void Refresh(EditableEndpoint);
+
+class AreaEndpoints {
+  ObservableList<EditableEndpoint> endpoints;
+  Refresh refresh;
+  String area;
+  
+  AreaEndpoints(this.endpoints, this.refresh, this.area);
+    
+}
+
+class GradeEndpoint extends Observable {
+  EditableEndpoint editableEndpoint;
+  Refresh _refresh;
+  String area;
+  
+  GradeEndpoint(this.editableEndpoint, this._refresh, this.area) {
+    onPropertyChange(editableEndpoint, #loadingGraphs, ()=>notifyPropertyChange(#loadingGraphs, null, loadingGraphs));
+    onPropertyChange(endpoint, #graphs, ()=>notifyPropertyChange(#graphs, null, graphs));
+  }
+  
+  String get id => endpoint.id;
+  
+  Endpoint get endpoint => editableEndpoint.model;
+  
+  @observable
+  List<String> get graphs => endpoint.graphs;
+  
+  void refresh() {
+    _refresh(editableEndpoint);
+  }
+  
+  @observable
+  bool get loadingGraphs => editableEndpoint.loadingGraphs;
+  
+}
