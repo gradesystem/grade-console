@@ -35,10 +35,6 @@ class TaskDetails extends PolymerElement with Filters, Dependencies {
   
   }
   
-  getTypeName(dynamic obj) {
-    return reflect(obj).type.reflectedType.toString();
-  }
-  
   @ComputedProperty("item.bean[source_endpoint_key]")
   String get sourceEnpointId => item!=null?item.bean[source_endpoint_key]:null;
   
@@ -66,6 +62,7 @@ class TaskDetails extends PolymerElement with Filters, Dependencies {
     gradeEndpoints = instanceOf(GradeEnpoints);
   }
   
+  //workaround to selected binding not working: issue https://github.com/dart-lang/core-elements/issues/157
   @ObserveProperty("item")
   void updateSourceGraphsSelected() {
     if (item!=null && $["sourceGraphsSelector"]!=null) $["sourceGraphsSelector"].selected = item.bean[source_graph_key];
