@@ -1,7 +1,7 @@
-[ {
+{
   "http://gradesystem.io/onto#id" : "7740a9d3-85d2-4fcd-92b2-f8b43c99dc48",
   "http://gradesystem.io/onto/endpoint.owl#name" : "tasks",
   "http://gradesystem.io/onto/endpoint.owl#uri" : "http://grade.ddns.net:3030/sr_task/query",
-  "http://gradesystem.io/onto/endpoint.owl#graph" : null,
+  "http://gradesystem.io/onto/endpoint.owl#graph" : [ "http://semanticrepository/task/graph/country" ],
   "http://gradesystem.io/onto/endpoint.owl#predefined" : true
-} ]
+}

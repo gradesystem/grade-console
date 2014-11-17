@@ -1,5 +1,5 @@
 {
-  "http://gradesystem.io/onto/endpoint.owl#id" : "2",
+  "http://gradesystem.io/onto#id" : "a7ceeac5-6021-4cf8-9d32-05abf0fb8096",
   "http://gradesystem.io/onto/endpoint.owl#name" : "production",
   "http://gradesystem.io/onto/endpoint.owl#uri" : "http://grade.ddns.net:3030/sr_public/query",
   "http://gradesystem.io/onto/endpoint.owl#graph" : [ "http://semanticrepository/public/graph/CL_ALPHA3_CODE", "http://semanticrepository/public/graph/CL_ASFIS_SCIENTIFIC_NAME", "http://semanticrepository/public/graph/EEZ_AREA", "http://semanticrepository/public/graph/CL_FAO_DIVISION_AREA", "http://semanticrepository/public/graph/CL_FAO_MAJOR_AREA", "http://semanticrepository/public/graph/CL_FAO_SUBDIVISION_AREA", "http://semanticrepository/public/graph/CL_FAO_SUBUNIT_AREA", "http://semanticrepository/public/graph/CL_FAO_GEAR_TYPES", "http://semanticrepository/public/graph/CL_TAXONOMIC_CODE", "http://semanticrepository/public/graph/CL_FAO_VESSEL_TYPES" ],

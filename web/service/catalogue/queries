@@ -1,7 +1,9 @@
-[{
+[ {
+  "http://gradesystem.io/onto#id" : "3e558317-0166-4a25-afec-f0adb2989761",
   "http://gradesystem.io/onto/query.owl#name" : "all_tasks",
-  "http://gradesystem.io/onto/query.owl#target" : "tasks",
-  "http://gradesystem.io/onto/query.owl#expression" : "prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> construct {?g ?p ?o . ?g rdf:type 'http://gradesystem.io/onto#root'} where { graph ?g {?s ?p ?o . ?s rdf:type 'Graph'}}",
+  "http://gradesystem.io/onto/query.owl#target" : "7740a9d3-85d2-4fcd-92b2-f8b43c99dc48",
+  "http://gradesystem.io/onto/query.owl#expression" : "prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> construct {?s ?p ?o . ?s rdf:type 'http://gradesystem.io/onto#root'} where { graph ?g { ?s ?p ?o . ?s  rdf:type <http://gradesystem.io/onto/task.owl#Task> } }",
   "http://gradesystem.io/onto/query.owl#note" : null,
+  "http://gradesystem.io/onto/query.owl#datasets" : null,
   "http://gradesystem.io/onto/query.owl#predefined" : true
-}]
+} ]

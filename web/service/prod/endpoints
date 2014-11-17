@@ -1,20 +1,7 @@
 [ {
-  "http://gradesystem.io/onto/endpoint.owl#id" : "2",
+  "http://gradesystem.io/onto#id" : "a7ceeac5-6021-4cf8-9d32-05abf0fb8096",
   "http://gradesystem.io/onto/endpoint.owl#name" : "production",
   "http://gradesystem.io/onto/endpoint.owl#uri" : "http://grade.ddns.net:3030/sr_public/query",
+  "http://gradesystem.io/onto/endpoint.owl#graph" : [],
   "http://gradesystem.io/onto/endpoint.owl#predefined" : true
-} ,
-{
-  "http://gradesystem.io/onto/endpoint.owl#id" : "3",
-  "http://gradesystem.io/onto/endpoint.owl#name" : "test1",
-  "http://gradesystem.io/onto/endpoint.owl#uri" : "http://grade.ddns.net:3030/sr_public/query",
-  "http://gradesystem.io/onto/endpoint.owl#predefined" : true
-} ,
-{
-  "http://gradesystem.io/onto/endpoint.owl#name" : "test2",
-  "http://gradesystem.io/onto/endpoint.owl#uri" : "http://grade.ddns.net:3030/sr_public/query",
-  "http://gradesystem.io/onto/endpoint.owl#predefined" : true
-}
-
-
-]
+} ]

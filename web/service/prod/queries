@@ -1,18 +1,33 @@
-[{
+[ {
+  "http://gradesystem.io/onto#id" : "573e308f-18a2-42f4-bec5-82b0bcb1aa6e",
   "http://gradesystem.io/onto/query.owl#name" : "all_datasets",
-  "http://gradesystem.io/onto/query.owl#target" : "production",
-  "http://gradesystem.io/onto/query.owl#datasets" : null,
+  "http://gradesystem.io/onto/query.owl#target" : "a7ceeac5-6021-4cf8-9d32-05abf0fb8096",
   "http://gradesystem.io/onto/query.owl#expression" : "prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> construct {?g ?p ?o . ?g rdf:type 'http://gradesystem.io/onto#root'} where { graph ?g { ?g ?p ?o } }",
   "http://gradesystem.io/onto/query.owl#note" : null,
+  "http://gradesystem.io/onto/query.owl#datasets" : null,
   "http://gradesystem.io/onto/query.owl#predefined" : true
-}
-,
-{
-  "http://gradesystem.io/onto/query.owl#name" : "sample subjects",
-  "http://gradesystem.io/onto/query.owl#target" : "production",
-  "http://gradesystem.io/onto/query.owl#datasets" : "SOME,SOME OTHER",
-  "http://gradesystem.io/onto/query.owl#expression" : "select ?s where { ?s !predicate ?o }",
-  "http://gradesystem.io/onto/query.owl#note" : "a sample query used during development",
+}, {
+  "http://gradesystem.io/onto#id" : "19690a05-b8e3-4396-a04d-d92afe7c1fbb",
+  "http://gradesystem.io/onto/query.owl#name" : "ce4eez",
+  "http://gradesystem.io/onto/query.owl#target" : "a7ceeac5-6021-4cf8-9d32-05abf0fb8096",
+  "http://gradesystem.io/onto/query.owl#expression" : "PREFIX  rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX  cls: <http://www.fao.org/figis/flod/onto/codedentityclassification.owl#> select ?eez ?eezname ?eezcode where { graph <http://semanticrepository/public/graph/EEZ_AREA> {  ?eezcode a <http://www.fao.org/figis/flod/onto/eez.owl#EEZCode>. ?eez cls:isClassfiedByCode ?eezcode. ?eez rdfs:label ?eezname . ?eezcode rdfs:label '!code'} }",
+  "http://gradesystem.io/onto/query.owl#note" : "EEZ example code to test the query : 5693",
+  "http://gradesystem.io/onto/query.owl#datasets" : "EEZ",
   "http://gradesystem.io/onto/query.owl#predefined" : false
-}
-]
+}, {
+  "http://gradesystem.io/onto#id" : "cf5a6621-d1c1-455a-bfc5-5f5278e0e356",
+  "http://gradesystem.io/onto/query.owl#name" : "All EEZ",
+  "http://gradesystem.io/onto/query.owl#target" : "a7ceeac5-6021-4cf8-9d32-05abf0fb8096",
+  "http://gradesystem.io/onto/query.owl#expression" : "PREFIX  rdfs: <http://www.w3.org/2000/01/rdf-schema#> \nPREFIX  cls: <http://www.fao.org/figis/flod/onto/codedentityclassification.owl#> \n\nselect ?eez ?eezname ?eezcode ?code_l\n\nwhere { graph <http://semanticrepository/public/graph/EEZ_AREA> \n              {  \n                 ?eezcode a <http://www.fao.org/figis/flod/onto/eez.owl#EEZCode>. \n                 ?eez cls:isClassfiedByCode ?eezcode. ?eez rdfs:label ?eezname . \n                 ?eezcode rdfs:label ?code_l\n              } \n}",
+  "http://gradesystem.io/onto/query.owl#note" : "All EEZ",
+  "http://gradesystem.io/onto/query.owl#datasets" : "EEZ",
+  "http://gradesystem.io/onto/query.owl#predefined" : false
+}, {
+  "http://gradesystem.io/onto#id" : "8dcc91b1-94b9-47bb-96d9-29a1d2f66a65",
+  "http://gradesystem.io/onto/query.owl#name" : "ce4a3c",
+  "http://gradesystem.io/onto/query.owl#target" : "a7ceeac5-6021-4cf8-9d32-05abf0fb8096",
+  "http://gradesystem.io/onto/query.owl#expression" : "PREFIX  rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX  cls:  <http://www.fao.org/figis/flod/onto/codedentityclassification.owl#> select ?sp ?spname ?spcode where {  graph <http://semanticrepository/public/graph/CL_ALPHA3_CODE> { ?sp cls:isClassfiedByCode ?spcode . ?spcode a <http://www.fao.org/figis/flod/onto/linneanspecies.owl#SpeciesCode>. ?sp rdfs:label ?spname . ?spcode rdfs:label '!code' }}",
+  "http://gradesystem.io/onto/query.owl#note" : "Codes for Species. TEST TEST",
+  "http://gradesystem.io/onto/query.owl#datasets" : "SPECIES",
+  "http://gradesystem.io/onto/query.owl#predefined" : false
+} ]
