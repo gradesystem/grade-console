@@ -2,7 +2,7 @@
 <link rel="import" href="../../../../packages/core_elements/core_icon.html">
 
 <link rel="import" href="../components/grade_input.html">
-<link rel="import" href="../components/grade_dropdown.html">
+<link rel="import" href="../components/endpoint_dropdown_menu.html">
 <link rel="import" href="../components/grade_item.html">
 <link rel="import" href="../components/grade_fascia.html">
 <link rel="import" href="../components/loading_panel.html">
@@ -78,15 +78,17 @@
 				
 	          <grade-fascia>
 				        
-	            <grade-dropdown fascia-title 
+	            <endpoint-dropdown-menu fascia-title 
 	                 disabled="{{ !editable }}" 
 	                 selected="{{ item.model.bean[target_key] }}"
 				           label="{{ target_key | suffix }} ?" 
 				           items="{{targets}}"
+				           required?="{{ isRequiredField(target_key) }}"
+				           invalid="{{ item.fieldsInvalidity[target_key] }}"
 				           itemLabelProvider={{endpointLabelProvider}}
 	                 itemIdProvider={{endpointIdProvider}}
 				           >
-	            </grade-dropdown>
+	            </endpoint-dropdown-menu>
 	            <div fascia-subtitle truncate><span>{{ target_key | start }}</span><span fg bolder>{{ target_key | suffix}}</span></div>
 				        
 	          </grade-fascia>

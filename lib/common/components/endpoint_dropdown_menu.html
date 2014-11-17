@@ -1,0 +1,17 @@
+<link rel="import" href="../../../../packages/polymer/polymer.html">
+
+<link rel="import" href="../../../../packages/paper_elements/paper_item.html">
+<link rel="import" href="grade_dropdown_menu.html">
+
+<polymer-element name="endpoint-dropdown-menu">
+	<template>
+    <grade-dropdown-menu selected={{selected}} valueattr="item" label={{label}} disabled={{disabled}} required={{required}}>
+		  <template repeat="{{item in items}}">
+		    <paper-item label="{{item | itemLabel}}" item="{{item | itemId}}"></paper-item>
+		  </template>
+		</grade-dropdown-menu>
+  </template>
+	     
+	<script type="application/dart" src="endpoint_dropdown_menu.dart"></script> 
+	
+</polymer-element>

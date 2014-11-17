@@ -1,7 +1,7 @@
 import 'package:polymer/polymer.dart';
 
-@CustomTag("grade-dropdown")
-class GradeDropdown extends PolymerElement {
+@CustomTag("endpoint-dropdown-menu")
+class EndpointDropdownMenu extends PolymerElement {
   
   @published
   String selected;
@@ -16,21 +16,18 @@ class GradeDropdown extends PolymerElement {
   bool disabled;
   
   @published
+  bool required;
+  
+  @published
   ItemLabelProvider itemLabelProvider;
   
   @published
   ItemIdProvider itemIdProvider;
   
-  GradeDropdown.created() : super.created();
+  EndpointDropdownMenu.created() : super.created();
   
   String itemLabel(item) => itemLabelProvider!=null?itemLabelProvider(item):item;
   String itemId(item) => itemIdProvider!=null?itemIdProvider(item):item;
-  
-  @ComputedProperty("selected")
-  String get singleItemLabel {
-    var item = items.firstWhere((e)=>itemId(e) == selected, orElse:()=>null);
-    return item != null?itemLabel(item):null;
-  }
   
 }
 

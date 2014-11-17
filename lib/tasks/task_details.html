@@ -1,11 +1,14 @@
 <link rel="import" href="../../../packages/polymer/polymer.html">
 
 <link rel="import" href="../../../packages/core_elements/core_selector.html">
+<link rel="import" href="../../../packages/paper_elements/paper_item.html">
 
 <link rel="import" href="../common/components/grade_input.html">
 <link rel="import" href="../common/components/grade_item.html">
 <link rel="import" href="../common/components/grade_fascia.html">
-<link rel="import" href="../common/components/grade_dropdown.html">
+<link rel="import" href="../common/components/endpoint_dropdown_menu.html">
+<link rel="import" href="../common/components/item_dropdown_menu.html">
+<link rel="import" href="../common/components/grade_dropdown_menu.html">
 
 <link rel="import" href="tasks.html">
 
@@ -53,14 +56,16 @@
 	      <!-- operation -->
 	      <grade-item icon=chevron-right>
 	        <grade-fascia>
-	          <grade-dropdown fascia-title 
+	          <grade-dropdown-menu fascia-title 
 	                 disabled="{{ !editable }}" 
 	                 selected="{{ item.bean[operation_key] }}"
 	                 label="{{ operation_key | suffix }} ?" 
-	                 items="{{operations}}"
-	                 itemLabelProvider={{operationLabelProvider}}
-	                 itemIdProvider={{operationIdProvider}}
-	                 ></grade-dropdown>
+	                 valueattr="itemId"
+	                 >
+		                 <template repeat="{{operation in operations}}">
+							        <paper-item label="{{operation.label}}" itemId="{{operation.value}}"></paper-item>
+							      </template>
+	                 </grade-dropdown-menu>
 	          <div fascia-subtitle truncate>
 	            <span>{{ operation_key | start}}</span><span fg bolder>{{ operation_key | suffix}}</span>
 	          </div>
@@ -73,14 +78,14 @@
 	      
 	        <!-- source endpoint -->
 		        <grade-fascia>
-		           <grade-dropdown fascia-title 
+		           <endpoint-dropdown-menu fascia-title 
 	                 disabled="{{ !editable }}" 
 	                 selected="{{ item.bean[source_endpoint_key] }}"
 	                 label="{{ source_endpoint_key | suffix }} ?" 
 	                 items="{{gradeEndpoints.items}}"
 	                 itemLabelProvider={{endpointLabelProvider}}
 	                 itemIdProvider={{endpointIdProvider}}
-	                 ></grade-dropdown>
+	                 ></endpoint-dropdown-menu>
 		          <div fascia-subtitle truncate>
 		            <span>{{ source_endpoint_key | start}}</span><span fg bolder>{{ source_endpoint_key | suffix}}</span>
 		          </div>

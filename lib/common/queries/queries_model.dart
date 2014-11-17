@@ -25,7 +25,6 @@ class Query extends Delegate with Cloneable<Query>, Observable, Filters {
     put(name_field, "");
     put(expression_field, "");
     put(predefined_field, false);
-    put(target_field, "production");
      
     _listenChanges();
   }

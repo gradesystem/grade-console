@@ -20,9 +20,7 @@ class TaskDetails extends PolymerElement with Filters, Dependencies {
   String get creator_key => Task.creator_field;
   
   List<Operation> get operations => Operation.values;
-  
-  ItemLabelProvider get operationLabelProvider => (Operation item)=>item.label;
-  ItemIdProvider get operationIdProvider => (Operation item)=>item.value;
+
   
   @observable
   ObservableList<String> myselected = new ObservableList();

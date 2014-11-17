@@ -1,0 +1,66 @@
+<link rel="import" href="../../../../packages/polymer/polymer.html">
+
+<link rel="import" href="../../../../packages/paper_elements/paper_dropdown_menu.html">
+<link rel="import" href="../../../../packages/core_elements/core_icon.html">
+
+<polymer-element name="grade-dropdown-menu">
+	<template>
+		<style>
+			
+			paper-dropdown-menu::shadow  #control {
+        border: none;
+			}
+			
+			paper-dropdown-menu {
+        padding: 0px;
+			}
+			
+			paper-dropdown-menu::shadow  #control > div {
+        padding: 0px;
+		  }
+		  
+		  paper-dropdown-menu::shadow  #arrow {
+        margin: 0px;
+		  }
+		  
+		  paper-dropdown-menu[disabled] {
+		    cursor: auto;
+        pointer-events: none;
+      }
+		  
+		  paper-dropdown-menu[disabled]::shadow  #arrow {
+        display: none;
+      }
+      
+      :host([focused]) .error-text,
+			:host([focused]) .error-icon {
+			  color: #d34336;
+			}
+			
+			.error-text {
+			  font-size: 0.75em;
+			  padding: 0.5em 0;
+			  color: #757575;
+			}
+			
+			.error-icon {
+			  height: 20px;
+			  width: 20px;
+			  color: #757575;
+			}
+
+		</style>
+    <paper-dropdown-menu selected={{selected}} valueattr="{{valueattr}}" label={{label}} disabled?={{disabled}}>
+       <content select="*"></content>
+		</paper-dropdown-menu>
+		<div layout horizontal center hidden?="{{!invalid}}">
+      <div class="error-text" flex auto role="alert" aria-hidden="{{!invalid}}">Please select an item.</div>
+      <core-icon class="error-icon" icon="warning"></core-icon>
+    </div>
+    
+	</template>
+	
+	      
+  <script type="application/dart" src="grade_dropdown_menu.dart"></script> 
+	
+</polymer-element>
