@@ -58,10 +58,6 @@ class QueryDetails extends PolymerElement with Filters {
   @ComputedProperty("item.synching")
   bool get loading => item!=null && item.synching;
   
-  ItemLabelProvider get endpointLabelProvider => (Endpoint item)=>item.name;
-  ItemIdProvider get endpointIdProvider => (Endpoint item)=>item.id;
-
-  
   //we need to listen to length in order to be notified
   @ComputedProperty("endpoints.data.length")
   List<Endpoint> get targets {
@@ -77,15 +73,10 @@ class QueryDetails extends PolymerElement with Filters {
       
       List<String> parameters = item.model.parameters;
       params = parameters.isEmpty? params :parameters.toString();
-    
     }
     
     return params;
     
   }
   
-}
-
-class Test extends Observable {
-  ObservableList items = new ObservableList();
 }

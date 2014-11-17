@@ -13,7 +13,6 @@ import '../../common.dart';
 
 import '../lists/lists.dart';
 import '../endpoints/endpoints.dart';
-import '../components/endpoint_dropdown_menu.dart';
 
 part 'queries_model.dart';
 part 'query_details.dart';
