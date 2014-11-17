@@ -61,7 +61,7 @@ class QueryDetails extends PolymerElement with Filters {
   //we need to listen to length in order to be notified
   @ComputedProperty("endpoints.data.length")
   List<Endpoint> get targets {
-    return endpoints==null?[]:endpoints.data.skipWhile((EditableEndpoint e)=>e.newModel).map((EditableEndpoint e)=> e.model).toList();
+    return endpoints==null?[]:endpoints.data.where((EditableEndpoint e)=>!e.newModel).map((EditableEndpoint e)=> e.model).toList();
   }
 
   @ComputedProperty("item.model.parameters")
