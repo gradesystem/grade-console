@@ -114,7 +114,10 @@ abstract class QuerySubPageModel {
   
   void cancelEditing(EditableQuery query) {
     query.cancel();
-    if (query.newModel) storage.data.remove(query);
+    if (query.newModel) {
+      storage.selected = null;
+      storage.data.remove(query);
+    }
   }
   
   void cloneQuery(EditableQuery original) {

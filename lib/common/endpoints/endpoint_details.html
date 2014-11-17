@@ -21,80 +21,82 @@
 		
 		</style>
 
-    <loading-panel loading="{{loading}}" message="saving the endpoint">
-   
-      <div style="overflow-y: auto;">
-      
-      <grade-item icon=chevron-right>
-          
-          <grade-fascia truncate>
-                   
-            <grade-input fascia-title 
-                         disabled="{{ !editable }}" 
-                         label="{{ name_key | suffix }} ?" 
-                         required
-                         validators="{{ name_validators}}"
-                         invalid="{{ item.fieldsInvalidity[name_key] }}"
-                         inputValue="{{ item.model.bean[name_key]  }}"
-                         >
-            </grade-input>
-                   
-            <div fascia-subtitle><span>{{ name_key | start}}</span><span fg bolder>{{ name_key | suffix}}</span></div>
-          </grade-fascia>
-            
-        </grade-item>
-          
-        <grade-item icon=chevron-right>
-          
-          <grade-fascia truncate>
-                   
-            <grade-input fascia-title 
-                         disabled="{{ !editable }}" 
-                         label="{{ uri_key | suffix }} ?" 
-                         required
-                         invalid="{{ item.fieldsInvalidity[uri_key] }}"
-                         inputValue="{{ item.model.bean[uri_key]  }}"
-                         type="URL"
-                         >
-            </grade-input>
-                   
-            <div fascia-subtitle><span>{{ uri_key | start}}</span><span fg bolder>{{ uri_key | suffix}}</span></div>
-          </grade-fascia>
-            
-        </grade-item>
-        
-        
-        <template if="{{!item.newModel}}">
-        <grade-item icon=chevron-right>
-          
-          <grade-fascia truncate style="width: 100%">
-          
-            <div fascia-title>
-            
-              <div horizontal layout>
-	              <div wired rounded style="min-height:160px;" relative flex>
-		              <loading-panel fit loading="{{item.loadingGraphs}}" message="loading the graphs" style="overflow-y:auto;">
-		                 <div small-spaced>
-					              <template repeat="{{graph in item.model.graphs}}">
-					                <div smaller><span>{{ graph | start}}</span><span fg>{{ graph | suffix}}</span></div>
-					              </template>
-			                </div>
-		              </loading-panel>
-	              </div>
-               <grade-button toolbar icon="refresh" label="refresh graphs" on-click="{{refreshGraphs}}" style="padding-left:5px;padding-right:5px;"></grade-button>
-             </div>
-              
-            </div>
-                   
-            <div fascia-subtitle><span>{{ graphs_key | start}}</span><span fg bolder>{{ graphs_key | suffix}}</span></div>
-          </grade-fascia>
-            
-        </grade-item>
-        
-        </template>
-          
-      </div>  
-    </loading-panel>
+    <template if="{{item!=null}}">
+	    <loading-panel loading="{{loading}}" message="saving the endpoint">
+	   
+	      <div style="overflow-y: auto;">
+	      
+	      <grade-item icon=chevron-right>
+	          
+	          <grade-fascia truncate>
+	                   
+	            <grade-input fascia-title 
+	                         disabled="{{ !editable }}" 
+	                         label="{{ name_key | suffix }} ?" 
+	                         required
+	                         validators="{{ name_validators}}"
+	                         invalid="{{ item.fieldsInvalidity[name_key] }}"
+	                         inputValue="{{ item.model.bean[name_key]  }}"
+	                         >
+	            </grade-input>
+	                   
+	            <div fascia-subtitle><span>{{ name_key | start}}</span><span fg bolder>{{ name_key | suffix}}</span></div>
+	          </grade-fascia>
+	            
+	        </grade-item>
+	          
+	        <grade-item icon=chevron-right>
+	          
+	          <grade-fascia truncate>
+	                   
+	            <grade-input fascia-title 
+	                         disabled="{{ !editable }}" 
+	                         label="{{ uri_key | suffix }} ?" 
+	                         required
+	                         invalid="{{ item.fieldsInvalidity[uri_key] }}"
+	                         inputValue="{{ item.model.bean[uri_key]  }}"
+	                         type="URL"
+	                         >
+	            </grade-input>
+	                   
+	            <div fascia-subtitle><span>{{ uri_key | start}}</span><span fg bolder>{{ uri_key | suffix}}</span></div>
+	          </grade-fascia>
+	            
+	        </grade-item>
+	        
+	        
+	        <template if="{{!item.newModel}}">
+	        <grade-item icon=chevron-right>
+	          
+	          <grade-fascia truncate style="width: 100%">
+	          
+	            <div fascia-title>
+	            
+	              <div horizontal layout>
+		              <div wired rounded style="min-height:160px;" relative flex>
+			              <loading-panel fit loading="{{item.loadingGraphs}}" message="loading the graphs" style="overflow-y:auto;">
+			                 <div small-spaced>
+						              <template repeat="{{graph in item.model.graphs}}">
+						                <div smaller><span>{{ graph | start}}</span><span fg>{{ graph | suffix}}</span></div>
+						              </template>
+				                </div>
+			              </loading-panel>
+		              </div>
+	               <grade-button toolbar icon="refresh" label="refresh graphs" on-click="{{refreshGraphs}}" style="padding-left:5px;padding-right:5px;"></grade-button>
+	             </div>
+	              
+	            </div>
+	                   
+	            <div fascia-subtitle><span>{{ graphs_key | start}}</span><span fg bolder>{{ graphs_key | suffix}}</span></div>
+	          </grade-fascia>
+	            
+	        </grade-item>
+	        
+	        </template>
+	          
+	      </div>  
+	    </loading-panel>
+    </template>
 		
   </template> 
 </polymer-element>

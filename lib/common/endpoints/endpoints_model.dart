@@ -101,7 +101,10 @@ abstract class EndpointSubPageModel {
   
   void cancelEditing(EditableEndpoint endpoint) {
     endpoint.cancel();
-    if (endpoint.newModel) storage.data.remove(endpoint);
+    if (endpoint.newModel) {
+      storage.selected = null;
+      storage.data.remove(endpoint);
+    }
   }
   
   void cloneEndpoint(EditableEndpoint original) {
