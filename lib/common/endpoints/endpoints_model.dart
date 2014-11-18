@@ -136,7 +136,7 @@ abstract class EndpointSubPageModel {
     
     editableModel.loadingGraphs = true;
     Endpoint endpoint = editableModel.model; 
-    print('refreshing $endpoint');
+
     service.get(endpoint.name)
     .then((Endpoint result){endpoint.graphs = result.graphs;})
     .catchError((e)=>_onError(e, ()=>refreshGraphs(editableModel)))
@@ -219,7 +219,7 @@ class EditableEndpoint extends EditableModel<Endpoint> {
   //true if the query or his parameters have been modified after last editing
   bool get dirty => _dirty;
   
-  String toString() => "EditableEndpoint loadingGraphs: $loadingGraphs ${super.toString()}";
+  String toString() => "EditableEndpoint model: $model";
 
 }
 
@@ -294,4 +294,5 @@ class GradeEndpoint extends Observable {
   @observable
   bool get loadingGraphs => editableEndpoint.loadingGraphs;
   
+  String toString() => "GradeEndpoint editableEndpoint: $editableEndpoint";
 }

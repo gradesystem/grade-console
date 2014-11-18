@@ -69,6 +69,8 @@ class EditableModel<T extends Cloneable<T>> extends Observable {
   void synched() {
     synching = false;
   }
+  
+  String toString() => "EditableModel $model";
 
 }
 
