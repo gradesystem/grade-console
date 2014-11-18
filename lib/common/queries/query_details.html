@@ -87,8 +87,8 @@
 				           invalid="{{ item.fieldsInvalidity[target_key] }}"
 				           valueattr="itemId"
 				           >
-				        <template repeat="{{target in targets}}">
-                  <paper-item label="{{target.name}}" itemId="{{target.id}}"></paper-item>
+				        <template repeat="{{target in endpoints.synchedData}}">
+                  <paper-item label="{{target.model.name}}" itemId="{{target.model.id}}"></paper-item>
                 </template>
 	            </grade-dropdown-menu>
 	            <div fascia-subtitle truncate><span>{{ target_key | start }}</span><span fg bolder>{{ target_key | suffix}}</span></div>

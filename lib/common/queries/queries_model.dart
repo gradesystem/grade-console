@@ -84,7 +84,7 @@ class Query extends Delegate with Cloneable<Query>, Observable, Filters {
    }
 }
 
-abstract class Queries extends ListItems<EditableQuery> {
+abstract class Queries extends EditableListItems<EditableQuery> {
   
   bool containsName(String name) => data.any((EditableQuery eq)=>eq!=selected && eq.model.name!=null && eq.model.name.toLowerCase() == name.toLowerCase());
 }

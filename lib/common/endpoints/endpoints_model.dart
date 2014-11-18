@@ -72,7 +72,7 @@ class Endpoint extends Delegate with Cloneable<Endpoint>, Observable, Filters {
   String toString() => "Endpoint id: $id name: $name ur: $uri graphs: $graphs hashCode: $hashCode";
 }
 
-abstract class Endpoints extends ListItems<EditableEndpoint> {
+abstract class Endpoints extends EditableListItems<EditableEndpoint> {
   
   bool containsName(String name) => data.any((EditableEndpoint eq)=>eq!=selected && eq.model.name!=null && eq.model.name.toLowerCase() == name.toLowerCase());
 }
@@ -117,6 +117,7 @@ abstract class EndpointSubPageModel {
   }
   
   void saveEndpoint(EditableEndpoint editableModel) {
+  
     Timer timer = new Timer(new Duration(milliseconds: 200), () {
       editableModel.sync();
     });
@@ -217,6 +218,8 @@ class EditableEndpoint extends EditableModel<Endpoint> {
   
   //true if the query or his parameters have been modified after last editing
   bool get dirty => _dirty;
+  
+  String toString() => "EditableEndpoint loadingGraphs: $loadingGraphs ${super.toString()}";
 
 }
 
