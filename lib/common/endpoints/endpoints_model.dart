@@ -1,6 +1,6 @@
 part of endpoints;
 
-class Endpoint extends Delegate with Cloneable<Endpoint>, Observable, Filters {
+class Endpoint extends GradeEntity with Cloneable<Endpoint>, Filters {
   
   static String id_field = "http://gradesystem.io/onto#id";  
   static String name_field = "http://gradesystem.io/onto/endpoint.owl#name";  

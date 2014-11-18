@@ -1,6 +1,6 @@
 part of datasets;
 
-class Dataset extends Delegate with Observable {
+class Dataset extends GradeEntity {
 
   Dataset(Map bean) : super(bean);
   

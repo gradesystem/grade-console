@@ -1,6 +1,6 @@
 part of tasks;
 
-class Task extends Delegate with Filters, Observable {
+class Task extends GradeEntity with Filters {
   
   static final String name_field = "http://gradesystem.io/onto#uri";  
   static final String label_field = "http://www.w3.org/2000/01/rdf-schema#label";

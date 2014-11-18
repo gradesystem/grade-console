@@ -2,6 +2,10 @@ part of common;
 
 abstract class Model {} 
 
+abstract class GradeEntity extends Delegate with Observable {
+  GradeEntity(Map bean):super(bean);
+}
+
 class EditableModel<T extends Cloneable<T>> extends Observable {
   
   @observable
