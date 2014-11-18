@@ -115,8 +115,6 @@ class HttpService {
 
   static Future<HttpRequest> request(String url, {String method, bool withCredentials, String responseType, String mimeType, Map<String, String> requestHeaders, sendData, void onProgress(ProgressEvent e)}) {
     var completer = new Completer<HttpRequest>();
-    
-    print('request: $url');
 
     var xhr = new HttpRequest();
     if (method == null) {
