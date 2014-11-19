@@ -57,7 +57,7 @@
 					
 					<core-animated-pages main flex selected="{{area}}">
             <endpoint-details main items={{items}} spaced></endpoint-details> 
-            <endpoint-graphs main items={{items}} on-refresh-graphs={{onRefreshGraphs}} spaced></endpoint-graphs> 
+            <endpoint-graphs main items={{items}} on-refresh-graphs={{onRefreshGraphs}} on-remove-graph={{onRemoveGraph}} spaced></endpoint-graphs> 
           </core-animated-pages>
 	      </grade-header-panel>
 	
@@ -68,7 +68,7 @@
 	    <div main>There is no going back here.</div>
 	    <div main bolder>Are you sure?</div>
 	    <paper-button fg dismissive option>NO</paper-button>
-	    <paper-button fg affirmative option autofocus on-click={{deleteSelectedItem}}>YES</paper-button>
+	    <paper-button fg affirmative option autofocus on-click={{dialogAffermative}}>YES</paper-button>
 	  </grade-dialog>
   
   </template>

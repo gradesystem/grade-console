@@ -22,4 +22,8 @@ class EndpointGraphs extends PolymerElement with Filters {
   void refreshGraphs() {
     fire("refresh-graphs", detail:item);
   }
+  
+  void removeGraph(event, detail, target) {
+    fire("remove-graph", detail:target.attributes['graph']);
+  }
 }

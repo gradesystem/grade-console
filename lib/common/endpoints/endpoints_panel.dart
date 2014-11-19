@@ -18,7 +18,7 @@ class EndpointsPanel extends PolymerElement with Filters {
   @observable
   String removedDialogHeader;
   
-  EditableEndpoint deleteCandidate;
+  Function dialogCallback;
   
   EndpointsPanel.created() : super.created();
   
@@ -49,15 +49,16 @@ class EndpointsPanel extends PolymerElement with Filters {
     model.saveEndpoint(items.selected);
   }
   
+  void dialogAffermative() {
+    if (dialogCallback!=null) dialogCallback();
+  }
+  
   void removeItem(event, detail, target) {
-    deleteCandidate = detail;
+    EditableEndpoint deleteCandidate = detail;
+    dialogCallback = (){model.removeEndpoint(deleteCandidate);};
     Endpoint query = deleteCandidate.model;
     removedDialogHeader = "Remove ${query.bean[Endpoint.name_field]}";
     removeDialogOpened = true;
-  }
-  
-  void deleteSelectedItem() {
-    if (deleteCandidate!=null) model.removeEndpoint(deleteCandidate);
   }
   
   void cloneItem(event, detail, target) {
@@ -66,5 +67,12 @@ class EndpointsPanel extends PolymerElement with Filters {
   
   void onRefreshGraphs(event, detail, target) {
     model.refreshGraphs(detail);
+  }
+  
+  void onRemoveGraph(event, detail, target) {
+    String graph = detail;
+    dialogCallback = (){model.removeEndpointGraph(items.selected, graph);};
+    removedDialogHeader = "Remove $graph";
+    removeDialogOpened = true;
   }
 }

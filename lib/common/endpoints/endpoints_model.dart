@@ -163,6 +163,30 @@ abstract class EndpointSubPageModel {
     });
 
   }
+  
+  void removeEndpointGraph(EditableEndpoint editableModel, String graph) {
+    editableModel.loadingGraphs = true;
+    Timer timer = new Timer(new Duration(milliseconds: 500), () {
+      editableModel.loadingGraphs = false;
+          });
+    
+    
+      /*Timer timer = new Timer(new Duration(milliseconds: 200), () {
+        editableModel.sync();
+      });
+      
+      service.deleteEndpoint(editableModel.model)
+      .then((bool result){
+        storage.data.remove(editableModel);
+        storage.selected = null;
+      })
+      .catchError((e)=>_onError(e, ()=>saveEndpoint(editableModel)))
+      .whenComplete((){
+        timer.cancel();
+        editableModel.synched();
+      });*/
+
+    }
 
   void loadAll() {
     storage.loading = true;
