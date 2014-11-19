@@ -4,7 +4,8 @@ class Endpoint extends GradeEntity with Cloneable<Endpoint>, Filters {
   
   static String id_field = "http://gradesystem.io/onto#id";  
   static String name_field = "http://gradesystem.io/onto/endpoint.owl#name";  
-  static String uri_field= "http://gradesystem.io/onto/endpoint.owl#uri";
+  static String uri_field= "http://gradesystem.io/onto/endpoint.owl#uri";//FIXME 
+  static String update_uri_field= "http://gradesystem.io/onto/endpoint.owl#update_uri";
   static String graphs_field= "http://gradesystem.io/onto/endpoint.owl#graph";
   static String predefined_field="http://gradesystem.io/onto/endpoint.owl#predefined";
   
@@ -16,13 +17,15 @@ class Endpoint extends GradeEntity with Cloneable<Endpoint>, Filters {
   Endpoint() : this.fromBean({
     id_field:"", 
     name_field:"", 
-    uri_field:"", 
+    uri_field:"",
+    update_uri_field:"",
     predefined_field:false});
   
   void _listenChanges() {
     onBeanChange([id_field], ()=>notifyPropertyChange(#id, null, id));
     onBeanChange([name_field], ()=>notifyPropertyChange(#name, null, name));
     onBeanChange([uri_field], ()=>notifyPropertyChange(#uri, null, uri));
+    onBeanChange([update_uri_field], ()=>notifyPropertyChange(#updateUri, null, updateUri));
     onBeanChange([graphs_field], ()=>notifyPropertyChange(#graphs, null, graphs));
   }
   
@@ -47,6 +50,13 @@ class Endpoint extends GradeEntity with Cloneable<Endpoint>, Filters {
     notifyPropertyChange(#uri, null, value);
   }
   
+  @observable
+  String get updateUri => get(update_uri_field);
+  set updateUri(String value) {
+    set(update_uri_field, value);
+    notifyPropertyChange(#updateUri, null, value);
+  }
+  
   bool get predefined => get(predefined_field);
   
   @observable
@@ -60,7 +70,7 @@ class Endpoint extends GradeEntity with Cloneable<Endpoint>, Filters {
     return new Endpoint.fromBean(new Map.from(bean));
   }
   
-  String toString() => "Endpoint id: $id name: $name ur: $uri graphs: $graphs hashCode: $hashCode";
+  String toString() => "Endpoint id: $id name: $name uri: $uri updateUri: $updateUri graphs: $graphs hashCode: $hashCode";
 }
 
 abstract class Endpoints extends EditableListItems<EditableEndpoint> {

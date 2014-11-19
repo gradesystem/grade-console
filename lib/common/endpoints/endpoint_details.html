@@ -63,7 +63,24 @@
 	          </grade-fascia>
 	            
 	        </grade-item>
-	        
+            
+          <grade-item icon=chevron-right>
+            
+            <grade-fascia truncate>
+                     
+              <grade-input fascia-title 
+                           disabled="{{ !editable }}" 
+                           label="{{ update_uri_key | suffix }} ?" 
+                           invalid="{{ item.fieldsInvalidity[update_uri_key] }}"
+                           inputValue="{{ item.model.bean[update_uri_key]  }}"
+                           type="URL"
+                           >
+              </grade-input>
+                     
+              <div fascia-subtitle><span>{{ update_uri_key | start}}</span><span fg bolder>{{ update_uri_key | suffix}}</span></div>
+            </grade-fascia>
+              
+          </grade-item>	        
 	        
 	        <template if="{{!item.newModel}}">
 	        <grade-item icon=chevron-right>
