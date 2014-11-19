@@ -40,6 +40,6 @@ abstract class QueryService extends ListService<Query> {
   }
 
   Future<bool> deleteQuery(Query query) {
-    return delete(query, query.name);
+    return delete(query.name);
   }
 }

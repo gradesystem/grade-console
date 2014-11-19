@@ -165,34 +165,38 @@ abstract class EndpointSubPageModel {
   }
   
   void removeEndpointGraph(EditableEndpoint editableModel, String graph) {
-    editableModel.loadingGraphs = true;
-    Timer timer = new Timer(new Duration(milliseconds: 500), () {
-      editableModel.loadingGraphs = false;
-          });
-    
-    
-      /*Timer timer = new Timer(new Duration(milliseconds: 200), () {
-        editableModel.sync();
+
+      Timer timer = new Timer(new Duration(milliseconds: 200), () {
+        editableModel.loadingGraphs = true;
       });
       
-      service.deleteEndpoint(editableModel.model)
+      service.deleteEndpointGraph(editableModel.model, graph)
       .then((bool result){
-        storage.data.remove(editableModel);
-        storage.selected = null;
+        editableModel.model.graphs.remove(graph);
       })
-      .catchError((e)=>_onError(e, ()=>saveEndpoint(editableModel)))
+      .catchError((e)=>_onError(e, ()=>removeEndpointGraph(editableModel, graph)))
       .whenComplete((){
         timer.cancel();
-        editableModel.synched();
-      });*/
+        editableModel.loadingGraphs = false;
+      });
 
     }
   
   void addEndpointGraph(EditableEndpoint editableModel, String graph) {
-      editableModel.loadingGraphs = true;
-      Timer timer = new Timer(new Duration(milliseconds: 500), () {
-        editableModel.loadingGraphs = false;
-            });
+      
+    Timer timer = new Timer(new Duration(milliseconds: 200), () {
+           editableModel.loadingGraphs = true;
+         });
+           
+    service.addEndpointGraph(editableModel.model, graph)
+    .then((bool result){
+      editableModel.model.graphs.add(graph);
+    })
+    .catchError((e)=>_onError(e, ()=>addEndpointGraph(editableModel, graph)))
+    .whenComplete((){
+      timer.cancel();
+      editableModel.loadingGraphs = false;
+    });
   }
 
   void loadAll() {

@@ -18,15 +18,17 @@ abstract class ListService<T extends Delegate> extends Dependencies {
     return http.getJSon(all_path).then((json)=>new ListDelegate(json, generator));
   }
   
-  Future<T> get(String name) {
-    return http.getJSon("$single_item_path/$name").then(generator);
+  Future<T> get(String key) {
+    return http.getJSon(getItemPath(key)).then(generator);
   }
   
   Future<T> put(T item) {
     return http.postJSon(all_path, JSON.encode(item.bean)).then(generator);
   }
 
-  Future<bool> delete(T item, String name) {
-    return http.delete("$single_item_path/$name").then((response) => true);
+  Future<bool> delete(String key, [Map<String, String> parameters]) {
+    return http.delete(getItemPath(key), parameters).then((response) => true);
   }
+  
+  String getItemPath(String key) => "$single_item_path/$key";
 }

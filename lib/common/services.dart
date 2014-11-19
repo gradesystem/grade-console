@@ -38,8 +38,8 @@ class GradeService {
     return HttpService.post(url.toString(), content, acceptedMediaType:MediaType.JSON).timeout(timeLimit).then((xhr) => xhr.responseText).then(_decode).catchError(_onError);
   }
 
-  Future<String> delete(String path) {
-    Uri url = new Uri.http("", "$base_path/$path");
+  Future<String> delete(String path, [Map<String, String> parameters]) {
+    Uri url = new Uri.http("", "$base_path/$path", parameters);
     return HttpService.delete(url.toString()).timeout(timeLimit).then((xhr) => xhr.responseText).catchError(_onError);
   }
 

@@ -20,10 +20,8 @@
 			}
 			
 			div:not(:hover) [onbuttonhover] {
-  
-      visibility: hidden;
-    
-    }  
+			  visibility: hidden;
+			}  
 		
 		</style>
 
@@ -34,26 +32,26 @@
 	        
 	        <template if="{{!item.newModel}}">
 	        
-	        <grade-item icon=chevron-right>
-	        <div flex horizontal layout>
-	         <grade-input flex  style="height: 37px;"
-                           label="new graph ?" 
-                           invalid="{{ newUrlInvalid }}"
-                           inputValue="{{ newUrl  }}"
-                           type="URL"
-                           >
-              </grade-input>
-	         <grade-button action 
-			         disabled?="{{newUrlInvalid || newUrl.isEmpty}}"
-			         icon="add" 
-			         label="add endpoint" 
-			         on-click={{addGraph}} 
-			         tooltip="left" l
-			         abel="add graph" 
-			         style="padding-left:5px;padding-right:5px;">
-	         </grade-button>
-	        </div>
-	        </grade-item>
+		        <grade-item icon=chevron-right hidden?={{item.model.predefined}}>
+			        <div flex horizontal layout>
+			         <grade-input flex  style="height: 37px;"
+		                           label="new graph ?" 
+		                           invalid="{{ newUrlInvalid }}"
+		                           inputValue="{{ newUrl  }}"
+		                           type="URL"
+		                           >
+		              </grade-input>
+			         <grade-button action 
+					         disabled?="{{newUrlInvalid || newUrl.isEmpty}}"
+					         icon="add" 
+					         label="add endpoint" 
+					         on-click={{addGraph}} 
+					         tooltip="left" l
+					         abel="add graph" 
+					         style="padding-left:5px;padding-right:5px;">
+			         </grade-button>
+			        </div>
+		        </grade-item>
 	        
 		        <grade-item icon=chevron-right>
 
@@ -68,7 +66,7 @@
 							              <template repeat="{{graph in item.model.graphs}}">
 							                <div smaller flex horizontal layout>
 							                 <div flex><span>{{ graph | start}}</span><span fg>{{ graph | suffix}}</span></div>
-							                 <grade-button action onbuttonhover hidden?={{item.model.predefined}} smallicon tooltip="left" label="remove graph" icon="delete" on-click={{removeGraph}} graph={{graph}}></grade-button>
+							                 <grade-button hidden?={{item.model.predefined}} action onbuttonhover  smallicon tooltip="left" label="remove graph" icon="delete" on-click={{removeGraph}} graph={{graph}}></grade-button>
 							                </div>
 							              </template>
 					                </div>
