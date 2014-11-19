@@ -44,14 +44,6 @@ class EndpointsPanel extends PolymerElement with Filters {
     model.saveEndpoint(items.selected);
   }
   
-  void onQueryPlayground() {
-    area = 1;
-  }
-  
-  void onBack() {
-    area = 0;
-  }
- 
   void removeItem(event, detail, target) {
     deleteCandidate = detail;
     Endpoint query = deleteCandidate.model;

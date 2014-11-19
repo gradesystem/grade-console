@@ -15,7 +15,6 @@ class EndpointDetails extends PolymerElement with Filters {
   String get name_key =>  Endpoint.name_field;
   String get uri_key =>  Endpoint.uri_field;
   String get update_uri_key =>  Endpoint.update_uri_field;
-  String get graphs_key =>  Endpoint.graphs_field;
   
   List<Validator> get name_validators => [($) => $!=null && items.containsName($)?"Not original enough, try again.":null];
   
@@ -23,8 +22,4 @@ class EndpointDetails extends PolymerElement with Filters {
   
   @ComputedProperty("item.synching")
   bool get loading => item!=null && item.synching;
-  
-  void refreshGraphs() {
-    fire("refresh-graphs", detail:item);
-  }
 }
