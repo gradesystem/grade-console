@@ -21,15 +21,6 @@ class TaskDetails extends PolymerElement with Filters, Dependencies {
   
   List<Operation> get operations => Operation.values;
 
-  
-  @observable
-  ObservableList<String> myselected = new ObservableList();
-      
-  void printBean(){
-   print("items: ${item.bean[source_graph_key]}");
-  
-  }
-  
   @ComputedProperty("item.bean[source_endpoint_key]")
   String get sourceEnpointId => item!=null?item.bean[source_endpoint_key]:null;
   
@@ -39,6 +30,20 @@ class TaskDetails extends PolymerElement with Filters, Dependencies {
   @ObserveProperty("sourceEnpointId")
   void refreshSourceEnpointGraphs() {
     if (sourceEnpointId!=null) gradeEndpoints.refesh(sourceEnpointId);
+  }
+  
+  @ComputedProperty("item.bean[target_endpoint_key]")
+  String get targetEnpointId => item!=null?item.bean[target_endpoint_key]:null;
+  
+  @ComputedProperty("targetEnpointId")
+  Endpoint get targetEnpoint => gradeEndpoints!=null?gradeEndpoints.findEndpointByUri(targetEnpointId):null;
+  
+  @ObserveProperty("targetEnpoint")
+  void refreshTargetEnpointGraphs() {
+    if (targetEnpointId!=null) {
+      gradeEndpoints.refesh(targetEnpointId);
+      if (targetEnpoint!=null && !targetEnpoint.graphs.contains(targetEnpointId)) item.bean[target_graph_key] = null;
+    }
   }
 
   @published

@@ -10,7 +10,7 @@ class Task extends GradeEntity with Filters {
   static final String source_endpoint_field = "http://gradesystem.io/onto/task.owl#source_endpoint";
   static final String source_graph_field = "http://gradesystem.io/onto/task.owl#source_graph";
   
-  static final String target_endpoint_field = "http://gradesystem.io/onto/task.owl#publication_endpoint";
+  static final String target_endpoint_field = "http://gradesystem.io/onto/task.owl#target_endpoint";
   static final String target_graph_field = "http://gradesystem.io/onto/task.owl#target_graph";
   
   static final String query_field = "http://gradesystem.io/onto/task.owl#transform";
