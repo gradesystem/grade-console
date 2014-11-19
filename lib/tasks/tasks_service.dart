@@ -4,11 +4,11 @@ part of tasks;
 final String _path = "catalogue";
 
 @Injectable()
-class TasksService extends ListService<Task> {
+class TasksService extends EditableListService<Task> {
   TasksService() : super(_path, "tasks", "task", toTask);
   
   static Task toTask(Map json) {
-    return new Task(json);
+    return new Task.fromBean(json);
   }
 }
 

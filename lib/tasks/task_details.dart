@@ -20,12 +20,16 @@ class TaskDetails extends PolymerElement with Filters, Dependencies {
   String get creator_key => Task.creator_field;
   
   List<Operation> get operations => Operation.values;
-  
-  @published
-  bool editable = false;
 
   @published
-  Task item;
+  EditableTask editableItem;
+  
+  @ComputedProperty('editableItem.model')
+  Task get item => editableItem==null?null:editableItem.model;
+  
+  
+  @ComputedProperty('editableItem.edit')
+  bool get editable => item==null?false:editableItem.edit;
   
   GradeEnpoints gradeEndpoints;
   
@@ -33,7 +37,7 @@ class TaskDetails extends PolymerElement with Filters, Dependencies {
     gradeEndpoints = instanceOf(GradeEnpoints);
   }  
 
-  @ComputedProperty("item.bean[source_endpoint_key]")
+  @ComputedProperty("item.model.bean[source_endpoint_key]")
   String get sourceEnpointId => item!=null?item.bean[source_endpoint_key]:null;
   
   @ComputedProperty("sourceEnpointId")

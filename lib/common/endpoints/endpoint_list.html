@@ -13,7 +13,7 @@
 
   <list-panel loading="{{listitems.loading}}" empty={{listitems.data.isEmpty}}>
 
-	  <core-list-dart id="list" data="{{listitems.data | filter(kfilter, itemFilter)}}" height="80" on-core-activate={{selectDataset}} flex>
+	  <core-list-dart id="list" data="{{listitems.data | filter(kfilter, itemFilter)}}" height="80" on-core-activate={{selectEndpoint}} flex>
 	    
 	    <template>
 

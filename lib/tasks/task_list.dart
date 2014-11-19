@@ -11,17 +11,31 @@ class TaskList extends PolymerElement with Filters {
   
   CoreList list;
   
-  FilterFunction itemFilter = (Task item, String term) => item.label != null && item.label.toLowerCase().contains(term.toLowerCase());
+  FilterFunction itemFilter = (EditableModel<Task> item, String term) 
+                                => item.model.label != null && 
+                                   item.model.label.toLowerCase().contains(term.toLowerCase());
   
   TaskList.created() : super.created();
   
   void ready() {
     list = $['list'] as CoreList;
     list.data.changes.listen((_){selecteFirstItem();});
-  }
-  
+    
+     onPropertyChange(listitems, #selected, syncSelection);
+   }
+   
+   void syncSelection() {
+     if (listitems.selected!= null && listitems.selected != list.selection) {
+       if (listitems.selected == null) list.clearSelection();
+       else {
+         int index = listitems.data.indexOf(listitems.selected);
+         list.selectItem(index);
+       }
+     }
+   }  
+   
   void selecteFirstItem() {
-    if (list.data != null && list.data.isNotEmpty) {
+    if (list.data != null && list.data.isNotEmpty && !list.data.contains(listitems.selected)) {
       
       list.selectItem(0);
       //we are not notified about the selection
@@ -31,10 +45,6 @@ class TaskList extends PolymerElement with Filters {
   
   void selectDataset(event) {
     listitems.selected = event.detail.data;
-  }
-  
-  void removeItem() {
-    listitems.data.remove(listitems.selected);
   }
  
 }

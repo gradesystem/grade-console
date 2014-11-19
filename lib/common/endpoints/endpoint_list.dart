@@ -31,7 +31,6 @@ class EndpointList extends PolymerElement with Filters {
         int index = listitems.data.indexOf(listitems.selected);
         list.selectItem(index);
       }
-      
     }
     
   }
@@ -45,7 +44,7 @@ class EndpointList extends PolymerElement with Filters {
     }
   }
   
-  void selectDataset(event) {
+  void selectEndpoint(event) {
     listitems.selected = event.detail.data;
   }
  

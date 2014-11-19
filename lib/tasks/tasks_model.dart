@@ -1,6 +1,9 @@
 part of tasks;
 
-class Task extends GradeEntity with Filters {
+class Task extends EditableGradeEntity with Filters {
+  
+  
+  static final String id_field = "http://gradesystem.io/onto#id";  
   
   static final String name_field = "http://gradesystem.io/onto#uri";  
   static final String label_field = "http://www.w3.org/2000/01/rdf-schema#label";
@@ -18,9 +21,25 @@ class Task extends GradeEntity with Filters {
   
   static final String creator_field = "http://purl.org/dc/terms/creator";
 
-  Task(Map bean) : super(bean) {
+  
+  Task.fromBean(Map bean) : super(bean) {
     onBeanChange([label_field], ()=>notifyPropertyChange(#label, null, label));
+    onBeanChange([name_field], () => notifyPropertyChange(#name, null, name));
     onBeanChange([operation_field], ()=>notifyPropertyChange(#operation, null, operation));
+  }
+  
+  Task() : this.fromBean({
+          id_field: "",
+          name_field: ""
+        });
+  
+  String get key => get(id_field);
+  
+  @observable
+  String get name => get(name_field);
+  set name(String value) {
+    set(name_field, value);
+    notifyPropertyChange(#name, null, value);
   }
 
   String get label => get(label_field);
@@ -30,6 +49,15 @@ class Task extends GradeEntity with Filters {
     set(operation_field, operation!=null?operation.value:null);
     notifyPropertyChange(#operation, null, operation);
   } 
+  
+  Task clone() {
+    return new Task.fromBean(new Map.from(bean));
+  }
+}
+
+class EditableTask extends EditableModel<Task> {
+  EditableTask(Task task) : super(task);
+  
 }
 
 class Operation {
@@ -62,13 +90,28 @@ class TasksPageModel {
   TasksPageModel(this.tasksModel, this.queriesModel, this.endpointsModel);
 }
 
+
 @Injectable()
-class TasksModel extends SubPageModel<Task> {
-  TasksModel(EventBus bus, TasksService service, Tasks storage) : super(bus, service, storage);
+class TasksModel extends SubPageEditableModel<Task> {
+
+
+  TasksModel(EventBus bus, TasksService service, Tasks storage):super(bus, service, storage, generate) {
+    bus.on(ApplicationReady).listen((_) {
+      loadAll();
+    });
+  }
+  
+  TasksService get taskService => service;
+  
+  static EditableTask generate([Task item]) {
+    if (item == null) return new EditableTask(new Task());
+    return new EditableTask(item);
+  }
+
 }
 
 @Injectable()
-class Tasks extends ListItems<Task> {
+class Tasks extends EditableListItems<EditableModel<Task>> {
 }
 
 @Injectable()

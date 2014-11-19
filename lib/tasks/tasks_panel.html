@@ -1,4 +1,5 @@
 <link rel="import" href="../../../packages/polymer/polymer.html">
+
 <link rel="import" href="../../../packages/paper_elements/paper_button.html">
 <link rel="import" href="../../../packages/core_elements/core_tooltip.html">
 <link rel="import" href="../../../packages/core_elements/core_icon.html">
@@ -8,6 +9,7 @@
 <link rel="import" href="../common/components/details_scaffold.html">
 <link rel="import" href="../common/components/grade_button.html">
 <link rel="import" href="../common/components/page_menu.html">
+<link rel="import" href="../common/components/grade_dialog.html">
 
 <link rel="import" href="task_details.html">
 <link rel="import" href="task_list.html">
@@ -31,22 +33,31 @@
 	                    inputValue={{kfilter}}>
 	        </grade-input>
 	        
-	        <grade-button toolbar icon="refresh" label="refresh list" on-click="{{refresh}}"></grade-button>
-	        
-	        <grade-button toolbar icon="add" label="add task"></grade-button>
-	   
-	        <task-list main listitems="{{tasks}}" kfilter="{{kfilter}}"></task-list>
+          <grade-button toolbar icon="refresh" label="refresh list" on-click="{{refresh}}"></grade-button>
+          <grade-button toolbar icon="add" label="add task" on-click={{addTask}}></grade-button>
+
+	        <task-list main listitems="{{items}}" kfilter="{{kfilter}}" on-remove-item={{removeItem}} on-clone-item={{cloneItem}}></task-list>
 	        
 	      </grade-header-panel>
 	      
 	      <grade-header-panel side fit paneltitle="PROPERTIES">
-	          <grade-button toolbar icon="create" label="edit task" on-click="{{onEdit}}" hidden?="{{tasks.selected==null || edit}}"></grade-button>
-	          <grade-button toolbar icon="cancel" label="cancel" on-click="{{onCancel}}" hidden?={{!edit}}></grade-button>
-	          <grade-button toolbar icon="save" label="save" on-click="{{onSave}}" hidden?={{!edit}}></grade-button>
-	          <task-details main item="{{tasks.selected}}" editable="{{edit}}" spaced></task-details> 
+          <grade-button toolbar icon="lock" nohover tooltip=left label="predefined task is locked" hidden?="{{!items.selected.model.predefined}}"></grade-button>
+          <grade-button toolbar icon="create" label="edit task" on-click="{{onEdit}}" hidden?="{{  items.selected==null || items.selected.edit || items.selected.model.predefined}}"></grade-button>
+          <grade-button toolbar icon="cancel" label="discard changes" on-click="{{onCancel}}" hidden?="{{ !items.selected.edit}}"></grade-button>
+          <grade-button toolbar icon="save" label="save changes" on-click="{{onSave}}" hidden?="{{ !items.selected.edit}}" disabled={{!items.selected.valid}}></grade-button>
+
+          <task-details main editableItem="{{items.selected}}" spaced></task-details> 
 	      </grade-header-panel>
 	
 	  </grade-scaffold>
+	  
+    
+    <grade-dialog opened={{removeDialogOpened}} heading={{removedDialogHeader}}>
+      <div main>There is no going back here.</div>
+      <div main bolder>Are you sure?</div>
+      <paper-button fg dismissive option>NO</paper-button>
+      <paper-button fg affirmative option autofocus on-click={{dialogAffermative}}>YES</paper-button>
+    </grade-dialog>
   
   </template>
   

@@ -1,15 +1,10 @@
 <link rel="import" href="../../../packages/polymer/polymer.html">
 
 <link rel="import" href="../../../packages/core_elements/core_list_dart.html">
-<link rel="import" href="../../../packages/core_elements/core_icon.html">
-
-<link rel="import" href="../../../packages/paper_elements/paper_item.html">
-<link rel="import" href="../../../packages/paper_elements/paper_progress.html">
 
 <link rel="import" href="../common/components/list_panel.html">
-<link rel="import" href="../common/components/grade_item.html">
-<link rel="import" href="../common/components/grade_fascia.html">
-<link rel="import" href="../common/components/grade_button.html">
+
+<link rel="import" href="task_details_summary.html">
 
 <link rel="import" href="tasks.html">
 
@@ -22,21 +17,9 @@
 	  <core-list-dart id="list" data="{{listitems.data | filter(kfilter, itemFilter)}}" height="80" on-core-activate={{selectDataset}} flex>
 	    
 	    <template>
-		    <paper-item flex trim bg-selected?={{selected}} >
-		   
-		     <grade-item icon=settings-applications smallicon flex>
-			     
-			       <grade-fascia flex truncate>
-			         <div fascia-title>{{model.label | model.uppercase}}</div>
-			         <div fascia-subtitle><span>{{ model.targetGraph | model.start}}</span><span fg bolder>{{ model.targetGraph | model.suffix}}</span></div>
-			       </grade-fascia>
-			       
-			       <grade-button action onhover hidden?="{{!selected}}" self-center tooltip="left" icon="delete" label="remove task" smallicon on-click={{removeItem}}></grade-button>
-			       
-			     </grade-item>
-			
-			   </paper-item>
 	    
+	     <task-details-summary flex item="{{model}}" selected="{{ selected==true }}"></task-details-summary>
+
 	    </template>
 	  
 	  </core-list-dart>

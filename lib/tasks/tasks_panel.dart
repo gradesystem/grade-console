@@ -7,32 +7,56 @@ class TasksPanel extends PolymerElement with Filters {
   String kfilter='';
   
   @published
-  SubPageModel<Task> model;
+  TasksModel model;
   
-  @published
-  bool edit = false;
+  @observable
+  bool removeDialogOpened = false;
+  
+  @observable
+  String removedDialogHeader;
+  
+  Function dialogCallback;
   
   TasksPanel.created() : super.created();
   
-  Tasks get tasks => model.storage;
+  Tasks get items => model.storage;
   
   void refresh() {
     model.loadAll();
   }
   
-  void onEdit() {
-    log.info("onEdit");
-    edit = true;
+  void addTask() {
+    model.addNew();
   }
   
-  void onCancel() {
-    log.info("onCancel");
-    edit = false;
+  
+  void cloneItem(event, detail, target) {
+    model.clone(detail);
   }
   
-  void onSave() {
-    log.info("onSave");
-    edit = false;
-  }
+   void removeItem(event, detail, target) {
+     EditableTask deleteCandidate = detail;
+     dialogCallback = (){model.remove(deleteCandidate);};
+     Task task = deleteCandidate.model;
+     removedDialogHeader = "Remove ${task.bean[Endpoint.name_field]}";
+     removeDialogOpened = true;
+   }
+  
+   
+   void onEdit() {
+     items.selected.startEdit();
+   }
+   
+   void onCancel() {
+     model.cancelEditing(items.selected);
+   }
+   
+   void onSave() {
+     model.save(items.selected);
+   }
+   
+   void dialogAffermative() {
+     if (dialogCallback!=null) dialogCallback();
+   }
  
 }

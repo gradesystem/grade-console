@@ -5,10 +5,10 @@ class TasksPage extends Polybase {
   
   TasksPage.created() : super.createWith(TasksPageModel);
   
-  TasksPageModel get tasksModel => model as TasksPageModel;
+  TasksPageModel get tasksPageModel => model as TasksPageModel;
   
-  TasksModel get tasks => tasksModel.tasksModel;
-  TasksQueriesModel get queries => tasksModel.queriesModel;
-  TasksEndpointsModel get endpoints => tasksModel.endpointsModel;
+  TasksModel get tasks => tasksPageModel.tasksModel;
+  TasksQueriesModel get queries => tasksPageModel.queriesModel;
+  TasksEndpointsModel get endpoints => tasksPageModel.endpointsModel;
 }
 
