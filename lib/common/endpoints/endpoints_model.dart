@@ -81,8 +81,6 @@ abstract class Endpoints extends EditableListItems<EditableEndpoint> {
   bool containsName(String name) => data.any((EditableEndpoint eq) => eq != selected && eq.model.name != null && eq.model.name.toLowerCase() == name.toLowerCase());
 }
 
-
-
 abstract class EndpointSubPageModel extends SubPageEditableModel<Endpoint> {
 
 
@@ -97,15 +95,6 @@ abstract class EndpointSubPageModel extends SubPageEditableModel<Endpoint> {
   static EditableModel<Endpoint> generate([Endpoint item]) {
     if (item == null) return new EditableEndpoint(new Endpoint());
     return new EditableEndpoint(item);
-  }
-
-  void saveEndpoint(EditableEndpoint editableModel) {
-
-    //FIXME remove after service alignment
-    editableModel.model.bean.remove(Endpoint.update_uri_field);
-
-    super.save(editableModel);
-
   }
 
   void refreshGraphs(EditableEndpoint editableModel) {

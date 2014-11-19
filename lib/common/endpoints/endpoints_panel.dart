@@ -46,7 +46,7 @@ class EndpointsPanel extends PolymerElement with Filters {
   }
   
   void onSave() {
-    model.saveEndpoint(items.selected);
+    model.save(items.selected);
   }
   
   void dialogAffermative() {
