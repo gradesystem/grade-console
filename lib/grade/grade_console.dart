@@ -13,7 +13,7 @@ class GradeConsole  extends PolymerElement with Dependencies, Filters {
    
   static const name = "grade-console";
   
-  @observable int page = 1;
+  @observable int page = 0;
   
   GradeConsole.created() : super.created() {
     

@@ -7,7 +7,7 @@ class GradeSubpages extends PolymerElement {
   static final page_attribute='page';
   
   @observable
-  int subpage = 2;
+  int subpage = 0;
   
   GradeSubpages.created() : super.created();
   
