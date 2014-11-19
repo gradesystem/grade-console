@@ -187,6 +187,13 @@ abstract class EndpointSubPageModel {
       });*/
 
     }
+  
+  void addEndpointGraph(EditableEndpoint editableModel, String graph) {
+      editableModel.loadingGraphs = true;
+      Timer timer = new Timer(new Duration(milliseconds: 500), () {
+        editableModel.loadingGraphs = false;
+            });
+  }
 
   void loadAll() {
     storage.loading = true;

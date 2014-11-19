@@ -14,6 +14,12 @@ class EndpointGraphs extends PolymerElement with Filters {
   
   String get graphs_key =>  Endpoint.graphs_field;
   
+  @observable
+  bool newUrlInvalid;
+  
+  @observable
+  String newUrl = "";
+  
   EndpointGraphs.created() : super.created();
   
   @ComputedProperty("item.synching")
@@ -21,6 +27,11 @@ class EndpointGraphs extends PolymerElement with Filters {
   
   void refreshGraphs() {
     fire("refresh-graphs", detail:item);
+  }
+  
+  void addGraph() {
+    fire("add-graph", detail:newUrl);
+    newUrl = "";
   }
   
   void removeGraph(event, detail, target) {

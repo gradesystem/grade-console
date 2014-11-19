@@ -33,10 +33,32 @@
 	      <div style="overflow-y: auto;">
 	        
 	        <template if="{{!item.newModel}}">
+	        
+	        <grade-item icon=chevron-right>
+	        <div flex horizontal layout>
+	         <grade-input flex  style="height: 37px;"
+                           label="new graph ?" 
+                           invalid="{{ newUrlInvalid }}"
+                           inputValue="{{ newUrl  }}"
+                           type="URL"
+                           >
+              </grade-input>
+	         <grade-button action 
+			         disabled?="{{newUrlInvalid || newUrl.isEmpty}}"
+			         icon="add" 
+			         label="add endpoint" 
+			         on-click={{addGraph}} 
+			         tooltip="left" l
+			         abel="add graph" 
+			         style="padding-left:5px;padding-right:5px;">
+	         </grade-button>
+	        </div>
+	        </grade-item>
+	        
 		        <grade-item icon=chevron-right>
-		          
+
 		          <grade-fascia truncate style="width: 100%">
-		          
+
 		            <div fascia-title>
 		            
 		              <div horizontal layout>
@@ -52,7 +74,7 @@
 					                </div>
 				              </loading-panel>
 			              </div>
-		               <grade-button toolbar icon="refresh" label="refresh graphs" on-click="{{refreshGraphs}}" style="padding-left:5px;padding-right:5px;"></grade-button>
+		               <grade-button icon="refresh" label="refresh graphs" on-click="{{refreshGraphs}}" style="padding-left:5px;padding-right:5px;"></grade-button>
 		             </div>
 		              
 		            </div>
