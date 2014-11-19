@@ -6,7 +6,6 @@ class Endpoint extends GradeEntity with Cloneable<Endpoint>, Filters {
   static String name_field = "http://gradesystem.io/onto/endpoint.owl#name";  
   static String uri_field= "http://gradesystem.io/onto/endpoint.owl#uri";
   static String graphs_field= "http://gradesystem.io/onto/endpoint.owl#graph";
-  static String graphs_last_update_field= "http://gradesystem.io/onto/endpoint.owl#graphs_last_update";
   static String predefined_field="http://gradesystem.io/onto/endpoint.owl#predefined";
   
   Endpoint.fromBean(Map bean) : super(bean){
@@ -54,15 +53,7 @@ class Endpoint extends GradeEntity with Cloneable<Endpoint>, Filters {
   List<String> get graphs => get(graphs_field);
   set graphs(List<String> newgraphs) {
     set(graphs_field, newgraphs);
-    graphsLastUpdate = Filters.formatter.format(new DateTime.now()); 
     notifyPropertyChange(#graphs, null, newgraphs);
-  }
-  
-  @observable
-  String get graphsLastUpdate => get(graphs_last_update_field);
-  set graphsLastUpdate(String graphsLastUpdate) {
-      set(graphs_last_update_field, graphsLastUpdate);
-      notifyPropertyChange(#graphsLastUpdate, null, graphsLastUpdate);
   }
   
   Endpoint clone() {
@@ -229,9 +220,9 @@ class GradeEnpoints extends Observable {
   ObservableList<AreaEndpoints> areaEndpoints = new ObservableList();
   ObservableList<GradeEndpoint> union = new ObservableList();
   
-  void addList(ObservableList<EditableEndpoint> endpoints, Refresh refresh, String area) {
-    areaEndpoints.add(new AreaEndpoints(endpoints, refresh, area));
-    endpoints.listChanges.forEach((_){updateUnion();});
+  void addList(Endpoints endpointsStorage, Refresh refresh, String area) {
+    areaEndpoints.add(new AreaEndpoints(endpointsStorage, refresh, area));
+    onPropertyChange(endpointsStorage, #synchedData, updateUnion);
   }
   
   void updateUnion() {
@@ -239,7 +230,7 @@ class GradeEnpoints extends Observable {
    
     //list.skipWhile((GradeEndpoint e)=>e.editableEndpoint.newModel)
     areaEndpoints.forEach((AreaEndpoints areaEndpoints){ 
-      union.addAll(areaEndpoints.endpoints.map((EditableEndpoint e)=> new GradeEndpoint(e, areaEndpoints.refresh, areaEndpoints.area)));
+      union.addAll(areaEndpoints.endpointsStorage.synchedData.map((EditableEndpoint e)=> new GradeEndpoint(e, areaEndpoints.refresh, areaEndpoints.area)));
     });
     
     notifyPropertyChange(#items, null, items);
@@ -247,20 +238,22 @@ class GradeEnpoints extends Observable {
   
   ObservableList<GradeEndpoint> get items => union;
   
-  GradeEndpoint find(String id) => union.firstWhere((GradeEndpoint e) => e.id == id, orElse:()=>null);
+  GradeEndpoint find(String id) => union.firstWhere((GradeEndpoint e) => e.editableEndpoint.model.id == id, orElse:()=>null);
   
   //remove after model update
-  GradeEndpoint findByURI(String uri) => union.firstWhere((GradeEndpoint e) => e.uri == uri, orElse:()=>null);
+  GradeEndpoint findByURI(String uri) => union.firstWhere((GradeEndpoint e) => e.editableEndpoint.model.uri == uri, orElse:()=>null);
 }
 
 typedef void Refresh(EditableEndpoint);
 
 class AreaEndpoints {
-  ObservableList<EditableEndpoint> endpoints;
+  Endpoints endpointsStorage;
   Refresh refresh;
   String area;
   
-  AreaEndpoints(this.endpoints, this.refresh, this.area);
+  AreaEndpoints(this.endpointsStorage, this.refresh, this.area);
+  
+  
     
 }
 
@@ -269,30 +262,11 @@ class GradeEndpoint extends Observable {
   Refresh _refresh;
   String area;
   
-  GradeEndpoint(this.editableEndpoint, this._refresh, this.area) {
-    onPropertyChange(editableEndpoint, #loadingGraphs, ()=>notifyPropertyChange(#loadingGraphs, null, loadingGraphs));
-    onPropertyChange(endpoint, #graphs, ()=>notifyPropertyChange(#graphs, null, graphs));
-    
-    //maybe avoid the bridge?
-    onPropertyChange(endpoint, #id, ()=>notifyPropertyChange(#id, null, id));
-    onPropertyChange(endpoint, #uri, ()=>notifyPropertyChange(#uri, null, uri));
-  }
-  
-  String get id => endpoint.id;
-  
-  String get uri => endpoint.uri;
-  
-  Endpoint get endpoint => editableEndpoint.model;
-  
-  @observable
-  List<String> get graphs => endpoint.graphs;
+  GradeEndpoint(this.editableEndpoint, this._refresh, this.area);
   
   void refresh() {
     _refresh(editableEndpoint);
   }
-  
-  @observable
-  bool get loadingGraphs => editableEndpoint.loadingGraphs;
   
   String toString() => "GradeEndpoint editableEndpoint: $editableEndpoint";
 }

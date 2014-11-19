@@ -22,9 +22,6 @@ class EndpointDetails extends PolymerElement with Filters {
   
   @ComputedProperty("item.synching")
   bool get loading => item!=null && item.synching;
-
-  @ComputedProperty("item.model.graphsLastUpdate")
-  String get lastUpdate => item!=null && item.model.graphsLastUpdate!=null?item.model.graphsLastUpdate:"n/a";
   
   void refreshGraphs() {
     fire("refresh-graphs", detail:item);

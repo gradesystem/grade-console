@@ -76,15 +76,20 @@
 	        <legend>Source</legend>
 	      
 	        <!-- source endpoint -->
+	        
+	        <!--  required?="true"
+                   invalid="{{ item.fieldsInvalidity[source_endpoint_key] }}" -->
 		        <grade-fascia>
-		           <endpoint-dropdown-menu fascia-title 
-	                 disabled="{{ !editable }}" 
-	                 selected="{{ item.bean[source_endpoint_key] }}"
-	                 label="{{ source_endpoint_key | suffix }} ?" 
-	                 items="{{gradeEndpoints.items}}"
-	                 itemLabelProvider={{endpointLabelProvider}}
-	                 itemIdProvider={{endpointIdProvider}}
-	                 ></endpoint-dropdown-menu>
+		          <grade-dropdown-menu fascia-title flex
+                   disabled="{{ !editable }}" 
+                   selected="{{ item.bean[source_endpoint_key] }}"
+                   label="{{ source_endpoint_key | suffix }} ?" 
+                   valueattr="itemId"
+                   >
+                <template repeat="{{item in gradeEndpoints.items}}">
+                  <paper-item label="{{item.editableEndpoint.model.name}}" itemId="{{item.editableEndpoint.model.uri}}"></paper-item>
+                </template>
+              </grade-dropdown-menu>
 		          <div fascia-subtitle truncate>
 		            <span>{{ source_endpoint_key | start}}</span><span fg bolder>{{ source_endpoint_key | suffix}}</span>
 		          </div>
@@ -94,7 +99,7 @@
 	          <grade-fascia truncate>
 	
 		            <core-selector id="sourceGraphsSelector" selected="{{item.bean[source_graph_key]}}" multi valueattr="item" selectedAttribute="bg-selected" fascia-title>
-		               <template repeat="{{graph in sourceEndpoint.graphs}}">
+		               <template repeat="{{graph in sourceEndpoint.editableEndpoint.model.graphs}}">
 		                  <paper-item label="{{graph}}" item={{graph}}></paper-item>
 		                </template>
 		            </core-selector>

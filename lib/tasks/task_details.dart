@@ -40,9 +40,6 @@ class TaskDetails extends PolymerElement with Filters, Dependencies {
   void refreshSourceEnpointGraphs() {
     if (sourceEndpoint!=null) sourceEndpoint.refresh();
   }
-  
-  ItemLabelProvider get endpointLabelProvider => (GradeEndpoint item)=>item.endpoint.name;
-  ItemIdProvider get endpointIdProvider => (GradeEndpoint item)=>item.uri;
 
   @published
   bool editable = false;
