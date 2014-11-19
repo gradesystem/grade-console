@@ -24,6 +24,11 @@ class EndpointsPanel extends PolymerElement with Filters {
   
   Endpoints get items => model.storage;
   
+  @ObserveProperty("model.storage.selected")
+  void updateArea() {
+    if (model!=null && model.storage.selected!=null && model.storage.selected.newModel) area = 0; 
+  }
+  
   void refresh() {
     model.loadAll();
   }
