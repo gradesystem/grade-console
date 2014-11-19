@@ -38,7 +38,7 @@ abstract class SubPageEditableModel<T extends EditableGradeEntity> {
 
   void clone(EditableModel<T> original) {
     T cloned = original.model.clone();
-    //FIXME cloned.name = cloned.name + "_cloned";
+    cloned.name = cloned.name + "_cloned";
     EditableModel<T> editableModel = generator(cloned);
     storage.data.add(editableModel);
     storage.selected = editableModel;
@@ -187,6 +187,9 @@ class EditableModel<T extends Cloneable<T>> extends Observable {
 }
 
 abstract class Cloneable<T> {
+  
+  String get name;
+  set name(String value);
   
   T clone();
 }
