@@ -1,6 +1,6 @@
 part of queries;
 
-class Query extends Delegate with Cloneable<Query>, Observable, Filters {
+class Query extends EditableGradeEntity with Filters {
   
   static String id_field = "http://gradesystem.io/onto/endpoint.owl#id";
   static String endpoint_field = "http://gradesystem.io/onto/query.owl#endpoint";
@@ -34,6 +34,8 @@ class Query extends Delegate with Cloneable<Query>, Observable, Filters {
     onBeanChange([expression_field], ()=>notifyPropertyChange(#parameters, null, parameters) );
     onBeanChange([name_field], ()=>notifyPropertyChange(#name, null, name) );
   }
+  
+  String get key => get(name_field);
   
   String get name => get(name_field);
   set name(String value) {
@@ -89,116 +91,33 @@ abstract class Queries extends EditableListItems<EditableQuery> {
   bool containsName(String name) => data.any((EditableQuery eq)=>eq!=selected && eq.model.name!=null && eq.model.name.toLowerCase() == name.toLowerCase());
 }
 
-abstract class QuerySubPageModel {
+abstract class QuerySubPageModel extends SubPageEditableModel<Query> {
   
-  EventBus bus;
-  QueryService service;
-  Queries storage;
+
+
   
-  QuerySubPageModel(this.bus, this.service, this.storage) {
+  QuerySubPageModel(EventBus bus, QueryService service, Queries storage):super(bus, service, storage, 
+      ([Query query])=>new EditableQuery(query!=null?query:new Query(service.path))){
     bus.on(ApplicationReady).listen((_) {
       loadAll();
     });
   }
   
-  void addNewQuery() {
-    Query query = new Query(service.path);
-    EditableQuery editableModel = new EditableQuery(query);
-    editableModel.newModel = true;
-    
-    storage.data.add(editableModel);
-    storage.selected = editableModel;
-    editableModel.startEdit();
-  }
-  
-  void cancelEditing(EditableQuery query) {
-    query.cancel();
-    if (query.newModel) {
-      storage.selected = null;
-      storage.data.remove(query);
-    }
-  }
-  
-  void cloneQuery(EditableQuery original) {
-    Query cloned = original.model.clone();
-    cloned.name = cloned.name + "_cloned";
-    EditableQuery editableModel = new EditableQuery(cloned);
-    storage.data.add(editableModel);
-    storage.selected = editableModel;
-    editableModel.startEdit();
-  }
-  
-  void saveQuery(EditableQuery editableModel) {
-    Timer timer = new Timer(new Duration(milliseconds: 200), () {
-      editableModel.sync();
-    });
-    
-    service.put(editableModel.model)
-    .then((Query result)=>editableModel.save(result))
-    .catchError((e)=>_onError(e, ()=>saveQuery(editableModel)))
-    .whenComplete((){
-      timer.cancel();
-      editableModel.synched();
-    });
+  QueryService get queryService => service;
 
-  }
-  
-  void removeQuery(EditableQuery editableModel) {
-    Timer timer = new Timer(new Duration(milliseconds: 200), () {
-      editableModel.sync();
-    });
-    
-    service.deleteQuery(editableModel.model)
-    .then((bool result){
-      storage.data.remove(editableModel);
-      storage.selected = null;
-    })
-    .catchError((e)=>_onError(e, ()=>saveQuery(editableModel)))
-    .whenComplete((){
-      timer.cancel();
-      editableModel.synched();
-    });
-
-  }
-  
   void runQueryByName(EditableQuery editableQuery) {
     editableQuery.runQuery();
     
-    service.runQueryByName(editableQuery.model, editableQuery.parametersValues)
+    queryService.runQueryByName(editableQuery.model, editableQuery.parametersValues)
       .then((QueryResult r)=>editableQuery.queryResult(r))
       .catchError((e)=> editableQuery.queryFailed(e));
   }
   
   void runQuery(EditableQuery editableQuery) {
     editableQuery.runQuery();
-    service.runQuery(editableQuery.model, editableQuery.parametersValues)
+    queryService.runQuery(editableQuery.model, editableQuery.parametersValues)
     .then((QueryResult r)=>editableQuery.queryResult(r))
     .catchError((e)=>editableQuery.queryFailed(e));
-  }
- 
-  void loadAll() {
-    storage.loading = true;
-    storage.selected = null;
-    service.getAll().then(_setData).catchError((e){
-      _onError(e, loadAll);
-      storage.data.clear();
-      storage.loading = false;
-      }
-    );
-  }
-  
-  void _setData(List<Query> items) {
-
-    storage.data.clear();
-
-    storage.data.addAll(items.map((Query q)=> new EditableQuery(q)));
-    storage.loading = false;
-    
-  }
-  
-  void _onError(e, callback) {
-    log.warning("QueryModel error: $e");
-    bus.fire(new ToastMessage.alert("Ops we are having some problems communicating with the server", callback));
   }
 }
 

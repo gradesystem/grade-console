@@ -10,6 +10,7 @@ import 'package:logging/logging.dart';
 import '../../common.dart';
 
 import '../lists/lists.dart';
+import '../editables/editables.dart';
 
 part 'endpoints_model.dart';
 part 'endpoint_details.dart';

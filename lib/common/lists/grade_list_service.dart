@@ -22,13 +22,5 @@ abstract class ListService<T extends Delegate> extends Dependencies {
     return http.getJSon(getItemPath(key)).then(generator);
   }
   
-  Future<T> put(T item) {
-    return http.postJSon(all_path, JSON.encode(item.bean)).then(generator);
-  }
-
-  Future<bool> delete(String key, [Map<String, String> parameters]) {
-    return http.delete(getItemPath(key), parameters).then((response) => true);
-  }
-  
   String getItemPath(String key) => "$single_item_path/$key";
 }

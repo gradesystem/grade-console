@@ -1,6 +1,6 @@
 part of endpoints;
 
-class Endpoint extends GradeEntity with Cloneable<Endpoint>, Filters {
+class Endpoint extends EditableGradeEntity with Cloneable<Endpoint>, Filters {
 
   static String id_field = "http://gradesystem.io/onto#id";
   static String name_field = "http://gradesystem.io/onto/endpoint.owl#name";
@@ -29,6 +29,8 @@ class Endpoint extends GradeEntity with Cloneable<Endpoint>, Filters {
     onBeanChange([update_uri_field], () => notifyPropertyChange(#updateUri, null, updateUri));
     onBeanChange([graphs_field], () => notifyPropertyChange(#graphs, null, graphs));
   }
+  
+  String get key => get(name_field);
 
   @observable
   String get id => get(id_field);
@@ -79,43 +81,22 @@ abstract class Endpoints extends EditableListItems<EditableEndpoint> {
   bool containsName(String name) => data.any((EditableEndpoint eq) => eq != selected && eq.model.name != null && eq.model.name.toLowerCase() == name.toLowerCase());
 }
 
-abstract class EndpointSubPageModel {
 
-  EventBus bus;
-  EndpointsService service;
-  Endpoints storage;
 
-  EndpointSubPageModel(this.bus, this.service, this.storage) {
+abstract class EndpointSubPageModel extends SubPageEditableModel<Endpoint> {
+
+
+  EndpointSubPageModel(EventBus bus, EndpointsService endpointService, Endpoints storage):super(bus, endpointService, storage, generate) {
     bus.on(ApplicationReady).listen((_) {
       loadAll();
     });
   }
-
-  void addNewEndpoint() {
-    Endpoint endpoint = new Endpoint();
-    EditableEndpoint editableModel = new EditableEndpoint(endpoint);
-    editableModel.newModel = true;
-
-    storage.data.add(editableModel);
-    storage.selected = editableModel;
-    editableModel.startEdit();
-  }
-
-  void cancelEditing(EditableEndpoint endpoint) {
-    endpoint.cancel();
-    if (endpoint.newModel) {
-      storage.selected = null;
-      storage.data.remove(endpoint);
-    }
-  }
-
-  void cloneEndpoint(EditableEndpoint original) {
-    Endpoint cloned = original.model.clone();
-    cloned.name = cloned.name + "_cloned";
-    EditableEndpoint editableModel = new EditableEndpoint(cloned);
-    storage.data.add(editableModel);
-    storage.selected = editableModel;
-    editableModel.startEdit();
+  
+  EndpointsService get endpointService => service;
+  
+  static EditableModel<Endpoint> generate([Endpoint item]) {
+    if (item == null) return new EditableEndpoint(new Endpoint());
+    return new EditableEndpoint(item);
   }
 
   void saveEndpoint(EditableEndpoint editableModel) {
@@ -123,14 +104,7 @@ abstract class EndpointSubPageModel {
     //FIXME remove after service alignment
     editableModel.model.bean.remove(Endpoint.update_uri_field);
 
-    Timer timer = new Timer(new Duration(milliseconds: 200), () {
-      editableModel.sync();
-    });
-
-    service.put(editableModel.model).then((Endpoint result) => editableModel.save(result)).catchError((e) => _onError(e, () => saveEndpoint(editableModel))).whenComplete(() {
-      timer.cancel();
-      editableModel.synched();
-    });
+    super.save(editableModel);
 
   }
 
@@ -141,24 +115,9 @@ abstract class EndpointSubPageModel {
 
     service.get(endpoint.name).then((Endpoint result) {
       endpoint.graphs = result.graphs;
-    }).catchError((e) => _onError(e, () => refreshGraphs(editableModel))).whenComplete(() {
+    }).catchError((e) => onError(e, () => refreshGraphs(editableModel))).whenComplete(() {
       editableModel.loadingGraphs = false;
     });
-  }
-
-  void removeEndpoint(EditableEndpoint editableModel) {
-    Timer timer = new Timer(new Duration(milliseconds: 200), () {
-      editableModel.sync();
-    });
-
-    service.deleteEndpoint(editableModel.model).then((bool result) {
-      storage.data.remove(editableModel);
-      storage.selected = null;
-    }).catchError((e) => _onError(e, () => saveEndpoint(editableModel))).whenComplete(() {
-      timer.cancel();
-      editableModel.synched();
-    });
-
   }
 
   void removeEndpointGraph(EditableEndpoint editableModel, String graph) {
@@ -167,9 +126,9 @@ abstract class EndpointSubPageModel {
       editableModel.loadingGraphs = true;
     });
 
-    service.deleteEndpointGraph(editableModel.model, graph).then((bool result) {
+    endpointService.deleteEndpointGraph(editableModel.model, graph).then((bool result) {
       editableModel.model.graphs.remove(graph);
-    }).catchError((e) => _onError(e, () => removeEndpointGraph(editableModel, graph))).whenComplete(() {
+    }).catchError((e) => onError(e, () => removeEndpointGraph(editableModel, graph))).whenComplete(() {
       timer.cancel();
       editableModel.loadingGraphs = false;
     });
@@ -182,37 +141,12 @@ abstract class EndpointSubPageModel {
       editableModel.loadingGraphs = true;
     });
 
-    service.addEndpointGraph(editableModel.model, graph).then((bool result) {
+    endpointService.addEndpointGraph(editableModel.model, graph).then((bool result) {
       editableModel.model.graphs.add(graph);
-    }).catchError((e) => _onError(e, () => addEndpointGraph(editableModel, graph))).whenComplete(() {
+    }).catchError((e) => onError(e, () => addEndpointGraph(editableModel, graph))).whenComplete(() {
       timer.cancel();
       editableModel.loadingGraphs = false;
     });
-  }
-
-  void loadAll() {
-    storage.loading = true;
-    storage.selected = null;
-    service.getAll().then(_setData).catchError((e) {
-      _onError(e, loadAll);
-      storage.data.clear();
-      storage.loading = false;
-    });
-  }
-
-  void _setData(List<Endpoint> items) {
-
-    storage.data.clear();
-
-    storage.data.addAll(items.map((Endpoint q) => new EditableEndpoint(q)));
-
-    storage.loading = false;
-
-  }
-
-  void _onError(e, callback) {
-    log.warning("EndpointsModel error: $e");
-    bus.fire(new ToastMessage.alert("Ops we are having some problems communicating with the server", callback));
   }
 }
 
@@ -223,7 +157,7 @@ class EditableEndpoint extends EditableModel<Endpoint> {
 
   bool _dirty = false;
 
-  EditableEndpoint(Endpoint query) : super(query) {
+  EditableEndpoint(Endpoint endpoint) : super(endpoint) {
 
     //we need to listen on the expression changes in the current model
     onPropertyChange(this, #model, _listenNewModel);

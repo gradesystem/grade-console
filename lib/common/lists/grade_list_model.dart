@@ -1,20 +1,5 @@
 part of lists;
 
-abstract class EditableListItems<T extends EditableModel> extends ListItems<T> {
-  
-  EditableListItems() {
-    onPropertyChange(data, #lastChangedItem, _notifySynchedDataChanged);
-    onPropertyChange(data, #length, _notifySynchedDataChanged);
-  }
-  
-  void _notifySynchedDataChanged() {
-    notifyPropertyChange(#synchedData, null, synchedData);
-  }
-  
-  @observable
-  List<T> get synchedData => data.where((T e)=>!e.newModel).toList();
-}
-
 abstract class ListItems<T extends Observable> extends Observable {
   
   @observable

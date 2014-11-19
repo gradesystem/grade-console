@@ -1,12 +1,8 @@
 part of endpoints;
 
-abstract class EndpointsService extends ListService<Endpoint> {
+abstract class EndpointsService extends EditableListService<Endpoint> {
 
   EndpointsService(String path) : super(path, "endpoints", "endpoint", (Map json) => new Endpoint.fromBean(json));
-
-  Future<bool> deleteEndpoint(Endpoint endpoint) {
-    return delete(endpoint.name);
-  }
   
   Future<bool> deleteEndpointGraph(Endpoint endpoint, String graph) {
     return http.delete(getGraphPath(endpoint.name), {"uri":graph}).then((response) => true);

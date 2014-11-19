@@ -1,6 +1,6 @@
 part of queries;
 
-abstract class QueryService extends ListService<Query> {
+abstract class QueryService extends EditableListService<Query> {
 
   QueryService(String path) : super(path, "queries", "query", (Map json) => new Query.fromBean(path, json));
 
@@ -40,6 +40,6 @@ abstract class QueryService extends ListService<Query> {
   }
 
   Future<bool> deleteQuery(Query query) {
-    return delete(query.name);
+    return delete(query);
   }
 }

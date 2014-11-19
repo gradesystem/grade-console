@@ -34,7 +34,7 @@ class EndpointsPanel extends PolymerElement with Filters {
   }
   
   void addEndpoint() {
-    model.addNewEndpoint();
+    model.addNew();
   }
   
   void onEdit() {
@@ -55,14 +55,14 @@ class EndpointsPanel extends PolymerElement with Filters {
   
   void removeItem(event, detail, target) {
     EditableEndpoint deleteCandidate = detail;
-    dialogCallback = (){model.removeEndpoint(deleteCandidate);};
+    dialogCallback = (){model.remove(deleteCandidate);};
     Endpoint query = deleteCandidate.model;
     removedDialogHeader = "Remove ${query.bean[Endpoint.name_field]}";
     removeDialogOpened = true;
   }
   
   void cloneItem(event, detail, target) {
-    model.cloneEndpoint(detail);
+    model.clone(detail);
   }
   
   void onRefreshGraphs(event, detail, target) {

@@ -33,7 +33,7 @@ class QueriesPanel extends PolymerElement with Filters {
   }
   
   void addQuery() {
-    model.addNewQuery();
+    model.addNew();
   }
   
   void onEdit() {
@@ -45,7 +45,7 @@ class QueriesPanel extends PolymerElement with Filters {
   }
   
   void onSave() {
-    model.saveQuery(queries.selected);
+    model.save(queries.selected);
   }
   
   void onQueryPlayground() {
@@ -68,10 +68,10 @@ class QueriesPanel extends PolymerElement with Filters {
   }
   
   void deleteSelectedQuery() {
-    if (deleteCandidate!=null) model.removeQuery(deleteCandidate);
+    if (deleteCandidate!=null) model.remove(deleteCandidate);
   }
   
   void cloneItem(event, detail, target) {
-    model.cloneQuery(detail);
+    model.clone(detail);
   }
 }
