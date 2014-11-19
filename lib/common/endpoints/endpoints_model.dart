@@ -118,6 +118,9 @@ abstract class EndpointSubPageModel {
   }
   
   void saveEndpoint(EditableEndpoint editableModel) {
+
+    //FIXME remove after service alignment
+    editableModel.model.bean.remove(Endpoint.update_uri_field);
   
     Timer timer = new Timer(new Duration(milliseconds: 200), () {
       editableModel.sync();

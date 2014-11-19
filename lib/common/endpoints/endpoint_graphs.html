@@ -32,7 +32,8 @@
 	        
 	        <template if="{{!item.newModel}}">
 	        
-		        <grade-item icon=chevron-right hidden?={{item.model.predefined}}>
+	         <!-- FIXME -->
+		        <grade-item icon=chevron-right hidden?="{{true || item.model.predefined}}">
 			        <div flex horizontal layout>
 			         <grade-input flex  style="height: 37px;"
 		                           label="new graph ?" 
@@ -66,7 +67,8 @@
 							              <template repeat="{{graph in item.model.graphs}}">
 							                <div smaller flex horizontal layout>
 							                 <div flex><span>{{ graph | start}}</span><span fg>{{ graph | suffix}}</span></div>
-							                 <grade-button hidden?={{item.model.predefined}} action onbuttonhover  smallicon tooltip="left" label="remove graph" icon="delete" on-click={{removeGraph}} graph={{graph}}></grade-button>
+							                 <!-- FIXME -->
+							                 <grade-button hidden?="{{true || item.model.predefined}}" action onbuttonhover  smallicon tooltip="left" label="remove graph" icon="delete" on-click={{removeGraph}} graph={{graph}}></grade-button>
 							                </div>
 							              </template>
 					                </div>
