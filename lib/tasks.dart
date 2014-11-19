@@ -1,7 +1,6 @@
 library tasks;
 
 import 'dart:collection';
-import 'dart:mirrors'; 
 
 import 'package:polymer/polymer.dart';
 import 'package:logging/logging.dart';
@@ -15,7 +14,6 @@ import 'common/lists/lists.dart';
 import 'common/pages/pages.dart';
 import 'common/queries/queries.dart';
 import 'common/endpoints/endpoints.dart';
-import 'common/components/endpoint_dropdown_menu.dart';
 
 part 'tasks/tasks_page.dart';
 part 'tasks/task_details.dart';
