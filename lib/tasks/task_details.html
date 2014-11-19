@@ -86,8 +86,10 @@
                    label="{{ source_endpoint_key | suffix }} ?" 
                    valueattr="itemId"
                    >
-                <template repeat="{{item in gradeEndpoints.items}}">
-                  <paper-item label="{{item.editableEndpoint.model.name}}" itemId="{{item.editableEndpoint.model.uri}}"></paper-item>
+                <template repeat="{{areaEndpoints in gradeEndpoints.areaEndpoints}}">
+                  <template repeat="{{item in areaEndpoints.endpointsStorage.synchedData}}">
+                    <paper-item label="{{item.model.name}}" itemId="{{item.model.uri}}"></paper-item>
+                  </template>
                 </template>
               </grade-dropdown-menu>
 		          <div fascia-subtitle truncate>
@@ -99,7 +101,7 @@
 	          <grade-fascia truncate>
 	
 		            <core-selector id="sourceGraphsSelector" selected="{{item.bean[source_graph_key]}}" multi valueattr="item" selectedAttribute="bg-selected" fascia-title>
-		               <template repeat="{{graph in sourceEndpoint.editableEndpoint.model.graphs}}">
+		               <template repeat="{{graph in sourceEnpoint.graphs}}">
 		                  <paper-item label="{{graph}}" item={{graph}}></paper-item>
 		                </template>
 		            </core-selector>

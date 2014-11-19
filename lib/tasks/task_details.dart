@@ -33,12 +33,12 @@ class TaskDetails extends PolymerElement with Filters, Dependencies {
   @ComputedProperty("item.bean[source_endpoint_key]")
   String get sourceEnpointId => item!=null?item.bean[source_endpoint_key]:null;
   
-  @ComputedProperty("sourceEnpointId") //modify after model update
-  GradeEndpoint get sourceEndpoint => gradeEndpoints!=null?gradeEndpoints.findByURI(sourceEnpointId):null;
-  
-  @ObserveProperty("sourceEndpoint")
+  @ComputedProperty("sourceEnpointId")
+  Endpoint get sourceEnpoint => gradeEndpoints.findEndpointByUri(sourceEnpointId);
+   
+  @ObserveProperty("sourceEnpointId")
   void refreshSourceEnpointGraphs() {
-    if (sourceEndpoint!=null) sourceEndpoint.refresh();
+    if (sourceEnpointId!=null) gradeEndpoints.refesh(sourceEnpointId);
   }
 
   @published
