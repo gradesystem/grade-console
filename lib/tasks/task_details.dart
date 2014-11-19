@@ -20,12 +20,24 @@ class TaskDetails extends PolymerElement with Filters, Dependencies {
   String get creator_key => Task.creator_field;
   
   List<Operation> get operations => Operation.values;
+  
+  @published
+  bool editable = false;
+
+  @published
+  Task item;
+  
+  GradeEnpoints gradeEndpoints;
+  
+  TaskDetails.created() : super.created() {
+    gradeEndpoints = instanceOf(GradeEnpoints);
+  }  
 
   @ComputedProperty("item.bean[source_endpoint_key]")
   String get sourceEnpointId => item!=null?item.bean[source_endpoint_key]:null;
   
   @ComputedProperty("sourceEnpointId")
-  Endpoint get sourceEnpoint => gradeEndpoints.findEndpointByUri(sourceEnpointId);
+  EditableEndpoint get sourceEnpoint => gradeEndpoints.findEditableEndpointByUri(sourceEnpointId);
    
   @ObserveProperty("sourceEnpointId")
   void refreshSourceEnpointGraphs() {
@@ -36,28 +48,16 @@ class TaskDetails extends PolymerElement with Filters, Dependencies {
   String get targetEnpointId => item!=null?item.bean[target_endpoint_key]:null;
   
   @ComputedProperty("targetEnpointId")
-  Endpoint get targetEnpoint => gradeEndpoints!=null?gradeEndpoints.findEndpointByUri(targetEnpointId):null;
+  EditableEndpoint get targetEnpoint => gradeEndpoints!=null?gradeEndpoints.findEditableEndpointByUri(targetEnpointId):null;
   
   @ObserveProperty("targetEnpoint")
   void refreshTargetEnpointGraphs() {
     if (targetEnpointId!=null) {
       gradeEndpoints.refesh(targetEnpointId);
-      if (targetEnpoint!=null && !targetEnpoint.graphs.contains(targetEnpointId)) item.bean[target_graph_key] = null;
+      if (targetEnpoint!=null && !targetEnpoint.model.graphs.contains(targetEnpointId)) item.bean[target_graph_key] = null;
     }
   }
 
-  @published
-  bool editable = false;
-
-  @published
-  Task item;
-  
-  GradeEnpoints gradeEndpoints;
-
-  TaskDetails.created() : super.created() {
-    gradeEndpoints = instanceOf(GradeEnpoints);
-  }
-  
   //workaround to selected binding not working: issue https://github.com/dart-lang/core-elements/issues/157
   @ObserveProperty("item")
   void updateSourceGraphsSelected() {
