@@ -2,7 +2,7 @@ part of queries;
 
 class Query extends EditableGradeEntity with Filters {
   
-  static String id_field = "http://gradesystem.io/onto/endpoint.owl#id";
+  static String id_field = "http://gradesystem.io/onto#id";
   static String endpoint_field = "http://gradesystem.io/onto/query.owl#endpoint";
   static String datasets_field="http://gradesystem.io/onto/query.owl#datasets";
   static String name_field = "http://gradesystem.io/onto/query.owl#name";  
@@ -35,7 +35,8 @@ class Query extends EditableGradeEntity with Filters {
     onBeanChange([name_field], ()=>notifyPropertyChange(#name, null, name) );
   }
   
-  String get key => get(name_field);
+  String get id => get(id_field);
+  set id(String value) => set(id_field, value);
   
   String get name => get(name_field);
   set name(String value) {

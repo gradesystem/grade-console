@@ -1,9 +1,11 @@
 part of editables;
 
 abstract class EditableGradeEntity extends GradeEntity with Cloneable {
+  
   EditableGradeEntity(Map bean):super(bean);
   
-  String get key;
+  String get id;
+  set id(String value);
 }
 
 typedef EditableModel<T> EditableGenerator<T extends EditableGradeEntity>([T item]);
@@ -41,10 +43,13 @@ abstract class SubPageEditableModel<T extends EditableGradeEntity> {
 
   void clone(EditableModel<T> original) {
     T cloned = original.model.clone();
+    cloned.id = null;
     cloned.name = generateCloneName(cloned.name);
+    
     EditableModel<T> editableModel = generator(cloned);
     storage.data.add(editableModel);
     storage.selected = editableModel;
+    print('selected: ${storage.selected}');
     editableModel.startEdit();
   }
   

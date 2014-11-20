@@ -33,7 +33,8 @@ class Task extends EditableGradeEntity with Filters {
           name_field: ""
         });
   
-  String get key => get(id_field);
+  String get id => get(id_field);
+  set id(String value) => set(id_field, value);
   
   @observable
   String get name => get(name_field);

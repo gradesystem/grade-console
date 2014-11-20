@@ -9,7 +9,7 @@ abstract class EditableListService<T extends EditableGradeEntity> extends ListSe
   }
 
   Future<bool> delete(T item, [Map<String, String> parameters]) {
-    return http.delete(getItemPath(item.key), parameters).then((response) => true);
+    return http.delete(getItemPath(item.id), parameters).then((response) => true);
   }
   
   String getItemPath(String key) => "$single_item_path/$key";

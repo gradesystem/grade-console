@@ -4,7 +4,7 @@ class Endpoint extends EditableGradeEntity with Filters {
 
   static String id_field = "http://gradesystem.io/onto#id";
   static String name_field = "http://gradesystem.io/onto/endpoint.owl#name";
-  static String uri_field = "http://gradesystem.io/onto/endpoint.owl#uri";//FIXME
+  static String uri_field = "http://gradesystem.io/onto/endpoint.owl#uri";
   static String update_uri_field = "http://gradesystem.io/onto/endpoint.owl#update_uri";
   static String graphs_field = "http://gradesystem.io/onto/endpoint.owl#graph";
   static String predefined_field = "http://gradesystem.io/onto/endpoint.owl#predefined";
@@ -29,8 +29,6 @@ class Endpoint extends EditableGradeEntity with Filters {
     onBeanChange([update_uri_field], () => notifyPropertyChange(#updateUri, null, updateUri));
     onBeanChange([graphs_field], () => notifyPropertyChange(#graphs, null, graphs));
   }
-  
-  String get key => get(name_field);
 
   @observable
   String get id => get(id_field);
