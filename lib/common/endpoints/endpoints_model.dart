@@ -92,6 +92,9 @@ abstract class EndpointSubPageModel extends SubPageEditableModel<Endpoint> {
   
   static EditableModel<Endpoint> generate([Endpoint item]) {
     if (item == null) return new EditableEndpoint(new Endpoint());
+    
+    //we are cloning
+    if (item.id == null) item.bean[Endpoint.predefined_field]=false;
     return new EditableEndpoint(item);
   }
 

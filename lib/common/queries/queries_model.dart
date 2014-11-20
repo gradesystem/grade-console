@@ -98,10 +98,16 @@ abstract class QuerySubPageModel extends SubPageEditableModel<Query> {
 
   
   QuerySubPageModel(EventBus bus, QueryService service, Queries storage):super(bus, service, storage, 
-      ([Query query])=>new EditableQuery(query!=null?query:new Query(service.path))){
+      ([Query query])=>generate(query!=null?query:new Query(service.path))){
     bus.on(ApplicationReady).listen((_) {
       loadAll();
     });
+  }
+  
+  static EditableQuery generate(Query query) {
+    //we are cloning
+    if (query.id == null) query.bean[Query.predefined_field] = false;
+    return new EditableQuery(query);
   }
   
   QueryService get queryService => service;
