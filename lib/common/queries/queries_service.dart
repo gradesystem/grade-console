@@ -19,7 +19,7 @@ abstract class QueryService extends EditableListService<Query> {
 
     String path = "submit";
 
-    return http.post(path, JSON.encode(query.bean), uriParameters).then((response) => new QueryResult(response, _decode(response)));
+    return http.post(path, JSON.encode(query.bean), acceptedMediaType:MediaType.SPARQL_JSON, parameters:uriParameters).then((response) => new QueryResult(response, _decode(response)));
   }
   
   dynamic _decode(String json) {

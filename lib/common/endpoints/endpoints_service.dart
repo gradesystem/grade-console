@@ -9,7 +9,7 @@ abstract class EndpointsService extends EditableListService<Endpoint> {
   }
   
   Future<bool> addEndpointGraph(Endpoint endpoint, String graph) {
-    return http.postJSon(getGraphPath(endpoint.name), "", {"uri":graph}).then((response) => true);
+    return http.post(getGraphPath(endpoint.name), "", parameters:{"uri":graph}).then((_) => true);
   }
   
   String getGraphPath(String key) => "${getItemPath(key)}/graphs";
