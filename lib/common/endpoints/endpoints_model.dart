@@ -1,6 +1,6 @@
 part of endpoints;
 
-class Endpoint extends EditableGradeEntity with Cloneable<Endpoint>, Filters {
+class Endpoint extends EditableGradeEntity with Filters {
 
   static String id_field = "http://gradesystem.io/onto#id";
   static String name_field = "http://gradesystem.io/onto/endpoint.owl#name";
