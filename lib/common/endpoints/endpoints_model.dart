@@ -9,7 +9,6 @@ class Endpoint extends EditableGradeEntity with Filters {
   static String graphs_field = "http://gradesystem.io/onto/endpoint.owl#graph";
   static String predefined_field = "http://gradesystem.io/onto/endpoint.owl#predefined";
 
-  @observable
   ObservableList<String> _graphs = new ObservableList();
   
   Endpoint.fromBean(Map bean) : super(bean) {
