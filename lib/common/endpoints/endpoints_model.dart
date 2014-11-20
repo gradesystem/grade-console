@@ -1,16 +1,19 @@
 part of endpoints;
 
-class Endpoint extends EditableGradeEntity with Cloneable<Endpoint>, Filters {
+class Endpoint extends EditableGradeEntity with Filters {
 
   static String id_field = "http://gradesystem.io/onto#id";
   static String name_field = "http://gradesystem.io/onto/endpoint.owl#name";
-  static String uri_field = "http://gradesystem.io/onto/endpoint.owl#uri";//FIXME
+  static String uri_field = "http://gradesystem.io/onto/endpoint.owl#uri";
   static String update_uri_field = "http://gradesystem.io/onto/endpoint.owl#update_uri";
   static String graphs_field = "http://gradesystem.io/onto/endpoint.owl#graph";
   static String predefined_field = "http://gradesystem.io/onto/endpoint.owl#predefined";
 
+  @observable
+  ObservableList<String> _graphs = new ObservableList();
+  
   Endpoint.fromBean(Map bean) : super(bean) {
-
+    _syncGraphs();
     _listenChanges();
   }
 
@@ -27,10 +30,19 @@ class Endpoint extends EditableGradeEntity with Cloneable<Endpoint>, Filters {
     onBeanChange([name_field], () => notifyPropertyChange(#name, null, name));
     onBeanChange([uri_field], () => notifyPropertyChange(#uri, null, uri));
     onBeanChange([update_uri_field], () => notifyPropertyChange(#updateUri, null, updateUri));
-    onBeanChange([graphs_field], () => notifyPropertyChange(#graphs, null, graphs));
+    onBeanChange([graphs_field], _syncGraphs);
   }
   
-  String get key => get(name_field);
+  void _syncGraphs() {
+    graphs = bean[graphs_field];
+  }
+  
+  @observable
+  get graphs => _graphs;
+  set graphs(List<String> newgraphs) {
+    graphs.clear();
+    graphs.addAll(newgraphs);
+  }
 
   @observable
   String get id => get(id_field);
@@ -62,13 +74,6 @@ class Endpoint extends EditableGradeEntity with Cloneable<Endpoint>, Filters {
 
   bool get predefined => get(predefined_field);
 
-  @observable
-  List<String> get graphs => get(graphs_field);
-  set graphs(List<String> newgraphs) {
-    set(graphs_field, newgraphs);
-    notifyPropertyChange(#graphs, null, newgraphs);
-  }
-
   Endpoint clone() {
     return new Endpoint.fromBean(new Map.from(bean));
   }
@@ -94,6 +99,9 @@ abstract class EndpointSubPageModel extends SubPageEditableModel<Endpoint> {
   
   static EditableModel<Endpoint> generate([Endpoint item]) {
     if (item == null) return new EditableEndpoint(new Endpoint());
+    
+    //we are cloning
+    if (item.id == null) item.bean[Endpoint.predefined_field]=false;
     return new EditableEndpoint(item);
   }
 

@@ -28,14 +28,13 @@ class GradeService {
     return HttpService.getString(url.toString()).timeout(timeLimit).catchError(_onError);
   }
 
-  Future<String> post(String path, String content, [Map<String, String> parameters]) {
+  Future<String> post(String path, String content, {MediaType acceptedMediaType:MediaType.JSON, Map<String, String> parameters}) {
     Uri url = new Uri.http("", "$base_path/$path", parameters);
-    return HttpService.post(url.toString(), content, acceptedMediaType:MediaType.SPARQL_JSON).timeout(timeLimit).then((xhr) => xhr.responseText).catchError(_onError);
+    return HttpService.post(url.toString(), content, acceptedMediaType:acceptedMediaType).timeout(timeLimit).then((xhr) => xhr.responseText).catchError(_onError);
   }
   
-  Future postJSon(String path, String content, [Map<String, String> parameters]) {
-    Uri url = new Uri.http("", "$base_path/$path", parameters);
-    return HttpService.post(url.toString(), content, acceptedMediaType:MediaType.JSON).timeout(timeLimit).then((xhr) => xhr.responseText).then(_decode).catchError(_onError);
+  Future<dynamic> postJSon(String path, String content, {MediaType acceptedMediaType, Map<String, String> parameters}) {
+    return post(path, content, acceptedMediaType:acceptedMediaType, parameters:parameters).then(_decode);
   }
 
   Future<String> delete(String path, [Map<String, String> parameters]) {
@@ -99,7 +98,7 @@ class HttpService {
     }, onProgress: onProgress);
   }
 
-  static Future<HttpRequest> post(String url, String content, {bool withCredentials, String responseType, MediaType acceptedMediaType, void onProgress(ProgressEvent e)}) {
+  static Future<HttpRequest> post(String url, String content, {bool withCredentials, String responseType, MediaType acceptedMediaType : MediaType.JSON, void onProgress(ProgressEvent e)}) {
     return request(url, method: 'POST', withCredentials: withCredentials, responseType: responseType, requestHeaders: {
       'Content-Type': MEDIA_TYPE_JSON,
       'Accept': acceptedMediaType.value

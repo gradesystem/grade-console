@@ -1,14 +1,19 @@
 part of editables;
 
 abstract class EditableGradeEntity extends GradeEntity with Cloneable {
+  
   EditableGradeEntity(Map bean):super(bean);
   
-  String get key;
+  String get id;
+  set id(String value);
 }
 
 typedef EditableModel<T> EditableGenerator<T extends EditableGradeEntity>([T item]);
 
 abstract class SubPageEditableModel<T extends EditableGradeEntity> {
+  
+  static String CLONED_NAME_SUFFIX = "_cloned";
+  RegExp CLONED_NAME_REGEXP = new RegExp(r'(.*)_cloned(\d*)$');
 
   EventBus bus;
   EditableListService<T> service;
@@ -38,11 +43,26 @@ abstract class SubPageEditableModel<T extends EditableGradeEntity> {
 
   void clone(EditableModel<T> original) {
     T cloned = original.model.clone();
-    cloned.name = cloned.name + "_cloned";
+    cloned.id = null;
+    cloned.name = generateCloneName(cloned.name);
+    
     EditableModel<T> editableModel = generator(cloned);
     storage.data.add(editableModel);
     storage.selected = editableModel;
+    print('selected: ${storage.selected}');
     editableModel.startEdit();
+  }
+  
+  String generateCloneName(String name) {
+    if (name == null) return name;
+    Match match = CLONED_NAME_REGEXP.firstMatch(name);
+    if (match!=null) {
+      String originalName = match.group(1);
+      String snum = match.group(2);
+      int number = snum == null || snum.isEmpty?0:int.parse(snum);
+      return originalName + CLONED_NAME_SUFFIX + (number+1).toString();
+    }
+    return name + CLONED_NAME_SUFFIX;
   }
 
   void save(EditableModel<T> editableModel) {
