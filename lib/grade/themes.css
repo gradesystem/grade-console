@@ -102,6 +102,9 @@
 :host /deep/ *:hover[option] {
   font-weight: bolder;
 }
+:host /deep/ paper-radio-button /deep/ #radioLabel {
+  margin-left: 5px;
+}
 .home-scaffold {
   background: #26699a;
   color: #fff;
@@ -156,6 +159,21 @@
 }
 :host /deep/ .home /deep/ paper-fab {
   background-color: #26699a;
+}
+:host /deep/ .home /deep/ paper-radio-button::shadow #ink[checked] {
+  color: "tertiary";
+}
+:host /deep/ .home /deep/ paper-radio-button::shadow #onRadio {
+  background-color: #26699a;
+}
+:host /deep/ .home /deep/ paper-radio-button[disabled][checked] /deep/ #offRadio {
+  opacity: 1;
+  background-color: "tertiary";
+  border-color: "tertiary";
+}
+:host /deep/ .home /deep/ paper-dropdown-menu /deep/ core-icon {
+  color: #26699a;
+  width: 36px;
 }
 :host /deep/ .home /deep/ paper-input::shadow .focused-underline {
   background-color: "tertiary";
@@ -239,6 +257,21 @@
 :host /deep/ .prod /deep/ paper-fab {
   background-color: #00bcd4;
 }
+:host /deep/ .prod /deep/ paper-radio-button::shadow #ink[checked] {
+  color: #80deea;
+}
+:host /deep/ .prod /deep/ paper-radio-button::shadow #onRadio {
+  background-color: #00bcd4;
+}
+:host /deep/ .prod /deep/ paper-radio-button[disabled][checked] /deep/ #offRadio {
+  opacity: 1;
+  background-color: #80deea;
+  border-color: #80deea;
+}
+:host /deep/ .prod /deep/ paper-dropdown-menu /deep/ core-icon {
+  color: #00bcd4;
+  width: 36px;
+}
 :host /deep/ .prod /deep/ paper-input::shadow .focused-underline {
   background-color: #80deea;
 }
@@ -320,6 +353,21 @@
 }
 :host /deep/ .deck /deep/ paper-fab {
   background-color: #ffc107;
+}
+:host /deep/ .deck /deep/ paper-radio-button::shadow #ink[checked] {
+  color: #ffdf82;
+}
+:host /deep/ .deck /deep/ paper-radio-button::shadow #onRadio {
+  background-color: #ffc107;
+}
+:host /deep/ .deck /deep/ paper-radio-button[disabled][checked] /deep/ #offRadio {
+  opacity: 1;
+  background-color: #ffdf82;
+  border-color: #ffdf82;
+}
+:host /deep/ .deck /deep/ paper-dropdown-menu /deep/ core-icon {
+  color: #ffc107;
+  width: 36px;
 }
 :host /deep/ .deck /deep/ paper-input::shadow .focused-underline {
   background-color: #ffdf82;
@@ -403,6 +451,21 @@
 :host /deep/ .tasks /deep/ paper-fab {
   background-color: #e41c23;
 }
+:host /deep/ .tasks /deep/ paper-radio-button::shadow #ink[checked] {
+  color: #f69988;
+}
+:host /deep/ .tasks /deep/ paper-radio-button::shadow #onRadio {
+  background-color: #e41c23;
+}
+:host /deep/ .tasks /deep/ paper-radio-button[disabled][checked] /deep/ #offRadio {
+  opacity: 1;
+  background-color: #f69988;
+  border-color: #f69988;
+}
+:host /deep/ .tasks /deep/ paper-dropdown-menu /deep/ core-icon {
+  color: #e41c23;
+  width: 36px;
+}
 :host /deep/ .tasks /deep/ paper-input::shadow .focused-underline {
   background-color: #f69988;
 }
@@ -484,6 +547,21 @@
 }
 :host /deep/ .stage /deep/ paper-fab {
   background-color: #009587;
+}
+:host /deep/ .stage /deep/ paper-radio-button::shadow #ink[checked] {
+  color: #80cbc4;
+}
+:host /deep/ .stage /deep/ paper-radio-button::shadow #onRadio {
+  background-color: #009587;
+}
+:host /deep/ .stage /deep/ paper-radio-button[disabled][checked] /deep/ #offRadio {
+  opacity: 1;
+  background-color: #80cbc4;
+  border-color: #80cbc4;
+}
+:host /deep/ .stage /deep/ paper-dropdown-menu /deep/ core-icon {
+  color: #009587;
+  width: 36px;
 }
 :host /deep/ .stage /deep/ paper-input::shadow .focused-underline {
   background-color: #80cbc4;

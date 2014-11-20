@@ -181,19 +181,19 @@ class GradeEnpoints extends Observable {
     areaEndpoints.add(new AreaEndpoints(endpointsStorage, refresh, area));
   }
 
-  EditableEndpoint findEditableEndpointByUri(String uri) {
+  EditableEndpoint findEditableEndpointById(String id) {
     for (AreaEndpoints areaEndpoints in areaEndpoints) {
       for (EditableEndpoint endpoint in areaEndpoints.endpointsStorage.synchedData) {
-        if (endpoint.model.uri == uri) return endpoint;
+        if (endpoint.model.id == id) return endpoint;
       }
     }
     return null;
   }
 
-  void refesh(String uri) {
+  void refesh(String id) {
     for (AreaEndpoints areaEndpoints in areaEndpoints) {
       for (EditableEndpoint endpoint in areaEndpoints.endpointsStorage.synchedData) {
-        if (endpoint.model.uri == uri) {
+        if (endpoint.model.id == id) {
           areaEndpoints.refresh(endpoint);
           return;
         }

@@ -13,6 +13,8 @@
 			
 			paper-dropdown-menu {
         padding: 0px;
+        width:100%;
+        background:transparent;
 			}
 			
 			paper-dropdown-menu::shadow  #control > div {
@@ -35,6 +37,10 @@
       :host([focused]) .error-text,
 			:host([focused]) .error-icon {
 			  color: #d34336;
+			}
+ 			
+			:host /deep/ core-dropdown {
+			   width:60%;
 			}
 			
 			.error-text {

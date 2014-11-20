@@ -1,7 +1,10 @@
 <link rel="import" href="../../../packages/polymer/polymer.html">
 
 <link rel="import" href="../../../packages/core_elements/core_selector.html">
+<link rel="import" href="../../../packages/core_elements/core_item.html">
 <link rel="import" href="../../../packages/paper_elements/paper_item.html">
+<link rel="import" href="../../../packages/paper_elements/paper_radio_button.html">
+<link rel="import" href="../../../packages/paper_elements/paper_radio_group.html"> 
 
 <link rel="import" href="../common/components/grade_input.html">
 <link rel="import" href="../common/components/grade_item.html">
@@ -21,18 +24,62 @@
 			     max-height: 150px;
 			  }
 			  
+			  :host [radios] {
+			   height:65px; 
+			   position: relative; 
+			   top:-8px
+			  }
+			  
+			  :host paper-radio-group {
+  			  border-bottom: 1px solid lightgrey;
+			  }
+			  
+			  :host paper-radio-button[disabled] /deep/ #onRadio" : {
+          opacity:100%;
+          background-color: blue
+         }
+         
+         :host [multifield] {
+         
+              position:relative; 
+              left:-10px; 
+              top:-5px; 
+              padding-top:10px;
+              padding-left:10px;
+         }
+         
+         :host [graphs] {
+         
+           min-height:80px; 
+           margin-top:15px
+         
+         }
+			  
+			  
+		      :host [dropitem] {
+		          max-height:25px;
+		          padding:10px
+		       }
+			  
     </style>
  
-    <template if="{{item!=null}}">
-	    <div style="overflow-y: auto;">
+	    <div hidden?="{{item==null}}" style="overflow-y: auto">
 			  
+			  <div radios layout vertical center border>
+				  <paper-radio-group fascia-title selected="{{ item.bean[operation_key] }}">
+	          <paper-radio-button name="http://gradesystem.io/onto/task.owl#publish" label="PUBLISH" disabled="{{!editable}}"></paper-radio-button>
+	          <paper-radio-button name="http://gradesystem.io/onto/task.owl#add" label="ADD" disabled="{{!editable}}"></paper-radio-button>
+	          <paper-radio-button name="http://gradesystem.io/onto/task.owl#remove" label="REMOVE" disabled="{{!editable}}"></paper-radio-button>
+	         </paper-radio-group>
+        </div>     
+	     
 	      <!-- name -->
 	      <grade-item icon=chevron-right>
 	        <grade-fascia truncate>
 	          <grade-input  fascia-title 
 	                        disabled="{{!editable}}" 
 	                        label="{{ name_key | suffix}}" 
-	                        value="{{item.bean[name_key] | trim | uppercase}}">
+	                        value="{{item.bean[name_key] | trim }}">
 	          </grade-input>
 	          <div fascia-subtitle>
 	            <span>{{ name_key | start}}</span><span fg bolder>{{ name_key | suffix}}</span>
@@ -46,7 +93,7 @@
 	          <grade-input  fascia-title 
 	                        disabled="{{!editable}}" 
 	                        label="{{ label_key | suffix}}" 
-	                        value="{{item.bean[label_key] | trim | uppercase}}">
+	                        value="{{item.bean[label_key] | trim}}">
 	          </grade-input>
 	          <div fascia-subtitle>
 	            <span>{{ label_key | start}}</span><span fg bolder>{{ label_key | suffix}}</span>
@@ -54,132 +101,154 @@
 	        </grade-fascia>   
 	      </grade-item>
 	      
-	      <!-- operation -->
-	      <grade-item icon=chevron-right>
-	        <grade-fascia>
-	          <grade-dropdown-menu fascia-title 
-	                 disabled="{{ !editable }}" 
-	                 selected="{{ item.bean[operation_key] }}"
-	                 label="{{ operation_key | suffix }} ?" 
-	                 valueattr="itemId"
-	                 >
-		                 <template repeat="{{operation in operations}}">
-							        <paper-item label="{{operation.label}}" itemId="{{operation.value}}"></paper-item>
-							      </template>
-	                 </grade-dropdown-menu>
-	          <div fascia-subtitle truncate>
-	            <span>{{ operation_key | start}}</span><span fg bolder>{{ operation_key | suffix}}</span>
-	          </div>
-	        </grade-fascia>   
-	      </grade-item>
-	      
-	      <!-- SOURCE -->
-	      <fieldset horizontal layout wired rounded>
-	        <legend>Source</legend>
-	      
 	        <!-- source endpoint -->
 	        
 	        <!--  required?="true"
                    invalid="{{ item.fieldsInvalidity[source_endpoint_key] }}" -->
-		        <grade-fascia>
-		          <grade-dropdown-menu fascia-title flex
-                   disabled="{{ !editable }}" 
-                   selected="{{ item.bean[source_endpoint_key] }}"
-                   label="{{ source_endpoint_key | suffix }} ?" 
-                   valueattr="itemId"
-                   >
-                <template repeat="{{areaEndpoints in gradeEndpoints.areaEndpoints}}">
-                  <template repeat="{{item in areaEndpoints.endpointsStorage.synchedData}}">
-                    <paper-item label="{{item.model.name}}" itemId="{{item.model.uri}}"></paper-item>
-                  </template>
-                </template>
-              </grade-dropdown-menu>
-		          <div fascia-subtitle truncate>
-		            <span>{{ source_endpoint_key | start}}</span><span fg bolder>{{ source_endpoint_key | suffix}}</span>
+                   
+         <div flex framing rounded multifield>
+         
+	          <grade-item icon=chevron-right>
+			     
+			        <div layout vertical flex>
+			        
+				        <grade-fascia>
+				        
+				          <grade-dropdown-menu fascia-title flex
+		                  
+		                   disabled="{{ !editable }}" 
+		                   selected="{{ item.bean[source_endpoint_key] }}"
+		                   label="{{ source_endpoint_key | suffix }} ?" 
+		                   valueattr="itemId">
+		                   
+			                <template repeat="{{areaEndpoints in gradeEndpoints.areaEndpoints}}">
+			                  <template repeat="{{item in areaEndpoints.endpointsStorage.synchedData}}">
+			                    <paper-item dropitem smaller label="{{item.model.name | uppercase}}" itemId="{{item.model.id}}"></paper-item>
+			                  </template>
+			                </template>
+			                
+		              </grade-dropdown-menu>
+		              
+				          <div fascia-subtitle truncate>
+				            <span>{{ source_endpoint_key | start}}</span><span fg bolder>{{ source_endpoint_key | suffix}}</span>
+				          </div>
+				          
+				        </grade-fascia>   
+				      
+				       <!-- source graphs -->
+			          <grade-fascia truncate>
+			             
+			             <div graphs horizontal layout flex fascia-title>
+				            
+				             <div smaller wired rounded relative flex>
+			                    <loading-panel fit loading="{{sourceEnpoint.loadingGraphs==true}}" message="loading the graphs" style="overflow-y:auto;">
+			                       <core-selector notap?="{{!editable}}" id="sourceGraphsSelector" selected="{{item.bean[source_graph_key]}}" multi valueattr="item" selectedAttribute="bg-selected">
+						                   <template repeat="{{graph in sourceEnpoint.model.graphs}}">
+						                      <div style="padding-left:5px" item={{graph}}><span>{{ graph | start}}</span><span fg>{{ graph | suffix}}</span></div>
+						                   </template>
+						                </core-selector>
+			                    </loading-panel>
+			                 </div>
+			                 
+		                  <grade-button icon="refresh" label="refresh graphs" on-click="{{refreshSourceEnpointGraphs}}" style="padding-left:5px;padding-right:5px;"></grade-button>
+		           
+		              </div>
+				                           
+			            <div fascia-subtitle>
+			              <span>{{ source_graph_key | start}}</span><span fg bolder>{{ source_graph_key | suffix}}</span>
+			            </div>
+			          </grade-fascia>   
+		          
 		          </div>
-		        </grade-fascia>   
-		      
-		       <!-- source graphs -->
-	          <grade-fascia truncate>
-	             <div horizontal layout flex fascia-title>
-		             <div style="min-height:250px;" relative flex>
-	                    <loading-panel fit loading="{{sourceEnpoint.loadingGraphs}}" message="loading the graphs" style="overflow-y:auto;">
-	                       <core-selector id="sourceGraphsSelector" selected="{{item.bean[source_graph_key]}}" multi valueattr="item" selectedAttribute="bg-selected" fascia-title>
-				                   <template repeat="{{graph in sourceEnpoint.model.graphs}}">
-				                      <paper-item label="{{graph}}" item={{graph}}></paper-item>
-				                    </template>
-				                </core-selector>
-	                    </loading-panel>
-	                 </div>
-                  <grade-button icon="refresh" label="refresh graphs" on-click="{{refreshSourceEnpointGraphs}}" style="padding-left:5px;padding-right:5px;"></grade-button>
-           
-              </div>
-		            
-		                 
-	            <div fascia-subtitle>
-	              <span>{{ source_graph_key | start}}</span><span fg bolder>{{ source_graph_key | suffix}}</span>
-	            </div>
-	          </grade-fascia>   
-	
-	      </fieldset>
+		     </grade-item>
+
+      </div>      
+	     
+	    <div flex framing rounded multifield> 
 	      
-	      <!-- TARGET -->
-	      <fieldset horizontal layout wired rounded>
-	        <legend>Target</legend>
+	      <grade-item icon=chevron-right>
 	      
-	        <!-- target endpoint -->
-            <grade-fascia>
-              <grade-dropdown-menu fascia-title flex
-                   disabled="{{ !editable }}" 
-                   selected="{{ item.bean[target_endpoint_key] }}"
-                   label="{{ target_endpoint_key | suffix }} ?" 
-                   valueattr="itemId"
-                   >
-                <template repeat="{{areaEndpoints in gradeEndpoints.areaEndpoints}}">
-                  <template repeat="{{item in areaEndpoints.endpointsStorage.synchedData}}">
-                    <paper-item label="{{item.model.name}}" itemId="{{item.model.uri}}"></paper-item>
-                  </template>
-                </template>
-              </grade-dropdown-menu>
-              <div fascia-subtitle truncate>
-                <span>{{ target_endpoint_key | start}}</span><span fg bolder>{{ target_endpoint_key | suffix}}</span>
-              </div>
-            </grade-fascia>   
+	        <div layout vertical flex>
 	        
-	         <!-- target graphs -->
-              <grade-fascia>
-               <div horizontal layout flex fascia-title>
-	              <grade-dropdown-menu flex
-	                   disabled="{{ !editable }}" 
-	                   selected="{{ item.bean[target_graph_key] }}"
-	                   label="{{ target_graph_key | suffix }} ?" 
-	                   valueattr="itemId"
-	                   >
-	                   <template repeat="{{graph in targetEnpoint.model.graphs}}">
-                        <paper-item label={{graph}} itemId={{graph}}></paper-item>
-	                   </template>
-	              </grade-dropdown-menu>
-	              <grade-button icon="refresh" label="refresh graphs" on-click="{{refreshTargetEnpointGraphs}}" style="padding-left:5px;padding-right:5px;"></grade-button>
-           
-              </div>
-                
-              <div fascia-subtitle>
-                <span>{{ target_graph_key | start}}</span><span fg bolder>{{ target_graph_key | suffix}}</span>
-              </div>
-            </grade-fascia> 
-	      
-	      </fieldset>
+				          <grade-fascia>
+			    
+			              <!-- target endpoint -->
+                    <grade-dropdown-menu fascia-title flex
+			                   disabled="{{ !editable }}" 
+			                   selected="{{ item.bean[target_endpoint_key] }}"
+			                   label="{{ target_endpoint_key | suffix }} ?" 
+			                   valueattr="itemId">
+			                   
+			                <template repeat="{{areaEndpoints in gradeEndpoints.areaEndpoints}}">
+			                  <template repeat="{{item in areaEndpoints.endpointsStorage.synchedData}}">
+			                    <paper-item dropitem smaller label="{{item.model.name | uppercase}}" itemId="{{item.model.id}}"></paper-item>
+			                  </template>
+			                </template>
+			              
+			              </grade-dropdown-menu>
+			              
+			              <div fascia-subtitle truncate>
+			                <span>{{ target_endpoint_key | start}}</span><span fg bolder>{{ target_endpoint_key | suffix}}</span>
+			              </div>
+			            
+			            </grade-fascia>   
+				        
+				         <!-- target graph -->
+			           <grade-fascia truncat>
+			           
+			                <div graphs horizontal layout flex fascia-title>
+                    
+		                     <div smaller wired rounded relative flex>
+		                          <loading-panel fit loading="{{targetEnpoint.loadingGraphs==true}}" message="loading the graphs" style="overflow-y:auto;">
+		                             <core-selector notap?="{{!editable}}" id="targetGraphsSelector" selected="{{item.bean[target_graph_key]}}" valueattr="item" selectedAttribute="bg-selected">
+		                               <template repeat="{{graph in targetEnpoint.model.graphs}}">
+		                                  <div style="padding-left:5px" item={{graph}}><span>{{ graph | start}}</span><span fg>{{ graph | suffix}}</span></div>
+		                               </template>
+		                            </core-selector>
+		                          </loading-panel>
+		                       </div>
+		                       
+		                      <grade-button icon="refresh" label="refresh graphs" on-click="{{refreshSourceEnpointGraphs}}" style="padding-left:5px;padding-right:5px;"></grade-button>
+		               
+		                  </div>
+		                  
+<!-- 			               <div horizontal layout flex fascia-title>
+				              <grade-dropdown-menu flex
+				                   disabled="{{ !editable }}" 
+				                   selected="{{ item.bean[target_graph_key] }}"
+				                   label="{{ target_graph_key | suffix }} ?" 
+				                   valueattr="itemId"
+				                   >
+				                   <template repeat="{{graph in targetEnpoint.model.graphs}}">
+			                        <paper-item label={{graph}} itemId={{graph}}></paper-item>
+				                   </template>
+				              </grade-dropdown-menu>
+				              <grade-button icon="refresh" label="refresh graphs" on-click="{{refreshTargetEnpointGraphs}}" style="padding-left:5px;padding-right:5px;"></grade-button>
+			           
+			              </div> -->
+			                
+			                
+			              <div fascia-subtitle>
+			                <span>{{ target_graph_key | start}}</span><span fg bolder>{{ target_graph_key | suffix}}</span>
+			              </div>
+			              
+			            </grade-fascia> 
+	           </div>
+	         </grade-item>
+	      </div>
 	      
 	      <!-- query -->
 	      <grade-item icon=chevron-right>
-	        <grade-fascia truncate>
-	          <grade-input  fascia-title 
-	                        disabled="{{!editable}}" 
-	                        maxRows="5"
-	                        multiline
-	                        label="{{ query_key | suffix}}" 
-	                        value="{{item.bean[query_key] | trim | uppercase}}">
-	          </grade-input>
+	        <grade-fascia>
+	           <div smaller wired rounded truncate inset fascia-title >
+		          <grade-input 
+		                        disabled="{{!editable}}" 
+		                        maxRows="5"
+		                        multiline
+		                        label="{{ query_key | suffix}}" 
+		                        value="{{item.bean[query_key] | trim }}">
+		          </grade-input>
+	          </div>
 	          <div fascia-subtitle>
 	            <span>{{ query_key | start}}</span><span fg bolder>{{ query_key | suffix}}</span>
 	          </div>
@@ -194,7 +263,7 @@
 	                        maxRows="5"
 	                        multiline
 	                        label="{{ note_key | suffix}}" 
-	                        value="{{item.bean[note_key] | trim | uppercase}}">
+	                        value="{{item.bean[note_key] | trim}}">
 	          </grade-input>
 	          <div fascia-subtitle>
 	            <span>{{ note_key | start}}</span><span fg bolder>{{ note_key | suffix}}</span>
@@ -204,5 +273,4 @@
 	    </div> 
     </template>
 		
-  </template> 
 </polymer-element>

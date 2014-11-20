@@ -235,6 +235,10 @@ grade-classes = {
       font-weight:bolder
     }
     
+    "paper-radio-button /deep/ #radioLabel" : {
+        margin-left: 5px
+    }
+    
     
 }
 
@@ -311,7 +315,26 @@ theme-classes = {
     "paper-fab" : {
       background-color : "primary"
     }
+    
+    
+    "paper-radio-button::shadow #ink[checked]" : {
+      color: "tertiary"
+    }
+    
+    "paper-radio-button::shadow #onRadio" : {
+      background-color: "primary"
+    }
+    
+    "paper-radio-button[disabled][checked] /deep/ #offRadio" : {
+      opacity:1
+      background-color: "tertiary"
+      border-color: "tertiary"
+    }
 
+    "paper-dropdown-menu /deep/ core-icon" : {
+      color : "primary"
+      width: 36px
+    }
     
     
    // inputs

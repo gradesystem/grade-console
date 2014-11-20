@@ -37,13 +37,12 @@ class TaskDetails extends PolymerElement with Filters, Dependencies {
     gradeEndpoints = instanceOf(GradeEnpoints);
   }  
 
-  @ComputedProperty("item.model.bean[source_endpoint_key]")
+  @ComputedProperty("item.bean[source_endpoint_key]")
   String get sourceEnpointId => item!=null?item.bean[source_endpoint_key]:null;
   
   @ComputedProperty("sourceEnpointId")
-  EditableEndpoint get sourceEnpoint => gradeEndpoints.findEditableEndpointByUri(sourceEnpointId);
+  EditableEndpoint get sourceEnpoint => gradeEndpoints.findEditableEndpointById(sourceEnpointId);
    
-  @ObserveProperty("sourceEnpointId")
   void refreshSourceEnpointGraphs() {
     if (sourceEnpointId!=null) gradeEndpoints.refesh(sourceEnpointId);
   }
@@ -52,9 +51,8 @@ class TaskDetails extends PolymerElement with Filters, Dependencies {
   String get targetEnpointId => item!=null?item.bean[target_endpoint_key]:null;
   
   @ComputedProperty("targetEnpointId")
-  EditableEndpoint get targetEnpoint => gradeEndpoints!=null?gradeEndpoints.findEditableEndpointByUri(targetEnpointId):null;
+  EditableEndpoint get targetEnpoint => gradeEndpoints!=null?gradeEndpoints.findEditableEndpointById(targetEnpointId):null;
   
-  @ObserveProperty("targetEnpoint")
   void refreshTargetEnpointGraphs() {
     if (targetEnpointId!=null) {
       gradeEndpoints.refesh(targetEnpointId);
@@ -65,7 +63,12 @@ class TaskDetails extends PolymerElement with Filters, Dependencies {
   //workaround to selected binding not working: issue https://github.com/dart-lang/core-elements/issues/157
   @ObserveProperty("item")
   void updateSourceGraphsSelected() {
-    if (item!=null && $["sourceGraphsSelector"]!=null) $["sourceGraphsSelector"].selected = item.bean[source_graph_key];
+    if (item!=null && $["sourceGraphsSelector"]!=null) 
+      $["sourceGraphsSelector"].selected = item.bean[source_graph_key];
+    
+    if (item!=null && $["targetGraphsSelector"]!=null) 
+         $["targetGraphsSelector"].selected = item.bean[target_graph_key];
+ 
   }
 
 }
