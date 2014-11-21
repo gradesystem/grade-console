@@ -17,6 +17,7 @@ part 'common/mvc.dart';
 part 'common/events.dart';
 part 'common/constants.dart';
 part 'common/filters.dart';
+part 'common/validators.dart';
 part 'common/delegates.dart';
 part 'common/services.dart';
 part 'common/history.dart';

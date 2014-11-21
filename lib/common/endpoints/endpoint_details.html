@@ -6,6 +6,7 @@
 <link rel="import" href="../components/grade_fascia.html">
 <link rel="import" href="../components/loading_panel.html">
 <link rel="import" href="../components/grade_button.html">
+<link rel="import" href="../components/grade_uri.html">
 
 <link rel="import" href="endpoints.html">
 
@@ -22,7 +23,7 @@
 		</style>
 
     <template if="{{item!=null}}">
-	    <loading-panel loading="{{loading}}" message="saving the endpoint">
+	    <loading-panel loading="{{loading}}" message="saving endpoint">
 	   
 	      <div style="overflow-y: auto;">
 	      
@@ -37,11 +38,13 @@
 	                         validators="{{ name_validators}}"
 	                         invalid="{{ item.fieldsInvalidity[name_key] }}"
 	                         inputValue="{{ item.model.bean[name_key]  }}"
+	                         type="URL"
 	                         >
 	            </grade-input>
 	                   
-	            <div fascia-subtitle><span>{{ name_key | start}}</span><span fg bolder>{{ name_key | suffix}}</span></div>
-	          </grade-fascia>
+	             <grade-uri fascia-subtitle value={{name_key}}></grade-uri>       
+	             
+	            </grade-fascia>
 	            
 	        </grade-item>
 	          
@@ -49,9 +52,9 @@
 	          
 	          <grade-fascia truncate>
 	                   
-	            <grade-input fascia-title 
+	            <grade-input fascia-title uppercase smaller
 	                         disabled="{{ !editable }}" 
-	                         label="{{ uri_key | suffix }} ?" 
+	                         label="uri ?" 
 	                         required
 	                         invalid="{{ item.fieldsInvalidity[uri_key] }}"
 	                         inputValue="{{ item.model.bean[uri_key]  }}"
@@ -59,7 +62,7 @@
 	                         >
 	            </grade-input>
 	                   
-	            <div fascia-subtitle><span>{{ uri_key | start}}</span><span fg bolder>{{ uri_key | suffix}}</span></div>
+	            <grade-uri fascia-subtitle value={{uri_key}}></grade-uri>
 	          </grade-fascia>
 	            
 	        </grade-item>
@@ -68,16 +71,14 @@
             
             <grade-fascia truncate>
                      
-              <grade-input fascia-title 
+              <grade-input fascia-title uppercase smaller
                            disabled="{{ !editable }}" 
-                           label="{{ update_uri_key | suffix }} ?" 
+                           label="uri ?" 
                            invalid="{{ item.fieldsInvalidity[update_uri_key] }}"
-                           inputValue="{{ item.model.bean[update_uri_key]  }}"
-                           type="URL"
-                           >
+                           inputValue="{{ item.model.bean[update_uri_key]  }}"          >
               </grade-input>
                      
-              <div fascia-subtitle><span>{{ update_uri_key | start}}</span><span fg bolder>{{ update_uri_key | suffix}}</span></div>
+               <grade-uri fascia-subtitle value={{update_uri_key}}></grade-uri>
             </grade-fascia>
               
           </grade-item>	        

@@ -1,7 +1,7 @@
 part of endpoints;
 
 @CustomTag("endpoint-details") 
-class EndpointDetails extends PolymerElement with Filters {
+class EndpointDetails extends PolymerElement with Filters, Validators {
   
   @published
   Endpoints items;
@@ -22,4 +22,5 @@ class EndpointDetails extends PolymerElement with Filters {
   
   @ComputedProperty("item.synching")
   bool get loading => item!=null && item.synching;
+  
 }

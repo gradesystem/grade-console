@@ -6,6 +6,7 @@
 <link rel="import" href="../components/grade_item.html">
 <link rel="import" href="../components/grade_button.html">
 <link rel="import" href="../components/grade_fascia.html">
+<link rel="import" href="../components/grade_uri.html">
 
 <link rel="import" href="endpoints.html">
 
@@ -19,7 +20,7 @@
 	     
 	       <grade-fascia flex truncate>
 	         <div fascia-title>{{ name | uppercase }}</div>
-	         <div fascia-subtitle>{{ item.model.uri }}</div>
+	         <grade-uri fascia-subtitle value="{{ item.model.uri }}"></grade-uri>
 	       </grade-fascia>
 	       
 	       <grade-button action onhover hidden?="{{ item.edit || !selected }}" smallicon icon="content-copy" tooltip="left" label="clone endpoint" on-click={{cloneItem}}></grade-button>

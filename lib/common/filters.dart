@@ -43,5 +43,3 @@ class Filters {
   
 
 }
-
-typedef String Validator(String value);

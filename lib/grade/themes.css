@@ -136,12 +136,6 @@
   border: 1px solid;
   border-color: #26699a;
 }
-:host /deep/ .home /deep/ [uri],
-[uri] /deep/ input {
-  text-transform: uppercase;
-  font-size: smaller;
-  font-weight: bolder;
-}
 :host /deep/ .home /deep/ [uppercase],
 [uppercase] /deep/ input {
   text-transform: uppercase;
@@ -245,12 +239,6 @@
 :host /deep/ .prod /deep/ [wired-fg] {
   border: 1px solid;
   border-color: #00bcd4;
-}
-:host /deep/ .prod /deep/ [uri],
-[uri] /deep/ input {
-  text-transform: uppercase;
-  font-size: smaller;
-  font-weight: bolder;
 }
 :host /deep/ .prod /deep/ [uppercase],
 [uppercase] /deep/ input {
@@ -356,12 +344,6 @@
   border: 1px solid;
   border-color: #ffc107;
 }
-:host /deep/ .deck /deep/ [uri],
-[uri] /deep/ input {
-  text-transform: uppercase;
-  font-size: smaller;
-  font-weight: bolder;
-}
 :host /deep/ .deck /deep/ [uppercase],
 [uppercase] /deep/ input {
   text-transform: uppercase;
@@ -466,12 +448,6 @@
   border: 1px solid;
   border-color: #e41c23;
 }
-:host /deep/ .tasks /deep/ [uri],
-[uri] /deep/ input {
-  text-transform: uppercase;
-  font-size: smaller;
-  font-weight: bolder;
-}
 :host /deep/ .tasks /deep/ [uppercase],
 [uppercase] /deep/ input {
   text-transform: uppercase;
@@ -575,12 +551,6 @@
 :host /deep/ .stage /deep/ [wired-fg] {
   border: 1px solid;
   border-color: #009587;
-}
-:host /deep/ .stage /deep/ [uri],
-[uri] /deep/ input {
-  text-transform: uppercase;
-  font-size: smaller;
-  font-weight: bolder;
 }
 :host /deep/ .stage /deep/ [uppercase],
 [uppercase] /deep/ input {
