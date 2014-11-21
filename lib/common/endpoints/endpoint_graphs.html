@@ -1,8 +1,9 @@
 <link rel="import" href="../../../../packages/polymer/polymer.html">
 <link rel="import" href="../../../../packages/core_elements/core_icon.html">
+<link rel="import" href="../../../../packages/core_elements/core_selector.html">
 
 <link rel="import" href="../components/grade_input.html">
-<link rel="import" href="../components/grade_item.html">
+<link rel="import" href="../components/grade_uri.html">
 <link rel="import" href="../components/grade_fascia.html">
 <link rel="import" href="../components/loading_panel.html">
 <link rel="import" href="../components/grade_button.html">
@@ -15,71 +16,100 @@
     
 		<style>
 		
-			grade-input::shadow [multiline] {
-        max-height: 150px;
-			}
-			
-			div:not(:hover) [onbuttonhover] {
-			  visibility: hidden;
-			}  
-		
-		</style>
+		  :host [sidebutton] {  padding-left:5px }
+		  
+      :host [starts-hidden] { visibility:hidden }
+       
+      :host [fg] [onhover-selected] { visibility:visible }
+      
+      :host [list] { min-height:200px; padding:5px; overflow-y:auto }
+      
+      
+ 	</style>
 
     <template if="{{item!=null}}">
-	    <loading-panel loading="{{loading}}" message="saving the endpoint">
+	   
+	    <loading-panel loading="{{loading}}" message="saving endpoint">
 	   
 	      <div style="overflow-y: auto;">
 	        
 	        <template if="{{!item.newModel}}">
 	        
-		        <grade-item icon=chevron-right>
-			        <div flex horizontal layout>
-			         <grade-input flex  style="height: 37px;"
-		                           label="new graph ?" 
-		                           invalid="{{ newUrlInvalid }}"
-		                           inputValue="{{ newUrl  }}"
-		                           type="URL"
-		                           >
-		              </grade-input>
-			         <grade-button action 
-					         disabled?="{{newUrlInvalid || newUrl.isEmpty}}"
-					         icon="add" 
-					         on-click={{addGraph}} 
-					         tooltip="left" 
-					         label="add graph" 
-					         style="padding-left:5px;padding-right:5px;">
-			         </grade-button>
-			        </div>
-		        </grade-item>
-	        
-		        <grade-item icon=chevron-right>
+	           <!--  graph list and button  -->
+             <div flex horizontal layout>
+             
+              <!-- graph list -->
+	            <loading-panel list wired rounded relative flex loading="{{item.loadingGraphs}}" message="loading graphs">
 
-		          <grade-fascia truncate style="width: 100%">
-
-		            <div fascia-title>
-		            
-		              <div horizontal layout>
-			              <div wired rounded style="min-height:250px;" relative flex>
-				              <loading-panel fit loading="{{item.loadingGraphs}}" message="loading the graphs" style="overflow-y:auto;">
-				                 <div small-spaced>
-							              <template repeat="{{graph in item.model.graphs}}">
-							                <div smaller flex horizontal layout>
-							                 <div flex><span>{{ graph | start}}</span><span fg>{{ graph | suffix}}</span></div>
-							                 <grade-button action onbuttonhover  smallicon tooltip="left" label="remove graph" icon="delete" on-click={{removeGraph}} graph={{graph}}></grade-button>
-							                </div>
-							              </template>
-					                </div>
-				              </loading-panel>
-			              </div>
-		               <grade-button icon="refresh" label="refresh graphs" on-click="{{refreshGraphs}}" style="padding-left:5px;padding-right:5px;"></grade-button>
-		             </div>
-		              
-		            </div>
-		                   
-		            <div fascia-subtitle><span>{{ graphs_key | start}}</span><span fg bolder>{{ graphs_key | suffix}}</span></div>
-		          </grade-fascia>
-		            
-		        </grade-item>
+	                  <core-selector selectedAttribute="fg">
+		                 
+		                   <template repeat="{{graph in item.model.graphs}}">
+				               
+				                 <!-- entry and remove button -->
+					                <div horizontal layout center>
+					                 
+						                 <grade-uri flex value={{graph}}></grade-uri>
+	
+	  				                 <grade-button
+						                          action 
+						                          starts-hidden
+						                          onhover-selected
+						                          smallicon 
+						                          tooltip="left" 
+						                          label="remove graph" 
+						                          icon="delete" 
+						                          on-click={{removeGraph}} 
+						                          graph={{graph}}>
+						                 </grade-button>
+						                
+						              </div>
+				                
+				              </template>
+			              
+			              </core-selector>
+		           
+		            </loading-panel>
+           
+              <!-- button -->
+              <grade-button sidebutton icon=refresh
+                            tooltip=left
+                            label="reload graphs" 
+                            on-click={{refreshGraphs}} >
+              </grade-button>
+           
+            </div>
+             
+           <div horizontal layout style="margin-top:30px">
+                
+		         <grade-fascia truncate flex>
+            
+	               <grade-input fascia-title
+	                               label="uri" 
+	                               invalid="{{ newUrlInvalid }}"
+	                               inputValue="{{ newUrl  }}"
+	                               type="URL">
+	               </grade-input>
+	               
+	               <div fascia-subtitle><span>NEW GRAPH</span></div>
+	               
+	          </grade-fascia>
+                
+            <grade-button
+                  sidebutton
+                  action 
+                  disabled?="{{newUrlInvalid || newUrl.isEmpty}}"
+                  icon="add" 
+                  on-click={{addGraph}} 
+                  tooltip=left
+                  label="create new graph">
+            </grade-button>
+            
+          </div>
+     
+         
+              
+            
+           
 	        
 	        </template>
 	          

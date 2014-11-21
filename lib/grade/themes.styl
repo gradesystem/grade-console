@@ -224,7 +224,7 @@ grade-classes = {
    }
         
         
-    "grade-item:not(:hover) [onhover]" : {
+    "*:not(:hover) [onhover]" : {
   
       visibility:hidden
     
@@ -260,6 +260,10 @@ theme-classes = {
         color : "secondary"
     }
     
+    "[fg][disabled]" : {
+        color : "tertiary"
+    }
+    
     "[bg-selected]" : {
       background : "tertiary"
       color :  white
@@ -274,6 +278,17 @@ theme-classes = {
         border:1px solid
         border-color: "primary"
     }
+    
+    "[uri], [uri] /deep/ input" : {
+        text-transform : uppercase
+        font-size:smaller
+        font-weight: bolder
+    }
+    
+    "[uppercase], [uppercase] /deep/ input" : {
+        text-transform : uppercase
+     }
+    
     
     "paper-progress::shadow #activeProgress" : {
       background-color: "primary"

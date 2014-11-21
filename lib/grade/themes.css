@@ -96,7 +96,7 @@
 :host /deep/ grade-header-panel[side] /deep/ .title {
   font-size: smaller;
 }
-:host /deep/ grade-item:not(:hover) [onhover] {
+:host /deep/ *:not(:hover) [onhover] {
   visibility: hidden;
 }
 :host /deep/ *:hover[option] {
@@ -121,6 +121,9 @@
 :host /deep/ .home /deep/ [fg-alt] {
   color: #f4f4f4;
 }
+:host /deep/ .home /deep/ [fg][disabled] {
+  color: "tertiary";
+}
 :host /deep/ .home /deep/ [bg-selected] {
   background: "tertiary";
   color: #fff;
@@ -132,6 +135,16 @@
 :host /deep/ .home /deep/ [wired-fg] {
   border: 1px solid;
   border-color: #26699a;
+}
+:host /deep/ .home /deep/ [uri],
+[uri] /deep/ input {
+  text-transform: uppercase;
+  font-size: smaller;
+  font-weight: bolder;
+}
+:host /deep/ .home /deep/ [uppercase],
+[uppercase] /deep/ input {
+  text-transform: uppercase;
 }
 :host /deep/ .home /deep/ paper-progress::shadow #activeProgress {
   background-color: #26699a;
@@ -218,6 +231,9 @@
 :host /deep/ .prod /deep/ [fg-alt] {
   color: #0097a7;
 }
+:host /deep/ .prod /deep/ [fg][disabled] {
+  color: #80deea;
+}
 :host /deep/ .prod /deep/ [bg-selected] {
   background: #80deea;
   color: #fff;
@@ -229,6 +245,16 @@
 :host /deep/ .prod /deep/ [wired-fg] {
   border: 1px solid;
   border-color: #00bcd4;
+}
+:host /deep/ .prod /deep/ [uri],
+[uri] /deep/ input {
+  text-transform: uppercase;
+  font-size: smaller;
+  font-weight: bolder;
+}
+:host /deep/ .prod /deep/ [uppercase],
+[uppercase] /deep/ input {
+  text-transform: uppercase;
 }
 :host /deep/ .prod /deep/ paper-progress::shadow #activeProgress {
   background-color: #00bcd4;
@@ -315,6 +341,9 @@
 :host /deep/ .deck /deep/ [fg-alt] {
   color: #ffa000;
 }
+:host /deep/ .deck /deep/ [fg][disabled] {
+  color: #ffdf82;
+}
 :host /deep/ .deck /deep/ [bg-selected] {
   background: #ffdf82;
   color: #fff;
@@ -326,6 +355,16 @@
 :host /deep/ .deck /deep/ [wired-fg] {
   border: 1px solid;
   border-color: #ffc107;
+}
+:host /deep/ .deck /deep/ [uri],
+[uri] /deep/ input {
+  text-transform: uppercase;
+  font-size: smaller;
+  font-weight: bolder;
+}
+:host /deep/ .deck /deep/ [uppercase],
+[uppercase] /deep/ input {
+  text-transform: uppercase;
 }
 :host /deep/ .deck /deep/ paper-progress::shadow #activeProgress {
   background-color: #ffc107;
@@ -412,6 +451,9 @@
 :host /deep/ .tasks /deep/ [fg-alt] {
   color: #cf1715;
 }
+:host /deep/ .tasks /deep/ [fg][disabled] {
+  color: #f69988;
+}
 :host /deep/ .tasks /deep/ [bg-selected] {
   background: #f69988;
   color: #fff;
@@ -423,6 +465,16 @@
 :host /deep/ .tasks /deep/ [wired-fg] {
   border: 1px solid;
   border-color: #e41c23;
+}
+:host /deep/ .tasks /deep/ [uri],
+[uri] /deep/ input {
+  text-transform: uppercase;
+  font-size: smaller;
+  font-weight: bolder;
+}
+:host /deep/ .tasks /deep/ [uppercase],
+[uppercase] /deep/ input {
+  text-transform: uppercase;
 }
 :host /deep/ .tasks /deep/ paper-progress::shadow #activeProgress {
   background-color: #e41c23;
@@ -509,6 +561,9 @@
 :host /deep/ .stage /deep/ [fg-alt] {
   color: #207368;
 }
+:host /deep/ .stage /deep/ [fg][disabled] {
+  color: #80cbc4;
+}
 :host /deep/ .stage /deep/ [bg-selected] {
   background: #80cbc4;
   color: #fff;
@@ -520,6 +575,16 @@
 :host /deep/ .stage /deep/ [wired-fg] {
   border: 1px solid;
   border-color: #009587;
+}
+:host /deep/ .stage /deep/ [uri],
+[uri] /deep/ input {
+  text-transform: uppercase;
+  font-size: smaller;
+  font-weight: bolder;
+}
+:host /deep/ .stage /deep/ [uppercase],
+[uppercase] /deep/ input {
+  text-transform: uppercase;
 }
 :host /deep/ .stage /deep/ paper-progress::shadow #activeProgress {
   background-color: #009587;
