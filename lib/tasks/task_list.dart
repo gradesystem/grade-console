@@ -11,6 +11,8 @@ class TaskList extends PolymerElement with Filters {
   
   CoreList list;
   
+  bool clickflag = false;
+  
   FilterFunction itemFilter = (EditableModel<Task> item, String term) 
                                 => item.model.label != null && 
                                    item.model.label.toLowerCase().contains(term.toLowerCase());
@@ -43,8 +45,17 @@ class TaskList extends PolymerElement with Filters {
     }
   }
   
-  void selectDataset(event) {
-    listitems.selected = event.detail.data;
+  void selectItem(event) {
+    //workaround to https://github.com/dart-lang/core-elements/issues/160
+    if (!clickflag) listitems.selected = event.detail.data;
+    else {
+      syncSelection();
+      clickflag = false;
+    }
+  }
+
+  void setClickFlag() {
+    clickflag = true;
   }
  
 }

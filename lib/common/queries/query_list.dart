@@ -11,6 +11,8 @@ class QueryList extends PolymerElement with Filters {
   
   CoreList list;
   
+  bool clickflag = false;
+  
   FilterFunction itemFilter = (EditableModel<Query> item, String term) 
                     => item.model.name != null && 
                        item.model.name.toLowerCase().contains(term.toLowerCase());
@@ -45,8 +47,17 @@ class QueryList extends PolymerElement with Filters {
     }
   }
   
-  void selectDataset(event) {
-    listitems.selected = event.detail.data;
+  void selectItem(event) {
+    //workaround to https://github.com/dart-lang/core-elements/issues/160
+    if (!clickflag) listitems.selected = event.detail.data;
+    else {
+      syncSelection();
+      clickflag = false;
+    }
+  }
+
+  void setClickFlag() {
+    clickflag = true;
   }
  
 }

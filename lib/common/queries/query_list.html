@@ -13,11 +13,11 @@
 
   <list-panel loading="{{listitems.loading}}" empty={{listitems.data.isEmpty}}>
 
-	  <core-list-dart id="list" data="{{listitems.data | filter(kfilter, itemFilter)}}" height="80" on-core-activate={{selectDataset}} flex>
+	  <core-list-dart id="list" data="{{listitems.data | filter(kfilter, itemFilter)}}" height="80" on-core-activate={{selectItem}} flex>
 	    
 	    <template>
 
- 	       <query-details-summary flex item="{{model}}" selected="{{ selected==true }}"></query-details-summary>
+ 	       <query-details-summary flex item="{{model}}" selected="{{ selected==true }}" on-remove-item={{setClickFlag}} on-clone-item={{setClickFlag}}></query-details-summary>
 	     
 	    </template>
 	  
