@@ -136,8 +136,7 @@
   border: 1px solid;
   border-color: #26699a;
 }
-:host /deep/ .home /deep/ [uppercase],
-[uppercase] /deep/ input {
+:host /deep/ .home /deep/ [uppercase] /deep/ input {
   text-transform: uppercase;
 }
 :host /deep/ .home /deep/ paper-progress::shadow #activeProgress {
@@ -240,8 +239,7 @@
   border: 1px solid;
   border-color: #00bcd4;
 }
-:host /deep/ .prod /deep/ [uppercase],
-[uppercase] /deep/ input {
+:host /deep/ .prod /deep/ [uppercase] /deep/ input {
   text-transform: uppercase;
 }
 :host /deep/ .prod /deep/ paper-progress::shadow #activeProgress {
@@ -344,8 +342,7 @@
   border: 1px solid;
   border-color: #ffc107;
 }
-:host /deep/ .deck /deep/ [uppercase],
-[uppercase] /deep/ input {
+:host /deep/ .deck /deep/ [uppercase] /deep/ input {
   text-transform: uppercase;
 }
 :host /deep/ .deck /deep/ paper-progress::shadow #activeProgress {
@@ -448,8 +445,7 @@
   border: 1px solid;
   border-color: #e41c23;
 }
-:host /deep/ .tasks /deep/ [uppercase],
-[uppercase] /deep/ input {
+:host /deep/ .tasks /deep/ [uppercase] /deep/ input {
   text-transform: uppercase;
 }
 :host /deep/ .tasks /deep/ paper-progress::shadow #activeProgress {
@@ -552,8 +548,7 @@
   border: 1px solid;
   border-color: #009587;
 }
-:host /deep/ .stage /deep/ [uppercase],
-[uppercase] /deep/ input {
+:host /deep/ .stage /deep/ [uppercase] /deep/ input {
   text-transform: uppercase;
 }
 :host /deep/ .stage /deep/ paper-progress::shadow #activeProgress {
