@@ -61,7 +61,13 @@ abstract class SubPageEditableModel<T extends EditableGradeEntity> {
       String originalName = match.group(1);
       String snum = match.group(2);
       int number = snum == null || snum.isEmpty?0:int.parse(snum);
-      return originalName + CLONED_NAME_SUFFIX + (number+1).toString();
+      
+      String cloneName;
+      do {
+        cloneName = originalName + CLONED_NAME_SUFFIX + (++number).toString();
+      } while(storage.findByName(cloneName)!=null); 
+      
+      return cloneName;
     }
     return name + CLONED_NAME_SUFFIX;
   }
@@ -137,6 +143,8 @@ abstract class EditableListItems<T extends EditableModel> extends ListItems<T> {
   
   @observable
   List<T> get synchedData => data.where((T e)=>!e.newModel).toList();
+  
+  T findByName(String name) => data.firstWhere((T item)=> item.model.name!=null && item.model.name.toLowerCase() == name.toLowerCase(), orElse:()=>null);
 }
 
 class EditableModel<T extends Cloneable<T>> extends Observable {
