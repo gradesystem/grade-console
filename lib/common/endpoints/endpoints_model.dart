@@ -21,6 +21,7 @@ class Endpoint extends EditableGradeEntity with Filters {
         name_field: "",
         uri_field: "",
         update_uri_field: "",
+        graphs_field: [],
         predefined_field: false
       });
 
@@ -29,18 +30,19 @@ class Endpoint extends EditableGradeEntity with Filters {
     onBeanChange([name_field], () => notifyPropertyChange(#name, null, name));
     onBeanChange([uri_field], () => notifyPropertyChange(#uri, null, uri));
     onBeanChange([update_uri_field], () => notifyPropertyChange(#updateUri, null, updateUri));
-    onBeanChange([graphs_field], _syncGraphs);
+    //we don't support graphs direct writing
   }
   
   void _syncGraphs() {
     graphs = bean[graphs_field];
+    bean[graphs_field] = graphs;
   }
   
   @observable
   get graphs => _graphs;
   set graphs(List<String> newgraphs) {
     graphs.clear();
-    graphs.addAll(newgraphs);
+    if (newgraphs!=null) graphs.addAll(newgraphs);
   }
 
   @observable

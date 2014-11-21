@@ -33,7 +33,7 @@ class GradeService {
     return HttpService.post(url.toString(), content, acceptedMediaType:acceptedMediaType).timeout(timeLimit).then((xhr) => xhr.responseText).catchError(_onError);
   }
   
-  Future<dynamic> postJSon(String path, String content, {MediaType acceptedMediaType, Map<String, String> parameters}) {
+  Future<dynamic> postJSon(String path, String content, {MediaType acceptedMediaType:MediaType.JSON, Map<String, String> parameters}) {
     return post(path, content, acceptedMediaType:acceptedMediaType, parameters:parameters).then(_decode);
   }
 

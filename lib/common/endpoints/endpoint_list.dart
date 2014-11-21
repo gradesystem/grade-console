@@ -11,6 +11,8 @@ class EndpointList extends PolymerElement with Filters {
   
   CoreList list;
   
+  bool clickflag = false;
+  
   FilterFunction itemFilter = (EditableModel<Endpoint> item, String term) 
                     => item.model.name != null && 
                        item.model.name.toLowerCase().contains(term.toLowerCase());
@@ -32,7 +34,6 @@ class EndpointList extends PolymerElement with Filters {
         list.selectItem(index);
       }
     }
-    
   }
   
   void selecteFirstItem() {
@@ -44,8 +45,17 @@ class EndpointList extends PolymerElement with Filters {
     }
   }
   
-  void selectEndpoint(event) {
-    listitems.selected = event.detail.data;
+  void selectItem(event) {
+    //workaround to https://github.com/dart-lang/core-elements/issues/160
+    if (!clickflag) listitems.selected = event.detail.data;
+    else {
+      syncSelection();
+      clickflag = false;
+    }
+  }
+
+  void setClickFlag() {
+    clickflag = true;
   }
  
 }
