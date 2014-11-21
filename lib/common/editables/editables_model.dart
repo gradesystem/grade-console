@@ -57,19 +57,15 @@ abstract class SubPageEditableModel<T extends EditableGradeEntity> {
   String generateCloneName(String name) {
     if (name == null) return name;
     Match match = CLONED_NAME_REGEXP.firstMatch(name);
-    if (match!=null) {
-      String originalName = match.group(1);
-      String snum = match.group(2);
-      int number = snum == null || snum.isEmpty?0:int.parse(snum);
-      
-      String cloneName;
-      do {
-        cloneName = originalName + CLONED_NAME_SUFFIX + (++number).toString();
-      } while(storage.findByName(cloneName)!=null); 
-      
-      return cloneName;
-    }
-    return name + CLONED_NAME_SUFFIX;
+    
+    String originalName = match!=null?match.group(1):name;
+    
+    int number = 1;
+    
+    String cloneName = originalName + CLONED_NAME_SUFFIX;
+    while(storage.findByName(cloneName)!=null) cloneName = originalName + CLONED_NAME_SUFFIX + (number++).toString();
+
+    return cloneName;
   }
 
   void save(EditableModel<T> editableModel) {

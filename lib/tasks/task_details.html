@@ -67,9 +67,9 @@
 			  
 			  <div radios layout vertical center border>
 				  <paper-radio-group fascia-title selected="{{ item.bean[operation_key] }}">
-	          <paper-radio-button name="http://gradesystem.io/onto/task.owl#publish" label="PUBLISH" disabled="{{!editable}}"></paper-radio-button>
-	          <paper-radio-button name="http://gradesystem.io/onto/task.owl#add" label="ADD" disabled="{{!editable}}"></paper-radio-button>
-	          <paper-radio-button name="http://gradesystem.io/onto/task.owl#remove" label="REMOVE" disabled="{{!editable}}"></paper-radio-button>
+	          <paper-radio-button name="{{publish_operation}}" label="PUBLISH" disabled="{{!editable}}"></paper-radio-button>
+	          <paper-radio-button name="{{add_operation}}" label="ADD" disabled="{{!editable}}"></paper-radio-button>
+	          <paper-radio-button name="{{remove_operation}}" label="REMOVE" disabled="{{!editable}}"></paper-radio-button>
 	         </paper-radio-group>
         </div>     
 	     
@@ -211,22 +211,6 @@
 		                      <grade-button icon="refresh" label="refresh graphs" on-click="{{refreshSourceEnpointGraphs}}" style="padding-left:5px;padding-right:5px;"></grade-button>
 		               
 		                  </div>
-		                  
-<!-- 			               <div horizontal layout flex fascia-title>
-				              <grade-dropdown-menu flex
-				                   disabled="{{ !editable }}" 
-				                   selected="{{ item.bean[target_graph_key] }}"
-				                   label="{{ target_graph_key | suffix }} ?" 
-				                   valueattr="itemId"
-				                   >
-				                   <template repeat="{{graph in targetEnpoint.model.graphs}}">
-			                        <paper-item label={{graph}} itemId={{graph}}></paper-item>
-				                   </template>
-				              </grade-dropdown-menu>
-				              <grade-button icon="refresh" label="refresh graphs" on-click="{{refreshTargetEnpointGraphs}}" style="padding-left:5px;padding-right:5px;"></grade-button>
-			           
-			              </div> -->
-			                
 			                
 			              <div fascia-subtitle>
 			                <span>{{ target_graph_key | start}}</span><span fg bolder>{{ target_graph_key | suffix}}</span>
@@ -237,7 +221,7 @@
 	         </grade-item>
 	      </div>
 	      
-	      <!-- query -->
+	      <!-- transform query -->
 	      <grade-item icon=chevron-right>
 	        <grade-fascia>
 	           <div smaller wired rounded truncate inset fascia-title >
@@ -245,15 +229,34 @@
 		                        disabled="{{!editable}}" 
 		                        maxRows="5"
 		                        multiline
-		                        label="{{ query_key | suffix}}" 
-		                        value="{{item.bean[query_key] | trim }}">
+		                        label="{{ transform_query_key | suffix}}" 
+		                        value="{{item.bean[transform_query_key] | trim }}">
 		          </grade-input>
 	          </div>
 	          <div fascia-subtitle>
-	            <span>{{ query_key | start}}</span><span fg bolder>{{ query_key | suffix}}</span>
+	            <span>{{ transform_query_key | start}}</span><span fg bolder>{{ transform_query_key | suffix}}</span>
 	          </div>
 	        </grade-fascia>   
 	      </grade-item>
+	      
+	             
+        <!-- difference query -->
+        <grade-item icon=chevron-right hidden?="{{ item.bean[operation_key] == publish_operation}}">
+          <grade-fascia>
+             <div smaller wired rounded truncate inset fascia-title >
+              <grade-input 
+                            disabled="{{!editable}}" 
+                            maxRows="5"
+                            multiline
+                            label="{{ difference_query_key | suffix}}" 
+                            value="{{item.bean[difference_query_key] | trim }}">
+              </grade-input>
+            </div>
+            <div fascia-subtitle>
+              <span>{{ difference_query_key | start}}</span><span fg bolder>{{ difference_query_key | suffix}}</span>
+            </div>
+          </grade-fascia>   
+        </grade-item>
 	      
 	      <!-- note -->
 	      <grade-item icon=chevron-right>

@@ -2,6 +2,10 @@ part of tasks;
 
 @CustomTag("task-details")
 class TaskDetails extends PolymerElement with Filters, Dependencies {
+  
+  String get publish_operation => 'http://gradesystem.io/onto/task.owl#publish';
+  String get add_operation =>'http://gradesystem.io/onto/task.owl#add';
+  String get remove_operation =>'http://gradesystem.io/onto/task.owl#remove';
 
   String get name_key => Task.name_field;
   String get label_key => Task.label_field;
@@ -14,7 +18,8 @@ class TaskDetails extends PolymerElement with Filters, Dependencies {
   String get target_endpoint_key => Task.target_endpoint_field;
   String get target_graph_key => Task.target_graph_field;
   
-  String get query_key => Task.query_field;
+  String get transform_query_key => Task.transform_query_field;
+  String get difference_query_key => Task.difference_query_field;
   String get note_key => Task.note_field;
   
   String get creator_key => Task.creator_field;
