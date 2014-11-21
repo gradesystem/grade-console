@@ -211,22 +211,6 @@
 		                      <grade-button icon="refresh" label="refresh graphs" on-click="{{refreshSourceEnpointGraphs}}" style="padding-left:5px;padding-right:5px;"></grade-button>
 		               
 		                  </div>
-		                  
-<!-- 			               <div horizontal layout flex fascia-title>
-				              <grade-dropdown-menu flex
-				                   disabled="{{ !editable }}" 
-				                   selected="{{ item.bean[target_graph_key] }}"
-				                   label="{{ target_graph_key | suffix }} ?" 
-				                   valueattr="itemId"
-				                   >
-				                   <template repeat="{{graph in targetEnpoint.model.graphs}}">
-			                        <paper-item label={{graph}} itemId={{graph}}></paper-item>
-				                   </template>
-				              </grade-dropdown-menu>
-				              <grade-button icon="refresh" label="refresh graphs" on-click="{{refreshTargetEnpointGraphs}}" style="padding-left:5px;padding-right:5px;"></grade-button>
-			           
-			              </div> -->
-			                
 			                
 			              <div fascia-subtitle>
 			                <span>{{ target_graph_key | start}}</span><span fg bolder>{{ target_graph_key | suffix}}</span>
