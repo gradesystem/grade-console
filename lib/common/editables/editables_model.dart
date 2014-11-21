@@ -47,9 +47,10 @@ abstract class SubPageEditableModel<T extends EditableGradeEntity> {
     cloned.name = generateCloneName(cloned.name);
     
     EditableModel<T> editableModel = generator(cloned);
+    editableModel.newModel = true;
+    
     storage.data.add(editableModel);
     storage.selected = editableModel;
-    print('selected: ${storage.selected}');
     editableModel.startEdit();
   }
   
