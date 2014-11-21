@@ -16,7 +16,9 @@ class Task extends EditableGradeEntity with Filters {
   static final String target_endpoint_field = "http://gradesystem.io/onto/task.owl#target_endpoint";
   static final String target_graph_field = "http://gradesystem.io/onto/task.owl#target_graph";
   
-  static final String query_field = "http://gradesystem.io/onto/task.owl#transform";
+  static final String transform_query_field = "http://gradesystem.io/onto/task.owl#transform";
+  static final String difference_query_field = "http://gradesystem.io/onto/task.owl#difference";
+  
   static final String note_field = "http://www.w3.org/2004/02/skos/core#editorialNote";
   
   static final String creator_field = "http://purl.org/dc/terms/creator";
