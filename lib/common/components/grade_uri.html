@@ -11,10 +11,13 @@
 
       <style>  
       
+        :host [uri] {
+            text-transform : uppercase;
+        }
       
       </style>
       
-        <div uppercase uri><span>{{ value | start }}</span><span fg bolder>{{ value | suffix }}</span></div>
+        <div uri truncate><span>{{ value | start }}</span><span fg bolder>{{ value | suffix }}</span></div>
         
     
     </template>

@@ -1,3 +1,6 @@
+:host /deep/ [trace] {
+  color: #d3d3d3;
+}
 :host /deep/ [trim] {
   padding: 0px;
   margin: 0px;
@@ -136,9 +139,6 @@
   border: 1px solid;
   border-color: #26699a;
 }
-:host /deep/ .home /deep/ [uppercase] /deep/ input {
-  text-transform: uppercase;
-}
 :host /deep/ .home /deep/ paper-progress::shadow #activeProgress {
   background-color: #26699a;
 }
@@ -150,6 +150,9 @@
 }
 :host /deep/ .home /deep/ paper-item:not([bg-selected]):hover {
   color: #26699a;
+}
+:host /deep/ .home /deep/ [dropitem]:hover {
+  color: #f4f4f4;
 }
 :host /deep/ .home /deep/ grade-dialog [option] {
   color: #26699a;
@@ -239,9 +242,6 @@
   border: 1px solid;
   border-color: #00bcd4;
 }
-:host /deep/ .prod /deep/ [uppercase] /deep/ input {
-  text-transform: uppercase;
-}
 :host /deep/ .prod /deep/ paper-progress::shadow #activeProgress {
   background-color: #00bcd4;
 }
@@ -253,6 +253,9 @@
 }
 :host /deep/ .prod /deep/ paper-item:not([bg-selected]):hover {
   color: #00bcd4;
+}
+:host /deep/ .prod /deep/ [dropitem]:hover {
+  color: #0097a7;
 }
 :host /deep/ .prod /deep/ grade-dialog [option] {
   color: #00bcd4;
@@ -342,9 +345,6 @@
   border: 1px solid;
   border-color: #ffc107;
 }
-:host /deep/ .deck /deep/ [uppercase] /deep/ input {
-  text-transform: uppercase;
-}
 :host /deep/ .deck /deep/ paper-progress::shadow #activeProgress {
   background-color: #ffc107;
 }
@@ -356,6 +356,9 @@
 }
 :host /deep/ .deck /deep/ paper-item:not([bg-selected]):hover {
   color: #ffc107;
+}
+:host /deep/ .deck /deep/ [dropitem]:hover {
+  color: #ffa000;
 }
 :host /deep/ .deck /deep/ grade-dialog [option] {
   color: #ffc107;
@@ -445,9 +448,6 @@
   border: 1px solid;
   border-color: #e41c23;
 }
-:host /deep/ .tasks /deep/ [uppercase] /deep/ input {
-  text-transform: uppercase;
-}
 :host /deep/ .tasks /deep/ paper-progress::shadow #activeProgress {
   background-color: #e41c23;
 }
@@ -459,6 +459,9 @@
 }
 :host /deep/ .tasks /deep/ paper-item:not([bg-selected]):hover {
   color: #e41c23;
+}
+:host /deep/ .tasks /deep/ [dropitem]:hover {
+  color: #cf1715;
 }
 :host /deep/ .tasks /deep/ grade-dialog [option] {
   color: #e41c23;
@@ -548,9 +551,6 @@
   border: 1px solid;
   border-color: #009587;
 }
-:host /deep/ .stage /deep/ [uppercase] /deep/ input {
-  text-transform: uppercase;
-}
 :host /deep/ .stage /deep/ paper-progress::shadow #activeProgress {
   background-color: #009587;
 }
@@ -562,6 +562,9 @@
 }
 :host /deep/ .stage /deep/ paper-item:not([bg-selected]):hover {
   color: #009587;
+}
+:host /deep/ .stage /deep/ [dropitem]:hover {
+  color: #207368;
 }
 :host /deep/ .stage /deep/ grade-dialog [option] {
   color: #009587;

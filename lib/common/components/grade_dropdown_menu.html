@@ -7,41 +7,26 @@
 	<template>
 		<style>
 			
-			paper-dropdown-menu::shadow  #control {
-        border: none;
-			}
+			/* undo predefined layout assumptions */
 			
-			paper-dropdown-menu {
-        padding: 0px;
-        width:100%;
-        background:transparent;
-			}
+      :host paper-dropdown-menu { padding: 0px; width:100%; background:transparent }
+      :host paper-dropdown-menu /deep/ core-dropdown {  width:95% !important; max-height:200px}   /* FIX: expands dropw down to fill the screen and not more*/
 			
-			paper-dropdown-menu::shadow  #control > div {
-        padding: 0px;
-		  }
-		  
-		  paper-dropdown-menu::shadow  #arrow {
-        margin: 0px;
-		  }
-		  
-		  paper-dropdown-menu[disabled] {
-		    cursor: auto;
-        pointer-events: none;
-      }
-		  
-		  paper-dropdown-menu[disabled]::shadow  #arrow {
-        display: none;
-      }
+			:host paper-dropdown-menu::shadow #control {border-color:lightgrey; max-height:20px ;}
+			:host paper-dropdown-menu::shadow #control > div { padding: 0px; text-transform: uppercase }
+			
+			
       
-      :host([focused]) .error-text,
-			:host([focused]) .error-icon {
-			  color: #d34336;
-			}
+			:host paper-dropdown-menu::shadow  #arrow { margin: 0px; top:-10px; min-width: 32px; width: 32px; height: 32px; min-height: 32px }
+		  
+		  :host paper-dropdown-menu[disabled]::shadow  #arrow {display: none;}
+		  :host paper-dropdown-menu[disabled]::shadow #control {border: none;}
+		  :host paper-dropdown-menu[disabled] {cursor: auto; pointer-events: none;}
+		  
+		  ::content [dropitem] { max-height:25px; padding:10px; text-transform:uppercase; font-size:smaller }
+      
+      :host([focused]) .error-text, :host([focused]) .error-icon {color: #d34336;}
  			
-			:host /deep/ core-dropdown {
-			   width:60%;
-			}
 			
 			.error-text {
 			  font-size: 0.75em;
@@ -56,12 +41,15 @@
 			}
 
 		</style>
-    <paper-dropdown-menu selected={{selected}} valueattr="{{valueattr}}" label={{label}} disabled?={{disabled}}>
+		
+    <paper-dropdown-menu id="menu" selected={{selected}} selectedAttribute="{{selectedAttribute}}" valueattr="dropitem" label={{label}} disabled?={{disabled}}>
        <content select="*"></content>
 		</paper-dropdown-menu>
+		
 		<div layout horizontal center hidden?="{{!invalid}}">
-      <div class="error-text" flex auto role="alert" aria-hidden="{{!invalid}}">Please select an item.</div>
+      <div class="error-text" flex auto role="alert" aria-hidden="{{!invalid}}">{{errorMsg}}</div>
       <core-icon class="error-icon" icon="warning"></core-icon>
+    
     </div>
     
 	</template>

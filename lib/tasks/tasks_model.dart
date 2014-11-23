@@ -1,55 +1,67 @@
 part of tasks;
 
+class TaskKeys {
+  
+     const TaskKeys();
+    
+     final String id = "http://gradesystem.io/onto#id";  
+       
+     final String uri = "http://gradesystem.io/onto#uri";  
+     final String label = "http://www.w3.org/2000/01/rdf-schema#label";
+     
+     final String op = "http://gradesystem.io/onto/task.owl#operation";
+     final String publish_op = 'http://gradesystem.io/onto/task.owl#publish';
+     final String add_op ='http://gradesystem.io/onto/task.owl#add';
+     final String remove_op  ='http://gradesystem.io/onto/task.owl#remove';
+     
+     final String source_endpoint = "http://gradesystem.io/onto/task.owl#source_endpoint";
+     final String source_graph = "http://gradesystem.io/onto/task.owl#source_graph";
+     
+     final String target_endpoint = "http://gradesystem.io/onto/task.owl#target_endpoint";
+     final String target_graph = "http://gradesystem.io/onto/task.owl#target_graph";
+     
+     final String transform = "http://gradesystem.io/onto/task.owl#transform";
+     final String diff = "http://gradesystem.io/onto/task.owl#difference";
+     
+     final String note = "http://www.w3.org/2004/02/skos/core#editorialNote";
+     final String creator = "http://purl.org/dc/terms/creator";
+     
+  
+}
+
+
+
 class Task extends EditableGradeEntity with Filters {
   
-  
-  static final String id_field = "http://gradesystem.io/onto#id";  
-  
-  static final String name_field = "http://gradesystem.io/onto#uri";  
-  static final String label_field = "http://www.w3.org/2000/01/rdf-schema#label";
-  
-  static final String operation_field = "http://gradesystem.io/onto/task.owl#operation";
-  
-  static final String source_endpoint_field = "http://gradesystem.io/onto/task.owl#source_endpoint";
-  static final String source_graph_field = "http://gradesystem.io/onto/task.owl#source_graph";
-  
-  static final String target_endpoint_field = "http://gradesystem.io/onto/task.owl#target_endpoint";
-  static final String target_graph_field = "http://gradesystem.io/onto/task.owl#target_graph";
-  
-  static final String transform_query_field = "http://gradesystem.io/onto/task.owl#transform";
-  static final String difference_query_field = "http://gradesystem.io/onto/task.owl#difference";
-  
-  static final String note_field = "http://www.w3.org/2004/02/skos/core#editorialNote";
-  
-  static final String creator_field = "http://purl.org/dc/terms/creator";
+  static TaskKeys K = const TaskKeys();
 
   
   Task.fromBean(Map bean) : super(bean) {
-    onBeanChange([label_field], ()=>notifyPropertyChange(#label, null, label));
-    onBeanChange([name_field], () => notifyPropertyChange(#name, null, name));
-    onBeanChange([operation_field], ()=>notifyPropertyChange(#operation, null, operation));
+    onBeanChange([K.label], ()=>notifyPropertyChange(#label, null, label));
+    onBeanChange([K.uri], () => notifyPropertyChange(#name, null, name));
+    onBeanChange([K.op], ()=>notifyPropertyChange(#operation, null, operation));
   }
   
   Task() : this.fromBean({
-          id_field: "",
-          name_field: ""
+          K.id: "",
+          K.uri: ""
         });
   
-  String get id => get(id_field);
-  set id(String value) => set(id_field, value);
+  String get id => get(K.id);
+  set id(String value) => set(K.id, value);
   
   @observable
-  String get name => get(name_field);
+  String get name => get(K.uri);
   set name(String value) {
-    set(name_field, value);
+    set(K.uri, value);
     notifyPropertyChange(#name, null, value);
   }
 
-  String get label => get(label_field);
+  String get label => get(K.label);
   
-  Operation get operation => Operation.parse(get(operation_field));
+  Operation get operation => Operation.parse(get(K.op));
   set operation(Operation operation) {
-    set(operation_field, operation!=null?operation.value:null);
+    set(K.op, operation!=null?operation.value:null);
     notifyPropertyChange(#operation, null, operation);
   } 
   
@@ -58,8 +70,13 @@ class Task extends EditableGradeEntity with Filters {
   }
 }
 
-class EditableTask extends EditableModel<Task> {
+class EditableTask extends EditableModel<Task> with Keyed {
+  
   EditableTask(Task task) : super(task);
+  
+  get(key) => model.get(key);
+  
+  set(key,value) => model.set(key, value);
   
 }
 
