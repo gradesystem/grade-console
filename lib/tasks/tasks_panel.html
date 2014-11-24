@@ -49,7 +49,7 @@
           <grade-button toolbar icon="create" label="edit task" on-click="{{onEdit}}" hidden?="{{  items.selected==null || items.selected.edit || items.selected.model.predefined}}"></grade-button>
           <grade-button toolbar icon="cancel" label="discard changes" on-click="{{onCancel}}" hidden?="{{ !items.selected.edit}}"></grade-button>
           <grade-button toolbar icon="save" label="save changes" on-click="{{onSave}}" hidden?="{{ !items.selected.edit}}" disabled={{!items.selected.valid}}></grade-button>
-<!--           <grade-button toolbar icon="arrow-forward" label="run task queries" on-click="{{onQueryPlayground}}" hidden?="{{ items.selected==null }}"></grade-button> -->
+          <grade-button toolbar icon="arrow-forward" label="run task queries" on-click="{{onQueryPlayground}}" hidden?="{{ items.selected==null }}"></grade-button>
 
           <task-details main editable="{{items.selected}}" spaced></task-details> 
           
@@ -57,7 +57,7 @@
 	
 	  </grade-scaffold>
 	  
-<!-- 	   <task-playground editableTask="{{items.selected}}" on-back="{{onBack}}" on-run="{{onRunQuery}}"></task-playground> -->
+	   <task-playground editableTask="{{items.selected}}" on-back="{{onBack}}" on-run="{{onRunQuery}}"></task-playground>
     
     </core-animated-pages>
 	  
