@@ -14,10 +14,10 @@ class TasKDetails extends View {
   
   TasKDetails.created() : super.created() {
   
-    endpoints = instanceOf(GradeEnpoints);
+  endpoints = instanceOf(GradeEnpoints);
   
-   conditionalRequiredDiff = ($) => 
-       get(editable,K.source_endpoint)!=K.publish_op && ($==null || $.isEmpty)? "Please fill in this field.":null;
+  conditionalRequiredDiff = ($) => 
+       get(editable,K.op)!=K.publish_op && ($==null || $.isEmpty)? "Please fill in this field.":null;
   }  
   
   @ComputedProperty("editable.model.bean[K.source_endpoint]")
