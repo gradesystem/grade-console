@@ -232,11 +232,25 @@
 	                        disabled="{{!editable.edit}}" 
 	                        multiline
 	                        label="note ?" 
-	                        value=" {{ editable.model.bean[K.note] }} ">
+	                        value="{{ editable.model.bean[K.note] }}">
 	          </grade-input>
 	          <grade-uri fascia-subtitle value={{K.note}}></grade-uri>
 	        </grade-fascia>   
 	      </grade-item>
+	      
+	      <!-- creator -->
+        <grade-item icon=chevron-right>
+          <grade-fascia flex truncate>
+            <grade-input  fascia-title 
+                          disabled="{{!editable.edit}}" 
+                          required
+                          type="URL"
+                          label="creator ?" 
+                          value="{{ editable.model.bean[K.creator] }}">
+            </grade-input>
+            <grade-uri fascia-subtitle value={{K.creator}}></grade-uri>
+          </grade-fascia>   
+        </grade-item>
 	    </div> 
     </template>
 		
