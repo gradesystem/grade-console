@@ -163,15 +163,15 @@ class EditableModel<T extends Cloneable> extends Observable {
   T _underEdit;
   
   EditableModel(T this._original) {
-    fieldsInvalidity.changes.listen(_updateValidity);
+    fieldsInvalidity.changes.listen((_)=>updateValidity());
   }
   
- 
-  
-  void _updateValidity(_) {
-    _valid = fieldsInvalidity.values.every((b)=>!b);
+  void updateValidity() {
+    _valid = calculateFieldsValidity();
     notifyPropertyChange(#valid, null, _valid);
   }
+  
+  bool calculateFieldsValidity() => fieldsInvalidity.values.every((b)=>!b);
   
   bool isValid(String fieldName) => fieldsInvalidity.containsKey(fieldName) && !fieldsInvalidity[fieldName];
   

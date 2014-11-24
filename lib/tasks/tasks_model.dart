@@ -26,12 +26,10 @@ class TaskKeys {
      final String note = "http://www.w3.org/2004/02/skos/core#editorialNote";
      final String creator = "http://purl.org/dc/terms/creator";
      
-  
 }
 
 class Task extends EditableGradeEntity with Filters {
 
-  
   static TaskKeys K = const TaskKeys();
 
   Task.fromBean(Map bean) : super(bean) {
@@ -70,6 +68,8 @@ class Task extends EditableGradeEntity with Filters {
 }
 
 class EditableTask extends EditableModel<Task> with Keyed {
+  
+  static TaskKeys K = const TaskKeys();
 
   @observable
   bool queryRunning = false;
@@ -93,13 +93,22 @@ class EditableTask extends EditableModel<Task> with Keyed {
   
   get(key) => model.get(key);
   set(key,value) => model.set(key, value);
-
+  
+  bool calculateFieldsValidity() => fieldsInvalidity.keys
+      //we skip the diff query if the operation is publish
+      .where((String field)=>!(field == K.diff && get(K.op)==K.publish_op))
+      .map((String field)=>fieldsInvalidity[field])
+      //we are watching invalidity
+      .every((b)=>!b);
 
   void _listenNewModel() {
 
     model.changes.listen((_) => _setDirty(true));
 
     onPropertyChange(this, #model, () => _setDirty(false));
+    
+    //we need to update validity after operation change
+    model.onBeanChange([K.op], updateValidity);
   }
 
   void _setDirty(bool dirty) {
