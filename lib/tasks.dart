@@ -8,6 +8,7 @@ import 'package:di/di.dart';
 import 'package:di/annotations.dart';
 import 'package:event_bus/event_bus.dart';
 import 'package:core_elements/core_list_dart.dart';
+import 'package:core_elements/core_collapse.dart';
 
 import 'common.dart';
 import 'common/lists/lists.dart';
@@ -22,6 +23,7 @@ part 'tasks/tasks_model.dart';
 part 'tasks/tasks_panel.dart';
 part 'tasks/task_list.dart';
 part 'tasks/task_details_summary.dart';
+part 'tasks/task_playground.dart';
 
 final Logger log = new Logger('grade.tasks');
 

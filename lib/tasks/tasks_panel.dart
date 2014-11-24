@@ -1,62 +1,79 @@
 part of tasks;
 
-@CustomTag("tasks-panel") 
+@CustomTag("tasks-panel")
 class TasksPanel extends PolymerElement with Filters {
-  
+
   @observable
-  String kfilter='';
-  
+  int area = 0;
+
+  @observable
+  String kfilter = '';
+
   @published
   TasksModel model;
-  
+
   @observable
   bool removeDialogOpened = false;
-  
+
   @observable
   String removedDialogHeader;
-  
+
   Function dialogCallback;
-  
+
   TasksPanel.created() : super.created();
-  
+
   Tasks get items => model.storage;
-  
+
   void refresh() {
     model.loadAll();
   }
-  
+
   void addTask() {
     model.addNew();
   }
-  
-  
+
+
   void cloneItem(event, detail, target) {
     model.clone(detail);
   }
+
+  void removeItem(event, detail, target) {
+    EditableTask deleteCandidate = detail;
+    dialogCallback = () {
+      model.remove(deleteCandidate);
+    };
+    Task task = deleteCandidate.model;
+    removedDialogHeader = "Remove ${task.bean[Endpoint.name_field]}";
+    removeDialogOpened = true;
+  }
+
+
+  void onEdit() {
+    items.selected.startEdit();
+  }
+
+  void onCancel() {
+    model.cancelEditing(items.selected);
+  }
+
+  void onSave() {
+    model.save(items.selected);
+  }
+
+  void dialogAffermative() {
+    if (dialogCallback != null) dialogCallback();
+  }
+   
+  void onQueryPlayground() {
+    area = 1;
+  }
   
-   void removeItem(event, detail, target) {
-     EditableTask deleteCandidate = detail;
-     dialogCallback = (){model.remove(deleteCandidate);};
-     Task task = deleteCandidate.model;
-     removedDialogHeader = "Remove ${task.bean[Endpoint.name_field]}";
-     removeDialogOpened = true;
-   }
+  void onBack() {
+    area = 0;
+  }
   
-   
-   void onEdit() {
-     items.selected.startEdit();
-   }
-   
-   void onCancel() {
-     model.cancelEditing(items.selected);
-   }
-   
-   void onSave() {
-     model.save(items.selected);
-   }
-   
-   void dialogAffermative() {
-     if (dialogCallback!=null) dialogCallback();
-   }
- 
+  void onRunQuery(event, detail, target) {
+    //model.runQuery(detail);
+  }
+
 }

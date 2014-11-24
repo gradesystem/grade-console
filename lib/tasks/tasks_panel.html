@@ -13,12 +13,15 @@
 
 <link rel="import" href="task_details.html">
 <link rel="import" href="task_list.html">
+<link rel="import" href="task_playground.html">
 
 <link rel="import" href="tasks.html">
 
 <polymer-element name="tasks-panel" horizontal layout>
 
   <template>
+  
+    <core-animated-pages flex selected="{{area}}">
 
 	  <grade-scaffold flex>
 	  
@@ -45,11 +48,16 @@
           <grade-button toolbar icon="create" label="edit task" on-click="{{onEdit}}" hidden?="{{  items.selected==null || items.selected.edit || items.selected.model.predefined}}"></grade-button>
           <grade-button toolbar icon="cancel" label="discard changes" on-click="{{onCancel}}" hidden?="{{ !items.selected.edit}}"></grade-button>
           <grade-button toolbar icon="save" label="save changes" on-click="{{onSave}}" hidden?="{{ !items.selected.edit}}" disabled={{!items.selected.valid}}></grade-button>
+          <grade-button toolbar icon="arrow-forward" label="run task queries" on-click="{{onQueryPlayground}}" hidden?="{{ items.selected==null }}"></grade-button>
 
           <task-details main editableItem="{{items.selected}}" spaced></task-details> 
 	      </grade-header-panel>
 	
 	  </grade-scaffold>
+	  
+	   <task-playground editableTask="{{items.selected}}" on-back="{{onBack}}" on-run="{{onRunQuery}}"></task-playground>
+    
+    </core-animated-pages>
 	  
     
     <grade-dialog opened={{removeDialogOpened}} heading={{removedDialogHeader}}>
@@ -58,7 +66,7 @@
       <paper-button fg dismissive option>NO</paper-button>
       <paper-button fg affirmative option autofocus on-click={{dialogAffermative}}>YES</paper-button>
     </grade-dialog>
-  
+
   </template>
   
 </polymer-element>

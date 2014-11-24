@@ -1,0 +1,148 @@
+ <link rel="import" href="../../../packages/polymer/polymer.html">
+
+<link rel="import" href="../common/components/grade_input.html">
+<link rel="import" href="../common/components/grade_item.html">
+<link rel="import" href="../common/components/grade_fascia.html">
+
+<link rel="import" href="../common/components/grade_header_panel.html">
+<link rel="import" href="../common/components/grade_button.html">
+<link rel="import" href="../common/components/grade_error.html">
+<link rel="import" href="../common/components/loading_panel.html">
+<link rel="import" href="../common/components/codemirror_input.html">
+
+<link rel="import" href="../../../packages/core_elements/av_icons.html">
+<link rel="import" href="../../../packages/core_elements/core_pages.html">
+<link rel="import" href="../../../packages/core_elements/core_splitter.html">
+<link rel="import" href="../../../packages/core_elements/core_animated_pages.html">
+<link rel="import" href="../../../packages/core_elements/core_collapse.html">
+<link rel="import" href="../../../packages/paper_elements/paper_fab.html">
+<link rel="import" href="../../../packages/paper_elements/paper_tabs.html">
+<link rel="import" href="../../../packages/paper_elements/paper_tab.html">
+<link rel="import" href="../../../packages/paper_elements/paper_input.html">
+
+<link rel="import" href="tasks.html">
+
+<polymer-element name="task-playground" layout vertical>  
+
+  <template>
+  
+    <style>
+      .runButton {
+				position: absolute;
+				right: 16px;
+				bottom: -36px;
+				z-index: 1000;
+      }
+      
+       /* spacing */
+      
+        :host paper-input, 
+        :host paper-input::shadow .mirror-text
+        
+        {
+          padding: 0px;
+        }
+        
+        /* underline */
+        
+        :host paper-input::shadow .underline {
+          border:none
+        }
+        
+        :host paper-input::shadow .unfocused-underline {
+        height: 0px;
+          border:none
+        }
+        
+         :host paper-input::shadow .focused-underline {
+                height: 0px;
+          border:none
+        }
+        
+        :host paper-input[disabled]::shadow .underline {
+          border:none
+        }
+   
+    </style>
+    
+    <div style="height:60%;" wired rounded spaced layout vertical>
+      <grade-header-panel flex paneltitle={{title}}>
+        <grade-button menu icon="arrow-back" on-click="{{onBack}}"></grade-button>
+        <div main fit layout vertical>
+
+              <div wired rounded spaced layout horizontal style="min-height:75px;" flex>
+			          <codemirror-input flex 
+			          active={{isactive}} 
+			          mode="sparql" 
+			          value={{transformQuery}}
+			          disabled="{{!editableTask.edit}}"></codemirror-input>
+              </div>
+
+	             <div wired rounded spaced layout horizontal style="min-height:75px;" flex hidden?={{hideDifferenceQuery}}>
+	            
+			            <codemirror-input flex
+			            active={{isactive}} 
+			            mode="sparql" 
+			            value={{differenceQuery}}
+			            disabled="{{!editableTask.edit}}"></codemirror-input>
+              </div>
+        </div>
+        
+      </grade-header-panel>
+      <div style="position: relative; width: 0; height: 0" self-end >
+        <paper-fab class="runButton" mini="true" icon="av:play-arrow" on-click="{{onRun}}" hide?="{{editableTask.fieldsInvalidity[transform_query_key] || editableTask.fieldsInvalidity[difference_query_key] }}"></paper-fab>
+      </div>
+    </div>
+  
+    <core-splitter direction="up" allowOverflow minSize="170px"></core-splitter>
+    
+    <div flex wired rounded spaced layout vertical>
+      <grade-header-panel flex paneltitle="Results">
+         <paper-tabs toolbar  style="width:200px" selected="{{resultArea}}" hide?="{{editableTask.lastQueryResult==null || editableTask.queryRunning || editableTask.lastError!=null}}" >
+          <paper-tab>Table</paper-tab>
+          <paper-tab>Raw</paper-tab>
+        </paper-tabs>
+        <loading-panel main fit loading="{{editableTask.queryRunning}}" message="retrieving results">
+          <core-animated-pages selected="{{resultArea}}" fit spaced hide?="{{editableTask.lastQueryResult==null}}">
+            <div style="overflow-y: auto;">
+	            <table style="border-collapse: collapse; width:100%">
+	              <tr>
+	                <th fg template repeat="{{header in editableTask.lastQueryResult.headers}}" result-table?="{{!editableTask.dirty}}" result-table-disabled?="{{editableTask.dirty}}">{{header}}</th>
+	              </tr> 
+	               
+	              <tr template repeat="{{row in editableTask.lastQueryResult.rows}}">
+	                <td template repeat="{{header in editableTask.lastQueryResult.headers}}" result-table?="{{!editableTask.dirty}}" result-table-disabled?="{{editableTask.dirty}}">
+	                    {{row[header]["value"]}}
+	                </td>
+	              </tr>
+	            </table>
+            </div>
+             
+						<div style="overflow-y: auto;">
+						  <pre>
+						    {{editableQuery.lastQueryResult.raw}}
+						  </pre>
+						</div>
+          
+          </core-animated-pages>
+          
+         <div layout horizontal center-justified 
+               hide?="{{editableTask.lastQueryResult!=null || editableTask.lastError!=null}}" style="overflow:hidden"> 
+         </div>
+         
+         <template if="{{editableTask.lastError!=null}}">
+
+            <grade-error one="{{errorMessage()}}"
+                 two = {{editableTask.lastError.message}}
+                 three = {{editableTask.lastError.stacktrace}}>
+            </grade-error>
+                  
+         </template>
+            
+            
+        </loading-panel>
+      </grade-header-panel>
+    </div>
+  </template>
+</polymer-element>
+
