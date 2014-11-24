@@ -12,10 +12,10 @@ class GradeService {
 
   Future getJSon(String path, [Map<String, String> parameters]) {
     Uri url = new Uri.http("", "$base_path/$path", parameters);
-    return HttpService.getString(url.toString()).timeout(timeLimit).then(_decode).catchError(_onError);
+    return HttpService.getString(url.toString()).timeout(timeLimit).then(decode).catchError(_onError);
   }
 
-  dynamic _decode(String json) {
+  dynamic decode(String json) {
     try {
       return JSON.decode(json);
     } catch (e) {
@@ -34,7 +34,7 @@ class GradeService {
   }
   
   Future<dynamic> postJSon(String path, String content, {MediaType acceptedMediaType:MediaType.JSON, Map<String, String> parameters}) {
-    return post(path, content, acceptedMediaType:acceptedMediaType, parameters:parameters).then(_decode);
+    return post(path, content, acceptedMediaType:acceptedMediaType, parameters:parameters).then(decode);
   }
 
   Future<String> delete(String path, [Map<String, String> parameters]) {

@@ -4,6 +4,7 @@ part of tasks;
 class TaskPlayground extends PolymerElement with Filters {
   
   TaskKeys K = const TaskKeys();  
+  TaskExecutionKeys TEK = const TaskExecutionKeys();
   
   @observable
   int resultArea = 0;

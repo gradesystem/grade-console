@@ -3,6 +3,7 @@
 <link rel="import" href="../common/components/grade_input.html">
 <link rel="import" href="../common/components/grade_item.html">
 <link rel="import" href="../common/components/grade_fascia.html">
+<link rel="import" href="../common/components/grade_uri.html">
 
 <link rel="import" href="../common/components/grade_header_panel.html">
 <link rel="import" href="../common/components/grade_button.html">
@@ -90,7 +91,7 @@
         
       </grade-header-panel>
       <div style="position: relative; width: 0; height: 0" self-end >
-        <paper-fab class="runButton" mini="true" icon="av:play-arrow" on-click="{{onRun}}" hide?="{{editableTask.fieldsInvalidity[transform_query_key] || editableTask.fieldsInvalidity[difference_query_key] }}"></paper-fab>
+        <paper-fab class="runButton" mini="true" icon="{{editableTask.taskRunning?'av:stop':'av:play-arrow'}}" on-click="{{onRun}}" hide?="{{editableTask.fieldsInvalidity[transform_query_key] || editableTask.fieldsInvalidity[difference_query_key] }}"></paper-fab>
       </div>
     </div>
   
@@ -98,12 +99,88 @@
     
     <div flex wired rounded spaced layout vertical>
       <grade-header-panel flex paneltitle="Results">
+         
          <paper-tabs toolbar  style="width:200px" selected="{{resultArea}}" hide?="{{editableTask.lastTaskExecution==null || editableTask.taskRunning || editableTask.lastError!=null}}" >
-          <paper-tab>Table</paper-tab>
-          <paper-tab>Raw</paper-tab>
+            <paper-tab>Status</paper-tab>
+            <paper-tab>Table</paper-tab>
+            <paper-tab>Raw</paper-tab>
         </paper-tabs>
-        <loading-panel main fit loading="{{editableTask.taskRunning}}" message="retrieving results">
-          <core-animated-pages selected="{{resultArea}}" fit spaced hide?="{{editableTask.lastTaskExecution==null}}">
+        
+          <core-animated-pages main selected="{{resultArea}}" fit spaced hide?="{{editableTask.lastTaskExecution==null}}">
+         
+            <div style="overflow-y: auto;"> 
+            
+                          
+              <grade-item icon=chevron-right>
+                <grade-fascia flex truncate>
+                  <div fascia-title>{{ editableTask.lastTaskExecution.bean[TEK.status] }}</div>
+                  <grade-uri fascia-subtitle value={{TEK.status}}></grade-uri>
+                </grade-fascia>   
+              </grade-item>
+              
+              <grade-item icon=chevron-right>
+                <grade-fascia flex truncate>
+                  <div fascia-title style="overflow-y: auto;height:150px;">
+                    <pre>{{editableTask.lastTaskExecution.bean[TEK.log]}}</pre>
+<!--                     <template repeat="{{logLine in editableTask.lastTaskExecution.bean[TEK.log] | split}}"> -->
+<!--                       <div>{{logLine}}</div> -->
+                  
+<!--                   </template> -->
+                  </div>
+                  <grade-uri fascia-subtitle value={{TEK.log}}></grade-uri>
+                </grade-fascia>   
+              </grade-item>
+              
+              <grade-item icon=chevron-right hidden?="{{editableTask.lastTaskExecution.bean[TEK.error]==null}}">
+                <grade-fascia flex truncate>
+                  <div fascia-title style="overflow-y: auto;height:200px;">
+                  <pre>{{editableTask.lastTaskExecution.bean[TEK.error]}}</pre>
+                  </div>
+                  <grade-uri fascia-subtitle value={{TEK.log}}></grade-uri>
+                </grade-fascia>   
+              </grade-item>
+     
+	            <grade-item icon=chevron-right>
+	              <grade-fascia flex truncate>
+	                <div fascia-title>{{ editableTask.lastTaskExecution.bean[TEK.startTime] | formatEpoch }}</div>
+	                <grade-uri fascia-subtitle value={{TEK.startTime}}></grade-uri>
+	              </grade-fascia>   
+	            </grade-item>
+	            
+	            
+              <grade-item icon=chevron-right>
+                <grade-fascia flex truncate>
+                  <div fascia-title>{{ editableTask.lastTaskExecution.bean[TEK.endTime] | formatEpoch }}</div>
+                  <grade-uri fascia-subtitle value={{TEK.endTime}}></grade-uri>
+                </grade-fascia>   
+              </grade-item>
+              
+              <grade-item icon=chevron-right>
+                <grade-fascia flex truncate>
+                  <div fascia-title>{{ editableTask.lastTaskExecution.bean[TEK.duration]}}</div>
+                  <grade-uri fascia-subtitle value={{TEK.duration}}></grade-uri>
+                </grade-fascia>   
+              </grade-item>
+
+              
+              <grade-item icon=chevron-right>
+                <grade-fascia flex truncate>
+                  <div fascia-title>{{ editableTask.lastTaskExecution.bean[TEK.sourceUri] }}</div>
+                  <grade-uri fascia-subtitle value={{TEK.sourceUri}}></grade-uri>
+                </grade-fascia>   
+              </grade-item>
+              
+              <grade-item icon=chevron-right>
+                <grade-fascia flex truncate>
+                  <div fascia-title>{{ editableTask.lastTaskExecution.bean[TEK.targetUri] }}</div>
+                  <grade-uri fascia-subtitle value={{TEK.targetUri}}></grade-uri>
+                </grade-fascia>   
+              </grade-item>
+ 
+  </div>
+          
+          
+           <loading-panel fit loading="{{editableTask.taskRunning}}" message="retrieving results">
             <div style="overflow-y: auto;">
 <!-- 	            <table style="border-collapse: collapse; width:100%"> -->
 <!-- 	              <tr> -->
@@ -117,12 +194,15 @@
 <!-- 	              </tr> -->
 <!-- 	            </table> -->
             </div>
+            </loading-panel>
              
+          <loading-panel fit loading="{{editableTask.taskRunning}}" message="retrieving results">
 						<div style="overflow-y: auto;">
 						  <pre>
 <!-- 						    {{editableTask.lastQueryResult.raw}} -->
 						  </pre>
 						</div>
+						</loading-panel>
           
           </core-animated-pages>
           
@@ -138,9 +218,7 @@
             </grade-error>
                   
          </template>
-            
-            
-        </loading-panel>
+
       </grade-header-panel>
     </div>
   </template>
