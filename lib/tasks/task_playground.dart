@@ -3,6 +3,8 @@ part of tasks;
 @CustomTag("task-playground") 
 class TaskPlayground extends PolymerElement with Filters {
   
+  TaskKeys K = const TaskKeys();  
+  
   @observable
   int resultArea = 0;
   
@@ -21,9 +23,9 @@ class TaskPlayground extends PolymerElement with Filters {
   
   String get publish_operation => 'http://gradesystem.io/onto/task.owl#publish';
   
-  String get transform_query_key => Task.transform_query_field;
-  String get difference_query_key => Task.difference_query_field;
-  String get operation_key => Task.operation_field;
+  String get transform_query_key => K.transform;
+  String get difference_query_key => K.diff;
+  String get operation_key => K.op;
   String get predefined_key => Query.predefined_field;
   String get target_key => Query.target_field;
   

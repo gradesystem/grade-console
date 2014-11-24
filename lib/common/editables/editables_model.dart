@@ -143,7 +143,7 @@ abstract class EditableListItems<T extends EditableModel> extends ListItems<T> {
   T findByName(String name) => data.firstWhere((T item)=> item.model.name!=null && item.model.name.toLowerCase() == name.toLowerCase(), orElse:()=>null);
 }
 
-class EditableModel<T extends Cloneable<T>> extends Observable {
+class EditableModel<T extends Cloneable> extends Observable {
   
   @observable
   bool newModel = false;
@@ -162,9 +162,11 @@ class EditableModel<T extends Cloneable<T>> extends Observable {
   T _original;
   T _underEdit;
   
-  EditableModel(this._original) {
+  EditableModel(T this._original) {
     fieldsInvalidity.changes.listen(_updateValidity);
   }
+  
+ 
   
   void _updateValidity(_) {
     _valid = fieldsInvalidity.values.every((b)=>!b);

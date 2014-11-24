@@ -6,6 +6,7 @@
 <link rel="import" href="../common/components/grade_item.html">
 <link rel="import" href="../common/components/grade_button.html">
 <link rel="import" href="../common/components/grade_fascia.html">
+<link rel="import" href="../common/components/grade_uri.html">
 
 <link rel="import" href="tasks.html">
 
@@ -18,14 +19,15 @@
 	     <grade-item smallicon icon="settings-applications" flex>
 	     
 	       <grade-fascia flex truncate>
-	         <div fascia-title>{{ label | uppercase }}</div>
-	         <div fascia-subtitle><span>{{ item.model.targetGraph | start}}</span><span fg bolder>{{ item.model.targetGraph | suffix}}</span></div>
+	         <div fascia-title>{{label | uppercase }}</div>
+	         <grade-uri fascia-subtitle value={{target}}></grade-uri>
 	         
 	       </grade-fascia>
 	       
 	       <grade-button action onhover hidden?="{{ item.edit || !selected }}" smallicon icon="content-copy" tooltip="left" label="clone task" on-click={{cloneItem}}></grade-button>
 	       <grade-button action hidden?="{{ !item.model.predefined }}" smallicon tooltip="left" label="predefined task" icon="lock"></grade-button>
          <grade-button action onhover hidden?="{{ item.edit || !selected || item.model.predefined }}" smallicon tooltip="left" label="remove task" icon="delete" on-click={{removeItem}}></grade-button>
+         <grade-button action hidden?="{{ item.valid }}" smallicon icon="warning" tooltip="left" label="there are errors"></grade-button>
          <grade-button action hidden?="{{ !item.edit }}" smallicon icon="save" tooltip="left" label="there are pending changes"></grade-button>
 
 	     </grade-item>

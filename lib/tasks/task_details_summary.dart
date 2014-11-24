@@ -1,7 +1,7 @@
 part of tasks;
 
 @CustomTag("task-details-summary") 
-class TaskDetailsSummary extends PolymerElement with Filters {
+class TaskDetailsSummary extends View {
    
   @published
   EditableTask item;
@@ -11,26 +11,17 @@ class TaskDetailsSummary extends PolymerElement with Filters {
   
   TaskDetailsSummary.created() : super.created();
 
-  bool get predefined => item.model.bean[Endpoint.predefined_field]==true;
+  TaskKeys K = const TaskKeys();
+ 
+  
 
-  String get label_key => Task.label_field;
+  @ComputedProperty("item.model.bean[K.target_graph]")
+  String get target =>get(item,K.target_graph);
   
-  @ComputedProperty("item.model.bean[label_key]")
-  String get label {
+  @ComputedProperty("item.model.bean[K.label]")
+  String get label => get(item,K.label);
+ 
   
-    String label = "(label?)";
-    
-    if (item!=null) {
-      
-      String current_label= item.model.get(label_key);
-      
-      label = (current_label==null || current_label.isEmpty)? label : current_label;
-      
-    }
-    
-    return label;
-      
-  }
   
   void removeItem() {
     fire("remove-item", detail:item);

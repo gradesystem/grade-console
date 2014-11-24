@@ -1,78 +1,45 @@
 part of tasks;
 
 @CustomTag("task-details")
-class TaskDetails extends PolymerElement with Filters, Dependencies {
-  
-  String get publish_operation => 'http://gradesystem.io/onto/task.owl#publish';
-  String get add_operation =>'http://gradesystem.io/onto/task.owl#add';
-  String get remove_operation =>'http://gradesystem.io/onto/task.owl#remove';
-
-  String get name_key => Task.name_field;
-  String get label_key => Task.label_field;
-  
-  String get operation_key => Task.operation_field;
-  
-  String get source_endpoint_key => Task.source_endpoint_field;
-  String get source_graph_key => Task.source_graph_field;
-  
-  String get target_endpoint_key => Task.target_endpoint_field;
-  String get target_graph_key => Task.target_graph_field;
-  
-  String get transform_query_key => Task.transform_query_field;
-  String get difference_query_key => Task.difference_query_field;
-  String get note_key => Task.note_field;
-  
-  String get creator_key => Task.creator_field;
-  
-  List<Operation> get operations => Operation.values;
-
+class TasKDetails extends View {
+ 
   @published
-  EditableTask editableItem;
-  
-  @ComputedProperty('editableItem.model')
-  Task get item => editableItem==null?null:editableItem.model;
-  
-  
-  @ComputedProperty('editableItem.edit')
-  bool get editable => item==null?false:editableItem.edit;
-  
-  GradeEnpoints gradeEndpoints;
-  
-  TaskDetails.created() : super.created() {
-    gradeEndpoints = instanceOf(GradeEnpoints);
-  }  
+  EditableTask editable;
 
-  @ComputedProperty("item.bean[source_endpoint_key]")
-  String get sourceEnpointId => item!=null?item.bean[source_endpoint_key]:null;
+  GradeEnpoints endpoints;
   
-  @ComputedProperty("sourceEnpointId")
-  EditableEndpoint get sourceEnpoint => gradeEndpoints.findEditableEndpointById(sourceEnpointId);
+  TaskKeys K = const TaskKeys();  
+  
+  Validator conditionalRequiredDiff ;
+  
+  TasKDetails.created() : super.created() {
+  
+    endpoints = instanceOf(GradeEnpoints);
+  
+   conditionalRequiredDiff = ($) => 
+       get(editable,K.source_endpoint)!=K.publish_op && ($==null || $.isEmpty)? "Please fill in this field.":null;
+  }  
+  
+  @ComputedProperty("editable.model.bean[K.source_endpoint]")
+  EditableEndpoint get source => endpoints.findEditableEndpointById(get(editable,K.source_endpoint));
    
-  void refreshSourceEnpointGraphs() {
-    if (sourceEnpointId!=null) gradeEndpoints.refesh(sourceEnpointId);
+  @ComputedProperty("editable.model.bean[K.target_endpoint]")
+  EditableEndpoint get target => endpoints.findEditableEndpointById(get(editable,K.target_endpoint));
+   
+  refreshSourceGraphs() {
+    endpoints.refesh(get(editable,K.source_endpoint));
   }
-  
-  @ComputedProperty("item.bean[target_endpoint_key]")
-  String get targetEnpointId => item!=null?item.bean[target_endpoint_key]:null;
-  
-  @ComputedProperty("targetEnpointId")
-  EditableEndpoint get targetEnpoint => gradeEndpoints!=null?gradeEndpoints.findEditableEndpointById(targetEnpointId):null;
-  
-  void refreshTargetEnpointGraphs() {
-    if (targetEnpointId!=null) {
-      gradeEndpoints.refesh(targetEnpointId);
-      if (targetEnpoint!=null && !targetEnpoint.model.graphs.contains(targetEnpointId)) item.bean[target_graph_key] = null;
-    }
+
+  refreshTargetGraphs() {
+    endpoints.refesh(get(editable,K.target_endpoint));
   }
 
   //workaround to selected binding not working: issue https://github.com/dart-lang/core-elements/issues/157
-  @ObserveProperty("item")
-  void updateSourceGraphsSelected() {
-    if (item!=null && $["sourceGraphsSelector"]!=null) 
-      $["sourceGraphsSelector"].selected = item.bean[source_graph_key];
+  @ObserveProperty("editable.model")
+  void updateGraphs() {
     
-    if (item!=null && $["targetGraphsSelector"]!=null) 
-         $["targetGraphsSelector"].selected = item.bean[target_graph_key];
+    $["sourceGraphs"].selected = getAll(editable,K.source_graph);
+    $["targetGraphs"].selected = get(editable,K.target_graph);
  
   }
 

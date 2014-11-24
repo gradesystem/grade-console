@@ -20,29 +20,21 @@
         }
 
         
-        :host paper-input::shadow .input-container {
-          top:0;
-          bottom:0;
-        }
+        :host paper-input::shadow .input-container {  top:0;  bottom:0; }
         
         /* underline */
         
-        :host paper-input::shadow .underline {
-          height:1px
-        }
+        :host paper-input::shadow .underline { height:1px}
         
-        :host paper-input::shadow .unfocused-underline {
-          background:lightgrey
-        }
+        :host paper-input::shadow .unfocused-underline { background:lightgrey }
         
-        :host paper-input[disabled]::shadow .underline {
-          border:none
-        }
+        :host paper-input[disabled]::shadow .underline {  border:none }
         
-        :host paper-input [multiline] {
-          
-             overflow:auto;
-        }
+        
+        :host paper-input [multiline] { overflow:auto; }
+        
+        
+        :host([uppercase]) /deep/ input { text-transform : uppercase  }
         
       </style>
                

@@ -4,7 +4,16 @@ typedef T Generator<T>(Map data);
 
 DateFormat JSON_DATE_FORMAT = new DateFormat('yyyy/MM/dd');
 
-abstract class Delegate {
+
+abstract class Keyed {
+  
+  dynamic get(String key);
+  
+  set(String key, dynamic val);
+  
+}
+
+abstract class Delegate extends Keyed {
   
   final ObservableMap _bean = new ObservableMap();
   
