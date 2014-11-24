@@ -72,8 +72,8 @@ class TasksPanel extends PolymerElement with Filters {
     area = 0;
   }
   
-  void onRunQuery(event, detail, target) {
-    //model.runQuery(detail);
+  void onRunTask(event, detail, target) {
+    model.runTask(detail);
   }
 
 }

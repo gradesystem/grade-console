@@ -3,8 +3,6 @@ part of tasks;
 class TaskKeys {
   
      const TaskKeys();
-    
-     final String id = "http://gradesystem.io/onto#id";  
        
      final String uri = "http://gradesystem.io/onto#uri";  
      final String label = "http://www.w3.org/2000/01/rdf-schema#label";
@@ -39,12 +37,10 @@ class Task extends EditableGradeEntity with Filters {
   }
 
   Task() : this.fromBean({
-          K.id: "",
-          K.uri: ""
         });
   
-  String get id => get(K.id);
-  set id(String value) => set(K.id, value);
+  String get id => get(K.uri);
+  set id(String value) => set(K.uri, value);
   
   @observable
   String get name => get(K.uri);
@@ -72,13 +68,13 @@ class EditableTask extends EditableModel<Task> with Keyed {
   static TaskKeys K = const TaskKeys();
 
   @observable
-  bool queryRunning = false;
+  bool taskRunning = false;
 
   @observable
   ErrorResponse lastError;
 
   @observable
-  QueryResult lastQueryResult;
+  TaskExecution lastTaskExecution;
 
   bool _dirty = false;
 
@@ -124,20 +120,20 @@ class EditableTask extends EditableModel<Task> with Keyed {
   }
 
 
-  void runQuery() {
-    queryRunning = true;
+  void runTask() {
+    taskRunning = true;
     _setDirty(false);
     resetLastError();
-    lastQueryResult = null;
+    lastTaskExecution = null;
   }
 
-  void queryResult(QueryResult result) {
-    queryRunning = false;
-    lastQueryResult = result;
+  void taskResult(TaskExecution result) {
+    taskRunning = false;
+    lastTaskExecution = result;
   }
 
-  void queryFailed(ErrorResponse reason) {
-    queryRunning = false;
+  void taskFailed(ErrorResponse reason) {
+    taskRunning = false;
     lastError = reason;
   }
 }
@@ -176,7 +172,6 @@ class TasksPageModel {
 @Injectable()
 class TasksModel extends SubPageEditableModel<Task> {
 
-
   TasksModel(EventBus bus, TasksService service, Tasks storage) : super(bus, service, storage, generate) {
     bus.on(ApplicationReady).listen((_) {
       loadAll();
@@ -189,7 +184,19 @@ class TasksModel extends SubPageEditableModel<Task> {
     if (item == null) return new EditableTask(new Task());
     return new EditableTask(item);
   }
+  
+  
+  void runTask(EditableTask editableTask) {
+    editableTask.runTask();
+    taskService.runTask(editableTask.model)
+    .then((TaskExecution r)=>editableTask.taskResult(r))
+    .catchError((e)=>editableTask.taskFailed(e));
+  }
 
+}
+
+class TaskExecution extends Delegate {
+  TaskExecution(Map bean):super(bean);
 }
 
 @Injectable()

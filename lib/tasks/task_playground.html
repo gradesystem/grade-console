@@ -98,36 +98,36 @@
     
     <div flex wired rounded spaced layout vertical>
       <grade-header-panel flex paneltitle="Results">
-         <paper-tabs toolbar  style="width:200px" selected="{{resultArea}}" hide?="{{editableTask.lastQueryResult==null || editableTask.queryRunning || editableTask.lastError!=null}}" >
+         <paper-tabs toolbar  style="width:200px" selected="{{resultArea}}" hide?="{{editableTask.lastTaskExecution==null || editableTask.taskRunning || editableTask.lastError!=null}}" >
           <paper-tab>Table</paper-tab>
           <paper-tab>Raw</paper-tab>
         </paper-tabs>
-        <loading-panel main fit loading="{{editableTask.queryRunning}}" message="retrieving results">
-          <core-animated-pages selected="{{resultArea}}" fit spaced hide?="{{editableTask.lastQueryResult==null}}">
+        <loading-panel main fit loading="{{editableTask.taskRunning}}" message="retrieving results">
+          <core-animated-pages selected="{{resultArea}}" fit spaced hide?="{{editableTask.lastTaskExecution==null}}">
             <div style="overflow-y: auto;">
-	            <table style="border-collapse: collapse; width:100%">
-	              <tr>
-	                <th fg template repeat="{{header in editableTask.lastQueryResult.headers}}" result-table?="{{!editableTask.dirty}}" result-table-disabled?="{{editableTask.dirty}}">{{header}}</th>
-	              </tr> 
+<!-- 	            <table style="border-collapse: collapse; width:100%"> -->
+<!-- 	              <tr> -->
+<!-- 	                <th fg template repeat="{{header in editableTask.lastQueryResult.headers}}" result-table?="{{!editableTask.dirty}}" result-table-disabled?="{{editableTask.dirty}}">{{header}}</th> -->
+<!-- 	              </tr>  -->
 	               
-	              <tr template repeat="{{row in editableTask.lastQueryResult.rows}}">
-	                <td template repeat="{{header in editableTask.lastQueryResult.headers}}" result-table?="{{!editableTask.dirty}}" result-table-disabled?="{{editableTask.dirty}}">
-	                    {{row[header]["value"]}}
-	                </td>
-	              </tr>
-	            </table>
+<!-- 	              <tr template repeat="{{row in editableTask.lastQueryResult.rows}}"> -->
+<!-- 	                <td template repeat="{{header in editableTask.lastQueryResult.headers}}" result-table?="{{!editableTask.dirty}}" result-table-disabled?="{{editableTask.dirty}}"> -->
+<!-- 	                    {{row[header]["value"]}} -->
+<!-- 	                </td> -->
+<!-- 	              </tr> -->
+<!-- 	            </table> -->
             </div>
              
 						<div style="overflow-y: auto;">
 						  <pre>
-						    {{editableTask.lastQueryResult.raw}}
+<!-- 						    {{editableTask.lastQueryResult.raw}} -->
 						  </pre>
 						</div>
           
           </core-animated-pages>
           
          <div layout horizontal center-justified 
-               hide?="{{editableTask.lastQueryResult!=null || editableTask.lastError!=null}}" style="overflow:hidden"> 
+               hide?="{{editableTask.lastTaskExecution!=null || editableTask.lastError!=null}}" style="overflow:hidden"> 
          </div>
          
          <template if="{{editableTask.lastError!=null}}">
