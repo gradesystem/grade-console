@@ -7,10 +7,13 @@ import 'package:di/annotations.dart';
 
 import 'common.dart';
 
+import 'tasks.dart';
+
 
 part 'deck/deck_page.dart';
 part 'deck/deck_service.dart';
 part 'deck/deck_model.dart';
+part 'deck/desk_tasks_panel.dart';
 
 final Logger log = new Logger('grade.deck');
 

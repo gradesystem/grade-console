@@ -2,12 +2,22 @@
 
 <link rel="import" href="../common/coming_soon.html">
 
+<link rel="import" href="../common/components/grade_header_panel.html">
+<link rel="import" href="../common/components/grade_button.html">
+<link rel="import" href="../common/components/grade_input.html">
+<link rel="import" href="../../../packages/core_elements/core_icon.html">
+
 <link rel="import" href="../../../packages/core_elements/core_splitter.html">
+
+<link rel="import" href="desk_tasks_panel.html">
+
+<link rel="import" href="deck.html">
 
 <polymer-element name="deck-page" layout vertical>  
   <template>
-    <div style="height:60%;" wired rounded spaced layout vertical>
-      <coming-soon larger></coming-soon>
+    <div style="height:60%;" spaced layout horizontal>
+        <deck-tasks-panel flex TWO rounded wired model="{{tasks}}"></deck-tasks-panel>
+        <div flex THREE wired rounded style="margin-left: 8px;padding: 5px;">RUNNING TASK</div>
     </div>
   
     <core-splitter direction="up" allowOverflow minSize="170px"></core-splitter>
@@ -17,5 +27,4 @@
     </div>
  </template>
  
- <script type="application/dart" src="../deck.dart"></script> 
 </polymer-element>
