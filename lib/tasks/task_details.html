@@ -52,7 +52,7 @@
        <!-- uri -->
         <grade-item icon=chevron-right>
           <grade-fascia flex truncate>
-            <div trace?={{editable.newModel}}  fascia-title>{{ editable.newModel ? '[generated on save]' : editable.model.bean[K.uri] }}</div>
+            <div trace?={{editable.newModel}}  fascia-title>{{ editable.newModel ? '&lt;system-generated&gt;' : editable.model.bean[K.uri] }}</div>
             <grade-uri fascia-subtitle value={{K.uri}}></grade-uri>
           </grade-fascia>   
         </grade-item>
@@ -86,8 +86,8 @@
                    <template repeat="{{item in areaEndpoints.endpointsStorage.synchedData}}">
                      <!-- to separate selection (ids) from display (names) we need a 'label'-ed polymer -->
                      <!-- paper-item (or core-item) are ready. we can also rollout our own if we must -->
-                     <paper-item truncate label="{{item.model.name | uppercase}} " dropitem="{{item.model.id}}">
-                       <div trace>:{{areaEndpoints.area | uppercase}}</div>
+                     <paper-item truncate label="{{item.model.name}} " dropitem="{{item.model.id}}">
+                       <div trace>:{{areaEndpoints.area }}</div>
                      </paper-item>
                    </template>
                  </template>
@@ -145,8 +145,8 @@
                          
                       <template repeat="{{areaEndpoints in endpoints.areaEndpoints}}">
                         <template repeat="{{item in areaEndpoints.endpointsStorage.synchedData}}">
-                            <paper-item truncate label="{{item.model.name | uppercase}}" dropitem="{{item.model.id}}">
-                               <div trace>:{{areaEndpoints.area | uppercase}}</div>
+                            <paper-item truncate label="{{item.model.name}}" dropitem="{{item.model.id}}">
+                               <div trace>:{{areaEndpoints.area}}</div>
                             </paper-item>
                         </template>
                       </template>

@@ -3,6 +3,7 @@
 
 <link rel="import" href="../components/grade_item.html">
 <link rel="import" href="../components/grade_fascia.html">
+<link rel="import" href="../components/grade_uri.html">
 
 <link rel="import" href="datasets.html">
 
@@ -17,8 +18,8 @@
           <grade-item icon=chevron-right>
           
             <grade-fascia truncate>
-                <span fascia-title>{{item.bean[key] | trim | uppercase}}</span>
-                <div fascia-subtitle><span>{{ key | uppercase | start}}</span><span fg bolder>{{ key | uppercase | suffix}}</span></div>
+                <span fascia-title>{{item.bean[key] | trim}}</span>
+                <grade-uri fascia-subtitle value="{{key}}"></grade-uri>
             </grade-fascia>
               
           </grade-item>

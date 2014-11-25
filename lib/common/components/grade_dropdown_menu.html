@@ -13,7 +13,7 @@
       :host paper-dropdown-menu /deep/ core-dropdown {  width:95% !important; max-height:200px}   /* FIX: expands dropw down to fill the screen and not more*/
 			
 			:host paper-dropdown-menu::shadow #control {border-color:lightgrey; max-height:20px ;}
-			:host paper-dropdown-menu::shadow #control > div { padding: 0px; text-transform: uppercase }
+			:host paper-dropdown-menu::shadow #control > div { padding: 0px }
 			
 			
       
@@ -23,7 +23,7 @@
 		  :host paper-dropdown-menu[disabled]::shadow #control {border: none;}
 		  :host paper-dropdown-menu[disabled] {cursor: auto; pointer-events: none;}
 		  
-		  ::content [dropitem] { max-height:25px; padding:10px; text-transform:uppercase; font-size:smaller }
+		  ::content [dropitem] { max-height:25px; padding:10px; font-size:smaller }
       
       :host([focused]) .error-text, :host([focused]) .error-icon {color: #d34336;}
  			
