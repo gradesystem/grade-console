@@ -19,196 +19,191 @@
 <polymer-element name="task-details" layout vertical> 
   <template>
     <style>
-			  
-			  grade-input::shadow [multiline] {
-			   min-height: 150px;
+        
+        grade-input::shadow [multiline] {
+         min-height: 150px;
          max-height: 250px;
       }
-			  
-			  :host [radios] { height:45px; position: relative; top:-8px }
-			  
+        
+        :host [radios] { height:45px; position: relative; top:-8px }
+        
         :host [graphs] { min-height:80px; margin-top:15px }
         :host [graphs] core-selector:not([notap]) grade-uri { cursor:pointer }
         
         
         :host side { padding-left:5px } 
-        			  			  
+                        
     </style>
  
  
-	    <div hidden?="{{editable==null}}" style="overflow-y: auto">
-			 
-			 <!-- operation --> 
-			  <div smaller radios layout vertical center>
-				  <paper-radio-group fascia-title selected="{{ editable.model.bean[K.op] }}">
-				  
-	          <paper-radio-button name="{{K.publish_op}}" label="PUBLISH"  disabled?="{{!editable.edit}}"></paper-radio-button>
-	          <paper-radio-button name="{{K.add_op}}"     label="ADD"      disabled?="{{!editable.edit}}"></paper-radio-button>
-	          <paper-radio-button name="{{K.remove_op}}"  label="REMOVE"   disabled?="{{!editable.edit}}"></paper-radio-button>
-	        
-	        </paper-radio-group>
+      <div hidden?="{{editable==null}}" style="overflow-y: auto">
+       
+       <!-- operation --> 
+        <div smaller radios layout vertical center>
+          <paper-radio-group fascia-title selected="{{ editable.model.bean[K.op] }}">
+          
+            <paper-radio-button name="{{K.publish_op}}" label="PUBLISH"  disabled?="{{!editable.edit}}"></paper-radio-button>
+            <paper-radio-button name="{{K.add_op}}"     label="ADD"      disabled?="{{!editable.edit}}"></paper-radio-button>
+            <paper-radio-button name="{{K.remove_op}}"  label="REMOVE"   disabled?="{{!editable.edit}}"></paper-radio-button>
+          
+          </paper-radio-group>
         </div>
-	     
-	     <!-- uri -->
-	      <grade-item icon=chevron-right>
-	        <grade-fascia flex truncate>
-	          <grade-input fascia-title label="uri ?" 
-	                       disabled= "{{!editable.edit}}" 
-	                       required validators="{{[ noWhiteSpaces ]}}" invalid= "{{ editable.fieldsInvalidity[K.uri] }}"
-	                       value= "{{ uri }}"
-	                       >
-	          </grade-input>
-	          <grade-uri fascia-subtitle value={{id}}></grade-uri>
-	        </grade-fascia>   
-	      </grade-item>
-	      
-	      <!-- label -->
-	      <grade-item icon=chevron-right>
-	        <grade-fascia flex truncate>
-	          <grade-input fascia-title required label="label ?" 
-	                        disabled="{{!editable.edit}}" 
-	                        invalid="{{ editable.fieldsInvalidity[K.label] }}"
-	                        value="{{ editable.model.bean[K.label] }}">
-	          </grade-input>
-	          <grade-uri fascia-subtitle value={{K.label}}></grade-uri>
-	         </grade-fascia>   
-	      </grade-item>
-	      
-	      
-	      <grade-item icon=chevron-right>
-	    
-	       <div layout vertical flex>
-	       
-	        <grade-fascia>
-	          <grade-dropdown-menu fascia-title flex
-	                
-	                 required invalid="{{ editable.fieldsInvalidity[K.source_endpoint] }}"
-	                 disabled="{{ !editable.edit }}" 
-	                 selected="{{ editable.model.bean[K.source_endpoint] }}"
-	                 label="source endpoint ?">
-	                 
-	               <template repeat="{{areaEndpoints in endpoints.areaEndpoints}}">
-	                 <template repeat="{{item in areaEndpoints.endpointsStorage.synchedData}}">
-	                   <!-- to separate selection (ids) from display (names) we need a 'label'-ed polymer -->
-	                   <!-- paper-item (or core-item) are ready. we can also rollout our own if we must -->
-	                   <paper-item truncate label="{{item.model.name | uppercase}} " dropitem="{{item.model.id}}">
-	                     <div trace>:{{areaEndpoints.area | uppercase}}</div>
-	                   </paper-item>
-	                 </template>
-	               </template>
-	               
-	            </grade-dropdown-menu>
-	            
-	            <grade-uri fascia-subtitle value="{{K.source_endpoint}}"></grade-uri>
-	          
-	        </grade-fascia>   
-	      
-	       <!-- source graphs -->
-	         <grade-fascia truncate>
-	            
-	            <div graphs horizontal layout flex fascia-title>
-	            
-	               <div smaller wired rounded relative flex>
-	                   <loading-panel fit loading="{{source.loadingGraphs==true}}" message="loading the graphs" style="overflow-y:auto;">
-	                      <core-selector id="sourceGraphs"  
-	                                     notap?="{{!editable.edit}}" 
-	                                     selected="{{editable.model.bean[K.source_graph]}}" 
-	                                     multi 
-	                                     valueattr="item" 
-	                                     selectedAttribute="fg">
-			                   <template repeat="{{graph in source.model.graphs}}">
-	                             <grade-uri smaller item={{graph}} value={{graph}}></grade-uri>
-			                   </template>
-			                </core-selector>
-	                   </loading-panel>
-	                </div>
-	                
-	                <grade-button disabled?={{!editable.edit}} side icon=refresh label="refresh graphs" on-click={{refreshSourceGraphs}}></grade-button>
-	         
-	            </div>
-	                     
-	              
-	           <grade-uri fascia-subtitle value="{{K.source_graph}}"></grade-uri>
-	           
-	         </grade-fascia>   
-	        
-	        </div>
-	   </grade-item>
+       
+       <!-- uri -->
+        <grade-item icon=chevron-right>
+          <grade-fascia flex truncate>
+            <div trace?={{editable.newModel}}  fascia-title>{{ editable.newModel ? '[generated on save]' : editable.model.bean[K.uri] }}</div>
+            <grade-uri fascia-subtitle value={{K.uri}}></grade-uri>
+          </grade-fascia>   
+        </grade-item>
+        
+        <!-- label -->
+        <grade-item icon=chevron-right>
+          <grade-fascia flex truncate>
+            <grade-input fascia-title required label="label ?" 
+                          disabled="{{!editable.edit}}" 
+                          invalid="{{ editable.fieldsInvalidity[K.label] }}"
+                          value="{{ editable.model.bean[K.label] }}">
+            </grade-input>
+            <grade-uri fascia-subtitle value={{K.label}}></grade-uri>
+           </grade-fascia>   
+        </grade-item>
+        
+        
+        <grade-item icon=chevron-right>
+      
+         <div layout vertical flex>
+         
+          <grade-fascia>
+            <grade-dropdown-menu fascia-title flex
+                  
+                   required invalid="{{ editable.fieldsInvalidity[K.source_endpoint] }}"
+                   disabled="{{ !editable.edit }}" 
+                   selected="{{ editable.model.bean[K.source_endpoint] }}"
+                   label="source endpoint ?">
+                   
+                 <template repeat="{{areaEndpoints in endpoints.areaEndpoints}}">
+                   <template repeat="{{item in areaEndpoints.endpointsStorage.synchedData}}">
+                     <!-- to separate selection (ids) from display (names) we need a 'label'-ed polymer -->
+                     <!-- paper-item (or core-item) are ready. we can also rollout our own if we must -->
+                     <paper-item truncate label="{{item.model.name | uppercase}} " dropitem="{{item.model.id}}">
+                       <div trace>:{{areaEndpoints.area | uppercase}}</div>
+                     </paper-item>
+                   </template>
+                 </template>
+                 
+              </grade-dropdown-menu>
+              
+              <grade-uri fascia-subtitle value="{{K.source_endpoint}}"></grade-uri>
+            
+          </grade-fascia>   
+        
+         <!-- source graphs -->
+           <grade-fascia truncate>
+              
+              <div graphs horizontal layout flex fascia-title>
+              
+                 <div smaller wired rounded relative flex>
+                     <loading-panel fit loading="{{source.loadingGraphs==true}}" message="loading the graphs" style="overflow-y:auto;">
+                        <core-selector id="sourceGraphs"  
+                                       notap?="{{!editable.edit}}" 
+                                       selected="{{editable.model.bean[K.source_graph]}}" 
+                                       multi 
+                                       valueattr="item" 
+                                       selectedAttribute="fg">
+                         <template repeat="{{graph in source.model.graphs}}">
+                               <grade-uri smaller item={{graph}} value={{graph}}></grade-uri>
+                         </template>
+                      </core-selector>
+                     </loading-panel>
+                  </div>
+                  
+                  <grade-button disabled?={{!editable.edit}} side icon=refresh label="refresh graphs" on-click={{refreshSourceGraphs}}></grade-button>
+           
+              </div>
+                       
+                
+             <grade-uri fascia-subtitle value="{{K.source_graph}}"></grade-uri>
+             
+           </grade-fascia>   
+          
+          </div>
+     </grade-item>
 
      <grade-item icon=chevron-right>
-	      
-	        <div layout vertical flex>
-	        
-				          <grade-fascia>
-			    
-			              <!-- target endpoint -->
+        
+          <div layout vertical flex>
+          
+                  <grade-fascia>
+          
+                    <!-- target endpoint -->
                     <grade-dropdown-menu fascia-title flex
                         required invalid="{{ editable.fieldsInvalidity[K.target_endpoint] }}"
-			                   disabled="{{ !editable.edit }}" 
-			                   selected="{{ editable.model.bean[K.target_endpoint] }}"
-			                   label="target endpoint ?">
-			                   
-			                <template repeat="{{areaEndpoints in endpoints.areaEndpoints}}">
-			                  <template repeat="{{item in areaEndpoints.endpointsStorage.synchedData}}">
-			                      <paper-item truncate label="{{item.model.name | uppercase}}" dropitem="{{item.model.id}}">
-			                         <div trace>:{{areaEndpoints.area | uppercase}}</div>
-			                      </paper-item>
+                         disabled="{{ !editable.edit }}" 
+                         selected="{{ editable.model.bean[K.target_endpoint] }}"
+                         label="target endpoint ?">
+                         
+                      <template repeat="{{areaEndpoints in endpoints.areaEndpoints}}">
+                        <template repeat="{{item in areaEndpoints.endpointsStorage.synchedData}}">
+                            <paper-item truncate label="{{item.model.name | uppercase}}" dropitem="{{item.model.id}}">
+                               <div trace>:{{areaEndpoints.area | uppercase}}</div>
+                            </paper-item>
                         </template>
-			                </template>
-			              
-			              </grade-dropdown-menu>
-			              
-			             <grade-uri fascia-subtitle value={{K.target_endpoint}}></grade-uri> 
-			            
-			            </grade-fascia>   
-				        
-				         <!-- target graph -->
-			           <grade-fascia truncat>
-			           
-			                <div graphs horizontal layout flex fascia-title>
+                      </template>
                     
-		                     <div smaller wired rounded relative flex>
-		                          <loading-panel fit loading="{{target.loadingGraphs==true}}" message="loading graphs" style="overflow-y:auto;">
-		                             <core-selector id="targetGraphs" 
-		                                              notap?="{{!editable.edit}}" 
-		                                              selected="{{editable.model.bean[K.target_graph]}}" 
-		                                              valueattr="item" 
-		                                              selectedAttribute="fg">
-		                               <template repeat="{{graph in target.model.graphs}}">
-                                      <grade-uri smaller item={{graph}} value={{graph}}></grade-uri>		                               
+                    </grade-dropdown-menu>
+                    
+                   <grade-uri fascia-subtitle value={{K.target_endpoint}}></grade-uri> 
+                  
+                  </grade-fascia>   
+                
+                 <!-- target graph -->
+                 <grade-fascia truncat>
+                 
+                      <div graphs horizontal layout flex fascia-title>
+                    
+                         <div smaller wired rounded relative flex>
+                              <loading-panel fit loading="{{target.loadingGraphs==true}}" message="loading graphs" style="overflow-y:auto;">
+                                 <core-selector id="targetGraphs" 
+                                                  notap?="{{!editable.edit}}" 
+                                                  selected="{{editable.model.bean[K.target_graph]}}" 
+                                                  valueattr="item" 
+                                                  selectedAttribute="fg">
+                                   <template repeat="{{graph in target.model.graphs}}">
+                                      <grade-uri smaller item={{graph}} value={{graph}}></grade-uri>                                   
                                  </template>
-		                            </core-selector>
-		                          </loading-panel>
-		                       </div>
-		                       
-		                      <grade-button disabled?={{!editable.edit}} side icon=refresh label="refresh graphs" on-click={{refreshTargetGraphs}}></grade-button>
-		               
-		                  </div>
-			              
-			              <grade-uri fascia-subtitle value={{K.target_graph}}></grade-uri>  
-			              
-			            </grade-fascia> 
-	           </div>
-	         </grade-item>
+                                </core-selector>
+                              </loading-panel>
+                           </div>
+                           
+                          <grade-button disabled?={{!editable.edit}} side icon=refresh label="refresh graphs" on-click={{refreshTargetGraphs}}></grade-button>
+                   
+                      </div>
+                    
+                    <grade-uri fascia-subtitle value={{K.target_graph}}></grade-uri>  
+                    
+                  </grade-fascia> 
+             </div>
+           </grade-item>
 
-	      
-	      <!-- transform query -->
-	      <grade-item icon=chevron-right>
-	        <grade-fascia flex>
-	           <div smaller wired rounded truncate inset fascia-title >
-		          <grade-input 
-		                        disabled="{{!editable.edit}}" 
-		                        multiline
-		                        required invalid= "{{ editable.fieldsInvalidity[K.transform]}}"
-		                        label="SPARQL transform query ?" 
-		                        value="{{ editable.model.bean[K.transform] }}">
-		          </grade-input>
-	          </div>
-	          <grade-uri fascia-subtitle value={{K.transform}}></grade-uri>
-	        </grade-fascia>   
-	      </grade-item>
-	      
-	             
+        
+        <!-- transform query -->
+        <grade-item icon=chevron-right>
+          <grade-fascia flex>
+             <div smaller wired rounded truncate inset fascia-title >
+              <grade-input 
+                            disabled="{{!editable.edit}}" 
+                            multiline
+                            required invalid= "{{ editable.fieldsInvalidity[K.transform]}}"
+                            label="SPARQL transform query ?" 
+                            value="{{ editable.model.bean[K.transform] }}">
+              </grade-input>
+            </div>
+            <grade-uri fascia-subtitle value={{K.transform}}></grade-uri>
+          </grade-fascia>   
+        </grade-item>
+        
+               
         <!-- difference query -->
         <grade-item icon=chevron-right hidden?="{{ editable.model.bean[K.op] == K.publish_op}}">
           <grade-fascia flex>
@@ -224,21 +219,21 @@
              <grade-uri fascia-subtitle value={{K.diff}}></grade-uri>
           </grade-fascia>   
         </grade-item>
-	      
-	      <!-- note -->
-	      <grade-item icon=chevron-right>
-	        <grade-fascia flex truncate>
-	          <grade-input  fascia-title 
-	                        disabled="{{!editable.edit}}" 
-	                        multiline
-	                        label="note ?" 
-	                        value="{{ editable.model.bean[K.note] }}">
-	          </grade-input>
-	          <grade-uri fascia-subtitle value={{K.note}}></grade-uri>
-	        </grade-fascia>   
-	      </grade-item>
-	      
-	      <!-- creator -->
+        
+        <!-- note -->
+        <grade-item icon=chevron-right>
+          <grade-fascia flex truncate>
+            <grade-input  fascia-title 
+                          disabled="{{!editable.edit}}" 
+                          multiline
+                          label="note ?" 
+                          value="{{ editable.model.bean[K.note] }}">
+            </grade-input>
+            <grade-uri fascia-subtitle value={{K.note}}></grade-uri>
+          </grade-fascia>   
+        </grade-item>
+        
+        <!-- creator -->
         <grade-item icon=chevron-right>
           <grade-fascia flex truncate>
             <grade-input  fascia-title 
@@ -251,7 +246,7 @@
             <grade-uri fascia-subtitle value={{K.creator}}></grade-uri>
           </grade-fascia>   
         </grade-item>
-	    </div> 
+      </div> 
     </template>
-		
+    
 </polymer-element>

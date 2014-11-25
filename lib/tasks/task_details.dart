@@ -6,8 +6,6 @@ class TasKDetails extends View {
   static String URI_PREFIX = "http://gradesystem.io/tasks#";
   static RegExp spaceExp = new RegExp(r'[\s]');
   
-  final String id = "http://gradesystem.io/onto#id";
- 
   @published
   EditableTask editable;
 
@@ -16,7 +14,6 @@ class TasKDetails extends View {
   TaskKeys K = const TaskKeys();  
   
   Validator conditionalRequiredDiff ;
-  Validator noWhiteSpaces ;
   
   TasKDetails.created() : super.created() {
   
@@ -24,20 +21,7 @@ class TasKDetails extends View {
   
   conditionalRequiredDiff = ($) => 
        get(editable,K.op)!=K.publish_op && ($==null || $.isEmpty)? "Please fill in this field.":null;
-  
-  noWhiteSpaces = ($) => 
-        ($!=null && $.contains(spaceExp))? "No spaces allowed.":null;
-
-  }  
-  
-   
-  @ComputedProperty("editable.model.bean[K.uri]")
-  String get uri {
-   String uri = get(editable,K.uri);
-   return uri!=null && uri.startsWith(URI_PREFIX)?uri.substring(URI_PREFIX.length):uri;
   }
-  set uri(String uri) => set(editable, K.uri, URI_PREFIX+uri);
-  
   
   @ComputedProperty("editable.model.bean[K.source_endpoint]")
   EditableEndpoint get source => endpoints.findEditableEndpointById(get(editable,K.source_endpoint));
