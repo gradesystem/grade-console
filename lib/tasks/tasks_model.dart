@@ -36,7 +36,10 @@ class Task extends EditableGradeEntity with Filters {
     onBeanChange([K.op], () => notifyPropertyChange(#operation, null, operation));
   }
 
-  Task() : this.fromBean({});
+  Task() : this.fromBean({
+    K.op:K.publish_op
+    
+  });
 
   String get id => get(K.uri);
   set id(String value) => set(K.uri, value);
