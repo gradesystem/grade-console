@@ -37,9 +37,7 @@ class Task extends EditableGradeEntity with Filters {
   }
 
   Task() : this.fromBean({
-    K.op:K.publish_op,
-    K.transform:"",
-    K.diff:""
+    K.op:K.publish_op
     
   });
 

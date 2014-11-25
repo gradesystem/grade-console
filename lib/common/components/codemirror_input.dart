@@ -42,14 +42,15 @@ class CodemirrorInput extends PolymerElement {
     editor.setLineNumbers(true);
 
     onPropertyChange(this, #value, (){
-      if (value!=editor.getDoc().getValue()) {
+      if (value!=null && value!=editor.getDoc().getValue()) {
         editor.getDoc().setValue(value);
         editor.refresh();
       }
     });
     
     editor.onChange.listen((_){
-      value = editor.getDoc().getValue();
+      String cmValue = editor.getDoc().getValue();
+      value = (cmValue==null || cmValue.isEmpty)?null:cmValue;
     });
     
     onPropertyChange(this, #disabled, (){
@@ -57,14 +58,5 @@ class CodemirrorInput extends PolymerElement {
     });
 
   }
-  
-  /**
-   * How to listen to attributes changes, for parent refresh notification:
-   void attributeChanged(name, oldValue, newValue) {
-    super.attributeChanged(name, oldValue, newValue);
-    if (name == "active") isactive =  attributes.containsKey('active');
-  }
-   */
-
   
 }
