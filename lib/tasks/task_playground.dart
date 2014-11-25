@@ -32,7 +32,7 @@ class TaskPlayground extends PolymerElement with Filters {
   
   @ComputedProperty("editableTask.model.bean[transform_query_key]") 
   String get transformQuery => editableTask!=null?editableTask.model.bean[transform_query_key]:"";
-  void set transformQuery(String exp) {editableTask.model.bean[transform_query_key] = exp;}
+  void set transformQuery(String exp) {if (editableTask!=null) editableTask.model.bean[transform_query_key] = exp;}
   
   @ComputedProperty("editableTask.model.bean[difference_query_key]") 
   String get differenceQuery => editableTask!=null?editableTask.model.bean[difference_query_key]:"";
