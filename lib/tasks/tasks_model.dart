@@ -291,6 +291,8 @@ class TaskExecution extends Delegate {
 
 @Injectable()
 class Tasks extends EditableListItems<EditableModel<Task>> {
+  
+  containsName($) => data.any((EditableTask eq)=>eq!=selected && eq.model.label!=null && eq.model.label.toLowerCase() == $.toLowerCase());
 }
 
 @Injectable()

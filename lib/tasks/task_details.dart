@@ -8,19 +8,25 @@ class TasKDetails extends View {
   
   @published
   EditableTask editable;
+  
+  @published
+  Tasks tasks;
 
   GradeEnpoints endpoints;
   
   TaskKeys K = const TaskKeys();  
   
   Validator conditionalRequiredDiff ;
+  Validator uniqueLabel;
   
   TasKDetails.created() : super.created() {
   
-  endpoints = instanceOf(GradeEnpoints);
-  
-  conditionalRequiredDiff = ($) => 
+    endpoints = instanceOf(GradeEnpoints);
+    
+    conditionalRequiredDiff = ($) => 
        get(editable,K.op)!=K.publish_op && ($==null || $.isEmpty)? "Please fill in this field.":null;
+    
+    uniqueLabel = ($) =>  $!=null && tasks.containsName($)?"Not original enough, try again.":null;
   }
   
   @ComputedProperty("editable.model.bean[K.source_endpoint]")

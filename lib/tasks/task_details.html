@@ -60,8 +60,9 @@
         <!-- label -->
         <grade-item icon=chevron-right>
           <grade-fascia flex truncate>
-            <grade-input fascia-title required label="label ?" 
+            <grade-input fascia-title label="label ?" 
                           disabled="{{!editable.edit}}" 
+                          required validators="{{[ uniqueLabel ]}}"
                           invalid="{{ editable.fieldsInvalidity[K.label] }}"
                           value="{{ editable.model.bean[K.label] }}">
             </grade-input>
