@@ -2,12 +2,19 @@
 
 <link rel="import" href="../common/coming_soon.html">
 
+<link rel="import" href="../../../packages/core_elements/core_splitter.html">
+
 <polymer-element name="deck-page" layout vertical>  
-
   <template>
+    <div style="height:60%;" wired rounded spaced layout vertical>
+      <coming-soon larger></coming-soon>
+    </div>
+  
+    <core-splitter direction="up" allowOverflow minSize="170px"></core-splitter>
     
-   <coming-soon larger></coming-soon>
-
+    <div flex wired rounded spaced layout vertical>
+      <coming-soon larger></coming-soon>
+    </div>
  </template>
  
  <script type="application/dart" src="../deck.dart"></script> 
