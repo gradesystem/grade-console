@@ -52,11 +52,11 @@
 	     <!-- uri -->
 	      <grade-item icon=chevron-right>
 	        <grade-fascia flex truncate>
-	          <grade-input fascia-title uppercase label="uri ?" 
+	          <grade-input fascia-title label="uri ?" 
 	                       disabled= "{{!editable.edit}}" 
-	                       required invalid= "{{ editable.fieldsInvalidity[K.uri] }}"
-	                       value= "{{ editable.model.bean[K.uri] }}"
-	                       type="URL">
+	                       required validators="{{[ noWhiteSpaces ]}}" invalid= "{{ editable.fieldsInvalidity[K.uri] }}"
+	                       value= "{{ uri }}"
+	                       >
 	          </grade-input>
 	          <grade-uri fascia-subtitle value={{K.uri}}></grade-uri>
 	        </grade-fascia>   
