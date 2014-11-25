@@ -238,7 +238,7 @@
           <grade-fascia flex truncate>
             <grade-input  fascia-title 
                           disabled="{{!editable.edit}}" 
-                          required
+                          required invalid= "{{ editable.fieldsInvalidity[K.creator]}}"
                           type="URL"
                           label="creator ?" 
                           value="{{ editable.model.bean[K.creator] }}">
