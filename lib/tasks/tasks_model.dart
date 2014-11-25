@@ -37,7 +37,9 @@ class Task extends EditableGradeEntity with Filters {
   }
 
   Task() : this.fromBean({
-    K.op:K.publish_op
+    K.op:K.publish_op,
+    K.transform:"",
+    K.diff:""
     
   });
 
@@ -231,6 +233,7 @@ class TaskExecutionKeys {
   final String status = "http://gradesystem.io/onto/taskexecution.owl#status";
   final String status_running = "http://gradesystem.io/onto/taskexecution.owl#running";
   final String status_failed =  "http://gradesystem.io/onto/taskexecution.owl#failed";
+  final String status_completed =  "http://gradesystem.io/onto/taskexecution.owl#completed";
 
   final String sourceUri = "http://gradesystem.io/onto/taskexecution.owl#sourceUri";
   final String targetUri = "http://gradesystem.io/onto/taskexecution.owl#targetUri";
