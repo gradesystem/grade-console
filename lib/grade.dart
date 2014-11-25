@@ -14,6 +14,7 @@ import 'dart:html';
 import 'common.dart';
 import 'home.dart' as home;
 import 'prod.dart' as prod;
+import 'deck.dart' as deck;
 import 'stage.dart' as staging;
 import 'tasks.dart' as tasks;
 
@@ -69,6 +70,7 @@ _initModules() {
   
   home.init();
   prod.init();
+  deck.init();
   staging.init();
   tasks.init();
   
