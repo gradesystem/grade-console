@@ -11,6 +11,7 @@
 <link rel="import" href="../components/grade_error.html">
 <link rel="import" href="../components/loading_panel.html">
 <link rel="import" href="../components/codemirror_input.html">
+<link rel="import" href="../components/query_result_table.html">
 
 <link rel="import" href="../../../../packages/core_elements/av_icons.html">
 <link rel="import" href="../../../../packages/core_elements/core_pages.html">
@@ -113,19 +114,8 @@
         </paper-tabs>
         <loading-panel main fit loading="{{editableQuery.queryRunning}}" message="retrieving results">
           <core-animated-pages selected="{{resultArea}}" fit spaced hide?="{{editableQuery.lastQueryResult==null}}">
-            <div style="overflow-y: auto;">
-	            <table style="border-collapse: collapse; width:100%">
-	              <tr>
-	                <th fg template repeat="{{header in editableQuery.lastQueryResult.headers}}" result-table?="{{!editableQuery.dirty}}" result-table-disabled?="{{editableQuery.dirty}}">{{header}}</th>
-	              </tr> 
-	               
-	              <tr template repeat="{{row in editableQuery.lastQueryResult.rows}}">
-	                <td template repeat="{{header in editableQuery.lastQueryResult.headers}}" result-table?="{{!editableQuery.dirty}}" result-table-disabled?="{{editableQuery.dirty}}">
-	                    {{row[header]["value"]}}
-	                </td>
-	              </tr>
-	            </table>
-            </div>
+            
+            <query-result-table headers={{editableQuery.lastQueryResult.headers}} rows={{editableQuery.lastQueryResult.rows}} dirty={{editableQuery.dirty}}></query-result-table>
              
 						<div style="overflow-y: auto;">
 						  <pre>{{editableQuery.lastQueryResult.raw}}</pre>
