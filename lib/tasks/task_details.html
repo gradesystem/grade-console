@@ -58,14 +58,14 @@
 	                       value= "{{ uri }}"
 	                       >
 	          </grade-input>
-	          <grade-uri fascia-subtitle value={{K.uri}}></grade-uri>
+	          <grade-uri fascia-subtitle value={{id}}></grade-uri>
 	        </grade-fascia>   
 	      </grade-item>
 	      
 	      <!-- label -->
 	      <grade-item icon=chevron-right>
 	        <grade-fascia flex truncate>
-	          <grade-input uppercase fascia-title required label="label ?" 
+	          <grade-input fascia-title required label="label ?" 
 	                        disabled="{{!editable.edit}}" 
 	                        invalid="{{ editable.fieldsInvalidity[K.label] }}"
 	                        value="{{ editable.model.bean[K.label] }}">

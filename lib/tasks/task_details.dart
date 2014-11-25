@@ -5,6 +5,8 @@ class TasKDetails extends View {
   
   static String URI_PREFIX = "http://gradesystem.io/tasks#";
   static RegExp spaceExp = new RegExp(r'[\s]');
+  
+  final String id = "http://gradesystem.io/onto#id";
  
   @published
   EditableTask editable;
