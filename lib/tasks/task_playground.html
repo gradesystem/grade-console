@@ -10,7 +10,7 @@
 <link rel="import" href="../common/components/grade_error.html">
 <link rel="import" href="../common/components/loading_panel.html">
 <link rel="import" href="../common/components/codemirror_input.html">
-<link rel="import" href="../common/components/query_result_table.html">
+<link rel="import" href="../common/components/query_result.html">
 
 <link rel="import" href="../../../packages/core_elements/av_icons.html">
 <link rel="import" href="../../../packages/core_elements/core_pages.html">
@@ -178,20 +178,16 @@
                 </grade-fascia>   
               </grade-item>
  
-  </div>
+            </div>
           
           
            <loading-panel fit loading="{{editableTask.taskRunning || editableTask.loadingResults}}" message="retrieving transform results">
-            
-<!--             <core-animated-pages main selected="{{executionArea}}" fit spaced hide?="{{editableTask.lastTaskExecution==null}}"> -->
-              <query-result-table headers={{editableTask.lastTransformResult.headers}} rows={{editableTask.lastTransformResult.rows}} dirty={{editableTask.dirty}}></query-result-table>
-
-<!-- 	            </core-animated-pages> -->
-            </loading-panel>
+             <query-result fit queryResult={{editableTask.lastTransformResult}} dirty={{editableTask.dirty}}></query-result>
+           </loading-panel>
              
           <loading-panel fit loading="{{editableTask.taskRunning || editableTask.loadingResults}}" message="retrieving target results">
-             <query-result-table headers={{editableTask.lastTargetResult.headers}} rows={{editableTask.lastTargetResult.rows}} dirty={{editableTask.dirty}}></query-result-table>
-						</loading-panel>
+            <query-result fit queryResult={{editableTask.lastTargetResult}} dirty={{editableTask.dirty}}></query-result>
+					</loading-panel>
           
           </core-animated-pages>
           

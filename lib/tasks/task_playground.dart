@@ -9,13 +9,6 @@ class TaskPlayground extends PolymerElement with Filters {
   @observable
   int executionArea = 0;
   
-  @observable
-  bool showTransformResultRaw = false;
-  
-  @observable
-  bool showTargetResultRaw = false;
-    
-  
   @published
   EditableTask editableTask;
   
@@ -75,8 +68,5 @@ class TaskPlayground extends PolymerElement with Filters {
     collapse.toggle();
     //($["detailsbutton"] as Element).text = collapse.opened?"Hide details":"Show details";
   }
-  
-  void toggleTransformResultFormat() { showTransformResultRaw = !showTransformResultRaw;}
-  void toggleTargetResultFormat() { showTargetResultRaw = !showTargetResultRaw;}
-  
+
 }

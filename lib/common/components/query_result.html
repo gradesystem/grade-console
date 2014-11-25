@@ -1,0 +1,40 @@
+<link rel="import" href="../../../../packages/polymer/polymer.html">
+<link rel="import" href="query_result_table.html">
+
+<link rel="import" href="../../../../packages/core_elements/core_animated_pages.html">
+
+<polymer-element name="query-result" relative>
+  <template>
+    <style>
+      [format-button] {
+        background-color: #f4f4f4;
+        padding: 2px;
+        cursor: pointer;
+        margin-bottom: 5px;
+      }
+    </style>
+    
+    <core-animated-pages fit selected="{{format}}">
+
+      <!-- table -->
+      <div vertical layout>
+        <div horizontal layout end-justified>
+          <div format-button on-click={{toggleFormat}}>RAW</div>
+        </div>
+        <query-result-table flex headers={{queryResult.headers}} rows={{queryResult.rows}} dirty={{dirty}}></query-result-table>
+      </div>
+     
+      <!-- raw -->
+      <div vertical layout>
+        <div horizontal layout end-justified>
+          <div format-button on-click={{toggleFormat}}>TABLE</div>
+        </div>
+        <div flex style="overflow-y: auto;">
+          <pre>{{queryResult.raw}}</pre>
+        </div>
+     
+      </div>
+     </core-animated-pages>
+    </template>
+  <script type="application/dart" src="query_result.dart"></script>
+</polymer-element>
