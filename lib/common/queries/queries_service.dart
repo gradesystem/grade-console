@@ -12,7 +12,7 @@ abstract class QueryService extends EditableListService<Query> {
 
     String path = "query/${query.name}/results";
 
-    return http.get(path, uriParameters).then((response) => new QueryResult(response, _decode(response)));
+    return http.get(path, parameters:uriParameters).then((response) => new QueryResult(response, _decode(response)));
   }
 
   Future<QueryResult> runQuery(Query query, Map<String, String> parameters) {

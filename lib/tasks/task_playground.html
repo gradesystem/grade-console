@@ -10,6 +10,7 @@
 <link rel="import" href="../common/components/grade_error.html">
 <link rel="import" href="../common/components/loading_panel.html">
 <link rel="import" href="../common/components/codemirror_input.html">
+<link rel="import" href="../common/components/query_result_table.html">
 
 <link rel="import" href="../../../packages/core_elements/av_icons.html">
 <link rel="import" href="../../../packages/core_elements/core_pages.html">
@@ -98,15 +99,15 @@
     <core-splitter direction="up" allowOverflow minSize="170px"></core-splitter>
     
     <div flex wired rounded spaced layout vertical>
-      <grade-header-panel flex paneltitle="Results">
+      <grade-header-panel flex paneltitle="Execution">
          
-         <paper-tabs toolbar  style="width:200px" selected="{{resultArea}}" hide?="{{editableTask.lastTaskExecution==null || editableTask.taskRunning || editableTask.lastError!=null}}" >
+         <paper-tabs toolbar  style="width:200px" selected="{{executionArea}}" hide?="{{editableTask.lastTaskExecution==null || editableTask.taskRunning || editableTask.lastError!=null}}" >
             <paper-tab>Status</paper-tab>
-            <paper-tab>Table</paper-tab>
-            <paper-tab>Raw</paper-tab>
+            <paper-tab>Transform</paper-tab>
+            <paper-tab>Target</paper-tab>
         </paper-tabs>
         
-          <core-animated-pages main selected="{{resultArea}}" fit spaced hide?="{{editableTask.lastTaskExecution==null}}">
+          <core-animated-pages main selected="{{executionArea}}" fit spaced hide?="{{editableTask.lastTaskExecution==null}}">
          
             <div style="overflow-y: auto;"> 
             
@@ -180,28 +181,16 @@
   </div>
           
           
-           <loading-panel fit loading="{{editableTask.taskRunning}}" message="retrieving results">
-            <div style="overflow-y: auto;">
-<!-- 	            <table style="border-collapse: collapse; width:100%"> -->
-<!-- 	              <tr> -->
-<!-- 	                <th fg template repeat="{{header in editableTask.lastQueryResult.headers}}" result-table?="{{!editableTask.dirty}}" result-table-disabled?="{{editableTask.dirty}}">{{header}}</th> -->
-<!-- 	              </tr>  -->
-	               
-<!-- 	              <tr template repeat="{{row in editableTask.lastQueryResult.rows}}"> -->
-<!-- 	                <td template repeat="{{header in editableTask.lastQueryResult.headers}}" result-table?="{{!editableTask.dirty}}" result-table-disabled?="{{editableTask.dirty}}"> -->
-<!-- 	                    {{row[header]["value"]}} -->
-<!-- 	                </td> -->
-<!-- 	              </tr> -->
-<!-- 	            </table> -->
-            </div>
+           <loading-panel fit loading="{{editableTask.taskRunning || editableTask.loadingResults}}" message="retrieving transform results">
+            
+<!--             <core-animated-pages main selected="{{executionArea}}" fit spaced hide?="{{editableTask.lastTaskExecution==null}}"> -->
+              <query-result-table headers={{editableTask.lastTransformResult.headers}} rows={{editableTask.lastTransformResult.rows}} dirty={{editableTask.dirty}}></query-result-table>
+
+<!-- 	            </core-animated-pages> -->
             </loading-panel>
              
-          <loading-panel fit loading="{{editableTask.taskRunning}}" message="retrieving results">
-						<div style="overflow-y: auto;">
-						  <pre>
-<!-- 						    {{editableTask.lastQueryResult.raw}} -->
-						  </pre>
-						</div>
+          <loading-panel fit loading="{{editableTask.taskRunning || editableTask.loadingResults}}" message="retrieving target results">
+             <query-result-table headers={{editableTask.lastTargetResult.headers}} rows={{editableTask.lastTargetResult.rows}} dirty={{editableTask.dirty}}></query-result-table>
 						</loading-panel>
           
           </core-animated-pages>

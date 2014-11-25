@@ -80,6 +80,15 @@ class EditableTask extends EditableModel<Task> with Keyed {
 
   @observable
   TaskExecution lastTaskExecution;
+  
+  @observable
+  bool loadingResults = false;
+  
+  @observable
+  QueryResult lastTransformResult;
+  
+  @observable
+  QueryResult lastTargetResult;
 
   bool _dirty = false;
 
@@ -127,6 +136,9 @@ class EditableTask extends EditableModel<Task> with Keyed {
     _setDirty(false);
     resetLastError();
     lastTaskExecution = null;
+    lastTransformResult = null;
+    lastTargetResult = null;
+    loadingResults = false;
   }
 
   void taskExecutionUpdate(TaskExecution update) {
@@ -211,10 +223,31 @@ class TasksModel extends SubPageEditableModel<Task> {
     .then((TaskExecution update) {
       editableTask.taskExecutionUpdate(update);
       if (!update.running) timer.cancel();
+      if (update.completed) retrieveResults(editableTask);
       })
     .catchError((e) {
       timer.cancel();
       editableTask.taskFailed(e);
+      onError(e, null);
+    });
+  }
+  
+  void retrieveResults(EditableTask editableTask) {
+    editableTask.loadingResults = true;
+    int count = 0;
+    taskService.getTransformResult(editableTask.lastTaskExecution)
+    .then((QueryResult result){
+      editableTask.lastTransformResult = result;
+    }).catchError((e) => onError(e, null)).whenComplete(() {
+      editableTask.loadingResults = ++count == 2;
+    });
+    
+    taskService.getTargetResult(editableTask.lastTaskExecution)
+    .then((QueryResult result){
+      editableTask.lastTargetResult = result;
+      editableTask.loadingResults = ++count == 2;
+    }).catchError((e) => onError(e, null)).whenComplete(() {
+      editableTask.loadingResults = ++count == 2;
     });
   }
 
@@ -253,6 +286,8 @@ class TaskExecution extends Delegate {
   String get id => get(K.id);
   
   bool get running => get(K.status) == K.status_running;
+  
+  bool get completed => get(K.status) == K.status_completed;
 
 }
 

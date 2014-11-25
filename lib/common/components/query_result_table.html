@@ -1,0 +1,19 @@
+<link rel="import" href="../../../../packages/polymer/polymer.html">
+
+<polymer-element name="query-result-table">
+  <template>
+    <div style="overflow-y: auto;">
+			<table style="border-collapse: collapse; width:100%">
+			  <tr>
+			    <th fg template repeat="{{header in headers}}" result-table?="{{!dirty}}" result-table-disabled?="{{dirty}}">{{header}}</th>
+			  </tr> 
+			  <tr template repeat="{{row in rows}}">
+			    <td template repeat="{{header in headers}}" result-table?="{{!dirty}}" result-table-disabled?="{{dirty}}">
+			        {{row[header]["value"]}}
+			    </td>
+			  </tr>
+			</table>
+		</div>
+  </template>
+  <script type="application/dart" src="query_result_table.dart"></script>
+</polymer-element>

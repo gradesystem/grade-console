@@ -10,9 +10,9 @@ class GradeService {
     base_path = "service/$service_path";
   }
 
-  Future getJSon(String path, [Map<String, String> parameters]) {
+  Future getJSon(String path, {MediaType acceptedMediaType:MediaType.JSON, Map<String, String> parameters}) {
     Uri url = new Uri.http("", "$base_path/$path", parameters);
-    return HttpService.getString(url.toString()).timeout(timeLimit).then(decode).catchError(_onError);
+    return HttpService.getString(url.toString(), acceptedMediaType:acceptedMediaType).timeout(timeLimit).then(decode).catchError(_onError);
   }
 
   dynamic decode(String json) {
@@ -23,9 +23,9 @@ class GradeService {
     }
   }
 
-  Future get(String path, [Map<String, String> parameters]) {
+  Future get(String path, {MediaType acceptedMediaType:MediaType.JSON, Map<String, String> parameters}) {
     Uri url = new Uri.http("", "$base_path/$path", parameters);
-    return HttpService.getString(url.toString()).timeout(timeLimit).catchError(_onError);
+    return HttpService.getString(url.toString(), acceptedMediaType:acceptedMediaType).timeout(timeLimit).catchError(_onError);
   }
 
   Future<String> post(String path, String content, {MediaType acceptedMediaType:MediaType.JSON, Map<String, String> parameters}) {
@@ -105,10 +105,10 @@ class HttpService {
     }, sendData: content, onProgress: onProgress);
   }
 
-  static Future<String> getString(String url, {bool withCredentials, void onProgress(ProgressEvent e)}) {
+  static Future<String> getString(String url, {bool withCredentials, MediaType acceptedMediaType : MediaType.JSON, void onProgress(ProgressEvent e)}) {
     return request(url, withCredentials: withCredentials, onProgress: onProgress, requestHeaders: {
       'Content-Type': MEDIA_TYPE_JSON,
-      'Accept': MEDIA_TYPE_JSON
+      'Accept': acceptedMediaType.value
     }).then((xhr) => xhr.responseText);
   }
 

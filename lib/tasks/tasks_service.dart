@@ -15,18 +15,22 @@ class TasksService extends EditableListService<Task> {
     return super.delete(item, addUri(parameters, item));
   }
 
+  Future<TaskExecution> runTask(Task task) 
+    => http.postJSon(executionsPath, JSON.encode(task.bean), parameters: parameters(task)).then((json) => new TaskExecution(json));
 
-  Future<TaskExecution> runTask(Task task) {
-    String path = "$all_path/$EXECUTIONS_PATH";
-    return http.postJSon(path, JSON.encode(task.bean), parameters: parameters(task)).then((json) => new TaskExecution(json));
-  }
+  Future<TaskExecution> pollTaskExecution(TaskExecution execution) 
+    => http.getJSon(executionPath(execution)).then((json) => new TaskExecution(json));
 
-  Future<TaskExecution> pollTaskExecution(TaskExecution execution) {
-
-    String path = "$all_path/$EXECUTIONS_PATH/${execution.id}";
-
-    return http.getJSon(path).then((json) => new TaskExecution(json));
-  }
+  Future<QueryResult> getTransformResult(TaskExecution execution)     
+    => http.get("${executionResultsPath(execution)}/transform", acceptedMediaType:MediaType.SPARQL_JSON).then((response) => new QueryResult(response, http.decode(response)));
+  
+  Future<QueryResult> getTargetResult(TaskExecution execution)     
+    => http.get("${executionResultsPath(execution)}/target", acceptedMediaType:MediaType.SPARQL_JSON).then((response) => new QueryResult(response, http.decode(response)));
+  
+  String executionResultsPath(TaskExecution execution) => "${executionPath(execution)}/results";
+  String executionPath(TaskExecution execution) => "$executionsPath/${execution.id}";
+  String get executionsPath => "$all_path/$EXECUTIONS_PATH";
+  
 
   Map<String, String> parameters(Task task) => addUri({}, task);
 
