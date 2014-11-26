@@ -266,7 +266,7 @@ class TasksModel extends SubPageEditableModel<Task> {
   
   void updateTaskExecution(EditableTask editableTask, TaskExecution update) {
     editableTask.taskExecutionUpdate(update);
-    if (update.transformed) retrieveTransformResults(editableTask);
+    if (update.transformed && editableTask.lastTransformResult==null) retrieveTransformResults(editableTask);
     if (update.completed) retrieveTargetResults(editableTask);
   }
   
