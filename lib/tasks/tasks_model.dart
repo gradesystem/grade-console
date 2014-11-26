@@ -300,6 +300,8 @@ class TaskExecutionKeys {
 
   final String startTime = "http://gradesystem.io/onto/taskexecution.owl#startTime";
   final String endTime = "http://gradesystem.io/onto/taskexecution.owl#endTime";
+  
+  final String task = "http://gradesystem.io/onto/taskexecution.owl#task";
 
   final String status = "http://gradesystem.io/onto/taskexecution.owl#status";
   
@@ -320,7 +322,7 @@ class TaskExecutionKeys {
 
 }
 
-class TaskExecution extends Delegate {
+class TaskExecution extends GradeEntity {
 
   static TaskExecutionKeys K = const TaskExecutionKeys();
   
@@ -338,6 +340,9 @@ class TaskExecution extends Delegate {
   
   Endpoint get source => new Endpoint.fromBean(get(K.source));
   Endpoint get target => new Endpoint.fromBean(get(K.target));
+  
+  Task get task => new Task.fromBean(get(K.task));
+  
 
 }
 

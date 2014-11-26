@@ -33,6 +33,10 @@ class TasksService extends EditableListService<Task> {
   Future<QueryResult> getTargetResult(TaskExecution execution)     
     => http.get("${executionResultsPath(execution)}/target", acceptedMediaType:MediaType.SPARQL_JSON).then((response) => new QueryResult(response, http.decode(response)));
   
+  Future<List<TaskExecution>> getAllExecutions() {
+    return http.getJSon(executionsPath).then((json)=>new ListDelegate(json, (json) => new TaskExecution(json)));
+  }
+  
   String executionResultsPath(TaskExecution execution) => "${executionPath(execution)}/results";
   String executionPath(TaskExecution execution) => "$executionsPath/${execution.id}";
   String get executionsPath => "$all_path/$EXECUTIONS_PATH";

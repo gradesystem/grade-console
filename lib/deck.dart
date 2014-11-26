@@ -20,13 +20,16 @@ part 'deck/deck_model.dart';
 part 'deck/runnable_tasks_panel.dart';
 part 'deck/runnable_task_list.dart';
 part 'deck/runnable_task_details_summary.dart';
-part 'deck/running_tasks_panel.dart';
+part 'deck/task_executions_panel.dart';
+part 'deck/task_execution_list.dart';
+part 'deck/task_execution_details_summary.dart';
 
 final Logger log = new Logger('grade.deck');
 
 init() {
   
   var module = new Module()
+          ..bind(TaskExecutions)
           ..bind(DeckPageModel);
 
   
