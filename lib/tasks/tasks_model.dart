@@ -266,8 +266,8 @@ class TaskExecutionKeys {
   final String status_failed =  "http://gradesystem.io/onto/taskexecution.owl#failed";
   final String status_completed =  "http://gradesystem.io/onto/taskexecution.owl#completed";
 
-  final String sourceUri = "http://gradesystem.io/onto/taskexecution.owl#sourceUri";
-  final String targetUri = "http://gradesystem.io/onto/taskexecution.owl#targetUri";
+  final String source = "http://gradesystem.io/onto/taskexecution.owl#source";
+  final String target = "http://gradesystem.io/onto/taskexecution.owl#target";
   
   final String error = "http://gradesystem.io/onto/taskexecution.owl#error";
   final String log = "http://gradesystem.io/onto/taskexecution.owl#log";
@@ -286,6 +286,9 @@ class TaskExecution extends Delegate {
   bool get running => get(K.status) == K.status_running;
   
   bool get completed => get(K.status) == K.status_completed;
+  
+  Endpoint get source => new Endpoint.fromBean(get(K.source));
+  Endpoint get target => new Endpoint.fromBean(get(K.target));
 
 }
 

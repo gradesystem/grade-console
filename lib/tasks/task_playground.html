@@ -166,14 +166,14 @@
               
               <grade-item icon=chevron-right>
                 <grade-fascia flex truncate>
-                  <div fascia-title>{{ editableTask.lastTaskExecution.bean[TEK.sourceUri] }}</div>
+                  <div fascia-title>{{ editableTask.lastTaskExecution.source.bean[endpoint_name_key] }}</div>
                   <grade-uri fascia-subtitle value={{TEK.sourceUri}}></grade-uri>
                 </grade-fascia>   
               </grade-item>
               
               <grade-item icon=chevron-right>
                 <grade-fascia flex truncate>
-                  <div fascia-title>{{ editableTask.lastTaskExecution.bean[TEK.targetUri] }}</div>
+                  <div fascia-title>{{ editableTask.lastTaskExecution.target.bean[endpoint_name_key] }}</div>
                   <grade-uri fascia-subtitle value={{TEK.targetUri}}></grade-uri>
                 </grade-fascia>   
               </grade-item>

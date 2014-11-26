@@ -30,6 +30,8 @@ class TaskPlayground extends PolymerElement with Filters {
   String get predefined_key => Query.predefined_field;
   String get target_key => Query.target_field;
   
+  String get endpoint_name_key => Endpoint.name_field;
+  
   @ComputedProperty("editableTask.model.bean[transform_query_key]") 
   String get transformQuery => editableTask!=null?editableTask.model.bean[transform_query_key]:"";
   void set transformQuery(String exp) {if (editableTask!=null) editableTask.model.bean[transform_query_key] = exp;}
