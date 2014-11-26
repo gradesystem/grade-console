@@ -218,7 +218,16 @@ class TasksModel extends SubPageEditableModel<Task> {
     if (item == null) return new EditableTask(new Task());
     return new EditableTask(item);
   }
-
+  
+  void runTask(EditableTask editableTask) {
+    editableTask.runTask();
+    taskService.runTask(editableTask.model)
+              .then((TaskExecution update) {
+                  updateTaskExecution(editableTask, update);
+                  _listenTaskExecution(editableTask);
+                })
+              .catchError((e) => editableTask.taskFailed(e));
+  }
 
   void runSandboxTask(EditableTask editableTask) {
     editableTask.runTask();
