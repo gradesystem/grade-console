@@ -25,7 +25,7 @@
   background: #fafafa;
 }
 :host /deep/ [filled-blue] {
-  background: grade-light-blue;
+  background: #4fc3f7;
 }
 :host /deep/ [wired] {
   border: 2px solid #f4f4f4;
@@ -315,86 +315,86 @@
   border: 1px solid #424242;
 }
 .deck-scaffold {
-  background: #ffc107;
+  background: #f50057;
   color: #fff;
 }
 :host /deep/ .deck /deep/ [bg] {
-  background: #ffc107;
+  background: #f50057;
 }
 :host /deep/ .deck /deep/ [fg] {
-  color: #ffc107;
+  color: #f50057;
 }
 :host /deep/ .deck /deep/ [bg-alt] {
-  background: #ffa000;
+  background: #c51162;
 }
 :host /deep/ .deck /deep/ [fg-alt] {
-  color: #ffa000;
+  color: #c51162;
 }
 :host /deep/ .deck /deep/ [fg][disabled] {
-  color: #ffdf82;
+  color: #e91e63;
 }
 :host /deep/ .deck /deep/ [bg-selected] {
-  background: #ffdf82;
+  background: #e91e63;
   color: #fff;
 }
 :host /deep/ .deck /deep/ [header] {
   background: #f4f4f4;
-  color: #ffc107;
+  color: #f50057;
 }
 :host /deep/ .deck /deep/ [wired-fg] {
   border: 1px solid;
-  border-color: #ffc107;
+  border-color: #f50057;
 }
 :host /deep/ .deck /deep/ paper-progress::shadow #activeProgress {
-  background-color: #ffc107;
+  background-color: #f50057;
 }
 :host /deep/ .deck /deep/ paper-tabs::shadow #selectionBar {
-  background-color: #ffc107;
+  background-color: #f50057;
 }
 :host /deep/ .deck /deep/ paper-tabs paper-tab::shadow #ink {
-  color: #ffdf82;
+  color: #e91e63;
 }
 :host /deep/ .deck /deep/ paper-item:not([bg-selected]):hover {
-  color: #ffc107;
+  color: #f50057;
 }
 :host /deep/ .deck /deep/ [dropitem]:hover {
-  color: #ffa000;
+  color: #c51162;
 }
 :host /deep/ .deck /deep/ grade-dialog [option] {
-  color: #ffc107;
+  color: #f50057;
 }
 :host /deep/ .deck /deep/ paper-button::shadow #ripple {
-  color: #ffdf82;
+  color: #e91e63;
 }
 :host /deep/ .deck /deep/ paper-icon-button::shadow #ripple {
-  color: #ffdf82;
+  color: #e91e63;
 }
 :host /deep/ .deck /deep/ paper-fab::shadow /deep/ #icon {
-  color: #ffc107;
+  color: #f50057;
 }
 :host /deep/ .deck /deep/ paper-fab {
-  background-color: #ffc107;
+  background-color: #f50057;
 }
 :host /deep/ .deck /deep/ paper-radio-button::shadow #ink[checked] {
-  color: #ffdf82;
+  color: #e91e63;
 }
 :host /deep/ .deck /deep/ paper-radio-button::shadow #onRadio {
-  background-color: #ffc107;
+  background-color: #f50057;
 }
 :host /deep/ .deck /deep/ paper-radio-button[disabled][checked] /deep/ #offRadio {
   opacity: 1;
-  background-color: #ffdf82;
-  border-color: #ffdf82;
+  background-color: #e91e63;
+  border-color: #e91e63;
 }
 :host /deep/ .deck /deep/ paper-dropdown-menu /deep/ core-icon {
-  color: #ffc107;
+  color: #f50057;
   width: 36px;
 }
 :host /deep/ .deck /deep/ paper-input::shadow .focused-underline {
-  background-color: #ffdf82;
+  background-color: #e91e63;
 }
 :host /deep/ .deck /deep/ paper-input::shadow .cursor {
-  background: #ffdf82;
+  background: #e91e63;
 }
 :host /deep/ .deck /deep/ paper-input[focused]::shadow .error-text {
   color: #e41c23;

@@ -26,7 +26,7 @@ class TasKDetails extends View {
     conditionalRequiredDiff = ($) => 
        get(editable,K.op)!=K.publish_op && ($==null || $.isEmpty)? "Please fill in this field.":null;
     
-    uniqueLabel = ($) =>  $!=null && tasks.containsName($)?"Not original enough, try again.":null;
+    uniqueLabel = ($) =>  $!=null && tasks.containsLabel($)?"Not original enough, try again.":null;
   }
   
   @ComputedProperty("editable.model.bean[K.source_endpoint]")
