@@ -17,9 +17,8 @@ class RunnableTasksPanel extends PolymerElement with Filters {
     model.loadAll();
   }
 
-  
-  void onRunTask(event, detail, target) {
-   
+  void runTask(event, detail, target) {
+    model.runTask(detail);
   }
 
 }
