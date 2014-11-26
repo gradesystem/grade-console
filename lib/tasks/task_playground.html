@@ -36,6 +36,10 @@
 				z-index: 1000;
       }
       
+      [disabled-tab] {
+        pointer-events: none;
+      }
+      
        /* spacing */
       
         :host paper-input, 
@@ -92,7 +96,7 @@
         
       </grade-header-panel>
       <div style="position: relative; width: 0; height: 0" self-end >
-        <paper-fab class="runButton" mini="true" icon="{{editableTask.taskRunning?'av:stop':'av:play-arrow'}}" on-click="{{onRun}}" hide?="{{editableTask.fieldsInvalidity[K.transform] || editableTask.fieldsInvalidity[K.diff] }}"></paper-fab>
+        <paper-fab class="runButton" mini="true" icon="{{editableTask.taskRunning?'av:stop':'av:play-arrow'}}" disabled?="{{!editableTask.canCancel && editableTask.taskRunning}}" on-click="{{onButtonClick}}" hide?="{{editableTask.fieldsInvalidity[K.transform] || editableTask.fieldsInvalidity[K.diff] }}"></paper-fab>
       </div>
     </div>
   
@@ -104,8 +108,8 @@
          <paper-tabs toolbar  style="width:300px" selected="{{executionArea}}" hide?="{{editableTask.lastTaskExecution==null || editableTask.lastError!=null}}" >
             <paper-tab>Summary</paper-tab>
             <paper-tab>Log</paper-tab>
-            <paper-tab disabled?="{{editableTask.taskRunning}}">Transform</paper-tab>
-            <paper-tab disabled?="{{editableTask.taskRunning}}">Target</paper-tab>
+            <paper-tab disabled-tab?="{{editableTask.lastTransformResult==null}}">Transform</paper-tab>
+            <paper-tab disabled-tab?="{{editableTask.lastTargetResult==null}}">Target</paper-tab>
         </paper-tabs>
         
           <core-animated-pages main selected="{{executionArea}}" fit spaced hide?="{{editableTask.lastTaskExecution==null}}">
@@ -162,11 +166,11 @@
 
             </div>
           
-           <loading-panel fit loading="{{editableTask.taskRunning || editableTask.loadingResults}}" message="retrieving transform results">
+           <loading-panel fit loading="{{editableTask.loadingTransformResults}}" message="retrieving transform results">
              <query-result fit queryResult={{editableTask.lastTransformResult}} dirty={{editableTask.dirty}}></query-result>
            </loading-panel>
              
-          <loading-panel fit loading="{{editableTask.taskRunning || editableTask.loadingResults}}" message="retrieving target results">
+          <loading-panel fit loading="{{editableTask.loadingTargetResults}}" message="retrieving target results">
             <query-result fit queryResult={{editableTask.lastTargetResult}} dirty={{editableTask.dirty}}></query-result>
 					</loading-panel>
           

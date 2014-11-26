@@ -58,8 +58,9 @@ class TaskPlayground extends PolymerElement with Filters {
     fire("back");
   }
   
-  void onRun() {
-    fire("run", detail:editableTask);
+  void onButtonClick() {
+    if (editableTask.taskRunning) fire("cancel", detail:editableTask);
+    else fire("run", detail:editableTask);
   }
   
   void showErrorDetails() {

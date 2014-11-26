@@ -16,10 +16,16 @@ class TasksService extends EditableListService<Task> {
   }
 
   Future<TaskExecution> runTask(Task task) 
-    => http.postJSon(executionsPath, JSON.encode(task.bean), parameters: parameters(task)).then((json) => new TaskExecution(json));
-
+    => http.postJSon(executionsPath, "", parameters: parameters(task)).then((json) => new TaskExecution(json));
+  
+  Future<TaskExecution> runSandboxTask(Task task) 
+    => http.postJSon("$all_path/sandbox/$EXECUTIONS_PATH", JSON.encode(task.bean)).then((json) => new TaskExecution(json));
+  
   Future<TaskExecution> pollTaskExecution(TaskExecution execution) 
     => http.getJSon(executionPath(execution)).then((json) => new TaskExecution(json));
+  
+  Future<TaskExecution> stopTaskExecution(TaskExecution execution) 
+    => http.delete(executionPath(execution)).then((response) => true);  
 
   Future<QueryResult> getTransformResult(TaskExecution execution)     
     => http.get("${executionResultsPath(execution)}/transform", acceptedMediaType:MediaType.SPARQL_JSON).then((response) => new QueryResult(response, http.decode(response)));

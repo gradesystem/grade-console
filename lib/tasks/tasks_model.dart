@@ -79,14 +79,22 @@ class EditableTask extends EditableModel<Task> with Keyed {
   @observable
   TaskExecution lastTaskExecution;
   
-  @observable
-  bool loadingResults = false;
+  Timer taskExecutionPoller;
   
+  @observable
+  bool canCancel = false;
+
   @observable
   QueryResult lastTransformResult;
   
   @observable
+  bool loadingTransformResults = false;
+  
+  @observable
   QueryResult lastTargetResult;
+  
+  @observable
+  bool loadingTargetResults = false;
 
   bool _dirty = false;
 
@@ -135,18 +143,28 @@ class EditableTask extends EditableModel<Task> with Keyed {
     resetLastError();
     lastTaskExecution = null;
     lastTransformResult = null;
+    loadingTransformResults = false;
     lastTargetResult = null;
-    loadingResults = false;
+    loadingTargetResults = false;
+    canCancel = false;
   }
 
   void taskExecutionUpdate(TaskExecution update) {
     lastTaskExecution = update;
     taskRunning = update.running;
+    canCancel = true;
+    if (!update.running) taskExecutionPoller.cancel();
   }
 
   void taskFailed(ErrorResponse reason) {
     taskRunning = false;
     lastError = reason;
+    if (taskExecutionPoller!=null) taskExecutionPoller.cancel();
+  }
+  
+  void stopTask() {
+    taskRunning = false;
+    if (taskExecutionPoller!=null) taskExecutionPoller.cancel();
   }
 }
 
@@ -202,50 +220,63 @@ class TasksModel extends SubPageEditableModel<Task> {
   }
 
 
-  void runTask(EditableTask editableTask) {
+  void runSandboxTask(EditableTask editableTask) {
     editableTask.runTask();
-    taskService.runTask(editableTask.model)
-              .then((TaskExecution r) {
-                  editableTask.lastTaskExecution = r;
+    taskService.runSandboxTask(editableTask.model)
+              .then((TaskExecution update) {
+                  updateTaskExecution(editableTask, update);
                   _listenTaskExecution(editableTask);
                 })
               .catchError((e) => editableTask.taskFailed(e));
   }
   
-  void _listenTaskExecution(EditableTask editableTask) {
-    new Timer.periodic(EXECUTION_POLL_DELAY, (Timer timer)=>pollTaskExecution(timer, editableTask));
+  void stopTask(EditableTask editableTask) {
+    if (!editableTask.canCancel || !editableTask.taskRunning) return;
+    editableTask.stopTask();
+    taskService.stopTaskExecution(editableTask.lastTaskExecution);
   }
   
-  void pollTaskExecution(Timer timer, EditableTask editableTask) {
+  void _listenTaskExecution(EditableTask editableTask) {
+    //the user can stop the task during the first ajax call
+    if (editableTask.taskRunning) 
+      editableTask.taskExecutionPoller = new Timer.periodic(EXECUTION_POLL_DELAY, (_)=>pollTaskExecution(editableTask));
+  }
+  
+  void pollTaskExecution(EditableTask editableTask) {
+    if (!editableTask.taskRunning) return;
+    
     taskService.pollTaskExecution(editableTask.lastTaskExecution)
-    .then((TaskExecution update) {
-      editableTask.taskExecutionUpdate(update);
-      if (!update.running) timer.cancel();
-      if (update.completed) retrieveResults(editableTask);
-      })
+    .then((TaskExecution update) => updateTaskExecution(editableTask, update))
     .catchError((e) {
-      timer.cancel();
       editableTask.taskFailed(e);
       onError(e, null);
     });
   }
   
-  void retrieveResults(EditableTask editableTask) {
-    editableTask.loadingResults = true;
-    int count = 0;
-    taskService.getTransformResult(editableTask.lastTaskExecution)
-    .then((QueryResult result){
-      editableTask.lastTransformResult = result;
-    }).catchError((e) => onError(e, null)).whenComplete(() {
-      editableTask.loadingResults = ++count == 2;
-    });
+  void updateTaskExecution(EditableTask editableTask, TaskExecution update) {
+    editableTask.taskExecutionUpdate(update);
+    if (update.transformed) retrieveTransformResults(editableTask);
+    if (update.completed) retrieveTargetResults(editableTask);
+  }
+  
+  void retrieveTargetResults(EditableTask editableTask) {
+    editableTask.loadingTargetResults = true;
     
     taskService.getTargetResult(editableTask.lastTaskExecution)
     .then((QueryResult result){
       editableTask.lastTargetResult = result;
-      editableTask.loadingResults = ++count == 2;
     }).catchError((e) => onError(e, null)).whenComplete(() {
-      editableTask.loadingResults = ++count == 2;
+      editableTask.loadingTargetResults = false;
+    });
+  }
+  
+  void retrieveTransformResults(EditableTask editableTask) {
+    editableTask.loadingTransformResults = true;
+    taskService.getTransformResult(editableTask.lastTaskExecution)
+    .then((QueryResult result){
+      editableTask.lastTransformResult = result;
+    }).catchError((e) => onError(e, null)).whenComplete(() {
+      editableTask.loadingTransformResults = false;
     });
   }
 
@@ -262,9 +293,14 @@ class TaskExecutionKeys {
   final String endTime = "http://gradesystem.io/onto/taskexecution.owl#endTime";
 
   final String status = "http://gradesystem.io/onto/taskexecution.owl#status";
-  final String status_running = "http://gradesystem.io/onto/taskexecution.owl#running";
+  
+  final String status_submitted = "http://gradesystem.io/onto/taskexecution.owl#submitted";
+  final String status_started = "http://gradesystem.io/onto/taskexecution.owl#started";
+  final String status_transformed = "http://gradesystem.io/onto/taskexecution.owl#transformed";
+  final String status_modified = "http://gradesystem.io/onto/taskexecution.owl#modified";
   final String status_failed =  "http://gradesystem.io/onto/taskexecution.owl#failed";
   final String status_completed =  "http://gradesystem.io/onto/taskexecution.owl#completed";
+
 
   final String source = "http://gradesystem.io/onto/taskexecution.owl#source";
   final String target = "http://gradesystem.io/onto/taskexecution.owl#target";
@@ -279,11 +315,15 @@ class TaskExecution extends Delegate {
 
   static TaskExecutionKeys K = const TaskExecutionKeys();
   
+  static List<String> afterTransform = [K.status_completed, K.status_modified, K.status_transformed];
+  
   TaskExecution(Map bean) : super(bean);
   
   String get id => get(K.id);
   
-  bool get running => get(K.status) == K.status_running;
+  bool get running => get(K.status) != K.status_completed && get(K.status) != K.status_failed;
+  
+  bool get transformed => afterTransform.contains(get(K.status));
   
   bool get completed => get(K.status) == K.status_completed;
   

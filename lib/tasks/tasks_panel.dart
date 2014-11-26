@@ -73,7 +73,12 @@ class TasksPanel extends PolymerElement with Filters {
   }
   
   void onRunTask(event, detail, target) {
-    model.runTask(detail);
+    model.runSandboxTask(detail);
   }
+  
+  void onCancelTask(event, detail, target) {
+    model.stopTask(detail);
+  }
+  
 
 }
