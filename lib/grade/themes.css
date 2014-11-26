@@ -325,10 +325,10 @@
   color: #f50057;
 }
 :host /deep/ .deck /deep/ [bg-alt] {
-  background: #c51162;
+  background: #d21b5a;
 }
 :host /deep/ .deck /deep/ [fg-alt] {
-  color: #c51162;
+  color: #d21b5a;
 }
 :host /deep/ .deck /deep/ [fg][disabled] {
   color: #e91e63;
@@ -358,7 +358,7 @@
   color: #f50057;
 }
 :host /deep/ .deck /deep/ [dropitem]:hover {
-  color: #c51162;
+  color: #d21b5a;
 }
 :host /deep/ .deck /deep/ grade-dialog [option] {
   color: #f50057;
