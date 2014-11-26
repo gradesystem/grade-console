@@ -1,7 +1,7 @@
 part of deck;
 
-@CustomTag("deck-tasks-panel")
-class TasksPanel extends PolymerElement with Filters {
+@CustomTag("runnable-tasks-panel")
+class RunnableTasksPanel extends PolymerElement with Filters {
 
   @observable
   String kfilter = '';
@@ -9,7 +9,7 @@ class TasksPanel extends PolymerElement with Filters {
   @published
   TasksModel model;
 
-  TasksPanel.created() : super.created();
+  RunnableTasksPanel.created() : super.created();
 
   Tasks get items => model.storage;
 

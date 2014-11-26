@@ -1,0 +1,29 @@
+<link rel="import" href="../../../packages/polymer/polymer.html">
+
+<link rel="import" href="../../../packages/core_elements/core_list_dart.html">
+
+<link rel="import" href="../common/components/list_panel.html">
+
+<link rel="import" href="runnable_task_details_summary.html">
+
+<link rel="import" href="deck.html">
+
+<polymer-element name="runnable-task-list">
+
+ <template>
+ 
+   <list-panel loading="{{listitems.loading}}" empty={{listitems.data.isEmpty}}>
+
+	  <core-list-dart id="list" data="{{listitems.data | filter(kfilter, itemFilter)}}" height="80" on-core-activate={{selectItem}} flex>
+	    
+	    <template>
+	    
+	     <runnable-task-details-summary flex item="{{model}}" selected="{{ selected==true }}" on-remove-item={{setClickFlag}} on-clone-item={{setClickFlag}}></runnable-task-details-summary>
+
+	    </template>
+	  
+	  </core-list-dart>
+	 </list-panel>
+ </template>
+
+</polymer-element>
