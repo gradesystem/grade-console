@@ -143,7 +143,7 @@
      
 	            <grade-item icon=chevron-right>
 	              <grade-fascia flex truncate>
-	                <div fascia-title>{{ editableTask.lastTaskExecution.bean[TEK.startTime] | formatEpoch }}</div>
+	                <div fascia-title>{{ editableTask.lastTaskExecution.bean[TEK.startTime] }}</div>
 	                <grade-uri fascia-subtitle value={{TEK.startTime}}></grade-uri>
 	              </grade-fascia>   
 	            </grade-item>
@@ -151,7 +151,7 @@
 	            
               <grade-item icon=chevron-right>
                 <grade-fascia flex truncate>
-                  <div fascia-title>{{ editableTask.lastTaskExecution.bean[TEK.endTime] | formatEpoch }}</div>
+                  <div fascia-title>{{ editableTask.lastTaskExecution.bean[TEK.endTime] }}</div>
                   <grade-uri fascia-subtitle value={{TEK.endTime}}></grade-uri>
                 </grade-fascia>   
               </grade-item>
@@ -167,14 +167,14 @@
               <grade-item icon=chevron-right>
                 <grade-fascia flex truncate>
                   <div fascia-title>{{ editableTask.lastTaskExecution.source.bean[endpoint_name_key] }}</div>
-                  <grade-uri fascia-subtitle value={{TEK.sourceUri}}></grade-uri>
+                  <grade-uri fascia-subtitle value={{TEK.source}}></grade-uri>
                 </grade-fascia>   
               </grade-item>
               
               <grade-item icon=chevron-right>
                 <grade-fascia flex truncate>
                   <div fascia-title>{{ editableTask.lastTaskExecution.target.bean[endpoint_name_key] }}</div>
-                  <grade-uri fascia-subtitle value={{TEK.targetUri}}></grade-uri>
+                  <grade-uri fascia-subtitle value={{TEK.target}}></grade-uri>
                 </grade-fascia>   
               </grade-item>
  
