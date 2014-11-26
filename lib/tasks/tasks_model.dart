@@ -225,6 +225,7 @@ class TasksModel extends SubPageEditableModel<Task> {
     editableTask.runTask();
     taskService.runTask(editableTask.model)
               .then((TaskExecution update) {
+                  bus.fire(new TaskLaunched());
                   updateTaskExecution(editableTask, update);
                   _listenTaskExecution(editableTask);
                 })
@@ -303,7 +304,7 @@ class TaskExecutionKeys {
   final String startTime = "http://gradesystem.io/onto/taskexecution.owl#startTime";
   final String endTime = "http://gradesystem.io/onto/taskexecution.owl#endTime";
   
-  final String task = "http://gradesystem.io/onto/taskexecution.owl#task";
+  final String task = "http://gradesystem.io/onto/task.owl#Task";
 
   final String status = "http://gradesystem.io/onto/taskexecution.owl#status";
   

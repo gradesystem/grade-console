@@ -1,12 +1,12 @@
 part of deck;
 
 
+
 @Injectable()
-class DeckPageModel {
+class DeckPageModel extends SubPageModel<TaskExecution> {
   TasksModel tasks;
-  TaskExecutions storage;
   
-  DeckPageModel(this.tasks, this.storage);
+  DeckPageModel(this.tasks, EventBus bus, TaskExecutionsService service, TaskExecutions storage) : super(bus, service, storage);
 }
 
 @Injectable()

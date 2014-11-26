@@ -13,7 +13,7 @@ class TaskExecutionDetailsSummary extends View {
 
   TaskExecutionKeys TEK = const TaskExecutionKeys();
   
-  @ComputedProperty("item.bean[TEK.statu]")
+  @ComputedProperty("item.bean[TEK.status]")
   String get status => get(item,TEK.status);
 
   
