@@ -92,7 +92,7 @@
         
       </grade-header-panel>
       <div style="position: relative; width: 0; height: 0" self-end >
-        <paper-fab class="runButton" mini="true" icon="{{editableTask.taskRunning?'av:stop':'av:play-arrow'}}" on-click="{{onRun}}" hide?="{{editableTask.fieldsInvalidity[transform_query_key] || editableTask.fieldsInvalidity[difference_query_key] }}"></paper-fab>
+        <paper-fab class="runButton" mini="true" icon="{{editableTask.taskRunning?'av:stop':'av:play-arrow'}}" on-click="{{onRun}}" hide?="{{editableTask.fieldsInvalidity[K.transform] || editableTask.fieldsInvalidity[K.diff] }}"></paper-fab>
       </div>
     </div>
   

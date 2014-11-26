@@ -23,25 +23,22 @@ class TaskPlayground extends PolymerElement with Filters {
    }
   
   String get publish_operation => 'http://gradesystem.io/onto/task.owl#publish';
-  
-  String get transform_query_key => K.transform;
-  String get difference_query_key => K.diff;
-  String get operation_key => K.op;
+
   String get predefined_key => Query.predefined_field;
   String get target_key => Query.target_field;
   
   String get endpoint_name_key => Endpoint.name_field;
   
-  @ComputedProperty("editableTask.model.bean[transform_query_key]") 
-  String get transformQuery => editableTask!=null?editableTask.model.bean[transform_query_key]:"";
-  void set transformQuery(String exp) {if (editableTask!=null) editableTask.model.bean[transform_query_key] = exp;}
+  @ComputedProperty("editableTask.model.bean[K.transform]") 
+  String get transformQuery => editableTask!=null?editableTask.model.bean[K.transform]:"";
+  void set transformQuery(String exp) {if (editableTask!=null) editableTask.model.bean[K.transform] = exp;}
   
-  @ComputedProperty("editableTask.model.bean[difference_query_key]") 
-  String get differenceQuery => editableTask!=null?editableTask.model.bean[difference_query_key]:"";
-  void set differenceQuery(String exp) {editableTask.model.bean[difference_query_key] = exp;}
+  @ComputedProperty("editableTask.model.bean[K.diff]") 
+  String get differenceQuery => editableTask!=null?editableTask.model.bean[K.diff]:"";
+  void set differenceQuery(String exp) {editableTask.model.bean[K.diff] = exp;}
   
-  @ComputedProperty("editableTask.model.bean[operation_key]") 
-  bool get hideDifferenceQuery => editableTask!=null?editableTask.model.bean[operation_key] == publish_operation:false;
+  @ComputedProperty("editableTask.model.bean[K.op]") 
+  bool get hideDifferenceQuery => editableTask!=null?editableTask.model.bean[K.op] == publish_operation:false;
   
   @ComputedProperty("editableTask.model.bean[predefined_key]") 
   bool get editable => editableTask!=null?editableTask.model.bean[Query.predefined_field]==false:false;
