@@ -205,8 +205,10 @@ class TasksModel extends SubPageEditableModel<Task> {
   static Duration EXECUTION_POLL_DELAY = new Duration(seconds:2);
   
   static TaskExecutionKeys TEK = const TaskExecutionKeys();
+  
+  TaskExecutionsService executionsService; 
 
-  TasksModel(EventBus bus, TasksService service, Tasks storage) : super(bus, service, storage, generate) {
+  TasksModel(EventBus bus, TasksService service, this.executionsService, Tasks storage) : super(bus, service, storage, generate) {
     bus.on(ApplicationReady).listen((_) {
       loadAll();
     });
@@ -242,7 +244,7 @@ class TasksModel extends SubPageEditableModel<Task> {
   void stopTask(EditableTask editableTask) {
     if (!editableTask.canCancel || !editableTask.taskRunning) return;
     editableTask.stopTask();
-    taskService.stopTaskExecution(editableTask.lastTaskExecution);
+    executionsService.stopTaskExecution(editableTask.lastTaskExecution);
   }
   
   void _listenTaskExecution(EditableTask editableTask) {
@@ -254,7 +256,7 @@ class TasksModel extends SubPageEditableModel<Task> {
   void pollTaskExecution(EditableTask editableTask) {
     if (!editableTask.taskRunning) return;
     
-    taskService.pollTaskExecution(editableTask.lastTaskExecution)
+    executionsService.pollTaskExecution(editableTask.lastTaskExecution)
     .then((TaskExecution update) => updateTaskExecution(editableTask, update))
     .catchError((e) {
       editableTask.taskFailed(e);
@@ -271,7 +273,7 @@ class TasksModel extends SubPageEditableModel<Task> {
   void retrieveTargetResults(EditableTask editableTask) {
     editableTask.loadingTargetResults = true;
     
-    taskService.getTargetResult(editableTask.lastTaskExecution)
+    executionsService.getTargetResult(editableTask.lastTaskExecution)
     .then((QueryResult result){
       editableTask.lastTargetResult = result;
     }).catchError((e) => onError(e, null)).whenComplete(() {
@@ -281,7 +283,7 @@ class TasksModel extends SubPageEditableModel<Task> {
   
   void retrieveTransformResults(EditableTask editableTask) {
     editableTask.loadingTransformResults = true;
-    taskService.getTransformResult(editableTask.lastTaskExecution)
+    executionsService.getTransformResult(editableTask.lastTaskExecution)
     .then((QueryResult result){
       editableTask.lastTransformResult = result;
     }).catchError((e) => onError(e, null)).whenComplete(() {
