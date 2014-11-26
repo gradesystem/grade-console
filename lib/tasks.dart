@@ -26,6 +26,7 @@ part 'tasks/tasks_panel.dart';
 part 'tasks/task_list.dart';
 part 'tasks/task_details_summary.dart';
 part 'tasks/task_playground.dart';
+part 'tasks/task_execution.dart';
 
 final Logger log = new Logger('grade.tasks');
 

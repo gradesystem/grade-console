@@ -315,86 +315,86 @@
   border: 1px solid #424242;
 }
 .deck-scaffold {
-  background: #f50057;
+  background: #e91e63;
   color: #fff;
 }
 :host /deep/ .deck /deep/ [bg] {
-  background: #f50057;
+  background: #e91e63;
 }
 :host /deep/ .deck /deep/ [fg] {
-  color: #f50057;
-}
-:host /deep/ .deck /deep/ [bg-alt] {
-  background: #c51162;
-}
-:host /deep/ .deck /deep/ [fg-alt] {
-  color: #c51162;
-}
-:host /deep/ .deck /deep/ [fg][disabled] {
   color: #e91e63;
 }
+:host /deep/ .deck /deep/ [bg-alt] {
+  background: #ff2272;
+}
+:host /deep/ .deck /deep/ [fg-alt] {
+  color: #ff2272;
+}
+:host /deep/ .deck /deep/ [fg][disabled] {
+  color: #f06292;
+}
 :host /deep/ .deck /deep/ [bg-selected] {
-  background: #e91e63;
+  background: #f06292;
   color: #fff;
 }
 :host /deep/ .deck /deep/ [header] {
   background: #f4f4f4;
-  color: #f50057;
+  color: #e91e63;
 }
 :host /deep/ .deck /deep/ [wired-fg] {
   border: 1px solid;
-  border-color: #f50057;
+  border-color: #e91e63;
 }
 :host /deep/ .deck /deep/ paper-progress::shadow #activeProgress {
-  background-color: #f50057;
+  background-color: #e91e63;
 }
 :host /deep/ .deck /deep/ paper-tabs::shadow #selectionBar {
-  background-color: #f50057;
+  background-color: #e91e63;
 }
 :host /deep/ .deck /deep/ paper-tabs paper-tab::shadow #ink {
-  color: #e91e63;
+  color: #f06292;
 }
 :host /deep/ .deck /deep/ paper-item:not([bg-selected]):hover {
-  color: #f50057;
+  color: #e91e63;
 }
 :host /deep/ .deck /deep/ [dropitem]:hover {
-  color: #c51162;
+  color: #ff2272;
 }
 :host /deep/ .deck /deep/ grade-dialog [option] {
-  color: #f50057;
+  color: #e91e63;
 }
 :host /deep/ .deck /deep/ paper-button::shadow #ripple {
-  color: #e91e63;
+  color: #f06292;
 }
 :host /deep/ .deck /deep/ paper-icon-button::shadow #ripple {
-  color: #e91e63;
+  color: #f06292;
 }
 :host /deep/ .deck /deep/ paper-fab::shadow /deep/ #icon {
-  color: #f50057;
-}
-:host /deep/ .deck /deep/ paper-fab {
-  background-color: #f50057;
-}
-:host /deep/ .deck /deep/ paper-radio-button::shadow #ink[checked] {
   color: #e91e63;
 }
+:host /deep/ .deck /deep/ paper-fab {
+  background-color: #e91e63;
+}
+:host /deep/ .deck /deep/ paper-radio-button::shadow #ink[checked] {
+  color: #f06292;
+}
 :host /deep/ .deck /deep/ paper-radio-button::shadow #onRadio {
-  background-color: #f50057;
+  background-color: #e91e63;
 }
 :host /deep/ .deck /deep/ paper-radio-button[disabled][checked] /deep/ #offRadio {
   opacity: 1;
-  background-color: #e91e63;
-  border-color: #e91e63;
+  background-color: #f06292;
+  border-color: #f06292;
 }
 :host /deep/ .deck /deep/ paper-dropdown-menu /deep/ core-icon {
-  color: #f50057;
+  color: #e91e63;
   width: 36px;
 }
 :host /deep/ .deck /deep/ paper-input::shadow .focused-underline {
-  background-color: #e91e63;
+  background-color: #f06292;
 }
 :host /deep/ .deck /deep/ paper-input::shadow .cursor {
-  background: #e91e63;
+  background: #f06292;
 }
 :host /deep/ .deck /deep/ paper-input[focused]::shadow .error-text {
   color: #e41c23;

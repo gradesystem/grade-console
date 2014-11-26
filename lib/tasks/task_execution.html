@@ -1,0 +1,64 @@
+<link rel="import" href="../../../packages/polymer/polymer.html">
+<link rel="import" href="tasks.html">
+
+<link rel="import" href="../../../packages/core_elements/core_icon.html">
+
+<link rel="import" href="../common/components/grade_fascia.html">
+
+<polymer-element name="task-execution">
+
+  <template>
+ 
+      <style>
+        
+        :host [card] {
+        
+          color:white;
+          min-height:300px;
+          width:600px;
+          
+        }
+        
+        :host [banner] {
+        
+          margin:5px 25px;
+          
+        }
+        
+        :host [banner] [fascia-subtitle] {
+        
+          position:relative;
+          top:-3px;
+          
+        }
+        
+         :host core-icon[status] {
+        
+          min-width:64px;
+          min-height:64px;
+          
+        }
+  
+       </style>
+
+ 
+        <div card rounded bg layout vertical>
+         
+          <div flex 
+             banner layout horizontal>
+         
+              <grade-fascia flex>
+                <div large lighter fascia-title>{{ execution.bean[K.status] | suffix | lowercase}}</div>
+                <div fascia-subtitle>status</div>
+              </grade-fascia>
+              
+              <core-icon status icon={{icon}}></core-icon>
+         
+          </div>
+          
+        </div>
+ 
+   
+ </template>
+
+</polymer-element>
