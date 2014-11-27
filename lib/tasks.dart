@@ -28,6 +28,9 @@ part 'tasks/task_details_summary.dart';
 part 'tasks/task_playground.dart';
 part 'tasks/task_execution.dart';
 
+part 'tasks/task_execution_panel.dart';
+part 'tasks/running_task_panel.dart';
+
 final Logger log = new Logger('grade.tasks');
 
 init() {

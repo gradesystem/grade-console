@@ -17,7 +17,3 @@ class ToastMessage {
   ToastMessage.info(this.message);
   
 }
-
-class TaskLaunched {
-  const TaskLaunched();
-}

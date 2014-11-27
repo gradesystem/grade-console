@@ -1,0 +1,68 @@
+<link rel="import" href="../../../packages/polymer/polymer.html">
+
+<link rel="import" href="../common/components/query_result.html">
+<link rel="import" href="../common/components/loading_panel.html">
+<link rel="import" href="../common/components/grade_error.html">
+<link rel="import" href="../common/components/grade_header_panel.html">
+
+<link rel="import" href="../../../packages/core_elements/core_animated_pages.html">
+<link rel="import" href="../../../packages/paper_elements/paper_tabs.html">
+<link rel="import" href="../../../packages/paper_elements/paper_tab.html">
+<link rel="import" href="../../../packages/core_elements/core_animated_pages.html">
+
+<link rel="import" href="task_execution_panel.html">
+<link rel="import" href="tasks.html">
+
+<polymer-element name="running-task-panel" layout vertical>
+	<template>
+		<style>
+			[disabled-tab] {
+			  pointer-events: none;
+			}
+		</style>
+      <grade-header-panel flex paneltitle="{{paneltitle}}">
+         
+         <paper-tabs toolbar  style="width:300px" selected="{{executionArea}}" hide?="{{runningTask.execution==null || runningTask.error!=null}}" >
+            <paper-tab>Summary</paper-tab>
+            <paper-tab>Log</paper-tab>
+            <paper-tab disabled-tab?="{{runningTask.transformResult==null}}">Transform</paper-tab>
+            <paper-tab disabled-tab?="{{runningTask.targetResult==null}}">Target</paper-tab>
+        </paper-tabs>
+        
+        <core-animated-pages main selected="{{executionArea}}" fit spaced hide?="{{runningTask.execution==null}}">
+       
+          <!-- STATUS -->
+          <task-execution-panel taskExecution={{runningTask.execution}}></task-execution-panel>
+          
+          <!-- LOG -->
+          <div style="overflow-y: auto;"> 
+           <pre>{{runningTask.execution.bean[TEK.log]}}</pre>
+          </div>
+        
+          <!-- TRANSFORM RESULT -->
+					<loading-panel fit loading="{{runningTask.loadingTransformResults}}" message="retrieving transform results">
+					  <query-result fit queryResult={{runningTask.transformResult}} dirty={{dirty}}></query-result>
+					</loading-panel>
+           
+          <!-- TARGET RESULT -->
+	        <loading-panel fit loading="{{runningTask.loadingTargetResults}}" message="retrieving target results">
+	          <query-result fit queryResult={{runningTask.targetResult}} dirty={{dirty}}></query-result>
+	        </loading-panel>
+        
+        </core-animated-pages>
+          
+        <div layout horizontal center-justified hide?="{{runningTask.execution!=null || runningTask.error!=null}}" style="overflow:hidden"> 
+        </div>
+         
+				<template if="{{runningTask.error!=null}}">
+				
+					<grade-error one="{{errorMessage()}}"
+					     two = {{runningTask.error.message}}
+					     three = {{runningTask.error.stacktrace}}>
+					</grade-error>
+				         
+				</template>
+
+      </grade-header-panel>
+  </template>
+</polymer-element>

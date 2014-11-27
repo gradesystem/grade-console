@@ -1,7 +1,7 @@
 part of deck;
 
-@CustomTag("task-execution-list") 
-class TaskExecutionList extends PolymerElement with Filters {
+@CustomTag("running-task-list") 
+class RunningTaskList extends PolymerElement with Filters {
   
   @published
   String kfilter = '';
@@ -13,11 +13,11 @@ class TaskExecutionList extends PolymerElement with Filters {
   
   bool clickflag = false;
   
-  FilterFunction itemFilter = (TaskExecution item, String term) 
-                                =>  item.task.label != null && 
-                                    item.task.label.toLowerCase().contains(term.toLowerCase());
+  FilterFunction itemFilter = (RunningTask item, String term) 
+                                =>  item.execution.task.label != null && 
+                                    item.execution.task.label.toLowerCase().contains(term.toLowerCase());
   
-  TaskExecutionList.created() : super.created();
+  RunningTaskList.created() : super.created();
   
   void ready() {
     list = $['list'] as CoreList;

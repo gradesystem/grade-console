@@ -1,27 +1,14 @@
- <link rel="import" href="../../../packages/polymer/polymer.html">
-
-<link rel="import" href="../common/components/grade_input.html">
-<link rel="import" href="../common/components/grade_item.html">
-<link rel="import" href="../common/components/grade_fascia.html">
-<link rel="import" href="../common/components/grade_uri.html">
+<link rel="import" href="../../../packages/polymer/polymer.html">
 
 <link rel="import" href="../common/components/grade_header_panel.html">
 <link rel="import" href="../common/components/grade_button.html">
-<link rel="import" href="../common/components/grade_error.html">
-<link rel="import" href="../common/components/loading_panel.html">
 <link rel="import" href="../common/components/codemirror_input.html">
-<link rel="import" href="../common/components/query_result.html">
 
 <link rel="import" href="../../../packages/core_elements/av_icons.html">
-<link rel="import" href="../../../packages/core_elements/core_pages.html">
 <link rel="import" href="../../../packages/core_elements/core_splitter.html">
-<link rel="import" href="../../../packages/core_elements/core_animated_pages.html">
-<link rel="import" href="../../../packages/core_elements/core_collapse.html">
 <link rel="import" href="../../../packages/paper_elements/paper_fab.html">
-<link rel="import" href="../../../packages/paper_elements/paper_tabs.html">
-<link rel="import" href="../../../packages/paper_elements/paper_tab.html">
-<link rel="import" href="../../../packages/paper_elements/paper_input.html">
 
+<link rel="import" href="running_task_panel.html">
 <link rel="import" href="tasks.html">
 
 <polymer-element name="task-playground" layout vertical>  
@@ -36,38 +23,34 @@
 				z-index: 1000;
       }
       
-      [disabled-tab] {
-        pointer-events: none;
+     /* spacing */
+    
+      :host paper-input, 
+      :host paper-input::shadow .mirror-text
+      
+      {
+        padding: 0px;
       }
       
-       /* spacing */
+      /* underline */
       
-        :host paper-input, 
-        :host paper-input::shadow .mirror-text
-        
-        {
-          padding: 0px;
-        }
-        
-        /* underline */
-        
-        :host paper-input::shadow .underline {
-          border:none
-        }
-        
-        :host paper-input::shadow .unfocused-underline {
-        height: 0px;
-          border:none
-        }
-        
-         :host paper-input::shadow .focused-underline {
-                height: 0px;
-          border:none
-        }
-        
-        :host paper-input[disabled]::shadow .underline {
-          border:none
-        }
+      :host paper-input::shadow .underline {
+        border:none
+      }
+      
+      :host paper-input::shadow .unfocused-underline {
+      height: 0px;
+        border:none
+      }
+      
+       :host paper-input::shadow .focused-underline {
+              height: 0px;
+        border:none
+      }
+      
+      :host paper-input[disabled]::shadow .underline {
+        border:none
+      }
    
     </style>
     
@@ -76,121 +59,32 @@
         <grade-button menu icon="arrow-back" on-click="{{onBack}}"></grade-button>
         <div main fit layout vertical>
 
-              <div wired rounded spaced layout horizontal style="min-height:75px;" flex>
-			          <codemirror-input flex 
-			          active={{isactive}} 
-			          mode="sparql" 
-			          value={{transformQuery}}
-			          disabled="{{!editableTask.edit}}"></codemirror-input>
-              </div>
+					<div wired rounded spaced layout horizontal style="min-height:75px;" flex>
+						<codemirror-input flex 
+															active={{isactive}} 
+															mode="sparql" 
+															value={{transformQuery}}
+															disabled="{{!editableTask.edit}}"></codemirror-input>
+					</div>
 
-	             <div wired rounded spaced layout horizontal style="min-height:75px;" flex hidden?={{hideDifferenceQuery}}>
-	            
-			            <codemirror-input flex
-			            active={{isactive}} 
-			            mode="sparql" 
-			            value={{differenceQuery}}
-			            disabled="{{!editableTask.edit}}"></codemirror-input>
-              </div>
+          <div wired rounded spaced layout horizontal style="min-height:75px;" flex hidden?={{hideDifferenceQuery}}>
+	           <codemirror-input flex
+										           active={{isactive}} 
+										           mode="sparql" 
+										           value={{differenceQuery}}
+										           disabled="{{!editableTask.edit}}"></codemirror-input>
+          </div>
         </div>
         
       </grade-header-panel>
       <div style="position: relative; width: 0; height: 0" self-end >
-        <paper-fab class="runButton" mini="true" icon="{{editableTask.taskRunning?'av:stop':'av:play-arrow'}}" disabled?="{{!editableTask.canCancel && editableTask.taskRunning}}" on-click="{{onButtonClick}}" hide?="{{editableTask.fieldsInvalidity[K.transform] || editableTask.fieldsInvalidity[K.diff] }}"></paper-fab>
+        <paper-fab class="runButton" mini="true" icon="{{editableTask.playgroundRunningTask.running?'av:stop':'av:play-arrow'}}" disabled?="{{!editableTask.playgroundRunningTask.canCancel && editableTask.playgroundRunningTask.running}}" on-click="{{onButtonClick}}" hide?="{{editableTask.fieldsInvalidity[K.transform] || editableTask.fieldsInvalidity[K.diff] }}"></paper-fab>
       </div>
     </div>
   
     <core-splitter direction="up" allowOverflow minSize="170px"></core-splitter>
     
-    <div flex wired rounded spaced layout vertical>
-      <grade-header-panel flex paneltitle="Execution">
-         
-         <paper-tabs toolbar  style="width:300px" selected="{{executionArea}}" hide?="{{editableTask.lastTaskExecution==null || editableTask.lastError!=null}}" >
-            <paper-tab>Summary</paper-tab>
-            <paper-tab>Log</paper-tab>
-            <paper-tab disabled-tab?="{{editableTask.lastTransformResult==null}}">Transform</paper-tab>
-            <paper-tab disabled-tab?="{{editableTask.lastTargetResult==null}}">Target</paper-tab>
-        </paper-tabs>
-        
-          <core-animated-pages main selected="{{executionArea}}" fit spaced hide?="{{editableTask.lastTaskExecution==null}}">
-         
-            <div style="overflow-y: auto;"> 
-       
-              <grade-item icon=chevron-right>
-                <grade-fascia flex truncate>
-                  <div fascia-title>{{ editableTask.lastTaskExecution.bean[TEK.status] }}</div>
-                  <grade-uri fascia-subtitle value={{TEK.status}}></grade-uri>
-                </grade-fascia>   
-              </grade-item>
-     
-	            <grade-item icon=chevron-right>
-	              <grade-fascia flex truncate>
-	                <div fascia-title>{{ editableTask.lastTaskExecution.bean[TEK.startTime] }}</div>
-	                <grade-uri fascia-subtitle value={{TEK.startTime}}></grade-uri>
-	              </grade-fascia>   
-	            </grade-item>
-
-              <grade-item icon=chevron-right>
-                <grade-fascia flex truncate>
-                  <div fascia-title>{{ editableTask.lastTaskExecution.bean[TEK.endTime] }}</div>
-                  <grade-uri fascia-subtitle value={{TEK.endTime}}></grade-uri>
-                </grade-fascia>   
-              </grade-item>
-              
-              <grade-item icon=chevron-right>
-                <grade-fascia flex truncate>
-                  <div fascia-title>{{ editableTask.lastTaskExecution.bean[TEK.duration]}}</div>
-                  <grade-uri fascia-subtitle value={{TEK.duration}}></grade-uri>
-                </grade-fascia>   
-              </grade-item>
-
-              <grade-item icon=chevron-right>
-                <grade-fascia flex truncate>
-                  <div fascia-title>{{ editableTask.lastTaskExecution.source.bean[endpoint_name_key] }}</div>
-                  <grade-uri fascia-subtitle value={{TEK.source}}></grade-uri>
-                </grade-fascia>   
-              </grade-item>
-              
-              <grade-item icon=chevron-right>
-                <grade-fascia flex truncate>
-                  <div fascia-title>{{ editableTask.lastTaskExecution.target.bean[endpoint_name_key] }}</div>
-                  <grade-uri fascia-subtitle value={{TEK.target}}></grade-uri>
-                </grade-fascia>   
-              </grade-item>
- 
-            </div>
-            
-            <div style="overflow-y: auto;"> 
-
-             <pre>{{editableTask.lastTaskExecution.bean[TEK.log]}}</pre>
-
-            </div>
-          
-           <loading-panel fit loading="{{editableTask.loadingTransformResults}}" message="retrieving transform results">
-             <query-result fit queryResult={{editableTask.lastTransformResult}} dirty={{editableTask.dirty}}></query-result>
-           </loading-panel>
-             
-          <loading-panel fit loading="{{editableTask.loadingTargetResults}}" message="retrieving target results">
-            <query-result fit queryResult={{editableTask.lastTargetResult}} dirty={{editableTask.dirty}}></query-result>
-					</loading-panel>
-          
-          </core-animated-pages>
-          
-         <div layout horizontal center-justified 
-               hide?="{{editableTask.lastTaskExecution!=null || editableTask.lastError!=null}}" style="overflow:hidden"> 
-         </div>
-         
-         <template if="{{editableTask.lastError!=null}}">
-
-            <grade-error one="{{errorMessage()}}"
-                 two = {{editableTask.lastError.message}}
-                 three = {{editableTask.lastError.stacktrace}}>
-            </grade-error>
-                  
-         </template>
-
-      </grade-header-panel>
-    </div>
+    <running-task-panel runningTask={{editableTask.playgroundRunningTask}} dirty={{editableTask.dirty}} panelTitle="Execution" flex wired rounded spaced ></running-task-panel>
+    
   </template>
 </polymer-element>
-

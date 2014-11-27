@@ -68,43 +68,21 @@ class Task extends EditableGradeEntity with Filters {
 class EditableTask extends EditableModel<Task> with Keyed {
 
   static TaskKeys K = const TaskKeys();
-  static TaskExecutionKeys TEK = const TaskExecutionKeys();
-
-  @observable
-  bool taskRunning = false;
-
-  @observable
-  ErrorResponse lastError;
-
-  @observable
-  TaskExecution lastTaskExecution;
-  
-  Timer taskExecutionPoller;
   
   @observable
-  bool canCancel = false;
-
-  @observable
-  QueryResult lastTransformResult;
-  
-  @observable
-  bool loadingTransformResults = false;
-  
-  @observable
-  QueryResult lastTargetResult;
-  
-  @observable
-  bool loadingTargetResults = false;
+  RunningTask playgroundRunningTask;
 
   bool _dirty = false;
 
   EditableTask(Task task) : super(task) {
+    
+    playgroundRunningTask = new RunningTask();
 
     //we need to listen on the expression changes in the current model
     onPropertyChange(this, #model, _listenNewModel);
 
-    //when query or parameters are edited we reset the last error
-    onPropertyChange(this, #dirty, resetLastError);
+    //when task is edited we reset the last error
+    //FIXME onPropertyChange(this, #dirty, resetLastError);
   }
 
   get(key) => model.get(key);
@@ -132,40 +110,6 @@ class EditableTask extends EditableModel<Task> with Keyed {
   //true if the query or his parameters have been modified after last editing
   bool get dirty => _dirty;
 
-  void resetLastError() {
-    lastError = null;
-  }
-
-
-  void runTask() {
-    taskRunning = true;
-    _setDirty(false);
-    resetLastError();
-    lastTaskExecution = null;
-    lastTransformResult = null;
-    loadingTransformResults = false;
-    lastTargetResult = null;
-    loadingTargetResults = false;
-    canCancel = false;
-  }
-
-  void taskExecutionUpdate(TaskExecution update) {
-    lastTaskExecution = update;
-    taskRunning = update.running;
-    canCancel = true;
-    if (!update.running) taskExecutionPoller.cancel();
-  }
-
-  void taskFailed(ErrorResponse reason) {
-    taskRunning = false;
-    lastError = reason;
-    if (taskExecutionPoller!=null) taskExecutionPoller.cancel();
-  }
-  
-  void stopTask() {
-    taskRunning = false;
-    if (taskExecutionPoller!=null) taskExecutionPoller.cancel();
-  }
 }
 
 class Operation {
@@ -221,74 +165,78 @@ class TasksModel extends SubPageEditableModel<Task> {
     return new EditableTask(item);
   }
   
-  void runTask(EditableTask editableTask) {
-    editableTask.runTask();
+  RunningTask runTask(EditableTask editableTask) {
+    RunningTask runningTask = new RunningTask(); 
     taskService.runTask(editableTask.model)
               .then((TaskExecution update) {
-                  bus.fire(new TaskLaunched());
-                  updateTaskExecution(editableTask, update);
-                  _listenTaskExecution(editableTask);
+                  updateTaskExecution(runningTask, update);
+                  _listenTaskExecution(runningTask);
                 })
-              .catchError((e) => editableTask.taskFailed(e));
+              .catchError((e) => runningTask.taskFailed(e));
+    return runningTask;
   }
 
   void runSandboxTask(EditableTask editableTask) {
-    editableTask.runTask();
+    editableTask.playgroundRunningTask.runTask();
     taskService.runSandboxTask(editableTask.model)
               .then((TaskExecution update) {
-                  updateTaskExecution(editableTask, update);
-                  _listenTaskExecution(editableTask);
+                  updateTaskExecution(editableTask.playgroundRunningTask, update);
+                  _listenTaskExecution(editableTask.playgroundRunningTask);
                 })
-              .catchError((e) => editableTask.taskFailed(e));
+              .catchError((e) => editableTask.playgroundRunningTask.taskFailed(e));
   }
   
   void stopTask(EditableTask editableTask) {
-    if (!editableTask.canCancel || !editableTask.taskRunning) return;
-    editableTask.stopTask();
-    executionsService.stopTaskExecution(editableTask.lastTaskExecution);
+    stopRunningTask(editableTask.playgroundRunningTask);
   }
   
-  void _listenTaskExecution(EditableTask editableTask) {
+  void stopRunningTask(RunningTask runningTask) {
+    if (!runningTask.canCancel || !runningTask.running) return;
+    runningTask.stopTask();
+    executionsService.stopTaskExecution(runningTask.execution);
+  }
+  
+  void _listenTaskExecution(RunningTask editableTask) {
     //the user can stop the task during the first ajax call
-    if (editableTask.taskRunning) 
-      editableTask.taskExecutionPoller = new Timer.periodic(EXECUTION_POLL_DELAY, (_)=>pollTaskExecution(editableTask));
+    if (editableTask.running) 
+      editableTask.executionPoller = new Timer.periodic(EXECUTION_POLL_DELAY, (_)=>pollTaskExecution(editableTask));
   }
   
-  void pollTaskExecution(EditableTask editableTask) {
-    if (!editableTask.taskRunning) return;
+  void pollTaskExecution(RunningTask runningTask) {
+    if (!runningTask.running) return;
     
-    executionsService.pollTaskExecution(editableTask.lastTaskExecution)
-    .then((TaskExecution update) => updateTaskExecution(editableTask, update))
+    executionsService.pollTaskExecution(runningTask.execution)
+    .then((TaskExecution update) => updateTaskExecution(runningTask, update))
     .catchError((e) {
-      editableTask.taskFailed(e);
+      runningTask.taskFailed(e);
       onError(e, null);
     });
   }
   
-  void updateTaskExecution(EditableTask editableTask, TaskExecution update) {
-    editableTask.taskExecutionUpdate(update);
-    if (update.transformed && editableTask.lastTransformResult==null) retrieveTransformResults(editableTask);
-    if (update.completed) retrieveTargetResults(editableTask);
+  void updateTaskExecution(RunningTask runningTask, TaskExecution update) {
+    runningTask.executionUpdate(update);
+    if (update.transformed && runningTask.transformResult==null) retrieveTransformResults(runningTask);
+    if (update.completed) retrieveTargetResults(runningTask);
   }
   
-  void retrieveTargetResults(EditableTask editableTask) {
-    editableTask.loadingTargetResults = true;
+  void retrieveTargetResults(RunningTask runningTask) {
+    runningTask.loadingTargetResults = true;
     
-    executionsService.getTargetResult(editableTask.lastTaskExecution)
+    executionsService.getTargetResult(runningTask.execution)
     .then((QueryResult result){
-      editableTask.lastTargetResult = result;
+      runningTask.targetResult = result;
     }).catchError((e) => onError(e, null)).whenComplete(() {
-      editableTask.loadingTargetResults = false;
+      runningTask.loadingTargetResults = false;
     });
   }
   
-  void retrieveTransformResults(EditableTask editableTask) {
-    editableTask.loadingTransformResults = true;
-    executionsService.getTransformResult(editableTask.lastTaskExecution)
+  void retrieveTransformResults(RunningTask runningTask) {
+    runningTask.loadingTransformResults = true;
+    executionsService.getTransformResult(runningTask.execution)
     .then((QueryResult result){
-      editableTask.lastTransformResult = result;
+      runningTask.transformResult = result;
     }).catchError((e) => onError(e, null)).whenComplete(() {
-      editableTask.loadingTransformResults = false;
+      runningTask.loadingTransformResults = false;
     });
   }
 
@@ -335,11 +283,13 @@ class TaskExecution extends GradeEntity {
   
   String get id => get(K.id);
   
-  bool get running => get(K.status) != K.status_completed && get(K.status) != K.status_failed;
+  bool get running => status != K.status_completed && status != K.status_failed;
   
-  bool get transformed => afterTransform.contains(get(K.status));
+  bool get transformed => afterTransform.contains(status);
   
-  bool get completed => get(K.status) == K.status_completed;
+  bool get completed => status == K.status_completed;
+  
+  String get status => get(K.status);
   
   Endpoint get source => new Endpoint.fromBean(get(K.source));
   Endpoint get target => new Endpoint.fromBean(get(K.target));
@@ -348,6 +298,80 @@ class TaskExecution extends GradeEntity {
   
 
 }
+
+
+class RunningTask extends Observable {
+  
+  static TaskExecutionKeys TEK = const TaskExecutionKeys();
+
+  @observable
+  bool running = false;
+
+  @observable
+  ErrorResponse error;
+
+  @observable
+  TaskExecution execution;
+  
+  Timer executionPoller;
+  
+  @observable
+  bool canCancel = false;
+
+  @observable
+  QueryResult transformResult;
+  
+  @observable
+  bool loadingTransformResults = false;
+  
+  @observable
+  QueryResult targetResult;
+  
+  @observable
+  bool loadingTargetResults = false;
+  
+  RunningTask();
+  
+  RunningTask.fromExecution(this.execution);
+  
+  void resetError() {
+    error = null;
+  }
+
+  void runTask() {
+    running = true;
+   //FIXME _setDirty(false);
+    resetError();
+    execution = null;
+    transformResult = null;
+    loadingTransformResults = false;
+    targetResult = null;
+    loadingTargetResults = false;
+    canCancel = false;
+  }
+
+  void executionUpdate(TaskExecution update) {
+    execution = update;
+    running = update.running;
+    
+    //we don't know the first update, so we set it always true
+    canCancel = true;
+    if (!update.running) stopTask();
+  }
+
+  void taskFailed(ErrorResponse reason) {
+    error = reason;
+    stopTask();
+  }
+  
+  void stopTask() {
+    running = false;
+    canCancel = false;
+   if (executionPoller!=null) executionPoller.cancel();
+  }
+  
+}
+
 
 @Injectable()
 class Tasks extends EditableListItems<EditableModel<Task>> {

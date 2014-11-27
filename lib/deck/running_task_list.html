@@ -4,11 +4,11 @@
 
 <link rel="import" href="../common/components/list_panel.html">
 
-<link rel="import" href="task_execution_details_summary.html">
+<link rel="import" href="running_task_details_summary.html">
 
 <link rel="import" href="deck.html">
 
-<polymer-element name="task-execution-list">
+<polymer-element name="running-task-list">
 
  <template>
  
@@ -18,7 +18,7 @@
 	    
 	    <template>
 	    
-	     <task-execution-details-summary flex item="{{model}}" selected="{{ selected==true }}" on-remove-item={{setClickFlag}} on-clone-item={{setClickFlag}}></task-execution-details-summary>
+	     <running-task-details-summary flex item="{{model}}" selected="{{ selected==true }}" on-remove-execution={{setClickFlag}}></running-task-details-summary>
 
 	    </template>
 	  

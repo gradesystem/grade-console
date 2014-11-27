@@ -33,7 +33,7 @@
 	        
           <grade-button toolbar icon="refresh" label="refresh list" on-click="{{refresh}}"></grade-button>
 
-	        <runnable-task-list main listitems="{{items}}" kfilter="{{kfilter}}" on-run={{runTask}}></runnable-task-list>
+	        <runnable-task-list main listitems="{{model.tasks}}" kfilter="{{kfilter}}" on-run={{runTask}}></runnable-task-list>
 	        
 	      </grade-header-panel>
 
