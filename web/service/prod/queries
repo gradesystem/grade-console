@@ -2,7 +2,7 @@
   "http://gradesystem.io/onto#id" : "573e308f-18a2-42f4-bec5-82b0bcb1aa6e",
   "http://gradesystem.io/onto/query.owl#name" : "all_datasets",
   "http://gradesystem.io/onto/query.owl#target" : "a7ceeac5-6021-4cf8-9d32-05abf0fb8096",
-  "http://gradesystem.io/onto/query.owl#expression" : "prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> construct {?g ?p ?o . ?g rdf:type 'http://gradesystem.io/onto#root'} where { graph ?g { ?g ?p ?o } }",
+  "http://gradesystem.io/onto/query.owl#expression" : "prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> construct {?g ?p ?o . ?g rdf:type <http://gradesystem.io/onto#root>} where { graph ?g { ?g ?p ?o } }",
   "http://gradesystem.io/onto/query.owl#note" : null,
   "http://gradesystem.io/onto/query.owl#datasets" : null,
   "http://gradesystem.io/onto/query.owl#predefined" : true
