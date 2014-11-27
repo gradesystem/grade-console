@@ -43,7 +43,7 @@ class TaskExecutionView extends View {
     source = getMap(execution,K.source)[Endpoint.name_field];
     target = getMap(execution,K.target)[Endpoint.name_field];
         
-    String status = execution.get(K.status);
+    String status = get(execution,K.status);
     
     if (status==null)
       return;
