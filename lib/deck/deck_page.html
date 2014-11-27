@@ -1,13 +1,12 @@
 <link rel="import" href="../../../packages/polymer/polymer.html">
 
-<link rel="import" href="../common/coming_soon.html">
-
 <link rel="import" href="../common/components/grade_header_panel.html">
 <link rel="import" href="../common/components/grade_button.html">
 <link rel="import" href="../common/components/grade_input.html">
 <link rel="import" href="../../../packages/core_elements/core_icon.html">
-
 <link rel="import" href="../../../packages/core_elements/core_splitter.html">
+
+<link rel="import" href="../tasks/running_task_panel.html">
 
 <link rel="import" href="runnable_tasks_panel.html">
 <link rel="import" href="running_tasks_panel.html">
@@ -23,9 +22,8 @@
   
     <core-splitter direction="up" allowOverflow minSize="170px"></core-splitter>
     
-    <div flex wired rounded spaced layout vertical>
-      <coming-soon larger></coming-soon>
-    </div>
+    <running-task-panel runningTask="{{deckModel.storage.selected}}" flex wired rounded spaced></running-task-panel>
+
  </template>
  
 </polymer-element>
