@@ -361,7 +361,6 @@ class RunningTask extends Observable {
   }
 
   void taskFailed(ErrorResponse reason) {
-    print('taskFailed reason $reason');
     error = reason;
     stopTask();
   }
