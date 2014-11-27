@@ -9,17 +9,16 @@
 
 <link rel="import" href="../../../packages/core_elements/core_splitter.html">
 
-<link rel="import" href="desk_tasks_panel.html">
-<link rel="import" href="running_tasks_panel.html">
+<link rel="import" href="runnable_tasks_panel.html">
+<link rel="import" href="task_executions_panel.html">
 
 <link rel="import" href="deck.html">
 
 <polymer-element name="deck-page" layout vertical>  
   <template>
     <div style="height:60%;" spaced layout horizontal>
-        <deck-tasks-panel flex TWO rounded wired model="{{tasks}}"></deck-tasks-panel>
-        <running-tasks-panel flex FOUR rounded wired style="margin-left: 8px;"></running-tasks-panel>
-<!--         <div flex THREE wired rounded style="margin-left: 8px;padding: 5px;">RUNNING TASK</div> -->
+        <runnable-tasks-panel flex TWO rounded wired model="{{tasks}}"></runnable-tasks-panel>
+        <task-executions-panel flex FOUR rounded wired style="margin-left: 8px;" model="{{deckModel}}"></task-executions-panel>
     </div>
   
     <core-splitter direction="up" allowOverflow minSize="170px"></core-splitter>

@@ -10,27 +10,15 @@ class TasksService extends EditableListService<Task> {
 
   TasksService() : super(_path, "tasks", "task", (Map json) => new Task.fromBean(json));
 
-
   Future<bool> delete(Task item, [Map<String, String> parameters]) {
     return super.delete(item, addUri(parameters, item));
   }
 
   Future<TaskExecution> runTask(Task task) 
-    => http.postJSon(executionsPath, JSON.encode(task.bean), parameters: parameters(task)).then((json) => new TaskExecution(json));
-
-  Future<TaskExecution> pollTaskExecution(TaskExecution execution) 
-    => http.getJSon(executionPath(execution)).then((json) => new TaskExecution(json));
-
-  Future<QueryResult> getTransformResult(TaskExecution execution)     
-    => http.get("${executionResultsPath(execution)}/transform", acceptedMediaType:MediaType.SPARQL_JSON).then((response) => new QueryResult(response, http.decode(response)));
+    => http.postJSon("$all_path/$EXECUTIONS_PATH", "", parameters: parameters(task)).then((json) => new TaskExecution(json));
   
-  Future<QueryResult> getTargetResult(TaskExecution execution)     
-    => http.get("${executionResultsPath(execution)}/target", acceptedMediaType:MediaType.SPARQL_JSON).then((response) => new QueryResult(response, http.decode(response)));
-  
-  String executionResultsPath(TaskExecution execution) => "${executionPath(execution)}/results";
-  String executionPath(TaskExecution execution) => "$executionsPath/${execution.id}";
-  String get executionsPath => "$all_path/$EXECUTIONS_PATH";
-  
+  Future<TaskExecution> runSandboxTask(Task task) 
+    => http.postJSon("$all_path/sandbox/$EXECUTIONS_PATH", JSON.encode(task.bean)).then((json) => new TaskExecution(json));
 
   Map<String, String> parameters(Task task) => addUri({}, task);
 
@@ -43,6 +31,28 @@ class TasksService extends EditableListService<Task> {
   String getItemPath(String key) => "$single_item_path";
 
 }
+
+
+@Injectable()
+class TaskExecutionsService extends ListService<TaskExecution> {
+  
+  TaskExecutionsService() : super(_path, "tasks/executions", "tasks/executions", (json) => new TaskExecution(json));
+  
+  Future<TaskExecution> pollTaskExecution(TaskExecution execution) 
+    => get(execution.id);
+  
+  Future<TaskExecution> stopTaskExecution(TaskExecution execution) 
+    => http.delete(getItemPath(execution.id)).then((response) => true);  
+
+  Future<QueryResult> getTransformResult(TaskExecution execution)     
+    => http.get("${getItemPath(execution.id)}/results/transform", acceptedMediaType:MediaType.SPARQL_JSON).then((response) => new QueryResult(response, http.decode(response)));
+  
+  Future<QueryResult> getTargetResult(TaskExecution execution)     
+    => http.get("${getItemPath(execution.id)}/results/target", acceptedMediaType:MediaType.SPARQL_JSON).then((response) => new QueryResult(response, http.decode(response)));
+ 
+}
+
+
 
 @Injectable()
 class TasksQueriesService extends QueryService {

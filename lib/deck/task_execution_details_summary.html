@@ -1,0 +1,34 @@
+<link rel="import" href="../../../packages/polymer/polymer.html">
+
+<link rel="import" href="../../../packages/paper_elements/paper_item.html">
+
+<link rel="import" href="../common/components/grade_input.html">
+<link rel="import" href="../common/components/grade_item.html">
+<link rel="import" href="../common/components/grade_button.html">
+<link rel="import" href="../common/components/grade_fascia.html">
+<link rel="import" href="../common/components/grade_uri.html">
+
+<link rel="import" href="deck.html">
+
+<polymer-element name="task-execution-details-summary"> 
+
+  <template>
+	
+     <paper-item trim bg-selected?="{{selected}}">
+           
+	     <grade-item smallicon icon="settings-applications" flex>
+	     
+	       <grade-fascia flex truncate>
+	         <div fascia-title>{{item.task.label}}</div>
+	         <grade-uri fascia-subtitle value={{status}}></grade-uri>
+	         
+	       </grade-fascia>
+	       
+<!--          <grade-button action smallicon icon="av:play-arrow" tooltip="left" label="runs the task" on-click={{runTask}}></grade-button> -->
+
+	     </grade-item>
+                 
+     </paper-item>
+  
+  </template> 
+</polymer-element>

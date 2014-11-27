@@ -41,6 +41,21 @@ class View extends PolymerElement with Filters,Validators, Dependencies {
         
         return value;
    }
+    
+    Map<dynamic,dynamic> getMap(Keyed item,key) {
+         
+            Map value = {};
+            
+            if (item!=null) {
+              
+              Map current= item.get(key);
+              
+              value = (current==null || current.isEmpty)? value : current;
+              
+            }
+            
+            return value;
+       }
   
     void set(Keyed item,key,value) {
      

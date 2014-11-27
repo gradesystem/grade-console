@@ -140,7 +140,7 @@
   border-color: #26699a;
 }
 :host /deep/ .home /deep/ paper-progress::shadow #activeProgress {
-  background-color: #26699a;
+  background-color: "primary" !important;
 }
 :host /deep/ .home /deep/ paper-tabs::shadow #selectionBar {
   background-color: #26699a;
@@ -243,7 +243,7 @@
   border-color: #00bcd4;
 }
 :host /deep/ .prod /deep/ paper-progress::shadow #activeProgress {
-  background-color: #00bcd4;
+  background-color: "primary" !important;
 }
 :host /deep/ .prod /deep/ paper-tabs::shadow #selectionBar {
   background-color: #00bcd4;
@@ -346,7 +346,7 @@
   border-color: #e91e63;
 }
 :host /deep/ .deck /deep/ paper-progress::shadow #activeProgress {
-  background-color: #e91e63;
+  background-color: "primary" !important;
 }
 :host /deep/ .deck /deep/ paper-tabs::shadow #selectionBar {
   background-color: #e91e63;
@@ -449,7 +449,7 @@
   border-color: #e41c23;
 }
 :host /deep/ .tasks /deep/ paper-progress::shadow #activeProgress {
-  background-color: #e41c23;
+  background-color: "primary" !important;
 }
 :host /deep/ .tasks /deep/ paper-tabs::shadow #selectionBar {
   background-color: #e41c23;
@@ -552,7 +552,7 @@
   border-color: #009587;
 }
 :host /deep/ .stage /deep/ paper-progress::shadow #activeProgress {
-  background-color: #009587;
+  background-color: "primary" !important;
 }
 :host /deep/ .stage /deep/ paper-tabs::shadow #selectionBar {
   background-color: #009587;

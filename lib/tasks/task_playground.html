@@ -36,6 +36,10 @@
 				z-index: 1000;
       }
       
+      [disabled-tab] {
+        pointer-events: none;
+      }
+      
        /* spacing */
       
         :host paper-input, 
@@ -92,7 +96,7 @@
         
       </grade-header-panel>
       <div style="position: relative; width: 0; height: 0" self-end >
-        <paper-fab class="runButton" mini="true" icon="{{editableTask.taskRunning?'av:stop':'av:play-arrow'}}" on-click="{{onRun}}" hide?="{{editableTask.fieldsInvalidity[K.transform] || editableTask.fieldsInvalidity[K.diff] }}"></paper-fab>
+        <paper-fab class="runButton" mini="true" icon="{{editableTask.taskRunning?'av:stop':'av:play-arrow'}}" disabled?="{{!editableTask.canCancel && editableTask.taskRunning}}" on-click="{{onButtonClick}}" hide?="{{editableTask.fieldsInvalidity[K.transform] || editableTask.fieldsInvalidity[K.diff] }}"></paper-fab>
       </div>
     </div>
   
@@ -101,43 +105,21 @@
     <div flex wired rounded spaced layout vertical>
       <grade-header-panel flex paneltitle="Execution">
          
-         <paper-tabs toolbar  style="width:200px" selected="{{executionArea}}" hide?="{{editableTask.lastTaskExecution==null || editableTask.taskRunning || editableTask.lastError!=null}}" >
-            <paper-tab>Status</paper-tab>
-            <paper-tab>Transform</paper-tab>
-            <paper-tab>Target</paper-tab>
+         <paper-tabs toolbar  style="width:300px" selected="{{executionArea}}" hide?="{{editableTask.lastTaskExecution==null || editableTask.lastError!=null}}" >
+            <paper-tab>Summary</paper-tab>
+            <paper-tab>Log</paper-tab>
+            <paper-tab disabled-tab?="{{editableTask.lastTransformResult==null}}">Transform</paper-tab>
+            <paper-tab disabled-tab?="{{editableTask.lastTargetResult==null}}">Target</paper-tab>
         </paper-tabs>
         
           <core-animated-pages main selected="{{executionArea}}" fit spaced hide?="{{editableTask.lastTaskExecution==null}}">
          
             <div style="overflow-y: auto;"> 
-            
-                          
+       
               <grade-item icon=chevron-right>
                 <grade-fascia flex truncate>
                   <div fascia-title>{{ editableTask.lastTaskExecution.bean[TEK.status] }}</div>
                   <grade-uri fascia-subtitle value={{TEK.status}}></grade-uri>
-                </grade-fascia>   
-              </grade-item>
-              
-              <grade-item icon=chevron-right>
-                <grade-fascia flex truncate>
-                  <div fascia-title style="overflow-y: auto;height:150px;">
-                    <pre>{{editableTask.lastTaskExecution.bean[TEK.log]}}</pre>
-<!--                     <template repeat="{{logLine in editableTask.lastTaskExecution.bean[TEK.log] | split}}"> -->
-<!--                       <div>{{logLine}}</div> -->
-                  
-<!--                   </template> -->
-                  </div>
-                  <grade-uri fascia-subtitle value={{TEK.log}}></grade-uri>
-                </grade-fascia>   
-              </grade-item>
-              
-              <grade-item icon=chevron-right hidden?="{{editableTask.lastTaskExecution.bean[TEK.error]==null}}">
-                <grade-fascia flex truncate>
-                  <div fascia-title style="overflow-y: auto;height:200px;">
-                  <pre>{{editableTask.lastTaskExecution.bean[TEK.error]}}</pre>
-                  </div>
-                  <grade-uri fascia-subtitle value={{TEK.error}}></grade-uri>
                 </grade-fascia>   
               </grade-item>
      
@@ -147,8 +129,7 @@
 	                <grade-uri fascia-subtitle value={{TEK.startTime}}></grade-uri>
 	              </grade-fascia>   
 	            </grade-item>
-	            
-	            
+
               <grade-item icon=chevron-right>
                 <grade-fascia flex truncate>
                   <div fascia-title>{{ editableTask.lastTaskExecution.bean[TEK.endTime] }}</div>
@@ -163,7 +144,6 @@
                 </grade-fascia>   
               </grade-item>
 
-              
               <grade-item icon=chevron-right>
                 <grade-fascia flex truncate>
                   <div fascia-title>{{ editableTask.lastTaskExecution.source.bean[endpoint_name_key] }}</div>
@@ -179,13 +159,18 @@
               </grade-item>
  
             </div>
+            
+            <div style="overflow-y: auto;"> 
+
+             <pre>{{editableTask.lastTaskExecution.bean[TEK.log]}}</pre>
+
+            </div>
           
-          
-           <loading-panel fit loading="{{editableTask.taskRunning || editableTask.loadingResults}}" message="retrieving transform results">
+           <loading-panel fit loading="{{editableTask.loadingTransformResults}}" message="retrieving transform results">
              <query-result fit queryResult={{editableTask.lastTransformResult}} dirty={{editableTask.dirty}}></query-result>
            </loading-panel>
              
-          <loading-panel fit loading="{{editableTask.taskRunning || editableTask.loadingResults}}" message="retrieving target results">
+          <loading-panel fit loading="{{editableTask.loadingTargetResults}}" message="retrieving target results">
             <query-result fit queryResult={{editableTask.lastTargetResult}} dirty={{editableTask.dirty}}></query-result>
 					</loading-panel>
           

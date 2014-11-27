@@ -36,6 +36,7 @@ init() {
           ..bind(TasksPageModel)          
           
           ..bind(TasksService)
+          ..bind(TaskExecutionsService)
           ..bind(TasksModel)
           ..bind(Tasks)
 
