@@ -1,6 +1,5 @@
 library home;
 
-import 'dart:math';
 import 'package:polymer/polymer.dart';
 
 import 'common.dart';
