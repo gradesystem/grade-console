@@ -76,7 +76,7 @@ class EditableTask extends EditableModel<Task> with Keyed {
 
   EditableTask(Task task) : super(task) {
     
-    playgroundRunningTask = new RunningTask();
+    playgroundRunningTask = new RunningTask(model);
 
     //we need to listen on the expression changes in the current model
     onPropertyChange(this, #model, _listenNewModel);
@@ -166,7 +166,7 @@ class TasksModel extends SubPageEditableModel<Task> {
   }
   
   RunningTask runTask(EditableTask editableTask) {
-    RunningTask runningTask = new RunningTask(); 
+    RunningTask runningTask = new RunningTask(editableTask.model); 
     taskService.runTask(editableTask.model)
               .then((TaskExecution update) {
                   updateTaskExecution(runningTask, update);
@@ -304,6 +304,8 @@ class TaskExecution extends GradeEntity {
 class RunningTask extends Observable {
   
   static TaskExecutionKeys TEK = const TaskExecutionKeys();
+  
+  Task launchedTask;
 
   @observable
   bool running = false;
@@ -331,7 +333,10 @@ class RunningTask extends Observable {
   @observable
   bool loadingTargetResults = false;
   
-  RunningTask();
+  @observable
+  String status;
+  
+  RunningTask(this.launchedTask);
   
   RunningTask.fromExecution(this.execution);
   
@@ -341,7 +346,7 @@ class RunningTask extends Observable {
 
   void runTask() {
     running = true;
-   //FIXME _setDirty(false);
+    status = TEK.status_submitted;
     resetError();
     execution = null;
     transformResult = null;
@@ -353,6 +358,7 @@ class RunningTask extends Observable {
 
   void executionUpdate(TaskExecution update) {
     execution = update;
+    status = update.status;
     running = update.running;
     
     //we don't know the first update, so we set it always true
@@ -362,6 +368,7 @@ class RunningTask extends Observable {
 
   void taskFailed(ErrorResponse reason) {
     error = reason;
+    status = TEK.status_failed;
     stopTask();
   }
   

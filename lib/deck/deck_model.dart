@@ -23,6 +23,7 @@ class DeckPageModel {
   void runTask(EditableTask editableTask) {
     RunningTask runningTask = tasksModel.runTask(editableTask);
     storage.data.add(runningTask);
+    storage.selected = runningTask;
   }
   
   void cancelExecution(RunningTask runningTask) {

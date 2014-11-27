@@ -17,7 +17,7 @@
 	  <core-list-dart id="list" data="{{listitems.data | filter(kfilter, itemFilter)}}" height="80" on-core-activate={{selectItem}} flex>
 	    
 	    <template>
-	    
+
 	     <running-task-details-summary flex item="{{model}}" selected="{{ selected==true }}" on-remove-execution={{setClickFlag}}></running-task-details-summary>
 
 	    </template>
