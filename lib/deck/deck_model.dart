@@ -68,6 +68,19 @@ class DeckPageModel {
 
 @Injectable()
 class RunningTasks extends ListItems<RunningTask> {
+  
+  RunningTasks() {
+    onPropertyChange(data, #lastChangedItem, _notifyRunningChanged);
+    onPropertyChange(data, #length, _notifyRunningChanged);
+  }
+  
+  void _notifyRunningChanged() {
+    notifyPropertyChange(#running, null, running);
+  }
+  
+  @observable
+  List<RunningTask> get running => data.where((RunningTask e)=>e.running).toList();
+
 }
 
 

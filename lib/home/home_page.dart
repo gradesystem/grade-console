@@ -2,21 +2,6 @@ part of home;
 
 @CustomTag("home-page") 
 class HomePage extends PolymerElement with Dependencies {
- 
-  HomePage.created() : super.created() {
-    
-    prod = instanceOf(ProdDatasets);
-    prod_stats = new PageStatistics(prod.data.length,new DateTime.now(), []);
-  
-    stage = instanceOf(StageDatasets);
-    stage_stats = new PageStatistics(stage.data.length,new DateTime.now(), []);
-    
-    tasks= instanceOf(Tasks);
-    tasks_stats = new PageStatistics(tasks.data.length,new DateTime.now(), []);
-    
-    //todo
-    deck_stats = new PageStatistics(0,new DateTime.now(), []);
-  }
 
   @observable
   ProdDatasets prod;
@@ -26,6 +11,9 @@ class HomePage extends PolymerElement with Dependencies {
  
   @observable
   Tasks tasks;
+  
+  @observable
+  RunningTasks runningTasks;
   
   @observable
   PageStatistics prod_stats;
@@ -38,6 +26,21 @@ class HomePage extends PolymerElement with Dependencies {
   
   @observable
   PageStatistics deck_stats;
+  
+  HomePage.created() : super.created() {
+    
+    prod = instanceOf(ProdDatasets);
+    prod_stats = new PageStatistics(prod.data.length,new DateTime.now(), []);
+  
+    stage = instanceOf(StageDatasets);
+    stage_stats = new PageStatistics(stage.data.length,new DateTime.now(), []);
+    
+    tasks = instanceOf(Tasks);
+    tasks_stats = new PageStatistics(tasks.data.length,new DateTime.now(), []);
+
+    runningTasks = instanceOf(RunningTasks);
+    deck_stats = new PageStatistics(runningTasks.running.length,new DateTime.now(), []);
+  }
   
   
   @ObserveProperty('prod.loading') 
@@ -62,7 +65,7 @@ class HomePage extends PolymerElement with Dependencies {
   
   @ObserveProperty('tasks.loading') 
   @ObserveProperty('tasks.data') 
-  ontasksChange() {
+  onTasksChange() {
       
         tasks_stats.loaded=!tasks.loading;
         tasks_stats.count=tasks.data.length;
@@ -70,10 +73,12 @@ class HomePage extends PolymerElement with Dependencies {
             
   }
   
-  @ObserveProperty('tasks.loading') 
-  ondeckChange() {
+  @ObserveProperty('runningTasks.loading') 
+  @ObserveProperty('runningTasks.running') 
+  onDeckChange() {
       
-    deck_stats.loaded=!tasks.loading;
+    deck_stats.loaded=!runningTasks.loading;
+    deck_stats.count=runningTasks.running.length;
     deck_stats.date= new DateTime.now();
             
   }
