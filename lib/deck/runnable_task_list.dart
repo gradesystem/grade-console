@@ -24,10 +24,10 @@ class RunnableTaskList extends PolymerElement with Filters {
     list = $['list'] as CoreList;
     list.data.changes.listen((_){selecteFirstItem();});
     
-     onPropertyChange(listitems, #selected, syncSelection);
+     //onPropertyChange(listitems, #selected, syncSelection);
    }
    
-   void syncSelection() {
+  /* void syncSelection() {
      if (listitems.selected!= null && listitems.selected != list.selection) {
        if (listitems.selected == null) list.clearSelection();
        else {
@@ -35,24 +35,24 @@ class RunnableTaskList extends PolymerElement with Filters {
          list.selectItem(index);
        }
      }
-   }  
+   }  */
    
   void selecteFirstItem() {
-    if (list.data != null && list.data.isNotEmpty && !list.data.contains(listitems.selected)) {
+    //if (list.data != null && list.data.isNotEmpty && !list.data.contains(listitems.selected)) {
       
       list.selectItem(0);
       //we are not notified about the selection
-      listitems.selected = list.selection;
-    }
+     // listitems.selected = list.selection;
+    //}
   }
   
   void selectItem(event) {
     //workaround to https://github.com/dart-lang/core-elements/issues/160
-    if (!clickflag) listitems.selected = event.detail.data;
+  /*  if (!clickflag) listitems.selected = event.detail.data;
     else {
       syncSelection();
       clickflag = false;
-    }
+    }*/
   }
 
   void setClickFlag() {
