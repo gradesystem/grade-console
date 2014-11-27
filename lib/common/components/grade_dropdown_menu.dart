@@ -43,9 +43,7 @@ class GradeDropdownMenu extends PolymerElement {
    unknown_validator = (sel) => (!isItem(sel))? "Current value '${sel}' is no longer a valid choice.":null;    
   
   }
-  
-  
-  
+
   bool isItem(String val) {
     
     for (var item in querySelectorAll("[dropitem]"))

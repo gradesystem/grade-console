@@ -85,10 +85,9 @@
 				           label="{{ target_key | suffix }} ?" 
 				           required?="{{ isRequiredField(target_key) }}"
 				           invalid="{{ item.fieldsInvalidity[target_key] }}"
-				           valueattr="itemId"
 				           >
 				        <template repeat="{{target in endpoints.synchedData}}">
-                  <paper-item label="{{target.model.name}}" itemId="{{target.model.id}}"></paper-item>
+				        <paper-item truncate label="{{target.model.name}}" dropitem="{{target.model.id}}"></paper-item>
                 </template>
 	            </grade-dropdown-menu>
 	            <div fascia-subtitle truncate><span>{{ target_key | start }}</span><span fg bolder>{{ target_key | suffix}}</span></div>
