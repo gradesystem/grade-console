@@ -190,10 +190,10 @@ class TasksModel extends SubPageEditableModel<Task> {
     stopRunningTask(editableTask.playgroundRunningTask);
   }
   
-  void stopRunningTask(RunningTask editableTask) {
-    if (!editableTask.canCancel || !editableTask.running) return;
-    editableTask.stopTask();
-    executionsService.stopTaskExecution(editableTask.execution);
+  void stopRunningTask(RunningTask runningTask) {
+    if (!runningTask.canCancel || !runningTask.running) return;
+    runningTask.stopTask();
+    executionsService.stopTaskExecution(runningTask.execution);
   }
   
   void _listenTaskExecution(RunningTask editableTask) {
@@ -353,19 +353,21 @@ class RunningTask extends Observable {
   void executionUpdate(TaskExecution update) {
     execution = update;
     running = update.running;
+    
+    //we don't know the first update, so we set it always true
     canCancel = true;
-    if (!update.running) executionPoller.cancel();
+    if (!update.running) stopTask();
   }
 
   void taskFailed(ErrorResponse reason) {
-    running = false;
     error = reason;
-    if (executionPoller!=null) executionPoller.cancel();
+    stopTask();
   }
   
   void stopTask() {
     running = false;
-    if (executionPoller!=null) executionPoller.cancel();
+    canCancel = false;
+   if (executionPoller!=null) executionPoller.cancel();
   }
   
 }

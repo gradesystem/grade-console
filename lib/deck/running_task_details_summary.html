@@ -24,7 +24,7 @@
 	         
 	       </grade-fascia>
 	       
-<!--          <grade-button action smallicon icon="av:play-arrow" tooltip="left" label="runs the task" on-click={{runTask}}></grade-button> -->
+         <grade-button action smallicon icon="av:stop" tooltip="left" label="runs the task" on-click={{stopTask}} hidden?="{{!item.canCancel}}"></grade-button>
 
 	     </grade-item>
                  
