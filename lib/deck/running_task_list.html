@@ -12,7 +12,7 @@
 
  <template>
  
-   <list-panel loading="{{listitems.loading}}" empty={{listitems.data.isEmpty}}>
+   <list-panel loading="{{listitems.loading}}" empty={{listitems.data.isEmpty}} emptyMessage="No runs to show">
 
 	  <core-list-dart id="list" data="{{listitems.data | filter(kfilter, itemFilter)}}" height="80" on-core-activate={{selectItem}} flex>
 	    
