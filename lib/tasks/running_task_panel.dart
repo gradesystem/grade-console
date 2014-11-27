@@ -23,7 +23,7 @@ class RunningTaskPanel extends PolymerElement {
   String errorMessage()   {
   
     return runningTask.error.isClientError()?
-                      "Uhm, may be this query is broken? Make sure it's a well-formed SELECT, CONSTRUCT, or DESCRIBE.":
+                      "Uhm, may be the task queries are broken ?":
                       "Ouch. Something went horribly wrong...";
   
   }

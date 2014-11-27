@@ -10,16 +10,16 @@
 <link rel="import" href="../../../packages/paper_elements/paper_tab.html">
 <link rel="import" href="../../../packages/core_elements/core_animated_pages.html">
 
-<link rel="import" href="task_execution_panel.html">
+<link rel="import" href="task_execution.html">
 <link rel="import" href="tasks.html">
 
 <polymer-element name="running-task-panel" layout vertical>
-	<template>
-		<style>
-			[disabled-tab] {
-			  pointer-events: none;
-			}
-		</style>
+  <template>
+    <style>
+      [disabled-tab] {
+        pointer-events: none;
+      }
+    </style>
       <grade-header-panel flex paneltitle="{{paneltitle}}">
          
          <paper-tabs toolbar  style="width:300px" selected="{{executionArea}}" hide?="{{runningTask.execution==null || runningTask.error!=null}}" >
@@ -32,36 +32,51 @@
         <core-animated-pages main selected="{{executionArea}}" fit spaced hide?="{{runningTask.execution==null}}">
        
           <!-- STATUS -->
-          <task-execution-panel taskExecution={{runningTask.execution}}></task-execution-panel>
+          
+         <!--  <task-execution-panel taskExecution={{runningTask.execution}}></task-execution-panel> -->
+          <div layout horizontal center-justified>
+            <div style="min-width:600px">
+              <task-execution execution="{{runningTask.execution}}"></task-execution>
+            </div>
+          </div>
           
           <!-- LOG -->
           <div style="overflow-y: auto;"> 
-           <pre>{{runningTask.execution.bean[TEK.log]}}</pre>
+          
+           <div fg-alt style="overflow-y: auto; margin: 30px" layout vertical center-justified>
+                <template if="{{runningTask.execution.bean[TEK.log]==null || runningTask.execution.bean[TEK.log].isEmpty}}">
+                    <div self-center>No logs as yet.</div>
+                </template>
+                <template if="{{runningTask.execution.bean[TEK.log]!=null}}">
+                    <pre>{{runningTask.execution.bean[TEK.log]}}</pre>
+                </template>
+             </div>
+     
           </div>
         
           <!-- TRANSFORM RESULT -->
-					<loading-panel fit loading="{{runningTask.loadingTransformResults}}" message="retrieving transform results">
-					  <query-result fit queryResult={{runningTask.transformResult}} dirty={{dirty}}></query-result>
-					</loading-panel>
+          <loading-panel fit loading="{{runningTask.loadingTransformResults}}" message="retrieving transform results">
+            <query-result fit queryResult={{runningTask.transformResult}} dirty={{dirty}}></query-result>
+          </loading-panel>
            
           <!-- TARGET RESULT -->
-	        <loading-panel fit loading="{{runningTask.loadingTargetResults}}" message="retrieving target results">
-	          <query-result fit queryResult={{runningTask.targetResult}} dirty={{dirty}}></query-result>
-	        </loading-panel>
+          <loading-panel fit loading="{{runningTask.loadingTargetResults}}" message="retrieving target results">
+            <query-result fit queryResult={{runningTask.targetResult}} dirty={{dirty}}></query-result>
+          </loading-panel>
         
         </core-animated-pages>
           
         <div layout horizontal center-justified hide?="{{runningTask.execution!=null || runningTask.error!=null}}" style="overflow:hidden"> 
         </div>
          
-				<template if="{{runningTask.error!=null}}">
-				
-					<grade-error one="{{errorMessage()}}"
-					     two = {{runningTask.error.message}}
-					     three = {{runningTask.error.stacktrace}}>
-					</grade-error>
-				         
-				</template>
+        <template if="{{runningTask.error!=null}}">
+        
+          <grade-error one="{{errorMessage()}}"
+               two = {{runningTask.error.message}}
+               three = {{runningTask.error.stacktrace}}>
+          </grade-error>
+                 
+        </template>
 
       </grade-header-panel>
   </template>

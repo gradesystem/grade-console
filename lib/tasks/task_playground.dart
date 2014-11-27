@@ -38,7 +38,7 @@ class TaskPlayground extends PolymerElement with Filters {
   bool get editable => editableTask!=null?editableTask.model.bean[Query.predefined_field]==false:false;
   
   @ComputedProperty("editableTask.model.name")  
-  String get title => editableTask!=null?(editableTask.model.name == null || editableTask.model.name.isEmpty?"(name?)":suffix(editableTask.model.name)):"";
+  String get title => editableTask!=null?(editableTask.model.label == null || editableTask.model.label.isEmpty?"(label?)":editableTask.model.label):"";
   
   void onBack() {
     fire("back");

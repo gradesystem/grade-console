@@ -36,8 +36,6 @@
           overflow-x: auto;
           white-space: nowrap;
           text-overflow: ellipsis;
-          top:-2px; 
-          position:relative
         }
         
         
@@ -90,11 +88,11 @@
           
            <div middle layout horizontal center-justified center>
            
-                <div flex endpoint small truncate style="text-align:right;" >{{source | uppercase}}</div>
+                <div flex endpoint smaller truncate style="text-align:right;" >{{source | uppercase}}</div>
                 <div flex three style="margin:0px 10px">
                   <paper-progress value="{{progress}}"></paper-progress>
                 </div>
-                <div flex endpoint small truncate> {{target | uppercase}}</div>
+                <div flex endpoint smaller truncate> {{target | uppercase}}</div>
           
           </div>
           
