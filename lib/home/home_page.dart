@@ -30,16 +30,16 @@ class HomePage extends PolymerElement with Dependencies {
   HomePage.created() : super.created() {
     
     prod = instanceOf(ProdDatasets);
-    prod_stats = new PageStatistics(prod.data.length,new DateTime.now(), []);
+    prod_stats = new PageStatistics(prod.data.length,new DateTime.now());
   
     stage = instanceOf(StageDatasets);
-    stage_stats = new PageStatistics(stage.data.length,new DateTime.now(), []);
+    stage_stats = new PageStatistics(stage.data.length,new DateTime.now());
     
     tasks = instanceOf(Tasks);
-    tasks_stats = new PageStatistics(tasks.data.length,new DateTime.now(), []);
+    tasks_stats = new PageStatistics(tasks.data.length,new DateTime.now());
 
     runningTasks = instanceOf(RunningTasks);
-    deck_stats = new PageStatistics(runningTasks.running.length,new DateTime.now(), []);
+    deck_stats = new PageStatistics(runningTasks.running.length,new DateTime.now());
   }
   
   
@@ -75,11 +75,14 @@ class HomePage extends PolymerElement with Dependencies {
   
   @ObserveProperty('runningTasks.loading') 
   @ObserveProperty('runningTasks.running') 
+  @ObserveProperty('runningTasks.failed')
   onDeckChange() {
       
     deck_stats.loaded=!runningTasks.loading;
     deck_stats.count=runningTasks.running.length;
     deck_stats.date= new DateTime.now();
-            
+    
+    deck_stats.notifications.clear();
+    if (runningTasks.failed.isNotEmpty) deck_stats.notifications.add("error");   
   }
 }

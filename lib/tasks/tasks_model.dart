@@ -283,11 +283,12 @@ class TaskExecution extends GradeEntity {
   
   String get id => get(K.id);
   
-  bool get running => status != K.status_completed && status != K.status_failed;
+  bool get running => !completed && !failed;
   
   bool get transformed => afterTransform.contains(status);
   
   bool get completed => status == K.status_completed;
+  bool get failed => status == K.status_failed;
   
   String get status => get(K.status);
   

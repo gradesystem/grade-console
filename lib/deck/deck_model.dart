@@ -70,16 +70,21 @@ class DeckPageModel {
 class RunningTasks extends ListItems<RunningTask> {
   
   RunningTasks() {
-    onPropertyChange(data, #lastChangedItem, _notifyRunningChanged);
-    onPropertyChange(data, #length, _notifyRunningChanged);
+    onPropertyChange(data, #lastChangedItem, _notifyDerivedChanged);
+    onPropertyChange(data, #length, _notifyDerivedChanged);
   }
   
-  void _notifyRunningChanged() {
+  void _notifyDerivedChanged() {
     notifyPropertyChange(#running, null, running);
+    notifyPropertyChange(#failed, null, failed);
   }
   
   @observable
   List<RunningTask> get running => data.where((RunningTask e)=>e.running).toList();
+  
+  @observable
+  List<RunningTask> get failed => data.where((RunningTask e)=>e.execution!=null && e.execution.failed).toList();
+    
 
 }
 
