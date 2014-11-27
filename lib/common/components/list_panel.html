@@ -4,21 +4,23 @@
 <link rel="import" href="../../../../packages/paper_elements/paper_progress.html">
 <link rel="import" href="loading_panel.html">
 
-<polymer-element name="list-panel" attributes="loading, empty" noscript> 
+<polymer-element name="list-panel"> 
 
  <template>
 
-  <loading-panel loading="{{loading}}" message="loading items">
+  <loading-panel loading={{loading}} message="loading items">
 
     <div hidden?={{empty}} flex>
       <content></content>
     </div>
     	  
 	  <div fit hidden?={{!empty}} layout vertical center center-justified>
-      <div fg>Ops.. We've found no items</div>
+      <div fg>{{emptyMessage}}</div>
     </div>
 	  
   </loading-panel>
  </template>
+ 
+ <script type="application/dart" src="list_panel.dart"></script> 
 
 </polymer-element>
