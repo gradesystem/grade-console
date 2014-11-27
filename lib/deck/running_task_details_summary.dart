@@ -11,8 +11,12 @@ class RunningTaskDetailsSummary extends View {
   
   RunningTaskDetailsSummary.created() : super.created();
 
-  void stopTask() {
-    fire("stop", detail:item);
+  void stopExecution() {
+    fire("stop-execution", detail:item);
+  }
+  
+  void removeExecution() {
+    fire("remove-execution", detail:item);
   }
   
 }

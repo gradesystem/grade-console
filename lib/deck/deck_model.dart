@@ -25,8 +25,14 @@ class DeckPageModel {
     storage.data.add(runningTask);
   }
   
-  void cancelTask(RunningTask runningTask) {
-    tasksModel.stopRunningTask(runningTask);
+  void cancelExecution(RunningTask runningTask) {
+    //FIXME tasksModel.stopRunningTask(runningTask);
+  }
+  
+  void removeExecution(RunningTask runningTask) {
+    executionsService.delete(runningTask.execution);
+    storage.data.remove(runningTask);
+    
   }
 
   void loadAll() {

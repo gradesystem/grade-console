@@ -50,6 +50,9 @@ class TaskExecutionsService extends ListService<TaskExecution> {
   Future<QueryResult> getTargetResult(TaskExecution execution)     
     => http.get("${getItemPath(execution.id)}/results/target", acceptedMediaType:MediaType.SPARQL_JSON).then((response) => new QueryResult(response, http.decode(response)));
  
+  Future<bool> delete(TaskExecution execution) {
+    return http.delete(getItemPath(execution.id)).then((response) => true);
+  }
 }
 
 

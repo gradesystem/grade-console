@@ -17,5 +17,12 @@ class RunningTasksPanel extends PolymerElement with Filters, Dependencies {
     model.loadAll();
   }
 
+  void stopExecution(event,detail,target) {
+    model.cancelExecution(detail);
+  }
+  
+  void removeExecution(event,detail,target) {
+    model.removeExecution(detail);
+  }
 
 }
