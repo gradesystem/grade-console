@@ -4,7 +4,7 @@ part of home;
 @CustomTag("page-tile")
 class PageTile extends PolymerElement with Filters {
   
-  Map notificationsSets = {'error':'social:notifications'};
+  Map notificationsSets = {'error':'warning'};
 
   @published String name;
   @published String resource_name;
@@ -30,7 +30,7 @@ class PageStatistics extends Observable {
   bool loaded = false;
   
   @observable
-  List<String> notifications = toObservable(['asdasdasd']);
+  List<String> notifications = toObservable([]);
   
   PageStatistics(this.count, this.date);
 }
