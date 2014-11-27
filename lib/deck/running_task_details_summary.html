@@ -10,7 +10,7 @@
 
 <link rel="import" href="deck.html">
 
-<polymer-element name="task-execution-details-summary"> 
+<polymer-element name="running-task-details-summary"> 
 
   <template>
 	
@@ -19,8 +19,8 @@
 	     <grade-item smallicon icon="settings-applications" flex>
 	     
 	       <grade-fascia flex truncate>
-	         <div fascia-title>{{item.task.label}}</div>
-	         <grade-uri fascia-subtitle value={{status}}></grade-uri>
+	         <div fascia-title>{{item.execution.task.label}}</div>
+	         <grade-uri fascia-subtitle value={{item.execution.status}}></grade-uri>
 	         
 	       </grade-fascia>
 	       

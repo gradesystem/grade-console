@@ -10,7 +10,7 @@
 <link rel="import" href="../../../packages/core_elements/core_splitter.html">
 
 <link rel="import" href="runnable_tasks_panel.html">
-<link rel="import" href="task_executions_panel.html">
+<link rel="import" href="running_tasks_panel.html">
 
 <link rel="import" href="deck.html">
 
@@ -18,7 +18,7 @@
   <template>
     <div style="height:60%;" spaced layout horizontal>
         <runnable-tasks-panel flex TWO rounded wired model="{{tasks}}"></runnable-tasks-panel>
-        <task-executions-panel flex FOUR rounded wired style="margin-left: 8px;" model="{{deckModel}}"></task-executions-panel>
+        <running-tasks-panel flex FOUR rounded wired style="margin-left: 8px;" model="{{deckModel}}"></running-tasks-panel>
     </div>
   
     <core-splitter direction="up" allowOverflow minSize="170px"></core-splitter>

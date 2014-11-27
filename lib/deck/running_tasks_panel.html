@@ -12,11 +12,11 @@
 <link rel="import" href="../common/components/page_menu.html">
 <link rel="import" href="../common/components/grade_dialog.html">
 
-<link rel="import" href="task_execution_list.html">
+<link rel="import" href="running_task_list.html">
 
 <link rel="import" href="deck.html">
 
-<polymer-element name="task-executions-panel" relative>
+<polymer-element name="running-tasks-panel" relative>
 
   <template>
 
@@ -33,7 +33,7 @@
 	        
           <grade-button toolbar icon="refresh" label="refresh list" on-click="{{refresh}}"></grade-button>
 
-	        <task-execution-list main listitems="{{items}}" kfilter="{{kfilter}}" on-run={{runTask}}></task-execution-list>
+	        <running-task-list main listitems="{{items}}" kfilter="{{kfilter}}" on-run={{runTask}}></running-task-list>
 	        
 	      </grade-header-panel>
 

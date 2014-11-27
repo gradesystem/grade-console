@@ -284,11 +284,13 @@ class TaskExecution extends GradeEntity {
   
   String get id => get(K.id);
   
-  bool get running => get(K.status) != K.status_completed && get(K.status) != K.status_failed;
+  bool get running => status != K.status_completed && status != K.status_failed;
   
-  bool get transformed => afterTransform.contains(get(K.status));
+  bool get transformed => afterTransform.contains(status);
   
-  bool get completed => get(K.status) == K.status_completed;
+  bool get completed => status == K.status_completed;
+  
+  String get status => get(K.status);
   
   Endpoint get source => new Endpoint.fromBean(get(K.source));
   Endpoint get target => new Endpoint.fromBean(get(K.target));
@@ -328,6 +330,10 @@ class RunningTask extends Observable {
   
   @observable
   bool loadingTargetResults = false;
+  
+  RunningTask();
+  
+  RunningTask.fromExecution(this.execution);
   
   void resetError() {
     error = null;

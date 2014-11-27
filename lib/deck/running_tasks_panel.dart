@@ -1,7 +1,7 @@
 part of deck;
 
-@CustomTag("task-executions-panel")
-class TaskExecutionsPanel extends PolymerElement with Filters, Dependencies {
+@CustomTag("running-tasks-panel")
+class RunningTasksPanel extends PolymerElement with Filters, Dependencies {
 
   @observable
   String kfilter = '';
@@ -9,16 +9,14 @@ class TaskExecutionsPanel extends PolymerElement with Filters, Dependencies {
   @published
   DeckPageModel model;
 
-
-  TaskExecutionsPanel.created() : super.created() {
+  RunningTasksPanel.created() : super.created() {
     EventBus bus = instanceOf(EventBus);
     bus.on(TaskLaunched).listen((_) {
       refresh();
      });
   }
-  
 
-  TaskExecutions get items => model.storage;
+  RunningTasks get items => model.storage;
 
   void refresh() {
     model.loadAll();
