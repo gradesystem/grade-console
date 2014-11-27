@@ -24,47 +24,51 @@
          
       <paper-tabs toolbar  style="width:300px" selected="{{executionArea}}" hide?="{{runningTask.execution==null || runningTask.error!=null}}" >
         <paper-tab>Summary</paper-tab>
-          <paper-tab>Log</paper-tab>
-          <paper-tab disabled-tab?="{{runningTask.transformResult==null}}">Transform</paper-tab>
-          <paper-tab disabled-tab?="{{runningTask.targetResult==null}}">Target</paper-tab>
-        </paper-tabs>
+        <paper-tab>Log</paper-tab>
+        <content select="[task-tab]"></content>
+        <paper-tab disabled-tab?="{{runningTask.transformResult==null}}">Transform</paper-tab>
+        <paper-tab disabled-tab?="{{runningTask.targetResult==null}}">Target</paper-tab>
+      </paper-tabs>
         
-        <div main fit relative>
-          <core-animated-pages selected="{{executionArea}}" fit spaced hide?="{{runningTask.execution==null}}">
-	       
-	          <!-- STATUS -->
-            <div layout horizontal center-justified>
-	            <div style="min-width:600px">
-	              <task-execution execution="{{runningTask.execution}}"></task-execution>
-	            </div>
-	          </div>
-	          
-	          <!-- LOG -->
-	          <div style="overflow-y: auto;"> 
-	            <div fg-alt style="overflow-y: auto; margin: 30px" layout vertical center-justified>
-	              <template if="{{runningTask.execution.bean[TEK.log]==null || runningTask.execution.bean[TEK.log].isEmpty}}">
-	                  <div self-center>No logs as yet.</div>
-	              </template>
-	              <template if="{{runningTask.execution.bean[TEK.log]!=null}}">
-	                  <pre>{{runningTask.execution.bean[TEK.log]}}</pre>
-	              </template>
-	            </div>
-	          </div>
-	        
-	          <!-- TRANSFORM RESULT -->
-	          <loading-panel fit loading="{{runningTask.loadingTransformResults}}" message="retrieving transform results">
-	            <query-result fit queryResult={{runningTask.transformResult}} dirty={{dirty}}></query-result>
-	          </loading-panel>
-	           
-	          <!-- TARGET RESULT -->
-	          <loading-panel fit loading="{{runningTask.loadingTargetResults}}" message="retrieving target results">
-	            <query-result fit queryResult={{runningTask.targetResult}} dirty={{dirty}}></query-result>
-	          </loading-panel>
-	        </core-animated-pages>
-	          
-	        <div layout horizontal center-justified hide?="{{runningTask.execution!=null || runningTask.error!=null}}" style="overflow:hidden"> 
-	      </div>
+      <div main fit relative>
       
+        <core-animated-pages selected="{{executionArea}}" fit spaced hide?="{{runningTask.execution==null}}">
+      
+					<!-- STATUS -->
+					<div layout horizontal center-justified>
+					 <div style="min-width:600px">
+					    <task-execution execution="{{runningTask.execution}}"></task-execution>
+					  </div>
+					</div>
+	         
+					<!-- LOG -->
+					<div style="overflow-y: auto;"> 
+					  <div fg-alt style="overflow-y: auto; margin: 30px" layout vertical center-justified>
+					    <template if="{{runningTask.execution.bean[TEK.log]==null || runningTask.execution.bean[TEK.log].isEmpty}}">
+					        <div self-center>No logs as yet.</div>
+					    </template>
+					    <template if="{{runningTask.execution.bean[TEK.log]!=null}}">
+					        <pre>{{runningTask.execution.bean[TEK.log]}}</pre>
+					    </template>
+					  </div>
+					</div>
+					
+					<content select="[task-panel]"></content>
+       
+	        <!-- TRANSFORM RESULT -->
+	        <loading-panel fit loading="{{runningTask.loadingTransformResults}}" message="retrieving transform results">
+	          <query-result fit queryResult={{runningTask.transformResult}} dirty={{dirty}}></query-result>
+	        </loading-panel>
+	         
+	        <!-- TARGET RESULT -->
+	        <loading-panel fit loading="{{runningTask.loadingTargetResults}}" message="retrieving target results">
+	          <query-result fit queryResult={{runningTask.targetResult}} dirty={{dirty}}></query-result>
+	        </loading-panel>
+        </core-animated-pages>
+         
+	      <div layout horizontal center-justified hide?="{{runningTask.execution!=null || runningTask.error!=null}}" style="overflow:hidden"> 
+	      </div>
+	      
 				<template if="{{runningTask.error!=null}}">
 				
 				  <grade-error one="{{errorMessage()}}"

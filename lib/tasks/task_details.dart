@@ -8,9 +8,6 @@ class TasKDetails extends View {
   
   @published
   EditableTask editable;
-  
-  @published
-  Tasks tasks;
 
   GradeEnpoints endpoints;
   
@@ -22,6 +19,7 @@ class TasKDetails extends View {
   TasKDetails.created() : super.created() {
   
     endpoints = instanceOf(GradeEnpoints);
+    Tasks tasks = instanceOf(Tasks);
     
     conditionalRequiredDiff = ($) => 
        get(editable,K.op)!=K.publish_op && ($==null || $.isEmpty)? "Please fill in this field.":null;

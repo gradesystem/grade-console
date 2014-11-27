@@ -7,6 +7,7 @@
 <link rel="import" href="../../../packages/core_elements/core_splitter.html">
 
 <link rel="import" href="../tasks/running_task_panel.html">
+<link rel="import" href="../tasks/task_details.html">
 
 <link rel="import" href="runnable_tasks_panel.html">
 <link rel="import" href="running_tasks_panel.html">
@@ -16,15 +17,16 @@
 <polymer-element name="deck-page" layout vertical>  
   <template>
     <div style="height:60%;" spaced layout horizontal>
-        <runnable-tasks-panel flex TWO rounded wired></runnable-tasks-panel>
-        <running-tasks-panel flex FOUR rounded wired style="margin-left: 8px;"></running-tasks-panel>
+      <runnable-tasks-panel flex TWO rounded wired></runnable-tasks-panel>
+      <running-tasks-panel flex FOUR rounded wired style="margin-left: 8px;"></running-tasks-panel>
     </div>
   
     <core-splitter direction="up" allowOverflow minSize="170px"></core-splitter>
     
     <!-- ciuf ciuf!!! -->
-    <running-task-panel runningTask="{{deckModel.storage.selected}}" panelTitle="Results for '{{deckModel.storage.selected.execution.task.label}}'" flex wired rounded spaced></running-task-panel>
-
- </template>
- 
+    <running-task-panel runningTask="{{deckModel.storage.selected}}" panelTitle="Results for '{{deckModel.storage.selected.execution.task.label}}'" flex wired rounded spaced>
+      <paper-tab task-tab>Task</paper-tab>
+      <task-details task-panel editable="{{deckModel.storage.selected | getTask | asEditableTask}}"></task-details>
+    </running-task-panel>
+  </template>
 </polymer-element>
