@@ -338,7 +338,9 @@ class RunningTask extends Observable {
   
   RunningTask(this.launchedTask);
   
-  RunningTask.fromExecution(this.execution);
+  RunningTask.fromExecution(this.execution) {
+    status = execution.status;
+  }
   
   void resetError() {
     error = null;
