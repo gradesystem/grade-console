@@ -33,6 +33,8 @@ class DeckPageModel {
     executionsService.delete(runningTask.execution);
     storage.data.remove(runningTask);
     
+    //required for core-list issue https://github.com/dart-lang/core-elements/issues/160
+    if (storage.data.isEmpty) storage.selected = null;
   }
 
   void loadAll() {
