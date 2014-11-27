@@ -14,6 +14,9 @@ class RunningTaskPanel extends PolymerElement {
   @published
   bool dirty = false;
   
+  @published
+  String paneltitle;
+  
   RunningTaskPanel.created() : super.created();
   
   

@@ -22,7 +22,8 @@
   
     <core-splitter direction="up" allowOverflow minSize="170px"></core-splitter>
     
-    <running-task-panel runningTask="{{deckModel.storage.selected}}" flex wired rounded spaced></running-task-panel>
+    <!-- ciuf ciuf!!! -->
+    <running-task-panel runningTask="{{deckModel.storage.selected}}" panelTitle="Execution {{deckModel.storage.selected.execution.task.label}}" flex wired rounded spaced></running-task-panel>
 
  </template>
  
