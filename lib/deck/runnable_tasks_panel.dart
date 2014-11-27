@@ -1,17 +1,16 @@
 part of deck;
 
 @CustomTag("runnable-tasks-panel")
-class RunnableTasksPanel extends PolymerElement with Filters {
+class RunnableTasksPanel extends PolymerElement with Filters, Dependencies {
 
   @observable
   String kfilter = '';
 
-  @published
-  TasksModel model;
+  DeckPageModel model;
 
-  RunnableTasksPanel.created() : super.created();
-
-  Tasks get items => model.storage;
+  RunnableTasksPanel.created() : super.created() {
+    model = instanceOf(DeckPageModel);
+  }
 
   void refresh() {
     model.loadAll();

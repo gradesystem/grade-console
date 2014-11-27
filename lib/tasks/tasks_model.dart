@@ -169,7 +169,6 @@ class TasksModel extends SubPageEditableModel<Task> {
     RunningTask runningTask = new RunningTask(); 
     taskService.runTask(editableTask.model)
               .then((TaskExecution update) {
-                  bus.fire(new TaskLaunched());
                   updateTaskExecution(runningTask, update);
                   _listenTaskExecution(runningTask);
                 })
