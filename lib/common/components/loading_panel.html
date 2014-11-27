@@ -1,15 +1,16 @@
 <link rel="import" href="../../../../packages/polymer/polymer.html">
 <link rel="import" href="infinite_progress.html">
 
-<polymer-element name="loading-panel" attributes="loading, message" noscript> 
+<polymer-element name="loading-panel"> 
   <template>
     <div hidden?={{loading}}>
      <content>
      </content>
     </div>
-     <div fit hidden?="{{loading !=null && !loading}}" layout vertical center center-justified>
-        <infinite-progress run="{{loading !=null && loading}}"></infinite-progress>
+     <div fit hidden?={{!loading}} layout vertical center center-justified>
+        <infinite-progress run="{{loading!=null && loading}}"></infinite-progress>
         <div small fg>{{message}}</div>
       </div>
   </template>
+  <script type="application/dart" src="loading_panel.dart"></script> 
 </polymer-element>
