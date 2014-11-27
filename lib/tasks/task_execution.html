@@ -1,0 +1,130 @@
+<link rel="import" href="../../../packages/polymer/polymer.html">
+<link rel="import" href="tasks.html">
+
+<link rel="import" href="../../../packages/core_elements/core_icon.html">
+<link rel="import" href="../../../packages/core_elements/core_tooltip.html">
+<link rel="import" href="../../../packages/paper_elements/paper_progress.html">
+<link rel="import" href="../common/components/grade_fascia.html">
+
+<polymer-element name="task-execution">
+
+  <template>
+ 
+      <style>
+        
+        :host [card] {
+        
+          color:white;
+          padding:10px 15px 15px;
+          border-radius:10px  
+        }
+        
+        :host core-icon[status] {
+        
+          min-width:56px;
+          min-height:56px;
+          
+        }
+
+        :host [middle] {
+          min-height:100px;
+        }
+        
+        :host [endpoint] {
+        
+          margin-right:10px;
+          overflow-x: auto;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          top:-2px; 
+          position:relative
+        }
+        
+        
+        :host [time] {
+        
+          min-width:110px;
+          
+        }
+        
+        :host paper-progress {
+          height:initial;
+          width:100%;
+        }
+        
+        :host paper-progress::shadow #progressContainer {
+          height:15px;
+          border-radius:5px;
+        }
+        
+        
+        
+        :host paper-progress::shadow #activeProgress {
+				  background-color: white !important;
+				  border-radius:5px;
+				}
+				
+				:host paper-progress::shadow #secondaryProgress {
+          border-radius:5px;
+        }
+        
+        
+        
+        
+  
+       </style>
+
+ 
+        <div card bg layout vertical justified>
+         
+          <div layout horizontal justified>
+         
+              <grade-fascia>
+                <div large lighter fascia-title>{{ execution.bean[K.status] | suffix | lowercase }}</div>
+                <div fascia-subtitle style="top:-3px"> status</div>
+              </grade-fascia>
+              
+              <core-icon status icon={{icon}}></core-icon>
+         
+          </div>
+          
+           <div middle layout horizontal center-justified center>
+           
+                <div flex endpoint small truncate style="text-align:right;" >{{source | uppercase}}</div>
+                <div flex three style="margin:0px 10px">
+                  <paper-progress value="{{progress}}"></paper-progress>
+                </div>
+                <div flex endpoint small truncate> {{target | uppercase}}</div>
+          
+          </div>
+          
+          <div layout horizontal justified end>
+         
+              <div time layout vertical start>
+                <div lighter smaller>{{ execution.bean[K.startTime] }}</div>
+                <div small>STARTED</div>
+              </div>
+              
+              <div layout vertical center style="min-width:200px">
+                 <div lighter larger>{{ execution.bean[K.duration]}}</div>
+                 <div small>DURATION</div>
+              </div>
+              
+             <div time layout vertical end>
+                <template if="{{execution.bean[K.endTime] == null}}">
+                  <core-icon tinyicon icon="more-horiz"></core-icon>
+                </template>
+                <template if="{{execution.bean[K.endTime] != null}}">
+                  <div lighter smaller>{{ execution.bean[K.endTime] }}</div>
+                </template>
+                <div small>ENDED</div>
+              </div>
+         
+          </div>
+          
+        </div>
+ 
+   
+ </template>
+
+</polymer-element>

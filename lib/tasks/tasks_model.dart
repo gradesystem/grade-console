@@ -263,7 +263,6 @@ class TaskExecutionKeys {
   final String status_failed =  "http://gradesystem.io/onto/taskexecution.owl#failed";
   final String status_completed =  "http://gradesystem.io/onto/taskexecution.owl#completed";
 
-
   final String source = "http://gradesystem.io/onto/taskexecution.owl#source";
   final String target = "http://gradesystem.io/onto/taskexecution.owl#target";
   
@@ -271,6 +270,7 @@ class TaskExecutionKeys {
   final String log = "http://gradesystem.io/onto/taskexecution.owl#log";
   final String duration = "http://gradesystem.io/onto/taskexecution.owl#duration";
 
+  
 }
 
 class TaskExecution extends GradeEntity {
