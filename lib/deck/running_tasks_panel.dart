@@ -6,13 +6,12 @@ class RunningTasksPanel extends PolymerElement with Filters, Dependencies {
   @observable
   String kfilter = '';
   
-  @published
+  @observable
   DeckPageModel model;
 
   RunningTasksPanel.created() : super.created() {
+    model = instanceOf(DeckPageModel);
   }
-
-  RunningTasks get items => model.storage;
 
   void refresh() {
     model.loadAll();
