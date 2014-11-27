@@ -77,13 +77,12 @@ class Query extends EditableGradeEntity with Filters {
      List<String> params = [];
      
      String exp = bean[Query.expression_field];
+     if (exp == null) return params;
      
      for (Match m in regexp.allMatches(exp))
        params.add(m.group(1));
      
      return params;
-     
-  
    }
 }
 
