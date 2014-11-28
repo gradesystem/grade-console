@@ -6,6 +6,7 @@ class TaskExecutionView extends View {
   @published
   TaskExecution execution;
   
+  TaskKeys TK = const TaskKeys();
   TaskExecutionKeys K = const TaskExecutionKeys();
   
   Map<String,String> icons;
@@ -49,7 +50,11 @@ class TaskExecutionView extends View {
       return;
     
     icon = icons[status];
-    progress = (100/statuses.length)*(statuses.indexOf(status)+1);
+    
+    //humber of relevant states depends on op
+    var length = getMap(execution,K.task)[TK.op]==TK.publish_op? statuses.length : statuses.length-1; 
+    
+    progress = (100/length)*(statuses.indexOf(status)+1);
    
   }
  

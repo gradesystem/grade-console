@@ -331,10 +331,10 @@
   color: #639bb3;
 }
 :host /deep/ .deck /deep/ [fg][disabled] {
-  color: #c0c3c4;
+  color: #a5d6a7;
 }
 :host /deep/ .deck /deep/ [bg-selected] {
-  background: #c0c3c4;
+  background: #a5d6a7;
   color: #fff;
 }
 :host /deep/ .deck /deep/ [header] {
@@ -352,7 +352,7 @@
   background-color: #6fa6bc;
 }
 :host /deep/ .deck /deep/ paper-tabs paper-tab::shadow #ink {
-  color: #c0c3c4;
+  color: #a5d6a7;
 }
 :host /deep/ .deck /deep/ paper-item:not([bg-selected]):hover {
   color: #6fa6bc;
@@ -364,10 +364,10 @@
   color: #6fa6bc;
 }
 :host /deep/ .deck /deep/ paper-button::shadow #ripple {
-  color: #c0c3c4;
+  color: #a5d6a7;
 }
 :host /deep/ .deck /deep/ paper-icon-button::shadow #ripple {
-  color: #c0c3c4;
+  color: #a5d6a7;
 }
 :host /deep/ .deck /deep/ paper-fab::shadow /deep/ #icon {
   color: #6fa6bc;
@@ -376,25 +376,25 @@
   background-color: #6fa6bc;
 }
 :host /deep/ .deck /deep/ paper-radio-button::shadow #ink[checked] {
-  color: #c0c3c4;
+  color: #a5d6a7;
 }
 :host /deep/ .deck /deep/ paper-radio-button::shadow #onRadio {
   background-color: #6fa6bc;
 }
 :host /deep/ .deck /deep/ paper-radio-button[disabled][checked] /deep/ #offRadio {
   opacity: 1;
-  background-color: #c0c3c4;
-  border-color: #c0c3c4;
+  background-color: #a5d6a7;
+  border-color: #a5d6a7;
 }
 :host /deep/ .deck /deep/ paper-dropdown-menu /deep/ core-icon {
   color: #6fa6bc;
   width: 36px;
 }
 :host /deep/ .deck /deep/ paper-input::shadow .focused-underline {
-  background-color: #c0c3c4;
+  background-color: #a5d6a7;
 }
 :host /deep/ .deck /deep/ paper-input::shadow .cursor {
-  background: #c0c3c4;
+  background: #a5d6a7;
 }
 :host /deep/ .deck /deep/ paper-input[focused]::shadow .error-text {
   color: #e41c23;
