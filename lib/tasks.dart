@@ -3,6 +3,7 @@ library tasks;
 import 'dart:collection';
 import 'dart:async';
 import 'dart:convert' show JSON;
+import 'dart:html';
 
 import 'package:polymer/polymer.dart';
 import 'package:logging/logging.dart';
