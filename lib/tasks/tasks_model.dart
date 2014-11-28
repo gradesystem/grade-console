@@ -167,23 +167,22 @@ class TasksModel extends SubPageEditableModel<Task> {
   
   RunningTask runTask(EditableTask editableTask) {
     RunningTask runningTask = new RunningTask(editableTask.model); 
-    taskService.runTask(editableTask.model)
-              .then((TaskExecution update) {
-                  updateTaskExecution(runningTask, update);
-                  _listenTaskExecution(runningTask);
-                })
-              .catchError((e) => runningTask.taskFailed(e));
+    _run(editableTask.playgroundRunningTask, editableTask.model, taskService.runTask);
     return runningTask;
   }
 
-  void runSandboxTask(EditableTask editableTask) {
-    editableTask.playgroundRunningTask.runTask();
-    taskService.runSandboxTask(editableTask.model)
-              .then((TaskExecution update) {
-                  updateTaskExecution(editableTask.playgroundRunningTask, update);
-                  _listenTaskExecution(editableTask.playgroundRunningTask);
-                })
-              .catchError((e) => editableTask.playgroundRunningTask.taskFailed(e));
+  void runSandboxTask(EditableTask editableTask)
+    => _run(editableTask.playgroundRunningTask, editableTask.model, taskService.runSandboxTask);
+  
+  
+  void _run(RunningTask runningTask, Task task, Future<TaskExecution> runner(Task)) {
+    runningTask.runTask();
+    runner(task)
+      .then((TaskExecution update) {
+          updateTaskExecution(runningTask, update);
+          _listenTaskExecution(runningTask);
+        })
+      .catchError((e) => runningTask.taskFailed(e));
   }
   
   void stopTask(EditableTask editableTask) {
@@ -213,30 +212,29 @@ class TasksModel extends SubPageEditableModel<Task> {
     });
   }
   
-  void updateTaskExecution(RunningTask runningTask, TaskExecution update) {
-    runningTask.executionUpdate(update);
-    if (update.transformed && runningTask.transformResult==null) retrieveTransformResults(runningTask);
-    if (update.completed) retrieveTargetResults(runningTask);
+  void updateTaskExecution(RunningTask runningTask, TaskExecution execution) {
+    runningTask.executionUpdate(execution);
+    if (execution.transformed && !runningTask.transform.hasValue) retrieveTransformResult(runningTask);
+    if (execution.modified && execution.differenceOperation && !runningTask.diff.hasValue) retrieveDifferenceResult(runningTask);
+    if (execution.completed) retrieveTargetResult(runningTask);
   }
   
-  void retrieveTargetResults(RunningTask runningTask) {
-    runningTask.loadingTargetResults = true;
-    
-    executionsService.getTargetResult(runningTask.execution)
-    .then((QueryResult result){
-      runningTask.targetResult = result;
-    }).catchError((e) => onError(e, null)).whenComplete(() {
-      runningTask.loadingTargetResults = false;
-    });
-  }
+  void retrieveTargetResult(RunningTask runningTask)
+    => retrieveResult(runningTask, executionsService.getTargetResult, runningTask.target);
   
-  void retrieveTransformResults(RunningTask runningTask) {
-    runningTask.loadingTransformResults = true;
-    executionsService.getTransformResult(runningTask.execution)
-    .then((QueryResult result){
-      runningTask.transformResult = result;
+  void retrieveDifferenceResult(RunningTask runningTask)
+    => retrieveResult(runningTask, executionsService.getDifferenceResult, runningTask.diff);
+
+  void retrieveTransformResult(RunningTask runningTask)
+    => retrieveResult(runningTask, executionsService.getTransformResult, runningTask.transform);
+  
+  void retrieveResult(RunningTask runningTask, Future<QueryResult> retriever(RunningTask), Result result) {
+    result.loading = true;
+    retriever(runningTask.execution)
+    .then((QueryResult resultQuery){
+      result.value = resultQuery;
     }).catchError((e) => onError(e, null)).whenComplete(() {
-      runningTask.loadingTransformResults = false;
+      result.loading = false;
     });
   }
 
@@ -277,7 +275,7 @@ class TaskExecution extends GradeEntity {
 
   static TaskExecutionKeys K = const TaskExecutionKeys();
   
-  static List<String> afterTransform = [K.status_completed, K.status_modified, K.status_transformed];
+  static List<String> STATUS_SEQUENCE = [K.status_submitted, K.status_started, K.status_transformed, K.status_modified, K.status_completed];
   
   TaskExecution(Map bean) : super(bean);
   
@@ -285,7 +283,10 @@ class TaskExecution extends GradeEntity {
   
   bool get running => !completed && !failed;
   
-  bool get transformed => afterTransform.contains(status);
+  bool isStatusAfter(String state) => STATUS_SEQUENCE.indexOf(status)>=STATUS_SEQUENCE.indexOf(state);
+  
+  bool get transformed => isStatusAfter(K.status_transformed);
+  bool get modified => isStatusAfter(K.status_modified);
   
   bool get completed => status == K.status_completed;
   bool get failed => status == K.status_failed;
@@ -297,7 +298,8 @@ class TaskExecution extends GradeEntity {
   
   Task get task => new Task.fromBean(get(K.task));
   
-
+  bool get differenceOperation => task.operation != Operation.PUBLISH;
+  
 }
 
 
@@ -305,7 +307,8 @@ class RunningTask extends Observable {
   
   static TaskExecutionKeys TEK = const TaskExecutionKeys();
   
-  Task launchedTask;
+  @observable
+  Task task;
 
   @observable
   bool running = false;
@@ -322,24 +325,22 @@ class RunningTask extends Observable {
   bool canCancel = false;
 
   @observable
-  QueryResult transformResult;
+  Result transform = new Result();
   
   @observable
-  bool loadingTransformResults = false;
-  
+  Result target = new Result();
+
   @observable
-  QueryResult targetResult;
-  
-  @observable
-  bool loadingTargetResults = false;
+  Result diff = new Result();
   
   @observable
   String status;
   
-  RunningTask(this.launchedTask);
+  RunningTask(this.task);
   
   RunningTask.fromExecution(this.execution) {
     status = execution.status;
+    task = execution.task;
   }
   
   void resetError() {
@@ -351,10 +352,9 @@ class RunningTask extends Observable {
     status = TEK.status_submitted;
     resetError();
     execution = null;
-    transformResult = null;
-    loadingTransformResults = false;
-    targetResult = null;
-    loadingTargetResults = false;
+    transform.clean();
+    diff.clean();
+    target.clean();
     canCancel = false;
   }
 
@@ -362,6 +362,7 @@ class RunningTask extends Observable {
     execution = update;
     status = update.status;
     running = update.running;
+    task = update.task;
     
     //we don't know the first update, so we set it always true
     canCancel = true;

@@ -219,3 +219,19 @@ class QueryResult extends Delegate {
   List<String> get headers => get("head")["vars"];
   List<Map<String,String>> get rows => get("results")["bindings"];
 }
+
+class Result extends Observable {
+  
+  @observable
+  QueryResult value;
+  
+  @observable
+  bool loading = false;
+  
+  bool get hasValue => value!=null;
+  
+  void clean() {
+    value = null;
+    loading = false;
+  }
+}

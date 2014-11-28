@@ -9,12 +9,6 @@ class RunningTaskDetailsSummary extends View {
   @published
   bool selected;
   
-  @ComputedProperty("item item.execution")
-  String get label {
-    if (item!=null) return (item.execution!=null)?item.execution.task.label:item.launchedTask.label;
-    return null;
-  }
-  
   RunningTaskDetailsSummary.created() : super.created();
 
   void stopExecution() {

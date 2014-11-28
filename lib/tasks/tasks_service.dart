@@ -45,10 +45,17 @@ class TaskExecutionsService extends ListService<TaskExecution> {
     => http.delete(getItemPath(execution.id)).then((response) => true);  
 
   Future<QueryResult> getTransformResult(TaskExecution execution)     
-    => http.get("${getItemPath(execution.id)}/results/transform", acceptedMediaType:MediaType.SPARQL_JSON).then((response) => new QueryResult(response, http.decode(response)));
+    => _getResult(execution, "transform");
+
+  Future<QueryResult> getDifferenceResult(TaskExecution execution)     
+    => _getResult(execution, "difference"); 
   
   Future<QueryResult> getTargetResult(TaskExecution execution)     
-    => http.get("${getItemPath(execution.id)}/results/target", acceptedMediaType:MediaType.SPARQL_JSON).then((response) => new QueryResult(response, http.decode(response)));
+    => _getResult(execution, "target");
+  
+  Future<QueryResult> _getResult(TaskExecution execution, String resultpath)     
+     => http.get("${getItemPath(execution.id)}/results/$resultpath", acceptedMediaType:MediaType.SPARQL_JSON).then((response) => new QueryResult(response, http.decode(response)));
+  
  
   Future<bool> delete(TaskExecution execution) {
     return http.delete(getItemPath(execution.id)).then((response) => true);

@@ -1,19 +1,22 @@
 import 'package:polymer/polymer.dart';
 import '../queries/queries.dart';
 
-@CustomTag("query-result")
-class QueryResultElement extends PolymerElement {
+@CustomTag("result-panel")
+class ResultPanel extends PolymerElement {
 
   @published
-  QueryResult queryResult;
+  Result result;
   
   @published
   bool dirty;
   
+  @published
+  String loadingMessage;
+  
   @observable
   int format = 0;
     
-  QueryResultElement.created() : super.created();
+  ResultPanel.created() : super.created();
   
   void toggleFormat() {
     format = ++format%2;
