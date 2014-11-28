@@ -228,6 +228,8 @@ class Result extends Observable {
   @observable
   bool loading = false;
   
+  bool get hasValue => value!=null;
+  
   void clean() {
     value = null;
     loading = false;

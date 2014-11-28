@@ -213,30 +213,29 @@ class TasksModel extends SubPageEditableModel<Task> {
     });
   }
   
-  void updateTaskExecution(RunningTask runningTask, TaskExecution update) {
-    runningTask.executionUpdate(update);
-    if (update.transformed && runningTask.transform.value==null) retrieveTransformResults(runningTask);
-    if (update.completed) retrieveTargetResults(runningTask);
+  void updateTaskExecution(RunningTask runningTask, TaskExecution execution) {
+    runningTask.executionUpdate(execution);
+    if (execution.transformed && !runningTask.transform.hasValue) retrieveTransformResult(runningTask);
+    if (execution.modified && execution.differenceOperation && !runningTask.diff.hasValue) retrieveDifferenceResult(runningTask);
+    if (execution.completed) retrieveTargetResult(runningTask);
   }
   
-  void retrieveTargetResults(RunningTask runningTask) {
-    runningTask.target.loading = true;
-    
-    executionsService.getTargetResult(runningTask.execution)
-    .then((QueryResult result){
-      runningTask.target.value = result;
-    }).catchError((e) => onError(e, null)).whenComplete(() {
-      runningTask.target.loading = false;
-    });
-  }
+  void retrieveTargetResult(RunningTask runningTask)
+    => retrieveResult(runningTask, executionsService.getTargetResult, runningTask.target);
   
-  void retrieveTransformResults(RunningTask runningTask) {
-    runningTask.transform.loading = true;
-    executionsService.getTransformResult(runningTask.execution)
-    .then((QueryResult result){
-      runningTask.transform.value = result;
+  void retrieveDifferenceResult(RunningTask runningTask)
+    => retrieveResult(runningTask, executionsService.getDifferenceResult, runningTask.diff);
+
+  void retrieveTransformResult(RunningTask runningTask)
+    => retrieveResult(runningTask, executionsService.getTransformResult, runningTask.transform);
+  
+  void retrieveResult(RunningTask runningTask, Future<QueryResult> retriever(RunningTask), Result result) {
+    result.loading = true;
+    retriever(runningTask.execution)
+    .then((QueryResult resultQuery){
+      result.value = resultQuery;
     }).catchError((e) => onError(e, null)).whenComplete(() {
-      runningTask.transform.loading = false;
+      result.loading = false;
     });
   }
 
@@ -277,7 +276,7 @@ class TaskExecution extends GradeEntity {
 
   static TaskExecutionKeys K = const TaskExecutionKeys();
   
-  static List<String> afterTransform = [K.status_completed, K.status_modified, K.status_transformed];
+  static List<String> STATUS_SEQUENCE = [K.status_submitted, K.status_started, K.status_transformed, K.status_modified, K.status_completed];
   
   TaskExecution(Map bean) : super(bean);
   
@@ -285,7 +284,10 @@ class TaskExecution extends GradeEntity {
   
   bool get running => !completed && !failed;
   
-  bool get transformed => afterTransform.contains(status);
+  bool isStatusAfter(String state) => STATUS_SEQUENCE.indexOf(status)>=STATUS_SEQUENCE.indexOf(state);
+  
+  bool get transformed => isStatusAfter(K.status_transformed);
+  bool get modified => isStatusAfter(K.status_modified);
   
   bool get completed => status == K.status_completed;
   bool get failed => status == K.status_failed;
@@ -297,7 +299,8 @@ class TaskExecution extends GradeEntity {
   
   Task get task => new Task.fromBean(get(K.task));
   
-
+  bool get differenceOperation => task.operation != Operation.PUBLISH;
+  
 }
 
 
