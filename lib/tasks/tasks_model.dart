@@ -300,7 +300,7 @@ class TaskExecution extends GradeEntity {
   
   bool get running => !completed && !failed;
   
-  bool isPhaseAfter(String target) => PHASE_SEQUENCE.indexOf(phase)>=PHASE_SEQUENCE.indexOf(target);
+  bool isPhaseAfter(String target) => PHASE_SEQUENCE.indexOf(phase)>PHASE_SEQUENCE.indexOf(target);
   
   bool get transformed => isPhaseAfter(K.phase_transformation);
   bool get difference => isPhaseAfter(K.phase_difference);
