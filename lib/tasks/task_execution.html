@@ -4,7 +4,9 @@
 <link rel="import" href="../../../packages/core_elements/core_icon.html">
 <link rel="import" href="../../../packages/core_elements/core_tooltip.html">
 <link rel="import" href="../../../packages/paper_elements/paper_progress.html">
+
 <link rel="import" href="../common/components/grade_fascia.html">
+<link rel="import" href="../common/components/task_execution_icon.html">
 
 <polymer-element name="task-execution">
 
@@ -19,7 +21,7 @@
           border-radius:10px  
         }
         
-        :host core-icon[status] {
+        :host task-execution-icon[status-icon]::shadow core-icon {
         
           min-width:56px;
           min-height:56px;
@@ -82,7 +84,8 @@
                 <div fascia-subtitle style="top:-3px"> status</div>
               </grade-fascia>
               
-              <core-icon status icon="{{icon==null?'':icon}}"></core-icon>
+              <task-execution-icon status-icon status={{execution.status}}></task-execution-icon>
+<!--               <core-icon status icon="{{icon==null?'':icon}}"></core-icon> -->
          
           </div>
           
