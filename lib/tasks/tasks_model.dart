@@ -243,15 +243,11 @@ class TasksModel extends SubPageEditableModel<Task> {
 }
 
 class TaskExecutionLists {
-
-  TaskExecutionLists(TaskExecutionKeys K) : statuses = [K.status_submitted,K.status_started,K.status_transformed,K.status_modified,K.status_completed,K.status_failed] ,
-                                            phases = [K.phase_startup,K.phase_transformation,K.phase_difference,K.phase_writeout];
   
-  
-  final List<String> statuses;
-  final List<String> phases;
+  static TaskExecutionKeys K = const TaskExecutionKeys();
 
-
+  static final List<String> statuses = [K.status_submitted,K.status_started,K.status_transformed,K.status_modified,K.status_completed,K.status_failed];
+  static final List<String> phases = [K.phase_startup,K.phase_transformation,K.phase_difference,K.phase_writeout];
   
 }
 
@@ -289,8 +285,7 @@ class TaskExecutionKeys {
   final String error = "http://gradesystem.io/onto/taskexecution.owl#error";
   final String log = "http://gradesystem.io/onto/taskexecution.owl#log";
   final String duration = "http://gradesystem.io/onto/taskexecution.owl#duration";
-
-  
+ 
 }
 
 class TaskExecution extends GradeEntity {
@@ -403,6 +398,18 @@ class RunningTask extends Observable {
    if (executionPoller!=null) executionPoller.cancel();
   }
   
+}
+
+class HasTaskIcons {
+  static TaskExecutionKeys _TEK = const TaskExecutionKeys();
+  static Map<String,String> icons = {_TEK.status_submitted : "cloud-upload", 
+                                     _TEK.status_started : "cloud",
+                                     _TEK.status_transformed : "cloud",
+                                     _TEK.status_modified : "cloud",
+                                     _TEK.status_completed:"cloud-done",
+                                     _TEK.status_failed:"warning"};
+  
+  String toIcon(String status) => status!=null? icons[status] :"";
 }
 
 

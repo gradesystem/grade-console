@@ -1,31 +1,15 @@
 part of tasks;
 
 @CustomTag("task-execution")
-class TaskExecutionView extends View {
+class TaskExecutionView extends View with HasTaskIcons {
   
   @published
   TaskExecution execution;
   
   TaskKeys TK = const TaskKeys();
   TaskExecutionKeys K = const TaskExecutionKeys();
-  TaskExecutionLists KL;
   
-  Map<String,String> icons;
-
-  TaskExecutionView.created() : super.created() {
-    
-   KL = new TaskExecutionLists(K);
-   icons={K.status_submitted : "cloud-upload", 
-           K.status_started : "cloud",
-           K.status_transformed : "cloud",
-           K.status_modified : "cloud",
-           K.status_completed:"cloud-done",
-           K.status_failed:"warning"};
-  
-  }
-  
-  @observable
-  String icon;
+  TaskExecutionView.created() : super.created();
   
   @observable
   num progress = 0;
@@ -47,12 +31,10 @@ class TaskExecutionView extends View {
     if (status==null)
       return;
     
-    icon = icons[status];
-    
     //humber of relevant states depends on op
-    var length = getMap(execution,K.task)[TK.op]==TK.publish_op? KL.statuses.length : KL.statuses.length-1; 
+    var length = getMap(execution,K.task)[TK.op]==TK.publish_op? TaskExecutionLists.statuses.length : TaskExecutionLists.statuses.length-1; 
     
-    progress = (100/length)*(KL.statuses.indexOf(status)+1);
+    progress = (100/length)*(TaskExecutionLists.statuses.indexOf(status)+1);
    
   }
  

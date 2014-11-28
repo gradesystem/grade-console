@@ -1,7 +1,9 @@
 part of deck;
 
 @CustomTag("running-task-details-summary") 
-class RunningTaskDetailsSummary extends View {
+class RunningTaskDetailsSummary extends View with HasTaskIcons {
+  
+  TaskExecutionKeys TEK = const TaskExecutionKeys();
    
   @published
   RunningTask item;
@@ -10,6 +12,8 @@ class RunningTaskDetailsSummary extends View {
   bool selected;
   
   RunningTaskDetailsSummary.created() : super.created();
+  
+  String available(String value) => value!=null?value:"n/a";
 
   void stopExecution() {
     fire("stop-execution", detail:item);
