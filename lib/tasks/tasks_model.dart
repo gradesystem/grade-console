@@ -217,7 +217,7 @@ class TasksModel extends SubPageEditableModel<Task> {
   void updateTaskExecution(RunningTask runningTask, TaskExecution execution) {
     runningTask.executionUpdate(execution);
     if (execution.transformed && !runningTask.transform.hasValue) retrieveTransformResult(runningTask);
-    if (execution.modified && execution.differenceOperation && !runningTask.diff.hasValue) retrieveDifferenceResult(runningTask);
+    if (execution.difference && execution.differenceOperation && !runningTask.diff.hasValue) retrieveDifferenceResult(runningTask);
     if (execution.completed) retrieveTargetResult(runningTask);
   }
   
@@ -274,7 +274,7 @@ class TaskExecutionKeys {
     
   final String phase = "http://gradesystem.io/onto/taskexecution.owl#phase";
   
-  final String phase_startup = "http://gradesystem.io/onto/taskexecution.owl#transformation";
+  final String phase_startup = "http://gradesystem.io/onto/taskexecution.owl#startup";
   final String phase_transformation = "http://gradesystem.io/onto/taskexecution.owl#transformation";
   final String phase_difference = "http://gradesystem.io/onto/taskexecution.owl#difference";
   final String phase_writeout = "http://gradesystem.io/onto/taskexecution.owl#writeout";
@@ -292,7 +292,7 @@ class TaskExecution extends GradeEntity {
 
   static TaskExecutionKeys K = const TaskExecutionKeys();
   
-  static List<String> STATUS_SEQUENCE = [K.status_submitted, K.status_started, K.status_transformed, K.status_modified, K.status_completed];
+  static List<String> PHASE_SEQUENCE = [K.phase_startup, K.phase_transformation, K.phase_difference, K.phase_writeout];
   
   TaskExecution(Map bean) : super(bean);
   
@@ -300,15 +300,16 @@ class TaskExecution extends GradeEntity {
   
   bool get running => !completed && !failed;
   
-  bool isStatusAfter(String state) => STATUS_SEQUENCE.indexOf(status)>=STATUS_SEQUENCE.indexOf(state);
+  bool isPhaseAfter(String target) => PHASE_SEQUENCE.indexOf(phase)>=PHASE_SEQUENCE.indexOf(target);
   
-  bool get transformed => isStatusAfter(K.status_transformed);
-  bool get modified => isStatusAfter(K.status_modified);
+  bool get transformed => isPhaseAfter(K.phase_transformation);
+  bool get difference => isPhaseAfter(K.phase_difference);
   
   bool get completed => status == K.status_completed;
   bool get failed => status == K.status_failed;
   
   String get status => get(K.status);
+  String get phase => get(K.phase);
   
   Endpoint get source => new Endpoint.fromBean(get(K.source));
   Endpoint get target => new Endpoint.fromBean(get(K.target));
