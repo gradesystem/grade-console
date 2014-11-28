@@ -305,7 +305,8 @@ class RunningTask extends Observable {
   
   static TaskExecutionKeys TEK = const TaskExecutionKeys();
   
-  Task launchedTask;
+  @observable
+  Task task;
 
   @observable
   bool running = false;
@@ -336,10 +337,11 @@ class RunningTask extends Observable {
   @observable
   String status;
   
-  RunningTask(this.launchedTask);
+  RunningTask(this.task);
   
   RunningTask.fromExecution(this.execution) {
     status = execution.status;
+    task = execution.task;
   }
   
   void resetError() {
@@ -362,6 +364,7 @@ class RunningTask extends Observable {
     execution = update;
     status = update.status;
     running = update.running;
+    task = update.task;
     
     //we don't know the first update, so we set it always true
     canCancel = true;

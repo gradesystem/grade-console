@@ -10,7 +10,7 @@ class DeckPage extends Polybase {
   DeckPageModel get deckModel => model as DeckPageModel;
   
   EditableTask asEditableTask(Task task) => task!=null?new EditableTask(task):null;
-  Task getTask(RunningTask running) => running!=null?running.execution!=null?running.execution.task:running.launchedTask:null;
+  Task getTask(RunningTask running) => running!=null?running.task:null;
   
   @ComputedProperty('deckModel.storage.selected.execution.task.label')
   String get title {
