@@ -19,21 +19,28 @@
       [disabled-tab] {
         pointer-events: none;
       }
+      
+      [expanded] {
+        width:400px !important;
+      }
     </style>
     <grade-header-panel flex paneltitle="{{paneltitle}}">
          
-      <paper-tabs toolbar style="width:300px" selected="{{executionArea}}" hide?="{{runningTask.execution==null || runningTask.error!=null}}" >
-        <paper-tab>Summary</paper-tab>
-        <paper-tab>Log</paper-tab>
+      <paper-tabs toolbar style="width:300px" expanded?={{expanded}} selected="{{executionArea}}" hide?="{{runningTask.execution==null || runningTask.error!=null}}" >
         <content select="[task-tab]"></content>
-        <paper-tab disabled-tab?="{{runningTask.transform.value ==null}}">Transform</paper-tab>
-        <paper-tab disabled-tab?="{{runningTask.diff.value ==null}}">Diff</paper-tab>
+        <paper-tab>Summary</paper-tab>
+        <paper-tab>Trace</paper-tab>
+
+        <paper-tab disabled-tab?="{{runningTask.transform.value ==null}}">Transf.</paper-tab>
+        <paper-tab disabled-tab?="{{runningTask.diff.value ==null}}">Diff.</paper-tab>
         <paper-tab disabled-tab?="{{runningTask.target.value ==null}}">Target</paper-tab>
       </paper-tabs>
         
       <div main fit relative>
       
         <core-animated-pages selected="{{executionArea}}" fit spaced hide?="{{runningTask.execution==null}}">
+                  
+          <content select="[task-panel]"></content>
       
 					<!-- STATUS -->
 					<div layout horizontal center-justified>
@@ -53,8 +60,6 @@
 					    </template>
 					  </div>
 					</div>
-					
-					<content select="[task-panel]"></content>
        
 	        <!-- TRANSFORM RESULT -->
 	        <result-panel fit result={{runningTask.transform}} dirty={{dirty}} loadingMesage="retrieving transform results"></result-panel>
