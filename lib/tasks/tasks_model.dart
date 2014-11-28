@@ -167,7 +167,7 @@ class TasksModel extends SubPageEditableModel<Task> {
   
   RunningTask runTask(EditableTask editableTask) {
     RunningTask runningTask = new RunningTask(editableTask.model); 
-    _run(editableTask.playgroundRunningTask, editableTask.model, taskService.runTask);
+    _run(runningTask, editableTask.model, taskService.runTask);
     return runningTask;
   }
 
