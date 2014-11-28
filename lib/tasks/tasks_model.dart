@@ -167,23 +167,22 @@ class TasksModel extends SubPageEditableModel<Task> {
   
   RunningTask runTask(EditableTask editableTask) {
     RunningTask runningTask = new RunningTask(editableTask.model); 
-    taskService.runTask(editableTask.model)
-              .then((TaskExecution update) {
-                  updateTaskExecution(runningTask, update);
-                  _listenTaskExecution(runningTask);
-                })
-              .catchError((e) => runningTask.taskFailed(e));
+    _run(editableTask.playgroundRunningTask, editableTask.model, taskService.runTask);
     return runningTask;
   }
 
-  void runSandboxTask(EditableTask editableTask) {
-    editableTask.playgroundRunningTask.runTask();
-    taskService.runSandboxTask(editableTask.model)
-              .then((TaskExecution update) {
-                  updateTaskExecution(editableTask.playgroundRunningTask, update);
-                  _listenTaskExecution(editableTask.playgroundRunningTask);
-                })
-              .catchError((e) => editableTask.playgroundRunningTask.taskFailed(e));
+  void runSandboxTask(EditableTask editableTask)
+    => _run(editableTask.playgroundRunningTask, editableTask.model, taskService.runSandboxTask);
+  
+  
+  void _run(RunningTask runningTask, Task task, Future<TaskExecution> runner(Task)) {
+    runningTask.runTask();
+    runner(task)
+      .then((TaskExecution update) {
+          updateTaskExecution(runningTask, update);
+          _listenTaskExecution(runningTask);
+        })
+      .catchError((e) => runningTask.taskFailed(e));
   }
   
   void stopTask(EditableTask editableTask) {
