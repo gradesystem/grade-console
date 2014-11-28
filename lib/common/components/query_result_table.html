@@ -5,10 +5,10 @@
     <div style="overflow-y: auto;">
 			<table style="border-collapse: collapse; width:100%">
 			  <tr>
-			    <th fg template repeat="{{header in headers}}" result-table?="{{!dirty}}" result-table-disabled?="{{dirty}}">{{header}}</th>
+			    <th fg template repeat="{{header in queryResult.headers}}" result-table?="{{!dirty}}" result-table-disabled?="{{dirty}}">{{header}}</th>
 			  </tr> 
-			  <tr template repeat="{{row in rows}}">
-			    <td template repeat="{{header in headers}}" result-table?="{{!dirty}}" result-table-disabled?="{{dirty}}">
+			  <tr template repeat="{{row in queryResult.rows}}">
+			    <td template repeat="{{header in queryResult.headers}}" result-table?="{{!dirty}}" result-table-disabled?="{{dirty}}">
 			        {{row[header]["value"]}}
 			    </td>
 			  </tr>

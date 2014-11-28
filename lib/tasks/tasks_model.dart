@@ -215,28 +215,28 @@ class TasksModel extends SubPageEditableModel<Task> {
   
   void updateTaskExecution(RunningTask runningTask, TaskExecution update) {
     runningTask.executionUpdate(update);
-    if (update.transformed && runningTask.transformResult==null) retrieveTransformResults(runningTask);
+    if (update.transformed && runningTask.transform.value==null) retrieveTransformResults(runningTask);
     if (update.completed) retrieveTargetResults(runningTask);
   }
   
   void retrieveTargetResults(RunningTask runningTask) {
-    runningTask.loadingTargetResults = true;
+    runningTask.target.loading = true;
     
     executionsService.getTargetResult(runningTask.execution)
     .then((QueryResult result){
-      runningTask.targetResult = result;
+      runningTask.target.value = result;
     }).catchError((e) => onError(e, null)).whenComplete(() {
-      runningTask.loadingTargetResults = false;
+      runningTask.target.loading = false;
     });
   }
   
   void retrieveTransformResults(RunningTask runningTask) {
-    runningTask.loadingTransformResults = true;
+    runningTask.transform.loading = true;
     executionsService.getTransformResult(runningTask.execution)
     .then((QueryResult result){
-      runningTask.transformResult = result;
+      runningTask.transform.value = result;
     }).catchError((e) => onError(e, null)).whenComplete(() {
-      runningTask.loadingTransformResults = false;
+      runningTask.transform.loading = false;
     });
   }
 
@@ -323,16 +323,13 @@ class RunningTask extends Observable {
   bool canCancel = false;
 
   @observable
-  QueryResult transformResult;
+  Result transform = new Result();
   
   @observable
-  bool loadingTransformResults = false;
-  
+  Result target = new Result();
+
   @observable
-  QueryResult targetResult;
-  
-  @observable
-  bool loadingTargetResults = false;
+  Result diff = new Result();
   
   @observable
   String status;
@@ -353,10 +350,9 @@ class RunningTask extends Observable {
     status = TEK.status_submitted;
     resetError();
     execution = null;
-    transformResult = null;
-    loadingTransformResults = false;
-    targetResult = null;
-    loadingTargetResults = false;
+    transform.clean();
+    diff.clean();
+    target.clean();
     canCancel = false;
   }
 

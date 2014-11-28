@@ -1,13 +1,11 @@
 import 'package:polymer/polymer.dart';
+import '../queries/queries.dart';
 
 @CustomTag("query-result-table")
 class QueryResultTable extends PolymerElement {
-
-  @published
-  List<String> headers;
   
   @published
-  List<Map<String,String>> rows;
+  QueryResult queryResult;
   
   @published
   bool dirty;
