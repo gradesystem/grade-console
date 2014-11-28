@@ -11,10 +11,21 @@ class RunningTaskDetailsSummary extends View with HasTaskIcons {
   @published
   bool selected;
   
+  @observable
+  String startTime = "n/a";
+  
+  @observable
+  String duration = "n/a";
+  
+  @observable
+  String phase = "n/a";
+  
+  @observable
+  String endTime = "n/a";
+  
   RunningTaskDetailsSummary.created() : super.created();
   
-  
-  String available(String $) => ($==null || $.isEmpty) ? "n/a" : $;
+  String available(String value) => value!=null?value:"n/a";
 
   void stopExecution() {
     fire("stop-execution", detail:item);
@@ -22,6 +33,16 @@ class RunningTaskDetailsSummary extends View with HasTaskIcons {
   
   void removeExecution() {
     fire("remove-execution", detail:item);
+  }
+  
+
+  @ObserveProperty("item.execution")
+    void setInfo() {
+      if (item == null || item.execution == null) return;
+      startTime = available(item.execution.bean[TEK.startTime]);
+      duration = available(item.execution.bean[TEK.duration]);
+      endTime = available(item.execution.bean[TEK.endTime]);
+      phase = available(item.execution.bean[TEK.phase]);
   }
   
 }
