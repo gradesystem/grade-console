@@ -146,7 +146,7 @@ class TasksPageModel {
 @Injectable()
 class TasksModel extends SubPageEditableModel<Task> {
   
-  static Duration EXECUTION_POLL_DELAY = new Duration(seconds:2);
+  static Duration EXECUTION_POLL_DELAY = new Duration(seconds:1);
   
   static TaskExecutionKeys TEK = const TaskExecutionKeys();
   
@@ -404,9 +404,9 @@ class RunningTask extends Observable {
 class HasTaskIcons {
   static TaskExecutionKeys _TEK = const TaskExecutionKeys();
   static Map<String,String> icons = {_TEK.status_submitted : "cloud-upload", 
-                                     _TEK.status_started : "cloud",
+                                     _TEK.status_started : "cloud-upload",
                                      _TEK.status_transformed : "cloud",
-                                     _TEK.status_modified : "cloud",
+                                     _TEK.status_modified : "cloud-queue",
                                      _TEK.status_completed:"cloud-done",
                                      _TEK.status_failed:"warning"};
   

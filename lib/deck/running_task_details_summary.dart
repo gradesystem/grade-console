@@ -20,13 +20,10 @@ class RunningTaskDetailsSummary extends View with HasTaskIcons {
   @observable
   String phase = "n/a";
   
-  @observable
-  String endTime = "n/a";
-  
   RunningTaskDetailsSummary.created() : super.created();
   
   String available(String value) => value!=null?value:"n/a";
-
+  
   void stopExecution() {
     fire("stop-execution", detail:item);
   }
@@ -41,7 +38,6 @@ class RunningTaskDetailsSummary extends View with HasTaskIcons {
       if (item == null || item.execution == null) return;
       startTime = available(item.execution.bean[TEK.startTime]);
       duration = available(item.execution.bean[TEK.duration]);
-      endTime = available(item.execution.bean[TEK.endTime]);
       phase = available(item.execution.bean[TEK.phase]);
   }
   
