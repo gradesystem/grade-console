@@ -13,14 +13,24 @@
 <polymer-element name="running-task-details-summary"> 
 
   <template>
+  
+  <style>
+    [status-icon] {
+      vertical-align: middle;
+    }
+  </style>
 
      <paper-item trim bg-selected?="{{selected}}">
            
-	     <grade-item smallicon icon="settings-applications" flex>
+	     <grade-item smallicon icon="{{item.status | toIcon}}" flex>
 	     
 	       <grade-fascia flex truncate>
 	         <div fascia-title>{{item.task.label}}</div>
-	         <grade-uri fascia-subtitle value={{item.status}}></grade-uri>
+           <div fascia-subtitle small>
+           S: <span fg>{{item.execution.bean[TEK.startTime] | available}}</span> 
+           D: <span fg>{{item.execution.bean[TEK.duration] | available}}</span>  
+           T: <span fg>{{item.execution.bean[TEK.endTime] | available}}</span> 
+           </div>
 	         
 	       </grade-fascia>
 	       

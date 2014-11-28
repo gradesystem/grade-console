@@ -1,7 +1,7 @@
 part of tasks;
 
 @CustomTag("task-execution")
-class TaskExecutionView extends View {
+class TaskExecutionView extends View with HasTaskIcons {
   
   @published
   TaskExecution execution;

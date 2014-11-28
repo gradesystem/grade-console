@@ -384,6 +384,18 @@ class RunningTask extends Observable {
   
 }
 
+class HasTaskIcons {
+  static TaskExecutionKeys _TEK = const TaskExecutionKeys();
+  static Map<String,String> icons = {_TEK.status_submitted : "cloud-upload", 
+                                     _TEK.status_started : "cloud",
+                                     _TEK.status_transformed : "cloud",
+                                     _TEK.status_modified : "cloud",
+                                     _TEK.status_completed:"cloud-done",
+                                     _TEK.status_failed:"warning"};
+  
+  String toIcon(String status) => status!=null? icons[status] :"";
+}
+
 
 @Injectable()
 class Tasks extends EditableListItems<EditableModel<Task>> {
