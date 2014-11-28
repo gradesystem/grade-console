@@ -92,7 +92,7 @@
 	                <div flex endpoint lighter smaller truncate> {{target | uppercase}}</div>
                 
                 </div>
-                <div small > {{execution.bean[K.phase] | suffix | uppercase}}...</div>
+                <div small hidden?="{{ execution.bean[K.status] == K.status_completed }}">{{ execution.bean[K.phase] | suffix | uppercase}}...</div>
           
           </div>
           

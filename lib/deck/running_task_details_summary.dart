@@ -13,7 +13,8 @@ class RunningTaskDetailsSummary extends View with HasTaskIcons {
   
   RunningTaskDetailsSummary.created() : super.created();
   
-  String available(String value) => value!=null?value:"n/a";
+  
+  String available(String $) => ($==null || $.isEmpty) ? "n/a" : $;
 
   void stopExecution() {
     fire("stop-execution", detail:item);

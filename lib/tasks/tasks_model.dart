@@ -246,7 +246,7 @@ class TaskExecutionLists {
   
   static TaskExecutionKeys K = const TaskExecutionKeys();
 
-  static final List<String> statuses = [K.status_submitted,K.status_started,K.status_transformed,K.status_modified,K.status_completed,K.status_failed];
+  static final List<String> statuses = [K.status_submitted,K.status_started,K.status_transformed,K.status_modified,K.status_completed];
   static final List<String> phases = [K.phase_startup,K.phase_transformation,K.phase_difference,K.phase_writeout];
   
 }

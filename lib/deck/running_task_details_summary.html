@@ -27,11 +27,11 @@
 	       <grade-fascia flex truncate>
 	         <div fascia-title>{{item.task.label}}</div>
            <div fascia-subtitle small>
-           S: <span fg>{{item.execution.bean[TEK.startTime] | available}}</span> 
-           D: <span fg>{{item.execution.bean[TEK.duration] | available}}</span>  
-           T: <span fg>{{item.execution.bean[TEK.endTime] | available}}</span> 
-           </div>
-	         
+	           <span fg>start:</span> {{item.execution.bean[TEK.startTime] | available}} 
+	           <span hidden?="{{ item.execution.bean[TEK.status] == TEK.status_completed }}"><span fg>phase:</span> {{item.execution.bean[TEK.phase] | suffix | available}}</span>
+	           <span fg>duration:</span> {{item.execution.bean[TEK.duration] | available}}  
+	           <span fg>end:</span> {{item.execution.bean[TEK.endTime] | available}}
+           </div>	
 	       </grade-fascia>
 	       
          <grade-button action smallicon icon="av:stop" tooltip="left" label="runs the task" on-click="{{stopExecution}}" hidden?="{{!item.canCancel}}"></grade-button>

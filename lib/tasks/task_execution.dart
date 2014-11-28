@@ -17,6 +17,10 @@ class TaskExecutionView extends View with HasTaskIcons {
   @observable
   String source;
   
+
+  @observable
+  String icon;
+
   @observable
   String target;
   
@@ -31,11 +35,14 @@ class TaskExecutionView extends View with HasTaskIcons {
     if (status==null)
       return;
     
+    icon = toIcon(status);
+    
     //humber of relevant states depends on op
     var length = getMap(execution,K.task)[TK.op]==TK.publish_op? TaskExecutionLists.statuses.length : TaskExecutionLists.statuses.length-1; 
     
     progress = (100/length)*(TaskExecutionLists.statuses.indexOf(status)+1);
    
   }
+
  
 }
