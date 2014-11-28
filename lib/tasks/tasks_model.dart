@@ -171,8 +171,10 @@ class TasksModel extends SubPageEditableModel<Task> {
     return runningTask;
   }
 
-  void runSandboxTask(EditableTask editableTask)
-    => _run(editableTask.playgroundRunningTask, editableTask.model, taskService.runSandboxTask);
+  void runSandboxTask(EditableTask editableTask) {
+    if (editableTask.playgroundRunningTask.execution!=null) executionsService.stopTaskExecution(editableTask.playgroundRunningTask.execution);
+    _run(editableTask.playgroundRunningTask, editableTask.model, taskService.runSandboxTask);
+  }
   
   
   void _run(RunningTask runningTask, Task task, Future<TaskExecution> runner(Task)) {
