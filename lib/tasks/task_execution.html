@@ -39,7 +39,6 @@
           text-overflow: ellipsis;
         }
         
-        
         :host [time] {
         
           min-width:110px;
@@ -55,9 +54,7 @@
           height:15px;
           border-radius:5px;
         }
-        
-        
-        
+
         :host paper-progress::shadow #activeProgress {
 				  background-color: white !important;
 				  border-radius:5px;
@@ -66,11 +63,7 @@
 				:host paper-progress::shadow #secondaryProgress {
           border-radius:5px;
         }
-        
-        
-        
-        
-  
+
        </style>
 
  
@@ -83,7 +76,7 @@
                 <div fascia-subtitle style="top:-3px"> status</div>
               </grade-fascia>
               
-              <core-icon status icon="{{execution.status | toIcon}}"></core-icon>
+              <core-icon status alt="Execution status" icon="{{execution.status | toIcon}}"></core-icon>
          
           </div>
           
