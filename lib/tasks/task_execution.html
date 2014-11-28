@@ -86,13 +86,19 @@
          
           </div>
           
-           <div middle layout horizontal center-justified center>
+           <div middle layout vertical center-justified center>
            
-                <div flex endpoint smaller truncate style="text-align:right;" >{{source | uppercase}}</div>
-                <div flex three style="margin:0px 10px">
-                  <paper-progress value="{{progress}}"></paper-progress>
+           
+                <div self-stretch horizontal layout>
+           
+	                <div flex endpoint smaller truncate style="text-align:right;" >{{source | uppercase}}</div>
+	                <div flex three style="margin:0px 10px">
+	                  <paper-progress value="{{progress}}"></paper-progress>
+	                </div>
+	                <div flex endpoint lighter smaller truncate> {{target | uppercase}}</div>
+                
                 </div>
-                <div flex endpoint smaller truncate> {{target | uppercase}}</div>
+                <div small > {{execution.bean[K.phase] | suffix | uppercase}}...</div>
           
           </div>
           

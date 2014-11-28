@@ -8,16 +8,14 @@ class TaskExecutionView extends View {
   
   TaskKeys TK = const TaskKeys();
   TaskExecutionKeys K = const TaskExecutionKeys();
+  TaskExecutionLists KL;
   
   Map<String,String> icons;
 
-  List<String> statuses;
-  
   TaskExecutionView.created() : super.created() {
     
-    statuses = [K.status_submitted,K.status_started,K.status_transformed, K.status_modified,K.status_completed];
-    
-    icons={K.status_submitted : "cloud-upload", 
+   KL = new TaskExecutionLists(K);
+   icons={K.status_submitted : "cloud-upload", 
            K.status_started : "cloud",
            K.status_transformed : "cloud",
            K.status_modified : "cloud",
@@ -52,9 +50,9 @@ class TaskExecutionView extends View {
     icon = icons[status];
     
     //humber of relevant states depends on op
-    var length = getMap(execution,K.task)[TK.op]==TK.publish_op? statuses.length : statuses.length-1; 
+    var length = getMap(execution,K.task)[TK.op]==TK.publish_op? KL.statuses.length : KL.statuses.length-1; 
     
-    progress = (100/length)*(statuses.indexOf(status)+1);
+    progress = (100/length)*(KL.statuses.indexOf(status)+1);
    
   }
  

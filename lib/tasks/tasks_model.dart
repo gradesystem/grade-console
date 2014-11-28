@@ -242,14 +242,24 @@ class TasksModel extends SubPageEditableModel<Task> {
 
 }
 
+class TaskExecutionLists {
+
+  TaskExecutionLists(TaskExecutionKeys K) : statuses = [K.status_submitted,K.status_started,K.status_transformed,K.status_modified,K.status_completed,K.status_failed] ,
+                                            phases = [K.phase_startup,K.phase_transformation,K.phase_difference,K.phase_writeout];
+  
+  
+  final List<String> statuses;
+  final List<String> phases;
+
+
+  
+}
 
 class TaskExecutionKeys {
 
-  const TaskExecutionKeys();
+ final String id = "http://gradesystem.io/onto#id";
 
-  final String id = "http://gradesystem.io/onto#id";
-
-  final String startTime = "http://gradesystem.io/onto/taskexecution.owl#startTime";
+  final String startTime =  "http://gradesystem.io/onto/taskexecution.owl#startTime";
   final String endTime = "http://gradesystem.io/onto/taskexecution.owl#endTime";
   
   final String task = "http://gradesystem.io/onto/task.owl#Task";
@@ -263,6 +273,16 @@ class TaskExecutionKeys {
   final String status_failed =  "http://gradesystem.io/onto/taskexecution.owl#failed";
   final String status_completed =  "http://gradesystem.io/onto/taskexecution.owl#completed";
 
+  const TaskExecutionKeys();
+   
+    
+  final String phase = "http://gradesystem.io/onto/taskexecution.owl#phase";
+  
+  final String phase_startup = "http://gradesystem.io/onto/taskexecution.owl#transformation";
+  final String phase_transformation = "http://gradesystem.io/onto/taskexecution.owl#transformation";
+  final String phase_difference = "http://gradesystem.io/onto/taskexecution.owl#difference";
+  final String phase_writeout = "http://gradesystem.io/onto/taskexecution.owl#writeout";
+  
   final String source = "http://gradesystem.io/onto/taskexecution.owl#source";
   final String target = "http://gradesystem.io/onto/taskexecution.owl#target";
   
