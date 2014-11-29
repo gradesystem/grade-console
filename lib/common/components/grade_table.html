@@ -1,0 +1,68 @@
+<link rel="import" href="../../../../packages/polymer/polymer.html">
+<link rel="import" href="../../../../packages/core_elements/core_tooltip.html">
+
+<polymer-element name="grade-table">
+
+    <template>
+
+      <style>  
+      
+        [table] {
+          overflow-y: auto;
+        }
+        
+        [headers] {
+          border-bottom: 1px solid lightgray;
+          margin-bottom: 10px;
+          text-transform: capitalize;
+          
+        }
+        
+        
+        [cell] {
+          margin:5px 5px;
+          overflow-x:hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+        }
+        
+        
+        [uri] [start] {
+          color: #90A4AE
+        }
+        
+        :host [disabled] * {
+          color: lightgrey !important;
+        }
+
+      </style>
+      
+        <div disabled?="{{disabled}}" inset rounded layout vertical>
+	          
+	          <div headers layout horizontal>
+		         <template repeat="{{header in headers}}">
+		           <div fg flex cell>{{header}}</div>
+		         </template>
+		        </div>
+		        
+            <template repeat="{{row in data}}">
+              <div layout horizontal>
+                <template repeat="{{cell in row}}">
+                  <core-tooltip flex label={{cell}}>
+		                  <div cell uri?="{{ (cell|suffix) != ''}}"  smaller>
+	                      
+	                      <span fg?="{{ (cell|suffix) == ''}}" start>{{cell | start }}</span>
+	                      <span fg>{{ cell | suffix}}</span>
+	                   
+	                   </div>
+                   </core-tooltip>
+              </template>
+              </div>
+            </template>
+        </div>
+    
+    <script type="application/dart" src="grade_table.dart"></script> 
+    
+    </template>
+
+</polymer-element>

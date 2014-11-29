@@ -42,21 +42,6 @@ class QueryPlayground extends PolymerElement with Filters {
   
   }
   
-  List toTable(QueryResult qresult) {
-    
-    List<List<String>> list = [];
-    
-    for (Map binding in qresult.rows) {
-      List<String> row = [];
-      for (Map tuple in binding.values)
-        row.add(tuple['value']);
-     
-      list.add(row); 
-    }
-    
-    return list;
-  }
-  
   void onBack() {
     fire("back");
   }

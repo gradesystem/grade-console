@@ -11,7 +11,7 @@
 <link rel="import" href="../components/grade_error.html">
 <link rel="import" href="../components/loading_panel.html">
 <link rel="import" href="../components/codemirror_input.html">
-<link rel="import" href="../components/grade_table.html">
+<link rel="import" href="../components/query_result_table.html">
 
 <link rel="import" href="../../../../packages/core_elements/av_icons.html">
 <link rel="import" href="../../../../packages/core_elements/core_pages.html">
@@ -115,13 +115,9 @@
         <loading-panel main fit loading="{{editableQuery.queryRunning}}" message="retrieving results">
           <core-animated-pages selected="{{resultArea}}" fit spaced hide?="{{editableQuery.lastQueryResult==null}}">
             
- <!--           <query-result-table queryResult="{{editableQuery.lastQueryResult}}" dirty={{editableQuery.dirty}}></query-result-table>
- -->          
-             <grade-table headers={{editableQuery.lastQueryResult.headers}} 
-                         data="{{ editableQuery.lastQueryResult | toTable }}" 
-                         disabled?="editableQuery.dirty"></grade-table>
-            
-            <div style="overflow-y: auto;">
+            <query-result-table queryResult={{editableQuery.lastQueryResult}} dirty={{editableQuery.dirty}}></query-result-table>
+             
+						<div style="overflow-y: auto;">
 						  <pre>{{editableQuery.lastQueryResult.raw}}</pre>
 						</div>
           
