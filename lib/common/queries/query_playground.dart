@@ -28,7 +28,6 @@ class QueryPlayground extends PolymerElement with Filters {
   String get expression => editableQuery!=null?editableQuery.model.bean[Query.expression_field]:"";
   void set expression(String exp) {editableQuery.model.bean[Query.expression_field] = exp;}
   
-  
   @ComputedProperty("editableQuery.model.bean[predefined_key]") 
   bool get editable => editableQuery!=null?editableQuery.model.bean[Query.predefined_field]==false:false;
   
@@ -41,6 +40,21 @@ class QueryPlayground extends PolymerElement with Filters {
                       "Uhm, may be this query is broken? Make sure it's a well-formed SELECT, CONSTRUCT, or DESCRIBE.":
                       "Ouch. Something went horribly wrong...";
   
+  }
+  
+  List toTable(QueryResult qresult) {
+    
+    List<List<String>> list = [];
+    
+    for (Map binding in qresult.rows) {
+      List<String> row = [];
+      for (Map tuple in binding.values)
+        row.add(tuple['value']);
+     
+      list.add(row); 
+    }
+    
+    return list;
   }
   
   void onBack() {

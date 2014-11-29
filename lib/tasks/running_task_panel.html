@@ -62,25 +62,15 @@
 					</div>
        
 	        <!-- TRANSFORM RESULT -->
-	        <result-panel fit result={{runningTask.transform}} dirty={{dirty}} loadingMesage="retrieving transform results"></result-panel>
-<!-- 	        <loading-panel fit loading="{{runningTask.loadingTransformResults}}" message="retrieving transform results"> -->
-<!-- 	          <query-result fit queryResult={{runningTask.transformResult}} dirty={{dirty}}></query-result> -->
-<!-- 	        </loading-panel> -->
+	        <result-panel fit result={{runningTask.transform}} disabled?={{dirty}} loadingMesage="retrieving transform results"></result-panel>
 	        
 	        <!-- DIFF RESULT -->
-	        <result-panel fit result={{runningTask.diff}} dirty={{dirty}} loadingMesage="retrieving diff results"></result-panel>
-	        
-<!--           <loading-panel fit loading="{{runningTask.loadingTargetResults}}" message="retrieving target results"> -->
-<!--             <query-result fit queryResult={{runningTask.targetResult}} dirty={{dirty}}></query-result> -->
-<!--           </loading-panel> -->
+	        <result-panel fit result={{runningTask.diff}} disabled?={{dirty}} loadingMesage="retrieving diff results"></result-panel>
 	         
 	        <!-- TARGET RESULT -->
-	        <result-panel fit result={{runningTask.target}} dirty={{dirty}} loadingMesage="retrieving target results"></result-panel>
-	        
-<!-- 	        <loading-panel fit loading="{{runningTask.loadingTargetResults}}" message="retrieving target results"> -->
-<!-- 	          <query-result fit queryResult={{runningTask.targetResult}} dirty={{dirty}}></query-result> -->
-<!-- 	        </loading-panel> -->
-        </core-animated-pages>
+	        <result-panel fit result={{runningTask.target}} disabled?={{dirty}} loadingMesage="retrieving target results"></result-panel>
+	
+	      </core-animated-pages>
          
 	      <div layout horizontal center-justified hide?="{{runningTask.execution!=null || runningTask.error!=null}}" style="overflow:hidden"> 
 	      </div>

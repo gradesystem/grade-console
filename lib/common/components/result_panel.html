@@ -1,44 +1,21 @@
 <link rel="import" href="../../../../packages/polymer/polymer.html">
 <link rel="import" href="loading_panel.html">
-<link rel="import" href="query_result_table.html">
+<link rel="import" href="grade_table.html">
 
 <link rel="import" href="../../../../packages/core_elements/core_animated_pages.html">
 
 <polymer-element name="result-panel" relative>
   <template>
-    <style>
-      [format-button] {
-        background-color: #f4f4f4;
-        padding: 2px;
-        cursor: pointer;
-        margin-bottom: 5px;
-      }
-    </style>
-    
+  
     <loading-panel fit loading="{{result.loading}}" message="{{loadingMessage}}">
     
-			<core-animated-pages fit selected="{{format}}">
-			
-			  <!-- table -->
-			  <div vertical layout>
-			    <div horizontal layout end-justified>
-			      <div format-button on-click={{toggleFormat}}>RAW</div>
-			    </div>
-			    <query-result-table flex queryResult={{result.value}} dirty={{dirty}}></query-result-table>
-			  </div>
-			 
-			  <!-- raw -->
-			  <div vertical layout>
-			    <div horizontal layout end-justified>
-			      <div format-button on-click={{toggleFormat}}>TABLE</div>
-			    </div>
-			    <div flex style="overflow-y: auto;">
-			      <pre>{{result.value.raw}}</pre>
-			    </div>
-			  </div>
-      </core-animated-pages>
+      <grade-table flex headers={{result.value.headers}} 
+                         data="{{ result.value | toTable }}" 
+                         disabled?={{disabled}}>
+      </grade-table>
       
     </loading-panel>
+    
   </template>
   <script type="application/dart" src="result_panel.dart"></script>
 </polymer-element>

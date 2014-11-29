@@ -8,18 +8,25 @@ class ResultPanel extends PolymerElement {
   Result result;
   
   @published
-  bool dirty;
+  bool disabled;
   
   @published
   String loadingMessage;
-  
-  @observable
-  int format = 0;
     
   ResultPanel.created() : super.created();
   
-  void toggleFormat() {
-    format = ++format%2;
-  }
+  List toTable(QueryResult qresult) {
+      
+      List<List<String>> list = [];
+      
+      for (Map binding in qresult.rows) {
+        List<String> row = [];
+        for (Map tuple in binding.values)
+          row.add(tuple['value']);
+       
+        list.add(row); 
+      }
 
+      return list;
+  }
 }
