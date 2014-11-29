@@ -27,7 +27,8 @@
 	       <grade-button action hidden?="{{ !item.model.predefined }}" smallicon tooltip="left" label="predefined endpoint" icon="lock"></grade-button>
          <grade-button action onhover hidden?="{{ item.edit || !selected || item.model.predefined }}" smallicon tooltip="left" label="remove endpoint" icon="delete" on-click={{removeItem}}></grade-button>
          <grade-button action hidden?="{{ !item.edit }}" smallicon icon="save" tooltip="left" label="there are pending changes"></grade-button>
-
+         <grade-button action hidden?="{{ item.valid }}" smallicon icon="warning" tooltip="left" label="there are errors"></grade-button>
+         
 	     </grade-item>
                  
      </paper-item>
