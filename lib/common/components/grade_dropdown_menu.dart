@@ -1,6 +1,8 @@
 import 'package:polymer/polymer.dart';
 import 'package:paper_elements/paper_dropdown_menu.dart';
+import 'package:core_elements/core_menu.dart';
 import 'package:grade_console/common.dart';
+import 'dart:html';
 
 @CustomTag("grade-dropdown-menu")
 class GradeDropdownMenu extends PolymerElement {
@@ -41,18 +43,23 @@ class GradeDropdownMenu extends PolymerElement {
     
    dropdown = $["menu"] as PaperDropdownMenu;
    unknown_validator = (sel) => (!isItem(sel))? "Current value '${sel}' is no longer a valid choice.":null;    
+   
+   new MutationObserver(($1,$2) {
+        (dropdown.shadowRoot.querySelector("#menu") as CoreMenu).jsElement.callMethod("updateSelected",[]);
+        onModelChange();
+      })
+      .observe(this.parentNode, childList:true, subtree:true);
   
   }
 
   bool isItem(String val) {
     
-    for (var item in querySelectorAll("[dropitem]"))
+    for (var item in this.querySelectorAll("[dropitem]")) 
        if (val == item.attributes['dropitem'])
           return true;
     
     return false;
   }
- 
   
   @ObserveProperty("selected")
   onModelChange() {
