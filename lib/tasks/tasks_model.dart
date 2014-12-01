@@ -182,7 +182,7 @@ class TasksModel extends SubPageEditableModel<Task> {
     runner(task)
       .then((TaskExecution update) {
           updateTaskExecution(runningTask, update);
-          _listenTaskExecution(runningTask);
+         listenTaskExecution(runningTask);
         })
       .catchError((e) => runningTask.taskFailed(e));
   }
@@ -197,7 +197,7 @@ class TasksModel extends SubPageEditableModel<Task> {
     executionsService.stopTaskExecution(runningTask.execution);
   }
   
-  void _listenTaskExecution(RunningTask editableTask) {
+  void listenTaskExecution(RunningTask editableTask) {
     //the user can stop the task during the first ajax call
     if (editableTask.running) 
       editableTask.executionPoller = new Timer.periodic(EXECUTION_POLL_DELAY, (_)=>pollTaskExecution(editableTask));
@@ -357,6 +357,7 @@ class RunningTask extends Observable {
   RunningTask(this.task);
   
   RunningTask.fromExecution(this.execution) {
+    running = execution.running;
     status = execution.status;
     task = execution.task;
   }
@@ -396,7 +397,11 @@ class RunningTask extends Observable {
   void stopTask() {
     running = false;
     canCancel = false;
-   if (executionPoller!=null) executionPoller.cancel();
+    stopPolling();
+  }
+  
+  void stopPolling() {
+    if (executionPoller!=null) executionPoller.cancel();
   }
   
 }

@@ -47,16 +47,23 @@ class DeckPageModel {
 
   void _setData(List<TaskExecution> items) {
 
-    storage.data.clear();
+    _clear();
     storage.data.addAll(items.map(_toRunningTask));
     storage.loading = false;
 
   }
   
+  void _clear() {
+    storage.data.forEach((RunningTask rt){
+      if (rt.running) rt.stopPolling();
+    });
+    storage.data.clear();
+  }
+  
   RunningTask _toRunningTask(TaskExecution te) {
     RunningTask runningTask = new RunningTask.fromExecution(te);
     tasksModel.updateTaskExecution(runningTask, te);
-    tasksModel.pollTaskExecution(runningTask);
+    tasksModel.listenTaskExecution(runningTask);
     return runningTask;
   }
 
