@@ -55,6 +55,7 @@ class DeckPageModel {
   
   RunningTask _toRunningTask(TaskExecution te) {
     RunningTask runningTask = new RunningTask.fromExecution(te);
+    tasksModel.updateTaskExecution(runningTask, te);
     tasksModel.pollTaskExecution(runningTask);
     return runningTask;
   }
