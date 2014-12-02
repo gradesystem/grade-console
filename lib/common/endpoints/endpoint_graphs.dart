@@ -12,8 +12,6 @@ class EndpointGraphs extends PolymerElement with Filters {
   @ComputedProperty('items.selected')
   EditableEndpoint get item => items==null?null:items.selected;
   
-  String get graphs_key =>  Endpoint.graphs_field;
-  
   @observable
   bool newUrlInvalid;
   

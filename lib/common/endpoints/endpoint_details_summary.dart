@@ -2,6 +2,8 @@ part of endpoints;
 
 @CustomTag("endpoint-details-summary") 
 class EndpointDetailsSummary extends PolymerElement with Filters {
+  
+  EndpointKeys K = const EndpointKeys();
    
   @published
   EditableEndpoint item;
@@ -11,18 +13,16 @@ class EndpointDetailsSummary extends PolymerElement with Filters {
   
   EndpointDetailsSummary.created() : super.created();
 
-  bool get predefined => item.model.bean[Endpoint.predefined_field]==true;
-
-  String get name_key => Endpoint.name_field;
+  bool get predefined => item.model.bean[K.predefined]==true;
   
-  @ComputedProperty("item.model.bean[name_key]")
+  @ComputedProperty("item.model.bean[K.name]")
   String get name {
   
     String name = "(name?)";
     
     if (item!=null) {
       
-      String current_name= item.model.get(name_key);
+      String current_name= item.model.get(K.name);
       
       name = (current_name==null || current_name.isEmpty)? name : current_name;
       

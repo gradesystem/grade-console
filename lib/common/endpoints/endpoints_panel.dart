@@ -57,7 +57,7 @@ class EndpointsPanel extends PolymerElement with Filters {
     EditableEndpoint deleteCandidate = detail;
     dialogCallback = (){model.remove(deleteCandidate);};
     Endpoint query = deleteCandidate.model;
-    removedDialogHeader = "Remove ${query.bean[Endpoint.name_field]}";
+    removedDialogHeader = "Remove ${query.bean[Endpoint.K.name]}";
     removeDialogOpened = true;
   }
   

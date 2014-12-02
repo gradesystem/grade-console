@@ -3,6 +3,8 @@ part of endpoints;
 @CustomTag("endpoint-details") 
 class EndpointDetails extends PolymerElement with Filters, Validators {
   
+  EndpointKeys K = const EndpointKeys();
+  
   @published
   Endpoints items;
   
@@ -11,10 +13,6 @@ class EndpointDetails extends PolymerElement with Filters, Validators {
   
   @ComputedProperty('items.selected')
   EditableEndpoint get item => items==null?null:items.selected;
-  
-  String get name_key =>  Endpoint.name_field;
-  String get uri_key =>  Endpoint.uri_field;
-  String get update_uri_key =>  Endpoint.update_uri_field;
   
   List<Validator> get name_validators => [($) => $!=null && items.containsName($)?"Not original enough, try again.":null];
   

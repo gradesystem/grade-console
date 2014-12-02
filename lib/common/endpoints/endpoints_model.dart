@@ -1,13 +1,20 @@
 part of endpoints;
 
+class EndpointKeys {
+
+  const EndpointKeys();
+  
+  final String id = "http://gradesystem.io/onto#id";
+  final String name = "http://gradesystem.io/onto/endpoint.owl#name";
+  final String uri = "http://gradesystem.io/onto/endpoint.owl#uri";
+  final String update_uri = "http://gradesystem.io/onto/endpoint.owl#update_uri";
+  final String graphs = "http://gradesystem.io/onto/endpoint.owl#graph";
+  final String predefined = "http://gradesystem.io/onto/endpoint.owl#predefined";
+}
+
 class Endpoint extends EditableGradeEntity with Filters {
 
-  static String id_field = "http://gradesystem.io/onto#id";
-  static String name_field = "http://gradesystem.io/onto/endpoint.owl#name";
-  static String uri_field = "http://gradesystem.io/onto/endpoint.owl#uri";
-  static String update_uri_field = "http://gradesystem.io/onto/endpoint.owl#update_uri";
-  static String graphs_field = "http://gradesystem.io/onto/endpoint.owl#graph";
-  static String predefined_field = "http://gradesystem.io/onto/endpoint.owl#predefined";
+  static EndpointKeys K = const EndpointKeys();
 
   ObservableList<String> _graphs = new ObservableList();
   
@@ -17,25 +24,25 @@ class Endpoint extends EditableGradeEntity with Filters {
   }
 
   Endpoint() : this.fromBean({
-        id_field: "",
-        name_field: "",
-        uri_field: "",
-        update_uri_field: "",
-        graphs_field: [],
-        predefined_field: false
+        K.id: "",
+        K.name: "",
+        K.uri: "",
+        K.update_uri: "",
+        K.graphs: [],
+        K.predefined: false
       });
 
   void _listenChanges() {
-    onBeanChange([id_field], () => notifyPropertyChange(#id, null, id));
-    onBeanChange([name_field], () => notifyPropertyChange(#name, null, name));
-    onBeanChange([uri_field], () => notifyPropertyChange(#uri, null, uri));
-    onBeanChange([update_uri_field], () => notifyPropertyChange(#updateUri, null, updateUri));
+    onBeanChange([K.id], () => notifyPropertyChange(#id, null, id));
+    onBeanChange([K.name], () => notifyPropertyChange(#name, null, name));
+    onBeanChange([K.uri], () => notifyPropertyChange(#uri, null, uri));
+    onBeanChange([K.update_uri], () => notifyPropertyChange(#updateUri, null, updateUri));
     //we don't support graphs direct writing
   }
   
   void _syncGraphs() {
-    graphs = bean[graphs_field];
-    bean[graphs_field] = graphs;
+    graphs = bean[K.graphs];
+    bean[K.graphs] = graphs;
   }
   
   @observable
@@ -46,34 +53,34 @@ class Endpoint extends EditableGradeEntity with Filters {
   }
 
   @observable
-  String get id => get(id_field);
+  String get id => get(K.id);
   set id(String value) {
-    set(id_field, value);
+    set(K.id, value);
     notifyPropertyChange(#id, null, value);
   }
 
   @observable
-  String get name => get(name_field);
+  String get name => get(K.name);
   set name(String value) {
-    set(name_field, value);
+    set(K.name, value);
     notifyPropertyChange(#name, null, value);
   }
 
   @observable
-  String get uri => get(uri_field);
+  String get uri => get(K.uri);
   set uri(String value) {
-    set(uri_field, value);
+    set(K.uri, value);
     notifyPropertyChange(#uri, null, value);
   }
 
   @observable
-  String get updateUri => get(update_uri_field);
+  String get updateUri => get(K.update_uri);
   set updateUri(String value) {
-    set(update_uri_field, value);
+    set(K.update_uri, value);
     notifyPropertyChange(#updateUri, null, value);
   }
 
-  bool get predefined => get(predefined_field);
+  bool get predefined => get(K.predefined);
 
   Endpoint clone() {
     return new Endpoint.fromBean(new Map.from(bean));
@@ -103,7 +110,7 @@ abstract class EndpointSubPageModel extends SubPageEditableModel<Endpoint> {
     if (item == null) return new EditableEndpoint(new Endpoint());
     
     //we are cloning
-    if (item.id == null) item.bean[Endpoint.predefined_field]=false;
+    if (item.id == null) item.bean[Endpoint.K.predefined]=false;
     return new EditableEndpoint(item);
   }
 

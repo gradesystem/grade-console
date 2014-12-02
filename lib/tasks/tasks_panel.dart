@@ -43,7 +43,7 @@ class TasksPanel extends PolymerElement with Filters {
       model.remove(deleteCandidate);
     };
     Task task = deleteCandidate.model;
-    removedDialogHeader = "Remove ${task.bean[Endpoint.name_field]}";
+    removedDialogHeader = "Remove ${task.bean[Endpoint.K.name]}";
     removeDialogOpened = true;
   }
 

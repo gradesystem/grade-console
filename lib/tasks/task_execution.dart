@@ -27,8 +27,8 @@ class TaskExecutionView extends View with HasTaskIcons {
   @ObserveProperty('execution')
   update() {
     
-    source = getMap(execution,K.source)[Endpoint.name_field];
-    target = getMap(execution,K.target)[Endpoint.name_field];
+    source = getMap(execution,K.source)[Endpoint.K.name];
+    target = getMap(execution,K.target)[Endpoint.K.name];
         
     String status = get(execution,K.status);
     

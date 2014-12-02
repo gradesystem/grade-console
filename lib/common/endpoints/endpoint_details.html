@@ -33,15 +33,15 @@
 	                   
 	            <grade-input fascia-title
 	                         disabled="{{ !editable }}" 
-	                         label="{{ name_key | suffix }} ?" 
+	                         label="{{ K.name | suffix }} ?" 
 	                         required
 	                         validators="{{ name_validators}}"
-	                         invalid="{{ item.fieldsInvalidity[name_key] }}"
-	                         inputValue="{{ item.model.bean[name_key]  }}"
+	                         invalid="{{ item.fieldsInvalidity[K.name] }}"
+	                         inputValue="{{ item.model.bean[K.name]  }}"
 	                         >
 	            </grade-input>
 	                   
-	             <grade-uri fascia-subtitle value={{name_key}}></grade-uri>       
+	             <grade-uri fascia-subtitle value={{K.name}}></grade-uri>       
 	             
 	            </grade-fascia>
 	            
@@ -55,13 +55,13 @@
 	                         disabled="{{ !editable }}" 
 	                         label="uri ?" 
 	                         required
-	                         invalid="{{ item.fieldsInvalidity[uri_key] }}"
-	                         inputValue="{{ item.model.bean[uri_key]  }}"
+	                         invalid="{{ item.fieldsInvalidity[K.uri] }}"
+	                         inputValue="{{ item.model.bean[K.uri]  }}"
 	                         type="URL"
 	                         >
 	            </grade-input>
 	                   
-	            <grade-uri fascia-subtitle value={{uri_key}}></grade-uri>
+	            <grade-uri fascia-subtitle value={{K.uri}}></grade-uri>
 	          </grade-fascia>
 	            
 	        </grade-item>
@@ -73,12 +73,12 @@
               <grade-input fascia-title
                            disabled="{{ !editable }}" 
                            label="uri ?" 
-                           invalid="{{ item.fieldsInvalidity[update_uri_key] }}"
-                           inputValue="{{ item.model.bean[update_uri_key]  }}"
+                           invalid="{{ item.fieldsInvalidity[K.update_uri] }}"
+                           inputValue="{{ item.model.bean[K.update_uri]  }}"
                            type="URL">
               </grade-input>
                      
-               <grade-uri fascia-subtitle value={{update_uri_key}}></grade-uri>
+               <grade-uri fascia-subtitle value={{K.update_uri}}></grade-uri>
             </grade-fascia>
               
           </grade-item>	        
