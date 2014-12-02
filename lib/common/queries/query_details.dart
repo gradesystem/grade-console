@@ -3,20 +3,21 @@ part of queries;
 @CustomTag("query-details") 
 class QueryDetails extends PolymerElement with Filters {
   
+  QueryKeys K = const QueryKeys();  
   
-  List<String> fields = [Query.datasets_field,
-                         Query.note_field,
-                         Query.expression_field];
+  List<String> fields = [Query.K.datasets,
+                         Query.K.note,
+                         Query.K.expression];
   
   static List<String> required_fields = [
-                         Query.name_field,
-                         Query.target_field,
-                         Query.expression_field];
+                         Query.K.name,
+                         Query.K.target,
+                         Query.K.expression];
   
   
   Map<String,List<Validator>> validators = {};
   
-  static List<String> area_fields = [Query.expression_field,Query.note_field];
+  static List<String> area_fields = [Query.K.expression, Query.K.note];
   
   @ComputedProperty('item.edit')
   bool get editable => item==null?false:item.edit;
@@ -32,15 +33,8 @@ class QueryDetails extends PolymerElement with Filters {
    
   QueryDetails.created() : super.created() {
     validators[
-       Query.name_field]=[($) =>  $!=null && queries.containsName($)?"Not original enough, try again.":null];
+       Query.K.name]=[($) =>  $!=null && queries.containsName($)?"Not original enough, try again.":null];
   }
-  
-  //used in template to lookup (cannot bind static fields)
-  String get endpoint_key => Query.endpoint_field;
-  String get parameters_key => Query.parameters_field;
-  String get target_key => Query.target_field;
-  String get expression_key => Query.expression_field;
-  String get name_key => Query.name_field;
   
   bool isAreaField(String key) {
     return area_fields.contains(key);

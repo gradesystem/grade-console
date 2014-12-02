@@ -85,6 +85,7 @@ class Endpoint extends EditableGradeEntity with Filters {
 abstract class Endpoints extends EditableListItems<EditableEndpoint> {
 
   bool containsName(String name) => data.any((EditableEndpoint eq) => eq != selected && eq.model.name != null && eq.model.name.toLowerCase() == name.toLowerCase());
+  EditableEndpoint findById(String id) => data.firstWhere((EditableEndpoint ee)=> ee.model.id == id, orElse:()=>null);
 }
 
 abstract class EndpointSubPageModel extends SubPageEditableModel<Endpoint> {

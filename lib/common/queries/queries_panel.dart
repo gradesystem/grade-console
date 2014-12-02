@@ -3,6 +3,8 @@ part of queries;
 @CustomTag("queries-panel") 
 class QueriesPanel extends PolymerElement with Filters {
   
+  QueryKeys K = const QueryKeys();
+  
   @observable
   int area = 0;
   
@@ -63,7 +65,7 @@ class QueriesPanel extends PolymerElement with Filters {
   void removeItem(event, detail, target) {
     deleteCandidate = detail;
     Query query = deleteCandidate.model;
-    removedDialogHeader = "Remove ${query.bean[Query.name_field]}";
+    removedDialogHeader = "Remove ${query.bean[K.name]}";
     removeDialogOpened = true;
   }
   

@@ -2,6 +2,8 @@ part of queries;
 
 @CustomTag("query-playground") 
 class QueryPlayground extends PolymerElement with Filters {
+
+  QueryKeys K = const QueryKeys();
   
   @observable
   int resultArea = 0;
@@ -19,17 +21,12 @@ class QueryPlayground extends PolymerElement with Filters {
      if (name == "active") isactive =  attributes.containsKey('active');
    }
   
-  //privately used: this is to support refactoring of vocabulary
-  String get expression_key => Query.expression_field;
-  String get predefined_key => Query.predefined_field;
-  String get target_key => Query.target_field;
+  @ComputedProperty("editableQuery.model.bean[K.expression]") 
+  String get expression => editableQuery!=null?editableQuery.get(K.expression):"";
+  void set expression(String exp) {if (editableQuery!=null) editableQuery.set(K.expression, exp);}
   
-  @ComputedProperty("editableQuery.model.bean[expression_key]") 
-  String get expression => editableQuery!=null?editableQuery.model.bean[Query.expression_field]:"";
-  void set expression(String exp) {if (editableQuery!=null) editableQuery.model.bean[Query.expression_field] = exp;}
-  
-  @ComputedProperty("editableQuery.model.bean[predefined_key]") 
-  bool get editable => editableQuery!=null?editableQuery.model.bean[Query.predefined_field]==false:false;
+  @ComputedProperty("editableQuery.model.bean[K.predefined]") 
+  bool get editable => editableQuery!=null?editableQuery.model.bean[K.predefined]==false:false;
   
   @ComputedProperty("editableQuery.model.name")  
   String get title => editableQuery!=null?(editableQuery.model.name == null || editableQuery.model.name.isEmpty?"(name?)":editableQuery.model.name):"";
@@ -53,7 +50,6 @@ class QueryPlayground extends PolymerElement with Filters {
   void showErrorDetails() {
     CoreCollapse collapse = $["errorDetails"] as CoreCollapse;
     collapse.toggle();
-    //($["detailsbutton"] as Element).text = collapse.opened?"Hide details":"Show details";
   }
   
 }

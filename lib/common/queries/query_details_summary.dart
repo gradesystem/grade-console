@@ -2,6 +2,8 @@ part of queries;
 
 @CustomTag("query-details-summary") 
 class QueryDetailsSummary extends PolymerElement with Filters {
+  
+  QueryKeys K = const QueryKeys();
    
   @published
   EditableQuery item;
@@ -11,19 +13,16 @@ class QueryDetailsSummary extends PolymerElement with Filters {
   
   QueryDetailsSummary.created() : super.created();
 
-  bool get predefined => item.model.bean[Query.predefined_field]==true;
-
-  String get datasets_key => Query.datasets_field;
-  String get name_key => Query.name_field;
+  bool get predefined => item.model.bean[K.predefined]==true;
   
-  @ComputedProperty("item.model.bean[name_key]")
+  @ComputedProperty("item.model.bean[K.name]")
   String get name {
   
     String name = "(name?)";
     
     if (item!=null) {
       
-      String current_name= item.model.get(name_key);
+      String current_name= item.get(K.name);
       
       name = (current_name==null || current_name.isEmpty)? name : current_name;
       
@@ -33,14 +32,14 @@ class QueryDetailsSummary extends PolymerElement with Filters {
       
   }
   
-  @ComputedProperty("item.model.bean[datasets_key]")
+  @ComputedProperty("item.model.bean[K.datasets]")
   String get datasets {
       
        String sets = '(all)';
        
        if (item!=null) {
        
-         String datasets = item.model.get(Query.datasets_field);
+         String datasets = item.get(K.datasets);
          
          sets = (datasets==null || datasets.length==0) ? sets : datasets;
               

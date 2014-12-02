@@ -1,16 +1,24 @@
 part of queries;
 
+class QueryKeys {
+
+  const QueryKeys();
+  
+  final String id = "http://gradesystem.io/onto#id";
+  final String endpoint = "http://gradesystem.io/onto/query.owl#endpoint";
+  final String datasets = "http://gradesystem.io/onto/query.owl#datasets";
+  final String name = "http://gradesystem.io/onto/query.owl#name";  
+  final String note = "http://gradesystem.io/onto/query.owl#note";
+  final String target = "http://gradesystem.io/onto/query.owl#target";
+  final String graph = "http://gradesystem.io/onto/query.owl#graph";
+  final String expression = "http://gradesystem.io/onto/query.owl#expression";
+  final String parameters = "http://gradesystem.io/onto/query.owl#parameters";
+  final String predefined = "http://gradesystem.io/onto/query.owl#predefined";
+}
+
 class Query extends EditableGradeEntity with Filters {
   
-  static String id_field = "http://gradesystem.io/onto#id";
-  static String endpoint_field = "http://gradesystem.io/onto/query.owl#endpoint";
-  static String datasets_field="http://gradesystem.io/onto/query.owl#datasets";
-  static String name_field = "http://gradesystem.io/onto/query.owl#name";  
-  static String note_field= "http://gradesystem.io/onto/query.owl#note";
-  static String target_field="http://gradesystem.io/onto/query.owl#target";
-  static String expression_field="http://gradesystem.io/onto/query.owl#expression";
-  static String parameters_field="http://gradesystem.io/onto/query.owl#parameters";
-  static String predefined_field="http://gradesystem.io/onto/query.owl#predefined";
+  static QueryKeys K = const QueryKeys();
   
   static final RegExp regexp = new RegExp(r"!(\w+)");
 
@@ -22,29 +30,28 @@ class Query extends EditableGradeEntity with Filters {
   }
   
   Query(this.repo_path) : super({}) {
-    put(name_field, "");
-    put(expression_field, "");
-    put(predefined_field, false);
+    put(K.name, "");
+    put(K.expression, "");
+    put(K.predefined, false);
      
     _listenChanges();
   }
   
   void _listenChanges() {
-    onBeanChange([name_field, expression_field], ()=>notifyPropertyChange(#endpoint, null, endpoint) );
-    onBeanChange([expression_field], ()=>notifyPropertyChange(#parameters, null, parameters) );
-    onBeanChange([name_field], ()=>notifyPropertyChange(#name, null, name) );
+    onBeanChange([K.name, K.expression], ()=>notifyPropertyChange(#endpoint, null, endpoint) );
+    onBeanChange([K.expression], ()=>notifyPropertyChange(#parameters, null, parameters) );
+    onBeanChange([K.name], ()=>notifyPropertyChange(#name, null, name) );
   }
   
-  String get id => get(id_field);
-  set id(String value) => set(id_field, value);
+  String get id => get(K.id);
+  set id(String value) => set(K.id, value);
   
-  String get name => get(name_field);
+  String get name => get(K.name);
   set name(String value) {
-    set(name_field, value);
+    set(K.name, value);
   }
   
-  bool get predefined => get(predefined_field);
-  
+  bool get predefined => get(K.predefined);
   
   Query clone() {
     return new Query.fromBean(repo_path, new Map.from(bean));
@@ -57,7 +64,7 @@ class Query extends EditableGradeEntity with Filters {
     Map<String,String> endpointParameters = {};
     for (String parameter in parameters) endpointParameters[parameter]="...";
     
-    Uri uri = new Uri.http("", '../service/${repo_path}/query/${bean[name_field]}/results', endpointParameters);
+    Uri uri = new Uri.http("", '../service/${repo_path}/query/${bean[K.name]}/results', endpointParameters);
     
     String endpoint = uri.toString();
     
@@ -68,7 +75,6 @@ class Query extends EditableGradeEntity with Filters {
     if (endpoint.endsWith("?")) endpoint = endpoint.substring(0, endpoint.length-1);
     
     return endpoint;
-
   }
   
   @observable
@@ -76,7 +82,7 @@ class Query extends EditableGradeEntity with Filters {
   
      List<String> params = [];
      
-     String exp = bean[Query.expression_field];
+     String exp = bean[K.expression];
      if (exp == null) return params;
      
      for (Match m in regexp.allMatches(exp))
@@ -102,7 +108,7 @@ abstract class QuerySubPageModel extends SubPageEditableModel<Query> {
   
   static EditableQuery generate(Query query) {
     //we are cloning
-    if (query.id == null) query.bean[Query.predefined_field] = false;
+    if (query.id == null) query.bean[Query.K.predefined] = false;
     return new EditableQuery(query);
   }
   
@@ -124,7 +130,7 @@ abstract class QuerySubPageModel extends SubPageEditableModel<Query> {
   }
 }
 
-class EditableQuery extends EditableModel<Query> {
+class EditableQuery extends EditableModel<Query> with Keyed {
   
   @observable
   bool queryRunning = false;
@@ -158,6 +164,9 @@ class EditableQuery extends EditableModel<Query> {
     onPropertyChange(this, #dirty, resetLastError);
     
   }
+  
+  get(key) => model.get(key);
+  set(key, value) => model.set(key, value);
   
   void _listenNewModel() {
     //when parameters list change we re-calculate the parameters validity

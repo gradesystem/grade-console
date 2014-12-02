@@ -39,15 +39,15 @@
 	                   
 	            <grade-input fascia-title 
 	                         disabled="{{ !editable }}" 
-	                         multiline?="{{ isAreaField(name_key) }}"
-	                         label="{{ name_key | suffix }} ?" 
-	                         required?="{{ isRequiredField(name_key) }}"
-	                         validators="{{ validatorsFor(name_key)}}"
-	                         invalid="{{ item.fieldsInvalidity[name_key] }}"
-	                         inputValue="{{ item.model.bean[name_key]  }}">
+	                         multiline?="{{ isAreaField(K.name) }}"
+	                         label="{{ K.name | suffix }} ?" 
+	                         required?="{{ isRequiredField(K.name) }}"
+	                         validators="{{ validatorsFor(K.name)}}"
+	                         invalid="{{ item.fieldsInvalidity[K.name] }}"
+	                         inputValue="{{ item.model.bean[K.name]  }}">
 	            </grade-input>
 	                   
-	            <div fascia-subtitle><span>{{ name_key | start}}</span><span fg bolder>{{ name_key | suffix}}</span></div>
+	            <div fascia-subtitle><span>{{ K.name | start}}</span><span fg bolder>{{ K.name | suffix}}</span></div>
 	          </grade-fascia>
 	            
 	        </grade-item>
@@ -81,16 +81,16 @@
 				        
 	            <grade-dropdown-menu fascia-title flex
 	                 disabled="{{ !editable }}" 
-	                 selected="{{ item.model.bean[target_key] }}"
-				           label="{{ target_key | suffix }} ?" 
-				           required?="{{ isRequiredField(target_key) }}"
-				           invalid="{{ item.fieldsInvalidity[target_key] }}"
+	                 selected="{{ item.model.bean[K.target] }}"
+				           label="{{ K.target | suffix }} ?" 
+				           required?="{{ isRequiredField(K.target) }}"
+				           invalid="{{ item.fieldsInvalidity[K.target] }}"
 				           >
 				        <template repeat="{{target in endpoints.synchedData}}">
 				          <paper-item truncate label="{{target.model.name}}" dropitem="{{target.model.id}}"></paper-item>
                 </template>
 	            </grade-dropdown-menu>
-	            <div fascia-subtitle truncate><span>{{ target_key | start }}</span><span fg bolder>{{ target_key | suffix}}</span></div>
+	            <div fascia-subtitle truncate><span>{{ K.target | start }}</span><span fg bolder>{{ K.target | suffix}}</span></div>
 				        
 	          </grade-fascia>
 				    
@@ -101,7 +101,7 @@
 						<grade-fascia truncate>
 						      
 							<div fascia-title>{{ parameters }}</div>
-						  <div fascia-subtitle><span>{{ parameters_key | start }}</span><span fg bolder>{{ parameters_key | suffix}}</span></div>
+						  <div fascia-subtitle><span>{{ K.parameters | start }}</span><span fg bolder>{{ K.parameters | suffix}}</span></div>
 						      
 						</grade-fascia>
 		           
@@ -113,7 +113,7 @@
 						<grade-fascia truncate>
 						
 							<div fascia-title>{{ item.model.endpoint }}</div>
-							<div fascia-subtitle><span>{{ endpoint_key | start }}</span><span fg bolder>{{ endpoint_key | suffix}}</span></div>
+							<div fascia-subtitle><span>{{ K.endpoint | start }}</span><span fg bolder>{{ K.endpoint | suffix}}</span></div>
 						     
 						</grade-fascia>
 		           
