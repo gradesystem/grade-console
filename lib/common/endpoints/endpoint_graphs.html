@@ -26,6 +26,8 @@
       
       :host [item] { height:20px}
       
+      :host [pointer] { cursor:pointer }
+      
       
  	</style>
 
@@ -48,7 +50,7 @@
 		                   <template repeat="{{graph in item.model.graphs}}">
 				               
 				                 <!-- entry and remove button -->
-					                <div item horizontal layout center>
+					                <div item horizontal layout center pointer>
 					                 
 						                 <grade-uri smaller flex value={{graph}}></grade-uri>
 	
