@@ -17,6 +17,9 @@ class QueriesPanel extends PolymerElement with Filters {
   @published
   Endpoints endpoints;
   
+  @published
+  Refresh endpointRefresh;
+  
   @observable
   bool removeDialogOpened = false;
   

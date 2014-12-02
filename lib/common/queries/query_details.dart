@@ -1,7 +1,7 @@
 part of queries;
 
 @CustomTag("query-details") 
-class QueryDetails extends PolymerElement with Filters {
+class QueryDetails extends View {
   
   QueryKeys K = const QueryKeys();  
   
@@ -30,6 +30,9 @@ class QueryDetails extends PolymerElement with Filters {
   
   @published
   Endpoints endpoints;
+  
+  @published
+  Refresh endpointRefresh;
    
   QueryDetails.created() : super.created() {
     validators[
@@ -51,6 +54,21 @@ class QueryDetails extends PolymerElement with Filters {
   
   @ComputedProperty("item.synching")
   bool get loading => item!=null && item.synching;
+  
+  @ComputedProperty("item.model.bean[K.target]")
+  EditableEndpoint get target => endpoints.findById(get(item, K.target));
+  
+  refreshTargetGraphs() {
+    endpointRefresh(target);
+  }
+  
+  //workaround to selected binding not working: issue https://github.com/dart-lang/core-elements/issues/157
+  @ObserveProperty("item.model")
+  void updateGraphs() {
+    
+    $["targetGraphs"].selected = getAll(item, K.graph);
+ 
+  }
 
   @ComputedProperty("item.model.parameters")
   String get parameters {

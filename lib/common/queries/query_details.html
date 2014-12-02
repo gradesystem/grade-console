@@ -7,6 +7,8 @@
 <link rel="import" href="../components/grade_item.html">
 <link rel="import" href="../components/grade_fascia.html">
 <link rel="import" href="../components/loading_panel.html">
+<link rel="import" href="../components/grade_uri.html">
+<link rel="import" href="../components/grade_button.html">
 
 <link rel="import" href="queries.html">
 
@@ -24,10 +26,13 @@
 		    overflow: hidden;
 		    text-overflow: ellipsis;
 		  }
+		        
+        :host [graphs] { min-height:80px; margin-top:15px }
+        :host [graphs] core-selector:not([notap]) grade-uri { cursor:pointer }
 		  
 		</style>
 		
-		<template if="{{item!=null}}">
+		<div hidden?="{{item==null}}">
 
 	    <loading-panel loading="{{loading}}" message="saving the query">
 	   
@@ -76,6 +81,8 @@
 	        </template>  
 	 
 	        <grade-item icon=chevron-right>
+	        
+	                 <div layout vertical flex>
 				
 	          <grade-fascia>
 				        
@@ -93,19 +100,50 @@
 	            <div fascia-subtitle truncate><span>{{ K.target | start }}</span><span fg bolder>{{ K.target | suffix}}</span></div>
 				        
 	          </grade-fascia>
+
+           <!-- graphs -->
+           <grade-fascia truncate>
+              
+              <div graphs horizontal layout flex fascia-title>
+              
+                 <div smaller wired rounded relative flex>
+                     <loading-panel fit loading="{{target.loadingGraphs==true}}" message="loading the graphs" style="overflow-y:auto;">
+                        <core-selector id="targetGraphs"  
+                                       notap?="{{!editable}}" 
+                                       selected="{{item.model.bean[K.graph]}}" 
+                                       multi 
+                                       valueattr="item" 
+                                       selectedAttribute="fg">
+                         <template repeat="{{graph in target.model.graphs}}">
+                               <grade-uri smaller item={{graph}} value={{graph}}></grade-uri>
+                         </template>
+                      </core-selector>
+                     </loading-panel>
+                  </div>
+                  
+                  <grade-button disabled?={{!editable}} side icon=refresh label="refresh graphs" on-click={{refreshTargetGraphs}}></grade-button>
+           
+              </div>
+                       
+                
+             <grade-uri fascia-subtitle value="{{K.graph}}"></grade-uri>
+             
+           </grade-fascia>   
+          
+          </div>
 				    
 	        </grade-item>
 	
 		      <grade-item icon=chevron-right>
-		       
-						<grade-fascia truncate>
-						      
-							<div fascia-title>{{ parameters }}</div>
-						  <div fascia-subtitle><span>{{ K.parameters | start }}</span><span fg bolder>{{ K.parameters | suffix}}</span></div>
-						      
-						</grade-fascia>
-		           
-		      </grade-item>
+		      
+		        <grade-fascia truncate>
+                  
+              <div fascia-title>{{ parameters }}</div>
+              <div fascia-subtitle><span>{{ K.parameters | start }}</span><span fg bolder>{{ K.parameters | suffix}}</span></div>
+                  
+            </grade-fascia>
+
+        </grade-item>
 		   
 		   
 		      <grade-item icon=chevron-right>
@@ -121,7 +159,7 @@
 	          
 	      </div>
 	    </loading-panel>
-    </template>
+    </div>
 		
   </template> 
 </polymer-element>
