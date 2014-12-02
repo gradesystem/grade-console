@@ -5,19 +5,7 @@ class QueryDetails extends View {
   
   QueryKeys K = const QueryKeys();  
   
-  List<String> fields = [Query.K.datasets,
-                         Query.K.note,
-                         Query.K.expression];
-  
-  static List<String> required_fields = [
-                         Query.K.name,
-                         Query.K.target,
-                         Query.K.expression];
-  
-  
   Map<String,List<Validator>> validators = {};
-  
-  static List<String> area_fields = [Query.K.expression, Query.K.note];
   
   @ComputedProperty('item.edit')
   bool get editable => item==null?false:item.edit;
@@ -33,23 +21,12 @@ class QueryDetails extends View {
   
   @published
   Refresh endpointRefresh;
+  
+  @observable
+  List<Validator> nameValidators = [];
    
   QueryDetails.created() : super.created() {
-    validators[
-       Query.K.name]=[($) =>  $!=null && queries.containsName($)?"Not original enough, try again.":null];
-  }
-  
-  bool isAreaField(String key) {
-    return area_fields.contains(key);
-  }
-  
-  bool isRequiredField(String key) {
-    return required_fields.contains(key);
-  }
-  
-  List<Validator> validatorsFor(String key) {
-    List<Validator> validators = this.validators[key];
-    return validators==null?[]:validators;
+    nameValidators.add(($) =>  $!=null && queries.containsName($)?"Not original enough, try again.":null);
   }
   
   @ComputedProperty("item.synching")
