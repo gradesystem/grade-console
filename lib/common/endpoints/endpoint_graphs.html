@@ -53,7 +53,7 @@
 		                   <template repeat="{{graph in item.model.graphs}}">
 				               
 				                 <!-- entry and remove button -->
-				                 <graph-details-summary item pointer graph={{graph}}></graph-details-summary>
+				                 <graph-details-summary pointer graph={{graph}}></graph-details-summary>
 				                
 				              </template>
 			              
@@ -76,18 +76,18 @@
               <div vertical layout flex>
                 
                 <grade-item>
-                <grade-fascia truncate flex>
-            
-									<grade-input fascia-title
-									                label="uri" 
-									                invalid="{{ newUrlInvalid }}"
-									                inputValue="{{ newUrl }}"
-									                type="URL">
-									</grade-input>
-									
-									<grade-uri fascia-subtitle value={{K.uri}}></grade-uri>
-	               
-                </grade-fascia>
+	                <grade-fascia truncate flex>
+	            
+										<grade-input fascia-title
+										                label="uri" 
+										                invalid="{{ newUrlInvalid }}"
+										                inputValue="{{ newUrl }}"
+										                type="URL">
+										</grade-input>
+										
+										<grade-uri fascia-subtitle value={{K.uri}}></grade-uri>
+		               
+	                </grade-fascia>
                 </grade-item>
 	          
 	          <grade-item>

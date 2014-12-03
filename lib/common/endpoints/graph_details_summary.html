@@ -1,31 +1,40 @@
 <link rel="import" href="../../../../packages/polymer/polymer.html">
 
+<link rel="import" href="../../../../packages/paper_elements/paper_item.html">
+
 <link rel="import" href="../components/grade_button.html">
 <link rel="import" href="../components/grade_uri.html">
+<link rel="import" href="../components/grade_item.html">
+<link rel="import" href="../components/grade_fascia.html">
 
 <link rel="import" href="endpoints.html">
 
 <polymer-element name="graph-details-summary" horizontal layout center> 
-
   <template>
     <style>
-      :host {display: block}
       :host [starts-hidden] { display:none }
-	 </style>
-		                        
-		<grade-uri smaller flex value={{graph.uri}}></grade-uri>
+    </style>
+    
+    <paper-item trim flex>
+      <grade-item flex>
+        <grade-fascia flex truncate>
+          <div fascia-title>{{ graph.label }}</div>
+          <grade-uri fascia-subtitle smaller flex value={{graph.uri}}></grade-uri>
+        </grade-fascia>
+        
+				<grade-button
+				         action 
+				         starts-hidden
+				         onhover-selected
 		
-		<grade-button
-		         action 
-		         starts-hidden
-		         onhover-selected
-
-		         smallicon 
-		         tooltip="left" 
-		         label="remove graph" 
-		         icon="delete" 
-		         on-click={{removeGraph}} 
-		         >
-		</grade-button>
+				         smallicon 
+				         tooltip="left" 
+				         label="remove graph" 
+				         icon="delete" 
+				         on-click={{removeGraph}} 
+				         >
+				</grade-button>
+      </grade-item>
+    </paper-item>
   </template> 
 </polymer-element>

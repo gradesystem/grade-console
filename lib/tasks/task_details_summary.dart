@@ -18,8 +18,6 @@ class TaskDetailsSummary extends View {
   
   @ComputedProperty("item.model.bean[K.label]")
   String get label => get(item,K.label);
- 
-  
   
   void removeItem() {
     fire("remove-item", detail:item);

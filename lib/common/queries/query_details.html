@@ -151,7 +151,7 @@
 							                            valueattr="item" 
 							                            selectedAttribute="fg">
 							              <template repeat="{{graph in target.model.graphs}}">
-							                    <grade-uri smaller item={{graph.uri}} value={{graph.uri}}></grade-uri>
+							                    <div smaller item={{graph.uri}}>{{graph.label !=null?graph.label:suffix(graph.uri)}}</div>
 							              </template>
 							           </core-selector>
 							          </loading-panel>
