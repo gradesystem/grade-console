@@ -5,7 +5,7 @@ abstract class EditableListService<T extends EditableGradeEntity> extends ListSe
   EditableListService(String path, String all_path, String single_item_path, Generator<T> generator): super(path, all_path, single_item_path, generator);
   
   Future<T> put(T item) {
-    return http.postJSon(all_path, JSON.encode(item.bean)).then(generator);
+    return http.postJSon(all_path, item.toJson()).then(generator);
   }
 
   Future<bool> delete(T item, [Map<String, String> parameters]) {

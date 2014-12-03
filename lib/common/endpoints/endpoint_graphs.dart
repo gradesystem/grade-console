@@ -3,6 +3,8 @@ part of endpoints;
 @CustomTag("endpoint-graphs") 
 class EndpointGraphs extends PolymerElement with Filters {
   
+  GraphKeys K = new GraphKeys();
+  
   @published
   Endpoints items;
   
@@ -13,10 +15,16 @@ class EndpointGraphs extends PolymerElement with Filters {
   EditableEndpoint get item => items==null?null:items.selected;
   
   @observable
-  bool newUrlInvalid;
+  bool newUrlInvalid = false;
   
   @observable
   String newUrl = "";
+  
+  @observable
+  bool newLabelInvalid = false;
+  
+  @observable
+  String newLabel = "";
   
   EndpointGraphs.created() : super.created();
   
@@ -28,8 +36,9 @@ class EndpointGraphs extends PolymerElement with Filters {
   }
   
   void addGraph() {
-    fire("add-graph", detail:newUrl);
+    fire("add-graph", detail:new Graph(newUrl, newLabel));
     newUrl = "";
+    newLabel = "";
   }
   
   void removeGraph(event, detail, target) {

@@ -3,10 +3,13 @@
 <link rel="import" href="../../../../packages/core_elements/core_selector.html">
 
 <link rel="import" href="../components/grade_input.html">
+<link rel="import" href="../components/grade_item.html">
 <link rel="import" href="../components/grade_uri.html">
 <link rel="import" href="../components/grade_fascia.html">
 <link rel="import" href="../components/loading_panel.html">
 <link rel="import" href="../components/grade_button.html">
+
+<link rel="import" href="graph_details_summary.html">
 
 <link rel="import" href="endpoints.html">
 
@@ -18,9 +21,8 @@
 		
 		  :host [sidebutton] {  padding-left:5px }
 		  
-      :host [starts-hidden] { display:none }
        
-      :host [fg] [onhover-selected] { display: inline }
+      :host [fg] /deep/ [onhover-selected] { display: inline }
       
       :host [list] { min-height:200px; padding:5px; overflow-y:auto }
       
@@ -35,7 +37,7 @@
 	   
 	    <loading-panel loading="{{loading}}" message="saving endpoint">
 	   
-	      <div style="overflow-y: auto;">
+	      <div>
 	        
 	        <template if="{{!item.newModel}}">
 	        
@@ -44,37 +46,24 @@
              
               <!-- graph list -->
 	            <loading-panel list wired rounded relative flex loading="{{item.loadingGraphs}}" message="loading graphs">
+	               <div fit style="overflow-y: auto;" spaced>
 
 	                  <core-selector selectedAttribute="fg">
 		                 
 		                   <template repeat="{{graph in item.model.graphs}}">
 				               
 				                 <!-- entry and remove button -->
-					                <div item horizontal layout center pointer>
-					                 
-						                 <grade-uri smaller flex value={{graph}}></grade-uri>
-	
-	  				                 <grade-button
-						                          action 
-						                          starts-hidden
-						                          onhover-selected
-						                          smallicon 
-						                          tooltip="left" 
-						                          label="remove graph" 
-						                          icon="delete" 
-						                          on-click={{removeGraph}} 
-						                          graph={{graph}}>
-						                 </grade-button>
-						                
-						              </div>
+				                 <graph-details-summary item pointer graph={{graph}}></graph-details-summary>
 				                
 				              </template>
 			              
 			              </core-selector>
+			              
+			              </div>
 		           
 		            </loading-panel>
            
-              <!-- button -->
+              <!-- refresh -->
               <grade-button sidebutton icon=refresh
                             tooltip=left
                             label="reload graphs" 
@@ -83,32 +72,51 @@
            
             </div>
              
-           <div horizontal layout style="margin-top:30px">
+            <div horizontal layout style="margin-top:30px">
+              <div vertical layout flex>
                 
-		         <grade-fascia truncate flex>
+                <grade-item>
+                <grade-fascia truncate flex>
             
-	               <grade-input fascia-title
-	                               label="uri" 
-	                               invalid="{{ newUrlInvalid }}"
-	                               inputValue="{{ newUrl  }}"
-	                               type="URL">
-	               </grade-input>
+									<grade-input fascia-title
+									                label="uri" 
+									                invalid="{{ newUrlInvalid }}"
+									                inputValue="{{ newUrl }}"
+									                type="URL">
+									</grade-input>
+									
+									<grade-uri fascia-subtitle value={{K.uri}}></grade-uri>
 	               
-	               <div fascia-subtitle uppercase><span>new graph</span></div>
-	               
-	          </grade-fascia>
+                </grade-fascia>
+                </grade-item>
+	          
+	          <grade-item>
+								<grade-fascia truncate flex>
+								 
+						      <grade-input fascia-title
+						                      label="label" 
+						                      invalid="{{ newLabelInvalid }}"
+						                      inputValue="{{ newLabel }}"
+						                      >
+						      </grade-input>
+						      
+						      <grade-uri fascia-subtitle value={{K.label}}></grade-uri>
+								      
+								 </grade-fascia>
+								 </grade-item>
+              </div>
                 
-            <grade-button
-                  sidebutton
-                  action 
-                  disabled?="{{newUrlInvalid || newUrl.isEmpty}}"
-                  icon="add" 
-                  on-click={{addGraph}} 
-                  tooltip=left
-                  label="create new graph">
-            </grade-button>
-            
-          </div>
+	            <grade-button
+	                  sidebutton
+	                  action 
+	                  disabled?="{{newUrlInvalid || newUrl.isEmpty || newLabelInvalid || newLabel.isEmpty}}"
+	                  icon="add" 
+	                  on-click={{addGraph}} 
+	                  tooltip=left
+	                  label="create new graph">
+	            </grade-button>
+	            
+	          </div>
      
 	        
 	        </template>

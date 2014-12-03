@@ -28,7 +28,7 @@ abstract class Delegate extends Keyed {
   
   set(String l, value) => _bean[l] = value;
     
-  List _all(String l, Generator gen) => new ListDelegate(get(l),gen);
+  List all(String l, Generator gen) => new ListDelegate(get(l),gen);
   
   put(String l, value) => _bean[l] = value;
   
@@ -46,6 +46,8 @@ abstract class Delegate extends Keyed {
          .where((ChangeRecord record)=> record is MapChangeRecord)
          .where((MapChangeRecord record)=> keys.contains(record.key)).listen((_){callback();});
     }
+  
+  String toJson() => JSON.encode(bean);
 }
 
 class ListDelegate<E extends Delegate> extends ListBase<E> {

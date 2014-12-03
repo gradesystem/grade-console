@@ -1,5 +1,26 @@
 part of endpoints;
 
+class GraphKeys {
+
+  const GraphKeys();
+  
+  final String label = "http://www.w3.org/2000/01/rdf-schema#label";
+  final String uri = "http://gradesystem.io/onto#uri";
+}
+
+class Graph extends GradeEntity {
+  
+  static GraphKeys K = new GraphKeys();
+  
+  Graph(String uri, String label) : super({K.uri:uri, K.label:label});
+  
+  Graph.fromBean(Map bean) : super(bean);
+  
+  String get uri => get(K.uri);
+  String get label => get(K.label);
+  
+}
+
 class EndpointKeys {
 
   const EndpointKeys();
@@ -16,10 +37,15 @@ class Endpoint extends EditableGradeEntity with Filters {
 
   static EndpointKeys K = const EndpointKeys();
 
-  ObservableList<String> _graphs = new ObservableList();
+  ObservableList<Graph> _graphs = new ObservableList();
   
   Endpoint.fromBean(Map bean) : super(bean) {
     _syncGraphs();
+    _listenChanges();
+  }
+  
+  Endpoint._clone(Map bean) : super(bean) {
+    graphs = get(K.graphs);
     _listenChanges();
   }
 
@@ -41,13 +67,13 @@ class Endpoint extends EditableGradeEntity with Filters {
   }
   
   void _syncGraphs() {
-    graphs = bean[K.graphs];
+    graphs = all(K.graphs, (Map json)=>new Graph.fromBean(json));
     bean[K.graphs] = graphs;
   }
   
   @observable
   get graphs => _graphs;
-  set graphs(List<String> newgraphs) {
+  set graphs(List<Graph> newgraphs) {
     graphs.clear();
     if (newgraphs!=null) graphs.addAll(newgraphs);
   }
@@ -83,7 +109,7 @@ class Endpoint extends EditableGradeEntity with Filters {
   bool get predefined => get(K.predefined);
 
   Endpoint clone() {
-    return new Endpoint.fromBean(new Map.from(bean));
+    return new Endpoint._clone(new Map.from(bean));
   }
 
   String toString() => "Endpoint id: $id name: $name uri: $uri updateUri: $updateUri graphs: $graphs hashCode: $hashCode";
@@ -126,7 +152,7 @@ abstract class EndpointSubPageModel extends SubPageEditableModel<Endpoint> {
     });
   }
 
-  void removeEndpointGraph(EditableEndpoint editableModel, String graph) {
+  void removeEndpointGraph(EditableEndpoint editableModel, Graph graph) {
 
     Timer timer = new Timer(new Duration(milliseconds: 200), () {
       editableModel.loadingGraphs = true;
@@ -141,7 +167,7 @@ abstract class EndpointSubPageModel extends SubPageEditableModel<Endpoint> {
 
   }
 
-  void addEndpointGraph(EditableEndpoint editableModel, String graph) {
+  void addEndpointGraph(EditableEndpoint editableModel, Graph graph) {
 
     Timer timer = new Timer(new Duration(milliseconds: 200), () {
       editableModel.loadingGraphs = true;

@@ -70,9 +70,8 @@ class EndpointsPanel extends PolymerElement with Filters {
   }
   
   void onRemoveGraph(event, detail, target) {
-    String graph = detail;
-    dialogCallback = (){model.removeEndpointGraph(items.selected, graph);};
-    removedDialogHeader = "Remove $graph";
+    dialogCallback = (){model.removeEndpointGraph(items.selected, detail);};
+    removedDialogHeader = "Remove ${detail.label}";
     removeDialogOpened = true;
   }
   

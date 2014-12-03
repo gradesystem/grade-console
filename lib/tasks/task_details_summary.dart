@@ -12,8 +12,6 @@ class TaskDetailsSummary extends View {
   TaskDetailsSummary.created() : super.created();
 
   TaskKeys K = const TaskKeys();
- 
-  
 
   @ComputedProperty("item.model.bean[K.target_graph]")
   String get target =>get(item,K.target_graph);
