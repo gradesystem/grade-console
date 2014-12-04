@@ -40,7 +40,6 @@ init() {
   Dependencies.bind("tasks", TasksAnnotation);
   
   var module = new Module()
-          ..bind(TasksPageModel)          
           
           ..bind(TasksService)
           ..bind(TaskExecutionsService)

@@ -3,7 +3,6 @@ library stage;
 import 'package:polymer/polymer.dart';
 import 'package:logging/logging.dart';
 import 'package:di/di.dart';
-import 'package:di/annotations.dart';
 import 'package:event_bus/event_bus.dart';
 
 import 'common.dart';
@@ -27,7 +26,6 @@ init() {
   Dependencies.bind("stage", StageAnnotation);
   
   var module = new Module()
-          ..bind(StagePageModel) 
 
           ..bind(Datasets, toValue: new Datasets(), withAnnotation: const StageAnnotation())
           ..bind(DatasetsPageModel, toFactory: (bus, datasets) => new DatasetsPageModel(bus, new DatasetService(_service_path), datasets), withAnnotation: const StageAnnotation(), inject: [EventBus, new Key(Datasets,StageAnnotation)])

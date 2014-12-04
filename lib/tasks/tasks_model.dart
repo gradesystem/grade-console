@@ -131,20 +131,6 @@ class Operation {
   static const REMOVE = const Operation._internal('http://gradesystem.io/onto/task.owl#remove', 'remove');
 }
 
-
-@Injectable()
-class TasksPageModel {
-
-  TasksModel tasksModel;
-  QuerySubPageModel queriesModel;
-  
-  @TasksAnnotation()
-  EndpointSubPageModel endpointsModel;
-
-  TasksPageModel(this.tasksModel, @TasksAnnotation() this.queriesModel, @TasksAnnotation() this.endpointsModel);
-}
-
-
 @Injectable()
 class TasksModel extends SubPageEditableModel<Task> {
   
