@@ -1,14 +1,8 @@
 part of tasks;
 
 @CustomTag("tasks-page") 
-class TasksPage extends Polybase {
+class TasksPage extends PolymerElement {
   
-  TasksPage.created() : super.createWith(TasksPageModel);
-  
-  TasksPageModel get tasksPageModel => model as TasksPageModel;
-  
-  TasksModel get tasks => tasksPageModel.tasksModel;
-  TasksQueriesModel get queries => tasksPageModel.queriesModel;
-  TasksEndpointsModel get endpoints => tasksPageModel.endpointsModel;
+  TasksPage.created() : super.created();
 }
 

@@ -1,15 +1,7 @@
 part of stage;
 
 @CustomTag("stage-page") 
-class StagePage extends Polybase {
-  
-  
-  StagePage.created() : super.createWith(StagePageModel);
+class StagePage extends PolymerElement {
 
-  
-  StagePageModel get stageModel => model as StagePageModel;
-  
-  StageDatasetsModel get datasets => stageModel.datasetsModel;
-  StageQueriesModel get queries => stageModel.queriesModel;
-  StageEndpointsModel get endpoints => stageModel.endpointsModel;
+  StagePage.created() : super.created();
 }

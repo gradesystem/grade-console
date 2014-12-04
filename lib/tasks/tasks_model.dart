@@ -131,18 +131,6 @@ class Operation {
   static const REMOVE = const Operation._internal('http://gradesystem.io/onto/task.owl#remove', 'remove');
 }
 
-
-@Injectable()
-class TasksPageModel {
-
-  TasksModel tasksModel;
-  TasksQueriesModel queriesModel;
-  TasksEndpointsModel endpointsModel;
-
-  TasksPageModel(this.tasksModel, this.queriesModel, this.endpointsModel);
-}
-
-
 @Injectable()
 class TasksModel extends SubPageEditableModel<Task> {
   
@@ -423,22 +411,4 @@ class HasTaskIcons {
 class Tasks extends EditableListItems<EditableModel<Task>> {
   
   containsLabel($) => data.any((EditableTask eq)=>eq!=selected && eq.model.label!=null && eq.model.label.toLowerCase() == $.toLowerCase());
-}
-
-@Injectable()
-class TasksQueriesModel extends QuerySubPageModel {
-  TasksQueriesModel(EventBus bus, TasksQueriesService service, TasksQueries storage) : super(bus, service, storage);
-}
-
-@Injectable()
-class TasksQueries extends Queries {
-}
-
-@Injectable()
-class TasksEndpointsModel extends EndpointSubPageModel {
-  TasksEndpointsModel(EventBus bus, TasksEndpointsService service, TasksEndpoints storage) : super(bus, service, storage);
-}
-
-@Injectable()
-class TasksEndpoints extends Endpoints {
 }

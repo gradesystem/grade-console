@@ -1,6 +1,6 @@
 part of tasks;
 
-final String _path = "catalogue";
+final String _service_path = "catalogue";
 
 @Injectable()
 class TasksService extends EditableListService<Task> {
@@ -8,7 +8,7 @@ class TasksService extends EditableListService<Task> {
   static String EXECUTIONS_PATH = "executions";
   static String URI_PARAMETER = "uri";
 
-  TasksService() : super(_path, "tasks", "task", (Map json) => new Task.fromBean(json));
+  TasksService() : super(_service_path, "tasks", "task", (Map json) => new Task.fromBean(json));
 
   Future<bool> delete(Task item, [Map<String, String> parameters]) {
     return super.delete(item, addUri(parameters, item));
@@ -36,7 +36,7 @@ class TasksService extends EditableListService<Task> {
 @Injectable()
 class TaskExecutionsService extends ListService<TaskExecution> {
   
-  TaskExecutionsService() : super(_path, "tasks/executions", "tasks/executions", (json) => new TaskExecution(json));
+  TaskExecutionsService() : super(_service_path, "tasks/executions", "tasks/executions", (json) => new TaskExecution(json));
   
   Future<TaskExecution> pollTaskExecution(TaskExecution execution) 
     => get(execution.id);
@@ -62,14 +62,3 @@ class TaskExecutionsService extends ListService<TaskExecution> {
   }
 }
 
-
-
-@Injectable()
-class TasksQueriesService extends QueryService {
-  TasksQueriesService() : super(_path);
-}
-
-@Injectable()
-class TasksEndpointsService extends EndpointsService {
-  TasksEndpointsService() : super(_path);
-}

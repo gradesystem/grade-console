@@ -26,15 +26,15 @@
     
     <grade-subpages flex >
       
-      <datasets-panel model="{{datasets}}">
+      <datasets-panel page="stage">
         <template bind ref="menu"></template>
       </datasets-panel>
       
-      <queries-panel  model="{{queries}}" endpoints={{endpoints.storage}} endpointRefresh="{{endpoints.refreshGraphs}}">
+      <queries-panel page="stage">
         <template bind ref="menu"></template>
       </queries-panel>
             
-      <endpoints-panel model="{{endpoints}}">
+      <endpoints-panel page="stage">
         <template bind ref="menu"></template>
       </endpoints-panel>
       

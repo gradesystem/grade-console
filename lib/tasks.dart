@@ -31,23 +31,25 @@ part 'tasks/running_task_panel.dart';
 
 final Logger log = new Logger('grade.tasks');
 
+class TasksAnnotation {
+  const TasksAnnotation();
+}
+
 init() {
   
+  Dependencies.bind("tasks", TasksAnnotation);
+  
   var module = new Module()
-          ..bind(TasksPageModel)          
           
           ..bind(TasksService)
           ..bind(TaskExecutionsService)
           ..bind(TasksModel)
           ..bind(Tasks)
+          
+          ..bind(QuerySubPageModel, toFactory: (bus) => new QuerySubPageModel(bus, new QueryService(_service_path), new Queries()), withAnnotation: const TasksAnnotation(), inject: [EventBus])
 
-          ..bind(TasksQueriesService)
-          ..bind(TasksQueriesModel)
-          ..bind(TasksQueries)
-
-          ..bind(TasksEndpointsModel)
-          ..bind(TasksEndpoints)
-          ..bind(TasksEndpointsService);
+          ..bind(Endpoints, toValue: new Endpoints(), withAnnotation: const TasksAnnotation())
+          ..bind(EndpointSubPageModel, toFactory: (bus, endpoints) => new EndpointSubPageModel(bus, new EndpointsService(_service_path), endpoints), withAnnotation: const TasksAnnotation(), inject: [EventBus, new Key(Endpoints, const TasksAnnotation())]);
   
   Dependencies.add(module);
 }

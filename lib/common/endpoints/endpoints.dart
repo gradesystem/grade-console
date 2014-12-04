@@ -6,6 +6,7 @@ import 'package:polymer/polymer.dart';
 import 'package:core_elements/core_list_dart.dart';
 import 'package:event_bus/event_bus.dart';
 import 'package:logging/logging.dart';
+import 'package:di/di.dart';
 
 import '../../common.dart';
 
