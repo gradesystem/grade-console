@@ -221,8 +221,8 @@ class GradeEnpoints extends Observable {
   @observable
   ObservableList<AreaEndpoints> areaEndpoints = new ObservableList();
 
-  void addList(Endpoints endpointsStorage, Refresh refresh, String area) {
-    areaEndpoints.add(new AreaEndpoints(endpointsStorage, refresh, area));
+  void addList(EndpointSubPageModel endpoints, String area) {
+    areaEndpoints.add(new AreaEndpoints(endpoints.storage, endpoints.refreshGraphs, area));
   }
 
   EditableEndpoint findEditableEndpointById(String id) {

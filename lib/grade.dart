@@ -86,7 +86,7 @@ _initModules() {
   
   Dependencies.configure(); 
   
-  gradeEnpoints.addList(Dependencies.injector.get(prod.ProdEndpoints), Dependencies.injector.get(prod.ProdEndpointsModel).refreshGraphs, "Data");
-  gradeEnpoints.addList(Dependencies.injector.get(staging.StageEndpoints), Dependencies.injector.get(staging.StageEndpointsModel).refreshGraphs, "Sources");
+  gradeEnpoints.addList(Dependencies.injector.get(prod.ProdEndpointsModel), "Data");
+  gradeEnpoints.addList(Dependencies.injector.get(staging.StageEndpointsModel), "Sources");
   //gradeEnpoints.addList(Dependencies.injector.get(tasks.TasksEndpoints), Dependencies.injector.get(tasks.TasksEndpointsModel).refreshGraphs, "Tasks");
 }
