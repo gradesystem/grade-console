@@ -9,6 +9,6 @@ class StagePage extends Polybase {
   
   StagePageModel get stageModel => model as StagePageModel;
   
-  StageQueriesModel get queries => stageModel.queriesModel;
+  QuerySubPageModel get queries => stageModel.queriesModel;
   EndpointSubPageModel get endpoints => stageModel.endpointsModel;
 }

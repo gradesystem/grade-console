@@ -8,7 +8,7 @@ class TasksPage extends Polybase {
   TasksPageModel get tasksPageModel => model as TasksPageModel;
   
   TasksModel get tasks => tasksPageModel.tasksModel;
-  TasksQueriesModel get queries => tasksPageModel.queriesModel;
+  QuerySubPageModel get queries => tasksPageModel.queriesModel;
   EndpointSubPageModel get endpoints => tasksPageModel.endpointsModel;
 }
 

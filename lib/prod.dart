@@ -30,14 +30,12 @@ init() {
           
           ..bind(Datasets, toValue: new Datasets(), withAnnotation: const ProdAnnotation())
           ..bind(DatasetsPageModel, toFactory: (bus, datasets) => new DatasetsPageModel(bus, new DatasetService(_service_path), datasets), withAnnotation: const ProdAnnotation(), inject: [EventBus, new Key(Datasets,ProdAnnotation)])
-          
-          ..bind(ProdQueriesModel)
-          ..bind(ProdQueries)
-          ..bind(ProdQueriesService)
 
+          ..bind(QuerySubPageModel, toFactory: (bus) => new QuerySubPageModel(bus, new QueryService(_service_path), new Queries()), withAnnotation: const ProdAnnotation(), inject: [EventBus])
 
-          ..bind(EndpointSubPageModel, toFactory: (bus) => new EndpointSubPageModel(bus, new EndpointsService(_service_path), new Endpoints()), withAnnotation: const ProdAnnotation(), inject: [EventBus]);
-  
+          ..bind(Endpoints, toValue: new Endpoints(), withAnnotation: const ProdAnnotation())
+          ..bind(EndpointSubPageModel, toFactory: (bus, endpoints) => new EndpointSubPageModel(bus, new EndpointsService(_service_path), endpoints), withAnnotation: const ProdAnnotation(), inject: [EventBus, new Key(Endpoints, const ProdAnnotation())]);
+    
   
   Dependencies.add(module);
 }

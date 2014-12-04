@@ -7,7 +7,7 @@ class ProdPage extends Polybase {
   
   ProdPageModel get prodModel => model as ProdPageModel;
   
-  ProdQueriesModel get queries => prodModel.queriesModel;
+  QuerySubPageModel get queries => prodModel.queriesModel;
   EndpointSubPageModel get endpoints => prodModel.endpointsModel;
   
 }
