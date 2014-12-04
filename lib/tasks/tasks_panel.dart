@@ -1,7 +1,7 @@
 part of tasks;
 
 @CustomTag("tasks-panel")
-class TasksPanel extends PolymerElement with Filters {
+class TasksPanel extends PolymerElement with Filters, Dependencies {
 
   @observable
   int area = 0;
@@ -9,18 +9,19 @@ class TasksPanel extends PolymerElement with Filters {
   @observable
   String kfilter = '';
 
-  @published
-  TasksModel model;
-
   @observable
   bool removeDialogOpened = false;
 
   @observable
   String removedDialogHeader;
+  
+  TasksModel model;
 
   Function dialogCallback;
 
-  TasksPanel.created() : super.created();
+  TasksPanel.created() : super.created(){
+    model = instanceOf(TasksModel);
+  }
 
   Tasks get items => model.storage;
 
@@ -31,7 +32,6 @@ class TasksPanel extends PolymerElement with Filters {
   void addTask() {
     model.addNew();
   }
-
 
   void cloneItem(event, detail, target) {
     model.clone(detail);

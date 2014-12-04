@@ -27,19 +27,19 @@
 
     <template id=menu>
     
-        <page-menu menu>
+      <page-menu menu>
         
-            <page-menu-item label="TASKS" icon="drive-document" page=0></page-menu-item>
-            <page-menu-item label="QUERIES"  icon="search" page=1></page-menu-item>
-            <page-menu-item label="ENDPOINTS"  icon="cloud-circle" page=2></page-menu-item>
+	      <page-menu-item label="TASKS" icon="drive-document" page=0></page-menu-item>
+	      <page-menu-item label="QUERIES"  icon="search" page=1></page-menu-item>
+	      <page-menu-item label="ENDPOINTS"  icon="cloud-circle" page=2></page-menu-item>
  
-         </page-menu>
+      </page-menu>
    
     </template>
     
     <grade-subpages flex >
     
-      <tasks-panel model="{{tasks}}">
+      <tasks-panel>
         <template bind ref="menu"></template>
       </tasks-panel>
       
@@ -53,6 +53,6 @@
       
     </grade-subpages>    
 		
- </template>
+  </template>
 
 </polymer-element>
