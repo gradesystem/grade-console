@@ -9,7 +9,6 @@ import 'package:event_bus/event_bus.dart';
 import 'common.dart';
 import 'common/datasets/datasets.dart';
 import 'common/queries/queries.dart';
-import 'common/pages/pages.dart';
 import 'common/endpoints/endpoints.dart';
 
 part 'stage/stage_page.dart';
@@ -28,11 +27,10 @@ init() {
   Dependencies.bind("stage", StageAnnotation);
   
   var module = new Module()
-          ..bind(StagePageModel)          
-          
-          ..bind(StageService)
-          ..bind(StageDatasetsModel)
-          ..bind(StageDatasets)
+          ..bind(StagePageModel) 
+
+          ..bind(Datasets, toValue: new Datasets(), withAnnotation: const StageAnnotation())
+          ..bind(DatasetsPageModel, toFactory: (bus, datasets) => new DatasetsPageModel(bus, new DatasetService(_service_path), datasets), withAnnotation: const StageAnnotation(), inject: [EventBus, new Key(Datasets,StageAnnotation)])
           
           ..bind(StageQueriesService)
           ..bind(StageQueriesModel)

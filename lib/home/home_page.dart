@@ -4,10 +4,10 @@ part of home;
 class HomePage extends PolymerElement with Dependencies {
 
   @observable
-  ProdDatasets prod;
+  Datasets prod;
   
   @observable
-  StageDatasets stage;
+  Datasets stage;
  
   @observable
   Tasks tasks;
@@ -29,10 +29,10 @@ class HomePage extends PolymerElement with Dependencies {
   
   HomePage.created() : super.created() {
     
-    prod = instanceOf(ProdDatasets);
+    prod = instanceOf(Datasets, ProdAnnotation);
     prod_stats = new PageStatistics(prod.data.length,new DateTime.now());
   
-    stage = instanceOf(StageDatasets);
+    stage = instanceOf(Datasets, StageAnnotation);
     stage_stats = new PageStatistics(stage.data.length,new DateTime.now());
     
     tasks = instanceOf(Tasks);

@@ -1,6 +1,6 @@
 part of datasets;
 
-abstract class DatasetService extends ListService<Dataset> {
+class DatasetService extends ListService<Dataset> {
   
   DatasetService(String path):super(path, "datasets", "", toDataset);
 
