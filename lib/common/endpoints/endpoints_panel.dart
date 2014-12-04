@@ -2,9 +2,6 @@ part of endpoints;
 
 @CustomTag("endpoints-panel") 
 class EndpointsPanel extends PolymerElement with Filters, Dependencies {
-
-  @published
-  EndpointSubPageModel model;
   
   @published
   String page;
@@ -21,13 +18,15 @@ class EndpointsPanel extends PolymerElement with Filters, Dependencies {
   @observable
   String removedDialogHeader;
   
+  EndpointSubPageModel model;
+  
   Function dialogCallback;
   
   EndpointsPanel.created() : super.created() {
-    if (page!=null) {
-      Type pageAnnotation = typeCalled(page);
-      model = instanceOf(EndpointSubPageModel, pageAnnotation);
-    }
+    if (page == null) throw new Exception("Page attribute not specified");
+    
+    Type pageAnnotation = typeCalled(page);
+    model = instanceOf(EndpointSubPageModel, pageAnnotation);
   }
   
   Endpoints get items => model.storage;
