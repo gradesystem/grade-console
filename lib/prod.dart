@@ -18,7 +18,13 @@ part 'prod/prod_model.dart';
 
 final Logger log = new Logger('grade.prod');
 
+class ProdAnnotation {
+  const ProdAnnotation();
+}
+
 init() {
+  
+  Dependencies.bind("prod", ProdAnnotation);
   
   var module = new Module()
           ..bind(ProdPageModel)
@@ -32,8 +38,8 @@ init() {
           ..bind(ProdQueriesService)
           
           ..bind(ProdEndpointsModel)
-          ..bind(ProdEndpoints)
-          ..bind(ProdEndpointsService);
+
+          ..bind(EndpointSubPageModel, toImplementation: ProdEndpointsModel, withAnnotation: const ProdAnnotation());
   
   
   Dependencies.add(module);

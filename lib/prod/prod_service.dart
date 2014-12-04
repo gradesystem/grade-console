@@ -1,18 +1,14 @@
 part of prod;
 
-final String _path = "prod";
+final String _service_path = "prod";
 
 @Injectable()
 class ProdDatasetService extends DatasetService {
-  ProdDatasetService() : super(_path);
+  ProdDatasetService() : super(_service_path);
 }
 
 @Injectable()
 class ProdQueriesService extends QueryService {
-  ProdQueriesService() : super(_path);
+  ProdQueriesService() : super(_service_path);
 }
 
-@Injectable()
-class ProdEndpointsService extends EndpointsService {
-  ProdEndpointsService() : super(_path);
-}

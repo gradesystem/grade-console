@@ -31,7 +31,6 @@ part 'tasks/running_task_panel.dart';
 
 final Logger log = new Logger('grade.tasks');
 
-@Injectable()
 class TasksAnnotation {
   const TasksAnnotation();
 }
