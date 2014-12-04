@@ -6,7 +6,6 @@ class QueryKeys {
   
   final String id = "http://gradesystem.io/onto#id";
   final String endpoint = "http://gradesystem.io/onto/query.owl#endpoint";
-  final String datasets = "http://gradesystem.io/onto/query.owl#datasets";
   final String name = "http://gradesystem.io/onto/query.owl#name";  
   final String note = "http://gradesystem.io/onto/query.owl#note";
   final String target = "http://gradesystem.io/onto/query.owl#target";

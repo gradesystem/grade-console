@@ -32,22 +32,6 @@ class QueryDetailsSummary extends PolymerElement with Filters {
       
   }
   
-  @ComputedProperty("item.model.bean[K.datasets]")
-  String get datasets {
-      
-       String sets = '(all)';
-       
-       if (item!=null) {
-       
-         String datasets = item.get(K.datasets);
-         
-         sets = (datasets==null || datasets.length==0) ? sets : datasets;
-              
-       }
-       
-        return sets;
-    }
-  
   void removeItem() {
     fire("remove-item", detail:item);
   }

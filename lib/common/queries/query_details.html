@@ -57,24 +57,6 @@
             </grade-fascia>
 	            
 	        </grade-item>
-	        
-	        <!-- datasets -->
-          <grade-item icon=chevron-right>
-            
-            <grade-fascia truncate>
-                     
-              <grade-input fascia-title 
-                           disabled="{{ !editable }}" 
-                           label="{{ K.datasets | suffix }} ?" 
-                           invalid="{{ item.fieldsInvalidity[K.datasets] }}"
-                           inputValue="{{ item.model.bean[K.datasets]  }}">
-              </grade-input>
-                     
-              <div fascia-subtitle><span>{{ K.datasets | start}}</span><span fg bolder>{{ K.datasets | suffix}}</span></div>
-              
-            </grade-fascia>
-              
-          </grade-item>
           
           <!-- note -->
           <grade-item icon=chevron-right>
