@@ -6,9 +6,10 @@ class ProdPageModel {
   
   ProdDatasetsModel datasetsModel;
   ProdQueriesModel queriesModel;
-  ProdEndpointsModel endpointsModel;
   
-  ProdPageModel(this.datasetsModel, this.queriesModel, this.endpointsModel);
+  EndpointSubPageModel endpointsModel;
+  
+  ProdPageModel(this.datasetsModel, this.queriesModel, @ProdAnnotation() this.endpointsModel);
 }
 
 @Injectable()

@@ -36,8 +36,6 @@ init() {
           ..bind(ProdQueriesModel)
           ..bind(ProdQueries)
           ..bind(ProdQueriesService)
-          
-          ..bind(ProdEndpointsModel)
 
           ..bind(EndpointSubPageModel, toImplementation: ProdEndpointsModel, withAnnotation: const ProdAnnotation());
   

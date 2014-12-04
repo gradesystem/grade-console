@@ -18,7 +18,14 @@ part 'stage/stage_model.dart';
 
 final Logger log = new Logger('grade.stage');
 
+
+class StageAnnotation {
+  const StageAnnotation();
+}
+
 init() {
+  
+  Dependencies.bind("stage", StageAnnotation);
   
   var module = new Module()
           ..bind(StagePageModel)          
@@ -31,9 +38,8 @@ init() {
           ..bind(StageQueriesModel)
           ..bind(StageQueries)
 
-          ..bind(StageEndpointsModel)
-          ..bind(StageEndpoints)
-          ..bind(StageEndpointsService);
+          ..bind(EndpointSubPageModel, toImplementation: StageEndpointsModel, withAnnotation: const StageAnnotation());
+          ;
 
   
   Dependencies.add(module);
