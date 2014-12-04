@@ -91,12 +91,12 @@ class Query extends EditableGradeEntity with Filters {
    }
 }
 
-abstract class Queries extends EditableListItems<EditableQuery> {
+class Queries extends EditableListItems<EditableQuery> {
   
   bool containsName(String name) => data.any((EditableQuery eq)=>eq!=selected && eq.model.name!=null && eq.model.name.toLowerCase() == name.toLowerCase());
 }
 
-abstract class QuerySubPageModel extends SubPageEditableModel<Query> {
+class QuerySubPageModel extends SubPageEditableModel<Query> {
 
   QuerySubPageModel(EventBus bus, QueryService service, Queries storage):super(bus, service, storage, 
       ([Query query])=>generate(query!=null?query:new Query(service.path))){

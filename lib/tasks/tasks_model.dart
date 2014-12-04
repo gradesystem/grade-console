@@ -136,12 +136,12 @@ class Operation {
 class TasksPageModel {
 
   TasksModel tasksModel;
-  TasksQueriesModel queriesModel;
+  QuerySubPageModel queriesModel;
   
   @TasksAnnotation()
   EndpointSubPageModel endpointsModel;
 
-  TasksPageModel(this.tasksModel, this.queriesModel,@TasksAnnotation() this.endpointsModel);
+  TasksPageModel(this.tasksModel, @TasksAnnotation() this.queriesModel, @TasksAnnotation() this.endpointsModel);
 }
 
 
@@ -425,13 +425,4 @@ class HasTaskIcons {
 class Tasks extends EditableListItems<EditableModel<Task>> {
   
   containsLabel($) => data.any((EditableTask eq)=>eq!=selected && eq.model.label!=null && eq.model.label.toLowerCase() == $.toLowerCase());
-}
-
-@Injectable()
-class TasksQueriesModel extends QuerySubPageModel {
-  TasksQueriesModel(EventBus bus, TasksQueriesService service, TasksQueries storage) : super(bus, service, storage);
-}
-
-@Injectable()
-class TasksQueries extends Queries {
 }

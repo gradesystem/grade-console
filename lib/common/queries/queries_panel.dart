@@ -1,7 +1,10 @@
 part of queries;
 
 @CustomTag("queries-panel") 
-class QueriesPanel extends PolymerElement with Filters {
+class QueriesPanel extends PolymerElement with Filters, Dependencies {
+  
+  @published
+  String page;
   
   QueryKeys K = const QueryKeys();
   
@@ -29,7 +32,17 @@ class QueriesPanel extends PolymerElement with Filters {
   EditableQuery deleteCandidate;
   
 
-  QueriesPanel.created() : super.created();
+  QueriesPanel.created() : super.created() {
+    //if (page == null) throw new Exception("Page attribute not specified");
+    
+    if (page != null) {
+      print('page diff');
+      Type pageAnnotation = typeCalled(page);
+      model = instanceOf(QuerySubPageModel, pageAnnotation);
+      endpoints = instanceOf(Endpoints, pageAnnotation);
+      endpointRefresh = (instanceOf(EndpointSubPageModel, pageAnnotation) as EndpointSubPageModel).refreshGraphs;
+    }
+  }
   
   Queries get queries => model.storage;
   

@@ -1,6 +1,6 @@
 part of queries;
 
-abstract class QueryService extends EditableListService<Query> {
+class QueryService extends EditableListService<Query> {
   
   static String SUBMIT_PATH = "submit";
 

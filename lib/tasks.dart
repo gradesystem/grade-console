@@ -46,12 +46,11 @@ init() {
           ..bind(TaskExecutionsService)
           ..bind(TasksModel)
           ..bind(Tasks)
+          
+          ..bind(QuerySubPageModel, toFactory: (bus) => new QuerySubPageModel(bus, new QueryService(_service_path), new Queries()), withAnnotation: const TasksAnnotation(), inject: [EventBus])
 
-          ..bind(TasksQueriesService)
-          ..bind(TasksQueriesModel)
-          ..bind(TasksQueries)
-
-          ..bind(EndpointSubPageModel, toFactory: (bus) => new EndpointSubPageModel(bus, new EndpointsService(_service_path), new Endpoints()), withAnnotation: const TasksAnnotation(), inject: [EventBus]);
+          ..bind(Endpoints, toValue: new Endpoints(), withAnnotation: const TasksAnnotation())
+          ..bind(EndpointSubPageModel, toFactory: (bus, endpoints) => new EndpointSubPageModel(bus, new EndpointsService(_service_path), endpoints), withAnnotation: const TasksAnnotation(), inject: [EventBus, new Key(Endpoints, const TasksAnnotation())]);
   
   Dependencies.add(module);
 }
