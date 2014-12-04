@@ -11,14 +11,14 @@ import 'common/queries/queries.dart';
 import 'common/endpoints/endpoints.dart';
 
 part 'prod/prod_page.dart';
-part 'prod/prod_service.dart';
-part 'prod/prod_model.dart';
 
 final Logger log = new Logger('grade.prod');
 
 class ProdAnnotation {
   const ProdAnnotation();
 }
+
+final String _service_path = "prod";
 
 init() {
   

@@ -11,15 +11,14 @@ import 'common/queries/queries.dart';
 import 'common/endpoints/endpoints.dart';
 
 part 'stage/stage_page.dart';
-part 'stage/stage_service.dart';
-part 'stage/stage_model.dart';
 
 final Logger log = new Logger('grade.stage');
-
 
 class StageAnnotation {
   const StageAnnotation();
 }
+
+final String _service_path = "stage";
 
 init() {
   
