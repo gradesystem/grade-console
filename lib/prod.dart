@@ -37,7 +37,8 @@ init() {
           ..bind(ProdQueries)
           ..bind(ProdQueriesService)
 
-          ..bind(EndpointSubPageModel, toImplementation: ProdEndpointsModel, withAnnotation: const ProdAnnotation());
+
+          ..bind(EndpointSubPageModel, toFactory: (bus) => new EndpointSubPageModel(bus, new EndpointsService(_service_path), new Endpoints()), withAnnotation: const ProdAnnotation(), inject: [EventBus]);
   
   
   Dependencies.add(module);

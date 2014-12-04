@@ -51,7 +51,7 @@ init() {
           ..bind(TasksQueriesModel)
           ..bind(TasksQueries)
 
-          ..bind(EndpointSubPageModel, toImplementation: TasksEndpointsModel, withAnnotation: const TasksAnnotation());
+          ..bind(EndpointSubPageModel, toFactory: (bus) => new EndpointSubPageModel(bus, new EndpointsService(_service_path), new Endpoints()), withAnnotation: const TasksAnnotation(), inject: [EventBus]);
   
   Dependencies.add(module);
 }

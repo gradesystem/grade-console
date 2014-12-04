@@ -38,7 +38,8 @@ init() {
           ..bind(StageQueriesModel)
           ..bind(StageQueries)
 
-          ..bind(EndpointSubPageModel, toImplementation: StageEndpointsModel, withAnnotation: const StageAnnotation());
+
+          ..bind(EndpointSubPageModel, toFactory: (bus) => new EndpointSubPageModel(bus, new EndpointsService(_service_path), new Endpoints()), withAnnotation: const StageAnnotation(), inject: [EventBus]);
           ;
 
   

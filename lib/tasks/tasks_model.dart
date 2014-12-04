@@ -435,8 +435,3 @@ class TasksQueriesModel extends QuerySubPageModel {
 @Injectable()
 class TasksQueries extends Queries {
 }
-
-@Injectable()
-class TasksEndpointsModel extends EndpointSubPageModel {
-  TasksEndpointsModel(EventBus bus) : super(bus, new EndpointsService(_service_path), new Endpoints());
-}

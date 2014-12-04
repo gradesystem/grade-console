@@ -29,10 +29,3 @@ class ProdQueriesModel extends QuerySubPageModel {
 @Injectable()
 class ProdQueries extends Queries {
 }
-
-@Injectable()
-class ProdEndpointsModel extends EndpointSubPageModel {
-  ProdEndpointsModel(EventBus bus) : super(bus, new EndpointsService(_service_path), new Endpoints());
-}
-
-

@@ -29,8 +29,3 @@ class StageQueriesModel extends QuerySubPageModel {
 @Injectable()
 class StageQueries extends Queries {
 }
-
-@Injectable()
-class StageEndpointsModel extends EndpointSubPageModel {
-  StageEndpointsModel(EventBus bus) : super(bus, new EndpointsService(_service_path), new Endpoints());
-}
