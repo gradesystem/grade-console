@@ -115,13 +115,14 @@ class Endpoint extends EditableGradeEntity with Filters {
   String toString() => "Endpoint id: $id name: $name uri: $uri updateUri: $updateUri graphs: $graphs hashCode: $hashCode";
 }
 
-abstract class Endpoints extends EditableListItems<EditableEndpoint> {
+@Injectable()
+class Endpoints extends EditableListItems<EditableEndpoint> {
 
   bool containsName(String name) => data.any((EditableEndpoint eq) => eq != selected && eq.model.name != null && eq.model.name.toLowerCase() == name.toLowerCase());
   EditableEndpoint findById(String id) => data.firstWhere((EditableEndpoint ee)=> ee.model.id == id, orElse:()=>null);
 }
 
-abstract class EndpointSubPageModel extends SubPageEditableModel<Endpoint> {
+class EndpointSubPageModel extends SubPageEditableModel<Endpoint> {
 
 
   EndpointSubPageModel(EventBus bus, EndpointsService endpointService, Endpoints storage):super(bus, endpointService, storage, generate) {

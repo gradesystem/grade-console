@@ -62,14 +62,7 @@ class TaskExecutionsService extends ListService<TaskExecution> {
   }
 }
 
-
-
 @Injectable()
 class TasksQueriesService extends QueryService {
   TasksQueriesService() : super(_path);
-}
-
-@Injectable()
-class TasksEndpointsService extends EndpointsService {
-  TasksEndpointsService() : super(_path);
 }

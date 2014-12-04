@@ -1,6 +1,6 @@
 part of endpoints;
 
-abstract class EndpointsService extends EditableListService<Endpoint> {
+class EndpointsService extends EditableListService<Endpoint> {
 
   EndpointsService(String path) : super(path, "endpoints", "endpoint", (Map json) => new Endpoint.fromBean(json));
   

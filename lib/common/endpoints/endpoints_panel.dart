@@ -1,16 +1,19 @@
 part of endpoints;
 
 @CustomTag("endpoints-panel") 
-class EndpointsPanel extends PolymerElement with Filters {
-  
-  @observable
-  int area = 0;
-  
-  @published
-  String kfilter = '';
+class EndpointsPanel extends PolymerElement with Filters, Dependencies {
 
   @published
   EndpointSubPageModel model;
+  
+  @published
+  String page;
+    
+  @observable
+  int area = 0;
+  
+  @observable
+  String kfilter = '';
   
   @observable
   bool removeDialogOpened = false;
@@ -20,7 +23,12 @@ class EndpointsPanel extends PolymerElement with Filters {
   
   Function dialogCallback;
   
-  EndpointsPanel.created() : super.created();
+  EndpointsPanel.created() : super.created() {
+    if (page!=null) {
+      Type pageAnnotation = typeCalled(page);
+      model = instanceOf(EndpointSubPageModel, pageAnnotation);
+    }
+  }
   
   Endpoints get items => model.storage;
   

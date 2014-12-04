@@ -137,9 +137,11 @@ class TasksPageModel {
 
   TasksModel tasksModel;
   TasksQueriesModel queriesModel;
-  TasksEndpointsModel endpointsModel;
+  
+  @TasksAnnotation()
+  EndpointSubPageModel endpointsModel;
 
-  TasksPageModel(this.tasksModel, this.queriesModel, this.endpointsModel);
+  TasksPageModel(this.tasksModel, this.queriesModel,@TasksAnnotation() this.endpointsModel);
 }
 
 
@@ -436,9 +438,5 @@ class TasksQueries extends Queries {
 
 @Injectable()
 class TasksEndpointsModel extends EndpointSubPageModel {
-  TasksEndpointsModel(EventBus bus, TasksEndpointsService service, TasksEndpoints storage) : super(bus, service, storage);
-}
-
-@Injectable()
-class TasksEndpoints extends Endpoints {
+  TasksEndpointsModel(EventBus bus) : super(bus, new EndpointsService(_path), new Endpoints());
 }

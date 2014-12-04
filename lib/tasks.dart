@@ -31,7 +31,14 @@ part 'tasks/running_task_panel.dart';
 
 final Logger log = new Logger('grade.tasks');
 
+@Injectable()
+class TasksAnnotation {
+  const TasksAnnotation();
+}
+
 init() {
+  
+  Dependencies.bind("tasks", TasksAnnotation);
   
   var module = new Module()
           ..bind(TasksPageModel)          
@@ -45,9 +52,7 @@ init() {
           ..bind(TasksQueriesModel)
           ..bind(TasksQueries)
 
-          ..bind(TasksEndpointsModel)
-          ..bind(TasksEndpoints)
-          ..bind(TasksEndpointsService);
+          ..bind(EndpointSubPageModel, toImplementation: TasksEndpointsModel, withAnnotation: const TasksAnnotation());
   
   Dependencies.add(module);
 }
