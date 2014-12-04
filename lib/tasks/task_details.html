@@ -191,7 +191,7 @@
         <!-- transform query -->
         <grade-item icon=chevron-right>
           <grade-fascia flex>
-             <div smaller wired rounded truncate inset fascia-title >
+             <div smaller wired rounded inset fascia-title >
               <grade-input 
                             disabled="{{!editable.edit}}" 
                             multiline
@@ -208,7 +208,7 @@
         <!-- difference query -->
         <grade-item icon=chevron-right hidden?="{{ editable.model.bean[K.op] == K.publish_op}}">
           <grade-fascia flex>
-             <div smaller wired rounded truncate inset fascia-title >
+             <div smaller wired rounded inset fascia-title >
               <grade-input style="min-height:150px; height:150px"
                             disabled="{{!editable.edit}}" 
                             multiline
@@ -223,7 +223,7 @@
         
         <!-- note -->
         <grade-item icon=chevron-right>
-          <grade-fascia flex truncate>
+          <grade-fascia flex>
             <grade-input  fascia-title 
                           disabled="{{!editable.edit}}" 
                           multiline
