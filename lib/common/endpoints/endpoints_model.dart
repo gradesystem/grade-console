@@ -150,8 +150,6 @@ class EndpointSubPageModel extends SubPageEditableModel<Endpoint> {
 
     editableModel.loadingGraphs = true;
     Endpoint endpoint = editableModel.model;
-    
-    print('refreshGraphs endpoint ${endpoint.hashCode}');
 
     service.get(endpoint.name).then((Endpoint result) {
       endpoint.graphs = result.graphs;
