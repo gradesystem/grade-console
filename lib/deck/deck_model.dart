@@ -37,12 +37,15 @@ class DeckPageModel {
     //required for core-list issue https://github.com/dart-lang/core-elements/issues/160
     if (storage.data.isEmpty) storage.selected = null;
   }
+  
+  void loadRunnable() {
+    tasksModel.loadAll();
+  }
 
   void loadAll() {
     storage.loading = true;
     storage.selected = null;
     executionsService.getAll().then(_setData).catchError((e) => _onError(e, loadAll));
-
   }
 
   void _setData(List<TaskExecution> items) {
