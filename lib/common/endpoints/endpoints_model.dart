@@ -19,6 +19,8 @@ class Graph extends GradeEntity {
   String get uri => get(K.uri);
   String get label => get(K.label);
   
+  String toString() => "Graph label: $label uri: $uri";
+  
 }
 
 class EndpointKeys {
@@ -46,6 +48,7 @@ class Endpoint extends EditableGradeEntity with Filters {
   
   Endpoint._clone(Map bean) : super(bean) {
     graphs = get(K.graphs);
+    bean[K.graphs] = _graphs;
     _listenChanges();
   }
 
@@ -68,14 +71,15 @@ class Endpoint extends EditableGradeEntity with Filters {
   
   void _syncGraphs() {
     graphs = all(K.graphs, (Map json)=>new Graph.fromBean(json));
-    bean[K.graphs] = graphs;
+    bean[K.graphs] = _graphs;
   }
   
   @observable
   get graphs => _graphs;
   set graphs(List<Graph> newgraphs) {
-    graphs.clear();
-    if (newgraphs!=null) graphs.addAll(newgraphs);
+    _graphs.clear();
+    if (newgraphs!=null) _graphs.addAll(newgraphs);
+    notifyPropertyChange(#graphs, null, _graphs);
   }
 
   @observable
@@ -143,8 +147,11 @@ class EndpointSubPageModel extends SubPageEditableModel<Endpoint> {
 
   void refreshGraphs(EditableEndpoint editableModel) {
 
+
     editableModel.loadingGraphs = true;
     Endpoint endpoint = editableModel.model;
+    
+    print('refreshGraphs endpoint ${endpoint.hashCode}');
 
     service.get(endpoint.name).then((Endpoint result) {
       endpoint.graphs = result.graphs;
