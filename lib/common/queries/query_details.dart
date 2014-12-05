@@ -24,6 +24,9 @@ class QueryDetails extends View {
   
   @observable
   List<Validator> nameValidators = [];
+  
+  @observable
+  EditableEndpoint target;
    
   QueryDetails.created() : super.created() {
     nameValidators.add(($) =>  $!=null && queries.containsName($)?"Not original enough, try again.":null);
@@ -33,8 +36,13 @@ class QueryDetails extends View {
   bool get loading => item!=null && item.synching;
   
   @ComputedProperty("item.model.bean[K.target]")
-  EditableEndpoint get target => endpoints.findById(get(item, K.target));
+  String get targetId => get(item, K.target);
   
+  @ObserveProperty("targetId endpoints.data")
+  void updateTarget() {
+    target = endpoints.findById(targetId);
+   }
+ 
   refreshTargetGraphs() {
     endpointRefresh(target);
   }
