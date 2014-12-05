@@ -27,7 +27,7 @@ init() {
   var module = new Module()
 
           ..bind(Datasets, toValue: new Datasets(), withAnnotation: const StageAnnotation())
-          ..bind(DatasetsPageModel, toFactory: (bus, datasets) => new DatasetsPageModel(bus, new DatasetService(_service_path), datasets), withAnnotation: const StageAnnotation(), inject: [EventBus, new Key(Datasets,StageAnnotation)])
+          ..bind(DatasetsPageModel, toFactory: (bus, datasets) => new DatasetsPageModel(bus, new DatasetService(_service_path), datasets), withAnnotation: const StageAnnotation(), inject: [EventBus, new Key(Datasets, const StageAnnotation())])
           
           ..bind(QuerySubPageModel, toFactory: (bus) => new QuerySubPageModel(bus, new QueryService(_service_path), new Queries()), withAnnotation: const StageAnnotation(), inject: [EventBus])
           
