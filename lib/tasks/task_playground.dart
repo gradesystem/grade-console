@@ -26,7 +26,7 @@ class TaskPlayground extends PolymerElement with Filters {
   
   @ComputedProperty("editableTask.model.bean[K.diff]") 
   String get differenceQuery => editableTask!=null?editableTask.model.bean[K.diff]:"";
-  void set differenceQuery(String exp) {editableTask.model.bean[K.diff] = exp;}
+  void set differenceQuery(String exp) {if (editableTask!=null) editableTask.model.bean[K.diff] = exp;}
   
   @ComputedProperty("editableTask.model.bean[K.op]") 
   bool get hideDifferenceQuery => editableTask!=null?editableTask.model.bean[K.op] == publish_operation:false;
