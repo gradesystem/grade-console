@@ -66,7 +66,7 @@ class Endpoint extends EditableGradeEntity with Filters {
     onBeanChange([K.name], () => notifyPropertyChange(#name, null, name));
     onBeanChange([K.uri], () => notifyPropertyChange(#uri, null, uri));
     onBeanChange([K.update_uri], () => notifyPropertyChange(#updateUri, null, updateUri));
-    //we don't support graphs direct writing
+    //we don't support graphs in bean map writing
   }
   
   void _syncGraphs() {

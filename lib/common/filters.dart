@@ -31,7 +31,7 @@ class Filters {
     return str.substring(0,index+1);
   }
   
-  filter(String term, FilterFunction filterFunction) => (List items) => term.isEmpty ? items : toObservable(items.where((item)=>filterFunction(item, term)).toList());
+  filter(String term, FilterFunction filterFunction) => (List items) => term.isEmpty ? items : toObservable(items.where((item)=>filterFunction(item, term)).toList()); 
   
   partialOrdering(List<String> partialOrdering) {
     return (Map toOrder) {
