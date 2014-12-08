@@ -14,8 +14,8 @@ class GradeTable extends View {
   bool disabled;
   
   GradeTable.created() : super.created();
-  
-  
 
-  
+  void uriClick(event, detail, target) {
+    fire("uri-click", detail:target.value);
+  }
 }

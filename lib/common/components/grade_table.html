@@ -1,6 +1,8 @@
 <link rel="import" href="../../../../packages/polymer/polymer.html">
 <link rel="import" href="../../../../packages/core_elements/core_tooltip.html">
 
+<link rel="import" href="grade_uri.html">
+
 <polymer-element name="grade-table">
 
     <template>
@@ -17,18 +19,20 @@
           text-transform: capitalize;
           
         }
-        
-        
+
         [cell] {
-          margin:5px 5px;
+          margin:5px;
           overflow-x:hidden;
           white-space: nowrap;
           text-overflow: ellipsis;
         }
         
-        
-        [uri] [start] {
-          color: #90A4AE
+        [uri-cell]::shadow div {
+          margin: 5px;
+          overflow-x: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          cursor:pointer;
         }
         
         :host [disabled] * {
@@ -49,12 +53,17 @@
               <div layout horizontal>
                 <template repeat="{{cell in row}}">
                   <core-tooltip flex label={{cell}}>
-		                  <div cell uri?="{{ (cell|suffix) != ''}}"  smaller>
-	                      
-	                      <span fg?="{{ (cell|suffix) == ''}}" start>{{cell | start }}</span>
-	                      <span fg>{{ cell | suffix}}</span>
-	                   
-	                   </div>
+                  
+                    <template if="{{cell | isHttpUri}}">
+                      <grade-uri uri-cell smaller value={{cell}} on-click={{uriClick}}></grade-uri>
+                    </template>
+                    
+                    <template if="{{!(cell | isHttpUri) }}">
+                      <div cell smaller>
+                        <span fg>{{cell}}</span>
+                      </div>
+                    </template>
+	                  
                    </core-tooltip>
               </template>
               </div>

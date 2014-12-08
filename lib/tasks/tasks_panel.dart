@@ -79,6 +79,5 @@ class TasksPanel extends PolymerElement with Filters, Dependencies {
   void onCancelTask(event, detail, target) {
     model.stopTask(detail);
   }
-  
 
 }

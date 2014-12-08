@@ -127,6 +127,17 @@ class QuerySubPageModel extends SubPageEditableModel<Query> {
     .then((QueryResult r)=>editableQuery.queryResult(r))
     .catchError((e)=>editableQuery.queryFailed(e));
   }
+  
+  void describeResultUri(EditableQuery editableQuery, String resultUri) {
+      editableQuery.runQuery();
+      Query resultQuery = editableQuery.model.clone();
+      resultQuery.set(Query.K.expression, _buildQuery(resultUri));
+      queryService.runQuery(resultQuery, {})
+      .then((QueryResult r)=>editableQuery.queryResult(r))
+      .catchError((e)=>editableQuery.queryFailed(e));
+    }
+  
+  String _buildQuery(String resultUri) => "describe <$resultUri>";
 }
 
 class EditableQuery extends EditableModel<Query> with Keyed {

@@ -10,9 +10,10 @@ class Filters {
   
   uppercase(o) => o is String && o != null ? o.toUpperCase() : o;
   lowercase(o) => o is String && o != null  ? o.toLowerCase() : o;
-  trim(o)   => o is String && o != null  ? o.trim() : o;
-  split(o)   => o is String && o != null  ? o.split('\n') : o;
-  tabToSpace(o)   => o is String && o != null  ? o.replaceAll('\t', '    ') : o;
+  trim(o) => o is String && o != null  ? o.trim() : o;
+  split(o) => o is String && o != null  ? o.split('\n') : o;
+  tabToSpace(o) => o is String && o != null  ? o.replaceAll('\t', '    ') : o;
+  isHttpUri(o) => o is String && o != null  && o.startsWith("http://");
   
   String format(DateTime date) => formatter.format(date);
   String formatEpoch(int milliseconds) => milliseconds != null  ? time_formatter.format(new DateTime.fromMillisecondsSinceEpoch(milliseconds)):milliseconds;

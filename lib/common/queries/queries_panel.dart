@@ -87,4 +87,10 @@ class QueriesPanel extends PolymerElement with Filters, Dependencies {
   void cloneItem(event, detail, target) {
     model.clone(detail);
   }
+  
+  
+  void onResultUriClick(event, detail, target) {
+    model.describeResultUri(queries.selected, detail);
+  }
+  
 }

@@ -1,18 +1,12 @@
 <link rel="import" href="../../../../packages/polymer/polymer.html">
 
-
 <link rel="import" href="../../../../packages/core_elements/core_icon.html">
 <link rel="import" href="../../../../packages/paper_elements/paper_input.html">
 
-
 <polymer-element name="grade-uri">
+  <template>
+    <div truncate><span>{{ value | start }}</span><span fg bolder>{{ value | suffix }}</span></div>
+  </template>
 
-    <template>
-
-        <div truncate><span>{{ value | start }}</span><span fg bolder>{{ value | suffix }}</span></div>
-        
-    
-    </template>
-
-      <script type="application/dart" src="grade_uri.dart"></script> 
+  <script type="application/dart" src="grade_uri.dart"></script> 
 </polymer-element>
