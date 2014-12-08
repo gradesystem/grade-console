@@ -37,8 +37,8 @@ class Task extends EditableGradeEntity with Filters {
   }
 
   Task() : this.fromBean({
-    K.op:K.publish_op
-    
+    K.op:K.publish_op,
+    K.source_graph:[]
   });
 
   String get id => get(K.uri);

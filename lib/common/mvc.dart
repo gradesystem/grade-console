@@ -28,18 +28,15 @@ class View extends PolymerElement with Filters,Validators, Dependencies {
    }
   
     List<dynamic> getAll(Keyed item,key) {
-     
-        List value = ["???"];
         
         if (item!=null) {
           
-          List current= item.get(key);
+          List current = item.get(key);
           
-          value = (current==null || current.isEmpty)? value : current;
-          
+          if (current != null) return current;
         }
         
-        return value;
+        return [];
    }
     
     Map<dynamic,dynamic> getMap(Keyed item,key) {
