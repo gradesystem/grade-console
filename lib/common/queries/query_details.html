@@ -9,6 +9,7 @@
 <link rel="import" href="../components/loading_panel.html">
 <link rel="import" href="../components/grade_uri.html">
 <link rel="import" href="../components/grade_button.html">
+<link rel="import" href="../components/field_error.html">
 
 <link rel="import" href="queries.html">
 
@@ -28,7 +29,11 @@
 		  }
 		        
         :host [graphs] { min-height:80px; margin-top:15px }
-        :host [graphs] core-selector:not([notap]) grade-uri { cursor:pointer }
+        :host [graphs] core-selector:not([notap]) div { cursor:pointer }
+        
+      [invalid-graph] {
+        color: #757575;
+      }
 		  
     </style>
 		
@@ -124,19 +129,27 @@
 							   
 							   <div graphs horizontal layout flex fascia-title>
 							   
-							      <div smaller wired rounded relative flex>
+							     <div smaller vertical layout flex>
+							       <div relative wired rounded flex>
 							          <loading-panel fit loading="{{target.loadingGraphs==true}}" message="loading the graphs" style="overflow-y:auto;">
-							             <core-selector id="targetGraphs"  
-							                            notap?="{{!editable}}" 
-							                            selected="{{item.model.bean[K.graph]}}" 
-							                            multi 
-							                            valueattr="item" 
-							                            selectedAttribute="fg">
-							              <template repeat="{{graph in target.model.graphs}}">
-							                    <div smaller item={{graph.uri}}>{{graph.label !=null?graph.label:suffix(graph.uri)}}</div>
-							              </template>
-							           </core-selector>
+							             <div>
+								             <core-selector id="targetGraphs"  
+								                            notap?="{{!editable}}" 
+								                            selected="{{item.model.bean[K.graph]}}" 
+								                            multi 
+								                            valueattr="item" 
+								                            selectedAttribute="fg">
+								              <template repeat="{{graph in target.model.graphs}}">
+								                <div smaller item={{graph.uri}}>{{graph.label !=null?graph.label:suffix(graph.uri)}}</div>
+								              </template>
+								            </core-selector>
+							              <template repeat="{{graphUri in invalidGraphUris }}">
+                              <div smaller disabled item={{graphUri}} invalid-graph>{{suffix(graphUri)}}</div>
+                            </template>
+                            </div>
 							          </loading-panel>
+							        </div>
+							         <field-error show="{{!invalidGraphUris.isEmpty}}">Some graph selection/s don't match the current endpoint's graphs, those will be deleted on the next save</field-error>
 							       </div>
 							       
 							       <grade-button disabled?={{!editable}} side icon=refresh label="refresh graphs" on-click={{refreshTargetGraphs}}></grade-button>
