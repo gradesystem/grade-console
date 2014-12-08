@@ -1,7 +1,8 @@
 <link rel="import" href="../../../../packages/polymer/polymer.html">
 
 <link rel="import" href="../../../../packages/paper_elements/paper_dropdown_menu.html">
-<link rel="import" href="../../../../packages/core_elements/core_icon.html">
+
+<link rel="import" href="field_error.html">
 
 <polymer-element name="grade-dropdown-menu">
 	<template>
@@ -46,11 +47,7 @@
        <content select="*"></content>
 		</paper-dropdown-menu>
 		
-		<div layout horizontal center hidden?="{{!invalid}}">
-      <div class="error-text" flex auto role="alert" aria-hidden="{{!invalid}}">{{errorMsg}}</div>
-      <core-icon class="error-icon" icon="warning"></core-icon>
-    
-    </div>
+		<field-error show="{{invalid}}">{{errorMsg}}</field-error>
     
 	</template>
 	
