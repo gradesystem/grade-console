@@ -64,7 +64,7 @@
                           disabled="{{!editable.edit}}" 
                           required validators="{{[ uniqueLabel ]}}"
                           invalid="{{ editable.fieldsInvalidity[K.label] }}"
-                          value="{{ editable.model.bean[K.label] }}">
+                          inputValue="{{ editable.model.bean[K.label] }}">
             </grade-input>
             <grade-uri fascia-subtitle value={{K.label}}></grade-uri>
            </grade-fascia>   
@@ -197,7 +197,7 @@
                             multiline
                             required invalid= "{{ editable.fieldsInvalidity[K.transform]}}"
                             label="SPARQL transform query ?" 
-                            value="{{ editable.model.bean[K.transform] }}">
+                            inputValue="{{ editable.model.bean[K.transform] }}">
               </grade-input>
             </div>
             <grade-uri fascia-subtitle value={{K.transform}}></grade-uri>
@@ -214,7 +214,7 @@
                             multiline
                             validators="{{[ conditionalRequiredDiff ]}}" invalid= "{{ editable.fieldsInvalidity[K.diff]}}"
                             label="SPARQL difference query ?" 
-                            value="{{editable.model.bean[K.diff] }}">
+                            inputValue="{{editable.model.bean[K.diff] }}">
               </grade-input>
             </div>
              <grade-uri fascia-subtitle value={{K.diff}}></grade-uri>
@@ -228,7 +228,7 @@
                           disabled="{{!editable.edit}}" 
                           multiline
                           label="note ?" 
-                          value="{{ editable.model.bean[K.note] }}">
+                          inputValue="{{ editable.model.bean[K.note] }}">
             </grade-input>
             <grade-uri fascia-subtitle value={{K.note}}></grade-uri>
           </grade-fascia>   
@@ -242,7 +242,7 @@
                           required invalid= "{{ editable.fieldsInvalidity[K.creator]}}"
                           type="URL"
                           label="creator ?" 
-                          value="{{ editable.model.bean[K.creator] }}">
+                          inputValue="{{ editable.model.bean[K.creator] }}">
             </grade-input>
             <grade-uri fascia-subtitle value={{K.creator}}></grade-uri>
           </grade-fascia>   
