@@ -18,6 +18,7 @@ class Filters {
   String formatEpoch(int milliseconds) => milliseconds != null  ? time_formatter.format(new DateTime.fromMillisecondsSinceEpoch(milliseconds)):milliseconds;
   
   String suffix(String str) {
+    if (str == null) return null;
     int index = str.lastIndexOf(new RegExp(r'(/|#)'));
     if (index<0) return "";
     return str.substring(index+1);

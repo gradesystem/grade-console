@@ -18,7 +18,7 @@
     <paper-item trim flex>
       <grade-item flex>
         <grade-fascia flex truncate>
-          <div fascia-title>{{ graph.label }}</div>
+          <div fascia-title>{{ graph.label !=null?graph.label:suffix(graph.uri) }}</div>
           <grade-uri fascia-subtitle smaller flex value={{graph.uri}}></grade-uri>
         </grade-fascia>
         
