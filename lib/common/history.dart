@@ -17,7 +17,7 @@ class GradeHistory {
     String hash = currentHash();
     
     if (hashes.containsKey(hash)) {
-      Function.apply(hashes[hash], []);
+      hashes[hash]();
     }
   }
   
