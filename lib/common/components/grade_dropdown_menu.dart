@@ -44,6 +44,7 @@ class GradeDropdownMenu extends PolymerElement {
    dropdown = $["menu"] as PaperDropdownMenu;
    unknown_validator = (sel) => (!isItem(sel))? "Current value '${sel}' is no longer a valid choice.":null;    
    
+    //observes for internal children changes (add or remove of items)
    new MutationObserver(($1,$2) {
         (dropdown.shadowRoot.querySelector("#menu") as CoreMenu).jsElement.callMethod("updateSelected",[]);
         onModelChange();
