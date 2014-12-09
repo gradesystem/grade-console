@@ -23,23 +23,36 @@ class Query extends EditableGradeEntity with Filters {
 
   final String repo_path;
   
+  ObservableList<Graph> _graphs = new ObservableList();
+  
   Query.fromBean(this.repo_path, Map bean) : super(bean){
-    
+    _syncGraphs();
     _listenChanges();
   }
   
-  Query(this.repo_path) : super({}) {
-    put(K.name, "");
-    put(K.expression, "");
-    put(K.predefined, false);
-     
+  Query._clone(this.repo_path, Map bean) : super(bean) {
+    graphs = get(K.graph);
+    set(K.graph, _graphs);
     _listenChanges();
   }
+  
+  Query(String repo_path) : this.fromBean(repo_path, {
+    K.name: "",
+    K.expression: "",
+    K.predefined: false,
+    K.graph: []
+  });
   
   void _listenChanges() {
     onBeanChange([K.name, K.expression], ()=>notifyPropertyChange(#endpoint, null, endpoint) );
     onBeanChange([K.expression], ()=>notifyPropertyChange(#parameters, null, parameters) );
     onBeanChange([K.name], ()=>notifyPropertyChange(#name, null, name) );
+    //we don't support graphs in bean map writing
+  }
+  
+  void _syncGraphs() {
+    graphs = get(K.graph);
+    set(K.graph, _graphs);
   }
   
   String get id => get(K.id);
@@ -50,10 +63,18 @@ class Query extends EditableGradeEntity with Filters {
     set(K.name, value);
   }
   
+  @observable
+  get graphs => _graphs;
+  set graphs(List<Graph> newgraphs) {
+    _graphs.clear();
+    if (newgraphs!=null) _graphs.addAll(newgraphs);
+    notifyPropertyChange(#graphs, null, _graphs);
+  }
+  
   bool get predefined => get(K.predefined);
   
   Query clone() {
-    return new Query.fromBean(repo_path, new Map.from(bean));
+    return new Query._clone(repo_path, new Map.from(bean));
   }
   
   //calculates endpoint

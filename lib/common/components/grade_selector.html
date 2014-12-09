@@ -1,0 +1,20 @@
+<link rel="import" href="../../../../packages/polymer/polymer.html">
+<link rel="import" href="../../../../packages/core_elements/core_selector.html">
+
+<polymer-element name="grade-selector" layout horizontal>
+  <template>
+    <core-selector 
+	    id="selector" 
+	    selected={{internalSelected}} 
+	    valueattr={{valueattr}} 
+	    multi={{multi}} 
+	    selectedAttribute={{selectedAttribute}}
+	    notap={{notap}}
+	    on-core-select={{onCoreSelect}}
+	    >
+      <content select="*"></content>
+    </core-selector>
+
+  </template>
+  <script type="application/dart" src="grade_selector.dart"></script>
+</polymer-element>
