@@ -15,7 +15,7 @@ class QueryKeys {
   final String predefined = "http://gradesystem.io/onto/query.owl#predefined";
 }
 
-class Query extends EditableGradeEntity with Filters {
+class Query extends EditableGradeEntity with Filters, Observable {
 
   static QueryKeys K = const QueryKeys();
 
@@ -100,13 +100,11 @@ class Query extends EditableGradeEntity with Filters {
   @observable
   List<String> get parameters {
 
-
-
     List<String> params = [];
 
     String exp = bean[K.expression];
+    
     if (exp == null) return params;
-
     for (Match m in regexp.allMatches(exp)) params.add(m.group(1));
 
     return params;
