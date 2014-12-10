@@ -32,6 +32,9 @@
           overflow-x: hidden;
           white-space: nowrap;
           text-overflow: ellipsis;
+        }
+        
+        [pointer] {
           cursor:pointer;
         }
         
@@ -52,15 +55,15 @@
             <template repeat="{{row in data}}">
               <div layout horizontal>
                 <template repeat="{{cell in row}}">
-                  <core-tooltip flex label={{cell}}>
+                  <core-tooltip flex label="{{cell['value']}}">
                   
-                    <template if="{{cell | isHttpUri}}">
-                      <grade-uri uri-cell smaller value={{cell}} on-click={{uriClick}}></grade-uri>
+                    <template if="{{cell['value'] | isHttpUri}}">
+                      <grade-uri uri-cell pointer?={{isUri(cell)}} smaller value="{{cell['value']}}" on-click={{uriClick}} cell-value="{{cell['value']}}"></grade-uri>
                     </template>
                     
-                    <template if="{{!(cell | isHttpUri) }}">
-                      <div cell smaller>
-                        <span fg>{{cell}}</span>
+                    <template if="{{!(cell['value'] | isHttpUri) }}">
+                      <div cell smaller pointer?={{isUri(cell)}} on-click={{uriClick}} cell-value="{{cell['value']}}">
+                        <span fg>{{cell['value']}}</span>
                       </div>
                     </template>
 	                  

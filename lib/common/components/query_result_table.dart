@@ -15,12 +15,12 @@ class QueryResultTable extends PolymerElement {
   
   List toTable(QueryResult qresult) {
       
-      List<List<String>> list = [];
+      List<List<Map>> list = [];
       
       for (Map binding in qresult.rows) {
-        List<String> row = [];
+        List<Map> row = [];
         for (Map tuple in binding.values)
-          row.add(tuple['value']);
+          row.add(tuple);
        
         list.add(row); 
       }

@@ -5,7 +5,7 @@ import 'package:grade_console/common.dart';
 class GradeTable extends View {
   
   @published
-  List<List<String>> data;
+  List<List<Map>> data;
   
   @published
   List<String> headers;
@@ -14,8 +14,12 @@ class GradeTable extends View {
   bool disabled;
   
   GradeTable.created() : super.created();
+  
+  isUri(Map m) => m is Map && m != null && m['type'] == "uri";
 
   void uriClick(event, detail, target) {
-    fire("uri-click", detail:target.value);
+    //we filter not clickable uri
+    if (target.attributes['pointer']==null) return;
+    fire("uri-click", detail:target.attributes['cell-value']);
   }
 }
