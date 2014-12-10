@@ -18,28 +18,26 @@
           margin-bottom: 10px;
           text-transform: capitalize;
           
-        }
-
+        }        
+                
         [cell] {
-          margin:5px;
+          margin:5px 5px;
           overflow-x:hidden;
           white-space: nowrap;
           text-overflow: ellipsis;
         }
         
-        [uri-cell]::shadow div {
-          margin: 5px;
-          overflow-x: hidden;
-          white-space: nowrap;
-          text-overflow: ellipsis;
+        
+        [uri] [start] {
+          color: #90A4AE
+        }
+        
+        :host [disabled] * {
+          color: lightgrey !important;
         }
         
         [pointer] {
           cursor:pointer;
-        }
-        
-        [disabled] /deep/ * {
-          color: #aaaaaa !important;
         }
 
       </style>
@@ -55,17 +53,12 @@
               <div layout horizontal>
                 <template repeat="{{cell in row}}">
                   <core-tooltip flex label="{{cell['value']}}">
-                  
-                    <template if="{{cell['value'] | isHttpUri}}">
-                      <grade-uri uri-cell pointer?={{isUri(cell)}} smaller value="{{cell['value']}}" on-click={{uriClick}} cell-value="{{cell['value']}}"></grade-uri>
-                    </template>
-                    
-                    <template if="{{!(cell['value'] | isHttpUri) }}">
-                      <div cell smaller pointer?={{isUri(cell)}} on-click={{uriClick}} cell-value="{{cell['value']}}">
-                        <span fg>{{cell['value']}}</span>
-                      </div>
-                    </template>
-	                  
+                   <div cell uri?="{{ (cell['value'] | suffix) != ''}}" pointer?={{isUri(cell)}} smaller on-click={{uriClick}} cell-value="{{cell['value']}}" cell-type="{{cell['type']}}">
+                        
+                        <span fg?="{{ (cell['value'] | suffix) == ''}}" start>{{cell['value'] | start }}</span>
+                        <span fg>{{ cell['value'] | suffix}}</span>
+                     
+                     </div>
                    </core-tooltip>
               </template>
               </div>

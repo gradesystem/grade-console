@@ -19,7 +19,6 @@ class GradeTable extends View {
 
   void uriClick(event, detail, target) {
     //we filter not clickable uri
-    if (target.attributes['pointer']==null) return;
-    fire("uri-click", detail:target.attributes['cell-value']);
+    if (target.attributes['cell-type'] == "uri") fire("uri-click", detail:target.attributes['cell-value']);
   }
 }
