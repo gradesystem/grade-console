@@ -204,7 +204,10 @@ class EditableQuery extends EditableModel<Query> with Keyed {
     onPropertyChange(model, #parameters, ()=>_updateParametersValidity(null));
     _updateParametersValidity(null);
 
-    model.changes.listen((_)=>_setDirty(true));
+    model.bean.changes.listen((_)=>_setDirty(true));
+    
+    //for query properties not updated in bean like graphs
+    onPropertyChange(model, #graphs,()=>_setDirty(true));
     
     onPropertyChange(this, #model, ()=>_setDirty(false));
   }

@@ -38,14 +38,13 @@
           cursor:pointer;
         }
         
-        :host [disabled] * {
-          color: lightgrey !important;
+        [disabled] /deep/ * {
+          color: #aaaaaa !important;
         }
 
       </style>
       
         <div disabled?="{{disabled}}" inset rounded layout vertical>
-	          
 	          <div headers layout horizontal>
 		         <template repeat="{{header in headers}}">
 		           <div fg flex cell>{{header}}</div>
