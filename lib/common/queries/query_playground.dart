@@ -60,14 +60,28 @@ class QueryPlayground extends PolymerElement with Filters {
     }
   }
   
-  
-  
   void onBack() {
     fire("back");
   }
   
   void onRun() {
     fire("run", detail:editableQuery);
+  }
+  
+  void onResultUriClick(event, detail, target) {
+    editableQuery.history.go(detail);
+    fire("describe-result", detail:detail);
+  }
+  
+  void onResultBack() {
+    editableQuery.history.goBack();
+    if (!editableQuery.history.empty) fire("describe-result", detail:editableQuery.history.currentUri);
+    else fire("run", detail:editableQuery);
+  }
+  
+  void onResultForward() {
+    editableQuery.history.goForward();
+    fire("describe-result", detail:editableQuery.history.currentUri);
   }
   
   void showErrorDetails() {

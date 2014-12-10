@@ -72,6 +72,10 @@ class QueriesPanel extends PolymerElement with Filters, Dependencies {
   void onRunQuery(event, detail, target) {
     model.runQuery(detail);
   }
+  
+  void onDescribeResult(event, detail, target) {
+    model.describeResultUri(queries.selected, detail);
+  }
 
   void removeItem(event, detail, target) {
     deleteCandidate = detail;
@@ -86,11 +90,6 @@ class QueriesPanel extends PolymerElement with Filters, Dependencies {
 
   void cloneItem(event, detail, target) {
     model.clone(detail);
-  }
-  
-  
-  void onResultUriClick(event, detail, target) {
-    model.describeResultUri(queries.selected, detail);
   }
   
 }

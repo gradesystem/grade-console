@@ -173,6 +173,9 @@ class EditableQuery extends EditableModel<Query> with Keyed {
   QueryResult lastQueryResult;
   
   @observable
+  ResultHistory history = new ResultHistory();
+  
+  @observable
   ObservableMap<String,String> parametersValues = new ObservableMap();
   
   @observable
@@ -277,4 +280,42 @@ class Result extends Observable {
     value = null;
     loading = false;
   }
+}
+
+class ResultHistory extends Observable {
+  List<String> uris = [];
+  int currentIndex = -1;
+  
+  void goBack() {
+    if (!canGoBack) throw new Exception("Can't go back");
+    currentIndex--;
+    _notifyChanges();
+  }
+  
+  void goForward() {
+    if (!canGoForward) throw new Exception("Can't go forward");
+    currentIndex++;
+    _notifyChanges();
+  }
+  
+  void go(String uri) {
+    uris = uris.sublist(0, currentIndex>=0?currentIndex+1:0);
+    uris.add(uri);
+    currentIndex++;
+    _notifyChanges();
+  }
+  
+  void _notifyChanges() {
+    //print('canGoBack: $canGoBack canGoForward: $canGoForward currentIndex: $currentIndex uris: $uris');
+    
+    notifyPropertyChange(#canGoBack, null, canGoBack);
+    notifyPropertyChange(#canGoForward, null, canGoForward);
+    notifyPropertyChange(#currentUri, null, currentUri);
+    notifyPropertyChange(#empty, null, empty);
+  }
+  
+  bool get canGoBack => currentIndex >= 0;
+  bool get canGoForward => uris.isNotEmpty && currentIndex < uris.length-1;
+  String get currentUri => currentIndex>=0?uris[currentIndex]:null;
+  bool get empty => currentIndex == -1;
 }
