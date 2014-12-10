@@ -8,20 +8,24 @@ class Filters {
   
   static DateFormat time_formatter = new DateFormat('HH:mm:ss.SSS');
   
+  static RegExp suffix_start_exp = new RegExp(r'(/|#)');
+  
   uppercase(o) => o is String && o != null ? o.toUpperCase() : o;
-  lowercase(o) => o is String && o != null  ? o.toLowerCase() : o;
-  trim(o) => o is String && o != null  ? o.trim() : o;
-  split(o) => o is String && o != null  ? o.split('\n') : o;
-  tabToSpace(o) => o is String && o != null  ? o.replaceAll('\t', '    ') : o;
-  isHttpUri(o) => o is String && o != null  && o.startsWith("http://");
+  lowercase(o) => o is String && o != null ? o.toLowerCase() : o;
+  trim(o) => o is String && o != null ? o.trim() : o;
+  split(o) => o is String && o != null ? o.split('\n') : o;
+  tabToSpace(o) => o is String && o != null ? o.replaceAll('\t', '    ') : o;
+  isHttpUri(o) => o is String && o != null && o.startsWith("http://");
   
   String format(DateTime date) => formatter.format(date);
   String formatEpoch(int milliseconds) => milliseconds != null  ? time_formatter.format(new DateTime.fromMillisecondsSinceEpoch(milliseconds)):milliseconds;
   
-  String suffix(String str) {
+  String suffixIfPresent(String s) => suffix(s, s);
+  
+  String suffix(String str, [String alternative]) {
     if (str == null) return null;
-    int index = str.lastIndexOf(new RegExp(r'(/|#)'));
-    if (index<0) return "";
+    int index = str.lastIndexOf(suffix_start_exp);
+    if (index<0) return alternative!=null?alternative:"";
     return str.substring(index+1);
   }
   
