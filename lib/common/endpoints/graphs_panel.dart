@@ -26,6 +26,10 @@ class GraphsPanel extends PolymerElement with Filters {
   
   GraphsPanel.created() : super.created();
   
+  void ready() {
+    print('graphs $graphs');
+  }
+  
   refreshEndpoint() {
     fire("refresh-endpoint", detail:endpoint);
   }

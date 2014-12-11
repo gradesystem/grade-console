@@ -21,7 +21,7 @@ class GradeSelector extends PolymerElement {
   bool notap;
 
   @observable
-  List internalSelected = toObservable([]);
+  var internalSelected;
   
   @observable
   var target;
@@ -29,6 +29,9 @@ class GradeSelector extends PolymerElement {
   GradeSelector.created() : super.created();
 
   void ready() {
+    
+    internalSelected = multi?toObservable([]):null;
+    
     $["selector"].selected = internalSelected;
 
     onPropertyChange(this, #selected, _syncInternalSelection);
@@ -45,14 +48,17 @@ class GradeSelector extends PolymerElement {
   }
 
   void _syncInternalSelection() {
-    internalSelected.clear();
-    if (selected!=null) internalSelected.addAll(selected);
+    if (multi) {
+      internalSelected.clear();
+      if (selected!=null) internalSelected.addAll(selected);
+    } else internalSelected = selected!=null && selected.isNotEmpty?selected.first:null;
   }
 
   void onCoreSelect() {
     if (selected!=null) {
       selected.clear();
-      selected.addAll(internalSelected);
+      if (multi) selected.addAll(internalSelected);
+      else if (internalSelected!=null) selected.add(internalSelected);
     }
   }
 
