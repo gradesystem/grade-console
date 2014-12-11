@@ -3,8 +3,10 @@ part of queries;
 class QueryService extends EditableListService<Query> {
   
   static String SUBMIT_PATH = "submit";
+  
+  String base_url;
 
-  QueryService(String path) : super(path, "queries", "query", (Map json) => new Query.fromBean(path, json));
+  QueryService(String base_url, String path) : super(path, "queries", "query", (Map json) => new Query.fromBean(base_url, path, json));
 
   Future<QueryResult> runQueryByName(Query query, Map<String, String> parameters) {
 

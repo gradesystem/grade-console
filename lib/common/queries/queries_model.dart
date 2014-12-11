@@ -21,22 +21,23 @@ class Query extends EditableGradeEntity with Filters, Observable {
 
   static final RegExp regexp = new RegExp(r"!(\w+)");
 
+  final String base_url;
   final String repo_path;
 
   ObservableList<Graph> _graphs = new ObservableList();
 
-  Query.fromBean(this.repo_path, Map bean) : super(bean) {
+  Query.fromBean(this.base_url, this.repo_path, Map bean) : super(bean) {
     _syncGraphs();
     _listenChanges();
   }
 
-  Query._clone(this.repo_path, Map bean) : super(bean) {
+  Query._clone(this.base_url, this.repo_path, Map bean) : super(bean) {
     graphs = get(K.graph);
     set(K.graph, _graphs);
     _listenChanges();
   }
 
-  Query(String repo_path) : this.fromBean(repo_path, {
+  Query(String base_url, String repo_path) : this.fromBean(base_url, repo_path, {
         K.name: "",
         K.expression: "",
         K.predefined: false,
@@ -74,7 +75,7 @@ class Query extends EditableGradeEntity with Filters, Observable {
   bool get predefined => get(K.predefined);
 
   Query clone() {
-    return new Query._clone(repo_path, new Map.from(bean));
+    return new Query._clone(base_url, repo_path, new Map.from(bean));
   }
 
   //calculates endpoint
@@ -84,12 +85,10 @@ class Query extends EditableGradeEntity with Filters, Observable {
     Map<String, String> endpointParameters = {};
     for (String parameter in parameters) endpointParameters[parameter] = "...";
 
-    Uri uri = new Uri.http("", '../service/${repo_path}/query/${bean[K.name]}/results', endpointParameters);
+    Uri base = Uri.parse(base_url);
+    Uri uri = new Uri.http(base.authority, '${base.path}/service/${repo_path}/query/${bean[K.name]}/results', endpointParameters);
 
     String endpoint = uri.toString();
-
-    //we remove the schema
-    endpoint = endpoint.substring(5);
 
     //we remove the final question mark
     if (endpoint.endsWith("?")) endpoint = endpoint.substring(0, endpoint.length - 1);
@@ -118,7 +117,7 @@ class Queries extends EditableListItems<EditableQuery> {
 
 class QuerySubPageModel extends SubPageEditableModel<Query> {
 
-  QuerySubPageModel(EventBus bus, QueryService service, Queries storage) : super(bus, service, storage, ([Query query]) => generate(query != null ? query : new Query(service.path))) {
+  QuerySubPageModel(EventBus bus, QueryService service, Queries storage) : super(bus, service, storage, ([Query query]) => generate(query != null ? query : new Query(service.base_url, service.path))) {
     bus.on(ApplicationReady).listen((_) {
       loadAll();
     });
@@ -244,6 +243,22 @@ class EditableQuery extends EditableModel<Query> with Keyed {
   void queryFailed(ErrorResponse reason) {
     queryRunning = false;
     lastError = reason;
+  }
+  
+  String get queryEndpoint {
+
+    Map<String, String> endpointParameters = {};
+    for (String parameter in model.parameters) endpointParameters[parameter] = parametersValues[parameter];
+
+    Uri base = Uri.parse(model.base_url);
+    Uri uri = new Uri.http(base.authority, '${base.path}/service/${model.repo_path}/query/${model.bean[Query.K.name]}/results', endpointParameters);
+
+    String endpoint = uri.toString();
+
+    //we remove the final question mark
+    if (endpoint.endsWith("?")) endpoint = endpoint.substring(0, endpoint.length - 1);
+
+    return endpoint;
   }
 
 }

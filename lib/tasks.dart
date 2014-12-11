@@ -3,6 +3,7 @@ library tasks;
 import 'dart:collection';
 import 'dart:async';
 import 'dart:convert' show JSON;
+import 'dart:html';
 
 import 'package:polymer/polymer.dart';
 import 'package:logging/logging.dart';
@@ -37,6 +38,8 @@ class TasksAnnotation {
 
 init() {
   
+  String base_url = window.location.origin;
+  
   Dependencies.bind("tasks", TasksAnnotation);
   
   var module = new Module()
@@ -46,7 +49,7 @@ init() {
           ..bind(TasksModel)
           ..bind(Tasks)
           
-          ..bind(QuerySubPageModel, toFactory: (bus) => new QuerySubPageModel(bus, new QueryService(_service_path), new Queries()), withAnnotation: const TasksAnnotation(), inject: [EventBus])
+          ..bind(QuerySubPageModel, toFactory: (bus) => new QuerySubPageModel(bus, new QueryService(base_url, _service_path), new Queries()), withAnnotation: const TasksAnnotation(), inject: [EventBus])
 
           ..bind(Endpoints, toValue: new Endpoints(), withAnnotation: const TasksAnnotation())
           ..bind(EndpointSubPageModel, toFactory: (bus, endpoints) => new EndpointSubPageModel(bus, new EndpointsService(_service_path), endpoints), withAnnotation: const TasksAnnotation(), inject: [EventBus, new Key(Endpoints, const TasksAnnotation())]);

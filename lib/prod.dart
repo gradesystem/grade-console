@@ -1,5 +1,7 @@
 library prod;
 
+import 'dart:html';
+
 import 'package:polymer/polymer.dart';
 import 'package:logging/logging.dart';
 import 'package:di/di.dart';
@@ -23,13 +25,16 @@ final String _service_path = "prod";
 init() {
   
   Dependencies.bind("prod", ProdAnnotation);
+
+  String base_url = window.location.origin;
   
   var module = new Module()
          
           ..bind(Datasets, toValue: new Datasets(), withAnnotation: const ProdAnnotation())
           ..bind(DatasetsPageModel, toFactory: (bus, datasets) => new DatasetsPageModel(bus, new DatasetService(_service_path), datasets), withAnnotation: const ProdAnnotation(), inject: [EventBus, new Key(Datasets, const ProdAnnotation())])
 
-          ..bind(QuerySubPageModel, toFactory: (bus) => new QuerySubPageModel(bus, new QueryService(_service_path), new Queries()), withAnnotation: const ProdAnnotation(), inject: [EventBus])
+          
+          ..bind(QuerySubPageModel, toFactory: (bus) => new QuerySubPageModel(bus, new QueryService(base_url, _service_path), new Queries()), withAnnotation: const ProdAnnotation(), inject: [EventBus])
 
           ..bind(Endpoints, toValue: new Endpoints(), withAnnotation: const ProdAnnotation())
           ..bind(EndpointSubPageModel, toFactory: (bus, endpoints) => new EndpointSubPageModel(bus, new EndpointsService(_service_path), endpoints), withAnnotation: const ProdAnnotation(), inject: [EventBus, new Key(Endpoints, const ProdAnnotation())]);
