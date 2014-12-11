@@ -21,6 +21,9 @@ class GraphsPanel extends PolymerElement with Filters {
   @published
   bool required = false;
   
+  @published
+  bool multi = false;
+  
   GraphsPanel.created() : super.created();
   
   refreshEndpoint() {
