@@ -180,7 +180,10 @@ class EditableQuery extends EditableModel<Query> with Keyed {
     //we want to listen on parameters value changes
     parametersInvalidity.changes.listen(_updateParametersValidity);
 
-    parametersValues.changes.listen((_) => _setDirty(true));
+    parametersValues.changes.listen((_) {
+      _setDirty(true);
+      notifyPropertyChange(#queryEndpoint, null, queryEndpoint);
+    });
 
     //we need to listen on the expression changes in the current model
     onPropertyChange(this, #model, _listenNewModel);
@@ -195,10 +198,16 @@ class EditableQuery extends EditableModel<Query> with Keyed {
 
   void _listenNewModel() {
     //when parameters list change we re-calculate the parameters validity
-    onPropertyChange(model, #parameters, () => _updateParametersValidity(null));
+    onPropertyChange(model, #parameters, () {
+      _updateParametersValidity(null);
+      notifyPropertyChange(#queryEndpoint, null, queryEndpoint);
+    });
     _updateParametersValidity(null);
 
-    model.bean.changes.listen((_) => _setDirty(true));
+    model.bean.changes.listen((_) {
+      _setDirty(true);
+      notifyPropertyChange(#queryEndpoint, null, queryEndpoint);
+    });
 
     //for query properties not updated in bean like graphs
     onPropertyChange(model, #graphs, () => _setDirty(true));
@@ -245,10 +254,11 @@ class EditableQuery extends EditableModel<Query> with Keyed {
     lastError = reason;
   }
   
+  @observable
   String get queryEndpoint {
 
     Map<String, String> endpointParameters = {};
-    for (String parameter in model.parameters) endpointParameters[parameter] = parametersValues[parameter];
+    for (String parameter in model.parameters) endpointParameters[parameter] = parametersValues[parameter]!=null && parametersValues[parameter].isNotEmpty ?parametersValues[parameter]:"~missing~";
 
     Uri base = Uri.parse(model.base_url);
     Uri uri = new Uri.http(base.authority, '${base.path}/service/${model.repo_path}/query/${model.bean[Query.K.name]}/results', endpointParameters);
