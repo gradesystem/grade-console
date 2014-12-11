@@ -1,6 +1,5 @@
 <link rel="import" href="../../../packages/polymer/polymer.html">
 
-<link rel="import" href="../../../packages/core_elements/core_selector.html">
 <link rel="import" href="../../../packages/core_elements/core_item.html">
 <link rel="import" href="../../../packages/paper_elements/paper_item.html">
 <link rel="import" href="../../../packages/paper_elements/paper_radio_button.html">
@@ -15,7 +14,7 @@
 <link rel="import" href="../common/components/grade_button.html">
 <link rel="import" href="../common/components/grade_uri.html">
 
-<link rel="import" href="../common/endpoints/graphs_panel.html">
+<link rel="import" href="../common/endpoints/graph_selector.html">
 
 <link rel="import" href="tasks.html">
 
@@ -30,12 +29,8 @@
         
         :host [radios] { height:45px; position: relative; top:-8px }
         
-        :host [graphs] { min-height:80px; margin-top:15px }
-        :host [graphs] core-selector:not([notap]) div { cursor:pointer }
-        
         [graphs-area] { min-height:80px; margin-top:15px }
-        
-        
+
         :host side { padding-left:5px } 
                         
     </style>
@@ -107,7 +102,7 @@
          <!-- source graphs -->
            <grade-fascia truncate>
            
-              <graphs-panel graphs-area flex fascia-title
+              <graph-selector graphs-area flex fascia-title
                    endpoint={{source}} 
                    graphs={{editable.model.sourceGraphs}} 
                    editable={{editable.edit}}
@@ -115,7 +110,7 @@
                    on-refresh-endpoint={{refreshSourceGraphs}}
                    multi
                  >
-                 </graphs-panel>
+                 </graph-selector>
             
              <grade-uri fascia-subtitle value="{{K.source_graph}}"></grade-uri>
              
@@ -154,14 +149,14 @@
                  <!-- target graph -->
                  <grade-fascia truncat>
                  
-	                  <graphs-panel graphs-area flex fascia-title
+	                  <graph-selector graphs-area flex fascia-title
 		                   endpoint={{target}} 
 		                   graphs={{targetGraphs}} 
 		                   editable={{editable.edit}}
 		                   invalid="{{ editable.fieldsInvalidity[K.target_graph] }}"
 		                   on-refresh-endpoint={{refreshTargetGraphs}}
 		                 >
-		                 </graphs-panel>
+		                 </graph-selector>
                     
                     <grade-uri fascia-subtitle value={{K.target_graph}}></grade-uri>  
                     

@@ -9,10 +9,8 @@
 <link rel="import" href="../components/loading_panel.html">
 <link rel="import" href="../components/grade_uri.html">
 <link rel="import" href="../components/grade_button.html">
-<link rel="import" href="../components/field_error.html">
-<link rel="import" href="../components/grade_selector.html">
 
-<link rel="import" href="../endpoints/graphs_panel.html">
+<link rel="import" href="../endpoints/graph_selector.html">
 
 <link rel="import" href="queries.html">
 
@@ -125,7 +123,7 @@
 							<!-- graphs -->
 							<grade-fascia truncate>
 							
-								 <graphs-panel graphs-area flex fascia-title
+								 <graph-selector graphs-area flex fascia-title
 								   endpoint={{target}} 
 								   graphs={{item.model.graphs}} 
 								   editable={{editable}}
@@ -133,7 +131,7 @@
 								   on-refresh-endpoint={{refreshTargetGraphs}}
 								   multi
 								 >
-								 </graphs-panel>
+								 </graph-selector>
 
 							  <grade-uri fascia-subtitle value="{{K.graph}}"></grade-uri>
 							  

@@ -1,7 +1,7 @@
 part of endpoints;
 
-@CustomTag("graphs-panel") 
-class GraphsPanel extends PolymerElement with Filters {
+@CustomTag("graph-selector") 
+class GraphSelector extends PolymerElement with Filters {
   
   @published
   EditableEndpoint endpoint;
@@ -24,11 +24,7 @@ class GraphsPanel extends PolymerElement with Filters {
   @published
   bool multi = false;
   
-  GraphsPanel.created() : super.created();
-  
-  void ready() {
-    print('graphs $graphs');
-  }
+  GraphSelector.created() : super.created();
   
   refreshEndpoint() {
     fire("refresh-endpoint", detail:endpoint);
