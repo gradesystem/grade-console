@@ -24,7 +24,7 @@ class Query extends EditableGradeEntity with Filters, Observable {
   final String base_url;
   final String repo_path;
 
-  ObservableList<Graph> _graphs = new ObservableList();
+  ObservableList<String> _graphs = new ObservableList();
 
   Query.fromBean(this.base_url, this.repo_path, Map bean) : super(bean) {
     _syncGraphs();
@@ -66,7 +66,7 @@ class Query extends EditableGradeEntity with Filters, Observable {
 
   @observable
   get graphs => _graphs;
-  set graphs(List<Graph> newgraphs) {
+  set graphs(List<String> newgraphs) {
     _graphs.clear();
     if (newgraphs != null) _graphs.addAll(newgraphs);
     notifyPropertyChange(#graphs, null, _graphs);

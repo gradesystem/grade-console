@@ -16,6 +16,10 @@ class TaskDetails extends View {
   Validator conditionalRequiredDiff ;
   Validator uniqueLabel;
   
+  //we need this list for the graphs panel
+  @observable
+  ObservableList<String> targetGraphs;
+  
   TaskDetails.created() : super.created() {
   
     endpoints = instanceOf(GradeEnpoints);
@@ -33,6 +37,7 @@ class TaskDetails extends View {
    
   @ComputedProperty("editable.model.bean[K.target_endpoint]")
   EditableEndpoint get target => endpoints.findEditableEndpointById(get(editable,K.target_endpoint));
+  set target(EditableEndpoint source) {/*IGNORE IT*/}
    
   refreshSourceGraphs() {
     endpoints.refesh(get(editable,K.source_endpoint));
@@ -41,14 +46,20 @@ class TaskDetails extends View {
   refreshTargetGraphs() {
     endpoints.refesh(get(editable,K.target_endpoint));
   }
-
-  //workaround to selected binding not working: issue https://github.com/dart-lang/core-elements/issues/157
-  @ObserveProperty("editable.model")
-  void updateGraphs() {
-    
-    //$["sourceGraphs"].selected = getAll(editable,K.source_graph);
-    $["targetGraphs"].selected = get(editable,K.target_graph);
- 
+  
+  @ComputedProperty("editable.model.bean[K.target_graph]")
+  String get targetGraph => getOrNull(editable, K.target_graph); 
+  
+  @ObserveProperty("targetGraph")
+  void updateTargetGraphs() {
+    targetGraphs = toObservable(targetGraph!=null?[targetGraph]:[]);
+  }
+  
+  @ObserveProperty("targetGraphs")
+  void syncTargetGraphs() {
+    String selectedGraph = targetGraphs!=null && targetGraphs.isNotEmpty?targetGraphs.first:null;
+    //avoid loops of notifications
+    if (targetGraph!=selectedGraph) set(editable, K.target_graph, selectedGraph);
   }
 
 }

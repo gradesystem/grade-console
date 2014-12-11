@@ -12,20 +12,22 @@ class View extends PolymerElement with Filters,Validators, Dependencies {
   
   View.created() : super.created();
   
-  dynamic get(Keyed item,key) {
-     
-        String value = "???";
-        
-        if (item!=null) {
+  dynamic get(Keyed item,key) => getOrNull(item, key, "???");
+  
+  dynamic getOrNull(Keyed item,key, [defaultValue]) {
+       
+          String value = defaultValue;
           
-          String current= item.get(key);
+          if (item!=null) {
+            
+            String current= item.get(key);
+            
+            value = (current==null || current.isEmpty)? value : current;
+            
+          }
           
-          value = (current==null || current.isEmpty)? value : current;
-          
-        }
-        
-        return value;
-   }
+          return value;
+     }
   
     List<dynamic> getAll(Keyed item,key) {
         

@@ -30,7 +30,7 @@ class Task extends EditableGradeEntity with Filters {
 
   static TaskKeys K = const TaskKeys();
   
-  ObservableList<Graph> _source_graphs = new ObservableList();
+  ObservableList<String> _source_graphs = new ObservableList();
 
   Task.fromBean(Map bean) : super(bean) {
     _syncGraphs();
@@ -72,7 +72,7 @@ class Task extends EditableGradeEntity with Filters {
   
   @observable
   get sourceGraphs => _source_graphs;
-  set sourceGraphs(List<Graph> newgraphs) {
+  set sourceGraphs(List<String> newgraphs) {
     _source_graphs.clear();
     if (newgraphs != null) _source_graphs.addAll(newgraphs);
     notifyPropertyChange(#sourceGraphs, null, _source_graphs);
