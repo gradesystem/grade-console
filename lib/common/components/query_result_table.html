@@ -4,45 +4,10 @@
 
 <polymer-element name="query-result-table">
   <template>
-  
-    <style>
-    
-        [table] {
-          overflow-y: auto;
-        }
-        
-        [headers] {
-          border-bottom: 1px solid lightgray;
-          margin-bottom: 10px;
-          text-transform: capitalize;
-          
-        }
-        
-        
-        [cell] {
-          margin:5px 5px;
-          overflow-x:hidden;
-          white-space: nowrap;
-          text-overflow: ellipsis;
-        }
-        
-        
-        [uri] [start] {
-          color: #90A4AE
-        }
-        
-        :host [disabled] * {
-          color: lightgrey !important;
-        }
-        
-          
-    </style>
-  
-          <grade-table headers={{queryResult.headers}} 
-                data="{{ queryResult | toTable }}" 
-                disabled="{{dirty}}">
-          </grade-table>
-        
+		<grade-table headers={{queryResult.headers}} 
+		      data="{{ queryResult | toTable }}" 
+		      disabled="{{dirty}}">
+		</grade-table>
   </template>
   <script type="application/dart" src="query_result_table.dart"></script>
 </polymer-element>

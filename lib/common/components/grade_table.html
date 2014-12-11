@@ -16,8 +16,6 @@
         [headers] {
           border-bottom: 1px solid lightgray;
           margin-bottom: 10px;
-          text-transform: capitalize;
-          
         }        
                 
         [cell] {
@@ -55,8 +53,7 @@
                   <core-tooltip flex label="{{cell['value']}}">
                    <div cell uri?="{{ (cell['value'] | suffix) != ''}}" pointer?={{isUri(cell)}} smaller on-click={{uriClick}} cell-value="{{cell['value']}}" cell-type="{{cell['type']}}">
                         
-                        <span fg?="{{ (cell['value'] | suffix) == ''}}" start>{{cell['value'] | start }}</span>
-                        <span fg>{{ cell['value'] | suffix}}</span>
+                        <span fg?="{{ (cell['value'] | suffix) == ''}}" start>{{cell['value'] | start }}</span><span fg>{{ cell['value'] | suffix}}</span>
                      
                      </div>
                    </core-tooltip>
