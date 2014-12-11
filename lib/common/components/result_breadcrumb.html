@@ -1,0 +1,40 @@
+<link rel="import" href="../../../../packages/polymer/polymer.html">
+<link rel="import" href="../../../../packages/core_elements/core_tooltip.html">
+
+<link rel="import" href="grade_uri.html">
+
+<polymer-element name="result-breadcrumb">
+  <template>
+    <style>  
+
+			[breadcrumb] {
+			  background: #f4f4f4;
+			}
+			
+			[crumb] {
+			  cursor: pointer;
+			  white-space: nowrap;
+			  overflow: hidden;
+			  text-overflow: ellipsis;
+			  margin-right: 5px;
+			}
+			
+			[current-crumb] {
+			  font-weight: bolder;
+			}
+			       
+			[spacer] {
+			  margin-right: 5px;
+			}
+    </style>
+        
+    <div horizontal layout fg breadcrumb center>
+      <span uri-index={{-1}} on-click={{onUriClick}} crumb smaller current-crumb?="{{history.currentIndex == -1}}">Start:</span>
+      <template repeat="{{uri in history.uris | enumerate}}">
+        <span bolder spacer>&gt;</span>
+        <span uri-index={{uri.index}} on-click={{onUriClick}} crumb smaller current-crumb?="{{history.currentIndex == uri.index}}">{{uri.value}}</span>
+      </template>
+    </div>
+    <script type="application/dart" src="result_breadcrumb.dart"></script> 
+  </template>
+</polymer-element>

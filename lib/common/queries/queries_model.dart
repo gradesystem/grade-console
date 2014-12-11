@@ -275,7 +275,11 @@ class Result extends Observable {
 }
 
 class ResultHistory extends Observable {
-  List<String> uris = [];
+  
+  @observable
+  List<String> uris = toObservable([]);
+  
+  @observable
   int currentIndex = -1;
 
   void goBack() {
@@ -291,9 +295,15 @@ class ResultHistory extends Observable {
   }
 
   void go(String uri) {
-    uris = uris.sublist(0, currentIndex >= 0 ? currentIndex + 1 : 0);
+    uris = toObservable(uris.sublist(0, currentIndex >= 0 ? currentIndex + 1 : 0));
     uris.add(uri);
     currentIndex++;
+    _notifyChanges();
+  }
+  
+  void goIndex(int index) {
+    if (index>=uris.length || index<-1) throw new Exception("Wrong index $index");
+    currentIndex = index;
     _notifyChanges();
   }
 

@@ -12,6 +12,7 @@
 <link rel="import" href="../components/loading_panel.html">
 <link rel="import" href="../components/codemirror_input.html">
 <link rel="import" href="../components/query_result_table.html">
+<link rel="import" href="../components/result_breadcrumb.html">
 
 <link rel="import" href="../../../../packages/core_elements/av_icons.html">
 <link rel="import" href="../../../../packages/core_elements/core_pages.html">
@@ -108,15 +109,16 @@
 
     <div flex wired rounded spaced layout vertical>
       <grade-header-panel flex paneltitle="Results">
-      <div toolbar style="width:300px" horizontal layout>
-        <grade-button self-center icon="arrow-back" on-click="{{onResultBack}}" hide?="{{!editableQuery.history.canGoBack || editableQuery.queryRunning}}"></grade-button>
-        <grade-button self-center icon="arrow-forward" on-click="{{onResultForward}}" hide?="{{!editableQuery.history.canGoForward || editableQuery.queryRunning}}"></grade-button>
-        <div flex></div>
-        <paper-tabs style="width:200px; display: inline-block;" selected="{{resultTab}}" hide?="{{!showTabs}}" >
+      <!-- REMOVE WHEN BREADCUMB APPROVED -->
+<!--       <div toolbar style="width:300px" horizontal layout> -->
+<!--         <grade-button self-center icon="arrow-back" on-click="{{onResultBack}}" hide?="{{!editableQuery.history.canGoBack || editableQuery.queryRunning}}"></grade-button> -->
+<!--         <grade-button self-center icon="arrow-forward" on-click="{{onResultForward}}" hide?="{{!editableQuery.history.canGoForward || editableQuery.queryRunning}}"></grade-button> -->
+<!--         <div flex></div> -->
+        <paper-tabs toolbar style="width:200px; display: inline-block;" selected="{{resultTab}}" hide?="{{!showTabs}}" >
           <paper-tab>Table</paper-tab>
           <paper-tab>Raw</paper-tab>
         </paper-tabs>
-        </div>
+<!--         </div> -->
         <loading-panel main fit loading="{{editableQuery.queryRunning}}" message="retrieving results">
         
 	        <core-animated-pages fit selected="{{resultArea}}">
@@ -134,8 +136,13 @@
 						<!--  RESULTS TAB -->
 	          <core-animated-pages selected="{{resultTab}}" fit spaced>
 	            
-	            <query-result-table queryResult={{editableQuery.lastQueryResult}} dirty={{editableQuery.dirty}} on-uri-click={{onResultUriClick}}></query-result-table>
-	             
+	            <div vertical layout>
+	             <result-breadcrumb history={{editableQuery.history}} on-go-uri={{onResultGoUri}}></result-breadcrumb>
+	             <div flex  style="overflow-y: auto;">
+	               <query-result-table queryResult={{editableQuery.lastQueryResult}} dirty={{editableQuery.dirty}} on-uri-click={{onResultUriClick}}></query-result-table>
+	             </div>
+	            </div>
+	            
 	            <div style="overflow-y: auto;">
 	              <pre>{{editableQuery.lastQueryResult.raw}}</pre>
 	            </div>
