@@ -49,16 +49,6 @@ class QueryDetails extends View {
   refreshTargetGraphs() {
     endpointRefresh(target);
   }
-  
-  //workaround to observe property not listening to target.model.graphs
-  @ComputedProperty("target.model.graphs")
-  List<Graph> get graphs => target!=null?target.model.graphs:[];
-  
-  @ObserveProperty("item.model.graphs graphs")
-  void calculateInvalidGraphUris() {
-    invalidGraphUris = item!=null?item.model.graphs.where((uri)=>!graphs.any((Graph g)=>g.uri == uri)).toList():[];
-    if (item!=null) item.fieldsInvalidity[K.graph] = invalidGraphUris.isNotEmpty;
-  }
 
   @ComputedProperty("item.model.parameters")
   String get parameters {

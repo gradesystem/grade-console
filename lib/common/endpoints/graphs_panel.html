@@ -1,0 +1,45 @@
+<link rel="import" href="../../../../packages/polymer/polymer.html">
+
+<link rel="import" href="../../../../packages/paper_elements/paper_item.html">
+
+<link rel="import" href="../components/grade_button.html">
+<link rel="import" href="../components/field_error.html">
+<link rel="import" href="../components/grade_selector.html">
+<link rel="import" href="../components/loading_panel.html">
+
+<link rel="import" href="endpoints.html">
+
+<polymer-element name="graphs-panel" horizontal layout> 
+  <template>
+    <style>
+      [pointer] { cursor:pointer }
+      [invalid-graph] { text-decoration:line-through; }
+    </style>
+                 
+		<div smaller vertical layout flex>
+		  <div relative wired rounded flex>
+		     <loading-panel fit loading="{{endpoint.loadingGraphs==true}}" message="loading the graphs" style="overflow-y:auto;">
+		      <div graphs>
+		        <grade-selector 
+		                       notap="{{!editable}}" 
+		                       selected="{{graphs}}" 
+		                       multi 
+		                       valueattr="item" 
+		                       selectedAttribute="fg">
+		         <template repeat="{{graph in endpoint.model.graphs}}">
+		           <div smaller pointer?={{editable}} item={{graph.uri}}>{{graph.label !=null?graph.label:suffix(graph.uri)}}</div>
+		         </template>
+		         <template repeat="{{graphUri in invalidGraphUris }}">
+		           <div smaller pointer?={{editable}} item={{graphUri}} invalid-graph>{{suffixIfPresent(graphUri)}}</div>
+		         </template>
+		       </grade-selector>
+		       </div>
+		   </loading-panel>
+		 </div>
+		  <field-error show="{{invalid}}">{{invalidMessage}}</field-error>
+		</div>
+		
+		<grade-button disabled?={{!editable}} side icon=refresh label="refresh graphs" on-click={{refreshEndpoint}}></grade-button>
+
+  </template> 
+</polymer-element>
