@@ -29,17 +29,36 @@ class TaskKeys {
 class Task extends EditableGradeEntity with Filters {
 
   static TaskKeys K = const TaskKeys();
+  
+  ObservableList<Graph> _source_graphs = new ObservableList();
 
   Task.fromBean(Map bean) : super(bean) {
-    onBeanChange([K.label], () => notifyPropertyChange(#label, null, label));
-    onBeanChange([K.uri], () => notifyPropertyChange(#name, null, name));
-    onBeanChange([K.op], () => notifyPropertyChange(#operation, null, operation));
+    _syncGraphs();
+    _listenChanges();
   }
+  
+  Task._clone(Map bean) : super(bean) {
+    sourceGraphs = get(K.source_graph);
+    set(K.source_graph, _source_graphs);
+    _listenChanges();
+    }
 
   Task() : this.fromBean({
     K.op:K.publish_op,
     K.source_graph:[]
   });
+  
+  void _syncGraphs() {
+    sourceGraphs = get(K.source_graph);
+    set(K.source_graph, _source_graphs);
+  }
+  
+  void _listenChanges() {
+    onBeanChange([K.label], () => notifyPropertyChange(#label, null, label));
+    onBeanChange([K.uri], () => notifyPropertyChange(#name, null, name));
+    onBeanChange([K.op], () => notifyPropertyChange(#operation, null, operation));
+      //we don't support graphs in bean map writing
+    }
 
   String get id => get(K.uri);
   set id(String value) => set(K.uri, value);
@@ -49,6 +68,14 @@ class Task extends EditableGradeEntity with Filters {
   set name(String value) {
     set(K.uri, value);
     notifyPropertyChange(#name, null, value);
+  }
+  
+  @observable
+  get sourceGraphs => _source_graphs;
+  set sourceGraphs(List<Graph> newgraphs) {
+    _source_graphs.clear();
+    if (newgraphs != null) _source_graphs.addAll(newgraphs);
+    notifyPropertyChange(#sourceGraphs, null, _source_graphs);
   }
 
   String get label => get(K.label);
@@ -61,7 +88,7 @@ class Task extends EditableGradeEntity with Filters {
   }
 
   Task clone() {
-    return new Task.fromBean(new Map.from(bean));
+    return new Task._clone(new Map.from(bean));
   }
 }
 

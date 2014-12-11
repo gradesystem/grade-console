@@ -14,6 +14,9 @@
 <link rel="import" href="../common/components/loading_panel.html">
 <link rel="import" href="../common/components/grade_button.html">
 <link rel="import" href="../common/components/grade_uri.html">
+
+<link rel="import" href="../common/endpoints/graphs_panel.html">
+
 <link rel="import" href="tasks.html">
 
 <polymer-element name="task-details" layout vertical> 
@@ -29,6 +32,8 @@
         
         :host [graphs] { min-height:80px; margin-top:15px }
         :host [graphs] core-selector:not([notap]) div { cursor:pointer }
+        
+        [graphs-area] { min-height:80px; margin-top:15px }
         
         
         :host side { padding-left:5px } 
@@ -101,29 +106,16 @@
         
          <!-- source graphs -->
            <grade-fascia truncate>
-              
-              <div graphs horizontal layout flex fascia-title>
-              
-                 <div smaller wired rounded relative flex>
-                     <loading-panel fit loading="{{source.loadingGraphs==true}}" message="loading the graphs" style="overflow-y:auto;">
-                        <core-selector id="sourceGraphs"  
-                                       notap?="{{!editable.edit}}" 
-                                       selected="{{editable.model.bean[K.source_graph]}}" 
-                                       multi 
-                                       valueattr="item" 
-                                       selectedAttribute="fg">
-                         <template repeat="{{graph in source.model.graphs}}">
-                               <div smaller item={{graph.uri}}>{{graph.label !=null?graph.label:suffix(graph.uri)}}</div>
-                         </template>
-                      </core-selector>
-                     </loading-panel>
-                  </div>
-                  
-                  <grade-button disabled?={{!editable.edit}} side icon=refresh label="refresh graphs" on-click={{refreshSourceGraphs}}></grade-button>
            
-              </div>
-                       
-                
+              <graphs-panel graphs-area flex fascia-title
+                   endpoint={{source}} 
+                   graphs={{editable.model.sourceGraphs}} 
+                   editable={{editable.edit}}
+                   invalid="{{ editable.fieldsInvalidity[K.source_graph] }}"
+                   on-refresh-endpoint={{refreshSourceGraphs}}
+                 >
+                 </graphs-panel>
+            
              <grade-uri fascia-subtitle value="{{K.source_graph}}"></grade-uri>
              
            </grade-fascia>   

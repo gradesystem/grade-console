@@ -1,7 +1,7 @@
 part of tasks;
 
 @CustomTag("task-details")
-class TasKDetails extends View {
+class TaskDetails extends View {
   
   static String URI_PREFIX = "http://gradesystem.io/tasks#";
   static RegExp spaceExp = new RegExp(r'[\s]');
@@ -16,7 +16,7 @@ class TasKDetails extends View {
   Validator conditionalRequiredDiff ;
   Validator uniqueLabel;
   
-  TasKDetails.created() : super.created() {
+  TaskDetails.created() : super.created() {
   
     endpoints = instanceOf(GradeEnpoints);
     Tasks tasks = instanceOf(Tasks);
@@ -29,6 +29,7 @@ class TasKDetails extends View {
   
   @ComputedProperty("editable.model.bean[K.source_endpoint]")
   EditableEndpoint get source => endpoints.findEditableEndpointById(get(editable,K.source_endpoint));
+  set source(EditableEndpoint source) {/*IGNORE IT*/}
    
   @ComputedProperty("editable.model.bean[K.target_endpoint]")
   EditableEndpoint get target => endpoints.findEditableEndpointById(get(editable,K.target_endpoint));
@@ -45,7 +46,7 @@ class TasKDetails extends View {
   @ObserveProperty("editable.model")
   void updateGraphs() {
     
-    $["sourceGraphs"].selected = getAll(editable,K.source_graph);
+    //$["sourceGraphs"].selected = getAll(editable,K.source_graph);
     $["targetGraphs"].selected = get(editable,K.target_graph);
  
   }
