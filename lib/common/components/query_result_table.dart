@@ -9,6 +9,9 @@ class QueryResultTable extends PolymerElement {
 
   @published
   bool dirty;
+  
+  @published
+  bool contentCopyEnabled;
 
   QueryResultTable.created() : super.created();
 

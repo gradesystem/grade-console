@@ -6,7 +6,8 @@
   <template>
 		<grade-table headers={{queryResult.headers}} 
 		      data="{{ queryResult | toTable }}" 
-		      disabled="{{dirty}}">
+		      disabled="{{dirty}}"
+		      contentCopyEnabled={{contentCopyEnabled}}>
 		</grade-table>
   </template>
   <script type="application/dart" src="query_result_table.dart"></script>

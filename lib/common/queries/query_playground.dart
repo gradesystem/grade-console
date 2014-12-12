@@ -21,7 +21,13 @@ class QueryPlayground extends PolymerElement with Filters {
   @observable
   bool isactive;
   
+  CodemirrorInput expressionEditor;
+  
   QueryPlayground.created() : super.created();
+  
+  void ready() {
+    expressionEditor = $["expressionEditor"];
+  }
   
   void attributeChanged(name, oldValue, newValue) {
      super.attributeChanged(name, oldValue, newValue);
@@ -83,6 +89,10 @@ class QueryPlayground extends PolymerElement with Filters {
   void showErrorDetails() {
     CoreCollapse collapse = $["errorDetails"] as CoreCollapse;
     collapse.toggle();
+  }
+  
+  void onResultContentCopy(event, detail, target) {
+    if (editableQuery.edit) expressionEditor.paste(detail);
   }
   
 }

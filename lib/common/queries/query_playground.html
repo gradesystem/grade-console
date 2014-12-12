@@ -76,6 +76,7 @@
           <div flex wired rounded spaced layout horizontal style="min-height:75px;">
 	          
 	          <codemirror-input flex
+	          id="expressionEditor"
 	          active={{isactive}} 
 	          mode="sparql" 
 	          value={{expression}}
@@ -137,7 +138,12 @@
 	            <div vertical layout>
 	             <result-breadcrumb history={{editableQuery.history}} on-go-uri={{onResultGoUri}}></result-breadcrumb>
 	             <div flex  style="overflow-y: auto;">
-	               <query-result-table queryResult={{editableQuery.lastQueryResult}} dirty={{editableQuery.dirty}} on-uri-click={{onResultUriClick}}></query-result-table>
+	               <query-result-table 
+	               queryResult={{editableQuery.lastQueryResult}} 
+	               dirty={{editableQuery.dirty}} 
+	               on-uri-click={{onResultUriClick}}
+	               contentCopyEnabled={{editableQuery.edit}}
+	               on-copy-content={{onResultContentCopy}}></query-result-table>
 	             </div>
 	            </div>
 	            

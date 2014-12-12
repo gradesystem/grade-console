@@ -59,4 +59,9 @@ class CodemirrorInput extends PolymerElement {
 
   }
   
+  void paste(String text) {
+    Position cursorPosition = editor.getDoc().getCursor();
+    editor.getDoc().callArgs('replaceRange', [text, cursorPosition.toProxy(), cursorPosition.toProxy()]);
+  }
+  
 }

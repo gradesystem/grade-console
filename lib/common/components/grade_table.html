@@ -1,69 +1,86 @@
 <link rel="import" href="../../../../packages/polymer/polymer.html">
 <link rel="import" href="../../../../packages/core_elements/core_tooltip.html">
+<link rel="import" href="../../../../packages/core_elements/core_icon.html">
+<link rel="import" href="../../../../packages/core_elements/core_icons.html">
 
 <link rel="import" href="grade_uri.html">
 
 <polymer-element name="grade-table">
 
-    <template>
+  <template>
 
-      <style>  
+	  <style>  
+	  
+	    [table] {
+	      overflow-y: auto;
+	    }
+	    
+	    [headers] {
+	      border-bottom: 1px solid lightgray;
+	      margin-bottom: 10px;
+	    }        
+	            
+	    [cell] {
+	      margin:5px 5px;
+	      overflow-x:hidden;
+	      white-space: nowrap;
+	      text-overflow: ellipsis;
+	    }
+	    
+	    
+	    [uri] [start] {
+	      color: #90A4AE
+	    }
+	    
+	    :host [disabled] * {
+	      color: lightgrey !important;
+	    }
+	    
+	    [pointer] {
+	      cursor:pointer;
+	    }
+	    
+	    [copy-icon] {
+        opacity: 0;
+        
+	      height: 12px;
+	      min-height: 12px;
+        width: 12px;
+        min-width: 12px;
+	    }
+	    
+	   [copy-icon]:hover {
+	   opacity: 1;
+	     /*visibility: visible;*/
+	    }
+	
+	  </style>
       
-        [table] {
-          overflow-y: auto;
-        }
-        
-        [headers] {
-          border-bottom: 1px solid lightgray;
-          margin-bottom: 10px;
-        }        
-                
-        [cell] {
-          margin:5px 5px;
-          overflow-x:hidden;
-          white-space: nowrap;
-          text-overflow: ellipsis;
-        }
-        
-        
-        [uri] [start] {
-          color: #90A4AE
-        }
-        
-        :host [disabled] * {
-          color: lightgrey !important;
-        }
-        
-        [pointer] {
-          cursor:pointer;
-        }
-
-      </style>
+    <div disabled?="{{disabled}}" inset rounded layout vertical>
+      <div headers layout horizontal>
+	      <template repeat="{{header in headers}}">
+	        <div fg flex cell>{{header}}</div>
+	      </template>
+      </div>
       
-        <div disabled?="{{disabled}}" inset rounded layout vertical>
-	          <div headers layout horizontal>
-		         <template repeat="{{header in headers}}">
-		           <div fg flex cell>{{header}}</div>
-		         </template>
-		        </div>
-		        
-            <template repeat="{{row in data}}">
-              <div layout horizontal>
-                <template repeat="{{cell in row}}">
-                  <core-tooltip flex label="{{cell['value']}}">
-                   <div cell uri?="{{ (cell['value'] | suffix) != ''}}" pointer?={{isUri(cell)}} smaller on-click={{uriClick}} cell-value="{{cell['value']}}" cell-type="{{cell['type']}}">
-                        
-                        <span fg?="{{ (cell['value'] | suffix) == ''}}" start>{{cell['value'] | start }}</span><span fg>{{ cell['value'] | suffix}}</span>
-                     
-                     </div>
-                   </core-tooltip>
-              </template>
+      <template repeat="{{row in data}}">
+        <div layout horizontal>
+          <template repeat="{{cell in row}}">
+            <div flex cell uri?="{{ (cell['value'] | suffix) != ''}}" pointer?={{isUri(cell)}} smaller layout horizontal center>
+              <div on-click={{uriClick}} cell-value="{{cell['value']}}" cell-type="{{cell['type']}}" flex>
+                <span fg?="{{ (cell['value'] | suffix) == ''}}" start>{{cell['value'] | start }}</span><span fg>{{ cell['value'] | suffix}}</span>
               </div>
-            </template>
+        
+              <core-icon copy-icon icon="content-copy" on-click={{copyContent}} cell-value="{{cell['value']}}" hidden?="{{!contentCopyEnabled}}" small></core-icon>
+                                
+            </div>
+          </template>
         </div>
+      </template>
+    </div>
     
     <script type="application/dart" src="grade_table.dart"></script> 
     
-    </template>
+  </template>
 
 </polymer-element>
