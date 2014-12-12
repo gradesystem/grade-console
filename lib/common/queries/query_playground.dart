@@ -56,13 +56,13 @@ class QueryPlayground extends PolymerElement with Filters {
   @ComputedProperty("resultArea == TABS_PANEL")
   bool get showTabs => readValue(#showTabs, ()=>false);
   
-  @ObserveProperty("editableQuery editableQuery.lastError editableQuery.lastQueryResult")
+  @ObserveProperty("editableQuery editableQuery.lastError editableQuery.lastResult.value")
   void updateResultArea() {
     resultArea = WHITE_PANEL;
     
     if (editableQuery != null) {
       if (editableQuery.lastError!=null) resultArea = ERROR_PANEL;
-      if (!editableQuery.lastResult.hasValue) resultArea = TABS_PANEL;
+      if (editableQuery.lastResult.hasValue) resultArea = TABS_PANEL;
     }
   }
   
