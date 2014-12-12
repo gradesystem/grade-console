@@ -41,17 +41,10 @@
 	    }
 	    
 	    [copy-icon] {
-        opacity: 0;
-        
 	      height: 12px;
 	      min-height: 12px;
         width: 12px;
         min-width: 12px;
-	    }
-	    
-	   [copy-icon]:hover {
-	   opacity: 1;
-	     /*visibility: visible;*/
 	    }
 	
 	  </style>
@@ -71,7 +64,7 @@
                 <span fg?="{{ (cell['value'] | suffix) == ''}}" start>{{cell['value'] | start }}</span><span fg>{{ cell['value'] | suffix}}</span>
               </div>
         
-              <core-icon copy-icon icon="content-copy" on-click={{copyContent}} cell-value="{{cell['value']}}" hidden?="{{!contentCopyEnabled}}" small></core-icon>
+              <core-icon onhover copy-icon icon="content-copy" on-click={{copyContent}} cell-value="{{cell['value']}}" hidden?="{{!contentCopyEnabled}}"></core-icon>
                                 
             </div>
           </template>
