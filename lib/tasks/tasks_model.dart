@@ -33,22 +33,17 @@ class Task extends EditableGradeEntity with Filters {
   ObservableList<String> _source_graphs = new ObservableList();
 
   Task.fromBean(Map bean) : super(bean) {
-    _syncGraphs();
+    _installSourceGraphs();
     _listenChanges();
   }
-  
-  Task._clone(Map bean) : super(bean) {
-    sourceGraphs = get(K.source_graph);
-    set(K.source_graph, _source_graphs);
-    _listenChanges();
-    }
 
   Task() : this.fromBean({
     K.op:K.publish_op,
     K.source_graph:[]
   });
   
-  void _syncGraphs() {
+  //put the graphs in the bean in the sourceGraphs field and sets the sourceGraphs field as bean value
+  void _installSourceGraphs() {
     sourceGraphs = get(K.source_graph);
     set(K.source_graph, _source_graphs);
   }
@@ -87,9 +82,7 @@ class Task extends EditableGradeEntity with Filters {
     notifyPropertyChange(#operation, null, operation);
   }
 
-  Task clone() {
-    return new Task._clone(new Map.from(bean));
-  }
+  Task clone() => new Task.fromBean(new Map.from(bean));
 }
 
 class EditableTask extends EditableModel<Task> with Keyed {

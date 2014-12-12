@@ -27,13 +27,7 @@ class Query extends EditableGradeEntity with Filters, Observable {
   ObservableList<String> _graphs = new ObservableList();
 
   Query.fromBean(this.base_url, this.repo_path, Map bean) : super(bean) {
-    _syncGraphs();
-    _listenChanges();
-  }
-
-  Query._clone(this.base_url, this.repo_path, Map bean) : super(bean) {
-    graphs = get(K.graph);
-    set(K.graph, _graphs);
+    _installGraphs();
     _listenChanges();
   }
 
@@ -51,7 +45,8 @@ class Query extends EditableGradeEntity with Filters, Observable {
     //we don't support graphs in bean map writing
   }
 
-  void _syncGraphs() {
+  //put the graphs in the bean in the graphs field and sets the graphs field as bean value
+  void _installGraphs() {
     graphs = get(K.graph);
     set(K.graph, _graphs);
   }
@@ -74,9 +69,7 @@ class Query extends EditableGradeEntity with Filters, Observable {
 
   bool get predefined => get(K.predefined);
 
-  Query clone() {
-    return new Query._clone(base_url, repo_path, new Map.from(bean));
-  }
+  Query clone() => new Query.fromBean(base_url, repo_path, new Map.from(bean));
 
   //calculates endpoint
   @observable
