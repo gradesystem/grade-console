@@ -62,7 +62,7 @@ class QueryPlayground extends PolymerElement with Filters {
     
     if (editableQuery != null) {
       if (editableQuery.lastError!=null) resultArea = ERROR_PANEL;
-      if (editableQuery.lastQueryResult!=null) resultArea = TABS_PANEL;
+      if (!editableQuery.lastResult.hasValue) resultArea = TABS_PANEL;
     }
   }
   
@@ -74,16 +74,9 @@ class QueryPlayground extends PolymerElement with Filters {
     fire("run", detail:editableQuery);
   }
   
-  void onResultUriClick(event, detail, target) {
-    editableQuery.history.go(detail);
-    fire("describe-result", detail:detail);
-  }
-  
-  void onResultGoUri(event, detail, target) {
-    int index = int.parse(detail);
-    editableQuery.history.goIndex(index);
-    if (!editableQuery.history.empty) fire("describe-result", detail:editableQuery.history.currentUri);
-    else fire("run", detail:editableQuery);
+  void onDescribeUri(event, detail, target) {
+    event.stopImmediatePropagation();
+    fire("describe-result", detail:{"uri":detail, "query":editableQuery});
   }
   
   void showErrorDetails() {

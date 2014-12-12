@@ -74,7 +74,7 @@ class QueriesPanel extends PolymerElement with Filters, Dependencies {
   }
   
   void onDescribeResult(event, detail, target) {
-    model.describeResultUri(queries.selected, detail);
+    model.describeResultUri(detail["query"], detail["uri"]);
   }
 
   void removeItem(event, detail, target) {

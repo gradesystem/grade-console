@@ -11,8 +11,8 @@
 <link rel="import" href="../components/grade_error.html">
 <link rel="import" href="../components/loading_panel.html">
 <link rel="import" href="../components/codemirror_input.html">
-<link rel="import" href="../components/query_result_table.html">
 <link rel="import" href="../components/result_breadcrumb.html">
+<link rel="import" href="../components/result_panel.html">
 
 <link rel="import" href="../../../../packages/core_elements/av_icons.html">
 <link rel="import" href="../../../../packages/core_elements/core_pages.html">
@@ -135,20 +135,17 @@
 						<!--  RESULTS TAB -->
 	          <core-animated-pages selected="{{resultTab}}" fit spaced>
 	            
-	            <div vertical layout>
-	             <result-breadcrumb history={{editableQuery.history}} on-go-uri={{onResultGoUri}}></result-breadcrumb>
-	             <div flex  style="overflow-y: auto;">
-	               <query-result-table 
-	               queryResult={{editableQuery.lastQueryResult}} 
-	               dirty={{editableQuery.dirty}} 
-	               on-uri-click={{onResultUriClick}}
-	               contentCopyEnabled={{editableQuery.edit}}
-	               on-copy-content={{onResultContentCopy}}></query-result-table>
-	             </div>
-	            </div>
+	            <result-panel 
+		            result={{editableQuery.lastResult}} 
+		            dirty={{editableQuery.dirty}} 
+		            contentCopyEnabled={{editableQuery.edit}}
+		            on-copy-content={{onResultContentCopy}}
+		            on-run-query={{onRun}}
+		            on-describe-uri={{onDescribeUri}}
+		            ></result-panel>
 	            
 	            <div style="overflow-y: auto;">
-	              <pre>{{editableQuery.lastQueryResult.raw}}</pre>
+	              <pre>{{editableQuery.lastResult.value.raw}}</pre>
 	            </div>
 	          
 	          </core-animated-pages>

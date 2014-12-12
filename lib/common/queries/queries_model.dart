@@ -154,10 +154,7 @@ class EditableQuery extends EditableModel<Query> with Keyed {
   ErrorResponse lastError;
 
   @observable
-  QueryResult lastQueryResult;
-
-  @observable
-  ResultHistory history = new ResultHistory();
+  Result lastResult = new Result();
 
   @observable
   ObservableMap<String, String> parametersValues = new ObservableMap();
@@ -234,12 +231,12 @@ class EditableQuery extends EditableModel<Query> with Keyed {
     queryRunning = true;
     _setDirty(false);
     resetLastError();
-    lastQueryResult = null;
+    lastResult.clean();
   }
 
   void queryResult(QueryResult result) {
     queryRunning = false;
-    lastQueryResult = result;
+    lastResult.value = result;
   }
 
   void queryFailed(ErrorResponse reason) {
@@ -283,6 +280,9 @@ class Result extends Observable {
 
   @observable
   bool loading = false;
+  
+  @observable
+  ResultHistory history = new ResultHistory();
 
   bool get hasValue => value != null;
 
