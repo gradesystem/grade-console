@@ -73,19 +73,6 @@ class QueryPlayground extends PolymerElement with Filters {
     fire("describe-result", detail:detail);
   }
   
-  //remove when breadcumb approved
-  void onResultBack() {
-    editableQuery.history.goBack();
-    if (!editableQuery.history.empty) fire("describe-result", detail:editableQuery.history.currentUri);
-    else fire("run", detail:editableQuery);
-  }
-  
-  //remove when breadcumb approved
-  void onResultForward() {
-    editableQuery.history.goForward();
-    fire("describe-result", detail:editableQuery.history.currentUri);
-  }
-  
   void onResultGoUri(event, detail, target) {
     int index = int.parse(detail);
     editableQuery.history.goIndex(index);

@@ -112,16 +112,11 @@
 
     <div flex wired rounded spaced layout vertical>
       <grade-header-panel flex paneltitle="Results">
-      <!-- REMOVE WHEN BREADCUMB APPROVED -->
-<!--       <div toolbar style="width:300px" horizontal layout> -->
-<!--         <grade-button self-center icon="arrow-back" on-click="{{onResultBack}}" hide?="{{!editableQuery.history.canGoBack || editableQuery.queryRunning}}"></grade-button> -->
-<!--         <grade-button self-center icon="arrow-forward" on-click="{{onResultForward}}" hide?="{{!editableQuery.history.canGoForward || editableQuery.queryRunning}}"></grade-button> -->
-<!--         <div flex></div> -->
         <paper-tabs toolbar style="width:200px; display: inline-block;" selected="{{resultTab}}" hide?="{{!showTabs}}" >
           <paper-tab>Table</paper-tab>
           <paper-tab>Raw</paper-tab>
         </paper-tabs>
-<!--         </div> -->
+
         <loading-panel main fit loading="{{editableQuery.queryRunning}}" message="retrieving results">
         
 	        <core-animated-pages fit selected="{{resultArea}}">
