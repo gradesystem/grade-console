@@ -15,6 +15,9 @@ class ResultPanel extends PolymerElement {
   
   @published
   bool contentCopyEnabled;
+  
+  @published
+  bool breadcrumbEnabled = true;
     
   ResultPanel.created() : super.created();
   
