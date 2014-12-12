@@ -134,7 +134,8 @@
 						
 						<!--  RESULTS TAB -->
 	          <core-animated-pages selected="{{resultTab}}" fit spaced>
-	            
+
+              <!-- TABLE -->	            
 	            <result-panel 
 		            result={{editableQuery.lastResult}} 
 		            dirty={{editableQuery.dirty}} 
@@ -144,9 +145,12 @@
 		            on-describe-uri={{onDescribeUri}}
 		            ></result-panel>
 	            
-	            <div style="overflow-y: auto;">
-	              <pre>{{editableQuery.lastResult.value.raw}}</pre>
-	            </div>
+	            <!-- RAW -->
+	            <codemirror-input 
+		            mode="application/json" 
+		            autoheight
+		            value={{editableQuery.lastResult.value.raw}}
+		            disabled="{{true}}"></codemirror-input>
 	          
 	          </core-animated-pages>
           </core-animated-pages>

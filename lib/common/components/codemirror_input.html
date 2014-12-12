@@ -16,8 +16,12 @@
         :host {
         display: block;
         }
+        
+        [auto-height] > .CodeMirror {
+          height: auto !important;
+        }
 		</style>
-		      <div fit style="height:100%" id="codemirror">
+		      <div fit style="height:100%" id="codemirror" auto-height?={{autoheight}}>
 
           </div>
 		</template>

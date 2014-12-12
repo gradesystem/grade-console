@@ -15,6 +15,9 @@ class CodemirrorInput extends PolymerElement {
   
   @published
   bool disabled;
+  
+  @published
+  bool autoheight = false;
 
   CodeMirror editor;
 
@@ -36,6 +39,8 @@ class CodemirrorInput extends PolymerElement {
     Map options = {
       'mode':  mode
     };
+ 
+    if (autoheight) options["viewportMargin"] = double.INFINITY;
 
     editor = new CodeMirror.fromElement(
         $['codemirror'], options: options);
