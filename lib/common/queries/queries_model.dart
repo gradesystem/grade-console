@@ -79,7 +79,8 @@ class Query extends EditableGradeEntity with Filters, Observable {
     for (String parameter in parameters) endpointParameters[parameter] = "...";
 
     Uri base = Uri.parse(base_url);
-    Uri uri = new Uri.http(base.authority, '${base.path}/service/${repo_path}/query/${bean[K.name]}/results', endpointParameters);
+    String namePath = name!=null && name.isNotEmpty ? name:"~missing~";
+    Uri uri = new Uri.http(base.authority, '${base.path}/service/${repo_path}/query/$namePath/results', endpointParameters);
 
     String endpoint = uri.toString();
 
