@@ -6,6 +6,12 @@
 
 <polymer-element name="grade-header-panel" vertical layout noscript attributes="paneltitle, panelsubtitle">
   <template>
+  
+	  <style>
+	    [subtitle] {
+	      font-size: small;
+	    }
+	  </style>
     
     <core-header-panel mode="seamed" flex>
 	        
@@ -15,7 +21,7 @@
         
         <div flex>
           <div bolder>{{paneltitle}}</div>
-          <div small>{{panelsubtitle}}</div>
+          <div subtitle>{{panelsubtitle}}</div>
         </div>
 
         <div layout horizontal center>            
