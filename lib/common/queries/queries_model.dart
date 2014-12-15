@@ -380,7 +380,7 @@ class ResultHistory extends Observable {
   }
   
   void clear() {
-    currentIndex == -1;
+    currentIndex = -1;
     uris.clear();
     _notifyChanges();
   }
