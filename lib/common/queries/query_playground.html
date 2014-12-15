@@ -70,10 +70,10 @@
     </style>
     
     <div style="height:60%;" wired rounded spaced layout vertical>
-      <grade-header-panel flex paneltitle={{title}}>
+      <grade-header-panel flex paneltitle={{title}} style="overflow-y:hidden;">
         <grade-button menu icon="arrow-back" on-click="{{onBack}}"></grade-button>
         <div main fit layout vertical>
-          <div flex wired rounded spaced layout horizontal style="min-height:75px;">
+          <div flex wired rounded spaced layout horizontal style="overflow-y:hidden;">
 	          
 	          <codemirror-input flex
 	          id="expressionEditor"
@@ -106,7 +106,7 @@
       </div>
     </div>
   
-    <core-splitter direction="up" allowOverflow minSize="170px"></core-splitter>
+    <core-splitter direction="up" allowOverflow minSize="10px"></core-splitter>
 
     <div flex wired rounded spaced layout vertical>
       <grade-header-panel flex paneltitle="Results" panelsubtitle="{{editableQuery.queryEndpoint}}">
