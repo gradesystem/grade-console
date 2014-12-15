@@ -30,6 +30,8 @@
 		  }
 		        
       [graphs-area] { min-height:80px; margin-top:15px }
+      
+      [derived-fields-area] { padding:10px;margin-top: 30px;}
 		  
     </style>
 		
@@ -141,29 +143,29 @@
 				    
 	        </grade-item>
 	        
-          <!-- parameters -->
-		      <grade-item icon=chevron-right>
-		      
-		        <grade-fascia truncate>
-                  
-              <div fascia-title>{{ parameters }}</div>
-              <div fascia-subtitle><span>{{ K.parameters | start }}</span><span fg bolder>{{ K.parameters | suffix}}</span></div>
-                  
-            </grade-fascia>
-
-        </grade-item>
-		   
-          <!-- endpoin -->
-		      <grade-item icon=chevron-right>
-		       
-						<grade-fascia truncate>
-						
-							<div fascia-title>{{ item.model.endpoint }}</div>
-							<div fascia-subtitle><span>{{ K.endpoint | start }}</span><span fg bolder>{{ K.endpoint | suffix}}</span></div>
-						     
-						</grade-fascia>
-		           
-		      </grade-item>
+	        <!-- derived fields -->
+          <div derived-fields-area rounded framing>
+          
+            <!-- ednpoint -->
+            <div layout vertical>
+                <div bolder>Query URL:</div>
+               <div fg>{{ item.model.endpoint }}</div>
+          </div>
+          
+         
+         <div layout vertical style="padding-top: 10px;">
+        
+           <div>
+              <div bolder>Query parameters:</div>
+            </div>
+           
+           <div>
+               <div fg>{{ parameters }}</div>
+           </div>
+           
+          </div>
+          
+          </div>
 	          
 	      </div>
 	    </loading-panel>
