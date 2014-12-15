@@ -312,7 +312,7 @@ class RawFormat {
   static const JSON = const RawFormat._internal(MediaType.SPARQL_JSON, 'json', 'application/json');
   static const XML = const RawFormat._internal(MediaType.SPARQL_XML, 'xml', 'application/xml');
   static const NTRIPLES = const RawFormat._internal(MediaType.NTRIPLES, 'n-triples', 'application/text');
-  static const JSONLD_TYPE = const RawFormat._internal(MediaType.JSONLD, 'json-ld', 'application/json-ld');
+  static const JSONLD_TYPE = const RawFormat._internal(MediaType.JSONLD, 'json-ld', 'application/ld+json');
   static const RDF_XML = const RawFormat._internal(MediaType.RDF_XML, 'rdf-xml', 'application/xml');
   static const TURTLE = const RawFormat._internal(MediaType.TURTLE, 'turtle', 'application/text');
 }
