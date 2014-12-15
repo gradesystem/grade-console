@@ -6,7 +6,9 @@ class QueryService extends EditableListService<Query> {
   
   String base_url;
 
-  QueryService(String base_url, String path) : super(path, "queries", "query", (Map json) => new Query.fromBean(base_url, path, json));
+  QueryService(String base_url, String path) : super(path, "queries", "query", (Map json) => new Query.fromBean(base_url, path, json)){
+    this.base_url = base_url;
+  }
 
   Future<String> runQueryByName(Query query, Map<String, String> parameters, [RawFormat format=RawFormat.JSON]) {
 
