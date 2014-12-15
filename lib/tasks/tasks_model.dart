@@ -427,8 +427,17 @@ class HasTaskIcons {
 }
 
 
+int compareTasks(EditableModel<Task> et1, EditableModel<Task> et2) {
+  if (et1 == null || et1.model.label == null) return 1;
+  if (et2 == null || et2.model.label == null) return -1;
+  return et1.model.label.compareTo(et2.model.label);
+}
+
+
 @Injectable()
 class Tasks extends EditableListItems<EditableModel<Task>> {
+  
+  Tasks():super(compareTasks);
   
   containsLabel($) => data.any((EditableTask eq)=>eq!=selected && eq.model.label!=null && eq.model.label.toLowerCase() == $.toLowerCase());
 }

@@ -104,7 +104,15 @@ class Query extends EditableGradeEntity with Filters, Observable {
   }
 }
 
+int compareQueries(EditableQuery eq1, EditableQuery eq2) {
+  if (eq1 == null || eq1.model.name == null) return 1;
+  if (eq2 == null || eq2.model.name == null) return -1;
+  return eq1.model.name.compareTo(eq2.model.name);
+}
+
 class Queries extends EditableListItems<EditableQuery> {
+  
+  Queries():super(compareQueries);
 
   bool containsName(String name) => data.any((EditableQuery eq) => eq != selected && eq.model.name != null && eq.model.name.toLowerCase() == name.toLowerCase());
 }

@@ -128,7 +128,7 @@ abstract class SubPageEditableModel<T extends EditableGradeEntity> {
 
 abstract class EditableListItems<T extends EditableModel> extends ListItems<T> {
   
-  EditableListItems() {
+  EditableListItems([Comparator<T> comparator]):super(comparator) {
     onPropertyChange(data, #lastChangedItem, _notifySynchedDataChanged);
     onPropertyChange(data, #length, _notifySynchedDataChanged);
   }
