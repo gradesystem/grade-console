@@ -2,6 +2,8 @@ part of lists;
 
 abstract class ListItems<T extends Observable> extends Observable {
   
+  Comparator<T> _comparator;
+  
   @observable
   T selected = null;
   
@@ -10,6 +12,24 @@ abstract class ListItems<T extends Observable> extends Observable {
   
   @observable
   bool loading = false;
+  
+  ListItems([this._comparator]) {
+    if (_comparator!=null) {
+      data.listChanges
+      .where((List<ListChangeRecord> records)=> records.any((ListChangeRecord record)=>record.addedCount>0 || record.removed.isNotEmpty))
+      .listen((_)=>_sort());
+    }
+  }
+  
+  void _sort() {
+    loading = true;
+    List<T> copy = new List.from(data);
+    copy.sort(_comparator);
+    data.clear();
+    data.addAll(copy);
+    loading = false;
+  }
+  
 }
 
 class ListsUnion<T> extends Observable {
