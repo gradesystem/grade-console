@@ -27,6 +27,11 @@
 	      text-overflow: ellipsis;
 	    }
 	    
+	     [cell]:hover *{
+	     color: white !important;
+	     }
+	     
+	    
 	    
 	    [uri] [start] {
 	      color: #90A4AE
@@ -59,7 +64,7 @@
       <template repeat="{{row in data}}">
         <div layout horizontal>
           <template repeat="{{cell in row}}">
-            <div flex cell uri?="{{ (cell['value'] | suffix) != ''}}" pointer?={{isUri(cell)}} smaller layout horizontal center>
+            <div flex cell uri?="{{ (cell['value'] | suffix) != ''}}" pointer?={{isUri(cell)}} smaller layout horizontal center grade-hover>
               <div on-click={{uriClick}} cell-value="{{cell['value']}}" cell-type="{{cell['type']}}" flex>
                 <span fg?="{{ (cell['value'] | suffix) == ''}}" start>{{cell['value'] | start }}</span><span fg>{{ cell['value'] | suffix}}</span>
               </div>

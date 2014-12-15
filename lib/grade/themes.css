@@ -139,6 +139,9 @@
   border: 1px solid;
   border-color: #26699a;
 }
+:host /deep/ .home /deep/ [grade-hover]:hover {
+  background-color: "tertiary";
+}
 :host /deep/ .home /deep/ paper-progress::shadow #activeProgress {
   background-color: "primary" !important;
 }
@@ -239,6 +242,9 @@
 :host /deep/ .prod /deep/ [wired-fg] {
   border: 1px solid;
   border-color: #00bcd4;
+}
+:host /deep/ .prod /deep/ [grade-hover]:hover {
+  background-color: #80deea;
 }
 :host /deep/ .prod /deep/ paper-progress::shadow #activeProgress {
   background-color: "primary" !important;
@@ -341,6 +347,9 @@
   border: 1px solid;
   border-color: #6fa6bc;
 }
+:host /deep/ .deck /deep/ [grade-hover]:hover {
+  background-color: #a5d6a7;
+}
 :host /deep/ .deck /deep/ paper-progress::shadow #activeProgress {
   background-color: "primary" !important;
 }
@@ -442,6 +451,9 @@
   border: 1px solid;
   border-color: #e41c23;
 }
+:host /deep/ .tasks /deep/ [grade-hover]:hover {
+  background-color: #f69988;
+}
 :host /deep/ .tasks /deep/ paper-progress::shadow #activeProgress {
   background-color: "primary" !important;
 }
@@ -542,6 +554,9 @@
 :host /deep/ .stage /deep/ [wired-fg] {
   border: 1px solid;
   border-color: #009587;
+}
+:host /deep/ .stage /deep/ [grade-hover]:hover {
+  background-color: #80cbc4;
 }
 :host /deep/ .stage /deep/ paper-progress::shadow #activeProgress {
   background-color: "primary" !important;
