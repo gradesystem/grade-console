@@ -23,7 +23,8 @@ class CodemirrorInput extends PolymerElement {
 
   
   CodemirrorInput.created() : super.created() {
-    onPropertyChange(this, #active, refresh);        
+    onPropertyChange(this, #active, refresh);       
+    onPropertyChange(this, #mode, updateMode);
   }
 
   void refresh() {
@@ -32,6 +33,10 @@ class CodemirrorInput extends PolymerElement {
   
   void readonly() {
     
+  }
+  
+  void updateMode() {
+    editor.setMode(mode);
   }
   
   void ready() {

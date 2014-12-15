@@ -71,7 +71,14 @@ class QueryPlayground extends PolymerElement with Filters {
   }
   
   void onRun() {
+    editableQuery.lastResult.history.clear();
     fire("run", detail:editableQuery);
+    resultTab = 0;
+  }
+  
+  void onRunStart() {
+    fire("run", detail:editableQuery);
+    resultTab = 0;
   }
   
   void onDescribeUri(event, detail, target) {
@@ -86,6 +93,11 @@ class QueryPlayground extends PolymerElement with Filters {
   
   void onResultContentCopy(event, detail, target) {
     if (editableQuery.edit) expressionEditor.paste(detail);
+  }
+  
+  void onLoadRawResult(event, detail, target) {
+    event.stopImmediatePropagation();
+    fire("load-raw", detail:{"query":editableQuery, "format":detail});
   }
   
 }

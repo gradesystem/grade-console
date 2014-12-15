@@ -124,22 +124,42 @@ class QuerySubPageModel extends SubPageEditableModel<Query> {
 
   QueryService get queryService => service;
 
-  void runQueryByName(EditableQuery editableQuery) {
-    editableQuery.runQuery();
+  void runQueryByName(EditableQuery editableQuery, [RawFormat format = RawFormat.JSON]) 
+   => _run(editableQuery, editableQuery.model, editableQuery.parametersValues, queryService.runQueryByName, format);
 
-    queryService.runQueryByName(editableQuery.model, editableQuery.parametersValues).then((QueryResult r) => editableQuery.queryResult(r)).catchError((e) => editableQuery.queryFailed(e));
-  }
+  void runQuery(EditableQuery editableQuery, [RawFormat format = RawFormat.JSON])
+    => _run(editableQuery, editableQuery.model, editableQuery.parametersValues, queryService.runQuery, format);
 
-  void runQuery(EditableQuery editableQuery) {
-    editableQuery.runQuery();
-    queryService.runQuery(editableQuery.model, editableQuery.parametersValues).then((QueryResult r) => editableQuery.queryResult(r)).catchError((e) => editableQuery.queryFailed(e));
-  }
-
-  void describeResultUri(EditableQuery editableQuery, String resultUri) {
-    editableQuery.runQuery();
+  void describeResultUri(EditableQuery editableQuery, String resultUri, [RawFormat format = RawFormat.JSON]) {
+    
     Query resultQuery = editableQuery.model.clone();
     resultQuery.set(Query.K.expression, _buildQuery(resultUri));
-    queryService.runQuery(resultQuery, {}).then((QueryResult r) => editableQuery.queryResult(r)).catchError((e) => editableQuery.queryFailed(e));
+    
+    _run(editableQuery, resultQuery, {}, queryService.runQuery, format);
+  }
+  
+  void loadRaw(EditableQuery editableQuery, RawFormat format) {
+    Result result = editableQuery.lastResult;
+    Query resultQuery = editableQuery.model.clone();
+    resultQuery.set(Query.K.expression, result.lastExpression);
+    result.loadingRaw = true;
+    queryService.runQuery(resultQuery, {}, format)
+      .then((String raw){
+      result.raws[format] = raw;
+      result.loadingRaw = false;
+    })
+      .catchError((e){
+      result.raws[format] = "n/a";
+      result.loadingRaw = false;
+    });
+  }
+  
+  void _run(EditableQuery editableQuery, Query query, Map parameters, Future<String> runner(Query query, Map<String, String> parameters), [RawFormat format = RawFormat.JSON]) {
+    editableQuery.runQuery();
+    editableQuery.lastResult.lastExpression = query.get(Query.K.expression);
+    runner(query, parameters)
+      .then((String result) => editableQuery.queryResult(format, result))
+      .catchError((e) => editableQuery.queryFailed(e));
   }
 
   String _buildQuery(String resultUri) => "describe <$resultUri>";
@@ -234,9 +254,10 @@ class EditableQuery extends EditableModel<Query> with Keyed {
     lastResult.clean();
   }
 
-  void queryResult(QueryResult result) {
+  void queryResult(RawFormat rawFormat, String result) {
     queryRunning = false;
-    lastResult.value = result;
+    if (rawFormat == RawFormat.JSON) lastResult.value = new ResulTable(JSON.decode(result));
+    lastResult.raws[rawFormat] = result;
   }
 
   void queryFailed(ErrorResponse reason) {
@@ -263,32 +284,65 @@ class EditableQuery extends EditableModel<Query> with Keyed {
 
 }
 
-class QueryResult extends Delegate {
+class ResulTable extends Delegate {
 
-  String raw;
-
-  QueryResult(this.raw, Map bean) : super(bean);
+  ResulTable(Map bean) : super(bean);
 
   List<String> get headers => get("head")["vars"];
   List<Map<String, String>> get rows => get("results")["bindings"];
 }
 
-class Result extends Observable {
+class RawFormat {
 
+  static UnmodifiableListView<RawFormat> values = new UnmodifiableListView([JSON, XML, NTRIPLES, JSONLD_TYPE, RDF_XML, TURTLE]);
+
+  static RawFormat parse(String value) => values.firstWhere((RawFormat o) => o._value == value, orElse: () => null);
+
+  final MediaType _value;
+  final String _label;
+  final String _mode;
+  const RawFormat._internal(this._value, this._label, this._mode);
+  
+  toString() => 'Operation.$_label';
+
+  MediaType get value => _value;
+  String get label => _label;
+  String get mode => _mode;
+
+  static const JSON = const RawFormat._internal(MediaType.SPARQL_JSON, 'json', 'application/json');
+  static const XML = const RawFormat._internal(MediaType.SPARQL_XML, 'xml', 'application/xml');
+  static const NTRIPLES = const RawFormat._internal(MediaType.NTRIPLES, 'n-triples', 'application/text');
+  static const JSONLD_TYPE = const RawFormat._internal(MediaType.JSONLD, 'json-ld', 'application/json-ld');
+  static const RDF_XML = const RawFormat._internal(MediaType.RDF_XML, 'rdf-xml', 'application/xml');
+  static const TURTLE = const RawFormat._internal(MediaType.TURTLE, 'turtle', 'application/text');
+}
+
+class Result extends Observable {
+  
   @observable
-  QueryResult value;
+  ResulTable value;
 
   @observable
   bool loading = false;
   
   @observable
   ResultHistory history = new ResultHistory();
+  
+  @observable
+  ObservableMap<RawFormat,String> raws = toObservable({});
+  
+  @observable
+  bool loadingRaw = false;
+  
+  String lastExpression;
 
   bool get hasValue => value != null;
 
   void clean() {
     value = null;
+    raws.clear();
     loading = false;
+    loadingRaw = false;
   }
 }
 
@@ -322,6 +376,12 @@ class ResultHistory extends Observable {
   void goIndex(int index) {
     if (index>=uris.length || index<-1) throw new Exception("Wrong index $index");
     currentIndex = index;
+    _notifyChanges();
+  }
+  
+  void clear() {
+    currentIndex == -1;
+    uris.clear();
     _notifyChanges();
   }
 

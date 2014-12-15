@@ -8,20 +8,20 @@ class QueryService extends EditableListService<Query> {
 
   QueryService(String base_url, String path) : super(path, "queries", "query", (Map json) => new Query.fromBean(base_url, path, json));
 
-  Future<QueryResult> runQueryByName(Query query, Map<String, String> parameters) {
+  Future<String> runQueryByName(Query query, Map<String, String> parameters, [RawFormat format=RawFormat.JSON]) {
 
     Map<String, String> uriParameters = _getQueryParameters(query, parameters);
 
     String path = "query/${query.name}/results";
 
-    return http.get(path, parameters:uriParameters).then((response) => new QueryResult(response, _decode(response)));
+    return http.get(path, parameters:uriParameters, acceptedMediaType: format.value);
   }
 
-  Future<QueryResult> runQuery(Query query, Map<String, String> parameters) {
+  Future<String> runQuery(Query query, Map<String, String> parameters, [RawFormat format=RawFormat.JSON]) {
 
     Map<String, String> uriParameters = _getQueryParameters(query, parameters);
 
-    return http.post(SUBMIT_PATH, JSON.encode(query.bean), acceptedMediaType:MediaType.SPARQL_JSON, parameters:uriParameters).then((response) => new QueryResult(response, _decode(response)));
+    return http.post(SUBMIT_PATH, JSON.encode(query.bean), acceptedMediaType: format.value, parameters:uriParameters);
   }
   
   dynamic _decode(String json) {

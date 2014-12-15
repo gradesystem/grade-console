@@ -238,10 +238,10 @@ class TasksModel extends SubPageEditableModel<Task> {
   void retrieveTransformResult(RunningTask runningTask)
     => retrieveResult(runningTask, executionsService.getTransformResult, runningTask.transform);
   
-  void retrieveResult(RunningTask runningTask, Future<QueryResult> retriever(RunningTask), Result result) {
+  void retrieveResult(RunningTask runningTask, Future<ResulTable> retriever(RunningTask), Result result) {
     result.loading = true;
     retriever(runningTask.execution)
-    .then((QueryResult resultQuery){
+    .then((ResulTable resultQuery){
       result.value = resultQuery;
     }).catchError((e) => onError(e, null)).whenComplete(() {
       result.loading = false;

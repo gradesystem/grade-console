@@ -1,6 +1,4 @@
- <link rel="import" href="../../../../packages/polymer/polymer.html">
-
-<link rel="import" href="../coming_soon.html">
+<link rel="import" href="../../../../packages/polymer/polymer.html">
 
 <link rel="import" href="../components/grade_input.html">
 <link rel="import" href="../components/grade_item.html">
@@ -23,6 +21,8 @@
 <link rel="import" href="../../../../packages/paper_elements/paper_tabs.html">
 <link rel="import" href="../../../../packages/paper_elements/paper_tab.html">
 <link rel="import" href="../../../../packages/paper_elements/paper_input.html">
+
+<link rel="import" href="raw_result_panel.html">
 
 <link rel="import" href="queries.html">
 
@@ -139,16 +139,18 @@
 		            dirty={{editableQuery.dirty}} 
 		            contentCopyEnabled={{editableQuery.edit}}
 		            on-copy-content={{onResultContentCopy}}
-		            on-run-query={{onRun}}
+		            on-run-query={{onRunStart}}
 		            on-describe-uri={{onDescribeUri}}
 		            ></result-panel>
 	            
 	            <!-- RAW -->
-	            <codemirror-input 
-		            mode="application/json" 
-		            autoheight
-		            value={{editableQuery.lastResult.value.raw}}
-		            disabled="{{true}}"></codemirror-input>
+	            <raw-result-panel id="raw-result" result={{editableQuery.lastResult}} on-load-raw={{onLoadRawResult}}>
+	            </raw-result-panel>
+<!-- 	            <codemirror-input  -->
+<!-- 		            mode="application/json"  -->
+<!-- 		            autoheight -->
+<!-- 		            value={{editableQuery.lastResult.raws}} -->
+<!-- 		            disabled="{{true}}"></codemirror-input> -->
 	          
 	          </core-animated-pages>
           </core-animated-pages>

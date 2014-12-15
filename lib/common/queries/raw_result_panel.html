@@ -1,0 +1,33 @@
+<link rel="import" href="../../../../packages/polymer/polymer.html">
+<link rel="import" href="../components/loading_panel.html">
+<link rel="import" href="../components/codemirror_input.html">
+
+<link rel="import" href="../../../../packages/core_elements/core_animated_pages.html">
+<link rel="import" href="../../../../packages/paper_elements/paper_tabs.html">
+<link rel="import" href="../../../../packages/paper_elements/paper_tab.html">
+
+<link rel="import" href="queries.html">
+
+<polymer-element name="raw-result-panel" vertical layout>
+  <template>
+    <div vertical layout flex>
+      <div layout horizontal center end-justified> 
+       <paper-tabs style="width:325px; display: inline-block;" selected="{{formatTab}}">
+         <template repeat="{{format in formats}}">
+           <paper-tab>{{format.label}}</paper-tab>
+         </template>
+       </paper-tabs>
+      </div>
+      <loading-panel loading="{{result.loadingRaw}}" message="Loading raw" flex relative>
+        <div fit vertical layout wired>
+	        <codemirror-input style="overflow-y:auto" flex  
+	            id ="rawEditor"
+	            mode="{{mode}}" 
+	            value="{{raw}}"
+	            active="{{isactive || result.loadingRaw}}" 
+	            disabled="{{true}}"></codemirror-input>
+	      </div>
+      </loading-panel>
+    </div>
+  </template>
+</polymer-element>

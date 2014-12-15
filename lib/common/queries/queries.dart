@@ -1,6 +1,7 @@
 library queries;
 
 import 'dart:async';
+import 'dart:collection';
 import 'dart:convert' show JSON;
 
 import 'package:polymer/polymer.dart';
@@ -22,6 +23,7 @@ part 'query_details_summary.dart';
 part 'queries_panel.dart';
 part 'query_list.dart';
 part 'query_playground.dart';
+part 'raw_result_panel.dart';
 
 part 'queries_service.dart';
 
