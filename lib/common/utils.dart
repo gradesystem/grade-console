@@ -74,7 +74,7 @@ class ObservedItemList<E extends Observable> extends ObservableList<E> {
   }
 }
 
-class ListPathObserver<E, P> extends ChangeNotifier {
+class GradeListPathObserver<E, P> extends ChangeNotifier {
   final ObservableList<E> list;
   final String _itemPath;
   final List<PathObserver> _observers = <PathObserver>[];
@@ -82,7 +82,7 @@ class ListPathObserver<E, P> extends ChangeNotifier {
   bool _scheduled = false;
   Iterable<P> _value;
 
-  ListPathObserver(this.list, String path)
+  GradeListPathObserver(this.list, String path)
       : _itemPath = path {
 
     // TODO(jmesserly): delay observation until we are observed.

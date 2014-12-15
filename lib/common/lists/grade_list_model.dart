@@ -16,7 +16,7 @@ abstract class ListItems<T extends Observable> extends Observable {
   ListItems([this._comparator]) {
     if (_comparator!=null) {
       data.listChanges
-      .where((List<ListChangeRecord> records)=> records.any((ListChangeRecord record)=>record.addedCount>0 || record.removed.isNotEmpty))
+      .where((List<ListChangeRecord> records)=> records.any((ListChangeRecord record)=>record.addedCount>0))
       .listen((_)=>_sort());
     }
   }
@@ -27,7 +27,13 @@ abstract class ListItems<T extends Observable> extends Observable {
     copy.sort(_comparator);
     data.clear();
     data.addAll(copy);
+    
+    notifyPropertyChange(#selected, null, selected);
     loading = false;
+  }
+  
+  void sort() {
+    if (_comparator!=null) _sort();
   }
   
 }

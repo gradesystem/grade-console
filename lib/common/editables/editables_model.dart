@@ -80,6 +80,7 @@ abstract class SubPageEditableModel<T extends EditableGradeEntity> {
     .whenComplete(() {
       timer.cancel();
       editableModel.synched();
+      storage.sort();
     });
 
   }
