@@ -4,39 +4,33 @@
 <link rel="import" href="../../../../packages/core_elements/core_header_panel.html">
 <link rel="import" href="../../../../packages/core_elements/core_toolbar.html">
 
-<polymer-element name="grade-header-panel" vertical layout noscript attributes="paneltitle">
+<polymer-element name="grade-header-panel" vertical layout noscript attributes="paneltitle, panelsubtitle">
   <template>
-  
-    <style>
-    
-	    /** fixes the vertical alignment**/
-	    .title {
-	      margin-bottom: 1px;
-	    }
-	  
-	  </style>
     
     <core-header-panel mode="seamed" flex>
 	        
-	            <core-toolbar header> 
+      <core-toolbar header> 
 	        
-	              <content select="[menu]"></content>
-	            
-	              <div class="title" bolder flex>{{paneltitle}}</div>
+        <content select="[menu]"></content>
+        
+        <div flex>
+          <div bolder>{{paneltitle}}</div>
+          <div small>{{panelsubtitle}}</div>
+        </div>
 
-	              <div layout horizontal center>            
-	                <content select="[toolbar]"></content>
-	              </div>
+        <div layout horizontal center>            
+          <content select="[toolbar]"></content>
+        </div>
 	              
-	            </core-toolbar>
+      </core-toolbar>
 	            
-	            <div small-spaced>
+      <div small-spaced>
 	 
-	              <content select="[main]"></content>
+        <content select="[main]"></content>
 	
-	            </div>
+      </div>
 	            
-	     </core-header-panel>
+    </core-header-panel>
 
   </template>
   

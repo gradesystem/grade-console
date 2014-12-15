@@ -98,9 +98,6 @@
 	            </grade-item>
 	          </template>            
           </div>
-          <grade-item style="min-height:50px;">
-            <div fg>{{editableQuery.queryEndpoint}}</div>
-          </grade-item>
         </div>
         
       </grade-header-panel>
@@ -112,7 +109,8 @@
     <core-splitter direction="up" allowOverflow minSize="170px"></core-splitter>
 
     <div flex wired rounded spaced layout vertical>
-      <grade-header-panel flex paneltitle="Results">
+      <grade-header-panel flex paneltitle="Results" panelsubtitle="{{editableQuery.queryEndpoint}}">
+      
         <paper-tabs toolbar style="width:200px; display: inline-block;" selected="{{resultTab}}" hide?="{{!showTabs}}" >
           <paper-tab>Table</paper-tab>
           <paper-tab>Raw</paper-tab>
