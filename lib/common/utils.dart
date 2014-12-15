@@ -132,3 +132,5 @@ class GradeListPathObserver<E, P> extends ChangeNotifier {
     }
   }
 }
+
+int compareIgnoreCase(String s1, String s2) => s1.toLowerCase().compareTo(s2.toLowerCase());

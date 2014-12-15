@@ -122,7 +122,7 @@ class Endpoint extends EditableGradeEntity with Filters {
 int compareEndpoints(EditableEndpoint ee1, EditableEndpoint ee2) {
   if (ee1 == null || ee1.model.name == null) return 1;
   if (ee2 == null || ee2.model.name == null) return -1;
-  return ee1.model.name.compareTo(ee2.model.name);
+  return compareIgnoreCase(ee1.model.name, ee2.model.name);
 }
 
 @Injectable()

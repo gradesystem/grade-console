@@ -107,7 +107,7 @@ class Query extends EditableGradeEntity with Filters, Observable {
 int compareQueries(EditableQuery eq1, EditableQuery eq2) {
   if (eq1 == null || eq1.model.name == null) return 1;
   if (eq2 == null || eq2.model.name == null) return -1;
-  return eq1.model.name.compareTo(eq2.model.name);
+  return compareIgnoreCase(eq1.model.name, eq2.model.name);
 }
 
 class Queries extends EditableListItems<EditableQuery> {

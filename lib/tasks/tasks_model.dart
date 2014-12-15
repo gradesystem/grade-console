@@ -430,7 +430,7 @@ class HasTaskIcons {
 int compareTasks(EditableModel<Task> et1, EditableModel<Task> et2) {
   if (et1 == null || et1.model.label == null) return 1;
   if (et2 == null || et2.model.label == null) return -1;
-  return et1.model.label.compareTo(et2.model.label);
+  return compareIgnoreCase(et1.model.label, et2.model.label);
 }
 
 
