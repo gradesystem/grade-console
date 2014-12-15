@@ -63,10 +63,13 @@ class CodemirrorInput extends PolymerElement {
       value = (cmValue==null || cmValue.isEmpty)?null:cmValue;
     });
     
-    onPropertyChange(this, #disabled, (){
-      editor.setOption("readOnly", disabled?"nocursor":false);
-    });
+    onPropertyChange(this, #disabled, setReadOnly);
 
+  }
+  
+  void setReadOnly() {
+    editor.setOption("readOnly", disabled);
+    editor.setOption("cursorBlinkRate", disabled?0:530);
   }
   
   void paste(String text) {
