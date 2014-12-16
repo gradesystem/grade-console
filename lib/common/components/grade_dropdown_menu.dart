@@ -50,7 +50,6 @@ class GradeDropdownMenu extends PolymerElement {
         onModelChange();
       })
       .observe(this.parentNode, childList:true, subtree:true);
-  
   }
 
   bool isItem(String val) {
@@ -60,6 +59,11 @@ class GradeDropdownMenu extends PolymerElement {
           return true;
     
     return false;
+  }
+  
+  @ObserveProperty("invalid")
+  onInvalidUpdate() {
+    if (invalid == null) onModelChange();
   }
   
   @ObserveProperty("selected")
