@@ -4,9 +4,7 @@ part of queries;
 class QueryDetails extends View {
   
   QueryKeys K = const QueryKeys();  
-  
-  Map<String,List<Validator>> validators = {};
-  
+    
   @ComputedProperty('item.edit')
   bool get editable => item==null?false:item.edit;
   
