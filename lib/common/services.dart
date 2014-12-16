@@ -66,12 +66,12 @@ class MediaType {
   String get value => _value;
    
   static const SPARQL_JSON = const MediaType._internal('application/sparql-results+json');
-  static const JSON = const MediaType._internal('application/json; charset=UTF-8');
-  static const TURTLE = const MediaType._internal('application/turtle; charset=UTF-8');
-  static const NTRIPLES = const MediaType._internal('application/n-triple; charset=UTF-8');
-  static const JSONLD = const MediaType._internal('application/ld+json; charset=UTF-8');
-  static const RDF_XML = const MediaType._internal('application/rdf+xml; charset=UTF-8');
-  static const SPARQL_XML = const MediaType._internal('application/sparql-results+xml; charset=UTF-8');
+  static const JSON = const MediaType._internal('application/json');
+  static const TURTLE = const MediaType._internal('application/turtle');
+  static const NTRIPLES = const MediaType._internal('application/n-triple');
+  static const JSONLD = const MediaType._internal('application/ld+json');
+  static const RDF_XML = const MediaType._internal('application/rdf+xml');
+  static const SPARQL_XML = const MediaType._internal('application/sparql-results+xml');
 }
 
 class ErrorResponse {
