@@ -89,7 +89,7 @@
 	          disabled="{{!editableQuery.edit}}"></codemirror-input>
           </div>
           
-          <div horizontal layout wrap style="overflow-y: auto; min-height:50px;">
+          <div horizontal layout wrap style="overflow-y: auto; min-height:50px;" hidden?={{editableQuery.model.parameters.isEmpty}}>
             <template repeat="{{key in editableQuery.model.parameters}}">
               <grade-item style="width:200px"> 
                 <grade-fascia flex>    
