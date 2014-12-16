@@ -133,7 +133,7 @@ class EndpointSubPageModel extends SubPageEditableModel<Endpoint> {
 
   EndpointSubPageModel(EventBus bus, EndpointsService endpointService, Endpoints storage):super(bus, endpointService, storage, generate) {
     bus.on(ApplicationReady).listen((_) {
-      loadAll();
+      loadAll(true);
     });
   }
   

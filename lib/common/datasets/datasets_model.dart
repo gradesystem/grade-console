@@ -54,7 +54,7 @@ class Datasets extends ListItems<Dataset> {
 
 class DatasetsPageModel extends SubPageModel<Dataset> {
   
-  DatasetsPageModel(EventBus bus,  ListService<Dataset> service, ListItems<Dataset> storage):super(bus, service, storage);
+  DatasetsPageModel(EventBus bus, ListService<Dataset> service, ListItems<Dataset> storage):super(bus, service, storage);
   
 }
 

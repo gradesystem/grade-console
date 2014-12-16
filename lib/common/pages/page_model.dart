@@ -25,11 +25,8 @@ abstract class SubPageModel<T extends GradeEntity> {
   }
   
   void _setData(List<T> items) {
-
-    storage.setData(items);
-    
+    storage.setData(items, true);
   }
-  
   
   void _onError(e, callback) {
     storage.data.clear();

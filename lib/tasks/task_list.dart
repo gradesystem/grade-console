@@ -21,10 +21,9 @@ class TaskList extends PolymerElement with Filters {
   
   void ready() {
     list = $['list'] as CoreList;
-    list.data.changes.listen((_){selecteFirstItem();});
-    
-     onPropertyChange(listitems, #selected, syncSelection);
-   }
+
+    onPropertyChange(listitems, #selected, syncSelection);
+  }
    
    void syncSelection() {
      if (listitems.selected!= null && listitems.selected != list.selection) {
@@ -35,15 +34,6 @@ class TaskList extends PolymerElement with Filters {
        }
      }
    }  
-   
-  void selecteFirstItem() {
-    if (list.data != null && list.data.isNotEmpty && !list.data.contains(listitems.selected)) {
-      
-      list.selectItem(0);
-      //we are not notified about the selection
-      listitems.selected = list.selection;
-    }
-  }
   
   void selectItem(event) {
     //workaround to https://github.com/dart-lang/core-elements/issues/160

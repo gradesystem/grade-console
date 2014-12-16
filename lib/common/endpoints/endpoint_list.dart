@@ -21,12 +21,13 @@ class EndpointList extends PolymerElement with Filters {
   
   void ready() {
     list = $['list'] as CoreList;
-    list.data.changes.listen((_){selecteFirstItem();});
+    //list.data.changes.listen((_){selecteFirstItem();});
     
     onPropertyChange(listitems, #selected, syncSelection);
   }
   
   void syncSelection() {
+    
     if (listitems.selected!= null && listitems.selected != list.selection) {
       if (listitems.selected == null) list.clearSelection();
       else {

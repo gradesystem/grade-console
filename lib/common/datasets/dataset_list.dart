@@ -17,17 +17,19 @@ class DatasetList extends PolymerElement with Filters {
   
   void ready() {
     list = $['list'] as CoreList;
-    list.data.changes.listen((_){selecteFirstItem();});
+    
+    onPropertyChange(listitems, #selected, syncSelection);
   }
   
-  void selecteFirstItem() {
-    if (list.data != null && list.data.isNotEmpty) {
-      
-      list.selectItem(0);
-      //we are not notified about the selection
-      listitems.selected = list.selection;
+  void syncSelection() {
+    if (listitems.selected!= null && listitems.selected != list.selection) {
+      if (listitems.selected == null) list.clearSelection();
+      else {
+        int index = listitems.data.indexOf(listitems.selected);
+        list.selectItem(index);
+      }
     }
-  }
+  } 
   
   void selectDataset(event) {
     listitems.selected = event.detail.data;

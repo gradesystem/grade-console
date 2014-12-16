@@ -21,7 +21,6 @@ class QueryList extends PolymerElement with Filters {
   
   void ready() {
     list = $['list'] as CoreList;
-    list.data.changes.listen((_){selecteFirstItem();});
     
     onPropertyChange(listitems, #selected, syncSelection);
   }
@@ -36,15 +35,6 @@ class QueryList extends PolymerElement with Filters {
       
     }
     
-  }
-  
-  void selecteFirstItem() {
-    if (list.data != null && list.data.isNotEmpty && !list.data.contains(listitems.selected)) {
-      
-      list.selectItem(0);
-      //we are not notified about the selection
-      listitems.selected = list.selection;
-    }
   }
   
   void selectItem(event) {
