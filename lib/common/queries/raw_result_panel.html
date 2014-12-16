@@ -11,10 +11,10 @@
 <polymer-element name="raw-result-panel" vertical layout>
   <template>
     <div vertical layout flex>
-      <div layout horizontal center end-justified> 
-       <paper-tabs style="width:325px; display: inline-block;" selected="{{formatTab}}">
+      <div layout horizontal center center-justified style="padding-bottom: 5px;"> 
+       <paper-tabs style="width:480px; display: inline-block;" selected="{{formatTab}}">
          <template repeat="{{format in formats}}">
-           <paper-tab>{{format.label}}</paper-tab>
+           <paper-tab smaller>{{format.label}}</paper-tab>
          </template>
        </paper-tabs>
       </div>
