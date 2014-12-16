@@ -86,7 +86,7 @@
 	      
 	      <grade-toast></grade-toast>
 	      
-	      <core-iconset id="developers" src="images/developers.png" width="60" iconSize="60" icons="aureliano claudio fabio federico">
+	      <core-iconset id="developers" src="images/developers.png" width="60" iconSize="60" icons="aureliano claudio fabio federico lucio">
         </core-iconset>
 	      
 	      <grade-dialog opened={{creditsDialogOpened}} heading="The Team">
@@ -117,6 +117,17 @@
               </template>
               <template if={{!easter}}>
                 <div fascia-subtitle>Software Developer</div>
+              </template>
+            </grade-fascia>
+          </grade-item>
+          <grade-item icon="developers:lucio" dev-icon>            
+            <grade-fascia style="padding-left: 5px;">
+              <div fascia-title>Lucio Lelii</div>
+              <template if={{easter}}>
+                <a href="http://tinyurl.com/n46rsxe" fascia-subtitle style="text-decoration: none;color: inherit;" target="_blank">Il Gr. Ladr. Farabut. di Gr. Croc. Mascalz. Assas. Figl. di Gr. Putt. Marchese Conte Piermatteo Barambani Megalom</a>
+              </template>
+              <template if={{!easter}}>
+                <div fascia-subtitle>Voluntary Contributor</div>
               </template>
             </grade-fascia>
           </grade-item>
