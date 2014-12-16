@@ -152,7 +152,7 @@ class QuerySubPageModel extends SubPageEditableModel<Query> {
     Query resultQuery = editableQuery.model.clone();
     resultQuery.set(Query.K.expression, result.lastExpression);
     result.loadingRaw = true;
-    queryService.runQuery(resultQuery, {}, format)
+    queryService.runQuery(resultQuery, result.lastParameters, format)
       .then((String raw){
       result.raws[format] = raw;
       result.loadingRaw = false;
@@ -166,6 +166,7 @@ class QuerySubPageModel extends SubPageEditableModel<Query> {
   void _run(EditableQuery editableQuery, Query query, Map parameters, Future<String> runner(Query query, Map<String, String> parameters), [RawFormat format = RawFormat.JSON]) {
     editableQuery.runQuery();
     editableQuery.lastResult.lastExpression = query.get(Query.K.expression);
+    editableQuery.lastResult.lastParameters = parameters;
     runner(query, parameters)
       .then((String result) => editableQuery.queryResult(format, result))
       .catchError((e) => editableQuery.queryFailed(e));
@@ -344,6 +345,7 @@ class Result extends Observable {
   bool loadingRaw = false;
   
   String lastExpression;
+  Map<String,String> lastParameters;
 
   bool get hasValue => value != null;
 
