@@ -19,6 +19,7 @@ part 'endpoint_details_summary.dart';
 part 'endpoints_panel.dart';
 part 'endpoint_list.dart';
 part 'endpoint_graphs.dart';
+part 'endpoint_utils.dart';
 part 'graph_details_summary.dart';
 part 'graph_selector.dart';
 

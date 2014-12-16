@@ -56,7 +56,5 @@ class Filters {
 //      }
       return ordered;
     };
-  }
-  
-
+  }  
 }

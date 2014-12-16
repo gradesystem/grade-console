@@ -119,12 +119,6 @@ class Endpoint extends EditableGradeEntity with Filters {
   String toString() => "Endpoint id: $id name: $name uri: $uri updateUri: $updateUri graphs: $graphs hashCode: $hashCode";
 }
 
-int compareEndpoints(EditableEndpoint ee1, EditableEndpoint ee2) {
-  if (ee1 == null || ee1.model.name == null) return 1;
-  if (ee2 == null || ee2.model.name == null) return -1;
-  return compareIgnoreCase(ee1.model.name, ee2.model.name);
-}
-
 @Injectable()
 class Endpoints extends EditableListItems<EditableEndpoint> {
   
