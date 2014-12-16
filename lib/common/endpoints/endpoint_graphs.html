@@ -41,8 +41,26 @@
 	        
 	        <template if="{{!item.newModel}}">
 	        
-	           <!--  graph list and button  -->
-             <div flex horizontal layout>
+						<!--  graph list and button  -->
+						<div flex vertical layout>
+             
+              <div horizontal layout end-justified spaced>
+             
+                <grade-input 
+                          style="width:120px; margin-right:10px" 
+                          label="filter"
+                          inputValue={{kfilter}}>
+                </grade-input>
+              
+                         
+	              <!-- refresh -->
+	              <grade-button sidebutton icon=refresh
+	                            tooltip=left
+	                            label="reload graphs" 
+	                            on-click={{refreshGraphs}} >
+	              </grade-button>
+
+              </div>
              
               <!-- graph list -->
 	            <loading-panel list wired rounded relative flex loading="{{item.loadingGraphs}}" message="loading graphs">
@@ -50,7 +68,7 @@
 
 	                  <core-selector selectedAttribute="fg">
 		                 
-		                   <template repeat="{{graph in item.model.graphs | sort(graphSorter)}}">
+		                   <template repeat="{{graph in item.model.graphs | filter(kfilter, itemFilter) | sort(graphSorter)}}">
 				               
 				                 <!-- entry and remove button -->
 				                 <graph-details-summary pointer graph={{graph}}></graph-details-summary>
@@ -62,13 +80,6 @@
 			              </div>
 		           
 		            </loading-panel>
-           
-              <!-- refresh -->
-              <grade-button sidebutton icon=refresh
-                            tooltip=left
-                            label="reload graphs" 
-                            on-click={{refreshGraphs}} >
-              </grade-button>
            
             </div>
              

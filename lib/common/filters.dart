@@ -35,7 +35,7 @@ class Filters {
     return str.substring(0,index+1);
   }
   
-  filter(String term, FilterFunction filterFunction) => (List items) => term.isEmpty ? items : toObservable(items.where((item)=>filterFunction(item, term)).toList()); 
+  filter(String term, FilterFunction filterFunction) => (List items) => term == null || term.isEmpty ? items : toObservable(items.where((item)=>filterFunction(item, term)).toList()); 
   sort(Comparator comparator) => (List items) {
     if (items == null) return null;
     List copy = new List.from(items);

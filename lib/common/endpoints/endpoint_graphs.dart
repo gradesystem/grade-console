@@ -7,6 +7,13 @@ class EndpointGraphs extends PolymerElement with Filters {
   
   Comparator<Graph> graphSorter = compareGraphs;
   
+  @observable
+  String kfilter;
+  
+  FilterFunction itemFilter = (Graph item, String term) 
+                    => item.label != null && 
+                       item.label.toLowerCase().contains(term.toLowerCase());
+  
   @published
   Endpoints items;
   
