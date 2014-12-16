@@ -47,9 +47,20 @@ class GradeConsole  extends PolymerElement with Dependencies, Filters {
     history.go(page.tab, page.name);
   }
   
+  @observable
+  int counter = 0;
+  
   void showCredits() {
     creditsDialogOpened = true;
+    counter = 0;
   }
+  
+  void onEaster() {
+    counter++;
+  }
+  
+  @ComputedProperty("counter")
+  bool get easter => counter>6;
   
 }
 

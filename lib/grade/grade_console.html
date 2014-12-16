@@ -94,25 +94,30 @@
 		      <grade-item icon="developers:fabio" dev-icon>            
             <grade-fascia style="padding-left: 5px;">
               <div fascia-title>Fabio Simeoni</div>
-              <div fascia-subtitle>Megadirettore Galattico Duca Conte Balabam</div>
+              <div fascia-subtitle>{{easter?"Megadirettore Galattico Duca Conte Balabam":"Tech Lead, Manager"}}</div>
             </grade-fascia>
           </grade-item>
           <grade-item icon="developers:claudio" dev-icon>            
             <grade-fascia style="padding-left: 5px;">
               <div fascia-title>Claudio Baldassarre</div>
-              <div fascia-subtitle>Megapresidente Galattico Arcangelo</div>
+              <div fascia-subtitle>{{easter?"Megapresidente Galattico Arcangelo":"Linked Data Maintenance Developer, Manager"}}</div>
             </grade-fascia>
           </grade-item>
           <grade-item icon="developers:aureliano" dev-icon>            
             <grade-fascia style="padding-left: 5px;">
               <div fascia-title>Aureliano Gentile</div>
-              <div fascia-subtitle>Direttore Conte Corrado Maria Lobbiam</div>
+              <div fascia-subtitle>{{easter?"Direttore Conte Corrado Maria Lobbiam":"Data Manager"}}</div>
             </grade-fascia>
           </grade-item>
           <grade-item icon="developers:federico" dev-icon>            
             <grade-fascia style="padding-left: 5px;">
-              <div fascia-title>Federico De Faveri</div>
-              <a href="http://tinyurl.com/n46rsxe" fascia-subtitle style="text-decoration: none;color: inherit;" target="_blank">Ragionier</a>
+              <div fascia-title on-click="{{onEaster}}">Federico De Faveri</div>
+              <template if={{easter}}>
+                <a href="http://tinyurl.com/n46rsxe" fascia-subtitle style="text-decoration: none;color: inherit;" target="_blank">Ragionier</a>
+              </template>
+              <template if={{!easter}}>
+                <div fascia-subtitle>Software Developer</div>
+              </template>
             </grade-fascia>
           </grade-item>
 		     
