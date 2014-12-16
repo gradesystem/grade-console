@@ -8,20 +8,20 @@
 <polymer-element name="result-panel" vertical layout>
   <template>
   
-  <result-breadcrumb history={{result.history}} on-go-uri={{onResultGoUri}} hidden?={{!breadcrumbEnabled}}></result-breadcrumb>
-  <div flex  style="overflow-y: auto;" relative>
-    <loading-panel fit loading="{{result.loading}}" message="{{loadingMessage}}">
-    
-      <grade-table flex headers={{result.value.headers}} 
-                         data="{{ result.value | toTable }}" 
-                         disabled?={{disabled}}
-                         on-uri-click={{onResultUriClick}}
-                         
-          contentCopyEnabled={{contentCopyEnabled}}>
-      </grade-table>
-      
-    </loading-panel>
-    </div>
+	  <result-breadcrumb history={{result.history}} on-go-uri={{onResultGoUri}} hidden?={{!breadcrumbEnabled}}></result-breadcrumb>
+	  <div flex  style="overflow-y: auto;" relative>
+	    <loading-panel fit loading="{{result.loading}}" message="{{loadingMessage}}">
+		    
+		      <grade-table flex headers={{result.value.headers}} 
+		                         data="{{ result.value | toTable }}" 
+		                         disabled?={{disabled}}
+		                         on-uri-click={{onResultUriClick}}
+		                         
+		          contentCopyEnabled={{contentCopyEnabled}}>
+		      </grade-table>
+		      
+		    </loading-panel>
+	    </div>
     
   </template>
   <script type="application/dart" src="result_panel.dart"></script>
