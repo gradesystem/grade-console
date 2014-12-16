@@ -18,6 +18,7 @@ class EndpointsPanel extends PolymerElement with Filters, Dependencies {
   @observable
   String removedDialogHeader;
   
+  @observable
   EndpointSubPageModel model;
   
   Function dialogCallback;
