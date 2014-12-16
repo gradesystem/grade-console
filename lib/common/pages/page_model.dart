@@ -15,22 +15,24 @@ abstract class SubPageModel<T extends GradeEntity> {
   void loadAll() {
     storage.loading = true;
     storage.selected = null;
-    service.getAll().then(_setData).catchError((e)=>_onError(e, loadAll));
+    service.getAll()
+    .then(_setData)
+    .catchError((e)=>_onError(e, loadAll))
+    .whenComplete((){
+      storage.loading = false;
+    });
     
   }
   
   void _setData(List<T> items) {
 
-    storage.data.clear();
-    storage.data.addAll(items);
-    storage.loading = false;
+    storage.setData(items);
     
   }
   
   
   void _onError(e, callback) {
     storage.data.clear();
-    storage.loading = false;
     bus.fire(new ToastMessage.alert("Ops we are having some problems communicating with the server", callback));
   }
 }

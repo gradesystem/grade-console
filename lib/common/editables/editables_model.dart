@@ -28,7 +28,7 @@ abstract class SubPageEditableModel<T extends EditableGradeEntity> {
     EditableModel<T> editableModel = generator();
     editableModel.newModel = true;
 
-    storage.data.add(editableModel);
+    storage.addItem(editableModel);
     storage.selected = editableModel;
     editableModel.startEdit();
   }
@@ -49,7 +49,7 @@ abstract class SubPageEditableModel<T extends EditableGradeEntity> {
     EditableModel<T> editableModel = generator(cloned);
     editableModel.newModel = true;
     
-    storage.data.add(editableModel);
+    storage.addItem(editableModel);
     storage.selected = editableModel;
     editableModel.startEdit();
   }
@@ -75,12 +75,14 @@ abstract class SubPageEditableModel<T extends EditableGradeEntity> {
     });
 
     service.put(editableModel.model)
-    .then((T result) => editableModel.save(result))
+    .then((T result) {
+      editableModel.save(result);
+      storage.sortItem(editableModel);
+    })
     .catchError((e) => onError(e, () => save(editableModel)))
     .whenComplete(() {
       timer.cancel();
       editableModel.synched();
-      storage.sort();
     });
 
   }
@@ -100,24 +102,19 @@ abstract class SubPageEditableModel<T extends EditableGradeEntity> {
 
   }
 
-  void loadAll() {
+  void loadAll([bool selectFirst = true]) {
     storage.loading = true;
     storage.selected = null;
-    service.getAll().then(_setData).catchError((e) {
+    service.getAll()
+    .then((List<T> items){
+      storage.setData(items.map((T q) => generator(q)).toList(), selectFirst);
+      })
+    .catchError((e) {
       onError(e, loadAll);
       storage.data.clear();
+    }).whenComplete(() {
       storage.loading = false;
     });
-  }
-
-  void _setData(List<T> items) {
-    
-    storage.data.clear();
-
-    storage.data.addAll(items.map((T q) => generator(q)));
-
-    storage.loading = false;
-
   }
 
   void onError(e, callback) {

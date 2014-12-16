@@ -13,27 +13,33 @@ abstract class ListItems<T extends Observable> extends Observable {
   @observable
   bool loading = false;
   
-  ListItems([this._comparator]) {
-    if (_comparator!=null) {
-      data.listChanges
-      .where((List<ListChangeRecord> records)=> records.any((ListChangeRecord record)=>record.addedCount>0))
-      .listen((_)=>_sort());
-    }
-  }
+  ListItems([this._comparator]);
   
-  void _sort() {
-    loading = true;
-    List<T> copy = new List.from(data);
-    copy.sort(_comparator);
+  void setData(List<T> items, [bool selectFirst = true]) {
+
     data.clear();
-    data.addAll(copy);
     
-    notifyPropertyChange(#selected, null, selected);
-    loading = false;
+    if (_comparator!=null) items.sort(_comparator);
+    data.addAll(items);
+
+    if (selectFirst && data.isNotEmpty) selected = data.first;
   }
   
-  void sort() {
-    if (_comparator!=null) _sort();
+  void addItem(T item) {
+    if (_comparator!=null) _insertSorted(item);
+    else data.add(item);
+  }
+  
+  void _insertSorted(T item) {
+    int i = 0;
+    while(i<data.length && _comparator(item, data[i])>=0) i++;
+    data.insert(i, item);
+  }
+ 
+  void sortItem(T item) {
+    data.remove(item);
+    _insertSorted(item);
+    notifyPropertyChange(#selected, null, selected);
   }
   
 }
