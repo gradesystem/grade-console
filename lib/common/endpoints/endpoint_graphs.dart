@@ -5,6 +5,12 @@ class EndpointGraphs extends PolymerElement with Filters {
   
   GraphKeys K = new GraphKeys();
   
+  int compareGraphs(Graph g1, Graph g2) {
+    if (g1 == null || g1.label == null) return 1;
+    if (g2 == null || g2.label == null) return -1;
+    return compareIgnoreCase(g1.label, g2.label);
+  }
+  
   @published
   Endpoints items;
   

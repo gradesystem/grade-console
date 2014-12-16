@@ -36,6 +36,12 @@ class Filters {
   }
   
   filter(String term, FilterFunction filterFunction) => (List items) => term.isEmpty ? items : toObservable(items.where((item)=>filterFunction(item, term)).toList()); 
+  sort(Comparator comparator) => (List items) {
+    if (items == null) return null;
+    List copy = new List.from(items);
+    copy.sort(comparator);
+    return copy;
+  };
   
   partialOrdering(List<String> partialOrdering) {
     return (Map toOrder) {

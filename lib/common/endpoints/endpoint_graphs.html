@@ -50,7 +50,7 @@
 
 	                  <core-selector selectedAttribute="fg">
 		                 
-		                   <template repeat="{{graph in item.model.graphs}}">
+		                   <template repeat="{{graph in item.model.graphs | sort(compareGraphs)}}">
 				               
 				                 <!-- entry and remove button -->
 				                 <graph-details-summary pointer graph={{graph}}></graph-details-summary>
