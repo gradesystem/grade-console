@@ -51,7 +51,7 @@ class QueryDetails extends View {
   @ComputedProperty("item.model.parameters")
   String get parameters {
     
-    String params = '(none)';
+    String params = '';
     
     if (item!=null) {
       
