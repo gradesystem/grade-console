@@ -15,6 +15,9 @@ class GradeConsole  extends PolymerElement with Dependencies, Filters {
   
   @observable int page = 0;
   
+  @observable
+  bool creditsDialogOpened = false;
+  
   GradeConsole.created() : super.created() {
     
     history.registerRoot(pages[0].tab, (){page=0;});
@@ -42,6 +45,10 @@ class GradeConsole  extends PolymerElement with Dependencies, Filters {
   void onPageChange() {
     Page page = pages[this.page];
     history.go(page.tab, page.name);
+  }
+  
+  void showCredits() {
+    creditsDialogOpened = true;
   }
   
 }

@@ -13,14 +13,24 @@
 <link rel="import" href="../stage/stage_page.html">
 <link rel="import" href="../tasks/tasks_page.html">
 
-<link rel="import" href="../common/coming_soon.html">
-
 <link rel="import" href="../common/components/grade_toast.html">
+<link rel="import" href="../common/components/grade_dialog.html">
+<link rel="import" href="../common/components/grade_item.html">
+<link rel="import" href="../common/components/grade_fascia.html">
          
 <polymer-element name="grade-console"> 
 
 
   <template>
+  
+  <style>
+  [dev-icon] /deep/ core-icon  { 
+      height: 60px;
+      min-height: 60px;
+      min-width: 60px;
+      width: 60px;
+    }
+  </style>
         <link rel="stylesheet" href="themes.css">
          
         <core-header-panel fit scrollable>
@@ -64,7 +74,7 @@
                   layout horizontal center>
                 
                 <div>Last deployed: 16/12/2014</div>
-                <div flex layout vertical center>
+                <div flex layout vertical center on-click={{showCredits}} style="cursor:pointer">
                     <div>Copyright 2014-2015 GRADE all rights reserved </div>
                 </div>
               </div>
@@ -75,6 +85,33 @@
 	      </core-header-panel>
 	      
 	      <grade-toast></grade-toast>
+	      
+	      <core-iconset id="developers" src="images/developers.png" width="60" iconSize="60" icons="claudio fabio federico">
+        </core-iconset>
+	      
+	      <grade-dialog opened={{creditsDialogOpened}} heading="Grade's developers">
+		     <div main vertical layout>
+		      <grade-item icon="developers:fabio" dev-icon>            
+            <grade-fascia style="padding-left: 5px;">
+              <div fascia-title>Fabio Simeoni</div>
+              <div fascia-subtitle>Megadirettore Galattico Duca Conte Balabam</div>
+            </grade-fascia>
+          </grade-item>
+          <grade-item icon="developers:claudio" dev-icon>            
+            <grade-fascia style="padding-left: 5px;">
+              <div fascia-title>Claudio Baldassarre</div>
+              <div fascia-subtitle>Megapresidente Galattico Arcangelo</div>
+            </grade-fascia>
+          </grade-item>
+          <grade-item icon="developers:federico" dev-icon>            
+            <grade-fascia style="padding-left: 5px;">
+              <div fascia-title>Federico De Faveri</div>
+              <div fascia-subtitle>Ragionier</div>
+            </grade-fascia>
+          </grade-item>
+		     
+		     </div>
+		    </grade-dialog>
 		      
 		  </template> 
     
