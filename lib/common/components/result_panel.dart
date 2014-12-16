@@ -43,7 +43,7 @@ class ResultPanel extends PolymerElement {
   void onResultGoUri(event, detail, target) {
     int index = int.parse(detail);
     result.history.goIndex(index);
-    if (!result.history.empty) fire("describe-uri", detail:result.history.currentUri);
+    if (!result.history.isQueryUrl) fire("describe-uri", detail:result.history.currentUri);
     else fire("run-query");
   }
 }

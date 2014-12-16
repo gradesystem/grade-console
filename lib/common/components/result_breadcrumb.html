@@ -8,7 +8,11 @@
     <style>  
 
 			[breadcrumb] {
-			  background: #f4f4f4;
+			  /*background: #f4f4f4;*/
+			}
+			
+			[path] {
+			 padding-left: 10px;
 			}
 			
 			[crumb] {
@@ -28,8 +32,8 @@
 			}
     </style>
         
-    <div horizontal layout fg breadcrumb center>
-      <span uri-index={{-1}} on-click={{onUriClick}} crumb smaller current-crumb?="{{history.currentIndex == -1}}">Start:</span>
+    <div horizontal layout fg breadcrumb center lighter>
+      <span uri-index={{-1}} on-click={{onUriClick}} crumb smaller current-crumb?="{{history.isQueryUrl}}" path hidden?={{history.empty}}>path:</span>
       <template repeat="{{uri in history.uris | enumerate}}">
         <span bolder spacer>&gt;</span>
         <span uri-index={{uri.index}} on-click={{onUriClick}} crumb smaller current-crumb?="{{history.currentIndex == uri.index}}">{{uri.value}}</span>

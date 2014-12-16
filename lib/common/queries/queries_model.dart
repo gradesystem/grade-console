@@ -402,11 +402,13 @@ class ResultHistory extends Observable {
     notifyPropertyChange(#canGoBack, null, canGoBack);
     notifyPropertyChange(#canGoForward, null, canGoForward);
     notifyPropertyChange(#currentUri, null, currentUri);
+    notifyPropertyChange(#isQueryUrl, null, isQueryUrl);
     notifyPropertyChange(#empty, null, empty);
   }
 
   bool get canGoBack => currentIndex >= 0;
   bool get canGoForward => uris.isNotEmpty && currentIndex < uris.length - 1;
   String get currentUri => currentIndex >= 0 ? uris[currentIndex] : null;
-  bool get empty => currentIndex == -1;
+  bool get isQueryUrl => currentIndex == -1;
+  bool get empty => uris.isEmpty;
 }
