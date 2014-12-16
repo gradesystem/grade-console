@@ -1,5 +1,6 @@
 <link rel="import" href="../../../packages/polymer/polymer.html">
 
+<link rel="import" href="../../../packages/core_elements/core_icon.html">
 <link rel="import" href="../../../packages/core_elements/core_pages.html">
 <link rel="import" href="../../../packages/core_elements/core_header_panel.html">
 <link rel="import" href="../../../packages/core_elements/core_toolbar.html">
@@ -74,8 +75,9 @@
                   layout horizontal center>
                 
                 <div>Last deployed: 16/12/2014</div>
-                <div flex layout vertical center on-click={{showCredits}} style="cursor:pointer">
-                    <div>Copyright 2014-2015 GRADE all rights reserved </div>
+                <div flex layout horizontal center-justified center on-click={{showCredits}} style="cursor:pointer" tinyicon>
+                    <div>Copyright 2014-2015 GRADE all rights reserved</div>
+                    <core-icon icon="social:people" style="padding-left:10px" ></core-icon>
                 </div>
               </div>
               
