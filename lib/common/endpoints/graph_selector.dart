@@ -3,6 +3,8 @@ part of endpoints;
 @CustomTag("graph-selector") 
 class GraphSelector extends PolymerElement with Filters {
   
+  Comparator<Graph> graphSorter = compareGraphs;
+  
   @published
   EditableEndpoint endpoint;
   

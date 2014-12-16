@@ -26,7 +26,7 @@
 		                       multi={{multi}}
 		                       valueattr="item" 
 		                       selectedAttribute="fg">
-		         <template repeat="{{graph in endpoint.model.graphs}}">
+		         <template repeat="{{graph in endpoint.model.graphs | sort(graphSorter)}}">
 		           <div smaller pointer?={{editable}} item={{graph.uri}}>{{graph.label !=null?graph.label:suffix(graph.uri)}}</div>
 		         </template>
 		         <template repeat="{{graphUri in invalidGraphUris }}">
