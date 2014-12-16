@@ -321,10 +321,10 @@ class RawFormat {
 
   static const JSON = const RawFormat._internal(MediaType.SPARQL_JSON, 'JSON-SR', 'application/json');
   static const XML = const RawFormat._internal(MediaType.SPARQL_XML, 'XML-SR', 'application/xml');
-  static const NTRIPLES = const RawFormat._internal(MediaType.NTRIPLES, 'N-TRIPLES', 'application/text');
+  static const NTRIPLES = const RawFormat._internal(MediaType.NTRIPLES, 'N-TRIPLES', 'text/n-triples');
   static const JSONLD_TYPE = const RawFormat._internal(MediaType.JSONLD, 'JSON-LD', 'application/ld+json');
   static const RDF_XML = const RawFormat._internal(MediaType.RDF_XML, 'RDF-XML', 'application/xml');
-  static const TURTLE = const RawFormat._internal(MediaType.TURTLE, 'TURTLE', 'application/text');
+  static const TURTLE = const RawFormat._internal(MediaType.TURTLE, 'TURTLE', 'text/turtle');
 }
 
 class Result extends Observable {

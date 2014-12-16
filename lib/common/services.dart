@@ -67,8 +67,8 @@ class MediaType {
    
   static const SPARQL_JSON = const MediaType._internal('application/sparql-results+json');
   static const JSON = const MediaType._internal('application/json');
-  static const TURTLE = const MediaType._internal('application/turtle');
-  static const NTRIPLES = const MediaType._internal('application/n-triple');
+  static const TURTLE = const MediaType._internal('text/turtle');
+  static const NTRIPLES = const MediaType._internal('application/n-triples');
   static const JSONLD = const MediaType._internal('application/ld+json');
   static const RDF_XML = const MediaType._internal('application/rdf+xml');
   static const SPARQL_XML = const MediaType._internal('application/sparql-results+xml');
