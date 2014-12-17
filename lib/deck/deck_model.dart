@@ -69,6 +69,18 @@ class DeckPageModel {
     tasksModel.listenTaskExecution(runningTask);
     return runningTask;
   }
+  
+  void retrieveTransformResult(RunningTask runningTask, [String uri]) {
+    tasksModel.retrieveTransformResult(runningTask, uri);
+  }
+  
+  void retrieveDifferenceResult(RunningTask runningTask, [String uri]) {
+    tasksModel.retrieveDifferenceResult(runningTask, uri);
+  }
+  
+  void retrieveTargetResult(RunningTask runningTask, [String uri]) {
+    tasksModel.retrieveTargetResult(runningTask, uri);
+  }
 
 
   void _onError(e, callback) {

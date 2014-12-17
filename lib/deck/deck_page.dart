@@ -24,4 +24,25 @@ class DeckPage extends Polybase {
     }      
   }
   void set title(String drop){}
+  
+  void onDescribeUri(event, detail, target) {
+    String type = detail["type"];
+    RunningTask runningTask = detail["runningTask"];
+    String uri = detail["uri"];
+    _retrieveResult(type, runningTask, uri);
+  }
+  
+  void onLoadResult(event, detail, target) {
+    String type = detail["type"];
+    RunningTask runningTask = detail["runningTask"];
+    _retrieveResult(type, runningTask);
+  }
+  
+  void _retrieveResult(String type, RunningTask runningTask, [String uri]) {
+    switch(type) {
+      case "transform": deckModel.retrieveTransformResult(runningTask, uri); break;
+      case "diff": deckModel.retrieveDifferenceResult(runningTask, uri); break;
+      case "target": deckModel.retrieveTargetResult(runningTask, uri); break;
+    }
+  }
 }
