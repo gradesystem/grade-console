@@ -1,7 +1,5 @@
 <link rel="import" href="../../../../packages/polymer/polymer.html">
 
-<link rel="import" href="../../../../packages/paper_elements/paper_item.html">
-
 <link rel="import" href="../components/grade_button.html">
 <link rel="import" href="../components/grade_uri.html">
 <link rel="import" href="../components/grade_item.html">
@@ -15,7 +13,6 @@
       :host [starts-hidden] { display:none }
     </style>
     
-    <paper-item trim flex>
       <grade-item flex>
         <grade-fascia flex truncate>
           <div fascia-title>{{ graph.label !=null?graph.label:suffix(graph.uri) }}</div>
@@ -35,6 +32,6 @@
 				         >
 				</grade-button>
       </grade-item>
-    </paper-item>
+
   </template> 
 </polymer-element>
