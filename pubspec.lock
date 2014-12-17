@@ -97,6 +97,10 @@ packages:
     description: quiver
     source: hosted
     version: "0.18.2"
+  script_inliner:
+    description: script_inliner
+    source: hosted
+    version: "1.0.0"
   smoke:
     description: smoke
     source: hosted

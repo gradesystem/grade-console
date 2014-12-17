@@ -12,6 +12,7 @@ dependencies:
   stylus: any
   collection: any
   codemirror: any
+  script_inliner: any
   
 dependency_overrides: 
   args: any #workaround to pub infinite loop
@@ -21,3 +22,4 @@ transformers:
     inline_stylesheets:
       packages/codemirror/codemirror.css: false
 - di
+- script_inliner
