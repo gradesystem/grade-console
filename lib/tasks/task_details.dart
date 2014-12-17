@@ -18,7 +18,7 @@ class TaskDetails extends View {
   
   //we need this list for the graphs panel
   @observable
-  ObservableList<String> targetGraphs;
+  ObservableList<String> targetGraphs = new ObservableList<String>();
   
   TaskDetails.created() : super.created() {
   
