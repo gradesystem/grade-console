@@ -5,21 +5,21 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>Grade console</title>
-		
-		<link href="//fonts.googleapis.com/css?family=Roboto:100,300,400" rel="stylesheet">
-		
-		<script src="js/codemirror-compressed.js"></script>
-		
+
 		<!-- polymer imports -->
 		<link rel="import" href="packages/polymer/polymer.html">
 		<link rel="import" href="packages/grade_console/grade/grade_console.html">
 		
+		<script async type="application/dart" src="main.dart"></script>
+    <script async type="text/javascript" src="packages/browser/dart.js"></script>
+    
+    <script async src="js/codemirror-compressed.js"></script>
+		
+		<link href="//fonts.googleapis.com/css?family=Roboto:100,300,400" rel="stylesheet">
 	</head>
 	<body fullbleed unresolved>
 	
 	   <grade-console></grade-console>
  
-    <script type="application/dart" src="main.dart"></script>
-		<script type="text/javascript" src="packages/browser/dart.js"></script>
 	</body>
 </html>
