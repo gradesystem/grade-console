@@ -62,13 +62,28 @@
 					</div>
        
 	        <!-- TRANSFORM RESULT -->
-	        <result-panel fit result={{runningTask.transform}} disabled?={{dirty}} loadingMesage="retrieving transform results" breadcrumbEnabled={{false}}></result-panel>
+	        <result-panel fit 
+	        result={{runningTask.transform}} 
+	        disabled?={{dirty}} 
+	        loadingMesage="retrieving transform results" 
+	        on-run-query={{onLoadTransformResult}}
+	        on-describe-uri={{onDescribeTransformUri}}></result-panel>
 	        
 	        <!-- DIFF RESULT -->
-	        <result-panel fit result={{runningTask.diff}} disabled?={{dirty}} loadingMesage="retrieving diff results" breadcrumbEnabled={{false}}></result-panel>
+	        <result-panel fit 
+	        result={{runningTask.diff}} 
+	        disabled?={{dirty}} 
+	        loadingMesage="retrieving diff results" 
+	        on-run-query={{onLoadDiffResult}}
+	        on-describe-uri={{onDescribeDiffUri}}></result-panel>
 	         
 	        <!-- TARGET RESULT -->
-	        <result-panel fit result={{runningTask.target}} disabled?={{dirty}} loadingMesage="retrieving target results" breadcrumbEnabled={{false}}></result-panel>
+	        <result-panel fit 
+	        result={{runningTask.target}} 
+	        disabled?={{dirty}} 
+	        loadingMesage="retrieving target results" 
+	        on-run-query={{onLoadTargetResult}}
+	        on-describe-uri={{onDescribeTargetUri}}></result-panel>
 	
 	      </core-animated-pages>
          

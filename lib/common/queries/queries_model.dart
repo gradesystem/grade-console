@@ -352,6 +352,7 @@ class Result extends Observable {
   void clean() {
     value = null;
     raws.clear();
+    history.clear();
     loading = false;
     loadingRaw = false;
   }

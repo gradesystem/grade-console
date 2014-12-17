@@ -79,5 +79,26 @@ class TasksPanel extends PolymerElement with Filters, Dependencies {
   void onCancelTask(event, detail, target) {
     model.stopTask(detail);
   }
+  
+  void onDescribeUri(event, detail, target) {
+    String type = detail["type"];
+    RunningTask runningTask = detail["runningTask"];
+    String uri = detail["uri"];
+    _retrieveResult(type, runningTask, uri);
+  }
+  
+  void onLoadResult(event, detail, target) {
+    String type = detail["type"];
+    RunningTask runningTask = detail["runningTask"];
+    _retrieveResult(type, runningTask);
+  }
+  
+  void _retrieveResult(String type, RunningTask runningTask, [String uri]) {
+    switch(type) {
+      case "transform": model.retrieveTransformResult(runningTask, uri); break;
+      case "diff": model.retrieveDifferenceResult(runningTask, uri); break;
+      case "target": model.retrieveTargetResult(runningTask, uri); break;
+    }
+  }
 
 }

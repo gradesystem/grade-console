@@ -229,18 +229,18 @@ class TasksModel extends SubPageEditableModel<Task> {
     if (execution.completed) retrieveTargetResult(runningTask);
   }
   
-  void retrieveTargetResult(RunningTask runningTask)
-    => retrieveResult(runningTask, executionsService.getTargetResult, runningTask.target);
+  void retrieveTargetResult(RunningTask runningTask, [String uri])
+    => retrieveResult(runningTask, executionsService.getTargetResult, runningTask.target, uri);
   
-  void retrieveDifferenceResult(RunningTask runningTask)
-    => retrieveResult(runningTask, executionsService.getDifferenceResult, runningTask.diff);
+  void retrieveDifferenceResult(RunningTask runningTask, [String uri])
+    => retrieveResult(runningTask, executionsService.getDifferenceResult, runningTask.diff, uri);
 
-  void retrieveTransformResult(RunningTask runningTask)
-    => retrieveResult(runningTask, executionsService.getTransformResult, runningTask.transform);
+  void retrieveTransformResult(RunningTask runningTask, [String uri])
+    => retrieveResult(runningTask, executionsService.getTransformResult, runningTask.transform, uri);
   
-  void retrieveResult(RunningTask runningTask, Future<ResulTable> retriever(RunningTask), Result result) {
+  void retrieveResult(RunningTask runningTask, Future<ResulTable> retriever(RunningTask, [uri]), Result result, [String uri]) {
     result.loading = true;
-    retriever(runningTask.execution)
+    retriever(runningTask.execution, uri)
     .then((ResulTable resultQuery){
       result.value = resultQuery;
     }).catchError((e) => onError(e, null)).whenComplete(() {

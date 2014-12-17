@@ -44,17 +44,18 @@ class TaskExecutionsService extends ListService<TaskExecution> {
   Future<TaskExecution> stopTaskExecution(TaskExecution execution) 
     => http.delete(getItemPath(execution.id)).then((response) => true);  
 
-  Future<ResulTable> getTransformResult(TaskExecution execution)     
-    => _getResult(execution, "transform");
+  Future<ResulTable> getTransformResult(TaskExecution execution, [String uri])     
+    => _getResult(execution, "transform", uri);
 
-  Future<ResulTable> getDifferenceResult(TaskExecution execution)     
-    => _getResult(execution, "difference"); 
+  Future<ResulTable> getDifferenceResult(TaskExecution execution, [String uri])     
+    => _getResult(execution, "difference", uri); 
   
-  Future<ResulTable> getTargetResult(TaskExecution execution)     
-    => _getResult(execution, "target");
+  Future<ResulTable> getTargetResult(TaskExecution execution, [String uri])     
+    => _getResult(execution, "target", uri);
   
-  Future<ResulTable> _getResult(TaskExecution execution, String resultpath)     
-     => http.get("${getItemPath(execution.id)}/results/$resultpath", acceptedMediaType:MediaType.SPARQL_JSON).then((response) => new ResulTable(http.decode(response)));
+  Future<ResulTable> _getResult(TaskExecution execution, String resultpath, [String uri])     
+     => http.get("${getItemPath(execution.id)}/results/$resultpath", acceptedMediaType:MediaType.SPARQL_JSON, parameters: uri!=null?{"uri":uri}:{})
+     .then((response) => new ResulTable(http.decode(response)));
   
  
   Future<bool> delete(TaskExecution execution) {
