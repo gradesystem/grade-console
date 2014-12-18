@@ -18,10 +18,15 @@ class QueryPlayground extends PolymerElement with Filters {
   @published
   EditableQuery editableQuery;
   
+  @published
+  List<EditableEndpoint> endpoints;
+  
   @observable
   bool isactive;
   
   CodemirrorInput expressionEditor;
+  
+
   
   QueryPlayground.created() : super.created();
   

@@ -52,7 +52,13 @@
 	
 	  </grade-scaffold>
 
-      <query-playground editableQuery="{{queries.selected}}" on-back="{{onBack}}" on-run="{{onRunQuery}}" on-describe-result="{{onDescribeResult}}" on-load-raw={{onLoadRaw}}></query-playground>
+      <query-playground 
+      editableQuery="{{queries.selected}}" 
+      endpoints={{endpoints.synchedData}}
+      on-back="{{onBack}}" 
+      on-run="{{onRunQuery}}" 
+      on-describe-result="{{onDescribeResult}}" 
+      on-load-raw={{onLoadRaw}}></query-playground>
 	  
 	  </core-animated-pages>
 	  
