@@ -380,8 +380,11 @@ class RunningTask extends Observable {
     resetError();
     execution = null;
     transform.clean();
+    transform.history.clear();
     diff.clean();
+    diff.history.clear();
     target.clean();
+    target.history.clear();
     canCancel = false;
   }
 
