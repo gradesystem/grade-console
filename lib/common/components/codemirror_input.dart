@@ -24,7 +24,7 @@ class CodemirrorInput extends PolymerElement {
   bool autoheight = false;
   
   @published
-  List<EditableEndpoint> endpoints;
+  Iterable<EditableEndpoint> endpoints;
 
   CodeMirror editor;
 
@@ -43,7 +43,7 @@ class CodemirrorInput extends PolymerElement {
       GradeMirror editor = new GradeMirror.fromJsObject(jseditor);
 
       CodemirrorInput cmInput = editor.getOption("CodemirrorInput");
-      List<EditableEndpoint> endpoints = cmInput.endpoints;
+      Iterable<EditableEndpoint> endpoints = cmInput.endpoints;
       if (endpoints == null) return null;
       
       Set<String> suggestions = new Set<String>();

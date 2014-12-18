@@ -223,7 +223,7 @@ class EditableEndpoint extends EditableModel<Endpoint> {
 
 }
 
-class GradeEnpoints extends Observable {
+class GradeEnpoints extends Observable with IterableMixin<EditableEndpoint> {
 
   @observable
   ObservableList<AreaEndpoints> areaEndpoints = new ObservableList();
@@ -252,6 +252,11 @@ class GradeEnpoints extends Observable {
 
     }
   }
+  
+  Iterator<EditableEndpoint> get iterator 
+    => areaEndpoints
+          .map((AreaEndpoints ae)=>ae.endpointsStorage.synchedData)
+          .expand((List<EditableEndpoint> endpoints)=>endpoints).iterator;
 }
 
 typedef void Refresh(EditableEndpoint);

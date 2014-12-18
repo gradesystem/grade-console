@@ -1,7 +1,7 @@
 part of tasks;
 
 @CustomTag("task-playground") 
-class TaskPlayground extends PolymerElement with Filters {
+class TaskPlayground extends PolymerElement with Filters, Dependencies {
   
   TaskKeys K = const TaskKeys();  
   
@@ -11,7 +11,13 @@ class TaskPlayground extends PolymerElement with Filters {
   @observable
   bool isactive;
   
-  TaskPlayground.created() : super.created();
+  @observable
+  GradeEnpoints gradeEndpoints;
+  
+  TaskPlayground.created() : super.created(){
+    
+    gradeEndpoints = instanceOf(GradeEnpoints);
+  }
   
   void attributeChanged(name, oldValue, newValue) {
      super.attributeChanged(name, oldValue, newValue);
