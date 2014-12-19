@@ -17,8 +17,13 @@ class TasksService extends EditableListService<Task> {
   Future<TaskExecution> runTask(Task task) 
     => http.postJSon("$all_path/$EXECUTIONS_PATH", "", parameters: parameters(task)).then((json) => new TaskExecution(json));
   
-  Future<TaskExecution> runSandboxTask(Task task) 
-    => http.postJSon("$all_path/sandbox/$EXECUTIONS_PATH", JSON.encode(task.bean)).then((json) => new TaskExecution(json));
+  Future<TaskExecution> runSandboxTask(Task task) {
+    //tmp workaround to limit the result size
+    Map bean = new Map.from(task.bean);
+    bean[Task.K.transform] = bean[Task.K.transform]+ " limit 1000";
+    if (bean.containsKey(Task.K.diff)) bean[Task.K.diff] = bean[Task.K.diff]+ " limit 1000";
+    return http.postJSon("$all_path/sandbox/$EXECUTIONS_PATH", JSON.encode(bean)).then((json) => new TaskExecution(json));
+  }
 
   Map<String, String> parameters(Task task) => addUri({}, task);
 
