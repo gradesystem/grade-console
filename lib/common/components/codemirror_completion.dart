@@ -33,7 +33,7 @@ Map<String, String> PREFIXES = {
 List<String> SPARQL_KEYWORDS = ["base", "prefix", "select", "distinct", "reduced", "construct", "describe", "ask", "from", "named", "where", "order", "limit", "offset", "filter", "optional", "graph", "by", "asc", "desc", "as", "having", "undef", "values", "group", "minus", "in", "not", "service", "silent", "using", "insert", "delete", "union", "true", "false", "with", "data", "copy", "to", "move", "add", "create", "drop", "clear", "load"];
 
 JsObject sparqlCompletion(JsObject jseditor, JsObject options) {
-  GradeMirror editor = new GradeMirror.fromJsObject(jseditor);
+  CodeMirror editor = new CodeMirror.fromJsObject(jseditor);
 
   CodemirrorInput cmInput = editor.getOption("CodemirrorInput");
   Iterable<EditableEndpoint> endpoints = cmInput.endpoints;
@@ -125,17 +125,4 @@ void fillPrefixes(Set<JsObject> suggestions) {
     "text": PREFIXES[key],
     "displayText": key
   })).forEach((JsObject o) => suggestions.add(o));
-}
-
-
-//tmp solution waiting for CodeMirror constructor with JsObject
-class GradeMirror extends ProxyHolder {
-
-  GradeMirror.fromJsObject(JsObject object) : super(object);
-
-  Position getCursor([String start]) => new Position.fromProxy(start == null ? call('getCursor') : callArg('getCursor', start));
-  dynamic getOption(String option) => callArg('getOption', option);
-
-  String getLine(int n) => callArg('getLine', n);
-
 }

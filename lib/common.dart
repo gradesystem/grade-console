@@ -1,6 +1,5 @@
 library common;
 
-import 'dart:js';
 import 'dart:html';
 import 'dart:async';
 import 'dart:mirrors';
