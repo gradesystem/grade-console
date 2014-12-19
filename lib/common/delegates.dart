@@ -32,15 +32,6 @@ abstract class Delegate extends Keyed {
   
   put(String l, value) => _bean[l] = value;
   
-/*  noSuchMethod(Invocation invocation) {
-    
-    return invocation.isGetter ? 
-                  get(MirrorSystem.getName(invocation.memberName)):
-                  invocation.isSetter ? 
-                        put(MirrorSystem.getName(invocation.memberName), invocation.positionalArguments[0])
-                        : super.noSuchMethod(invocation);
-   }*/
-  
   void onBeanChange(List<String> keys, void callback()) {
       bean.changes.expand((List<ChangeRecord> list) => list)
          .where((ChangeRecord record)=> record is MapChangeRecord)
