@@ -41,7 +41,9 @@ init() {
     initPolymer().run(() {
 
         Polymer.onReady.then((_) {
+          log.fine("polymers ready");
           bus.fire(const ApplicationReady());
+          log.fine("application ready");
         });
       });
     

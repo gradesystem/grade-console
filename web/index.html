@@ -5,6 +5,16 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>Grade console</title>
+		
+		<script>
+		
+		  if(typeof console === "undefined"){
+		    console = { log: function() { } };
+		  }
+		  var now = new Date();
+		  console.log("INFO: "+now.getHours()+":"+ now.getMinutes()+":"+now.getSeconds()+"."+now.getMilliseconds()+ " head ready");
+		
+		</script>
 
 		<!-- polymer imports -->
 		<link rel="import" href="packages/polymer/polymer.html">
