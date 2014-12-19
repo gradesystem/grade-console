@@ -38,10 +38,14 @@ init() {
 
     log.fine("initialising polymers...");
     
+    DateTime start = new DateTime.now();
+    
     initPolymer().run(() {
 
         Polymer.onReady.then((_) {
           log.fine("polymers ready");
+          Duration elapsed = new DateTime.now().difference(start);
+          log.fine("elapsed $elapsed");
           bus.fire(const ApplicationReady());
           log.fine("application ready");
         });
