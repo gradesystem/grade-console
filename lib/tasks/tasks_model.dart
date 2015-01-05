@@ -180,7 +180,7 @@ class TasksModel extends SubPageEditableModel<Task> {
   }
 
   void runSandboxTask(EditableTask editableTask) {
-    if (editableTask.playgroundRunningTask.execution!=null) executionsService.stopTaskExecution(editableTask.playgroundRunningTask.execution);
+    if (editableTask.playgroundRunningTask.execution!=null) executionsService.delete(editableTask.playgroundRunningTask.execution);
     _run(editableTask.playgroundRunningTask, editableTask.model, taskService.runSandboxTask);
   }
   
@@ -202,7 +202,12 @@ class TasksModel extends SubPageEditableModel<Task> {
   void stopRunningTask(RunningTask runningTask) {
     if (!runningTask.canCancel || !runningTask.running) return;
     runningTask.stopTask();
-    executionsService.stopTaskExecution(runningTask.execution);
+    executionsService.stopTaskExecution(runningTask.execution)
+    .then((TaskExecution update) => updateTaskExecution(runningTask, update))
+    .catchError((e) {
+        runningTask.taskFailed(e);
+        onError(e, null);
+      });
   }
   
   void listenTaskExecution(RunningTask editableTask) {
@@ -254,7 +259,7 @@ class TaskExecutionLists {
   
   static TaskExecutionKeys K = const TaskExecutionKeys();
 
-  static final List<String> statuses = [K.status_submitted,K.status_started,K.status_transformed,K.status_modified,K.status_completed];
+  static final List<String> statuses = [K.status_submitted,K.status_started,K.status_transformed,K.status_modified,K.status_completed, K.status_stopped];
   static final List<String> phases = [K.phase_startup,K.phase_transformation,K.phase_difference,K.phase_writeout];
   
 }
@@ -276,6 +281,7 @@ class TaskExecutionKeys {
   final String status_modified = "http://gradesystem.io/onto/taskexecution.owl#modified";
   final String status_failed =  "http://gradesystem.io/onto/taskexecution.owl#failed";
   final String status_completed =  "http://gradesystem.io/onto/taskexecution.owl#completed";
+  final String status_stopped =  "http://gradesystem.io/onto/taskexecution.owl#stopped";
 
   const TaskExecutionKeys();
    
@@ -306,7 +312,7 @@ class TaskExecution extends GradeEntity {
   
   String get id => get(K.id);
   
-  bool get running => !completed && !failed;
+  bool get running => !completed && !failed && !stopped;
   
   bool isPhaseAfter(String target) => PHASE_SEQUENCE.indexOf(phase)>PHASE_SEQUENCE.indexOf(target);
   
@@ -315,6 +321,7 @@ class TaskExecution extends GradeEntity {
   
   bool get completed => status == K.status_completed;
   bool get failed => status == K.status_failed;
+  bool get stopped => status == K.status_stopped;
   
   String get status => get(K.status);
   String get phase => get(K.phase);
@@ -424,7 +431,8 @@ class HasTaskIcons {
                                      _TEK.status_transformed : "cloud",
                                      _TEK.status_modified : "cloud-queue",
                                      _TEK.status_completed:"cloud-done",
-                                     _TEK.status_failed:"warning"};
+                                     _TEK.status_failed:"warning",
+                                     _TEK.status_stopped:"cloud-off"};
   
   String toIcon(String status) => status!=null? icons[status] :"";
 }

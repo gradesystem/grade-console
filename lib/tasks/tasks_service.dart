@@ -42,7 +42,7 @@ class TaskExecutionsService extends ListService<TaskExecution> {
     => get(execution.id);
   
   Future<TaskExecution> stopTaskExecution(TaskExecution execution) 
-    => http.delete(getItemPath(execution.id)).then((response) => true);  
+    => http.postJSon(getItemPath(execution.id), "").then(generator);
 
   Future<ResulTable> getTransformResult(TaskExecution execution, [String uri])     
     => _getResult(execution, "transform", uri);

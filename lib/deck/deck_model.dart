@@ -27,7 +27,7 @@ class DeckPageModel {
   }
   
   void cancelExecution(RunningTask runningTask) {
-    //FIXME tasksModel.stopRunningTask(runningTask);
+    tasksModel.stopRunningTask(runningTask);
   }
   
   void removeExecution(RunningTask runningTask) {
