@@ -21,12 +21,12 @@
       }
       
       [expanded] {
-        width:400px !important;
+        width:470px !important;
       }
     </style>
     <grade-header-panel flex paneltitle="{{paneltitle}}">
          
-      <paper-tabs toolbar style="width:300px" expanded?={{expanded}} selected="{{executionArea}}" hide?="{{runningTask.execution==null || runningTask.error!=null}}" >
+      <paper-tabs toolbar style="width:370px" expanded?={{expanded}} selected="{{executionArea}}" hide?="{{runningTask.execution==null || runningTask.error!=null}}" >
         <content select="[task-tab]"></content>
         <paper-tab>Summary</paper-tab>
         <paper-tab>Trace</paper-tab>
