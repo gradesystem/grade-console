@@ -57,7 +57,7 @@ init() {
 }
 
 _hideLoader() {
-  loader.style.visibility = "hidden";
+  loader.style.display = "none";
 }
 
 
