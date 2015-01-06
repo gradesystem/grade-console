@@ -25,6 +25,7 @@ part 'grade/grade_console.dart';
 //lib-level logger
 final Logger log = new Logger('grade');
 
+Element loader = querySelector("#loader");
 
 EventBus bus;
 
@@ -47,11 +48,16 @@ init() {
           Duration elapsed = new DateTime.now().difference(start);
           log.fine("elapsed $elapsed");
           bus.fire(const ApplicationReady());
+          _hideLoader();
           log.fine("application ready");
         });
       });
     
     log.finer("initialised.");
+}
+
+_hideLoader() {
+  loader.style.visibility = "hidden";
 }
 
 
