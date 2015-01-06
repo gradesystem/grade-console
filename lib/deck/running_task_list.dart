@@ -15,7 +15,9 @@ class RunningTaskList extends PolymerElement with Filters {
   
   FilterFunction itemFilter = (RunningTask item, String term) 
                                 =>  item.execution.task.label != null && 
-                                    item.execution.task.label.toLowerCase().contains(term.toLowerCase());
+                                    (item.execution.task.label.toLowerCase().contains(term.toLowerCase())
+                                     || 
+                                     item.execution.status.toLowerCase().contains(term.toLowerCase()));
   
   RunningTaskList.created() : super.created();
   
