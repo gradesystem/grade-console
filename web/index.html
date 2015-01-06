@@ -48,24 +48,35 @@
 			.bar:nth-child(1) {
 			  background-color: #6FA6BC;
 			  animation: loading 4s linear infinite;
+			  -webkit-animation: loading 4s linear infinite;
 			}
 			.bar:nth-child(2) {
 			  background-color: #E41C23;
 			  animation: loading 4s linear 1s infinite;
+			  -webkit-animation: loading 4s linear 1s infinite;
 			}
 			.bar:nth-child(3) {
 			  background-color: #009587;
 			  animation: loading 4s linear 2s infinite;
+			  -webkit-animation: loading 4s linear 2s infinite;
 			}
 			.bar:nth-child(4) {
         background-color: #00BCD4;
         animation: loading 4s linear 3s infinite;
+        -webkit-animation: loading 4s linear 3s infinite;
       }
 			@keyframes loading {
 			    from {left: 50%; width: 0;z-index:100;}
 			    33.3333% {left: 0; width: 100%;z-index: 10;}
 			    to {left: 0; width: 100%;}
 			}
+			
+			/* Chrome, Safari, Opera */ 
+			@-webkit-keyframes loading {
+          from {left: 50%; width: 0;z-index:100;}
+          33.3333% {left: 0; width: 100%;z-index: 10;}
+          to {left: 0; width: 100%;}
+      }
 		</style>
 
 		<!-- polymer imports -->
@@ -93,7 +104,7 @@
 			</div>
 		</div>
 	
-	   <grade-console unresolved></grade-console>
+<!-- 	   <grade-console unresolved></grade-console> -->
  
 	</body>
 </html>
