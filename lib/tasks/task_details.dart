@@ -31,6 +31,9 @@ class TaskDetails extends View {
     uniqueLabel = ($) =>  $!=null && tasks.containsLabel($)?"Not original enough, try again.":null;
   }
   
+  @ComputedProperty("editable.synching")
+  bool get loading => editable!=null && editable.synching;
+  
   @ComputedProperty("editable.model.bean[K.source_endpoint]")
   EditableEndpoint get source => endpoints.findEditableEndpointById(get(editable,K.source_endpoint));
   set source(EditableEndpoint source) {/*IGNORE IT*/}

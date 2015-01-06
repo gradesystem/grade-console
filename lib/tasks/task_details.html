@@ -36,195 +36,201 @@
     </style>
  
  
-      <div hidden?="{{editable==null}}" style="overflow-y: auto">
-       
-       <!-- operation --> 
-        <div smaller radios layout vertical center>
-          <paper-radio-group fascia-title selected="{{ editable.model.bean[K.op] }}">
-          
-            <paper-radio-button name="{{K.publish_op}}" label="PUBLISH"  disabled?="{{!editable.edit}}"></paper-radio-button>
-            <paper-radio-button name="{{K.add_op}}"     label="ADD"      disabled?="{{!editable.edit}}"></paper-radio-button>
-            <paper-radio-button name="{{K.remove_op}}"  label="REMOVE"   disabled?="{{!editable.edit}}"></paper-radio-button>
-          
-          </paper-radio-group>
-        </div>
-       
-       <!-- uri -->
-        <grade-item icon=chevron-right>
-          <grade-fascia flex truncate>
-            <div trace?={{editable.newModel}}  fascia-title>{{ editable.newModel ? '&lt;system-generated&gt;' : editable.model.bean[K.uri] }}</div>
-            <grade-uri fascia-subtitle value={{K.uri}}></grade-uri>
-          </grade-fascia>   
-        </grade-item>
-        
-        <!-- label -->
-        <grade-item icon=chevron-right>
-          <grade-fascia flex truncate>
-            <grade-input fascia-title label="label ?" 
-                          disabled="{{!editable.edit}}" 
-                          required validators="{{[ uniqueLabel ]}}"
-                          invalid="{{ editable.fieldsInvalidity[K.label] }}"
-                          inputValue="{{ editable.model.bean[K.label] }}">
-            </grade-input>
-            <grade-uri fascia-subtitle value={{K.label}}></grade-uri>
-           </grade-fascia>   
-        </grade-item>
-        
-        
-        <grade-item icon=chevron-right>
+    <div hidden?="{{editable==null}}">
       
-         <div layout vertical flex>
-         
-          <grade-fascia>
-            <grade-dropdown-menu fascia-title flex
-                  
-                   required invalid="{{ editable.fieldsInvalidity[K.source_endpoint] }}"
-                   disabled="{{ !editable.edit }}" 
-                   selected="{{ editable.model.bean[K.source_endpoint] }}"
-                   label="source endpoint ?">
-                   
-                 <template repeat="{{areaEndpoints in endpoints.areaEndpoints}}">
-                   <template repeat="{{item in areaEndpoints.endpointsStorage.synchedData}}">
-                     <!-- to separate selection (ids) from display (names) we need a 'label'-ed polymer -->
-                     <!-- paper-item (or core-item) are ready. we can also rollout our own if we must -->
-                     <paper-item truncate label="{{item.model.name}} " dropitem="{{item.model.id}}">
-                       <div trace>:{{areaEndpoints.area }}</div>
-                     </paper-item>
-                   </template>
-                 </template>
-                 
-              </grade-dropdown-menu>
-              
-              <grade-uri fascia-subtitle value="{{K.source_endpoint}}"></grade-uri>
-            
-          </grade-fascia>   
-        
-         <!-- source graphs -->
-           <grade-fascia truncate>
-           
-              <graph-selector graphs-area flex fascia-title
-                   endpoint={{source}} 
-                   graphs={{editable.model.sourceGraphs}} 
-                   editable={{editable.edit}}
-                   invalid="{{ editable.fieldsInvalidity[K.source_graph] }}"
-                   on-refresh-endpoint={{refreshSourceGraphs}}
-                   multi
-                 >
-                 </graph-selector>
-            
-             <grade-uri fascia-subtitle value="{{K.source_graph}}"></grade-uri>
-             
-           </grade-fascia>   
-          
-          </div>
-     </grade-item>
-
-     <grade-item icon=chevron-right>
-        
-          <div layout vertical flex>
-          
-                  <grade-fascia>
-          
-                    <!-- target endpoint -->
-                    <grade-dropdown-menu fascia-title flex
-                        required invalid="{{ editable.fieldsInvalidity[K.target_endpoint] }}"
-                         disabled="{{ !editable.edit }}" 
-                         selected="{{ editable.model.bean[K.target_endpoint] }}"
-                         label="target endpoint ?">
-                         
-                      <template repeat="{{areaEndpoints in endpoints.areaEndpoints}}">
-                        <template repeat="{{item in areaEndpoints.endpointsStorage.synchedData}}">
-                            <paper-item truncate label="{{item.model.name}}" dropitem="{{item.model.id}}">
-                               <div trace>:{{areaEndpoints.area}}</div>
-                            </paper-item>
-                        </template>
-                      </template>
-                    
-                    </grade-dropdown-menu>
-                    
-                   <grade-uri fascia-subtitle value={{K.target_endpoint}}></grade-uri> 
-                  
-                  </grade-fascia>   
-                
-                 <!-- target graph -->
-                 <grade-fascia truncat>
-                 
-	                  <graph-selector graphs-area flex fascia-title
-		                   endpoint={{target}} 
-		                   graphs={{targetGraphs}} 
-		                   editable={{editable.edit}}
-		                   invalid="{{ editable.fieldsInvalidity[K.target_graph] }}"
-		                   on-refresh-endpoint={{refreshTargetGraphs}}
-		                 >
-		                 </graph-selector>
-                    
-                    <grade-uri fascia-subtitle value={{K.target_graph}}></grade-uri>  
-                    
-                  </grade-fascia> 
-             </div>
-           </grade-item>
-
-        
-        <!-- transform query -->
-        <grade-item icon=chevron-right>
-          <grade-fascia flex>
-             <div smaller wired rounded inset fascia-title >
-              <grade-input 
-                            disabled="{{!editable.edit}}" 
-                            multiline
-                            required invalid= "{{ editable.fieldsInvalidity[K.transform]}}"
-                            label="SPARQL transform query ?" 
-                            inputValue="{{ editable.model.bean[K.transform] }}">
-              </grade-input>
-            </div>
-            <grade-uri fascia-subtitle value={{K.transform}}></grade-uri>
-          </grade-fascia>   
-        </grade-item>
-        
-               
-        <!-- difference query -->
-        <grade-item icon=chevron-right hidden?="{{ editable.model.bean[K.op] == K.publish_op}}">
-          <grade-fascia flex>
-             <div smaller wired rounded inset fascia-title >
-              <grade-input style="min-height:150px; height:150px"
-                            disabled="{{!editable.edit}}" 
-                            multiline
-                            validators="{{[ conditionalRequiredDiff ]}}" invalid= "{{ editable.fieldsInvalidity[K.diff]}}"
-                            label="SPARQL difference query ?" 
-                            inputValue="{{editable.model.bean[K.diff] }}">
-              </grade-input>
-            </div>
-             <grade-uri fascia-subtitle value={{K.diff}}></grade-uri>
-          </grade-fascia>   
-        </grade-item>
-        
-        <!-- note -->
-        <grade-item icon=chevron-right>
-          <grade-fascia flex>
-            <grade-input  fascia-title 
-                          disabled="{{!editable.edit}}" 
-                          multiline
-                          label="note ?" 
-                          inputValue="{{ editable.model.bean[K.note] }}">
-            </grade-input>
-            <grade-uri fascia-subtitle value={{K.note}}></grade-uri>
-          </grade-fascia>   
-        </grade-item>
-        
-        <!-- creator -->
-        <grade-item icon=chevron-right>
-          <grade-fascia flex truncate>
-            <grade-input  fascia-title 
-                          disabled="{{!editable.edit}}" 
-                          required invalid= "{{ editable.fieldsInvalidity[K.creator]}}"
-                          type="URL"
-                          label="creator ?" 
-                          inputValue="{{ editable.model.bean[K.creator] }}">
-            </grade-input>
-            <grade-uri fascia-subtitle value={{K.creator}}></grade-uri>
-          </grade-fascia>   
-        </grade-item>
-      </div> 
-    </template>
+      <loading-panel loading="{{loading}}" message="saving the task">
+        <div style="overflow-y: auto">
+	       
+          <!-- operation --> 
+	        <div smaller radios layout vertical center>
+	          <paper-radio-group fascia-title selected="{{ editable.model.bean[K.op] }}">
+	          
+	            <paper-radio-button name="{{K.publish_op}}" label="PUBLISH"  disabled?="{{!editable.edit}}"></paper-radio-button>
+	            <paper-radio-button name="{{K.add_op}}"     label="ADD"      disabled?="{{!editable.edit}}"></paper-radio-button>
+	            <paper-radio-button name="{{K.remove_op}}"  label="REMOVE"   disabled?="{{!editable.edit}}"></paper-radio-button>
+	          
+	          </paper-radio-group>
+	        </div>
+	       
+	       <!-- uri -->
+	        <grade-item icon=chevron-right>
+	          <grade-fascia flex truncate>
+	            <div trace?={{editable.newModel}}  fascia-title>{{ editable.newModel ? '&lt;system-generated&gt;' : editable.model.bean[K.uri] }}</div>
+	            <grade-uri fascia-subtitle value={{K.uri}}></grade-uri>
+	          </grade-fascia>   
+	        </grade-item>
+	        
+	        <!-- label -->
+	        <grade-item icon=chevron-right>
+	          <grade-fascia flex truncate>
+	            <grade-input fascia-title label="label ?" 
+	                          disabled="{{!editable.edit}}" 
+	                          required validators="{{[ uniqueLabel ]}}"
+	                          invalid="{{ editable.fieldsInvalidity[K.label] }}"
+	                          inputValue="{{ editable.model.bean[K.label] }}">
+	            </grade-input>
+	            <grade-uri fascia-subtitle value={{K.label}}></grade-uri>
+	           </grade-fascia>   
+	        </grade-item>
+	        
+	        
+	        <grade-item icon=chevron-right>
+	      
+	         <div layout vertical flex>
+	         
+	          <grade-fascia>
+	            <grade-dropdown-menu fascia-title flex
+	                  
+	                   required invalid="{{ editable.fieldsInvalidity[K.source_endpoint] }}"
+	                   disabled="{{ !editable.edit }}" 
+	                   selected="{{ editable.model.bean[K.source_endpoint] }}"
+	                   label="source endpoint ?">
+	                   
+	                 <template repeat="{{areaEndpoints in endpoints.areaEndpoints}}">
+	                   <template repeat="{{item in areaEndpoints.endpointsStorage.synchedData}}">
+	                     <!-- to separate selection (ids) from display (names) we need a 'label'-ed polymer -->
+	                     <!-- paper-item (or core-item) are ready. we can also rollout our own if we must -->
+	                     <paper-item truncate label="{{item.model.name}} " dropitem="{{item.model.id}}">
+	                       <div trace>:{{areaEndpoints.area }}</div>
+	                     </paper-item>
+	                   </template>
+	                 </template>
+	                 
+	              </grade-dropdown-menu>
+	              
+	              <grade-uri fascia-subtitle value="{{K.source_endpoint}}"></grade-uri>
+	            
+	          </grade-fascia>   
+	        
+	         <!-- source graphs -->
+	           <grade-fascia truncate>
+	           
+	              <graph-selector graphs-area flex fascia-title
+	                   endpoint={{source}} 
+	                   graphs={{editable.model.sourceGraphs}} 
+	                   editable={{editable.edit}}
+	                   invalid="{{ editable.fieldsInvalidity[K.source_graph] }}"
+	                   on-refresh-endpoint={{refreshSourceGraphs}}
+	                   multi
+	                 >
+	                 </graph-selector>
+	            
+	             <grade-uri fascia-subtitle value="{{K.source_graph}}"></grade-uri>
+	             
+	           </grade-fascia>   
+	          
+	          </div>
+	     </grade-item>
+	
+	     <grade-item icon=chevron-right>
+	        
+	          <div layout vertical flex>
+	          
+	                  <grade-fascia>
+	          
+	                    <!-- target endpoint -->
+	                    <grade-dropdown-menu fascia-title flex
+	                        required invalid="{{ editable.fieldsInvalidity[K.target_endpoint] }}"
+	                         disabled="{{ !editable.edit }}" 
+	                         selected="{{ editable.model.bean[K.target_endpoint] }}"
+	                         label="target endpoint ?">
+	                         
+	                      <template repeat="{{areaEndpoints in endpoints.areaEndpoints}}">
+	                        <template repeat="{{item in areaEndpoints.endpointsStorage.synchedData}}">
+	                            <paper-item truncate label="{{item.model.name}}" dropitem="{{item.model.id}}">
+	                               <div trace>:{{areaEndpoints.area}}</div>
+	                            </paper-item>
+	                        </template>
+	                      </template>
+	                    
+	                    </grade-dropdown-menu>
+	                    
+	                   <grade-uri fascia-subtitle value={{K.target_endpoint}}></grade-uri> 
+	                  
+	                  </grade-fascia>   
+	                
+	                 <!-- target graph -->
+	                 <grade-fascia truncat>
+	                 
+		                  <graph-selector graphs-area flex fascia-title
+			                   endpoint={{target}} 
+			                   graphs={{targetGraphs}} 
+			                   editable={{editable.edit}}
+			                   invalid="{{ editable.fieldsInvalidity[K.target_graph] }}"
+			                   on-refresh-endpoint={{refreshTargetGraphs}}
+			                 >
+			                 </graph-selector>
+	                    
+	                    <grade-uri fascia-subtitle value={{K.target_graph}}></grade-uri>  
+	                    
+	                  </grade-fascia> 
+	             </div>
+	           </grade-item>
+	
+	        
+	        <!-- transform query -->
+	        <grade-item icon=chevron-right>
+	          <grade-fascia flex>
+	             <div smaller wired rounded inset fascia-title >
+	              <grade-input 
+	                            disabled="{{!editable.edit}}" 
+	                            multiline
+	                            required invalid= "{{ editable.fieldsInvalidity[K.transform]}}"
+	                            label="SPARQL transform query ?" 
+	                            inputValue="{{ editable.model.bean[K.transform] }}">
+	              </grade-input>
+	            </div>
+	            <grade-uri fascia-subtitle value={{K.transform}}></grade-uri>
+	          </grade-fascia>   
+	        </grade-item>
+	        
+	               
+	        <!-- difference query -->
+	        <grade-item icon=chevron-right hidden?="{{ editable.model.bean[K.op] == K.publish_op}}">
+	          <grade-fascia flex>
+	             <div smaller wired rounded inset fascia-title >
+	              <grade-input style="min-height:150px; height:150px"
+	                            disabled="{{!editable.edit}}" 
+	                            multiline
+	                            validators="{{[ conditionalRequiredDiff ]}}" invalid= "{{ editable.fieldsInvalidity[K.diff]}}"
+	                            label="SPARQL difference query ?" 
+	                            inputValue="{{editable.model.bean[K.diff] }}">
+	              </grade-input>
+	            </div>
+	             <grade-uri fascia-subtitle value={{K.diff}}></grade-uri>
+	          </grade-fascia>   
+	        </grade-item>
+	        
+	        <!-- note -->
+	        <grade-item icon=chevron-right>
+	          <grade-fascia flex>
+	            <grade-input  fascia-title 
+	                          disabled="{{!editable.edit}}" 
+	                          multiline
+	                          label="note ?" 
+	                          inputValue="{{ editable.model.bean[K.note] }}">
+	            </grade-input>
+	            <grade-uri fascia-subtitle value={{K.note}}></grade-uri>
+	          </grade-fascia>   
+	        </grade-item>
+	        
+	        <!-- creator -->
+	        <grade-item icon=chevron-right>
+	          <grade-fascia flex truncate>
+	            <grade-input  fascia-title 
+	                          disabled="{{!editable.edit}}" 
+	                          required invalid= "{{ editable.fieldsInvalidity[K.creator]}}"
+	                          type="URL"
+	                          label="creator ?" 
+	                          inputValue="{{ editable.model.bean[K.creator] }}">
+	            </grade-input>
+	            <grade-uri fascia-subtitle value={{K.creator}}></grade-uri>
+	          </grade-fascia>   
+	        </grade-item>
+	      </div> 
+      
+      </loading-panel>
+    </div>
+  </template>
     
 </polymer-element>

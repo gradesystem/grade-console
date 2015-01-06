@@ -40,8 +40,23 @@ class TaskPlayground extends PolymerElement with Filters, Dependencies {
   @ComputedProperty("editableTask.model.name")  
   String get title => editableTask!=null?(editableTask.model.label == null || editableTask.model.label.isEmpty?"(label?)":editableTask.model.label):"";
   
+  @ComputedProperty("editableTask.synching")
+  bool get loading => editableTask!=null && editableTask.synching;
+  
   void onBack() {
     fire("back");
+  }
+  
+  void onEdit() {
+    editableTask.startEdit();
+  }
+  
+  void onCancel() {
+    fire("cancel-editing");
+  }
+
+  void onSave() {
+    fire("save");
   }
   
   void onButtonClick() {
