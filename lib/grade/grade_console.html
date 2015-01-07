@@ -6,6 +6,7 @@
 <link rel="import" href="../../../packages/core_elements/core_toolbar.html">
 <link rel="import" href="../../../packages/paper_elements/paper_tabs.html">
 <link rel="import" href="../../../packages/paper_elements/paper_tab.html">
+<link rel="import" href="../../../packages/paper_elements/paper_progress.html">
 
 <link rel="import" href="../home/home_page.html">
 <link rel="import" href="../prod/prod_page.html">
@@ -27,16 +28,69 @@
 			    min-width: 60px;
 			    width: 60px;
 			  }
+			  
+			[fade-in] {
+        -webkit-animation: fadein 2s; /* Safari, Chrome and Opera > 12.1 */
+        -ms-animation: fadein 2s; /* Internet Explorer */
+        animation: fadein 2s;
+      }
+      
+      @keyframes fadein {
+          from { opacity: 0; }
+          to   { opacity: 1; }
+      }
+      
+      /* Safari, Chrome and Opera > 12.1 */
+      @-webkit-keyframes fadein {
+          from { opacity: 0; }
+          to   { opacity: 1; }
+      }
+
+      /* Internet Explorer */
+      @-ms-keyframes fadein {
+          from { opacity: 0; }
+          to   { opacity: 1; }
+      }
+      
+      [fade-out] {
+        -webkit-animation: fadeout 1s; /* Safari, Chrome and Opera > 12.1 */
+        -ms-animation: fadeout 1s; /* Internet Explorer */
+        animation: fadeout 1s;
+      }
+      
+      @keyframes fadeout {
+          from { opacity: 1; }
+          to   { opacity: 0; }
+      }
+      
+      /* Safari, Chrome and Opera > 12.1 */
+      @-webkit-keyframes fadeout {
+          from { opacity: 1; }
+          to   { opacity: 0; }
+      }
+
+      /* Internet Explorer */
+      @-ms-keyframes fadeout {
+          from { opacity: 1; }
+          to   { opacity: 0; }
+      }
+			  
     </style>
     
     <link rel="stylesheet" href="themes.css">
     
-<!--     <template if="{{!consoleReady}}"> -->
-<!--       <paper-progress value={{progressValue}} min=0 max=100 step="2"></paper-progress> -->
-<!--     </template> -->
+    <template if="{{showLoadingProgress}}">
+      <div fit horizontal layout center center-justified fade-out?={{!showLoadingProgress}}>
+        <div vertical layout center>
+          <div style="font-size:125px">GRADE</div>
+	        <paper-progress value={{progressValue}} min=0 max=100 step="2" style="width:100%" fade-in></paper-progress>
+	        <div fade-in>{{progressMessage}}</div>
+        </div>
+      </div>
+    </template>
     
-    <template if="{{consoleReady}}">     
-    <core-header-panel fit scrollable>
+    <template if="{{instantiateConsole}}">     
+    <core-header-panel fit scrollable hidden?={{showLoadingProgress}} fade-in>
       <core-toolbar class="{{pages[page].style }}-scaffold">
         <div flex large>{{pages[page].name | uppercase}}</div>
               
@@ -52,28 +106,28 @@
 
 			<core-pages flex scrollable selected={{page}}>
 			    
-				<home-page on-tile-selected={{changePage}}></home-page>
+				<home-page on-tile-selected={{changePage}} on-area-ready={{onAreaReady}}></home-page>
 				
 				<div relative fit>
-					<template if="{{applicationReady}}">
+					<template if="{{instantiateAreas[0]}}">
             <prod-page class="prod" fit on-area-ready={{onAreaReady}}></prod-page>
 					</template>
 				</div>
 				
         <div relative fit>
-	        <template if="{{applicationReady}}">
+	        <template if="{{instantiateAreas[1]}}">
             <deck-page class="deck" fit on-area-ready={{onAreaReady}}></deck-page>
 					</template>
 				</div>
         
         <div relative fit>
-	        <template if="{{applicationReady}}">
+	        <template if="{{instantiateAreas[2]}}">
             <tasks-page class="tasks" fit on-area-ready={{onAreaReady}}></tasks-page>
 					</template>
         </div>
         
         <div relative fit>
-	        <template if="{{applicationReady}}">
+	        <template if="{{instantiateAreas[3]}}">
             <stage-page class="stage" fit on-area-ready={{onAreaReady}}></stage-page>
 					</template>
 				</div>

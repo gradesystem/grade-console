@@ -18,37 +18,56 @@ class GradeConsole  extends PolymerElement with Dependencies, Filters {
   @observable
   bool creditsDialogOpened = false;
   
+
   @observable
-  bool applicationReady = false;
+  bool showLoadingProgress = false;
   
   @observable
-  bool consoleReady = false;
+  bool instantiateConsole = false;
   
-  EventBus bus;
+  @observable
+  int progressValue = 0;
   
-  int readyAreas = 0;
+  @observable
+  String progressMessage = "loading home...";
+  
+  @observable
+  List<bool> instantiateAreas = toObservable([false,false,false,false]);
+  int nextArea = 0;
   
   GradeConsole.created() : super.created() {
-    
     history.registerRoot(pages[0].tab, (){page=0;});
-    for (int i = 0; i<pages.length; i++) history.register(pages[i].tab, (){page=i;});
-    
-    onPropertyChange(this, #page, onPageChange);
-    
-   bus = instanceOf(EventBus);
-   bus.on(PolymerReady).listen((_) {
-     print('grade_console PolymerReady');
-     consoleReady = true;
-   });
-   bus.on(ApplicationRenderingReady).listen((_) {
-     print('grade_console ApplicationRenderingReady');
-      applicationReady = true;
-   });
+       for (int i = 0; i<pages.length; i++) history.register(pages[i].tab, (){page=i;});
+       
+       onPropertyChange(this, #page, onPageChange);
+       
+      bus.on(PolymerReady).listen((_) {
+        log.info("initializing console element, showing progress loader...");
+        showLoadingProgress = true;
+        new Timer(new Duration(milliseconds: 500), () {
+          progressMessage = "loading home...";
+          instantiateConsole = true;
+        });
+      });
   }
   
-  void onAreaReady() {
-    readyAreas++;
-    if (readyAreas == 4) bus.fire(const AreasReady());
+  void onAreaReady(event, detail, target) {
+
+    if (nextArea >= instantiateAreas.length) {
+      progressValue = 100;
+      progressMessage = "ready!";
+      new Timer(new Duration(milliseconds: 500), () {
+        showLoadingProgress = false;
+        bus.fire(const ApplicationInitialized());
+      });
+    } else {
+      progressMessage = "loading "+pages[nextArea+1].name+"...";
+      progressValue +=20;
+      
+      new Timer(new Duration(milliseconds: 500), () {
+        instantiateAreas[nextArea++] = true;
+      });
+    }
   }
   
   void changePage(Event e, String tilename) {

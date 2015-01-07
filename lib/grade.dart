@@ -28,96 +28,74 @@ final Logger log = new Logger('grade');
 
 Element loader = querySelector("#loader");
 
-EventBus bus;
+EventBus bus = new EventBus();
 
 init() {
-  
-    _initLogging();
 
-    log.info("initialising modules...");
-    
-    _initModules();
+  _initLogging();
 
-    log.fine("initialising polymers...");
-    
-    DateTime start = new DateTime.now();
-    
-    bus.on(HomeRendered).listen((_) {
-      
+  log.fine("initialising polymer...");
+
+  initPolymer().run(() {
+
+    Polymer.onReady.then((_) {
+      log.fine("polymer ready");
+      _initModules();
+      bus.fire(const PolymerReady());
       _hideLoader();
-      
-      new Timer(new Duration(milliseconds: 500), () {
-      
-      start = new DateTime.now();
-      bus.fire(const ApplicationRenderingReady());
-      log.fine("areas ready, elapsed ${new DateTime.now().difference(start)}");
-   
-    });
-      });
-    
-    bus.on(AreasReady).listen((_) {
-      start = new DateTime.now();
-      bus.fire(const ApplicationReady());
-      log.fine("application ready, elapsed ${new DateTime.now().difference(start)}");
-    });
-    
-    initPolymer().run(() {
 
-        Polymer.onReady.then((_) {
-          log.fine("polymers ready, elapsed ${new DateTime.now().difference(start)}");
-          new Timer(new Duration(milliseconds: 500), () {
-          bus.fire(const PolymerReady());
-          });
+    });
+  });
 
-          
-        });
-      });
-    
-    log.finer("initialised.");
+  bus.on(ApplicationInitialized).listen((_) {
+    log.info("areas ready, firing application ready...");
+    bus.fire(const ApplicationReady());
+  });
 }
 
 _hideLoader() {
   loader.style.display = "none";
 }
 
-
 _initLogging() {
-  
-   logging.hierarchicalLoggingEnabled = true;
-  
-   log.level = Level.ALL;
-   
-   log.onRecord.listen((LogRecord rec) {
-   
-     //log format
-     print('${rec.level.name}: ${rec.time}, ${rec.loggerName}: ${rec.message}');
-     
-     //error log format
-     if (rec.error!=null)
-        print('error => ${rec.error} \ntrace => ${rec.stackTrace}');
-    });
+
+  logging.hierarchicalLoggingEnabled = true;
+
+  log.level = Level.ALL;
+
+  log.onRecord.listen((LogRecord rec) {
+
+    //log format
+    print('${rec.level.name}: ${rec.time}, ${rec.loggerName}: ${rec.message}');
+
+    //error log format
+    if (rec.error != null) print('error => ${rec.error} \ntrace => ${rec.stackTrace}');
+  });
 }
 
 _initModules() {
-  
+
+  log.info("initialising modules...");
+
   home.init();
   prod.init();
   deck.init();
   staging.init();
   tasks.init();
-  
-  bus = new EventBus();
+
   GradeEnpoints gradeEnpoints = new GradeEnpoints();
 
   //add app-level modules
   Module module = new Module()
-                      ..bind(EventBus, toValue: bus)
-                      ..bind(GradeEnpoints, toValue: gradeEnpoints);
-  
+      ..bind(EventBus, toValue: bus)
+      ..bind(GradeEnpoints, toValue: gradeEnpoints);
+
   Dependencies.add(module);
-  
-  Dependencies.configure(); 
-  
+
+  Dependencies.configure();
+
   gradeEnpoints.addList(Dependencies.injector.get(EndpointSubPageModel, prod.ProdAnnotation), "Data");
   gradeEnpoints.addList(Dependencies.injector.get(EndpointSubPageModel, staging.StageAnnotation), "Sources");
+
+  log.finer("modules ready");
 }

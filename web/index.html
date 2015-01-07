@@ -17,72 +17,28 @@
 		</script>
 		
 		<style>
-			.loader {
-		    width: 50%;
-		    height: 100px;
-		
-		    position: absolute;
-		    top:0;
-		    bottom: 0;
-		    left: 0;
-		    right: 0;
-		
-		    margin: auto;
-			}
-			
-			.loader-image {
-			display: block;
-			margin-left: auto;
-			margin-right: auto;
-			}
-			
-			.load-bar {
-			  position: relative;
-			  margin-top: 20px;
-			  width: 100%;
-			  height: 3px;
-			  background-color: #00BCD4;
-			}
-			.bar {
-			  content: "";
-			  display: inline;
-			  position: absolute;
-			  width: 0;
-			  height: 100%;
-			  left: 50%;
-			  text-align: center;
-			}
-			.bar:nth-child(1) {
-			  background-color: #6FA6BC;
-			  animation: loading 4s linear infinite;
-			  -webkit-animation: loading 4s linear infinite;
-			}
-			.bar:nth-child(2) {
-			  background-color: #E41C23;
-			  animation: loading 4s linear 1s infinite;
-			  -webkit-animation: loading 4s linear 1s infinite;
-			}
-			.bar:nth-child(3) {
-			  background-color: #009587;
-			  animation: loading 4s linear 2s infinite;
-			  -webkit-animation: loading 4s linear 2s infinite;
-			}
-			.bar:nth-child(4) {
-        background-color: #00BCD4;
-        animation: loading 4s linear 3s infinite;
-        -webkit-animation: loading 4s linear 3s infinite;
+      
+      [fade-in] {
+        -webkit-animation: fadein 2s; /* Safari, Chrome and Opera > 12.1 */
+        -ms-animation: fadein 2s; /* Internet Explorer */
+        animation: fadein 2s;
       }
-			@keyframes loading {
-			    from {left: 50%; width: 0;z-index:100;}
-			    33.3333% {left: 0; width: 100%;z-index: 10;}
-			    to {left: 0; width: 100%;}
-			}
-			
-			/* Chrome, Safari, Opera */ 
-			@-webkit-keyframes loading {
-          from {left: 50%; width: 0;z-index:100;}
-          33.3333% {left: 0; width: 100%;z-index: 10;}
-          to {left: 0; width: 100%;}
+      
+      @keyframes fadein {
+          from { opacity: 0; }
+          to   { opacity: 1; }
+      }
+      
+      /* Safari, Chrome and Opera > 12.1 */
+      @-webkit-keyframes fadein {
+          from { opacity: 0; }
+          to   { opacity: 1; }
+      }
+
+      /* Internet Explorer */
+      @-ms-keyframes fadein {
+          from { opacity: 0; }
+          to   { opacity: 1; }
       }
 		</style>
 
@@ -101,18 +57,11 @@
 		
 	</head>
 	<body fullbleed >
-	
-	  <div class="loader" id="loader">
-	  <img class="loader-image" src="images/loader.gif" />
-<!-- 		  <div class="load-bar"> -->
-<!-- 			  <div class="bar"></div> -->
-<!-- 			  <div class="bar"></div> -->
-<!-- 			  <div class="bar"></div> -->
-<!-- 			  <div class="bar"></div> -->
-<!-- 			</div> -->
-		</div>
-	
-	   <grade-console unresolved></grade-console>
+	 
+	  <div id="loader" fit horizontal layout center center-justified fade-in>
+       <div style="font-size:125px;font-family: Roboto, sans-serif;color:rgb(66, 66, 66);font-weight: 300;">GRADE</div>
+     </div>
+   <grade-console unresolved></grade-console>
  
 	</body>
 </html>

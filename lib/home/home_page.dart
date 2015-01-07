@@ -47,14 +47,13 @@ class HomePage extends PolymerElement with Dependencies {
     deck_stats = new PageStatistics(runningTasks.running.length,new DateTime.now());
     
     bus = instanceOf(EventBus);
-    bus.on(AreasReady).listen((_) {
+    bus.on(ApplicationInitialized).listen((_) {
          areasLoaded = true;
     });
   }
   
   void domReady() {
-    print('home page domReady');
-    async((_){bus.fire(const HomeRendered());});    
+    fire("area-ready");
   }
   
   

@@ -4,16 +4,8 @@ class PolymerReady {
   const PolymerReady();
 }
 
-class ApplicationRenderingReady {
-  const ApplicationRenderingReady();
-}
-
-class HomeRendered {
-  const HomeRendered();
-}
-
-class AreasReady {
-  const AreasReady();
+class ApplicationInitialized {
+  const ApplicationInitialized();
 }
 
 class ApplicationReady {
