@@ -30,7 +30,12 @@
     </style>
     
     <link rel="stylesheet" href="themes.css">
-         
+    
+<!--     <template if="{{!consoleReady}}"> -->
+<!--       <paper-progress value={{progressValue}} min=0 max=100 step="2"></paper-progress> -->
+<!--     </template> -->
+    
+    <template if="{{consoleReady}}">     
     <core-header-panel fit scrollable>
       <core-toolbar class="{{pages[page].style }}-scaffold">
         <div flex large>{{pages[page].name | uppercase}}</div>
@@ -139,6 +144,8 @@
 		  </grade-item>
 		</div>
     </grade-dialog>
+    
+    </template>
 		      
   </template> 
     

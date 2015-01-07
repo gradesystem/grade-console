@@ -1,19 +1,23 @@
 part of common;
 
-class ApplicationReady {
-  const ApplicationReady();
+class PolymerReady {
+  const PolymerReady();
 }
 
 class ApplicationRenderingReady {
   const ApplicationRenderingReady();
 }
 
+class HomeRendered {
+  const HomeRendered();
+}
+
 class AreasReady {
   const AreasReady();
 }
 
-class HomeRendered {
-  const HomeRendered();
+class ApplicationReady {
+  const ApplicationReady();
 }
 
 typedef ToastCallback(Map data);

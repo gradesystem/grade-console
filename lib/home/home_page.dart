@@ -30,6 +30,8 @@ class HomePage extends PolymerElement with Dependencies {
   @observable
   bool areasLoaded = false;
   
+  EventBus bus;
+  
   HomePage.created() : super.created() {
     
     prod = instanceOf(Datasets, ProdAnnotation);
@@ -44,10 +46,15 @@ class HomePage extends PolymerElement with Dependencies {
     runningTasks = instanceOf(RunningTasks);
     deck_stats = new PageStatistics(runningTasks.running.length,new DateTime.now());
     
-    EventBus bus = instanceOf(EventBus);
-       bus.on(AreasReady).listen((_) {
+    bus = instanceOf(EventBus);
+    bus.on(AreasReady).listen((_) {
          areasLoaded = true;
     });
+  }
+  
+  void domReady() {
+    print('home page domReady');
+    async((_){bus.fire(const HomeRendered());});    
   }
   
   

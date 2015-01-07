@@ -21,6 +21,9 @@ class GradeConsole  extends PolymerElement with Dependencies, Filters {
   @observable
   bool applicationReady = false;
   
+  @observable
+  bool consoleReady = false;
+  
   EventBus bus;
   
   int readyAreas = 0;
@@ -33,15 +36,14 @@ class GradeConsole  extends PolymerElement with Dependencies, Filters {
     onPropertyChange(this, #page, onPageChange);
     
    bus = instanceOf(EventBus);
+   bus.on(PolymerReady).listen((_) {
+     print('grade_console PolymerReady');
+     consoleReady = true;
+   });
    bus.on(ApplicationRenderingReady).listen((_) {
      print('grade_console ApplicationRenderingReady');
       applicationReady = true;
    });
-  }
-  
-  void domReady() {
-    print('grade_console domReady');
-    async((_){bus.fire(const HomeRendered());});    
   }
   
   void onAreaReady() {

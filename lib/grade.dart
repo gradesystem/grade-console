@@ -46,7 +46,7 @@ init() {
       
       _hideLoader();
       
-      new Timer(new Duration(seconds: 1), () {
+      new Timer(new Duration(milliseconds: 500), () {
       
       start = new DateTime.now();
       bus.fire(const ApplicationRenderingReady());
@@ -65,6 +65,9 @@ init() {
 
         Polymer.onReady.then((_) {
           log.fine("polymers ready, elapsed ${new DateTime.now().difference(start)}");
+          new Timer(new Duration(milliseconds: 500), () {
+          bus.fire(const PolymerReady());
+          });
 
           
         });
