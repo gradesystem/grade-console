@@ -27,6 +27,9 @@ class HomePage extends PolymerElement with Dependencies {
   @observable
   PageStatistics deck_stats;
   
+  @observable
+  bool areasLoaded = false;
+  
   HomePage.created() : super.created() {
     
     prod = instanceOf(Datasets, ProdAnnotation);
@@ -40,6 +43,11 @@ class HomePage extends PolymerElement with Dependencies {
 
     runningTasks = instanceOf(RunningTasks);
     deck_stats = new PageStatistics(runningTasks.running.length,new DateTime.now());
+    
+    EventBus bus = instanceOf(EventBus);
+       bus.on(AreasReady).listen((_) {
+         areasLoaded = true;
+    });
   }
   
   

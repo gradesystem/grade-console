@@ -49,13 +49,29 @@
 			    
 				<home-page on-tile-selected={{changePage}}></home-page>
 				
-				<prod-page class="prod"></prod-page>
+				<div relative fit>
+					<template if="{{applicationReady}}">
+            <prod-page class="prod" fit on-area-ready={{onAreaReady}}></prod-page>
+					</template>
+				</div>
 				
-				<deck-page class="deck"></deck-page>
-				
-				<tasks-page class="tasks"></tasks-page>
-				
-				<stage-page class="stage"></stage-page>
+        <div relative fit>
+	        <template if="{{applicationReady}}">
+            <deck-page class="deck" fit on-area-ready={{onAreaReady}}></deck-page>
+					</template>
+				</div>
+        
+        <div relative fit>
+	        <template if="{{applicationReady}}">
+            <tasks-page class="tasks" fit on-area-ready={{onAreaReady}}></tasks-page>
+					</template>
+        </div>
+        
+        <div relative fit>
+	        <template if="{{applicationReady}}">
+            <stage-page class="stage" fit on-area-ready={{onAreaReady}}></stage-page>
+					</template>
+				</div>
 			  
 			</core-pages>
           

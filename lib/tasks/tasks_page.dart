@@ -4,5 +4,9 @@ part of tasks;
 class TasksPage extends PolymerElement {
   
   TasksPage.created() : super.created();
+  
+  void domReady() {
+    fire("area-ready");
+  }
 }
 

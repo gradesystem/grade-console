@@ -4,4 +4,8 @@ part of prod;
 class ProdPage extends PolymerElement {
   
   ProdPage.created() : super.created();
+  
+  void domReady() {
+    fire("area-ready");
+  }
 }

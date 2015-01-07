@@ -1,6 +1,7 @@
 library home;
 
 import 'package:polymer/polymer.dart';
+import 'package:event_bus/event_bus.dart';
 
 import 'common.dart';
 import 'common/datasets/datasets.dart';

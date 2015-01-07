@@ -8,13 +8,15 @@ class PageTile extends PolymerElement with Filters {
 
   @published String name;
   @published String resource_name;
+
+  @published bool areaEnabled = false;
   
   @published PageStatistics statistics;
   
   PageTile.created() : super.created();
 
   void tileSelected() {
-    this.fire("tile-selected", detail:name);
+    if (areaEnabled) this.fire("tile-selected", detail:name);
   }
 }
 

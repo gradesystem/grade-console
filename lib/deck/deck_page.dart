@@ -6,6 +6,10 @@ class DeckPage extends Polybase {
   
   DeckPage.created() : super.createWith(DeckPageModel);
 
+  void domReady() {
+    fire("area-ready");
+  }
+
   @observable
   DeckPageModel get deckModel => model as DeckPageModel;
   

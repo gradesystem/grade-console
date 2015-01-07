@@ -4,6 +4,18 @@ class ApplicationReady {
   const ApplicationReady();
 }
 
+class ApplicationRenderingReady {
+  const ApplicationRenderingReady();
+}
+
+class AreasReady {
+  const AreasReady();
+}
+
+class HomeRendered {
+  const HomeRendered();
+}
+
 typedef ToastCallback(Map data);
 
 class ToastMessage {

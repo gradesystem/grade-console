@@ -2,8 +2,8 @@
 <link rel="import" href="../../../packages/core_elements/core_icons.html">
 <link rel="import" href="../../../packages/core_elements/social_icons.html">
 
-
 <link rel="import" href="../common/components/grade_button.html">
+<!-- <link rel="import" href="../common/components/grade_spinner.html"> -->
 
 <link rel="import" href="home.html">
 
@@ -25,7 +25,6 @@
         border-radius: 5px;
       }
       
-      
       [content] {
         padding-top: 5px;
         padding-left: 16px;
@@ -37,7 +36,10 @@
         font-weight : 400;
         border-top-right-radius: 5px;
         border-top-left-radius: 5px;
-        cursor: pointer;
+      }
+      
+      [clickable] {
+        cursor: pointer;      
       }
       
       [count] {
@@ -73,17 +75,42 @@
         color:white !important;
       }
       
+      [fade-in] {
+            -webkit-animation: fadein 2s; /* Safari, Chrome and Opera > 12.1 */
+        -ms-animation: fadein 2s; /* Internet Explorer */
+            animation: fadein 2s;
+      }
+      
+      @keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+
+/* Safari, Chrome and Opera > 12.1 */
+@-webkit-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Internet Explorer */
+@-ms-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+      
     </style>
 
     <div flex tile bg vertical layout>
     
       <div fascia content bg-alt 
-              horizontal layout center on-click="{{tileSelected}}">
+              horizontal layout center on-click="{{tileSelected}}" clickable?={{areaEnabled}}>
             <div flex>
               <span>{{name | uppercase}}</span>
             </div>
           
-          <grade-button notooltip icon="arrow-forward" label="enter area"></grade-button>
+          <grade-button notooltip icon="arrow-forward" label="enter area" hidden?={{!areaEnabled}} fade-in></grade-button>
        
         </div>
       
@@ -91,10 +118,13 @@
               <div layout horizontal>
                 
                 <div count>
-                  <template if={{statistics.loaded}}>
+                  <template if="{{statistics.loaded && areaEnabled}}" fade-in>
                     {{statistics.count}}
                   </template>	         
-                  <template if={{!statistics.loaded}}>...</template>          
+                  <template if="{{!statistics.loaded || !areaEnabled}}">
+<!--                   <grade-spinner></grade-spinner> -->
+                  ...
+                  </template>          
                 </div>
                 
 	              <div info layout vertical reverse>

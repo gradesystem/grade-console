@@ -18,12 +18,35 @@ class GradeConsole  extends PolymerElement with Dependencies, Filters {
   @observable
   bool creditsDialogOpened = false;
   
+  @observable
+  bool applicationReady = false;
+  
+  EventBus bus;
+  
+  int readyAreas = 0;
+  
   GradeConsole.created() : super.created() {
     
     history.registerRoot(pages[0].tab, (){page=0;});
     for (int i = 0; i<pages.length; i++) history.register(pages[i].tab, (){page=i;});
     
     onPropertyChange(this, #page, onPageChange);
+    
+   bus = instanceOf(EventBus);
+   bus.on(ApplicationRenderingReady).listen((_) {
+     print('grade_console ApplicationRenderingReady');
+      applicationReady = true;
+   });
+  }
+  
+  void domReady() {
+    print('grade_console domReady');
+    async((_){bus.fire(const HomeRendered());});    
+  }
+  
+  void onAreaReady() {
+    readyAreas++;
+    if (readyAreas == 4) bus.fire(const AreasReady());
   }
   
   void changePage(Event e, String tilename) {

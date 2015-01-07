@@ -10,6 +10,7 @@ import 'package:logging/logging.dart';
 import 'package:logging/logging.dart' as logging;
 
 import 'dart:html';
+import 'dart:async';
 
 import 'common.dart';
 import 'home.dart' as home;
@@ -41,15 +42,31 @@ init() {
     
     DateTime start = new DateTime.now();
     
+    bus.on(HomeRendered).listen((_) {
+      
+      _hideLoader();
+      
+      new Timer(new Duration(seconds: 1), () {
+      
+      start = new DateTime.now();
+      bus.fire(const ApplicationRenderingReady());
+      log.fine("areas ready, elapsed ${new DateTime.now().difference(start)}");
+   
+    });
+      });
+    
+    bus.on(AreasReady).listen((_) {
+      start = new DateTime.now();
+      bus.fire(const ApplicationReady());
+      log.fine("application ready, elapsed ${new DateTime.now().difference(start)}");
+    });
+    
     initPolymer().run(() {
 
         Polymer.onReady.then((_) {
-          log.fine("polymers ready");
-          Duration elapsed = new DateTime.now().difference(start);
-          log.fine("elapsed $elapsed");
-          bus.fire(const ApplicationReady());
-          _hideLoader();
-          log.fine("application ready");
+          log.fine("polymers ready, elapsed ${new DateTime.now().difference(start)}");
+
+          
         });
       });
     

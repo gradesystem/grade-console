@@ -4,4 +4,8 @@ part of stage;
 class StagePage extends PolymerElement {
 
   StagePage.created() : super.created();
+  
+  void domReady() {
+    fire("area-ready");
+  }
 }
