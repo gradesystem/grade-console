@@ -1,4 +1,5 @@
 <link rel="import" href="../../../packages/polymer/polymer.html">
+<link rel="import" href="../../../packages/core_elements/core_icon.html">
 <link rel="import" href="../../../packages/core_elements/core_icons.html">
 <link rel="import" href="../../../packages/core_elements/social_icons.html">
 <link rel="import" href="../../../packages/paper_elements/paper_progress.html">
@@ -98,14 +99,17 @@
 			    from { opacity: 0; }
 			    to   { opacity: 1; }
 			}
-
+  
+      [loading-icon] {
+        width: 30px;
+        height: 30px;
+      }
       
     </style>
 
     <div flex tile bg vertical layout>
     
-      <div fascia content bg-alt 
-              horizontal layout center on-click="{{tileSelected}}" clickable?={{areaEnabled}}>
+      <div fascia content bg-alt horizontal layout center on-click="{{tileSelected}}" clickable?={{areaEnabled}}>
             <div flex>
               <span>{{name | uppercase}}</span>
             </div>
@@ -113,7 +117,6 @@
           <grade-button notooltip icon="arrow-forward" label="enter area" hidden?={{!areaEnabled}} fade-in></grade-button>
        
         </div>
-        <paper-progress tile-progress id="progress" step="2" style="width:100%" hidden?={{statistics.loaded}}></paper-progress>
         
            <div flex content vertical layout end-justified>
               <div layout horizontal>
@@ -123,13 +126,13 @@
                     <span fade-in>{{statistics.count}}</span>
                   </template>	         
                   <template if="{{!statistics.loaded}}">
-                  ...
+                   <core-icon loading-icon icon="cached"></core-icon>
                   </template>          
                 </div>
                 
 	              <div info layout vertical reverse>
-	                    <div date>{{statistics.date | format}}</div>
-                      <div name>{{resource_name}}</div>
+	               <div date>{{statistics.date | format}}</div>
+                 <div name>{{resource_name}}</div>
 		            </div>
                 <div flex end-justified notifs
                    layout horizontal >

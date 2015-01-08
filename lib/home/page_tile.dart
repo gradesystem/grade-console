@@ -13,33 +13,10 @@ class PageTile extends PolymerElement with Filters {
   
   @published PageStatistics statistics;
   
-  PaperProgress progress;
-  
   PageTile.created() : super.created();
-  
-  void ready() {
-    progress = $['progress'];
-  }
 
   void tileSelected() {
     if (areaEnabled) this.fire("tile-selected", detail:name);
-  }
-  
-  @ObserveProperty("statistics.loaded")
-  void runProgress() {
-    progress.value = progress.min;
-    if (!statistics.loaded) {
-      nextProgress(0);
-    }
-  }
-
-  nextProgress(_) {
-    if (progress.value < progress.max) {
-      progress.value += (progress.step != 0 ? progress.step : 1);
-    } else {
-      progress.value = progress.min;
-    }
-    if (!statistics.loaded) window.animationFrame.then(nextProgress);
   }
 }
 
