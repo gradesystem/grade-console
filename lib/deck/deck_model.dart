@@ -41,6 +41,13 @@ class DeckPageModel {
   void loadRunnable() {
     tasksModel.loadAll();
   }
+  
+  void removeAllExecuted() {
+    storage.loading = true;
+    List<RunningTask> toDelete = storage.data.where((RunningTask rt)=>!rt.running).toList();
+    toDelete.forEach(removeExecution);
+    storage.loading = false;
+  }
 
   void loadAll() {
     storage.loading = true;

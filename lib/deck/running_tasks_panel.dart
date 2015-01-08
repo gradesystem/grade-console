@@ -24,5 +24,9 @@ class RunningTasksPanel extends PolymerElement with Filters, Dependencies {
   void removeExecution(event,detail,target) {
     model.removeExecution(detail);
   }
+  
+  void removeAllExecuted() {
+    model.removeAllExecuted();
+  }
 
 }

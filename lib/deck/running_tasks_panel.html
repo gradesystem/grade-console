@@ -32,6 +32,7 @@
 	        </grade-input>
 	        
           <grade-button toolbar icon="refresh" label="refresh list" on-click="{{refresh}}"></grade-button>
+          <grade-button toolbar action onhover label="remove all executed task" icon="delete" on-click={{removeAllExecuted}}></grade-button>
 
 	        <running-task-list main listitems="{{model.storage}}" kfilter="{{kfilter}}" on-stop-execution={{stopExecution}} on-remove-execution={{removeExecution}}></running-task-list>
 	        
