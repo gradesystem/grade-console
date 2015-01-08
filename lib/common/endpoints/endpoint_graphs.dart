@@ -45,7 +45,7 @@ class EndpointGraphs extends PolymerElement with Filters {
   }
   
   void addGraph() {
-    fire("add-graph", detail:new Graph(newUrl, newLabel));
+    fire("add-graph", detail:new Graph(newUrl.trim(), newLabel));
     newUrl = "";
     newLabel = "";
   }
