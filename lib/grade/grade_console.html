@@ -86,7 +86,7 @@
     <template if="{{showLoadingProgress}}">
       <div fit horizontal layout center center-justified fade-out?={{!showLoadingProgress}}>
         <div vertical layout center>
-          <div style="font-size:115px; font-weight: 100;color: #B3B3B3">GRADE</div>
+          <div style="font-size:105px; font-weight: 100;color: rgba(0,0,0,0.26)">GRADE</div>
 	        <paper-progress value={{progressValue}} min=0 max=100 step="2" style="width:100%" fade-in></paper-progress>
 	        <div fade-in style="padding-top:5px;color: #B3B3B3;min-height:18px" smaller>{{progressMessage}}</div>
         </div>
