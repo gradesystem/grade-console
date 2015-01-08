@@ -16,7 +16,7 @@ grade-dark-cyan = #0097A7
 grade-yellow = #FFC107
 grade-light-yellow = #FFDF82
 grade-dark-yellow = #FFA000
-grade-bright-yellow= #FFFF7A
+grade-bright-yellow= #FFFF7Ap
 
 grade-pink=#E91E63
 grade-light-pink=#DD3882
@@ -307,6 +307,14 @@ theme-classes = {
     
     
     "paper-progress::shadow #activeProgress" : {
+      background-color: "primary"
+    }
+    
+    "paper-progress[tile-progress]::shadow #activeProgress" : {
+      background-color: #c8c8c8
+    }
+    
+    "paper-progress[tile-progress]::shadow #progressContainer" : {
       background-color: "primary"
     }
     

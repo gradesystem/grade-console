@@ -145,6 +145,12 @@
 :host /deep/ .home /deep/ paper-progress::shadow #activeProgress {
   background-color: #26699a;
 }
+:host /deep/ .home /deep/ paper-progress[tile-progress]::shadow #activeProgress {
+  background-color: #c8c8c8;
+}
+:host /deep/ .home /deep/ paper-progress[tile-progress]::shadow #progressContainer {
+  background-color: #26699a;
+}
 :host /deep/ .home /deep/ paper-tabs::shadow #selectionBar {
   background-color: #26699a;
 }
@@ -247,6 +253,12 @@
   background-color: #80deea;
 }
 :host /deep/ .prod /deep/ paper-progress::shadow #activeProgress {
+  background-color: #00bcd4;
+}
+:host /deep/ .prod /deep/ paper-progress[tile-progress]::shadow #activeProgress {
+  background-color: #c8c8c8;
+}
+:host /deep/ .prod /deep/ paper-progress[tile-progress]::shadow #progressContainer {
   background-color: #00bcd4;
 }
 :host /deep/ .prod /deep/ paper-tabs::shadow #selectionBar {
@@ -353,6 +365,12 @@
 :host /deep/ .deck /deep/ paper-progress::shadow #activeProgress {
   background-color: #6fa6bc;
 }
+:host /deep/ .deck /deep/ paper-progress[tile-progress]::shadow #activeProgress {
+  background-color: #c8c8c8;
+}
+:host /deep/ .deck /deep/ paper-progress[tile-progress]::shadow #progressContainer {
+  background-color: #6fa6bc;
+}
 :host /deep/ .deck /deep/ paper-tabs::shadow #selectionBar {
   background-color: #6fa6bc;
 }
@@ -457,6 +475,12 @@
 :host /deep/ .tasks /deep/ paper-progress::shadow #activeProgress {
   background-color: #e41c23;
 }
+:host /deep/ .tasks /deep/ paper-progress[tile-progress]::shadow #activeProgress {
+  background-color: #c8c8c8;
+}
+:host /deep/ .tasks /deep/ paper-progress[tile-progress]::shadow #progressContainer {
+  background-color: #e41c23;
+}
 :host /deep/ .tasks /deep/ paper-tabs::shadow #selectionBar {
   background-color: #e41c23;
 }
@@ -559,6 +583,12 @@
   background-color: #80cbc4;
 }
 :host /deep/ .stage /deep/ paper-progress::shadow #activeProgress {
+  background-color: #009587;
+}
+:host /deep/ .stage /deep/ paper-progress[tile-progress]::shadow #activeProgress {
+  background-color: #c8c8c8;
+}
+:host /deep/ .stage /deep/ paper-progress[tile-progress]::shadow #progressContainer {
   background-color: #009587;
 }
 :host /deep/ .stage /deep/ paper-tabs::shadow #selectionBar {

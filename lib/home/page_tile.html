@@ -1,9 +1,10 @@
 <link rel="import" href="../../../packages/polymer/polymer.html">
 <link rel="import" href="../../../packages/core_elements/core_icons.html">
 <link rel="import" href="../../../packages/core_elements/social_icons.html">
+<link rel="import" href="../../../packages/paper_elements/paper_progress.html">
 
 <link rel="import" href="../common/components/grade_button.html">
-<!-- <link rel="import" href="../common/components/grade_spinner.html"> -->
+<link rel="import" href="../common/components/grade_spinner.html">
 
 <link rel="import" href="home.html">
 
@@ -113,16 +114,16 @@
           <grade-button notooltip icon="arrow-forward" label="enter area" hidden?={{!areaEnabled}} fade-in></grade-button>
        
         </div>
-      
+        <paper-progress tile-progress id="progress" step="2" style="width:100%" hidden?={{statistics.loaded}}></paper-progress>
+        
            <div flex content vertical layout end-justified>
               <div layout horizontal>
                 
                 <div count>
-                  <template if="{{statistics.loaded && areaEnabled}}" fade-in>
-                    {{statistics.count}}
+                  <template if="{{statistics.loaded}}">
+                    <span fade-in>{{statistics.count}}</span>
                   </template>	         
-                  <template if="{{!statistics.loaded || !areaEnabled}}">
-<!--                   <grade-spinner></grade-spinner> -->
+                  <template if="{{!statistics.loaded}}">
                   ...
                   </template>          
                 </div>
