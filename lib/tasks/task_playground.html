@@ -61,29 +61,29 @@
         <grade-button toolbar icon="cancel" label="discard changes" on-click="{{onCancel}}" hidden?="{{ !editableTask.edit}}"></grade-button>
         <grade-button toolbar icon="save" label="save changes" on-click="{{onSave}}" hidden?="{{ !editableTask.edit}}" disabled={{!editableTask.valid}}></grade-button>
  
-        <div main fit layout vertical>
-        <loading-panel loading="{{loading}}" message="saving the task">
-
-					<div wired rounded spaced layout horizontal style="min-height:75px;" flex>
-						<codemirror-input flex 
-															active={{isactive}} 
-															mode="sparql" 
-															value={{transformQuery}}
-															endpoints={{gradeEndpoints}}
-															disabled="{{!editableTask.edit}}"></codemirror-input>
-					</div>
-
-          <div wired rounded spaced layout horizontal style="min-height:75px;" flex hidden?={{hideDifferenceQuery}}>
-	           <codemirror-input flex
-										           active={{isactive}} 
-										           mode="sparql" 
-										           value={{differenceQuery}}
-										           endpoints={{gradeEndpoints}}
-										           disabled="{{!editableTask.edit}}"></codemirror-input>
-          </div>
-          </loading-panel>
-        </div>
         
+        <loading-panel main fit loading="{{loading}}" message="saving the task">
+          <div fit layout vertical>
+						<div wired rounded spaced layout horizontal style="min-height:75px;" flex>
+							<codemirror-input flex 
+																active={{isactive}} 
+																mode="sparql" 
+																value={{transformQuery}}
+																endpoints={{gradeEndpoints}}
+																disabled="{{!editableTask.edit}}"></codemirror-input>
+						</div>
+	
+	          <div wired rounded spaced layout horizontal style="min-height:75px;" flex hidden?={{hideDifferenceQuery}}>
+		           <codemirror-input flex
+											           active={{isactive}} 
+											           mode="sparql" 
+											           value={{differenceQuery}}
+											           endpoints={{gradeEndpoints}}
+											           disabled="{{!editableTask.edit}}"></codemirror-input>
+	          </div>
+          </div>
+        </loading-panel>
+
       </grade-header-panel>
       <div style="position: relative; width: 0; height: 0" self-end >
         <paper-fab class="runButton" mini="true" icon="{{editableTask.playgroundRunningTask.running?'av:stop':'av:play-arrow'}}" disabled?="{{!editableTask.playgroundRunningTask.canCancel && editableTask.playgroundRunningTask.running}}" on-click="{{onButtonClick}}" hide?="{{editableTask.fieldsInvalidity[K.transform] || editableTask.fieldsInvalidity[K.diff] }}"></paper-fab>
