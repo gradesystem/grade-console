@@ -20,14 +20,19 @@ void installHints() {
 }
 
 Map<String, String> PREFIXES = {
-  "rdfs": "rdfs: <http://www.w3.org/2000/01/rdf-schema#>",
-  "rdf": "rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>",
+  "cls": "cls: <http://www.fao.org/figis/flod/onto/codedentityclassification.owl#>",
   "dc": "dc: <http://purl.org/dc/elements/1.1/>",
-  "geo": "geo: <http://www.w3.org/2003/01/geo/wgs84_pos#>",
-  "owl": "owl: <http://www.w3.org/2002/07/owl#>",
   "dct": "dct: <http://purl.org/dc/terms/>",
   "dwc": "dwc: <http://rs.tdwg.org/dwc/terms/>",
-  "skos": "skos: <http://www.w3.org/2004/02/skos/core#>"
+  "fn": "fn: <http://www.w3.org/2005/xpath-functions#>",
+  "geo": "geo: <http://www.w3.org/2003/01/geo/wgs84_pos#>",
+  "int": "int: <http://www.fao.org/figis/flod/onto/intersection.owl#>",
+  "owl": "owl: <http://www.w3.org/2002/07/owl#>",
+  "rdf": "rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>",
+  "rdfs": "rdfs: <http://www.w3.org/2000/01/rdf-schema#>",
+  "skos": "skos: <http://www.w3.org/2004/02/skos/core#>",
+  "sov": "sov: <http://www.fao.org/figis/flod/onto/sovereignty.owl#>",
+  "xpl": "xpl: <http://www.fao.org/figis/flod/onto/exploitation.owl#>"
 };
 
 List<String> SPARQL_KEYWORDS = ["base", "prefix", "select", "distinct", "reduced", "construct", "describe", "ask", "from", "named", "where", "order", "limit", "offset", "filter", "optional", "graph", "by", "asc", "desc", "as", "having", "undef", "values", "group", "minus", "in", "not", "service", "silent", "using", "insert", "delete", "union", "true", "false", "with", "data", "copy", "to", "move", "add", "create", "drop", "clear", "load"];
