@@ -55,13 +55,13 @@ class GradeConsole  extends PolymerElement with Dependencies, Filters {
 
     if (nextArea >= instantiateAreas.length) {
       progressValue = 100;
-      progressMessage = "ready!";
+      progressMessage = "";
       new Timer(new Duration(milliseconds: 500), () {
         showLoadingProgress = false;
         bus.fire(const ApplicationInitialized());
       });
     } else {
-      progressMessage = "loading "+pages[nextArea+1].name+"...";
+      progressMessage = "loading "+pages[nextArea+1].tab.toLowerCase()+"...";
       progressValue +=20;
       
       new Timer(new Duration(milliseconds: 500), () {

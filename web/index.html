@@ -26,19 +26,19 @@
       
       @keyframes fadein {
           from { opacity: 0; }
-          to   { opacity: 1; }
+          to   { opacity: 1.0; }
       }
       
       /* Safari, Chrome and Opera > 12.1 */
       @-webkit-keyframes fadein {
           from { opacity: 0; }
-          to   { opacity: 1; }
+          to   { opacity: 1.0; }
       }
 
       /* Internet Explorer */
       @-ms-keyframes fadein {
           from { opacity: 0; }
-          to   { opacity: 1; }
+          to   { opacity: 1.0; }
       }
 		</style>
 
@@ -58,10 +58,13 @@
 	</head>
 	<body fullbleed >
 	 
-	  <div id="loader" fit horizontal layout center center-justified fade-in>
-       <div style="font-size:125px;font-family: Roboto, sans-serif;color:rgb(66, 66, 66);font-weight: 300;">GRADE</div>
-     </div>
-   <grade-console unresolved></grade-console>
+    <div id="loader" fit horizontal layout center center-justified fade-in>
+      <div vertical layout center>
+        <div style="font-size:115px;font-family: Roboto, sans-serif;color: #676767;font-weight: 100;">GRADE</div>
+        <div style="min-height:27px">&nbsp;</div>
+      </div>
+    </div>
+    <grade-console unresolved></grade-console>
  
 	</body>
 </html>
