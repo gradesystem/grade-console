@@ -65,16 +65,15 @@
           <!-- note -->
           <grade-item icon=chevron-right>
             
-            <grade-fascia truncate>
-                     
-              <grade-input fascia-title 
-                           disabled="{{ !editable }}" 
-                           multiline
-                           label="{{ K.note | suffix }} ?" 
-                           invalid="{{ item.fieldsInvalidity[K.note] }}"
-                           inputValue="{{ item.model.bean[K.note]  }}">
-              </grade-input>
-                     
+            <grade-fascia flex>
+              <div smaller wired rounded inset fascia-title >          
+	              <grade-input disabled="{{ !editable }}" 
+	                           multiline
+	                           label="{{ K.note | suffix }} ?" 
+	                           invalid="{{ item.fieldsInvalidity[K.note] }}"
+	                           inputValue="{{ item.model.bean[K.note]  }}">
+	              </grade-input>
+              </div>       
               <grade-uri fascia-subtitle value={{K.note}}></grade-uri>
               
             </grade-fascia>
