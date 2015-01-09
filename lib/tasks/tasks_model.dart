@@ -59,9 +59,9 @@ class Task extends EditableGradeEntity with Filters {
   set id(String value) => set(K.uri, value);
 
   @observable
-  String get name => get(K.uri);
+  String get name => get(K.label);
   set name(String value) {
-    set(K.uri, value);
+    set(K.label, value);
     notifyPropertyChange(#name, null, value);
   }
   
