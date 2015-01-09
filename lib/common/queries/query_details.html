@@ -56,7 +56,7 @@
 	                         inputValue="{{ item.model.bean[K.name] }}">
 	            </grade-input>
 	                   
-	            <div fascia-subtitle><span>{{ K.name | start}}</span><span fg bolder>{{ K.name | suffix}}</span></div>
+	            <grade-uri fascia-subtitle value={{K.name}}></grade-uri>
 	            
             </grade-fascia>
 	            
@@ -75,7 +75,7 @@
                            inputValue="{{ item.model.bean[K.note]  }}">
               </grade-input>
                      
-              <div fascia-subtitle><span>{{ K.note | start}}</span><span fg bolder>{{ K.note | suffix}}</span></div>
+              <grade-uri fascia-subtitle value={{K.note}}></grade-uri>
               
             </grade-fascia>
               
@@ -95,7 +95,7 @@
 	              </grade-input>
               </div>
                      
-              <div fascia-subtitle><span>{{ K.expression | start}}</span><span fg bolder>{{ K.expression | suffix}}</span></div>
+              <grade-uri fascia-subtitle value={{K.expression}}></grade-uri>
               
             </grade-fascia>
               
@@ -119,7 +119,7 @@
 					          <paper-item truncate label="{{target.model.name}}" dropitem="{{target.model.id}}"></paper-item>
 	                </template>
 		            </grade-dropdown-menu>
-		            <div fascia-subtitle truncate><span>{{ K.target | start }}</span><span fg bolder>{{ K.target | suffix}}</span></div>
+		            <grade-uri fascia-subtitle value={{K.target}}></grade-uri>
 					        
 		          </grade-fascia>
 
@@ -136,7 +136,7 @@
 								 >
 								 </graph-selector>
 
-							  <grade-uri fascia-subtitle value="{{K.graph}}"></grade-uri>
+							  <grade-uri fascia-subtitle value={{K.graph}}></grade-uri>
 							  
 							</grade-fascia>   
           
