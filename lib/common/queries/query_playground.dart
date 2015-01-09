@@ -26,8 +26,6 @@ class QueryPlayground extends PolymerElement with Filters {
   
   CodemirrorInput expressionEditor;
   
-
-  
   QueryPlayground.created() : super.created();
   
   void ready() {
@@ -84,6 +82,18 @@ class QueryPlayground extends PolymerElement with Filters {
   void onRunStart() {
     fire("run", detail:editableQuery);
     resultTab = 0;
+  }
+  
+  void onEdit() {
+    editableQuery.startEdit();
+  }
+  
+  void onCancel() {
+    fire("cancel-editing");
+  }
+
+  void onSave() {
+    fire("save");
   }
   
   void onDescribeUri(event, detail, target) {
