@@ -6,7 +6,7 @@ class RunningTaskPanel extends PolymerElement {
   TaskExecutionKeys TEK = const TaskExecutionKeys();
   
   @observable
-  int executionArea = 1;
+  int executionArea = 0;
 
   @published
   RunningTask runningTask;
@@ -24,6 +24,11 @@ class RunningTaskPanel extends PolymerElement {
   
   void ready() {
     expanded = querySelector("[task-tab]")!=null;
+  }
+  
+  @ObserveProperty("runningTask.running")
+  void resetArea() {
+    executionArea = 0;
   }
   
   
