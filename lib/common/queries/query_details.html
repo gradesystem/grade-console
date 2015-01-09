@@ -21,8 +21,9 @@
 		<style>
 		  
 		  grade-input::shadow [multiline] {
-		     max-height: 150px;
-		  }
+         min-height: 150px;
+         max-height: 250px;
+      }
 		  
 		  [truncate] {
 		    overflow: hidden;
@@ -83,16 +84,16 @@
           <!-- expression -->
           <grade-item icon=chevron-right>
             
-            <grade-fascia truncate>
-                     
-              <grade-input fascia-title 
-                           disabled="{{ !editable }}" 
-                           multiline
-                           required
-                           label="{{ K.expression | suffix }} ?" 
-                           invalid="{{ item.fieldsInvalidity[K.expression] }}"
-                           inputValue="{{ item.model.bean[K.expression]  }}">
-              </grade-input>
+            <grade-fascia flex>
+              <div smaller wired rounded inset fascia-title >       
+	              <grade-input disabled="{{ !editable }}" 
+	                           multiline
+	                           required
+	                           label="{{ K.expression | suffix }} ?" 
+	                           invalid="{{ item.fieldsInvalidity[K.expression] }}"
+	                           inputValue="{{ item.model.bean[K.expression]  }}">
+	              </grade-input>
+              </div>
                      
               <div fascia-subtitle><span>{{ K.expression | start}}</span><span fg bolder>{{ K.expression | suffix}}</span></div>
               
