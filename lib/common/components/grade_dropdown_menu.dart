@@ -46,7 +46,7 @@ class GradeDropdownMenu extends PolymerElement {
    
     //observes for internal children changes (add or remove of items)
    new MutationObserver(($1,$2) {
-        (dropdown.shadowRoot.querySelector("#menu") as CoreMenu).jsElement.callMethod("updateSelected",[]);
+        //FIXME (dropdown.shadowRoot.querySelector("#menu") as CoreMenu).jsElement.callMethod("updateSelected",[]);
         onModelChange();
       })
       .observe(this.parentNode, childList:true, subtree:true);
