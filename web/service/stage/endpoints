@@ -1,8 +1,11 @@
 [ {
-  "http://gradesystem.io/onto#id" : "4e22e90d-3800-4680-9264-545404714f79",
+  "http://gradesystem.io/onto#id" : "staging",
   "http://gradesystem.io/onto/endpoint.owl#name" : "staging",
-  "http://gradesystem.io/onto/endpoint.owl#uri" : "http://grade.ddns.net:3030/sr_staging/query",
-  "http://gradesystem.io/onto/endpoint.owl#update_uri" : "http://grade.ddns.net:3030/sr_staging/update",
-  "http://gradesystem.io/onto/endpoint.owl#graph" : ["http://semanticrepository/staging/graph/1.0/country","http://acme.org/stage/graph#2","http://acme.org/stage/graph#3"],
+  "http://gradesystem.io/onto/endpoint.owl#uri" : "",
+  "http://gradesystem.io/onto/endpoint.owl#update_uri" : null,
+  "http://gradesystem.io/onto/endpoint.owl#graph" : [ {
+    "http://gradesystem.io/onto#uri" : "http://graphs/graph3",
+    "http://www.w3.org/2000/01/rdf-schema#label" : "Dataset Three"
+  } ],
   "http://gradesystem.io/onto/endpoint.owl#predefined" : true
 } ]
