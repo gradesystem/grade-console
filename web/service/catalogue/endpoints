@@ -1,8 +1,8 @@
 [ {
-  "http://gradesystem.io/onto#id" : "7740a9d3-85d2-4fcd-92b2-f8b43c99dc48",
+  "http://gradesystem.io/onto#id" : "tasks",
   "http://gradesystem.io/onto/endpoint.owl#name" : "tasks",
-  "http://gradesystem.io/onto/endpoint.owl#uri" : "http://grade.ddns.net:3030/sr_task/query",
-  "http://gradesystem.io/onto/endpoint.owl#update_uri" : "http://grade.ddns.net:3030/sr_task/update",
-  "http://gradesystem.io/onto/endpoint.owl#graph" : ["http://semanticrepository/public/graph/1.0/country","http://acme.org/catalogue/task#2","http://acme.org/catalogue/task#3"],
+  "http://gradesystem.io/onto/endpoint.owl#uri" : "",
+  "http://gradesystem.io/onto/endpoint.owl#update_uri" : null,
+  "http://gradesystem.io/onto/endpoint.owl#graph" : [ ],
   "http://gradesystem.io/onto/endpoint.owl#predefined" : true
 } ]
