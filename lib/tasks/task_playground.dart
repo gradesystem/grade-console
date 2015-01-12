@@ -38,7 +38,7 @@ class TaskPlayground extends PolymerElement with Filters, Dependencies {
   bool get hideDifferenceQuery => editableTask!=null?editableTask.model.bean[K.op] == publish_operation:false;
   
   @ComputedProperty("editableTask.model.name")  
-  String get title => editableTask!=null?(editableTask.model.label == null || editableTask.model.label.isEmpty?"(label?)":editableTask.model.label):"";
+  String get paneltitle => editableTask!=null?(editableTask.model.label == null || editableTask.model.label.isEmpty?"(label?)":editableTask.model.label):"";
   
   @ComputedProperty("editableTask.synching")
   bool get loading => editableTask!=null && editableTask.synching;

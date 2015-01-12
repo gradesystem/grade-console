@@ -17,7 +17,7 @@ class DeckPage extends Polybase {
   Task getTask(RunningTask running) => running!=null?running.task:null;
   
   @ComputedProperty('deckModel.storage.selected.task.label')
-  String get title {
+  String get paneltitle {
     
     try {
       
@@ -27,7 +27,7 @@ class DeckPage extends Polybase {
       return "(no run selected)";
     }      
   }
-  void set title(String drop){}
+  void set paneltitle(String drop){}
   
   void onDescribeUri(event, detail, target) {
     String type = detail["type"];

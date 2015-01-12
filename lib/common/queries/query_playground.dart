@@ -45,7 +45,7 @@ class QueryPlayground extends PolymerElement with Filters {
   bool get editable => editableQuery!=null?editableQuery.model.bean[K.predefined]==false:false;
   
   @ComputedProperty("editableQuery.model.name")  
-  String get title => editableQuery!=null?(editableQuery.model.name == null || editableQuery.model.name.isEmpty?"(name?)":editableQuery.model.name):"";
+  String get paneltitle => editableQuery!=null?(editableQuery.model.name == null || editableQuery.model.name.isEmpty?"(name?)":editableQuery.model.name):"";
   
   @ComputedProperty("editableQuery.lastError")
   String get errorMessage {
