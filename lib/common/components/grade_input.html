@@ -1,6 +1,6 @@
 <link rel="import" href="../../../../packages/polymer/polymer.html">
 
-<link rel="import" href="../../../../packages/paper_elements/paper_input.html">
+<link rel="import" href="../../../../packages/paper_elements/paper_input_decorator.html">
 
 <polymer-element name="grade-input">
 
@@ -37,7 +37,7 @@
                
       <div>
       
-             <paper-input id="input"
+             <paper-input-decorator id="input"
                      disabled?={{disabled}}
                      label={{label}} 
                      value={{value}}
@@ -45,7 +45,7 @@
                      inputValue={{inputValue}}
                      invalid={{invalid}}
                      type={{type}}>
-             </paper-input>
+             </paper-input-decorator>
         
         
       </div>

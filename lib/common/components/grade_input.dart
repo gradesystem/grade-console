@@ -1,6 +1,6 @@
 
 import 'package:polymer/polymer.dart';
-import 'package:paper_elements/paper_input.dart';
+import 'package:paper_elements/paper_input_decorator.dart';
 import 'package:grade_console/common.dart';
 
 @CustomTag("grade-input")
@@ -35,11 +35,11 @@ class GradeInput extends PolymerElement {
   
   //hides low-level access
   @observable
-  PaperInput get inner => this.$["input"] as PaperInput;
+  PaperInputDecorator get inner => this.$["input"] as PaperInputDecorator;
   
   
   void set error(String e) {
-    inner.setCustomValidity(e);
+    inner.error = e;
   }
   
   Validator missing_validator = ($) => $==null || $.isEmpty? "Please fill in this field.":null;
