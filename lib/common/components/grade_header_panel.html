@@ -7,16 +7,16 @@
 <polymer-element name="grade-header-panel" vertical layout noscript attributes="paneltitle, panelsubtitle">
   <template>
   
-	  <style>
-	    [subtitle] {
-	      font-size: small;
-	    }
-	  </style>
+    <style>
+      [subtitle] {
+        font-size: small;
+      }
+    </style>
     
-    <core-header-panel mode="seamed" flex>
-	        
+    <div vertical layout flex>
+          
       <core-toolbar header> 
-	        
+          
         <content select="[menu]"></content>
         
         <div flex>
@@ -27,18 +27,17 @@
         <div layout horizontal center>            
           <content select="[toolbar]"></content>
         </div>
-	              
+                
       </core-toolbar>
-	            
-      <div small-spaced>
-	 
+              
+      <div small-spaced flex style="border: 1px solid red"  vertical layout>
+   
         <content select="[main]"></content>
-	
+  
       </div>
-	            
-    </core-header-panel>
+              
+    </div>
 
   </template>
   
 </polymer-element>
- 

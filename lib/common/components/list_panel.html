@@ -4,13 +4,13 @@
 <link rel="import" href="../../../../packages/paper_elements/paper_progress.html">
 <link rel="import" href="loading_panel.html">
 
-<polymer-element name="list-panel"> 
+<polymer-element name="list-panel" vertical layout> 
 
  <template>
 
-  <loading-panel loading={{loading}} message="loading items">
+  <loading-panel loading={{loading}} message="loading items" flex style="/*border: 5px solid yellow*/">
 
-    <div hidden?={{empty}} flex>
+    <div hidden?={{empty}} style="/*border: 5px solid brown*/" fit relative>
       <content></content>
     </div>
     	  

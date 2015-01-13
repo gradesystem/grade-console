@@ -1,11 +1,11 @@
 <link rel="import" href="../../../../packages/polymer/polymer.html">
 <link rel="import" href="infinite_progress.html">
 
-<polymer-element name="loading-panel"> 
+<polymer-element name="loading-panel" vertical layout> 
   <template>
-    <div hidden?={{loading}}>
-     <content>
-     </content>
+    <div hidden?={{loading}} flex style="border: 5px solid #DF01D7" relative>
+			<content>
+			</content>
     </div>
      <div fit hidden?={{!loading}} layout vertical center center-justified>
         <infinite-progress run="{{loading!=null && loading}}"></infinite-progress>
