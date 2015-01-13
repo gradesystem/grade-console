@@ -8,13 +8,13 @@
 
 <link rel="import" href="deck.html">
 
-<polymer-element name="running-task-list">
+<polymer-element name="running-task-list" vertical layout>
 
  <template>
  
-   <list-panel loading="{{listitems.loading}}" empty={{listitems.data.isEmpty}} emptyMessage="Run some task ?">
+   <list-panel loading="{{listitems.loading}}" empty={{listitems.data.isEmpty}} emptyMessage="Run some task ?" flex>
 
-	  <core-list-dart id="list" data="{{listitems.data | filter(kfilter, itemFilter)}}" height="80" on-core-activate={{selectItem}} flex>
+	  <core-list-dart id="list" data="{{listitems.data | filter(kfilter, itemFilter)}}" height="48" extraItems="1000" on-core-activate={{selectItem}} fit>
 	    
 	    <template>
 

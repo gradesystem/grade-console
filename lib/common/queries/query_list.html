@@ -7,13 +7,13 @@
 
 <link rel="import" href="queries.html">
 
-<polymer-element name="query-list"> 
+<polymer-element name="query-list" vertical layout> 
 
  <template>
 
-  <list-panel loading="{{listitems.loading}}" empty={{listitems.data.isEmpty}}>
+  <list-panel loading="{{listitems.loading}}" empty={{listitems.data.isEmpty}} flex>
 
-	  <core-list-dart id="list" data="{{listitems.data | filter(kfilter, itemFilter)}}" height="80" on-core-activate={{selectItem}} flex>
+	  <core-list-dart id="list" data="{{listitems.data | filter(kfilter, itemFilter)}}" height="48" extraItems="1000" on-core-activate={{selectItem}} fit>
 	    
 	    <template>
 

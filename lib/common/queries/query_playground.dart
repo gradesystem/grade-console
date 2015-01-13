@@ -56,6 +56,9 @@ class QueryPlayground extends PolymerElement with Filters {
   
   }
   
+  @ComputedProperty("editableQuery.synching")
+  bool get loading => editableQuery!=null && editableQuery.synching;
+  
   @ComputedProperty("resultArea == TABS_PANEL")
   bool get showTabs => readValue(#showTabs, ()=>false);
   
