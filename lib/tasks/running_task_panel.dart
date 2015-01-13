@@ -5,6 +5,13 @@ class RunningTaskPanel extends PolymerElement {
   
   TaskExecutionKeys TEK = const TaskExecutionKeys();
   
+  int WHITE_PANEL = 0;
+  int ERROR_PANEL = 1;
+  int EXECUTION_PANEL = 2;
+  
+  @observable
+  int resultArea = 0;
+  
   @observable
   int executionArea;
 
@@ -32,6 +39,15 @@ class RunningTaskPanel extends PolymerElement {
     executionArea = expanded?1:0;
   }
   
+  @ObserveProperty("runningTask runningTask.error runningTask.execution")
+  void updateResultArea() {
+    resultArea = WHITE_PANEL;
+    
+    if (runningTask != null) {
+      if (runningTask.error!=null) resultArea = ERROR_PANEL;
+      if (runningTask.execution!=null) resultArea = EXECUTION_PANEL;
+    }
+  }  
   
   String errorMessage()   {
   

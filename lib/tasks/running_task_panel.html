@@ -36,8 +36,20 @@
         <paper-tab disabled-tab?="{{runningTask.target.value ==null}}">Target</paper-tab>
       </paper-tabs>
         
-      <div main relative>
+        
+      <core-animated-pages main flex relative selected="{{resultArea}}">
+     
+				<!-- WHITE PANEL -->
+				<div style="overflow:hidden"> 
+				</div>
+				
+				<!-- ERROR PANEL -->
+				<grade-error one="{{errorMessage()}}"
+						         two = {{runningTask.error.message}}
+						         three = {{runningTask.error.stacktrace}}>
+				</grade-error>
       
+        <!--  EXECUTION TAB -->
         <core-animated-pages selected="{{executionArea}}" fit spaced hide?="{{runningTask.execution==null}}">
                   
           <content select="[task-panel]"></content>
@@ -62,7 +74,7 @@
 					</div>
        
 	        <!-- TRANSFORM RESULT -->
-	        <result-panel fit 
+	        <result-panel  
 	        result={{runningTask.transform}} 
 	        disabled?={{dirty}} 
 	        loadingMesage="retrieving transform results" 
@@ -70,7 +82,7 @@
 	        on-describe-uri={{onDescribeTransformUri}}></result-panel>
 	        
 	        <!-- DIFF RESULT -->
-	        <result-panel fit 
+	        <result-panel  
 	        result={{runningTask.diff}} 
 	        disabled?={{dirty}} 
 	        loadingMesage="retrieving diff results" 
@@ -78,7 +90,7 @@
 	        on-describe-uri={{onDescribeDiffUri}}></result-panel>
 	         
 	        <!-- TARGET RESULT -->
-	        <result-panel fit 
+	        <result-panel  
 	        result={{runningTask.target}} 
 	        disabled?={{dirty}} 
 	        loadingMesage="retrieving target results" 
@@ -86,19 +98,8 @@
 	        on-describe-uri={{onDescribeTargetUri}}></result-panel>
 	
 	      </core-animated-pages>
-         
-	      <div layout horizontal center-justified hide?="{{runningTask.execution!=null || runningTask.error!=null}}" style="overflow:hidden"> 
-	      </div>
-	      
-				<template if="{{runningTask.error!=null}}">
 				
-				  <grade-error one="{{errorMessage()}}"
-				       two = {{runningTask.error.message}}
-				       three = {{runningTask.error.stacktrace}}>
-				  </grade-error>
-				         
-				</template>
-	    </div>
+	    </core-animated-pages>
     </grade-header-panel>
   </template>
 </polymer-element>

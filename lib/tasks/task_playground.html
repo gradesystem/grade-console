@@ -62,8 +62,8 @@
         <grade-button toolbar icon="save" label="save changes" on-click="{{onSave}}" hidden?="{{ !editableTask.edit}}" disabled={{!editableTask.valid}}></grade-button>
  
         
-        <loading-panel main fit loading="{{loading}}" message="saving the task">
-          <div fit layout vertical>
+        <loading-panel main flex loading="{{loading}}" message="saving the task">
+          <div layout vertical fit>
 						<div wired rounded spaced layout horizontal style="min-height:75px;" flex>
 							<codemirror-input flex 
 																active={{isactive}} 
