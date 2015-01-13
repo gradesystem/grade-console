@@ -98,14 +98,21 @@ JsObject sparqlCompletion(JsObject jseditor, JsObject options) {
 }
 
 void fillGraphs(Set<JsObject> suggestions, Iterable<EditableEndpoint> endpoints) {
-  endpoints.map((EditableEndpoint e) => e.model.graphs).expand((List<Graph> graphs) => graphs).map((Graph g) => new JsObject.jsify({
+  
+  List<Graph> graphs = endpoints.map((EditableEndpoint e) => e.model.graphs).expand((List<Graph> graphs) => graphs).toList();
+  graphs.sort(compareGraphs);
+ 
+  graphs.map((Graph g) => new JsObject.jsify({
     "text": "<${g.uri}>",
     "displayText": "${g.label} - ${g.uri}"
   })).forEach((JsObject o) => suggestions.add(o));
 }
 
 void fillServices(Set<JsObject> suggestions, Iterable<EditableEndpoint> endpoints) {
-  endpoints.map((EditableEndpoint e) => new JsObject.jsify({
+  List<EditableEndpoint> sortedEndpoints = endpoints.toList();
+  sortedEndpoints.sort(compareEndpoints);
+  
+  sortedEndpoints.map((EditableEndpoint e) => new JsObject.jsify({
     "text": "<${e.model.uri}>",
     "displayText": e.model.name
   })).forEach((JsObject o) => suggestions.add(o));
