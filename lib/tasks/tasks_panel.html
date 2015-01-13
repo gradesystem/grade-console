@@ -26,7 +26,7 @@
 
 	  <grade-scaffold flex>
 	  
-	      <grade-header-panel main fit paneltitle="TASKS">
+	      <grade-header-panel main fit paneltitle="TASKS" fixedmain="true">
 	      
 	        <content select="[menu]"></content>
 	
@@ -40,7 +40,7 @@
           <grade-button toolbar icon="refresh" label="refresh list" on-click="{{refresh}}"></grade-button>
           <grade-button toolbar icon="add" label="add task" on-click={{addTask}}></grade-button>
 
-	        <task-list main flex listitems="{{items}}" kfilter="{{kfilter}}" on-remove-item={{removeItem}} on-clone-item={{cloneItem}}  style="border: 1px solid blue"></task-list>
+	        <task-list main flex listitems="{{items}}" kfilter="{{kfilter}}" on-remove-item={{removeItem}} on-clone-item={{cloneItem}}  style="/*border: 1px solid blue*/"></task-list>
 	        
 	      </grade-header-panel>
 	      

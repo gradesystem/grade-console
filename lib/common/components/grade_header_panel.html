@@ -4,7 +4,7 @@
 <link rel="import" href="../../../../packages/core_elements/core_header_panel.html">
 <link rel="import" href="../../../../packages/core_elements/core_toolbar.html">
 
-<polymer-element name="grade-header-panel" vertical layout noscript attributes="paneltitle, panelsubtitle">
+<polymer-element name="grade-header-panel" vertical layout noscript attributes="paneltitle, panelsubtitle, fixedmain">
   <template>
   
     <style>
@@ -30,7 +30,7 @@
                 
       </core-toolbar>
               
-      <div small-spaced flex style="border: 1px solid red"  vertical layout>
+      <div small-spaced flex vertical layout scrollable?={{!fixedmain}}>
    
         <content select="[main]"></content>
   
