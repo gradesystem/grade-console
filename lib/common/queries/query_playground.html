@@ -76,40 +76,42 @@
     </style>
     
     <div style="height:60%;" wired rounded spaced layout vertical>
-      <grade-header-panel flex paneltitle={{title}} style="overflow-y:hidden;">
+      <grade-header-panel flex paneltitle={{title}}>
         <grade-button menu icon="arrow-back" on-click="{{onBack}}"></grade-button>
 				<grade-button toolbar icon="create" label="edit query" on-click="{{onEdit}}" hidden?="{{ editableQuery.edit}}"></grade-button>
 				<grade-button toolbar icon="cancel" label="discard changes" on-click="{{onCancel}}" hidden?="{{ !editableQuery.edit}}"></grade-button>
 				<grade-button toolbar icon="save" label="save changes" on-click="{{onSave}}" hidden?="{{ !editableQuery.edit }}" disabled={{!editableQuery.valid}}></grade-button>
-				       
-        <div main fit layout vertical>
-          <div flex wired rounded spaced layout horizontal style="overflow-y:hidden;">
+				     
+				<loading-panel main flex loading="{{loading}}" message="saving the query">      
+	        <div fit layout vertical>
+	          <div flex wired rounded spaced layout horizontal style="overflow-y:hidden;">
+		          
+		          <codemirror-input flex
+		          id="expressionEditor"
+		          active={{isactive}} 
+		          mode="sparql" 
+		          value={{expression}}
+		          endpoints={{endpoints}}
+		          disabled="{{!editableQuery.edit}}"></codemirror-input>
+	          </div>
 	          
-	          <codemirror-input flex
-	          id="expressionEditor"
-	          active={{isactive}} 
-	          mode="sparql" 
-	          value={{expression}}
-	          endpoints={{endpoints}}
-	          disabled="{{!editableQuery.edit}}"></codemirror-input>
-          </div>
-          
-          <div horizontal layout wrap style="overflow-y: auto; min-height:50px;" hidden?={{editableQuery.model.parameters.isEmpty}}>
-            <template repeat="{{key in editableQuery.model.parameters}}">
-              <grade-item style="width:200px"> 
-                <grade-fascia flex>    
-                  <grade-input fascia-title 
-                               label="{{key}}" 
-                               required=true
-                               invalid="{{ editableQuery.parametersInvalidity[key] }}"
-                               inputValue="{{editableQuery.parametersValues[key]}}">
-                  </grade-input>
-                  <div fascia-subtitle><span fg bolder>{{key}}</span></div>
-                </grade-fascia>
-	            </grade-item>
-	          </template>            
-          </div>
-        </div>
+	          <div horizontal layout wrap style="overflow-y: auto; min-height:50px;" hidden?={{editableQuery.model.parameters.isEmpty}}>
+	            <template repeat="{{key in editableQuery.model.parameters}}">
+	              <grade-item style="width:200px"> 
+	                <grade-fascia flex>    
+	                  <grade-input fascia-title 
+	                               label="{{key}}" 
+	                               required=true
+	                               invalid="{{ editableQuery.parametersInvalidity[key] }}"
+	                               inputValue="{{editableQuery.parametersValues[key]}}">
+	                  </grade-input>
+	                  <div fascia-subtitle><span fg bolder>{{key}}</span></div>
+	                </grade-fascia>
+		            </grade-item>
+		          </template>            
+	          </div>
+	        </div>
+        </loading-panel>
         
       </grade-header-panel>
       <div style="position: relative; width: 0; height: 0" self-end >
@@ -127,22 +129,22 @@
           <paper-tab>Other</paper-tab>
         </paper-tabs>
 
-        <loading-panel main fit loading="{{editableQuery.queryRunning}}" message="retrieving results">
+        <loading-panel main flex loading="{{editableQuery.queryRunning}}" message="retrieving results">
         
 	        <core-animated-pages fit selected="{{resultArea}}">
 	   
 	          <!-- WHITE PANEL -->
-	          <div layout horizontal center-justified style="overflow:hidden"> 
+	          <div style="overflow:hidden"> 
 	          </div>
 	        
 	          <!-- ERROR PANEL -->
-						<grade-error fit one="{{errorMessage}}"
+						<grade-error one="{{errorMessage}}"
 						     two = "{{editableQuery.lastError.message}}"
 						     three = "{{editableQuery.lastError.stacktrace}}">
 						</grade-error>
 						
 						<!--  RESULTS TAB -->
-	          <core-animated-pages selected="{{resultTab}}" fit>
+	          <core-animated-pages selected="{{resultTab}}">
 
               <!-- TABLE -->	            
 	            <result-panel spaced
