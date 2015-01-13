@@ -11,10 +11,9 @@
 <polymer-element name="task-list" vertical layout>
 
  <template>
- 
    <list-panel loading="{{listitems.loading}}" empty={{listitems.data.isEmpty}} flex style="/*border: 5px solid red*/">
 
-	  <core-list-dart id="list" data="{{listitems.data | filter(kfilter, itemFilter)}}" height="48" on-core-activate={{selectItem}} fit>
+	  <core-list-dart id="list" data="{{listitems.data | filter(kfilter, itemFilter)}}" height="48" extraItems="1000" on-core-activate={{selectItem}} fit>
 	    
 	    <template>
 	     <task-details-summary flex item="{{model}}" selected="{{ selected==true }}" on-remove-item={{setClickFlag}} on-clone-item={{setClickFlag}}></task-details-summary>
