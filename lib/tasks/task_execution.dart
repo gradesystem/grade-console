@@ -38,7 +38,7 @@ class TaskExecutionView extends View with HasTaskIcons {
     icon = toIcon(status);
     
     //humber of relevant states depends on op
-    var length = getMap(execution,K.task)[TK.op]==TK.publish_op? TaskExecutionLists.statuses.length : TaskExecutionLists.statuses.length-1; 
+    var length = getMap(execution,K.task)[TK.op]==TK.publish_op ? TaskExecutionLists.statuses.length - 1 : TaskExecutionLists.statuses.length - 2; 
     
     progress = (100/length)*(TaskExecutionLists.statuses.indexOf(status)+1);
    
