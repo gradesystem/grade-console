@@ -7,13 +7,13 @@
 
 <link rel="import" href="datasets.html">
 
-<polymer-element name="dataset-list"> 
+<polymer-element name="dataset-list" vertical layout> 
 
  <template>
 
-  <list-panel loading="{{listitems.loading}}" empty={{listitems.data.isEmpty}}>
+  <list-panel loading="{{listitems.loading}}" empty={{listitems.data.isEmpty}} flex>
 
-	  <core-list-dart id="list" data="{{listitems.data | filter(kfilter, itemFilter)}}" height="48" extraItems="1000" on-core-activate={{selectDataset}} flex>
+	  <core-list-dart id="list" data="{{listitems.data | filter(kfilter, itemFilter)}}" height="48" extraItems="1000" on-core-activate={{selectDataset}} fit>
 	    
 	    <template>
 	      
