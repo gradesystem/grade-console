@@ -1,8 +1,10 @@
 <link rel="import" href="../../../../packages/polymer/polymer.html">
     
-<link rel="import" href="../../../../packages/paper_elements/paper_item.html">
 <link rel="import" href="../../../../packages/core_elements/core_icons.html">
+<link rel="import" href="../../../../packages/core_elements/core_menu.html">
 <link rel="import" href="../../../../packages/paper_elements/paper_menu_button.html">
+<link rel="import" href="../../../../packages/paper_elements/paper_icon_button.html">
+<link rel="import" href="../../../../packages/paper_elements/paper_dropdown.html">
 
 <link rel="import" href="grade_item.html">
 
@@ -20,8 +22,13 @@
       
     </style>
     
-    <paper-menu-button flex icon="menu">
-      <content></content>
+    <paper-menu-button flex>
+      <paper-icon-button icon="menu" noink></paper-icon-button>
+      <paper-dropdown class="dropdown"  transition="">
+        <core-menu class="menu">
+          <content></content>
+        </core-menu>
+      </paper-dropdown>
     </paper-menu-button>
   
   </template>

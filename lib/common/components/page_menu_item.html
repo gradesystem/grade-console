@@ -1,15 +1,23 @@
 <link rel="import" href="../../../../packages/polymer/polymer.html">
-    
-<link rel="import" href="../../../../packages/paper_elements/paper_item.html">
+   
 <link rel="import" href="../../../../packages/core_elements/core_icons.html">
-<link rel="import" href="../../../../packages/paper_elements/paper_menu_button.html">
+<link rel="import" href="../../../../packages/core_elements/core_icon.html"> 
+<link rel="import" href="../../../../packages/paper_elements/paper_item.html">
 
 <link rel="import" href="grade_item.html">
 
 <polymer-element name="page-menu-item" layout horizontal center>
   <template>
+    <style>
+      .icon {
+        margin-right: 8px;
+      }
+    </style>
     
-    <paper-item smallish fg-alt label="{{label}}" icon="{{icon}}" on-tap="{{notifyPageChange}}"></paper-item>
+    <paper-item smallish fg-alt on-tap="{{notifyPageChange}}">
+      <core-icon class="icon" icon="{{icon}}"></core-icon>
+      {{label}}
+    </paper-item>
     
   </template>
   <script type="application/dart" src="page_menu_item.dart"></script>
