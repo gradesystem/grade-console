@@ -18,21 +18,21 @@
                  
 		<div smaller vertical layout flex>
 		  <div relative wired rounded flex>
-		     <loading-panel fit loading="{{endpoint.loadingGraphs==true}}" message="loading the graphs" style="overflow-y:auto;">
-		      <div graphs>
+		     <loading-panel fit loading="{{endpoint.loadingGraphs==true}}" message="loading the graphs">
+		      <div fit style="overflow-y:auto;">
 		        <grade-selector 
-		                       notap="{{!editable}}" 
-		                       selected="{{graphs}}" 
-		                       multi={{multi}}
-		                       valueattr="item" 
-		                       selectedAttribute="fg">
-		         <template repeat="{{graph in endpoint.model.graphs | sort(graphSorter)}}">
-		           <div smaller pointer?={{editable}} item={{graph.uri}}>{{graph.label !=null?graph.label:suffix(graph.uri)}}</div>
-		         </template>
-		         <template repeat="{{graphUri in invalidGraphUris }}">
-		           <div smaller pointer?={{editable}} item={{graphUri}} invalid-graph>{{suffixIfPresent(graphUri)}}</div>
-		         </template>
-		       </grade-selector>
+			                       notap="{{!editable}}" 
+			                       selected="{{graphs}}" 
+			                       multi={{multi}}
+			                       valueattr="item" 
+			                       selectedAttribute="fg">
+			         <template repeat="{{graph in endpoint.model.graphs | sort(graphSorter)}}">
+			           <div smaller pointer?={{editable}} item={{graph.uri}}>{{graph.label !=null?graph.label:suffix(graph.uri)}}</div>
+			         </template>
+			         <template repeat="{{graphUri in invalidGraphUris }}">
+			           <div smaller pointer?={{editable}} item={{graphUri}} invalid-graph>{{suffixIfPresent(graphUri)}}</div>
+			         </template>
+			       </grade-selector>
 		       </div>
 		   </loading-panel>
 		 </div>
