@@ -1,79 +1,77 @@
 <link rel="import" href="../../../../packages/polymer/polymer.html">
 
 <link rel="import" href="../../../../packages/paper_elements/paper_input_decorator.html">
+<link rel="import" href="../../../../packages/core_elements/core_input.html">
 
 <polymer-element name="grade-input">
 
-    <template>
+	<template>
 
-      <style>   
-      
-        /* spacing */
-      
-        :host paper-input-decorator, 
-        :host paper-input-decorator::shadow .mirror-text, 
-        :host paper-input-decorator::shadow .label  
-        
-        {
-          padding: 0px;
-          width: 100%;
-        }
-        
-        :host paper-input-decorator /deep/ .label-text {
-           color: black !important; 
-        }
+    <style>   
 
+			/* spacing */
+			  
+			:host paper-input-decorator, 
+			:host paper-input-decorator::shadow .mirror-text, 
+			:host paper-input-decorator::shadow .label  
+			{
+			  padding: 0px;
+			  width: 100%;
+			}
+			    
+			:host paper-input-decorator /deep/ .label-text {
+			   color: black !important; 
+			}
+			
+			    
+			:host paper-input-decorator::shadow .input-container {  top:0;  bottom:0; }
+    
+			/* underline */
+			
+			:host paper-input-decorator::shadow .underline { height:1px}
+			
+			:host paper-input-decorator::shadow .unfocused-underline { background:lightgrey }
+			
+			:host paper-input-decorator[disabled]::shadow .underline {  border:none }
+			
+			:host paper-input-decorator /deep/ input,textarea { 
+			  margin: 0 !important;
+			}
+			
+			::-webkit-input-placeholder {
+			   color: #757575;
+			}
+			
+			:-moz-placeholder { /* Firefox 18- */
+			   color: #757575;  
+			}
+			
+			::-moz-placeholder {  /* Firefox 19+ */
+			   color: #757575;  
+			}
+			
+			:-ms-input-placeholder {  
+			   color: #757575;  
+			}
         
-        :host paper-input-decorator::shadow .input-container {  top:0;  bottom:0; }
-        
-        /* underline */
-        
-        :host paper-input-decorator::shadow .underline { height:1px}
-        
-        :host paper-input-decorator::shadow .unfocused-underline { background:lightgrey }
-        
-        :host paper-input-decorator[disabled]::shadow .underline {  border:none }
-        
-        
-        :host paper-input-decorator[multiline] { overflow:auto; }
-        :host paper-input-decorator /deep/ input { 
-          margin: 0 !important;
-        }
-        
-        ::-webkit-input-placeholder {
-				   color: #757575;
-				}
-				
-				:-moz-placeholder { /* Firefox 18- */
-				   color: #757575;  
-				}
-				
-				::-moz-placeholder {  /* Firefox 19+ */
-				   color: #757575;  
-				}
-				
-				:-ms-input-placeholder {  
-				   color: #757575;  
-				}
-        
-      </style>
+    </style>
       
-        <paper-input-decorator id="input"
-              disabled?={{disabled}}
-                label={{label}} 
-                value={{value}}
-                multiline?={{multiline}}
-                inputValue={{inputValue}}
-                invalid={{invalid}}
-                type={{type}}
-                >
-                <input is="core-input">
-        </paper-input-decorator>
+		<paper-input-decorator id="input"
+		      disabled?={{disabled}}
+		        label={{label}} 
+		        invalid={{invalid}}
+		        type={{type}}
+		        >
+			<template if={{!multiline}}>
+			  <input is="core-input" value={{inputValue}} committedValue={{value}} disabled?={{disabled}}>
+			</template>
+			<template if={{multiline}}>
+			  <textarea value={{inputValue}} committedValue={{value}} disabled?={{disabled}}></textarea>
+			</template>
+    </paper-input-decorator>
  
     <script type="application/dart" src="grade_input.dart"></script> 
-       
- 
-    
-    </template>
+
+  </template>
 
 </polymer-element>
