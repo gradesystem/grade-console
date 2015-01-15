@@ -8,54 +8,52 @@
 
 
 <polymer-element name="grade-button" attributes="icon,label,notooltip,tooltip,disabled" noscript>
+  
+  <template>
 
-    <template>
-    
-        <style>
+    <style>
         
-            :host paper-icon-button::shadow #icon  {
-              margin:0px;
-              
-            }
-				    
-				    :host paper-icon-button::shadow #icon {
-				      transition: -webkit-transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-				      transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-				    }
-				    
-				    :host(:not([nohover])) paper-icon-button::shadow #icon:hover {
-				      -webkit-transform: scale(1.2);
-				      transform: scale(1.2);
-				    }
-				    
-				    :host paper-icon-button {
-				      padding:0px;
-				    }
-				    
-				    :host([disabled="true"]) {
-			        pointer-events: none;
-			      }
+			:host paper-icon-button::shadow #icon  {
+			  margin:0px;
+			}
+			
+			:host paper-icon-button::shadow #icon {
+			  transition: -webkit-transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+			  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+			}
+			
+			:host(:not([nohover])) paper-icon-button::shadow #icon:hover {
+			  -webkit-transform: scale(1.2);
+			  transform: scale(1.2);
+			}
+			
+			:host paper-icon-button {
+			  padding:0px;
+			  vertical-align: middle;
+			}
+			
+			:host([disabled="true"]) {
+			   pointer-events: none;
+			 }
 							    
-        </style>
-        
-        <template if={{disabled}}>
-			    <style>
-			      :host {
-			        pointer-events: none;
-			      }
-			    </style>
-			  </template>
+    </style>
+      
+	<template if={{disabled}}>
+		<style>
+			:host {
+			  pointer-events: none;
+			}
+		</style>
+	</template>
 
-        <template if="{{notooltip==null}}">
-	        <core-tooltip label={{label}} position="{{ tooltip || bottom}}">
-	          <paper-icon-button fg icon={{icon}} disabled={{disabled}}></paper-icon-button>
-	        </core-tooltip>
-        </template>
-        
-        <template if="{{notooltip!=null}}">
-          <paper-icon-button fg icon={{icon}} disabled={{disabled}}></paper-icon-button>
-        </template>
-    </template>
-
-
+	<template if="{{notooltip==null}}">
+		<core-tooltip label={{label}} position="{{ tooltip || bottom}}">
+        <paper-icon-button fg icon={{icon}} disabled={{disabled}}></paper-icon-button>
+		</core-tooltip>
+	</template>
+	
+	<template if="{{notooltip!=null}}">
+      <paper-icon-button fg icon={{icon}} disabled={{disabled}}></paper-icon-button>
+	</template>
+  </template>
 </polymer-element>
