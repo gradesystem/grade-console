@@ -375,7 +375,7 @@ theme-classes = {
     }
 
     "paper-dropdown-menu /deep/ core-icon" : {
-      color : "primary"
+      color : "primary" !important
       width: 36px
     }
     
@@ -442,7 +442,10 @@ for theme-name,t in themes
             if val in t
              {prop} : t[val]
             else
-             {prop} : val
+             if val[0] in t
+              {prop} : t[val[0]] val[1]
+             else
+              {prop} : val
                             
         
     

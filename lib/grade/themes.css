@@ -190,7 +190,7 @@
   border-color: "tertiary";
 }
 :host /deep/ .home /deep/ paper-dropdown-menu /deep/ core-icon {
-  color: #26699a;
+  color: #26699a !important;
   width: 36px;
 }
 :host /deep/ .home /deep/ paper-input-decorator::shadow .focused-underline {
@@ -294,7 +294,7 @@
   border-color: #80deea;
 }
 :host /deep/ .prod /deep/ paper-dropdown-menu /deep/ core-icon {
-  color: #00bcd4;
+  color: #00bcd4 !important;
   width: 36px;
 }
 :host /deep/ .prod /deep/ paper-input-decorator::shadow .focused-underline {
@@ -398,7 +398,7 @@
   border-color: #a5d6a7;
 }
 :host /deep/ .deck /deep/ paper-dropdown-menu /deep/ core-icon {
-  color: #6fa6bc;
+  color: #6fa6bc !important;
   width: 36px;
 }
 :host /deep/ .deck /deep/ paper-input-decorator::shadow .focused-underline {
@@ -502,7 +502,7 @@
   border-color: #f69988;
 }
 :host /deep/ .tasks /deep/ paper-dropdown-menu /deep/ core-icon {
-  color: #e41c23;
+  color: #e41c23 !important;
   width: 36px;
 }
 :host /deep/ .tasks /deep/ paper-input-decorator::shadow .focused-underline {
@@ -606,7 +606,7 @@
   border-color: #80cbc4;
 }
 :host /deep/ .stage /deep/ paper-dropdown-menu /deep/ core-icon {
-  color: #009587;
+  color: #009587 !important;
   width: 36px;
 }
 :host /deep/ .stage /deep/ paper-input-decorator::shadow .focused-underline {
