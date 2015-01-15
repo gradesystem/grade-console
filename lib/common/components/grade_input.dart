@@ -40,6 +40,7 @@ class GradeInput extends PolymerElement {
   
   void set error(String e) {
     inner.error = e;
+    inner.isInvalid = e.isNotEmpty;
   }
   
   Validator missing_validator = ($) => $==null || $.isEmpty? "Please fill in this field.":null;
