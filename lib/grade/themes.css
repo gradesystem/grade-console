@@ -108,6 +108,12 @@
 :host /deep/ paper-radio-button /deep/ #radioLabel {
   margin-left: 5px;
 }
+:host /deep/ paper-item {
+  height: 48px;
+}
+:host /deep/ paper-item /deep/ .button-content {
+  padding: 0 !important;
+}
 .home-scaffold {
   background: #26699a;
   color: #fff;
