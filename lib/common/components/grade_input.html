@@ -18,6 +18,10 @@
           padding: 0px;
           width: 100%;
         }
+        
+        :host paper-input-decorator /deep/ .label-text {
+           color: black !important; 
+        }
 
         
         :host paper-input-decorator::shadow .input-container {  top:0;  bottom:0; }
@@ -32,6 +36,25 @@
         
         
         :host paper-input-decorator[multiline] { overflow:auto; }
+        :host paper-input-decorator /deep/ input { 
+          margin: 0 !important;
+        }
+        
+        ::-webkit-input-placeholder {
+				   color: #757575;
+				}
+				
+				:-moz-placeholder { /* Firefox 18- */
+				   color: #757575;  
+				}
+				
+				::-moz-placeholder {  /* Firefox 19+ */
+				   color: #757575;  
+				}
+				
+				:-ms-input-placeholder {  
+				   color: #757575;  
+				}
         
       </style>
       
