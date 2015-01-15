@@ -115,7 +115,7 @@
 					           invalid="{{ item.fieldsInvalidity[K.target] }}"
 					           >
 					        <template repeat="{{target in endpoints.synchedData}}">
-					          <paper-item truncate label="{{target.model.name}}" dropitem="{{target.model.id}}"></paper-item>
+					          <paper-item truncate dropitem="{{target.model.id}}">{{target.model.name}}</paper-item>
 	                </template>
 		            </grade-dropdown-menu>
 		            <grade-uri fascia-subtitle value={{K.target}}></grade-uri>

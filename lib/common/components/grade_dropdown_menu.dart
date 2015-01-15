@@ -31,7 +31,7 @@ class GradeDropdownMenu extends PolymerElement {
   @published
   List<Validator> validators = [];
   
-  PaperDropdownMenu dropdown;
+  CoreMenu menu;
   
   Validator required_validator = ($) => $==null || $.isEmpty? "Please make a choice.":null;
   Validator unknown_validator;
@@ -41,12 +41,12 @@ class GradeDropdownMenu extends PolymerElement {
   
   ready() {
     
-   dropdown = $["menu"] as PaperDropdownMenu;
+    menu = $["menu"] as CoreMenu;
    unknown_validator = (sel) => (!isItem(sel))? "Current value '${sel}' is no longer a valid choice.":null;    
    
     //observes for internal children changes (add or remove of items)
    new MutationObserver(($1,$2) {
-        //FIXME (dropdown.shadowRoot.querySelector("#menu") as CoreMenu).jsElement.callMethod("updateSelected",[]);
+        menu.jsElement.callMethod("updateSelected",[]);
         onModelChange();
       })
       .observe(this.parentNode, childList:true, subtree:true);
