@@ -187,22 +187,22 @@
   color: #26699a;
   width: 36px;
 }
-:host /deep/ .home /deep/ paper-input::shadow .focused-underline {
+:host /deep/ .home /deep/ paper-input-decorator::shadow .focused-underline {
   background-color: "tertiary";
 }
-:host /deep/ .home /deep/ paper-input::shadow .cursor {
+:host /deep/ .home /deep/ paper-input-decorator::shadow .cursor {
   background: "tertiary";
 }
-:host /deep/ .home /deep/ paper-input[focused]::shadow .error-text {
+:host /deep/ .home /deep/ paper-input-decorator[focused]::shadow .error-text {
   color: #e41c23;
 }
-:host /deep/ .home /deep/ paper-input[focused]::shadow .error-icon {
+:host /deep/ .home /deep/ paper-input-decorator[focused]::shadow .error-icon {
   color: #e41c23;
 }
-:host /deep/ .home /deep/ paper-input.invalid::shadow .focused-underline {
+:host /deep/ .home /deep/ paper-input-decorator.invalid::shadow .focused-underline {
   background-color: #f69988;
 }
-:host /deep/ .home /deep/ paper-input.invalid::shadow .cursor {
+:host /deep/ .home /deep/ paper-input-decorator.invalid::shadow .cursor {
   background-color: #f69988;
 }
 :host /deep/ .home /deep/ [result-table] {
@@ -291,22 +291,22 @@
   color: #00bcd4;
   width: 36px;
 }
-:host /deep/ .prod /deep/ paper-input::shadow .focused-underline {
+:host /deep/ .prod /deep/ paper-input-decorator::shadow .focused-underline {
   background-color: #80deea;
 }
-:host /deep/ .prod /deep/ paper-input::shadow .cursor {
+:host /deep/ .prod /deep/ paper-input-decorator::shadow .cursor {
   background: #80deea;
 }
-:host /deep/ .prod /deep/ paper-input[focused]::shadow .error-text {
+:host /deep/ .prod /deep/ paper-input-decorator[focused]::shadow .error-text {
   color: #e41c23;
 }
-:host /deep/ .prod /deep/ paper-input[focused]::shadow .error-icon {
+:host /deep/ .prod /deep/ paper-input-decorator[focused]::shadow .error-icon {
   color: #e41c23;
 }
-:host /deep/ .prod /deep/ paper-input.invalid::shadow .focused-underline {
+:host /deep/ .prod /deep/ paper-input-decorator.invalid::shadow .focused-underline {
   background-color: #f69988;
 }
-:host /deep/ .prod /deep/ paper-input.invalid::shadow .cursor {
+:host /deep/ .prod /deep/ paper-input-decorator.invalid::shadow .cursor {
   background-color: #f69988;
 }
 :host /deep/ .prod /deep/ [result-table] {
@@ -395,22 +395,22 @@
   color: #6fa6bc;
   width: 36px;
 }
-:host /deep/ .deck /deep/ paper-input::shadow .focused-underline {
+:host /deep/ .deck /deep/ paper-input-decorator::shadow .focused-underline {
   background-color: #a5d6a7;
 }
-:host /deep/ .deck /deep/ paper-input::shadow .cursor {
+:host /deep/ .deck /deep/ paper-input-decorator::shadow .cursor {
   background: #a5d6a7;
 }
-:host /deep/ .deck /deep/ paper-input[focused]::shadow .error-text {
+:host /deep/ .deck /deep/ paper-input-decorator[focused]::shadow .error-text {
   color: #e41c23;
 }
-:host /deep/ .deck /deep/ paper-input[focused]::shadow .error-icon {
+:host /deep/ .deck /deep/ paper-input-decorator[focused]::shadow .error-icon {
   color: #e41c23;
 }
-:host /deep/ .deck /deep/ paper-input.invalid::shadow .focused-underline {
+:host /deep/ .deck /deep/ paper-input-decorator.invalid::shadow .focused-underline {
   background-color: #f69988;
 }
-:host /deep/ .deck /deep/ paper-input.invalid::shadow .cursor {
+:host /deep/ .deck /deep/ paper-input-decorator.invalid::shadow .cursor {
   background-color: #f69988;
 }
 :host /deep/ .deck /deep/ [result-table] {
@@ -499,22 +499,22 @@
   color: #e41c23;
   width: 36px;
 }
-:host /deep/ .tasks /deep/ paper-input::shadow .focused-underline {
+:host /deep/ .tasks /deep/ paper-input-decorator::shadow .focused-underline {
   background-color: #f69988;
 }
-:host /deep/ .tasks /deep/ paper-input::shadow .cursor {
+:host /deep/ .tasks /deep/ paper-input-decorator::shadow .cursor {
   background: #f69988;
 }
-:host /deep/ .tasks /deep/ paper-input[focused]::shadow .error-text {
+:host /deep/ .tasks /deep/ paper-input-decorator[focused]::shadow .error-text {
   color: #e41c23;
 }
-:host /deep/ .tasks /deep/ paper-input[focused]::shadow .error-icon {
+:host /deep/ .tasks /deep/ paper-input-decorator[focused]::shadow .error-icon {
   color: #e41c23;
 }
-:host /deep/ .tasks /deep/ paper-input.invalid::shadow .focused-underline {
+:host /deep/ .tasks /deep/ paper-input-decorator.invalid::shadow .focused-underline {
   background-color: #f69988;
 }
-:host /deep/ .tasks /deep/ paper-input.invalid::shadow .cursor {
+:host /deep/ .tasks /deep/ paper-input-decorator.invalid::shadow .cursor {
   background-color: #f69988;
 }
 :host /deep/ .tasks /deep/ [result-table] {
@@ -603,22 +603,22 @@
   color: #009587;
   width: 36px;
 }
-:host /deep/ .stage /deep/ paper-input::shadow .focused-underline {
+:host /deep/ .stage /deep/ paper-input-decorator::shadow .focused-underline {
   background-color: #80cbc4;
 }
-:host /deep/ .stage /deep/ paper-input::shadow .cursor {
+:host /deep/ .stage /deep/ paper-input-decorator::shadow .cursor {
   background: #80cbc4;
 }
-:host /deep/ .stage /deep/ paper-input[focused]::shadow .error-text {
+:host /deep/ .stage /deep/ paper-input-decorator[focused]::shadow .error-text {
   color: #e41c23;
 }
-:host /deep/ .stage /deep/ paper-input[focused]::shadow .error-icon {
+:host /deep/ .stage /deep/ paper-input-decorator[focused]::shadow .error-icon {
   color: #e41c23;
 }
-:host /deep/ .stage /deep/ paper-input.invalid::shadow .focused-underline {
+:host /deep/ .stage /deep/ paper-input-decorator.invalid::shadow .focused-underline {
   background-color: #f69988;
 }
-:host /deep/ .stage /deep/ paper-input.invalid::shadow .cursor {
+:host /deep/ .stage /deep/ paper-input-decorator.invalid::shadow .cursor {
   background-color: #f69988;
 }
 :host /deep/ .stage /deep/ [result-table] {

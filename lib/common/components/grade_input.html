@@ -10,9 +10,9 @@
       
         /* spacing */
       
-        :host paper-input, 
-        :host paper-input::shadow .mirror-text, 
-        :host paper-input::shadow .label  
+        :host paper-input-decorator, 
+        :host paper-input-decorator::shadow .mirror-text, 
+        :host paper-input-decorator::shadow .label  
         
         {
           padding: 0px;
@@ -20,35 +20,32 @@
         }
 
         
-        :host paper-input::shadow .input-container {  top:0;  bottom:0; }
+        :host paper-input-decorator::shadow .input-container {  top:0;  bottom:0; }
         
         /* underline */
         
-        :host paper-input::shadow .underline { height:1px}
+        :host paper-input-decorator::shadow .underline { height:1px}
         
-        :host paper-input::shadow .unfocused-underline { background:lightgrey }
+        :host paper-input-decorator::shadow .unfocused-underline { background:lightgrey }
         
-        :host paper-input[disabled]::shadow .underline {  border:none }
+        :host paper-input-decorator[disabled]::shadow .underline {  border:none }
         
         
-        :host paper-input [multiline] { overflow:auto; }
+        :host paper-input-decorator[multiline] { overflow:auto; }
         
       </style>
-               
-      <div>
       
-             <paper-input-decorator id="input"
-                     disabled?={{disabled}}
-                     label={{label}} 
-                     value={{value}}
-                     multiline?={{multiline}}
-                     inputValue={{inputValue}}
-                     invalid={{invalid}}
-                     type={{type}}>
-             </paper-input-decorator>
-        
-        
-      </div>
+        <paper-input-decorator id="input"
+              disabled?={{disabled}}
+                label={{label}} 
+                value={{value}}
+                multiline?={{multiline}}
+                inputValue={{inputValue}}
+                invalid={{invalid}}
+                type={{type}}
+                >
+                <input is="core-input">
+        </paper-input-decorator>
  
     <script type="application/dart" src="grade_input.dart"></script> 
        
