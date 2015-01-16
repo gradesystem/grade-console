@@ -37,9 +37,9 @@ Map<String, String> PREFIXES = {
 
 List<String> SPARQL_KEYWORDS = ["base", "prefix", "select", "distinct", "reduced", "construct", "describe", "ask", "from", "named", "where", "order", "limit", "offset", "filter", "optional", "graph", "by", "asc", "desc", "as", "having", "undef", "values", "group", "minus", "in", "not", "service", "silent", "using", "insert", "delete", "union", "true", "false", "with", "data", "copy", "to", "move", "add", "create", "drop", "clear", "load"];
 
-Map<String, String> SELECT_TEMPLATES = {"select distinct ?p where {?s ?p ?o}":"distinct ?p where {?s ?p ?o}", 
-                                 "select ?s ?p where {?s <fill_with_property> ?o}":"?s ?p where {?s <fill_with_property> ?o}", 
-                                 "select ?s where {?s a cls:CodedEntity}":"?s where {?s a cls:CodedEntity}"
+Map<String, String> SELECT_TEMPLATES = {"all properties in ds":"distinct ?p where {?s ?p ?o}", 
+                                 "all subject objects with this property":"?s ?p where {?s <fill_with_property> ?o}", 
+                                 "all coded entities":"?s where {?s a cls:CodedEntity}"
                                  };
 
 JsObject sparqlCompletion(JsObject jseditor, JsObject options) {
