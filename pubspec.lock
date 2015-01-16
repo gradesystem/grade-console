@@ -32,7 +32,7 @@ packages:
   core_elements:
     description: core_elements
     source: hosted
-    version: "0.6.0+3"
+    version: "0.6.0+4"
   csslib:
     description: csslib
     source: hosted
@@ -96,7 +96,7 @@ packages:
   quiver:
     description: quiver
     source: hosted
-    version: "0.18.2"
+    version: "0.20.0"
   script_inliner:
     description: script_inliner
     source: hosted
