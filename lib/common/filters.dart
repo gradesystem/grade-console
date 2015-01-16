@@ -17,6 +17,8 @@ class Filters {
   tabToSpace(o) => o is String && o != null ? o.replaceAll('\t', '    ') : o;
   isHttpUri(o) => o is String && o != null && o.startsWith("http://");
   
+  static containsIgnoreCase(String s1, String s2) => (s1 != null && s2 != null && s1.toLowerCase().contains(s2.toLowerCase())) || (s1 == s2);
+  
   String format(DateTime date) => formatter.format(date);
   String formatEpoch(int milliseconds) => milliseconds != null  ? time_formatter.format(new DateTime.fromMillisecondsSinceEpoch(milliseconds)):milliseconds;
   

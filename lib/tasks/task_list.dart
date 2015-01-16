@@ -13,7 +13,10 @@ class TaskList extends PolymerElement with Filters {
 
   bool clickflag = false;
 
-  FilterFunction itemFilter = (EditableModel<Task> item, String term) => item.model.label != null && item.model.label.toLowerCase().contains(term.toLowerCase());
+  FilterFunction itemFilter = (EditableModel<Task> item, String term) 
+      => Filters.containsIgnoreCase(item.model.label, term) || 
+          Filters.containsIgnoreCase(item.model.get(Task.K.transform), term) || 
+          Filters.containsIgnoreCase(item.model.get(Task.K.diff), term);
 
   TaskList.created() : super.created();
 
