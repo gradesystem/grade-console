@@ -14,8 +14,8 @@ class QueryList extends PolymerElement with Filters {
   bool clickflag = false;
   
   FilterFunction itemFilter = (EditableModel<Query> item, String term) 
-                    => item.model.name != null && 
-                       item.model.name.toLowerCase().contains(term.toLowerCase());
+                    => Filters.containsIgnoreCase(item.model.name, term)
+                    || Filters.containsIgnoreCase(item.model.get(Query.K.expression), term);
   
   QueryList.created() : super.created();
   

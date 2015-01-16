@@ -37,6 +37,11 @@ Map<String, String> PREFIXES = {
 
 List<String> SPARQL_KEYWORDS = ["base", "prefix", "select", "distinct", "reduced", "construct", "describe", "ask", "from", "named", "where", "order", "limit", "offset", "filter", "optional", "graph", "by", "asc", "desc", "as", "having", "undef", "values", "group", "minus", "in", "not", "service", "silent", "using", "insert", "delete", "union", "true", "false", "with", "data", "copy", "to", "move", "add", "create", "drop", "clear", "load"];
 
+Map<String, String> SELECT_TEMPLATES = {"all properties in ds":"distinct ?p where {?s ?p ?o}", 
+                                 "all subject objects with this property":"?s ?p where {?s <fill_with_property> ?o}", 
+                                 "all coded entities":"?s where {?s a cls:CodedEntity}"
+                                 };
+
 JsObject sparqlCompletion(JsObject jseditor, JsObject options) {
   CodeMirror editor = new CodeMirror.fromJsObject(jseditor);
 
@@ -82,6 +87,9 @@ JsObject sparqlCompletion(JsObject jseditor, JsObject options) {
         break;
       case "prefix":
         fillPrefixes(suggestions);
+        break;
+      case "select":
+        fillSelectTemplates(suggestions);
         break;
       default:
         fillKeywords(suggestions);
@@ -135,6 +143,13 @@ void fillKeywords(Set<JsObject> suggestions) {
 void fillPrefixes(Set<JsObject> suggestions) {
   PREFIXES.keys.map((String key) => new JsObject.jsify({
     "text": PREFIXES[key],
+    "displayText": key
+  })).forEach((JsObject o) => suggestions.add(o));
+}
+
+void fillSelectTemplates(Set<JsObject> suggestions) {
+  SELECT_TEMPLATES.keys.map((String key) => new JsObject.jsify({
+    "text": SELECT_TEMPLATES[key],
     "displayText": key
   })).forEach((JsObject o) => suggestions.add(o));
 }

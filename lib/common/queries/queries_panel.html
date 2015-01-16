@@ -68,8 +68,15 @@
 	   <div main>There is no going back here.</div>
 	   <div main bolder>Are you sure?</div>
 	   <paper-button fg dismissive option>NO</paper-button>
-     <paper-button fg affirmative option autofocus on-click={{deleteSelectedQuery}}>YES</paper-button>
+     <paper-button fg affirmative option autofocus on-click={{dialogAffermative}}>YES</paper-button>
 	  </grade-dialog>
+	  
+	  <grade-dialog opened={{saveDialogOpened}} heading={{saveDialogHeader}}>
+     <div main>You're changing the query endpoint, probably breaking existing clients. Make sure you know what you are doing.</div>
+<!--      <div main bolder>Are you sure?</div> -->
+     <paper-button fg dismissive option>Cancel</paper-button>
+     <paper-button fg affirmative option autofocus on-click={{dialogAffermative}}>Yes, go ahead.</paper-button>
+    </grade-dialog>
   
   </template>
   

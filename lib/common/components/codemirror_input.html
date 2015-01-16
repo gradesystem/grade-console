@@ -1,9 +1,10 @@
 <link rel="import" href="../../../../packages/polymer/polymer.html">
 
 <polymer-element name="codemirror-input" relative>
-		<template>
+  <template>
 		<style>
 		    @import 'packages/codemirror/css/codemirror.css';
+		    @import 'packages/grade_console/common/components/dialog.css';
         
         .CodeMirror {
           height: inherit;
@@ -20,10 +21,10 @@
         [auto-height] > .CodeMirror {
           height: auto !important;
         }
-		</style>
-		      <div fit style="height:100%" id="codemirror" auto-height?={{autoheight}}>
 
-          </div>
-		</template>
+		</style>
+		<div fit style="height:100%" id="codemirror" auto-height?={{autoheight}}>
+		</div>
+  </template>
   <script type="application/dart" src="codemirror_input.dart"></script> 
 </polymer-element>

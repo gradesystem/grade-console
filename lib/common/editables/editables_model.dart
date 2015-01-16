@@ -179,6 +179,8 @@ class EditableModel<T extends Cloneable> extends Observable {
   @observable
   T get model => edit?_underEdit:_original;
   
+  T get original => _original;
+  
   @observable
   bool get valid => _valid; 
   

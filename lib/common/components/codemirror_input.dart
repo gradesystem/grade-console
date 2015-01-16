@@ -81,8 +81,15 @@ class CodemirrorInput extends PolymerElement {
   }
 
   void paste(String text) {
-    Position cursorPosition = editor.getDoc().getCursor();
-    editor.getDoc().callArgs('replaceRange', [text, cursorPosition.toProxy(), cursorPosition.toProxy()]);
+    String selection = editor.getDoc().getSelection();
+    if (selection != null && selection.isNotEmpty) {
+      //replace selection
+      editor.getDoc().callArgs('replaceSelection', [text]);
+    } else {
+      //insert text
+      Position cursorPosition = editor.getDoc().getCursor();
+      editor.getDoc().callArgs('replaceRange', [text, cursorPosition.toProxy(), cursorPosition.toProxy()]);
+    }
   }
 
 }

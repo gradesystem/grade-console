@@ -139,7 +139,7 @@
 			</core-pages>
           
 			<div class="{{ pages[page].style}}-scaffold" small layout horizontal center>   
-			  <div>Last deployed: 13/01/2015</div>
+			  <div>Last deployed: 16/01/2015</div>
 			  <div flex layout horizontal center-justified center on-click={{showCredits}} style="cursor:pointer" tinyicon>
 			    <div>Copyright 2014-2015 GRADE all rights reserved</div>
 			  </div>
@@ -155,52 +155,48 @@
 	      
     <grade-toast></grade-toast>
      
-    <core-iconset id="developers" src="images/developers.png" width="60" iconSize="60" icons="aureliano claudio fabio federico lucio">
+    <core-iconset id="developers" src="images/developers.png" width="60" iconSize="60" icons="aureliano claudio fabio federico emmanuel fiorellato">
     </core-iconset>
      
     <grade-dialog opened={{creditsDialogOpened}} heading="The Team">
-		<div main vertical layout>
-		  <grade-item icon="developers:claudio" dev-icon>            
-		    <grade-fascia style="padding-left: 5px;">
-		      <div fascia-title>Claudio Baldassarre</div>
-		      <div fascia-subtitle>{{easter?"Megapresidente Galattico Arcangelo":"Linked Data Maintenance Developer, Manager"}}</div>
-		    </grade-fascia>
-		  </grade-item>
-		  <grade-item icon="developers:federico" dev-icon>            
-		    <grade-fascia style="padding-left: 5px;">
-		      <div fascia-title on-click="{{onEaster}}">Federico De Faveri</div>
-		      <template if={{easter}}>
-		        <a href="http://tinyurl.com/n46rsxe" fascia-subtitle style="text-decoration: none;color: inherit;" target="_blank">Ragionier</a>
-		      </template>
-		      <template if={{!easter}}>
+			<div main vertical layout>
+			  <grade-item icon="developers:claudio" dev-icon>            
+			    <grade-fascia style="padding-left: 5px;">
+			      <div fascia-title>Claudio Baldassarre</div>
+			      <div fascia-subtitle>Linked Data Maintenance Developer, Manager</div>
+			    </grade-fascia>
+			  </grade-item>
+			  <grade-item icon="developers:emmanuel" dev-icon>            
+	        <grade-fascia style="padding-left: 5px;">
+	          <div fascia-title>Emmanuel Blondel</div>
+	          <div fascia-subtitle>GIS Data Integrator</div>
+	        </grade-fascia>
+	      </grade-item>
+			  <grade-item icon="developers:federico" dev-icon>            
+			    <grade-fascia style="padding-left: 5px;">
+			      <div fascia-title>Federico De Faveri</div>
 		        <div fascia-subtitle>Software Developer</div>
-		      </template>
-		    </grade-fascia>
-		  </grade-item>
-		  <grade-item icon="developers:aureliano" dev-icon>            
-		    <grade-fascia style="padding-left: 5px;">
-		      <div fascia-title>Aureliano Gentile</div>
-		      <div fascia-subtitle>{{easter?"Direttore Conte Corrado Maria Lobbiam":"Data Manager"}}</div>
-		    </grade-fascia>
-		  </grade-item>
-		  <grade-item icon="developers:lucio" dev-icon>            
-		    <grade-fascia style="padding-left: 5px;">
-			    <div fascia-title>Lucio Lelii</div>
-			    <template if={{easter}}>
-			      <a href="http://tinyurl.com/n46rsxe" fascia-subtitle style="text-decoration: none;color: inherit;" target="_blank">Il Gr. Ladr. Farabut. di Gr. Croc. Mascalz. Assas. Figl. di Gr. Putt. Marchese Conte Piermatteo Barambani Megalom</a>
-			    </template>
-			    <template if={{!easter}}>
-			      <div fascia-subtitle>Voluntary Contributor</div>
-			    </template>
-		    </grade-fascia>
-		  </grade-item>
-		  <grade-item icon="developers:fabio" dev-icon>            
-		    <grade-fascia style="padding-left: 5px;">
-		      <div fascia-title>Fabio Simeoni</div>
-		      <div fascia-subtitle>{{easter?"Megadirettore Galattico Duca Conte Balabam":"Tech Lead, Manager"}}</div>
-		    </grade-fascia>
-		  </grade-item>
-		</div>
+			    </grade-fascia>
+			  </grade-item>
+			  <grade-item icon="developers:fiorellato" dev-icon>            
+	        <grade-fascia style="padding-left: 5px;">
+	          <div fascia-title>Fabio Fiorellato</div>
+	          <div fascia-subtitle>Mapping Integrator</div>
+	        </grade-fascia>
+	      </grade-item>
+			  <grade-item icon="developers:aureliano" dev-icon>            
+			    <grade-fascia style="padding-left: 5px;">
+			      <div fascia-title>Aureliano Gentile</div>
+			      <div fascia-subtitle>Data Manager</div>
+			    </grade-fascia>
+			  </grade-item>
+			  <grade-item icon="developers:fabio" dev-icon>            
+			    <grade-fascia style="padding-left: 5px;">
+			      <div fascia-title>Fabio Simeoni</div>
+			      <div fascia-subtitle>Tech Lead, Manager</div>
+			    </grade-fascia>
+			  </grade-item>
+			</div>
     </grade-dialog>
     
     </template>
