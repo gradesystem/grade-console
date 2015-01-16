@@ -19,8 +19,14 @@ class QueriesPanel extends PolymerElement with Filters, Dependencies {
 
   @observable
   String removedDialogHeader;
+  
+  @observable
+  bool saveDialogOpened = false;
 
-  EditableQuery deleteCandidate;
+  @observable
+  String saveDialogHeader;
+  
+  Function dialogCallback;
 
   QuerySubPageModel model;
 
@@ -58,7 +64,17 @@ class QueriesPanel extends PolymerElement with Filters, Dependencies {
   }
 
   void onSave() {
-    model.save(queries.selected);
+    
+    EditableQuery query = queries.selected;
+    
+    if (!query.newModel && query.model.endpoint != query.original.endpoint) _requestSaveConfirm(query);
+    else model.save(queries.selected);
+  }
+  
+  void _requestSaveConfirm(EditableQuery query) {
+    saveDialogHeader = "Save ${query.model.name}";
+    saveDialogOpened = true;
+    dialogCallback = ()=>model.save(query);
   }
 
   void onQueryPlayground() {
@@ -82,14 +98,14 @@ class QueriesPanel extends PolymerElement with Filters, Dependencies {
   }
 
   void removeItem(event, detail, target) {
-    deleteCandidate = detail;
-    Query query = deleteCandidate.model;
+    Query query = detail.model;
     removedDialogHeader = "Remove ${query.bean[K.name]}";
     removeDialogOpened = true;
+    dialogCallback = ()=>model.remove(detail);
   }
 
-  void deleteSelectedQuery() {
-    if (deleteCandidate != null) model.remove(deleteCandidate);
+  void dialogAffermative() {
+    if (dialogCallback != null) dialogCallback();
   }
 
   void cloneItem(event, detail, target) {
