@@ -1,4 +1,4 @@
-
+import 'dart:html';
 import 'package:polymer/polymer.dart';
 import 'package:paper_elements/paper_input_decorator.dart';
 import 'package:grade_console/common.dart';
@@ -33,14 +33,17 @@ class GradeInput extends PolymerElement {
   @published
   List<Validator> validators = [];
   
-  //hides low-level access
-  @observable
-  PaperInputDecorator get inner => this.$["input"] as PaperInputDecorator;
+  PaperInputDecorator decorator;
+  var input;
   
+  void ready() {
+    decorator = $["decorator"] as PaperInputDecorator;
+    input = $["input"];
+  }
   
   void set error(String e) {
-    inner.error = e;
-    inner.isInvalid = e.isNotEmpty;
+    decorator.error = e;
+    decorator.isInvalid = e.isNotEmpty || !input.validity.valid;
   }
   
   Validator missing_validator = ($) => $==null || $.isEmpty? "Please fill in this field.":null;
@@ -72,6 +75,13 @@ class GradeInput extends PolymerElement {
         return;
       }
     
+    }
+    
+    //HTML5 validation
+    if (!input.validity.valid) {
+      error = input.validationMessage;
+      invalid = !disabled;
+      return;
     }
    
     error='';
