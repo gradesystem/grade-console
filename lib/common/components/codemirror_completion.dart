@@ -1,6 +1,5 @@
-import 'dart:js';
-
 import 'package:codemirror/codemirror.dart';
+import 'package:codemirror/hints.dart';
 
 import '../endpoints/endpoints.dart';
 import 'codemirror_input.dart';
@@ -15,8 +14,7 @@ void installCompletion() {
 }
 
 void installHints() {
-  CodeMirror.registerHelper("hint", "sparql", sparqlCompletion);
-
+  Hints.registerHintsHelper("sparql", sparqlCompletion);
 }
 
 Map<String, String> PREFIXES = {
@@ -42,8 +40,7 @@ Map<String, String> SELECT_TEMPLATES = {"all properties in ds":"distinct ?p wher
                                  "all coded entities":"?s where {?s a cls:CodedEntity}"
                                  };
 
-JsObject sparqlCompletion(JsObject jseditor, JsObject options) {
-  CodeMirror editor = new CodeMirror.fromJsObject(jseditor);
+HintResults sparqlCompletion(CodeMirror editor, [HintsOptions options]) {
 
   CodemirrorInput cmInput = editor.getOption("CodemirrorInput");
   Iterable<EditableEndpoint> endpoints = cmInput.endpoints;
@@ -63,7 +60,7 @@ JsObject sparqlCompletion(JsObject jseditor, JsObject options) {
   if (lastSpaceIndex >= 0) currWord = subline.substring(lastSpaceIndex + 1, subline.length);
   //print('currWord >$currWord<');
 
-  Set<JsObject> suggestions = new Set<JsObject>();
+  Set<HintResult> suggestions = new Set<HintResult>();
 
   if (currWord.isNotEmpty) fillMatchingKeywords(suggestions, currWord); else {
 
@@ -96,60 +93,44 @@ JsObject sparqlCompletion(JsObject jseditor, JsObject options) {
         break;
     }
   }
-
-
-  return new JsObject.jsify({
-    "list": suggestions.toList(),
-    "from": cursorPosition.toProxy(),
-    "to": cursorPosition.toProxy()
-  });
+  
+  return new HintResults.fromHints(suggestions.toList(),
+      cursorPosition, cursorPosition);
 }
 
-void fillGraphs(Set<JsObject> suggestions, Iterable<EditableEndpoint> endpoints) {
+void fillGraphs(Set<HintResult> suggestions, Iterable<EditableEndpoint> endpoints) {
   
   List<Graph> graphs = endpoints.map((EditableEndpoint e) => e.model.graphs).expand((List<Graph> graphs) => graphs).toList();
   graphs.sort(compareGraphs);
  
-  graphs.map((Graph g) => new JsObject.jsify({
-    "text": "<${g.uri}>",
-    "displayText": "${g.label} - ${g.uri}"
-  })).forEach((JsObject o) => suggestions.add(o));
+  graphs.map((Graph g) => new HintResult("<${g.uri}>", displayText: "${g.label} - ${g.uri}"))
+  .forEach((HintResult hr) => suggestions.add(hr));
 }
 
-void fillServices(Set<JsObject> suggestions, Iterable<EditableEndpoint> endpoints) {
+void fillServices(Set<HintResult> suggestions, Iterable<EditableEndpoint> endpoints) {
   List<EditableEndpoint> sortedEndpoints = endpoints.toList();
   sortedEndpoints.sort(compareEndpoints);
   
-  sortedEndpoints.map((EditableEndpoint e) => new JsObject.jsify({
-    "text": "<${e.model.uri}>",
-    "displayText": e.model.name
-  })).forEach((JsObject o) => suggestions.add(o));
+  sortedEndpoints.map((EditableEndpoint e) => new HintResult("<${e.model.uri}>", displayText: e.model.name))
+    .forEach((HintResult hr) => suggestions.add(hr));
 }
 
-void fillMatchingKeywords(Set<JsObject> suggestions, String word) {
-  SPARQL_KEYWORDS.where((String k) => k.startsWith(word)).map((String u) => new JsObject.jsify({
-    "text": u.substring(word.length),
-    "displayText": u
-  })).forEach((JsObject o) => suggestions.add(o));
+void fillMatchingKeywords(Set<HintResult> suggestions, String word) {
+  SPARQL_KEYWORDS.where((String k) => k.startsWith(word)).map((String u) =>  new HintResult(u.substring(word.length), displayText: u))
+    .forEach((HintResult hr) => suggestions.add(hr));
 }
 
-void fillKeywords(Set<JsObject> suggestions) {
-  SPARQL_KEYWORDS.map((String u) => new JsObject.jsify({
-    "text": u,
-    "displayText": u
-  })).forEach((JsObject o) => suggestions.add(o));
+void fillKeywords(Set<HintResult> suggestions) {
+  SPARQL_KEYWORDS.map((String u) =>  new HintResult(u, displayText: u))
+    .forEach((HintResult hr) => suggestions.add(hr));
 }
 
-void fillPrefixes(Set<JsObject> suggestions) {
-  PREFIXES.keys.map((String key) => new JsObject.jsify({
-    "text": PREFIXES[key],
-    "displayText": key
-  })).forEach((JsObject o) => suggestions.add(o));
+void fillPrefixes(Set<HintResult> suggestions) {
+  PREFIXES.keys.map((String key) =>  new HintResult(PREFIXES[key], displayText: key))
+    .forEach((HintResult hr) => suggestions.add(hr));
 }
 
-void fillSelectTemplates(Set<JsObject> suggestions) {
-  SELECT_TEMPLATES.keys.map((String key) => new JsObject.jsify({
-    "text": SELECT_TEMPLATES[key],
-    "displayText": key
-  })).forEach((JsObject o) => suggestions.add(o));
+void fillSelectTemplates(Set<HintResult> suggestions) {
+  SELECT_TEMPLATES.keys.map((String key) =>  new HintResult(SELECT_TEMPLATES[key], displayText: key))
+    .forEach((HintResult hr) => suggestions.add(hr));
 }
