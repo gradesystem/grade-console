@@ -11,7 +11,7 @@ dependencies:
   intl: any
   stylus: any
   collection: any
-  codemirror: "0.0.12+4.8.0"
+  codemirror: "0.1.5+4.11.0"
   script_inliner: any
   
 dependency_overrides: 
