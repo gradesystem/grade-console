@@ -28,8 +28,10 @@ abstract class SubPageEditableModel<T extends EditableGradeEntity> {
     EditableModel<T> editableModel = generator();
     editableModel.newModel = true;
 
-    storage.addItem(editableModel);
+    //order required for core-list selection sync
     storage.selected = editableModel;
+    storage.addItem(editableModel);
+    
     editableModel.startEdit();
   }
 
@@ -49,8 +51,9 @@ abstract class SubPageEditableModel<T extends EditableGradeEntity> {
     EditableModel<T> editableModel = generator(cloned);
     editableModel.newModel = true;
     
-    storage.addItem(editableModel);
+    //order required for core-list selection sync
     storage.selected = editableModel;
+    storage.addItem(editableModel);
     editableModel.startEdit();
   }
   
