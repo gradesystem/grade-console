@@ -43,7 +43,7 @@
 	      
 	      <grade-header-panel side fit>
 	      
-          <paper-tabs menu style="width:200px" selected="{{ area }}">
+          <paper-tabs menu style="width:200px" selected="{{ area }}" hidden?="{{items.selected==null}}">
             <paper-tab>PROPERTIES</paper-tab>
             <paper-tab hide?="{{items.selected.newModel || items.selected.edit}}">GRAPHS</paper-tab>
           </paper-tabs>
