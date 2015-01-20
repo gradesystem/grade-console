@@ -38,14 +38,12 @@ Map<String, String> PREFIXES = {
 List<String> SPARQL_KEYWORDS = ["base", "prefix", "select", "distinct", "reduced", "construct", "describe", "ask", "from", "named", "where", "order", "limit", "offset", "filter", "optional", "graph", "by", "asc", "desc", "as", "having", "undef", "values", "group", "minus", "in", "not", "service", "silent", "using", "insert", "delete", "union", "true", "false", "with", "data", "copy", "to", "move", "add", "create", "drop", "clear", "load"];
 
 Map<String, String> SELECT_TEMPLATES = {
-                                  "all coded entities":"?s where {?s a cls:CodedEntity}",
-                                  "all properties in ds":"distinct ?p where {?s ?p ?o}", 
-                                  "all subject objects with this property":"?s ?p where {?s <fill_with_property> ?o}", 
-                                  "creator(s) of graphs":"distinct ?creator where {?s http://purl.org/dc/terms/creator ?creator}",
-                                  "list of graphs":"distinct ?gLabel where {graph ?g {?g http://www.w3.org/2000/01/rdf-schema#label ?gLabel}}",
-                                  "list of all entities of types":"distinct ?gLabel where {graph ?g {?g http://www.w3.org/2000/01/rdf-schema#label ?gLabel}}",
-                                  "lists of all types":"distinct ?type where {?s a ?type}",
-                                  "number of triples":"(count(*) as dim) where {?s ?p ?o}"
+                                  "all properties":"distinct ?p where {?s ?p ?o}",
+                                  "all types":"distinct ?type where {?s a ?type}", 
+                                  "all entities of types":"distinct ?e ?eLabel where {?e a ?type . ?s http://www.w3.org/2004/02/skos/core#prefLabel ?eLabel} limit 50", 
+                                  "all graphs":"distinct ?g ?gLabel where {graph ?g {?g http://www.w3.org/2000/01/rdf-schema#label ?gLabel}}",
+                                  "number of triples":"(count(*) as ?dim) where {?s ?p ?o}",
+                                  "creator(s) of graphs":"distinct ?creator where {?s http://purl.org/dc/terms/creator ?creator}"
                                   };
 
 JsObject sparqlCompletion(JsObject jseditor, JsObject options) {
