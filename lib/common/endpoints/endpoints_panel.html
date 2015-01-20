@@ -53,8 +53,8 @@
 					<grade-button toolbar icon="save" label="save changes" on-click="{{onSave}}" hidden?="{{ area == 1 || !items.selected.edit}}" disabled={{!items.selected.valid}}></grade-button>
 					
 					<core-animated-pages main flex selected="{{area}}">
-            <endpoint-details main items={{items}} spaced></endpoint-details> 
-            <endpoint-graphs main items={{items}} on-refresh-graphs={{onRefreshGraphs}} on-remove-graph={{onRemoveGraph}} on-add-graph={{onAddGraph}} spaced></endpoint-graphs> 
+            <endpoint-details items={{items}} spaced></endpoint-details> 
+            <endpoint-graphs items={{items}} on-refresh-graphs={{onRefreshGraphs}} on-remove-graph={{onRemoveGraph}} on-add-graph={{onAddGraph}} spaced></endpoint-graphs> 
           </core-animated-pages>
 	      </grade-header-panel>
 	

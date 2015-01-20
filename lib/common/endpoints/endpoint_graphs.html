@@ -14,7 +14,6 @@
 <link rel="import" href="endpoints.html">
 
 <polymer-element name="endpoint-graphs" layout vertical> 
-
   <template>
     
 		<style>
@@ -31,109 +30,101 @@
       :host [pointer] { cursor:pointer }
       
       
- 	</style>
+    </style>
 
-    <template if="{{item!=null}}">
+    <template if="{{item!=null && !item.newModel}}">
 	   
-	    <loading-panel loading="{{loading}}" message="saving endpoint">
-	   
-	      <div>
-	        
-	        <template if="{{!item.newModel}}">
-	        
-						<!--  graph list and button  -->
-						<div flex vertical layout>
+	    <loading-panel loading="{{loading}}" message="saving endpoint" flex>
+					
+				<div fit vertical layout>
+	           
+	          <!-- graphs filter and refresh -->
+					<div horizontal layout end-justified spaced>
+					
+					  <grade-input 
+					            style="width:120px; margin-right:10px" 
+					            label="filter"
+					            inputValue={{kfilter}}>
+					  </grade-input>
+					
+					         
+					  <!-- refresh -->
+					  <grade-button sidebutton icon=refresh
+					               tooltip=left
+					               label="reload graphs" 
+					               on-click={{refreshGraphs}} >
+					  </grade-button>
+					
+					</div>
              
-              <div horizontal layout end-justified spaced>
-             
-                <grade-input 
-                          style="width:120px; margin-right:10px" 
-                          label="filter"
-                          inputValue={{kfilter}}>
-                </grade-input>
-              
-                         
-	              <!-- refresh -->
-	              <grade-button sidebutton icon=refresh
-	                            tooltip=left
-	                            label="reload graphs" 
-	                            on-click={{refreshGraphs}} >
-	              </grade-button>
-
-              </div>
-             
-              <!-- graph list -->
-	            <loading-panel list wired rounded relative flex loading="{{item.loadingGraphs}}" message="loading graphs">
-	               <div fit style="overflow-y: auto;" spaced>
-
-	                  <core-selector selectedAttribute="fg">
-		                 
-		                   <template repeat="{{graph in item.model.graphs | filter(kfilter, itemFilter) | sort(graphSorter)}}">
-				               
-				                 <!-- entry and remove button -->
-				                 <graph-details-summary pointer graph={{graph}}></graph-details-summary>
-				                
-				              </template>
-			              
-			              </core-selector>
-			              
-			              </div>
-		           
-		            </loading-panel>
-           
-            </div>
-             
-            <div horizontal layout style="margin-top:30px">
-              <div vertical layout flex>
-                
-                <grade-item>
-	                <grade-fascia truncate flex>
-	            
-										<grade-input fascia-title
-										                label="uri" 
-										                invalid="{{ newUrlInvalid }}"
-										                inputValue="{{ newUrl }}"
-										                type="URL">
-										</grade-input>
-										
-										<grade-uri fascia-subtitle value={{K.uri}}></grade-uri>
-		               
-	                </grade-fascia>
-                </grade-item>
-	          
-	          <grade-item>
+					<!-- graph list -->
+					<loading-panel list wired rounded relative loading="{{item.loadingGraphs}}" message="loading graphs">
+						<div fit style="overflow-y: auto;" spaced>
+						
+							<core-selector selectedAttribute="fg">
+							
+								<template repeat="{{graph in item.model.graphs | filter(kfilter, itemFilter) | sort(graphSorter)}}">
+									
+					        <!-- entry and remove button -->
+					        <graph-details-summary pointer graph={{graph}}></graph-details-summary>
+									  
+								</template>
+							
+							</core-selector>
+						
+						</div>
+					
+					</loading-panel>
+          
+	        <!-- new graph -->
+	        <div horizontal layout style="margin-top:30px;">
+			      <div vertical layout flex>
+			      
+			        <grade-item>
+			          <grade-fascia truncate flex>
+			   
+									<grade-input fascia-title
+									                label="uri" 
+									                invalid="{{ newUrlInvalid }}"
+									                inputValue="{{ newUrl }}"
+									                type="URL">
+									</grade-input>
+			
+		                <grade-uri fascia-subtitle value={{K.uri}}></grade-uri>
+			       
+		              </grade-fascia>
+		            </grade-item>
+		         
+		          <grade-item>
 								<grade-fascia truncate flex>
 								 
-						      <grade-input fascia-title
-						                      label="label" 
-						                      invalid="{{ newLabelInvalid }}"
-						                      inputValue="{{ newLabel }}"
-						                      >
-						      </grade-input>
-						      
-						      <grade-uri fascia-subtitle value={{K.label}}></grade-uri>
+								  <grade-input fascia-title
+								               label="label" 
+								               invalid="{{ newLabelInvalid }}"
+								               inputValue="{{ newLabel }}"
+								               >
+								  </grade-input>
+								    
+								  <grade-uri fascia-subtitle value={{K.label}}></grade-uri>
 								      
-								 </grade-fascia>
-								 </grade-item>
-              </div>
-                
-	            <grade-button
-	                  sidebutton
-	                  action 
-	                  disabled?="{{newUrlInvalid || newUrl.isEmpty || newLabelInvalid || newLabel.isEmpty}}"
-	                  icon="add" 
-	                  on-click={{addGraph}} 
-	                  tooltip=left
-	                  label="create new graph">
-	            </grade-button>
-	            
+								</grade-fascia>
+		          </grade-item>
 	          </div>
-     
-	        
-	        </template>
+              
+		        <grade-button
+		              sidebutton
+		              action 
+		              disabled?="{{newUrlInvalid || newUrl.isEmpty || newLabelInvalid || newLabel.isEmpty}}"
+		              icon="add" 
+		              on-click={{addGraph}} 
+		              tooltip=left
+		              label="create new graph">
+		        </grade-button>
+			            
+		      </div>
 	          
-	      </div>  
-	    </loading-panel>
+        </div>  
+      </loading-panel>
     </template>
 		
   </template> 
