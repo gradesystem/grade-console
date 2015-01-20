@@ -19,10 +19,15 @@
   <template>
   
 		<style>
+		
+		  [small-area] /deep/ paper-input  {
+         min-height: 50px;
+         max-height: 150px;
+      }
 		  
-		  grade-input::shadow [multiline] {
-         min-height: 150px;
-         max-height: 250px;
+		 [large-area] /deep/ paper-input  {
+         min-height: 100px;
+         max-height: 200px;
       }
 		  
 		  [truncate] {
@@ -30,7 +35,7 @@
 		    text-overflow: ellipsis;
 		  }
 		        
-      [graphs-area] { min-height:80px; margin-top:15px }
+      [graphs-area] { min-height:130px; margin-top:15px }
       
       [derived-fields-area] { padding:10px;margin-top: 30px; color: lightgrey}
 		  
@@ -68,7 +73,7 @@
             <grade-fascia flex>
               <div smaller wired rounded inset fascia-title >          
 	              <grade-input disabled="{{ !editable }}" 
-	                           multiline
+	                           multiline small-area
 	                           label="{{ K.note | suffix }} ?" 
 	                           invalid="{{ item.fieldsInvalidity[K.note] }}"
 	                           inputValue="{{ item.model.bean[K.note]  }}">
@@ -86,7 +91,7 @@
             <grade-fascia flex>
               <div smaller wired rounded inset fascia-title >       
 	              <grade-input disabled="{{ !editable }}" 
-	                           multiline
+	                           multiline large-area
 	                           required
 	                           label="{{ K.expression | suffix }} ?" 
 	                           invalid="{{ item.fieldsInvalidity[K.expression] }}"
