@@ -32,7 +32,7 @@
 	        </grade-input>
 	        
           <grade-button toolbar icon="refresh" label="refresh list" on-click="{{refresh}}"></grade-button>
-          <grade-button toolbar icon="delete"  label="remove all executed task" on-click={{removeAllExecuted}}></grade-button>
+          <grade-button toolbar icon="delete"  label="remove all executed task" on-click={{removeAllExecuted}} tooltip="left"></grade-button>
 
 	        <running-task-list main flex listitems="{{model.storage}}" kfilter="{{kfilter}}" on-stop-execution={{stopExecution}} on-remove-execution={{removeExecution}}></running-task-list>
 	        
