@@ -17,12 +17,18 @@
 	    
 	    [headers] {
 	      border-bottom: 1px solid lightgray;
-	      margin-bottom: 10px;
 	    }   
 	    
 	    [header-cell] {
-	     padding-left: 10px;
-	    }     
+	     padding:5px 5px;
+	     font-weight: 300;
+	     text-align: left;
+
+	    }
+	    
+	    [spacing-cell] {
+       padding:5px 0px;
+      }      
 	            
 	    [cell] {
 	      margin:5px 5px;
@@ -31,7 +37,7 @@
 	      text-overflow: ellipsis;
 	    }
 	    
-	     [cell]:hover *{
+	    [cell]:hover *{
 	     color: white !important;
 	     }
 	     
@@ -64,28 +70,52 @@
 	  </style>
       
     <div disabled?="{{disabled}}" inset rounded layout vertical>
-      <div headers layout horizontal>
-	      <template repeat="{{header in headers}}">
-	        <div fg flex cell header-cell>{{header}}</div>
-	      </template>
-      </div>
-      
-      <template repeat="{{row in data}}">
-        <div layout horizontal>
-          <template repeat="{{cell in row}}">
-            <div flex cell uri?="{{ (cell['value'] | suffix) != ''}}" pointer?={{isUri(cell)}} smaller layout horizontal center grade-hover>
+    
+      <table style="border-collapse: collapse; width:100%">
+        <tr headers>
+          <th template repeat="{{header in headers}}" fg cell header-cell>{{header}}</th>
+        </tr>
+        <tr>
+          <td template repeat="{{header in headers}}" spacing-cell></td>
+        </tr>
+        <tr template repeat="{{row in data}}">
+          <td template repeat="{{cell in row}}">
+            <div cell uri?="{{ (cell['value'] | suffix) != ''}}" pointer?={{isUri(cell)}} smaller layout horizontal center grade-hover>
               
-              <core-icon onhover copy-icon icon="content-copy" on-click={{copyContent}} cell-value="{{cell['value']}}" hide?="{{!contentCopyEnabled}}"></core-icon>
                             
               <div on-click={{uriClick}} cell-value="{{cell['value']}}" cell-type="{{cell['type']}}" flex>
                 <span fg?="{{ (cell['value'] | suffix) == ''}}" start>{{cell['value'] | start }}</span><span fg>{{ cell['value'] | suffix}}</span>
               </div>
+              
+               <core-icon onhover copy-icon icon="content-copy" on-click={{copyContent}} cell-value="{{cell['value']}}" hide?="{{!contentCopyEnabled}}"></core-icon>
+               
+            </div>
+          </td>
+        </tr>
+      </table>
+    
+<!--       <div headers layout horizontal> -->
+<!-- 	      <template repeat="{{header in headers}}"> -->
+<!-- 	        <div fg flex cell header-cell>{{header}}</div> -->
+<!-- 	      </template> -->
+<!--       </div> -->
+      
+<!--       <template repeat="{{row in data}}"> -->
+<!--         <div layout horizontal> -->
+<!--           <template repeat="{{cell in row}}"> -->
+<!--             <div flex cell uri?="{{ (cell['value'] | suffix) != ''}}" pointer?={{isUri(cell)}} smaller layout horizontal center grade-hover> -->
+              
+<!--               <core-icon onhover copy-icon icon="content-copy" on-click={{copyContent}} cell-value="{{cell['value']}}" hide?="{{!contentCopyEnabled}}"></core-icon> -->
+                            
+<!--               <div on-click={{uriClick}} cell-value="{{cell['value']}}" cell-type="{{cell['type']}}" flex> -->
+<!--                 <span fg?="{{ (cell['value'] | suffix) == ''}}" start>{{cell['value'] | start }}</span><span fg>{{ cell['value'] | suffix}}</span> -->
+<!--               </div> -->
         
                                 
-            </div>
-          </template>
-        </div>
-      </template>
+<!--             </div> -->
+<!--           </template> -->
+<!--         </div> -->
+<!--       </template> -->
     </div>
     
     <script type="application/dart" src="grade_table.dart"></script> 
