@@ -49,14 +49,15 @@ class RunningTaskPanel extends PolymerElement {
     }
   }  
   
-  String errorMessage()   {
-  
-    return runningTask!=null && runningTask!=null?runningTask.error.isClientError()?
-                      "Uhm, may be the task queries are broken ?":
-                      "Ouch. Something went horribly wrong..."
-                      :null;
-  
-  }
+  @ComputedProperty("runningTask.error")
+   String get errorMessage {
+   
+    return runningTask!=null && runningTask.error!=null && runningTask.error.isClientError()?
+                          "Uhm, may be the task queries are broken ?":
+                          "Ouch. Something went horribly wrong...";
+   
+   }
+   
   
   
   void showErrorDetails() {
