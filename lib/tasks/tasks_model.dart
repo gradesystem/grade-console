@@ -100,6 +100,8 @@ class EditableTask extends EditableModel<Task> with Keyed {
 
     //we need to listen on the expression changes in the current model
     onPropertyChange(this, #model, _listenNewModel);
+    
+    onPropertyChange(playgroundRunningTask, #running, _taskRunningStateUpdate);
 
     //when task is edited we reset the last error
     //FIXME onPropertyChange(this, #dirty, resetLastError);
@@ -111,10 +113,17 @@ class EditableTask extends EditableModel<Task> with Keyed {
   bool calculateFieldsValidity() => fieldsInvalidity.keys//we skip the diff query if the operation is publish
   .where((String field) => !(field == K.diff && get(K.op) == K.publish_op)).map((String field) => fieldsInvalidity[field])//we are watching invalidity
   .every((b) => !b);
+  
+  void _taskRunningStateUpdate() {
+    if (playgroundRunningTask.running) _setDirty(false);
+  }
 
   void _listenNewModel() {
 
     model.changes.listen((_) => _setDirty(true));
+    model.bean.changes.listen((_) {
+          _setDirty(true);
+    });
 
     onPropertyChange(this, #model, () => _setDirty(false));
 
@@ -128,6 +137,7 @@ class EditableTask extends EditableModel<Task> with Keyed {
   }
 
   //true if the query or his parameters have been modified after last editing
+  @observable
   bool get dirty => _dirty;
 
 }

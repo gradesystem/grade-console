@@ -76,7 +76,7 @@
 	        <!-- TRANSFORM RESULT -->
 	        <result-panel  
 	        result={{runningTask.transform}} 
-	        disabled?={{dirty}} 
+	        disabled={{dirty}} 
 	        loadingMesage="retrieving transform results" 
 	        on-run-query={{onLoadTransformResult}}
 	        on-eat-crumb={{onEatTransformCrumb}}></result-panel>
@@ -84,7 +84,7 @@
 	        <!-- DIFF RESULT -->
 	        <result-panel  
 	        result={{runningTask.diff}} 
-	        disabled?={{dirty}} 
+	        disabled={{dirty}} 
 	        loadingMesage="retrieving diff results" 
 	        on-run-query={{onLoadDiffResult}}
 	        on-eat-crumb={{onEatDiffCrumb}}></result-panel>
@@ -92,7 +92,7 @@
 	        <!-- TARGET RESULT -->
 	        <result-panel  
 	        result={{runningTask.target}} 
-	        disabled?={{dirty}} 
+	        disabled={{dirty}} 
 	        loadingMesage="retrieving target results" 
 	        on-run-query={{onLoadTargetResult}}
 	        on-eat-crumb={{onEatTargetCrumb}}></result-panel>
