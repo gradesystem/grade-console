@@ -142,7 +142,9 @@ class QuerySubPageModel extends SubPageEditableModel<Query> {
   void describeResult(EditableQuery editableQuery, Crumb crumb, [RawFormat format = RawFormat.JSON]) {
     
     Query resultQuery = editableQuery.model.clone();
-    resultQuery.set(Query.K.expression, _buildQuery(crumb));
+    String expression =  _generateDescribeExpression(crumb);
+    print('expression $expression');
+    resultQuery.set(Query.K.expression, expression);
     
     _run(editableQuery, resultQuery, {}, queryService.runQuery, format);
   }
@@ -172,9 +174,10 @@ class QuerySubPageModel extends SubPageEditableModel<Query> {
       .catchError((e) => editableQuery.queryFailed(e));
   }
 
-  String _buildQuery(Crumb crumb) {
-    //TODO
-   return "describe <${crumb.uri}>";
+  String _generateDescribeExpression(Crumb crumb) {
+    if (crumb.type == DescribeType.DESCRIBE_BY_SUBJECT) return "select * where { graph ?g { <${crumb.uri}> ?p  ?o}}";
+    if (crumb.type == DescribeType.DESCRIBE_BY_OBJECT) return "select * where { graph ?g { ?s ?p <${crumb.uri}>}}";
+    return "describe <${crumb.uri}>";
   }
 }
 
