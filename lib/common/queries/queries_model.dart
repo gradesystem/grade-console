@@ -360,7 +360,7 @@ class Result extends Observable {
 class ResultHistory extends Observable {
   
   @observable
-  List<String> uris = toObservable([]);
+  List<Crumb> crumbs = toObservable([]);
   
   @observable
   int currentIndex = -1;
@@ -377,22 +377,22 @@ class ResultHistory extends Observable {
     _notifyChanges();
   }
 
-  void go(String uri) {
-    uris = toObservable(uris.sublist(0, currentIndex >= 0 ? currentIndex + 1 : 0));
-    uris.add(uri);
+  void go(String uri, [DescribeType type = DescribeType.DESCRIBE_BY_SUBJECT]) {
+    crumbs = toObservable(crumbs.sublist(0, currentIndex >= 0 ? currentIndex + 1 : 0));
+    crumbs.add(new Crumb(uri, type));
     currentIndex++;
     _notifyChanges();
   }
   
   void goIndex(int index) {
-    if (index>=uris.length || index<-1) throw new Exception("Wrong index $index");
+    if (index>=crumbs.length || index<-1) throw new Exception("Wrong index $index");
     currentIndex = index;
     _notifyChanges();
   }
   
   void clear() {
     currentIndex = -1;
-    uris.clear();
+    crumbs.clear();
     _notifyChanges();
   }
 
@@ -407,8 +407,34 @@ class ResultHistory extends Observable {
   }
 
   bool get canGoBack => currentIndex >= 0;
-  bool get canGoForward => uris.isNotEmpty && currentIndex < uris.length - 1;
-  String get currentUri => currentIndex >= 0 ? uris[currentIndex] : null;
+  bool get canGoForward => crumbs.isNotEmpty && currentIndex < crumbs.length - 1;
+  String get currentUri => currentIndex >= 0 ? crumbs[currentIndex].uri : null;
   bool get isQueryUrl => currentIndex == -1;
-  bool get empty => uris.isEmpty;
+  bool get empty => crumbs.isEmpty;
+}
+
+class Crumb {
+  String uri;
+  DescribeType type;
+  
+  Crumb(this.uri, this.type);
+  
+  toString() => 'Crumb $uri $type';
+  
+}
+
+class DescribeType {
+
+  static UnmodifiableListView<DescribeType> values = new UnmodifiableListView([DESCRIBE_BY_SUBJECT, DESCRIBE_BY_OBJECT]);
+
+  static DescribeType parse(String value) => values.firstWhere((DescribeType o) => o._value == value, orElse: () => null);
+
+  final _value;
+  const DescribeType._internal(this._value);
+  toString() => 'DescribeType.$_value';
+
+  String get value => _value;
+
+  static const DESCRIBE_BY_SUBJECT = const DescribeType._internal('subject');
+  static const DESCRIBE_BY_OBJECT = const DescribeType._internal('object');
 }
