@@ -21,11 +21,17 @@
 <polymer-element name="task-details" layout vertical> 
   <template>
     <style>
-        
-        grade-input::shadow [multiline] {
-         min-height: 150px;
-         max-height: 250px;
+    
+      [small-area] /deep/ paper-input  {
+        min-height: 50px;
+        max-height: 150px;
       }
+      
+      [large-area] /deep/ paper-input  {
+        min-height: 150px;
+        max-height: 250px;
+      }
+
         
         :host [radios] { height:45px; position: relative; top:-8px }
         
@@ -73,7 +79,21 @@
 	           </grade-fascia>   
 	        </grade-item>
 	        
-	        
+	        <!-- note -->
+          <grade-item icon=chevron-right>
+            <grade-fascia flex>
+              <div  smaller wired rounded inset fascia-title >
+	              <grade-input  fascia-title 
+	                            disabled="{{!editable.edit}}" 
+	                            multiline small-area
+	                            label="note ?" 
+	                            inputValue="{{ editable.model.bean[K.note] }}">
+	              </grade-input>
+              </div>
+              <grade-uri fascia-subtitle value={{K.note}}></grade-uri>
+            </grade-fascia>   
+          </grade-item>
+
 	        <grade-item icon=chevron-right>
 	      
 	         <div layout vertical flex>
@@ -174,7 +194,7 @@
 	             <div smaller wired rounded inset fascia-title >
 	              <grade-input 
 	                            disabled="{{!editable.edit}}" 
-	                            multiline
+	                            multiline large-area
 	                            required invalid= "{{ editable.fieldsInvalidity[K.transform]}}"
 	                            label="SPARQL transform query ?" 
 	                            inputValue="{{ editable.model.bean[K.transform] }}">
@@ -191,7 +211,7 @@
 	             <div smaller wired rounded inset fascia-title >
 	              <grade-input style="min-height:150px; height:150px"
 	                            disabled="{{!editable.edit}}" 
-	                            multiline
+	                            multiline large-area
 	                            validators="{{[ conditionalRequiredDiff ]}}" invalid= "{{ editable.fieldsInvalidity[K.diff]}}"
 	                            label="SPARQL difference query ?" 
 	                            inputValue="{{editable.model.bean[K.diff] }}">
@@ -200,20 +220,7 @@
 	             <grade-uri fascia-subtitle value={{K.diff}}></grade-uri>
 	          </grade-fascia>   
 	        </grade-item>
-	        
-	        <!-- note -->
-	        <grade-item icon=chevron-right>
-	          <grade-fascia flex>
-	            <grade-input  fascia-title 
-	                          disabled="{{!editable.edit}}" 
-	                          multiline
-	                          label="note ?" 
-	                          inputValue="{{ editable.model.bean[K.note] }}">
-	            </grade-input>
-	            <grade-uri fascia-subtitle value={{K.note}}></grade-uri>
-	          </grade-fascia>   
-	        </grade-item>
-	        
+	              
 	        <!-- creator -->
 	        <grade-item icon=chevron-right>
 	          <grade-fascia flex truncate>
