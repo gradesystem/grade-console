@@ -79,7 +79,7 @@
 	        disabled?={{dirty}} 
 	        loadingMesage="retrieving transform results" 
 	        on-run-query={{onLoadTransformResult}}
-	        on-describe-uri={{onDescribeTransformUri}}></result-panel>
+	        on-eat-crumb={{onEatTransformCrumb}}></result-panel>
 	        
 	        <!-- DIFF RESULT -->
 	        <result-panel  
@@ -87,7 +87,7 @@
 	        disabled?={{dirty}} 
 	        loadingMesage="retrieving diff results" 
 	        on-run-query={{onLoadDiffResult}}
-	        on-describe-uri={{onDescribeDiffUri}}></result-panel>
+	        on-eat-crumb={{onEatDiffCrumb}}></result-panel>
 	         
 	        <!-- TARGET RESULT -->
 	        <result-panel  
@@ -95,7 +95,7 @@
 	        disabled?={{dirty}} 
 	        loadingMesage="retrieving target results" 
 	        on-run-query={{onLoadTargetResult}}
-	        on-describe-uri={{onDescribeTargetUri}}></result-panel>
+	        on-eat-crumb={{onEatTargetCrumb}}></result-panel>
 	
 	      </core-animated-pages>
 				

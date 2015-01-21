@@ -90,7 +90,7 @@ class QueriesPanel extends PolymerElement with Filters, Dependencies {
   }
   
   void onDescribeResult(event, detail, target) {
-    model.describeResultUri(detail["query"], detail["uri"]);
+    model.describeResult(detail["query"], detail["crumb"]);
   }
   
   void onLoadRaw(event, detail, target) {

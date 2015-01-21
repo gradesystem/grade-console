@@ -9,6 +9,7 @@ import 'package:event_bus/event_bus.dart';
 import 'package:core_elements/core_list_dart.dart';
 
 import 'common.dart';
+import 'common/queries/queries.dart';
 import 'common/lists/lists.dart';
 import 'common/editables/editables.dart';
 

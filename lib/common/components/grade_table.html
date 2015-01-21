@@ -55,7 +55,7 @@
 	      cursor:pointer;
 	    }
 	    
-	    [copy-icon] {
+	    [result-icon] {
 	      height: 12px;
 	      min-height: 12px;
         width: 12px;
@@ -87,35 +87,13 @@
                 <span fg?="{{ (cell['value'] | suffix) == ''}}" start>{{cell['value'] | start }}</span><span fg>{{ cell['value'] | suffix}}</span>
               </div>
               
-               <core-icon onhover copy-icon icon="content-copy" on-click={{copyContent}} cell-value="{{cell['value']}}" hide?="{{!contentCopyEnabled}}"></core-icon>
+               <core-icon onhover result-icon icon="send" on-click={{uriDescribe}} hide?="{{!uriDescribeEnabled || !isUri(cell)}}" cell-value="{{cell['value']}}" cell-type="{{cell['type']}}"></core-icon>
+               <core-icon onhover result-icon icon="content-copy" on-click={{copyContent}} cell-value="{{cell['value']}}" hide?="{{!contentCopyEnabled}}"></core-icon>
                
             </div>
           </td>
         </tr>
       </table>
-    
-<!--       <div headers layout horizontal> -->
-<!-- 	      <template repeat="{{header in headers}}"> -->
-<!-- 	        <div fg flex cell header-cell>{{header}}</div> -->
-<!-- 	      </template> -->
-<!--       </div> -->
-      
-<!--       <template repeat="{{row in data}}"> -->
-<!--         <div layout horizontal> -->
-<!--           <template repeat="{{cell in row}}"> -->
-<!--             <div flex cell uri?="{{ (cell['value'] | suffix) != ''}}" pointer?={{isUri(cell)}} smaller layout horizontal center grade-hover> -->
-              
-<!--               <core-icon onhover copy-icon icon="content-copy" on-click={{copyContent}} cell-value="{{cell['value']}}" hide?="{{!contentCopyEnabled}}"></core-icon> -->
-                            
-<!--               <div on-click={{uriClick}} cell-value="{{cell['value']}}" cell-type="{{cell['type']}}" flex> -->
-<!--                 <span fg?="{{ (cell['value'] | suffix) == ''}}" start>{{cell['value'] | start }}</span><span fg>{{ cell['value'] | suffix}}</span> -->
-<!--               </div> -->
-        
-                                
-<!--             </div> -->
-<!--           </template> -->
-<!--         </div> -->
-<!--       </template> -->
     </div>
     
     <script type="application/dart" src="grade_table.dart"></script> 

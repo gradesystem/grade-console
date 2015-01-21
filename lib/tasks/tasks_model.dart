@@ -234,18 +234,18 @@ class TasksModel extends SubPageEditableModel<Task> {
     if (execution.completed) retrieveTargetResult(runningTask);
   }
   
-  void retrieveTargetResult(RunningTask runningTask, [String uri])
-    => retrieveResult(runningTask, executionsService.getTargetResult, runningTask.target, uri);
+  void retrieveTargetResult(RunningTask runningTask, [Crumb crumb])
+    => retrieveResult(runningTask, executionsService.getTargetResult, runningTask.target, crumb);
   
-  void retrieveDifferenceResult(RunningTask runningTask, [String uri])
-    => retrieveResult(runningTask, executionsService.getDifferenceResult, runningTask.diff, uri);
+  void retrieveDifferenceResult(RunningTask runningTask, [Crumb crumb])
+    => retrieveResult(runningTask, executionsService.getDifferenceResult, runningTask.diff, crumb);
 
-  void retrieveTransformResult(RunningTask runningTask, [String uri])
-    => retrieveResult(runningTask, executionsService.getTransformResult, runningTask.transform, uri);
+  void retrieveTransformResult(RunningTask runningTask, [Crumb crumb])
+    => retrieveResult(runningTask, executionsService.getTransformResult, runningTask.transform, crumb);
   
-  void retrieveResult(RunningTask runningTask, Future<ResulTable> retriever(RunningTask, [uri]), Result result, [String uri]) {
+  void retrieveResult(RunningTask runningTask, Future<ResulTable> retriever(RunningTask, [uri]), Result result, [Crumb crumb]) {
     result.loading = true;
-    retriever(runningTask.execution, uri)
+    retriever(runningTask.execution, crumb!=null?crumb.uri:null)
     .then((ResulTable resultQuery){
       result.value = resultQuery;
     }).catchError((e) => onError(e, null)).whenComplete(() {

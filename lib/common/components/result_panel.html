@@ -16,8 +16,10 @@
 		                         data="{{ result.value | toTable }}" 
 		                         disabled={{disabled}}
 		                         on-uri-click={{onResultUriClick}}
-		                         
-		          contentCopyEnabled={{contentCopyEnabled}}>
+		                         on-uri-describe={{onUriDescribe}}
+		                         contentCopyEnabled={{contentCopyEnabled}}
+		                         uriDescribeEnabled={{uriDescribeEnabled}}
+		          >
 		      </grade-table>
 		      
 		    </loading-panel>

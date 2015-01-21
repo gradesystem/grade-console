@@ -139,10 +139,10 @@ class QuerySubPageModel extends SubPageEditableModel<Query> {
   void runQuery(EditableQuery editableQuery, [RawFormat format = RawFormat.JSON])
     => _run(editableQuery, editableQuery.model, editableQuery.parametersValues, queryService.runQuery, format);
 
-  void describeResultUri(EditableQuery editableQuery, String resultUri, [RawFormat format = RawFormat.JSON]) {
+  void describeResult(EditableQuery editableQuery, Crumb crumb, [RawFormat format = RawFormat.JSON]) {
     
     Query resultQuery = editableQuery.model.clone();
-    resultQuery.set(Query.K.expression, _buildQuery(resultUri));
+    resultQuery.set(Query.K.expression, _buildQuery(crumb));
     
     _run(editableQuery, resultQuery, {}, queryService.runQuery, format);
   }
@@ -172,7 +172,10 @@ class QuerySubPageModel extends SubPageEditableModel<Query> {
       .catchError((e) => editableQuery.queryFailed(e));
   }
 
-  String _buildQuery(String resultUri) => "describe <$resultUri>";
+  String _buildQuery(Crumb crumb) {
+    //TODO
+   return "describe <${crumb.uri}>";
+  }
 }
 
 class EditableQuery extends EditableModel<Query> with Keyed {
@@ -377,17 +380,20 @@ class ResultHistory extends Observable {
     _notifyChanges();
   }
 
-  void go(String uri, [DescribeType type = DescribeType.DESCRIBE_BY_SUBJECT]) {
+  Crumb go(String uri, [DescribeType type = DescribeType.DESCRIBE_BY_SUBJECT]) {
     crumbs = toObservable(crumbs.sublist(0, currentIndex >= 0 ? currentIndex + 1 : 0));
-    crumbs.add(new Crumb(uri, type));
+    Crumb crumb = new Crumb(uri, type);
+    crumbs.add(crumb);
     currentIndex++;
     _notifyChanges();
+    return crumb;
   }
   
-  void goIndex(int index) {
+  Crumb goIndex(int index) {
     if (index>=crumbs.length || index<-1) throw new Exception("Wrong index $index");
     currentIndex = index;
     _notifyChanges();
+    return currentCrumb;
   }
   
   void clear() {
@@ -402,6 +408,7 @@ class ResultHistory extends Observable {
     notifyPropertyChange(#canGoBack, null, canGoBack);
     notifyPropertyChange(#canGoForward, null, canGoForward);
     notifyPropertyChange(#currentUri, null, currentUri);
+    notifyPropertyChange(#currentCrumb, null, currentCrumb);
     notifyPropertyChange(#isQueryUrl, null, isQueryUrl);
     notifyPropertyChange(#empty, null, empty);
   }
@@ -409,6 +416,7 @@ class ResultHistory extends Observable {
   bool get canGoBack => currentIndex >= 0;
   bool get canGoForward => crumbs.isNotEmpty && currentIndex < crumbs.length - 1;
   String get currentUri => currentIndex >= 0 ? crumbs[currentIndex].uri : null;
+  Crumb get currentCrumb => currentIndex >= 0 ? crumbs[currentIndex] : null;
   bool get isQueryUrl => currentIndex == -1;
   bool get empty => crumbs.isEmpty;
 }
