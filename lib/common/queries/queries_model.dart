@@ -146,6 +146,8 @@ class QuerySubPageModel extends SubPageEditableModel<Query> {
     print('expression $expression');
     resultQuery.set(Query.K.expression, expression);
     
+    resultQuery.set(Query.K.graph, []);
+    
     _run(editableQuery, resultQuery, {}, queryService.runQuery, format);
   }
   
