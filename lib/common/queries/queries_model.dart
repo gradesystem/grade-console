@@ -175,8 +175,8 @@ class QuerySubPageModel extends SubPageEditableModel<Query> {
   }
 
   String _generateDescribeExpression(Crumb crumb) {
-    if (crumb.type == DescribeType.DESCRIBE_BY_SUBJECT) return "select * where { graph ?g { <${crumb.uri}> ?p  ?o}}";
-    if (crumb.type == DescribeType.DESCRIBE_BY_OBJECT) return "select * where { graph ?g { ?s ?p <${crumb.uri}>}}";
+    if (crumb.type == DescribeType.DESCRIBE_BY_SUBJECT) return "select ?graph ?subject ?predicate ?object where { graph ?graph {?subject ?predicate ?object} . filter (?subject = <${crumb.uri}>)}";
+    if (crumb.type == DescribeType.DESCRIBE_BY_OBJECT) return "select ?graph ?subject ?predicate ?object where { graph ?graph {?subject ?predicate ?object} . filter (?object = <${crumb.uri}>)}";
     return "describe <${crumb.uri}>";
   }
 }
