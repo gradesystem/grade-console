@@ -1,0 +1,107 @@
+<link rel="import" href="../../../../packages/polymer/polymer.html">
+
+<link rel="import" href="../../../../packages/paper_elements/paper_item.html">
+<link rel="import" href="../../../../packages/paper_elements/paper_button.html">
+
+<link rel="import" href="../components/grade_dialog.html">
+<link rel="import" href="../components/grade_dropdown_menu.html">
+<link rel="import" href="../components/grade_input.html">
+
+<link rel="import" href="datasets.html">
+         
+<polymer-element name="dataset-upload-dialog"> 
+  <template> 
+  
+    <style>
+	    #drop-zone {
+			  border: 2px dashed #bbb;
+			  -webkit-border-radius: 5px;
+			  -moz-border-radius: 5px;
+			  border-radius: 5px;
+			  color: #bbb;
+			  font-size: 20pt;
+			  font-weight: bold;
+			  padding: 25px;
+			  text-align: center;
+			}
+
+			#drop-zone.hover {
+			  background-color: #def;
+			  border-color: #777;
+			  color: #777;
+			}
+			
+			[item] {
+			 height: 50px;
+			}
+    </style>
+    <grade-dialog opened={{opened}} heading="Upload">
+      <div main vertical layout>
+        <grade-input item
+             label="{{ 'name' }} ?" 
+             required
+             invalid="{{ nameInvalid }}"
+             inputValue="{{ name  }}"
+             >
+        </grade-input>
+        <grade-dropdown-menu item
+                     selected="{{ endpoint }}"
+                     label="{{ 'endpoint' }}" 
+                     required
+                     invalid="{{ endpointInvalid }}"
+                     >
+          <template repeat="{{target in endpoints.synchedData}}">
+            <paper-item truncate label="{{target.model.name}}" dropitem="{{target.model.id}}"></paper-item>
+          </template>
+        </grade-dropdown-menu>
+        
+        <input type="file" id="files" name="files[]" multiple item />
+        <div id="drop-zone">Drop files here</div>
+        
+        <grade-dropdown-menu item style="padding-top:8px" 
+             selected="{{ mimeType }}"
+             label="{{ 'mime type' }}" 
+             required
+             invalid="{{ mimeTypeInvalid }}"
+             >
+          <template repeat="{{target in acceptedMediaType}}">
+            <paper-item truncate label="{{target.value}}" dropitem="{{target.value}}"></paper-item>
+          </template>
+        </grade-dropdown-menu>
+        
+        <div vertical layout hidden?={{!isTypeCSV}}>
+          <grade-input item
+             label="{{ 'delimiter' }} ?" 
+             required
+             invalid="{{ delimiterInvalid }}"
+             inputValue="{{ delimiter  }}"
+             maxlength=1
+             >
+          </grade-input>
+          <grade-dropdown-menu item
+                  selected="{{ encoding }}"
+                  label="{{ 'encoding' }}" 
+                  required
+                  invalid="{{ encodingInvalid }}"
+                  >
+	          <template repeat="{{target in encodings}}">
+	            <paper-item truncate label="{{target}}" dropitem="{{target}}"></paper-item>
+	          </template>
+	        </grade-dropdown-menu>
+         <grade-input item
+	             label="{{ 'quote' }} ?" 
+	             required
+	             invalid="{{ quoteInvalid }}"
+	             inputValue="{{ quote  }}"
+	             maxlength=1
+	             >
+	        </grade-input>
+        
+        </div>
+
+      </div>
+      <paper-button fg affirmative option autofocus on-click={{upload}} disabled={{invalid}}>Upload</paper-button>
+    </grade-dialog>
+              
+  </template> 
+</polymer-element>

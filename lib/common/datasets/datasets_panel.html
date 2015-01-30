@@ -7,6 +7,7 @@
 
 <link rel="import" href="dataset_list.html">
 <link rel="import" href="dataset_details.html">
+<link rel="import" href="dataset_upload_dialog.html">
 
 <link rel="import" href="datasets.html">
 
@@ -27,6 +28,7 @@
             </grade-input>
             
             <grade-button toolbar icon="refresh" label="refresh list" on-click="{{refresh}}"></grade-button>
+            <grade-button hidden?={{!uploadEnabled}} toolbar icon="cloud-upload" label="upload dataset" on-click="{{upload}}"></grade-button>
        
             <dataset-list main flex listitems="{{datasets}}" kfilter="{{kfilter}}"></dataset-list>
             
@@ -37,6 +39,8 @@
           </grade-header-panel>
 
       </grade-scaffold>
+      
+      <dataset-upload-dialog opened={{uploadDialogOpened}} model={{model}} endpoints={{endpoints}}></dataset-upload-dialog>
   
   </template>
   

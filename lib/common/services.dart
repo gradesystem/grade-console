@@ -28,13 +28,18 @@ class GradeService {
     return HttpService.getString(url.toString(), acceptedMediaType:acceptedMediaType).timeout(timeLimit).catchError(_onError);
   }
 
-  Future<String> post(String path, String content, {MediaType acceptedMediaType:MediaType.JSON, Map<String, String> parameters}) {
+  Future<String> post(String path, dynamic content, {MediaType acceptedMediaType:MediaType.JSON, MediaType contentType : MediaType.JSON, Map<String, String> parameters}) {
     Uri url = new Uri.http("", "$base_path/$path", parameters);
-    return HttpService.post(url.toString(), content, acceptedMediaType:acceptedMediaType).timeout(timeLimit).then((xhr) => xhr.responseText).catchError(_onError);
+    return HttpService.post(url.toString(), content, acceptedMediaType:acceptedMediaType, contentType: contentType).timeout(timeLimit).then((xhr) => xhr.responseText).catchError(_onError);
   }
   
   Future<dynamic> postJSon(String path, String content, {MediaType acceptedMediaType:MediaType.JSON, Map<String, String> parameters}) {
     return post(path, content, acceptedMediaType:acceptedMediaType, parameters:parameters).then(decode);
+  }
+  
+  Future<String> postFormData(String path, FormData data, Map<String, String> parameters) {
+    Uri url = new Uri.http("", "$base_path/$path", parameters);
+    return HttpService.request(url.toString(), method: 'POST', sendData: data).timeout(timeLimit).then((xhr) => xhr.responseText).catchError(_onError);
   }
 
   Future<String> delete(String path, [Map<String, String> parameters]) {
@@ -58,12 +63,18 @@ class GradeService {
 }
 
 class MediaType {
+  
+  static UnmodifiableListView<MediaType> values = new UnmodifiableListView([SPARQL_JSON, JSON, TURTLE, NTRIPLES, JSONLD, RDF_XML, SPARQL_XML, XML, CSV]);
+
+  static MediaType parse(String value) => values.firstWhere((MediaType o) => o._value == value || o.alternatives.contains(value), orElse: () => null);
    
-  final _value;
-  const MediaType._internal(this._value);
+  final String _value;
+  final List<String> _alternatives;
+  const MediaType._internal(this._value, [this._alternatives = const []]);
   toString() => 'MediaType.$_value';
   
   String get value => _value;
+  List<String> get alternatives => _alternatives;
    
   static const SPARQL_JSON = const MediaType._internal('application/sparql-results+json');
   static const JSON = const MediaType._internal('application/json');
@@ -72,6 +83,9 @@ class MediaType {
   static const JSONLD = const MediaType._internal('application/ld+json');
   static const RDF_XML = const MediaType._internal('application/rdf+xml');
   static const SPARQL_XML = const MediaType._internal('application/sparql-results+xml');
+  static const XML = const MediaType._internal('application/xml',const ['text/xml']);
+  static const CSV = const MediaType._internal('text/csv');
+
 }
 
 class ErrorResponse {
@@ -103,9 +117,9 @@ class HttpService {
     }, onProgress: onProgress);
   }
 
-  static Future<HttpRequest> post(String url, String content, {bool withCredentials, String responseType, MediaType acceptedMediaType : MediaType.JSON, void onProgress(ProgressEvent e)}) {
+  static Future<HttpRequest> post(String url, dynamic content, {bool withCredentials, String responseType, MediaType acceptedMediaType : MediaType.JSON, MediaType contentType : MediaType.JSON, void onProgress(ProgressEvent e)}) {
     return request(url, method: 'POST', withCredentials: withCredentials, responseType: responseType, requestHeaders: {
-      'Content-Type': MEDIA_TYPE_JSON,
+      'Content-Type': contentType.value,
       'Accept': acceptedMediaType.value
     }, sendData: content, onProgress: onProgress);
   }

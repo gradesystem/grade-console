@@ -56,6 +56,33 @@ class DatasetsPageModel extends SubPageModel<Dataset> {
   
   DatasetsPageModel(EventBus bus, ListService<Dataset> service, ListItems<Dataset> storage):super(bus, service, storage);
   
+  DatasetService get datasetService => service;
+  
+  void uploadDataset(String name, String endpoint, MediaType type, File file, [CSVConfiguration csvconfiguration]) {
+    datasetService.upload(new DatasetUploadMetadata(name, type, endpoint, csvconfiguration), file)
+    .catchError((e)=>onError(e, loadAll))
+    .then((_){
+      loadAll();
+    });
+  }
+  
 }
 
+class DatasetUploadMetadata {
+  String name;
+  MediaType type;
+  String endpoint;
+  CSVConfiguration csvConfiguration;
+  
+  DatasetUploadMetadata(this.name, this.type, this.endpoint, [this.csvConfiguration]);
+}
+
+class CSVConfiguration {
+  String delimiter;
+  String encoding;
+  String quote;
+  
+  CSVConfiguration(this.delimiter, this.encoding, this.quote);  
+  
+}
 
