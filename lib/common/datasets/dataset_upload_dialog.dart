@@ -8,7 +8,7 @@ class DatasetUploadDialog extends PolymerElement with Filters {
   static String DEFAULT_ENCODING = 'UTF-8';
   
   @observable
-  List<MediaType> acceptedMediaType = [MediaType.CSV, MediaType.JSON, MediaType.XML];
+  List<Format> acceptedFormats = [new Format("CSV",MediaType.CSV), new Format("JSON", MediaType.JSON), new Format("XML", MediaType.XML)];
   
   @observable
   List<String> encodings = [DEFAULT_ENCODING, "UTF-16"];
@@ -35,6 +35,12 @@ class DatasetUploadDialog extends PolymerElement with Filters {
   bool endpointInvalid = false;
   
   @observable
+  File file;
+  
+  @observable
+  bool fileInvalid;
+  
+  @observable
   String mimeType;
   
   @observable
@@ -58,68 +64,35 @@ class DatasetUploadDialog extends PolymerElement with Filters {
   
   @observable
   bool quoteInvalid = false;
-
-  Element dropZone;
-  InputElement fileInput;
   
-  @observable
-  File file;
+
 
   DatasetUploadDialog.created() : super.created();
 
   void ready() {
-
-    //print('shadow: ${($['files'] as PaperInput).shadowRoot} ');
-    //fileInput = ($['files'] as PaperInput).shadowRoot.querySelector("#input");
-    fileInput = $['files'];
-    fileInput.onChange.listen((e) => _onFileInputChange());
-
-    dropZone = $['drop-zone'];
-    dropZone.onDragOver.listen(_onDragOver);
-    dropZone.onDragEnter.listen((e) => dropZone.classes.add('hover'));
-    dropZone.onDragLeave.listen((e) => dropZone.classes.remove('hover'));
-    dropZone.onDrop.listen(_onDrop);
     
     onPropertyChange(this, #opened, (){
       if (opened) reset();      
     });
+    
+    onPropertyChange(this, #file, _onFileSelected);
   }
   
   void reset() {
     name = "";
     endpoint = null;
     file = null;
-    fileInput.value = null;
     mimeType = null;
     delimiter = DEFAULT_DELIMITER;
     encoding = DEFAULT_ENCODING;
     quote = DEFAULT_QUOTE;
   }
 
-  void _onDragOver(MouseEvent event) {
-    event.stopPropagation();
-    event.preventDefault();
-    event.dataTransfer.dropEffect = 'copy';
-  }
-
-  void _onDrop(MouseEvent event) {
-    event.stopPropagation();
-    event.preventDefault();
-    dropZone.classes.remove('hover');
-    _onFilesSelected(event.dataTransfer.files);
-  }
-
-  void _onFileInputChange() {
-    _onFilesSelected(fileInput.files);
-  }
-
-  void _onFilesSelected(List<File> files) {
-    print('_onFilesSelected $files');
-    file = files.isNotEmpty?files.first:null;
+  void _onFileSelected() {
     
     if (file != null) {
       MediaType fileType = MediaType.parse(file.type);
-      mimeTypeInvalid = !acceptedMediaType.contains(fileType); 
+      mimeTypeInvalid = !acceptedFormats.any((Format f)=>f.type == fileType); 
       mimeType = fileType.value;
     } else {
       mimeTypeInvalid = null;
@@ -142,12 +115,20 @@ class DatasetUploadDialog extends PolymerElement with Filters {
       csvConfiguration = new CSVConfiguration(delimiter, encoding, quote);
     }
 
-    
     model.uploadDataset(name, endpoint, userFileType, file, csvConfiguration);
   }
     
-  @ComputedProperty("nameInvalid || endpointInvalid || mimeTypeInvalid || file == null || (isTypeCSV && (delimiterInvalid || encodingInvalid || quoteInvalid))")
+  @ComputedProperty("nameInvalid || endpointInvalid || mimeTypeInvalid || fileInvalid || (isTypeCSV && (delimiterInvalid || encodingInvalid || quoteInvalid))")
   bool get invalid => readValue(#invalid, ()=>false);
 
 
+}
+
+class Format {
+  String label;
+  MediaType type;
+  
+  String get value => type.value;
+  
+  Format(this.label, this.type);
 }

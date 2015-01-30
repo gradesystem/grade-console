@@ -13,6 +13,12 @@
 
 <polymer-element name="datasets-panel" horizontal layout>
   <template>
+  
+    <style>
+    [spaced-button] {
+      padding-left: 5px;
+    }
+    </style>
    
       <grade-scaffold flex>
       
@@ -28,7 +34,7 @@
             </grade-input>
             
             <grade-button toolbar icon="refresh" label="refresh list" on-click="{{refresh}}"></grade-button>
-            <grade-button hidden?={{!uploadEnabled}} toolbar icon="cloud-upload" label="upload dataset" on-click="{{upload}}"></grade-button>
+            <grade-button hidden?={{!uploadEnabled}} toolbar icon="cloud-upload" label="upload dataset" on-click="{{upload}}" spaced-button></grade-button>
        
             <dataset-list main flex listitems="{{datasets}}" kfilter="{{kfilter}}"></dataset-list>
             
