@@ -67,7 +67,7 @@ class QueriesPanel extends PolymerElement with Filters, Dependencies {
     
     EditableQuery query = queries.selected;
     
-    if (!query.newModel && query.model.endpoint != query.original.endpoint) _requestSaveConfirm(query);
+    if (query.model.status != K.status_internal && !query.newModel && query.model.endpoint != query.original.endpoint) _requestSaveConfirm(query);
     else model.save(queries.selected);
   }
   

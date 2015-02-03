@@ -16,11 +16,14 @@
       :host {
         display: block;
       }
+      [disabled-icon] /deep/ core-icon {
+        color: grey !important;
+      }
     </style>
 	
      <paper-item trim bg-selected?="{{selected}}">
            
-	     <grade-item smallicon icon=search flex>
+	     <grade-item smallicon icon=search flex disabled-icon?="{{item.model.status == K.status_internal}}">
 	     
 	       <grade-fascia flex truncate>
 	         <div fascia-title>{{ name }}</div>

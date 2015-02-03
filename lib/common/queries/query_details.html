@@ -1,6 +1,8 @@
 <link rel="import" href="../../../../packages/polymer/polymer.html">
 <link rel="import" href="../../../../packages/core_elements/core_icon.html">
 <link rel="import" href="../../../../packages/paper_elements/paper_item.html">
+<link rel="import" href="../../../../packages/paper_elements/paper_radio_button.html">
+<link rel="import" href="../../../../packages/paper_elements/paper_radio_group.html"> 
 
 <link rel="import" href="../components/grade_input.html">
 <link rel="import" href="../components/grade_dropdown_menu.html">
@@ -46,6 +48,16 @@
       <loading-panel loading="{{loading}}" message="saving the query">
 	   
         <div style="overflow-y: auto;">
+        
+         <!-- status --> 
+          <div smaller radios layout vertical center>
+            <paper-radio-group fascia-title selected="{{ item.model.status }}">
+            
+              <paper-radio-button name="{{K.status_internal}}" label="INTERNAL"  disabled?="{{!editable}}"></paper-radio-button>
+              <paper-radio-button name="{{K.status_service}}"     label="SERVICE"      disabled?="{{!editable}}"></paper-radio-button>
+             
+            </paper-radio-group>
+          </div>
 
           <!-- name -->
           <grade-item icon=chevron-right>

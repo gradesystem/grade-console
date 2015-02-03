@@ -13,6 +13,10 @@ class QueryKeys {
   final String expression = "http://gradesystem.io/onto/query.owl#expression";
   final String parameters = "http://gradesystem.io/onto/query.owl#parameters";
   final String predefined = "http://gradesystem.io/onto/query.owl#predefined";
+  final String status = "http://gradesystem.io/onto/query.owl#status";
+  
+  final String status_service = "service";
+  final String status_internal = "internal";
 }
 
 class Query extends EditableGradeEntity with Filters, Observable {
@@ -35,6 +39,7 @@ class Query extends EditableGradeEntity with Filters, Observable {
         K.name: "",
         K.expression: "",
         K.predefined: false,
+        K.status:K.status_service,
         K.graph: []
       });
 
@@ -42,6 +47,7 @@ class Query extends EditableGradeEntity with Filters, Observable {
     onBeanChange([K.name, K.expression], () => notifyPropertyChange(#endpoint, null, endpoint));
     onBeanChange([K.expression], () => notifyPropertyChange(#parameters, null, parameters));
     onBeanChange([K.name], () => notifyPropertyChange(#name, null, name));
+    onBeanChange([K.status], () => notifyPropertyChange(#status, null, status)); 
     //we don't support graphs in bean map writing
   }
 
@@ -57,6 +63,11 @@ class Query extends EditableGradeEntity with Filters, Observable {
   String get name => get(K.name);
   set name(String value) {
     set(K.name, value);
+  }
+  
+  String get status => get(K.status);
+  set status(String value) {
+    set(K.status, value);
   }
 
   @observable
