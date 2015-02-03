@@ -125,7 +125,7 @@ void fillServices(Set<JsObject> suggestions, Iterable<EditableEndpoint> endpoint
   sortedEndpoints.sort(compareEndpoints);
   
   sortedEndpoints.map((EditableEndpoint e) => new JsObject.jsify({
-    "text": "<${e.model.uri}>",
+    "text": "[${e.model.name}]",
     "displayText": e.model.name
   })).forEach((JsObject o) => suggestions.add(o));
 }
