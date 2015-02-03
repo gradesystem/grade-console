@@ -16,7 +16,6 @@ abstract class ListService<T extends Delegate> extends Dependencies {
   
   Future<List<T>> getAll() {
     return http.getJSon(all_path).then((json) {
-      log.info('$this: json response received, converting');
       return new ListDelegate(json, generator);
     });
   }
