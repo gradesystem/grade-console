@@ -11,6 +11,8 @@
 <link rel="import" href="../components/grade_uri.html">
 <link rel="import" href="../components/grade_fascia.html">
 <link rel="import" href="../components/grade_file_input.html">
+<link rel="import" href="../components/grade_error.html">
+<link rel="import" href="../components/infinite_progress.html">
 
 <link rel="import" href="datasets.html">
          
@@ -21,117 +23,131 @@
 			[item] {
 			 margin-bottom:15px;
 			}
+			
+			[hide] {
+			 display: none;
+			}
     </style>
-    <grade-dialog opened={{opened}} heading="Upload" autoCloseDisabled=true>
+    <grade-dialog opened={{opened}} heading="Upload" autoCloseDisabled=true closeSelector="[dismissive]">
       <div main vertical layout style="width: 320px; padding-bottom: 10px">
-
-        <grade-fascia item>
-          <grade-input fascia-title
-           label="{{ 'name' }} ?" 
-           required
-           validators={{[validate_name]}}
-           invalid="{{ nameInvalid }}"
-           inputValue="{{ name  }}"
-           ></grade-input>
-          <grade-uri fascia-subtitle value="HTTP://WWW.W3.ORG/2000/01/RDF-SCHEMA#LABEL"></grade-uri>
-        </grade-fascia>
-        
-        <grade-fascia item>
-          <grade-input fascia-title truncate smaller
-           disabled
-           inputValue="{{ uri  }}"
-           ></grade-input>
-          <grade-uri fascia-subtitle value="HTTP://GRADESYSTEM.IO/ONTO#URI"></grade-uri>
-        </grade-fascia>
-        
-        <grade-fascia item>
-          <grade-input fascia-title
-           label="{{ 'author' }} ?" 
-           required
-           invalid="{{ authorInvalid }}"
-           inputValue="{{ author  }}"
-           ></grade-input>
-          <grade-uri fascia-subtitle value="HTTP://GRADESYSTEM.IO/ONTO#AUTHOR"></grade-uri>
-        </grade-fascia>
-
-        <grade-fascia item>
-          <grade-file-input file={{file}} invalid={{fileInvalid}} fascia-title></grade-file-input>
-          <grade-uri fascia-subtitle value="HTTP://GRADESYSTEM.IO/ONTO#FILE"></grade-uri>
-        </grade-fascia>
-        
-        <grade-fascia item>
-          <grade-dropdown-menu fascia-title 
-             selected="{{ mimeType }}"
-             label="{{ 'mime type' }}" 
-             required
-             invalid="{{ mimeTypeInvalid }}"
-             >
-	          <template repeat="{{target in acceptedFormats}}">
-	            <paper-item truncate label="{{target.label}}" dropitem="{{target.value}}"></paper-item>
-	          </template>
-	        </grade-dropdown-menu>
-          <grade-uri fascia-subtitle value="HTTP://GRADESYSTEM.IO/ONTO#MIMETYPE"></grade-uri>
-        </grade-fascia>
-
-        <grade-fascia item>
-          <grade-dropdown-menu fascia-title
-                       selected="{{ endpoint }}"
-                       label="{{ 'endpoint' }}" 
-                       required
-                       invalid="{{ endpointInvalid }}"
-                       >
-            <template repeat="{{target in endpoints.synchedData}}">
-              <paper-item truncate label="{{target.model.name}}" dropitem="{{target.model.id}}"></paper-item>
-            </template>
-          </grade-dropdown-menu>
-          <grade-uri fascia-subtitle value="HTTP://GRADESYSTEM.IO/ONTO#ENDPOINT"></grade-uri>
-        </grade-fascia>
-        
-        <div vertical layout hidden?={{!isTypeCSV}}>
-          <grade-fascia item>
-	          <grade-input fascia-title 
-	             label="{{ 'delimiter' }} ?" 
-	             required
-	             invalid="{{ delimiterInvalid }}"
-	             inputValue="{{ delimiter  }}"
-	             maxlength=1
-	             >
-	          </grade-input>
-            <grade-uri fascia-subtitle value="HTTP://GRADESYSTEM.IO/ONTO#DELIMITER"></grade-uri>
-          </grade-fascia>
-          
+        <div hidden?="{{uploading || failed}}" vertical layout>
 	        <grade-fascia item>
-	          <grade-dropdown-menu fascia-title 
-	                  selected="{{ encoding }}"
-	                  label="{{ 'encoding' }}" 
-	                  required
-	                  invalid="{{ encodingInvalid }}"
-	                  >
-		          <template repeat="{{target in encodings}}">
-		            <paper-item truncate label="{{target}}" dropitem="{{target}}"></paper-item>
-		          </template>
-		        </grade-dropdown-menu>
-	          <grade-uri fascia-subtitle value="HTTP://GRADESYSTEM.IO/ONTO#ENCODING"></grade-uri>
+	          <grade-input fascia-title
+	           label="{{ 'name' }} ?" 
+	           required
+	           validators={{[validate_name]}}
+	           invalid="{{ nameInvalid }}"
+	           inputValue="{{ name  }}"
+	           ></grade-input>
+	          <grade-uri fascia-subtitle value="HTTP://WWW.W3.ORG/2000/01/RDF-SCHEMA#LABEL"></grade-uri>
 	        </grade-fascia>
 	        
 	        <grade-fascia item>
-	          <grade-input fascia-title 
-		             label="{{ 'quote' }} ?" 
+	          <grade-input fascia-title truncate smaller
+	           disabled
+	           inputValue="{{ uri  }}"
+	           ></grade-input>
+	          <grade-uri fascia-subtitle value="HTTP://GRADESYSTEM.IO/ONTO#URI"></grade-uri>
+	        </grade-fascia>
+	        
+	        <grade-fascia item>
+	          <grade-input fascia-title
+	           label="{{ 'author' }} ?" 
+	           required
+	           invalid="{{ authorInvalid }}"
+	           inputValue="{{ author  }}"
+	           ></grade-input>
+	          <grade-uri fascia-subtitle value="HTTP://GRADESYSTEM.IO/ONTO#AUTHOR"></grade-uri>
+	        </grade-fascia>
+	
+	        <grade-fascia item>
+	          <grade-file-input file={{file}} invalid={{fileInvalid}} fascia-title></grade-file-input>
+	          <grade-uri fascia-subtitle value="HTTP://GRADESYSTEM.IO/ONTO#FILE"></grade-uri>
+	        </grade-fascia>
+	        
+	        <grade-fascia item>
+	          <grade-dropdown-menu fascia-title 
+	             selected="{{ mimeType }}"
+	             label="{{ 'mime type' }}" 
+	             required
+	             invalid="{{ mimeTypeInvalid }}"
+	             >
+		          <template repeat="{{target in acceptedFormats}}">
+		            <paper-item truncate label="{{target.label}}" dropitem="{{target.value}}"></paper-item>
+		          </template>
+		        </grade-dropdown-menu>
+	          <grade-uri fascia-subtitle value="HTTP://GRADESYSTEM.IO/ONTO#MIMETYPE"></grade-uri>
+	        </grade-fascia>
+	
+	        <grade-fascia item>
+	          <grade-dropdown-menu fascia-title
+	                       selected="{{ endpoint }}"
+	                       label="{{ 'endpoint' }}" 
+	                       required
+	                       invalid="{{ endpointInvalid }}"
+	                       >
+	            <template repeat="{{target in endpoints.synchedData}}">
+	              <paper-item truncate label="{{target.model.name}}" dropitem="{{target.model.id}}"></paper-item>
+	            </template>
+	          </grade-dropdown-menu>
+	          <grade-uri fascia-subtitle value="HTTP://GRADESYSTEM.IO/ONTO#ENDPOINT"></grade-uri>
+	        </grade-fascia>
+	        
+	        <div vertical layout hidden?={{!isTypeCSV}}>
+	          <grade-fascia item>
+		          <grade-input fascia-title 
+		             label="{{ 'delimiter' }} ?" 
 		             required
-		             invalid="{{ quoteInvalid }}"
-		             inputValue="{{ quote  }}"
+		             invalid="{{ delimiterInvalid }}"
+		             inputValue="{{ delimiter  }}"
 		             maxlength=1
 		             >
-		        </grade-input>
-	          <grade-uri fascia-subtitle value="HTTP://GRADESYSTEM.IO/ONTO#QUOTE"></grade-uri>
-	        </grade-fascia>
-        
+		          </grade-input>
+	            <grade-uri fascia-subtitle value="HTTP://GRADESYSTEM.IO/ONTO#DELIMITER"></grade-uri>
+	          </grade-fascia>
+	          
+		        <grade-fascia item>
+		          <grade-dropdown-menu fascia-title 
+		                  selected="{{ encoding }}"
+		                  label="{{ 'encoding' }}" 
+		                  required
+		                  invalid="{{ encodingInvalid }}"
+		                  >
+			          <template repeat="{{target in encodings}}">
+			            <paper-item truncate label="{{target}}" dropitem="{{target}}"></paper-item>
+			          </template>
+			        </grade-dropdown-menu>
+		          <grade-uri fascia-subtitle value="HTTP://GRADESYSTEM.IO/ONTO#ENCODING"></grade-uri>
+		        </grade-fascia>
+		        
+		        <grade-fascia item>
+		          <grade-input fascia-title 
+			             label="{{ 'quote' }} ?" 
+			             required
+			             invalid="{{ quoteInvalid }}"
+			             inputValue="{{ quote  }}"
+			             maxlength=1
+			             >
+			        </grade-input>
+		          <grade-uri fascia-subtitle value="HTTP://GRADESYSTEM.IO/ONTO#QUOTE"></grade-uri>
+		        </grade-fascia>
+	        
+	        </div>
         </div>
-
+        <div flex hidden?="{{!uploading || failed}}" layout vertical center center-justified>
+	        <infinite-progress run="{{uploading!=null && uploading}}"></infinite-progress>
+	        <div small fg>uploading dataset</div>
+	      </div>
+	      <grade-error hidden?="{{!failed}}" one="{{errorMessage}}"
+                 two = "{{error.message}}"
+                 three = "{{error.stacktrace}}">
+	      </grade-error>
+	      
       </div>
       
-      <paper-button fg dismissive option>CANCEL</paper-button>
-      <paper-button fg affirmative option autofocus on-click={{upload}} disabled={{invalid}}>Upload</paper-button>
+      <paper-button fg dismissive option hidden?={{uploading}}>CANCEL</paper-button>
+      <paper-button fg affirmative option autofocus on-click={{upload}} disabled={{invalid}} hidden?="{{uploading || failed}}">Upload</paper-button>
+      <paper-button fg affirmative option autofocus on-click={{retry}} hidden?="{{!failed}}">Retry</paper-button>
     </grade-dialog>
               
   </template> 

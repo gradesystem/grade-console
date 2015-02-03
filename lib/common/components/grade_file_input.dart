@@ -1,8 +1,6 @@
 import 'dart:html';
 import 'package:polymer/polymer.dart';
-import 'package:grade_console/common/components/grade_input.dart';
 import 'package:paper_elements/paper_input.dart';
-import 'package:grade_console/common.dart';
 
 @CustomTag("grade-file-input")
 class GradeFileInput extends PolymerElement {
@@ -41,6 +39,7 @@ class GradeFileInput extends PolymerElement {
     onPropertyChange(this, #file, () {
       _updateLabel();
       _updateInvalid();
+      if (file == null) input.value = null;
     });
   }
 
@@ -62,9 +61,7 @@ class GradeFileInput extends PolymerElement {
   }
 
   void _onFilesSelected(List<File> files) {
-    print('_onFilesSelected $files');
     file = files.isNotEmpty ? files.first : null;
-
   }
 
   void _updateLabel() {

@@ -58,11 +58,11 @@ class DatasetsPageModel extends SubPageModel<Dataset> {
   
   DatasetService get datasetService => service;
   
-  void uploadDataset(DatasetUploadMetadata metadata, File file) {
-    datasetService.upload(metadata, file)
-    .catchError((e)=>onError(e, loadAll))
+  Future<bool> uploadDataset(DatasetUploadMetadata metadata, File file) {
+    return datasetService.upload(metadata, file)
     .then((_){
       loadAll();
+      return true;
     });
   }
   

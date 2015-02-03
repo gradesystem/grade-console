@@ -72,6 +72,15 @@ class DatasetUploadDialog extends PolymerElement with Filters {
   
   @observable
   bool quoteInvalid = false;
+  
+  @observable
+  bool uploading = false;
+  
+  @observable
+  bool failed = false;
+  
+  @observable
+  ErrorResponse error = null;
 
   DatasetUploadDialog.created() : super.created();
 
@@ -85,7 +94,8 @@ class DatasetUploadDialog extends PolymerElement with Filters {
   }
   
   void reset() {
-    name = "";
+    name = null;
+    author = null;
     endpoint = null;
     file = null;
     mimeType = null;
@@ -93,12 +103,15 @@ class DatasetUploadDialog extends PolymerElement with Filters {
     encoding = DEFAULT_ENCODING;
     quote = DEFAULT_QUOTE;
     
+    uploading = false;
+    failed = false;
+    error = null;
+    
     if (endpoints.synchedData.length == 1) endpoint = endpoints.synchedData.first.model.id;
   }
   
-  String validate_name(String s) {
-      return !valid_name_exp.hasMatch(s)?"Invalid name...":null;
-    }
+  String validate_name(String s) 
+    => s==null || !valid_name_exp.hasMatch(s)?"Invalid name...":null;
 
   void _onFileSelected() {
     
@@ -119,14 +132,22 @@ class DatasetUploadDialog extends PolymerElement with Filters {
   @ComputedProperty("name")
   String get uri => name!=null && name.isNotEmpty ?"http://gradesystem.io/staging/graph/$name":"http://gradesystem.io/staging/graph/~missing~";
   
+  @ComputedProperty("error")
+  String get errorMessage {
+  
+    return error!=null && error.isClientError()?
+                      "Check the upload parameters...":
+                      "Ouch. Something went horribly wrong...";
+  
+  }
+  
   void upload() {
     
-    print('file type: ${file.type}');
-    
+    uploading = true;
+    failed = false;
+    error = null;
+        
     MediaType userFileType = MediaType.parse(mimeType);
-    
-    
-    
     
     CSVConfiguration csvConfiguration = null;
     if (isTypeCSV) {
@@ -134,7 +155,22 @@ class DatasetUploadDialog extends PolymerElement with Filters {
     }
 
     DatasetUploadMetadata metadata = new DatasetUploadMetadata(name, author, userFileType, endpoint, csvConfiguration);
-    model.uploadDataset(metadata, file);
+    model.uploadDataset(metadata, file)
+    .then((_){
+      opened = false;
+    })
+    .catchError((e){
+      error = e;
+      failed = true;
+    })
+    .whenComplete((){
+      uploading = false;
+    });
+  }
+  
+  void retry() {
+    failed = false;
+    error = null;
   }
     
   @ComputedProperty("nameInvalid || authorInvalid || endpointInvalid || mimeTypeInvalid || fileInvalid || (isTypeCSV && (delimiterInvalid || encodingInvalid || quoteInvalid))")

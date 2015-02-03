@@ -18,6 +18,10 @@ class GradeError extends PolymerElement {
   int level=1;
   
   GradeError.created() : super.created();
+  
+  void ready() {
+    onPropertyChange(this, #one, (){level=1;});
+  }
 
   levelUp() {
     level++;

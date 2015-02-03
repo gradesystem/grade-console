@@ -54,14 +54,14 @@
               
               <core-icon large meme icon="warning"></core-icon>
               <div larger fg>{{one}}</div>
-              <grade-button more hide?="{{level>1}}" tinyicon icon=help label="more info?" on-click={{levelUp}}></grade-button>
+              <grade-button more hide?="{{level>1}}" tinyicon icon=help label="more info?" on-click={{levelUp}} tooltip="left"></grade-button>
              
              </div>
 
              <template if="{{two!=null && level>=2}}">
                <div layout horizontal center-justified>
                  <div two fg-alt>{{two}}</div>
-                 <grade-button more hide?="{{level!=2}}" tinyicon icon=help label="all the ugly details?" on-click={{levelUp}}></grade-button>
+                 <grade-button more hide?="{{level!=2}}" tinyicon icon=help label="all the ugly details?" on-click={{levelUp}} tooltip="left"></grade-button>
                </div>
              </template>   
              
