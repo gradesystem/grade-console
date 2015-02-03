@@ -5,7 +5,7 @@
 <link rel="import" href="../../../../packages/paper_elements/paper_dialog_transition.html">
 
 
-<polymer-element name="grade-dialog" attributes="heading,opened" noscript>
+<polymer-element name="grade-dialog" attributes="heading,opened,autoCloseDisabled" noscript>
 
     <template>
 
@@ -27,7 +27,7 @@
 	      
       </style>
       
-        <paper-dialog wired-fg rounded opened={{opened}} backdrop=true>
+        <paper-dialog wired-fg rounded opened={{opened}} backdrop=true autoCloseDisabled={{autoCloseDisabled}}>
     
 	        <div layout vertical>
 	          <div heading fg>{{heading}}</div>
