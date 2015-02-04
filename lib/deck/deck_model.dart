@@ -77,16 +77,16 @@ class DeckPageModel {
     return runningTask;
   }
   
-  void retrieveTransformResult(RunningTask runningTask, [String uri]) {
-    tasksModel.retrieveTransformResult(runningTask, uri);
+  void retrieveTransformResult(RunningTask runningTask, [Crumb crumb]) {
+    tasksModel.retrieveTransformResult(runningTask, crumb);
   }
   
-  void retrieveDifferenceResult(RunningTask runningTask, [String uri]) {
-    tasksModel.retrieveDifferenceResult(runningTask, uri);
+  void retrieveDifferenceResult(RunningTask runningTask, [Crumb crumb]) {
+    tasksModel.retrieveDifferenceResult(runningTask, crumb);
   }
   
-  void retrieveTargetResult(RunningTask runningTask, [String uri]) {
-    tasksModel.retrieveTargetResult(runningTask, uri);
+  void retrieveTargetResult(RunningTask runningTask, [Crumb crumb]) {
+    tasksModel.retrieveTargetResult(runningTask, crumb);
   }
 
 

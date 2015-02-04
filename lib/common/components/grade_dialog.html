@@ -2,8 +2,7 @@
 
 <link rel="import" href="../../../../packages/paper_elements/paper_action_dialog.html">
 
-
-<polymer-element name="grade-dialog" attributes="heading,opened" noscript>
+<polymer-element name="grade-dialog" attributes="heading,opened,autoCloseDisabled,closeSelector" noscript>
   <template>
     <style>  
 	   
@@ -18,7 +17,7 @@
 
     </style>
       
-    <paper-action-dialog wired-fg rounded opened={{opened}} backdrop=true layered=false>
+    <paper-action-dialog wired-fg rounded opened={{opened}} backdrop=true layered=false autoCloseDisabled={{autoCloseDisabled}} closeSelector={{closeSelector}}>
 	
 	    <div layout vertical>
 	      <div heading fg>{{heading}}</div>
@@ -28,9 +27,10 @@
 	    </div>
 	     
 	    <content></content>
-	      
+
     </paper-action-dialog>
 	
   </template>
+
 
 </polymer-element>

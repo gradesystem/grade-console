@@ -49,14 +49,15 @@ class RunningTaskPanel extends PolymerElement {
     }
   }  
   
-  String errorMessage()   {
-  
-    return runningTask!=null && runningTask!=null?runningTask.error.isClientError()?
-                      "Uhm, may be the task queries are broken ?":
-                      "Ouch. Something went horribly wrong..."
-                      :null;
-  
-  }
+  @ComputedProperty("runningTask.error")
+   String get errorMessage {
+   
+    return runningTask!=null && runningTask.error!=null && runningTask.error.isClientError()?
+                          "Uhm, may be the task queries are broken ?":
+                          "Ouch. Something went horribly wrong...";
+   
+   }
+   
   
   
   void showErrorDetails() {
@@ -65,19 +66,19 @@ class RunningTaskPanel extends PolymerElement {
   }
   
   
-  void onDescribeTransformUri(event, detail, target) {
+  void onEatTransformCrumb(event, detail, target) {
     event.stopImmediatePropagation();
-    fire("describe-uri", detail:{"type":"transform", "uri":detail, "runningTask":runningTask});
+    fire("describe-uri", detail:{"type":"transform", "crumb":detail, "runningTask":runningTask});
   }
   
-  void onDescribeDiffUri(event, detail, target) {
+  void onEatDiffCrumb(event, detail, target) {
     event.stopImmediatePropagation();
-    fire("describe-uri", detail:{"type":"diff", "uri":detail, "runningTask":runningTask});
+    fire("describe-uri", detail:{"type":"diff", "crumb":detail, "runningTask":runningTask});
   }
   
-  void onDescribeTargetUri(event, detail, target) {
+  void onEatTargetCrumb(event, detail, target) {
     event.stopImmediatePropagation();
-    fire("describe-uri", detail:{"type":"target", "uri":detail, "runningTask":runningTask});
+    fire("describe-uri", detail:{"type":"target", "crumb":detail, "runningTask":runningTask});
   }
   
   void onLoadTransformResult() {

@@ -43,18 +43,18 @@
 	      
 	      <grade-header-panel side fit>
 	      
-          <paper-tabs menu style="width:200px" selected="{{ area }}">
+          <paper-tabs menu style="width:200px" selected="{{ area }}" hidden?="{{items.selected==null}}">
             <paper-tab>PROPERTIES</paper-tab>
             <paper-tab hide?="{{items.selected.newModel || items.selected.edit}}">GRAPHS</paper-tab>
           </paper-tabs>
 					
-					<grade-button toolbar icon="create" label="edit endpoint" on-click="{{onEdit}}" hidden?="{{  area == 1 || items.selected==null || items.selected.edit}}"></grade-button>
+					<grade-button toolbar icon="create" label="edit endpoint" on-click="{{onEdit}}" hidden?="{{  area == 1 || items.selected==null || items.selected.edit}}" tooltip="left"></grade-button>
 					<grade-button toolbar icon="cancel" label="discard changes" on-click="{{onCancel}}" hidden?="{{ area == 1 || !items.selected.edit}}"></grade-button>
-					<grade-button toolbar icon="save" label="save changes" on-click="{{onSave}}" hidden?="{{ area == 1 || !items.selected.edit}}" disabled={{!items.selected.valid}}></grade-button>
+					<grade-button toolbar icon="save" label="save changes" on-click="{{onSave}}" hidden?="{{ area == 1 || !items.selected.edit}}" disabled={{!items.selected.valid}} tooltip="left"></grade-button>
 					
 					<core-animated-pages main flex selected="{{area}}">
-            <endpoint-details main items={{items}} spaced></endpoint-details> 
-            <endpoint-graphs main items={{items}} on-refresh-graphs={{onRefreshGraphs}} on-remove-graph={{onRemoveGraph}} on-add-graph={{onAddGraph}} spaced></endpoint-graphs> 
+            <endpoint-details items={{items}} spaced></endpoint-details> 
+            <endpoint-graphs items={{items}} on-refresh-graphs={{onRefreshGraphs}} on-remove-graph={{onRemoveGraph}} on-add-graph={{onAddGraph}} spaced></endpoint-graphs> 
           </core-animated-pages>
 	      </grade-header-panel>
 	

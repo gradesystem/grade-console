@@ -18,6 +18,9 @@ class ResultPanel extends PolymerElement {
   
   @published
   bool breadcrumbEnabled = true;
+  
+  @published
+  bool uriDescribeEnabled = false;
     
   ResultPanel.created() : super.created();
   
@@ -36,14 +39,19 @@ class ResultPanel extends PolymerElement {
   }
   
   void onResultUriClick(event, detail, target) {
-    result.history.go(detail);
-    fire("describe-uri", detail:detail);
+    Crumb crumb = result.history.go(detail);
+    fire("eat-crumb", detail:crumb);
+  }
+  
+  void onUriDescribe(event, detail, target) {
+    Crumb crumb = result.history.go(detail, DescribeType.DESCRIBE_BY_OBJECT);
+    fire("eat-crumb", detail:crumb);
   }
   
   void onResultGoUri(event, detail, target) {
     int index = int.parse(detail);
-    result.history.goIndex(index);
-    if (!result.history.isQueryUrl) fire("describe-uri", detail:result.history.currentUri);
+    Crumb crumb = result.history.goIndex(index);
+    if (crumb!=null) fire("eat-crumb", detail:crumb);
     else fire("run-query");
   }
 }

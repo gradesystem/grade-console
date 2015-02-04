@@ -13,6 +13,10 @@ class QueryKeys {
   final String expression = "http://gradesystem.io/onto/query.owl#expression";
   final String parameters = "http://gradesystem.io/onto/query.owl#parameters";
   final String predefined = "http://gradesystem.io/onto/query.owl#predefined";
+  final String status = "http://gradesystem.io/onto/query.owl#status";
+  
+  final String status_service = "service";
+  final String status_internal = "internal";
 }
 
 class Query extends EditableGradeEntity with Filters, Observable {
@@ -35,6 +39,7 @@ class Query extends EditableGradeEntity with Filters, Observable {
         K.name: "",
         K.expression: "",
         K.predefined: false,
+        K.status:K.status_service,
         K.graph: []
       });
 
@@ -42,6 +47,7 @@ class Query extends EditableGradeEntity with Filters, Observable {
     onBeanChange([K.name, K.expression], () => notifyPropertyChange(#endpoint, null, endpoint));
     onBeanChange([K.expression], () => notifyPropertyChange(#parameters, null, parameters));
     onBeanChange([K.name], () => notifyPropertyChange(#name, null, name));
+    onBeanChange([K.status], () => notifyPropertyChange(#status, null, status)); 
     //we don't support graphs in bean map writing
   }
 
@@ -57,6 +63,11 @@ class Query extends EditableGradeEntity with Filters, Observable {
   String get name => get(K.name);
   set name(String value) {
     set(K.name, value);
+  }
+  
+  String get status => get(K.status);
+  set status(String value) {
+    set(K.status, value);
   }
 
   @observable
@@ -139,10 +150,14 @@ class QuerySubPageModel extends SubPageEditableModel<Query> {
   void runQuery(EditableQuery editableQuery, [RawFormat format = RawFormat.JSON])
     => _run(editableQuery, editableQuery.model, editableQuery.parametersValues, queryService.runQuery, format);
 
-  void describeResultUri(EditableQuery editableQuery, String resultUri, [RawFormat format = RawFormat.JSON]) {
+  void describeResult(EditableQuery editableQuery, Crumb crumb, [RawFormat format = RawFormat.JSON]) {
     
     Query resultQuery = editableQuery.model.clone();
-    resultQuery.set(Query.K.expression, _buildQuery(resultUri));
+    String expression =  _generateDescribeExpression(crumb);
+    print('expression $expression');
+    resultQuery.set(Query.K.expression, expression);
+    
+    resultQuery.set(Query.K.graph, []);
     
     _run(editableQuery, resultQuery, {}, queryService.runQuery, format);
   }
@@ -172,7 +187,11 @@ class QuerySubPageModel extends SubPageEditableModel<Query> {
       .catchError((e) => editableQuery.queryFailed(e));
   }
 
-  String _buildQuery(String resultUri) => "describe <$resultUri>";
+  String _generateDescribeExpression(Crumb crumb) {
+    if (crumb.type == DescribeType.DESCRIBE_BY_SUBJECT) return "select ?graph ?subject ?predicate ?object where { graph ?graph {?subject ?predicate ?object} . filter (?subject = <${crumb.uri}>)}";
+    if (crumb.type == DescribeType.DESCRIBE_BY_OBJECT) return "select ?graph ?subject ?predicate ?object where { graph ?graph {?subject ?predicate ?object} . filter (?object = <${crumb.uri}>)}";
+    return "describe <${crumb.uri}>";
+  }
 }
 
 class EditableQuery extends EditableModel<Query> with Keyed {
@@ -360,7 +379,7 @@ class Result extends Observable {
 class ResultHistory extends Observable {
   
   @observable
-  List<String> uris = toObservable([]);
+  List<Crumb> crumbs = toObservable([]);
   
   @observable
   int currentIndex = -1;
@@ -377,22 +396,25 @@ class ResultHistory extends Observable {
     _notifyChanges();
   }
 
-  void go(String uri) {
-    uris = toObservable(uris.sublist(0, currentIndex >= 0 ? currentIndex + 1 : 0));
-    uris.add(uri);
+  Crumb go(String uri, [DescribeType type = DescribeType.DESCRIBE_BY_SUBJECT]) {
+    crumbs = toObservable(crumbs.sublist(0, currentIndex >= 0 ? currentIndex + 1 : 0));
+    Crumb crumb = new Crumb(uri, type);
+    crumbs.add(crumb);
     currentIndex++;
     _notifyChanges();
+    return crumb;
   }
   
-  void goIndex(int index) {
-    if (index>=uris.length || index<-1) throw new Exception("Wrong index $index");
+  Crumb goIndex(int index) {
+    if (index>=crumbs.length || index<-1) throw new Exception("Wrong index $index");
     currentIndex = index;
     _notifyChanges();
+    return currentCrumb;
   }
   
   void clear() {
     currentIndex = -1;
-    uris.clear();
+    crumbs.clear();
     _notifyChanges();
   }
 
@@ -402,13 +424,41 @@ class ResultHistory extends Observable {
     notifyPropertyChange(#canGoBack, null, canGoBack);
     notifyPropertyChange(#canGoForward, null, canGoForward);
     notifyPropertyChange(#currentUri, null, currentUri);
+    notifyPropertyChange(#currentCrumb, null, currentCrumb);
     notifyPropertyChange(#isQueryUrl, null, isQueryUrl);
     notifyPropertyChange(#empty, null, empty);
   }
 
   bool get canGoBack => currentIndex >= 0;
-  bool get canGoForward => uris.isNotEmpty && currentIndex < uris.length - 1;
-  String get currentUri => currentIndex >= 0 ? uris[currentIndex] : null;
+  bool get canGoForward => crumbs.isNotEmpty && currentIndex < crumbs.length - 1;
+  String get currentUri => currentIndex >= 0 ? crumbs[currentIndex].uri : null;
+  Crumb get currentCrumb => currentIndex >= 0 ? crumbs[currentIndex] : null;
   bool get isQueryUrl => currentIndex == -1;
-  bool get empty => uris.isEmpty;
+  bool get empty => crumbs.isEmpty;
+}
+
+class Crumb {
+  String uri;
+  DescribeType type;
+  
+  Crumb(this.uri, this.type);
+  
+  toString() => 'Crumb $uri $type';
+  
+}
+
+class DescribeType {
+
+  static UnmodifiableListView<DescribeType> values = new UnmodifiableListView([DESCRIBE_BY_SUBJECT, DESCRIBE_BY_OBJECT]);
+
+  static DescribeType parse(String value) => values.firstWhere((DescribeType o) => o._value == value, orElse: () => null);
+
+  final _value;
+  const DescribeType._internal(this._value);
+  toString() => 'DescribeType.$_value';
+
+  String get value => _value;
+
+  static const DESCRIBE_BY_SUBJECT = const DescribeType._internal('subject');
+  static const DESCRIBE_BY_OBJECT = const DescribeType._internal('object');
 }

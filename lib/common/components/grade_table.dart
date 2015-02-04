@@ -16,6 +16,9 @@ class GradeTable extends View {
   @published
   bool contentCopyEnabled = false;
   
+  @published
+  bool uriDescribeEnabled = true;
+  
   GradeTable.created() : super.created();
   
   isUri(Map m) => m is Map && m != null && m['type'] == "uri";
@@ -23,6 +26,11 @@ class GradeTable extends View {
   void uriClick(event, detail, target) {
     //we filter not clickable uri
     if (target.attributes['cell-type'] == "uri") fire("uri-click", detail:target.attributes['cell-value']);
+  }
+  
+  void uriDescribe(event, detail, target) {
+    //we filter not clickable uri
+    if (target.attributes['cell-type'] == "uri") fire("uri-describe", detail:target.attributes['cell-value']);
   }
   
   void copyContent(event, detail, target) {

@@ -17,7 +17,7 @@ abstract class SubPageModel<T extends GradeEntity> {
     storage.selected = null;
     service.getAll()
     .then(_setData)
-    .catchError((e)=>_onError(e, loadAll))
+    .catchError((e)=>onError(e, loadAll))
     .whenComplete((){
       storage.loading = false;
     });
@@ -28,7 +28,7 @@ abstract class SubPageModel<T extends GradeEntity> {
     storage.setData(items, true);
   }
   
-  void _onError(e, callback) {
+  void onError(e, callback) {
     storage.data.clear();
     bus.fire(new ToastMessage.alert("Ops we are having some problems communicating with the server", callback));
   }

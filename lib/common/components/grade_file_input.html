@@ -1,0 +1,54 @@
+<link rel="import" href="../../../../packages/polymer/polymer.html">
+
+<link rel="import" href="../../../../packages/paper_elements/paper_input.html">
+<link rel="import" href="grade_input.html">
+
+<polymer-element name="grade-file-input"> 
+  <template>
+    <style>
+
+      .hover {
+        background-color: #def;
+        border-color: #777;
+        color: #777;
+      }
+      
+      paper-input-decorator, 
+      paper-input-decorator::shadow .mirror-text, 
+      paper-input-decorator::shadow .label  
+      {
+				padding: 0px;
+				width: 100%;
+      }
+
+      paper-input-decorator::shadow .input-container {  top:0;  bottom:0; }
+        
+      /* underline */
+        
+      paper-input-decorator::shadow .underline { height:1px}
+        
+      paper-input-decorator::shadow .unfocused-underline { background:lightgrey }
+        
+      paper-input-decorator[disabled]::shadow .underline { 
+        border:none;
+        height:1px !important;
+      }
+        
+      paper-input-decorator[disabled]::shadow .unfocused-underline { 
+        background:lightgrey !important;
+        visibility: visible;
+      }
+	 
+	 </style>
+	 
+	 <paper-input-decorator id="labelDecorator"
+        disabled
+        label="Select a file or drop it here"
+        >
+       <input id="label" is="core-input">
+    </paper-input-decorator>
+    <input id="input" type="file" hidden />
+
+    <script type="application/dart" src="grade_file_input.dart"></script> 
+	</template> 
+</polymer-element>

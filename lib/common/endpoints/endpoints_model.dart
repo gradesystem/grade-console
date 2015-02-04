@@ -6,6 +6,7 @@ class GraphKeys {
   
   final String label = "http://www.w3.org/2000/01/rdf-schema#label";
   final String uri = "http://gradesystem.io/onto#uri";
+  final String size = "http://gradesystem.io/onto#size";
 }
 
 class Graph extends GradeEntity {
@@ -18,8 +19,9 @@ class Graph extends GradeEntity {
   
   String get uri => get(K.uri);
   String get label => get(K.label);
+  String get size => get(K.size);
   
-  String toString() => "Graph label: $label uri: $uri";
+  String toString() => "Graph label: $label uri: $uri size: $size";
   
 }
 

@@ -106,14 +106,11 @@ abstract class SubPageEditableModel<T extends EditableGradeEntity> {
   }
 
   void loadAll([bool selectFirst = true]) {
-    log.info("$this: loading all");
     storage.loading = true;
     storage.selected = null;
     service.getAll()
     .then((List<T> items){
-      log.info("$this: received ${items.length} items");
       storage.setData(items.map((T q) => generator(q)).toList(), selectFirst);
-      log.info("$this: data converted");
       })
     .catchError((e) {
       onError(e, loadAll);

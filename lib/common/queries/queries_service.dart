@@ -26,8 +26,8 @@ class QueryService extends EditableListService<Query> {
     //tmp workaround to limit the result size
     Map bean = new Map.from(query.bean);
     
-    if (bean[Query.K.expression]!=null && !(bean[Query.K.expression] as String).contains("limit"))
-       bean[Query.K.expression] = bean[Query.K.expression]+ " limit 1000";
+    if (bean[Query.K.expression]!=null && !(bean[Query.K.expression] as String).contains(" limit "))
+       bean[Query.K.expression] = bean[Query.K.expression]+ " limit 100";
 
     return http.post(SUBMIT_PATH, JSON.encode(bean), acceptedMediaType: format.value, parameters:uriParameters);
   }

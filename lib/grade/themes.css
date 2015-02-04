@@ -90,7 +90,6 @@
   text-overflow: ellipsis;
 }
 :host /deep/ [scrollable] {
-  min-width: 640px;
   overflow: auto;
 }
 :host /deep/ [bg-selected] /deep/ [fg] {

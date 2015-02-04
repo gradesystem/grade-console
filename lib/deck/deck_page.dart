@@ -32,8 +32,8 @@ class DeckPage extends Polybase {
   void onDescribeUri(event, detail, target) {
     String type = detail["type"];
     RunningTask runningTask = detail["runningTask"];
-    String uri = detail["uri"];
-    _retrieveResult(type, runningTask, uri);
+    Crumb crumb = detail["crumb"];
+    _retrieveResult(type, runningTask, crumb);
   }
   
   void onLoadResult(event, detail, target) {
@@ -42,11 +42,11 @@ class DeckPage extends Polybase {
     _retrieveResult(type, runningTask);
   }
   
-  void _retrieveResult(String type, RunningTask runningTask, [String uri]) {
+  void _retrieveResult(String type, RunningTask runningTask, [Crumb crumb]) {
     switch(type) {
-      case "transform": deckModel.retrieveTransformResult(runningTask, uri); break;
-      case "diff": deckModel.retrieveDifferenceResult(runningTask, uri); break;
-      case "target": deckModel.retrieveTargetResult(runningTask, uri); break;
+      case "transform": deckModel.retrieveTransformResult(runningTask, crumb); break;
+      case "diff": deckModel.retrieveDifferenceResult(runningTask, crumb); break;
+      case "target": deckModel.retrieveTargetResult(runningTask, crumb); break;
     }
   }
 }

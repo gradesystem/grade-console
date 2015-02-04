@@ -99,9 +99,9 @@ class QueryPlayground extends PolymerElement with Filters {
     fire("save");
   }
   
-  void onDescribeUri(event, detail, target) {
+  void onEatCrumb(event, detail, target) {
     event.stopImmediatePropagation();
-    fire("describe-result", detail:{"uri":detail, "query":editableQuery});
+    fire("describe-result", detail:{"crumb":detail, "query":editableQuery});
   }
   
   void showErrorDetails() {

@@ -31,6 +31,9 @@ class GradeInput extends PolymerElement {
   String type;
   
   @published
+  num maxlength;
+  
+  @published
   List<Validator> validators = [];
   
   PaperInputDecorator decorator;

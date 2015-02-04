@@ -55,14 +55,14 @@
 			}
         
     </style>
-      
+
 		<paper-input-decorator id="decorator"
 		      disabled?={{disabled}}
 		        label={{label}} 
 		        isInvalid={{invalid}}
 		        >
 			<template if={{!multiline}}>
-			  <input id="input" is="core-input" value={{inputValue}} committedValue={{value}} disabled?={{disabled}} type={{type}}>
+			  <input id="input" is="core-input" value={{inputValue}} committedValue={{value}} disabled?={{disabled}} type={{type}} maxlength={{maxlength}}>
 			</template>
 			<template if={{multiline}}>
 			  <textarea id="input" value={{inputValue}} committedValue={{value}} disabled?={{disabled}}></textarea>

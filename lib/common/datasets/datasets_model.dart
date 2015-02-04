@@ -56,6 +56,34 @@ class DatasetsPageModel extends SubPageModel<Dataset> {
   
   DatasetsPageModel(EventBus bus, ListService<Dataset> service, ListItems<Dataset> storage):super(bus, service, storage);
   
+  DatasetService get datasetService => service;
+  
+  Future<bool> uploadDataset(DatasetUploadMetadata metadata, File file) {
+    return datasetService.upload(metadata, file)
+    .then((_){
+      loadAll();
+      return true;
+    });
+  }
+  
 }
 
+class DatasetUploadMetadata {
+  String name;
+  String author;
+  MediaType type;
+  String endpoint;
+  CSVConfiguration csvConfiguration;
+  
+  DatasetUploadMetadata(this.name, this.author, this.type, this.endpoint, [this.csvConfiguration]);
+}
+
+class CSVConfiguration {
+  String delimiter;
+  String encoding;
+  String quote;
+  
+  CSVConfiguration(this.delimiter, this.encoding, this.quote);  
+  
+}
 

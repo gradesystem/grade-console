@@ -100,6 +100,8 @@ class EditableTask extends EditableModel<Task> with Keyed {
 
     //we need to listen on the expression changes in the current model
     onPropertyChange(this, #model, _listenNewModel);
+    
+    onPropertyChange(playgroundRunningTask, #running, _taskRunningStateUpdate);
 
     //when task is edited we reset the last error
     //FIXME onPropertyChange(this, #dirty, resetLastError);
@@ -111,10 +113,17 @@ class EditableTask extends EditableModel<Task> with Keyed {
   bool calculateFieldsValidity() => fieldsInvalidity.keys//we skip the diff query if the operation is publish
   .where((String field) => !(field == K.diff && get(K.op) == K.publish_op)).map((String field) => fieldsInvalidity[field])//we are watching invalidity
   .every((b) => !b);
+  
+  void _taskRunningStateUpdate() {
+    if (playgroundRunningTask.running) _setDirty(false);
+  }
 
   void _listenNewModel() {
 
     model.changes.listen((_) => _setDirty(true));
+    model.bean.changes.listen((_) {
+          _setDirty(true);
+    });
 
     onPropertyChange(this, #model, () => _setDirty(false));
 
@@ -128,6 +137,7 @@ class EditableTask extends EditableModel<Task> with Keyed {
   }
 
   //true if the query or his parameters have been modified after last editing
+  @observable
   bool get dirty => _dirty;
 
 }
@@ -234,18 +244,18 @@ class TasksModel extends SubPageEditableModel<Task> {
     if (execution.completed) retrieveTargetResult(runningTask);
   }
   
-  void retrieveTargetResult(RunningTask runningTask, [String uri])
-    => retrieveResult(runningTask, executionsService.getTargetResult, runningTask.target, uri);
+  void retrieveTargetResult(RunningTask runningTask, [Crumb crumb])
+    => retrieveResult(runningTask, executionsService.getTargetResult, runningTask.target, crumb);
   
-  void retrieveDifferenceResult(RunningTask runningTask, [String uri])
-    => retrieveResult(runningTask, executionsService.getDifferenceResult, runningTask.diff, uri);
+  void retrieveDifferenceResult(RunningTask runningTask, [Crumb crumb])
+    => retrieveResult(runningTask, executionsService.getDifferenceResult, runningTask.diff, crumb);
 
-  void retrieveTransformResult(RunningTask runningTask, [String uri])
-    => retrieveResult(runningTask, executionsService.getTransformResult, runningTask.transform, uri);
+  void retrieveTransformResult(RunningTask runningTask, [Crumb crumb])
+    => retrieveResult(runningTask, executionsService.getTransformResult, runningTask.transform, crumb);
   
-  void retrieveResult(RunningTask runningTask, Future<ResulTable> retriever(RunningTask, [uri]), Result result, [String uri]) {
+  void retrieveResult(RunningTask runningTask, Future<ResulTable> retriever(RunningTask, [uri]), Result result, [Crumb crumb]) {
     result.loading = true;
-    retriever(runningTask.execution, uri)
+    retriever(runningTask.execution, crumb!=null?crumb.uri:null)
     .then((ResulTable resultQuery){
       result.value = resultQuery;
     }).catchError((e) => onError(e, null)).whenComplete(() {
