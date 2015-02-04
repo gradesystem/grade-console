@@ -7,16 +7,19 @@
 
 <link rel="import" href="field_error.html">
 
-<polymer-element name="grade-dropdown-menu">
+<polymer-element name="grade-dropdown-menu" vertical layout>
   <template>
     <style>
+    
+      :host {
+        display: block;
+      }
 			
 			/* undo predefined layout assumptions */
 			
       :host paper-dropdown-menu { 
         padding: 0px; 
         margin: 0;
-        width:100%; 
         background:transparent 
       }
       
@@ -27,7 +30,6 @@
 
 			:host paper-dropdown-menu::shadow #arrow { 
 				margin: 0px; 
-				/*top:-10px; */
 				min-width: 32px; 
 				width: 32px; 
 				height: 32px; 
@@ -39,18 +41,28 @@
 		  :host paper-dropdown-menu[disabled] {cursor: auto; pointer-events: none;}
 		  
 		  paper-dropdown {  
-		    width:95%;
+		   /* width:95%;*/
+		    box-sizing: border-box;
 		  } 
 		  
 		  ::content [dropitem] { 
-		  max-height:25px; 
-		  font-size:smaller;
-		  background: none;
+			  height:25px !important;
+			  font-size:smaller;
+			  background: none;
 		  }
       
-      :host([focused]) .error-text, :host([focused]) .error-icon {color: #d34336;}
- 			
-			
+      :host([focused]) .error-text, :host([focused]) .error-icon {
+        color: #d34336;
+      }
+	      
+	    paper-dropdown-menu {
+	      box-sizing: border-box;
+	    }
+	
+	    core-menu {
+	      box-sizing: border-box;
+	    }
+
 			.error-text {
 			  font-size: 0.75em;
 			  padding: 0.5em 0;
