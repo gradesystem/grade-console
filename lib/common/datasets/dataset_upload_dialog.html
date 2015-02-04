@@ -73,7 +73,7 @@
 	             invalid="{{ mimeTypeInvalid }}"
 	             >
 		          <template repeat="{{target in acceptedFormats}}">
-		            <paper-item truncate label="{{target.label}}" dropitem="{{target.value}}"></paper-item>
+		            <paper-item truncate dropitem="{{target.value}}">{{target.label}}</paper-item>
 		          </template>
 		        </grade-dropdown-menu>
 	          <grade-uri fascia-subtitle value="HTTP://GRADESYSTEM.IO/ONTO#MIMETYPE"></grade-uri>
@@ -87,7 +87,7 @@
 	                       invalid="{{ endpointInvalid }}"
 	                       >
 	            <template repeat="{{target in endpoints.synchedData}}">
-	              <paper-item truncate label="{{target.model.name}}" dropitem="{{target.model.id}}"></paper-item>
+	              <paper-item truncate dropitem="{{target.model.id}}">{{target.model.name}}</paper-item>
 	            </template>
 	          </grade-dropdown-menu>
 	          <grade-uri fascia-subtitle value="HTTP://GRADESYSTEM.IO/ONTO#ENDPOINT"></grade-uri>
@@ -114,7 +114,7 @@
 		                  invalid="{{ encodingInvalid }}"
 		                  >
 			          <template repeat="{{target in encodings}}">
-			            <paper-item truncate label="{{target}}" dropitem="{{target}}"></paper-item>
+			            <paper-item truncate dropitem="{{target}}">{{target}}</paper-item>
 			          </template>
 			        </grade-dropdown-menu>
 		          <grade-uri fascia-subtitle value="HTTP://GRADESYSTEM.IO/ONTO#ENCODING"></grade-uri>
