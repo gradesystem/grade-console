@@ -16,6 +16,7 @@ import '../lists/lists.dart';
 import '../endpoints/endpoints.dart';
 import '../editables/editables.dart';
 import '../components/codemirror_input.dart';
+import '../components/core_resizable.dart';
 
 part 'queries_model.dart';
 part 'query_details.dart';

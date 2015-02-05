@@ -1,7 +1,7 @@
 part of queries;
 
 @CustomTag("query-list") 
-class QueryList extends PolymerElement with Filters {
+class QueryList extends ResizerPolymerElement with Filters {
   
   @published
   String kfilter = '';
@@ -24,6 +24,8 @@ class QueryList extends PolymerElement with Filters {
     list = $['list'] as CoreList;
     
     onPropertyChange(listitems, #selected, syncSelection);
+    
+    addEventListener("core-resize", (_)=>list.updateSize());
   }
   
   void syncSelection() {

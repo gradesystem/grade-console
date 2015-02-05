@@ -3,7 +3,7 @@
 
 <polymer-element name="grade-subpages" layout horizontal>
   <template>
-		<core-pages flex selected={{subpage}} on-page-selected={{changePage}}>
+		<core-pages id="subpages" flex selected={{subpage}} on-page-selected={{changePage}}>
 		  <content></content>
 		</core-pages>
   </template>

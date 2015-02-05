@@ -1,7 +1,7 @@
 part of stage;
 
 @CustomTag("stage-page") 
-class StagePage extends PolymerElement {
+class StagePage extends ResizerPolymerElement {
 
   StagePage.created() : super.created();
   

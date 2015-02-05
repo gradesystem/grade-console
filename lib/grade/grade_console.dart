@@ -16,8 +16,7 @@ class GradeConsole  extends PolymerElement with Dependencies, Filters {
   @observable int page = 0;
   
   @observable
-  bool creditsDialogOpened = false;
-  
+  bool creditsDialogOpened = false;  
 
   @observable
   bool showLoadingProgress = false;
@@ -35,7 +34,12 @@ class GradeConsole  extends PolymerElement with Dependencies, Filters {
   List<bool> instantiateAreas = toObservable([false,false,false,false]);
   int nextArea = 0;
   
+  CoreResizer resizer;
+  
   GradeConsole.created() : super.created() {
+    resizer = new CoreResizer(this);
+    onPropertyChange(this, #page, notifyResize);
+    
     history.registerRoot(pages[0].tab, (){page=0;});
        for (int i = 0; i<pages.length; i++) history.register(pages[i].tab, (){page=i;});
        
@@ -49,6 +53,23 @@ class GradeConsole  extends PolymerElement with Dependencies, Filters {
           instantiateConsole = true;
         });
       });
+  }
+  
+  void notifyResize() {
+    Element targetContainer = (this.shadowRoot.querySelector("#pagescontainer") as CorePages).items[page];
+    var target = targetContainer.querySelector("[on-area-ready]");
+    print('page changed notifiyng to $target');
+    resizer.notifyResize(target);
+  }
+  
+  void attached() {
+    super.attached();
+    resizer.resizerAttachedHandler();
+  }
+  
+  void detached() {
+    super.detached();
+    resizer.resizerDetachedHandler();
   }
   
   void onAreaReady(event, detail, target) {

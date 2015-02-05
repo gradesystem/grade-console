@@ -1,7 +1,7 @@
 part of queries;
 
 @CustomTag("queries-panel")
-class QueriesPanel extends PolymerElement with Filters, Dependencies {
+class QueriesPanel extends ResizerPolymerElement with Filters, Dependencies {
 
   @published
   String page;

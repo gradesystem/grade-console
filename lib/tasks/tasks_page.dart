@@ -1,7 +1,7 @@
 part of tasks;
 
 @CustomTag("tasks-page") 
-class TasksPage extends PolymerElement {
+class TasksPage extends ResizerPolymerElement {
   
   TasksPage.created() : super.created();
   

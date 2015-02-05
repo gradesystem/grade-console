@@ -18,6 +18,7 @@ import 'common/lists/lists.dart';
 import 'common/queries/queries.dart';
 import 'common/endpoints/endpoints.dart';
 import 'common/editables/editables.dart';
+import 'common/components/core_resizable.dart';
 
 part 'tasks/tasks_page.dart';
 part 'tasks/task_details.dart';

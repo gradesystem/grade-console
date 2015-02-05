@@ -11,6 +11,7 @@ import 'common.dart';
 import 'common/datasets/datasets.dart';
 import 'common/queries/queries.dart';
 import 'common/endpoints/endpoints.dart';
+import 'common/components/core_resizable.dart';
 
 part 'prod/prod_page.dart';
 

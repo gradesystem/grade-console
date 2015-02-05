@@ -7,15 +7,10 @@
 <polymer-element name="list-panel" vertical layout> 
 
  <template>
-     <style>
-      [hide] {
-        visibility: hidden;
-      }
-    </style>
 
   <loading-panel loading={{loading}} message="loading items" flex relative style="/*border: 5px solid yellow*/">
 
-    <div hide?={{empty}} style="/*border: 5px solid brown*/" fit relative>
+    <div hidden?={{empty}} style="/*border: 5px solid brown*/" fit relative>
       <content></content>
     </div>
     	  

@@ -1,7 +1,7 @@
 part of datasets;
 
 @CustomTag("datasets-panel") 
-class DatasetsPanel extends PolymerElement with Filters, Dependencies {
+class DatasetsPanel extends ResizerPolymerElement with Filters, Dependencies {
   
   @observable
   String kfilter='';
@@ -17,8 +17,9 @@ class DatasetsPanel extends PolymerElement with Filters, Dependencies {
   
   DatasetsPageModel model;
   EndpointSubPageModel endpointsModel;
-  
+
   DatasetsPanel.created() : super.created() {
+    addEventListener("core-resize", (_){print('core-resize DatasetsPanel');});
     if (page == null) throw new Exception("Page attribute not specified");
     
     Type pageAnnotation = typeCalled(page);

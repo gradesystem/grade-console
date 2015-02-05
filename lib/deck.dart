@@ -12,6 +12,7 @@ import 'common.dart';
 import 'common/queries/queries.dart';
 import 'common/lists/lists.dart';
 import 'common/editables/editables.dart';
+import 'common/components/core_resizable.dart';
 
 import 'tasks.dart';
 

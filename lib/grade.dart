@@ -6,6 +6,8 @@ import 'package:di/di.dart';
 
 import 'package:polymer/polymer.dart';
 
+import 'package:core_elements/core_pages.dart';
+
 import 'package:logging/logging.dart';
 import 'package:logging/logging.dart' as logging;
 
@@ -20,6 +22,7 @@ import 'stage.dart' as staging;
 import 'tasks.dart' as tasks;
 
 import 'common/endpoints/endpoints.dart';
+import 'common/components/core_resizable.dart';
 
 part 'grade/grade_console.dart';
 
