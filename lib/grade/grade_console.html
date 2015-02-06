@@ -76,6 +76,10 @@
       paper-tab::shadow .tab-content {
         margin: 0;
       }
+      
+      core-pages > :not(.core-selected) {
+        display: none !important;
+      }
 			  
     </style>
     
@@ -91,7 +95,7 @@
       </div>
     </template>
     
-    <template if="{{instantiateConsole}}">     
+    <template if="{{instantiateConsole}}">
     <core-header-panel fit scrollable hidden?={{showLoadingProgress}} fade-in>
       <core-toolbar class="{{pages[page].style }}-scaffold">
         <div flex large>{{pages[page].name | uppercase}}</div>
