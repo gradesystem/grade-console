@@ -79,7 +79,7 @@
       <grade-header-panel flex paneltitle={{paneltitle}} >
         <grade-button menu icon="arrow-back" on-click="{{onBack}}"></grade-button>
 				<grade-button toolbar icon="create" label="edit query" on-click="{{onEdit}}" hidden?="{{ editableQuery.edit}}" tooltip="left"></grade-button>
-				<grade-button toolbar icon="cancel" label="discard changes" on-click="{{onCancel}}" hidden?="{{ !editableQuery.edit}}"></grade-button>
+				<grade-button toolbar icon="cancel" label="discard changes" on-click="{{onCancel}}" hidden?="{{ !editableQuery.edit}}" tooltip="left"></grade-button>
 				<grade-button toolbar icon="save" label="save changes" on-click="{{onSave}}" hidden?="{{ !editableQuery.edit }}" disabled={{!editableQuery.valid}} tooltip="left"></grade-button>
 				     
 				<loading-panel main flex loading="{{loading}}" message="saving the query">      
