@@ -20,12 +20,13 @@
       :host paper-dropdown-menu { 
         padding: 0px; 
         margin: 0;
-        background:transparent 
+        background:transparent;
+        border-color:lightgrey;
       }
       
       /*:host paper-dropdown-menu /deep/ paper-dropdown {  width:95% !important; max-height:200px} */  /* FIX: expands dropw down to fill the screen and not more*/
 			
-			:host paper-dropdown-menu::shadow #label {border-color:lightgrey; max-height:21px ;}
+			:host paper-dropdown-menu::shadow #label { max-height:21px; color: black;}
 			:host paper-dropdown-menu::shadow #label > div { padding: 0px }
 
 			:host paper-dropdown-menu::shadow #arrow { 
