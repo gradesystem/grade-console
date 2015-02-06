@@ -58,7 +58,7 @@
       <grade-header-panel flex paneltitle={{paneltitle}}>
         <grade-button menu icon="arrow-back" on-click="{{onBack}}"></grade-button>
         <grade-button toolbar icon="create" label="edit task" on-click="{{onEdit}}" hidden?="{{  editableTask==null || editableTask.edit}}" tooltip="left"></grade-button>
-        <grade-button toolbar icon="cancel" label="discard changes" on-click="{{onCancel}}" hidden?="{{ !editableTask.edit}}"></grade-button>
+        <grade-button toolbar icon="cancel" label="discard changes" on-click="{{onCancel}}" hidden?="{{ !editableTask.edit}}"  tooltip="left"></grade-button>
         <grade-button toolbar icon="save" label="save changes" on-click="{{onSave}}" hidden?="{{ !editableTask.edit}}" disabled={{!editableTask.valid}}  tooltip="left"></grade-button>
  
         
