@@ -21,6 +21,10 @@ class ResizerPolymerElement extends PolymerElement {
     super.detached();
     resizer.resizerDetachedHandler();
   }
+  
+  addResizeListener(EventListener listener) {
+    resizer.addResizeListener(listener);
+  }
 }
 
 class CoreResizable {
@@ -34,6 +38,12 @@ class CoreResizable {
       if (e.detail == element) print('$element: received event core-resize target: ${e.target} detail: ${e.detail}');
       else print('skipping event core-resize detail: ${e.detail} ');
       });*/
+  }
+  
+  addResizeListener(EventListener listener) {
+    this.element.addEventListener("core-resize", (CustomEvent e){
+      if (e.detail == element) listener(e);
+    });
   }
 
   /**

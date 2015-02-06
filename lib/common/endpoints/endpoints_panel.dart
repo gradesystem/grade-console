@@ -23,11 +23,19 @@ class EndpointsPanel extends ResizerPolymerElement with Filters, Dependencies {
   
   Function dialogCallback;
   
+  PaperTabs propertiesTabs;
+  
   EndpointsPanel.created() : super.created() {
     if (page == null) throw new Exception("Page attribute not specified");
     
     Type pageAnnotation = typeCalled(page);
     model = instanceOf(EndpointSubPageModel, pageAnnotation);
+    
+    addResizeListener((_)=>propertiesTabs.updateBar());
+  }
+  
+  void ready() {
+    propertiesTabs = $["propertiesTabs"] as PaperTabs;
   }
   
   Endpoints get items => model.storage;

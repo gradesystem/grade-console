@@ -5,6 +5,7 @@ import 'dart:collection';
 
 import 'package:polymer/polymer.dart';
 import 'package:core_elements/core_list_dart.dart';
+import 'package:paper_elements/paper_tabs.dart';
 import 'package:event_bus/event_bus.dart';
 import 'package:logging/logging.dart';
 import 'package:di/di.dart';
