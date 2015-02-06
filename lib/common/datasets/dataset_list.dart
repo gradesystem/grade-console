@@ -33,6 +33,9 @@ class DatasetList extends PolymerElement with Filters {
     list = $['list'] as CoreList;
     
     onPropertyChange(listitems, #selected, syncSelection);
+    onPropertyChange(listitems.data, #isEmpty, (){
+      async((_)=>list.updateSize());
+    });
   }
   
   void syncSelection() {

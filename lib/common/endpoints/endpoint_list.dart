@@ -38,6 +38,9 @@ class EndpointList extends PolymerElement with Filters {
     //list.data.changes.listen((_){selecteFirstItem();});
     
     onPropertyChange(listitems, #selected, syncSelection);
+    onPropertyChange(listitems.data, #isEmpty, (){
+      async((_)=>list.updateSize());
+    });
   }
   
   void syncSelection() {
