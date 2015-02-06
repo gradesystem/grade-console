@@ -49,7 +49,7 @@ class DatasetList extends PolymerElement with Filters {
   } 
   
   void selectDataset(event) {
-    listitems.selected = event.detail.data;
+    listitems.selected = list.selection;
   }
  
 }

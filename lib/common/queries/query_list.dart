@@ -57,7 +57,7 @@ class QueryList extends PolymerElement with Filters {
   
   void selectItem(event) {
     //workaround to https://github.com/dart-lang/core-elements/issues/160
-    if (!clickflag) listitems.selected = event.detail.data;
+    if (!clickflag) listitems.selected = list.selection;
     else {
       syncSelection();
       clickflag = false;

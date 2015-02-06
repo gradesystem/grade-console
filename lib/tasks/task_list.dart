@@ -45,7 +45,8 @@ class TaskList extends PolymerElement with Filters {
 
   void syncSelection() {
     if (listitems.selected != null && listitems.selected != list.selection) {
-      if (listitems.selected == null) list.clearSelection(); else {
+      if (listitems.selected == null) list.clearSelection(); 
+      else {
         int index = listitems.data.indexOf(listitems.selected);
         list.selectItem(index);
       }
@@ -54,7 +55,8 @@ class TaskList extends PolymerElement with Filters {
 
   void selectItem(event) {
     //workaround to https://github.com/dart-lang/core-elements/issues/160
-    if (!clickflag) listitems.selected = event.detail.data; else {
+    if (!clickflag) listitems.selected = list.selection; 
+    else {
       syncSelection();
       clickflag = false;
     }
