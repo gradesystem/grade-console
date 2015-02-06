@@ -11,15 +11,18 @@ class GradeSubpages extends ResizerPolymerElement {
   @observable
   int subpage = 0;
   
-  GradeSubpages.created() : super.created();
+  CorePages corePages;
   
-  void ready() {
-    onPropertyChange(this, #subpage, notifyResize);
+  GradeSubpages.created() : super.created() {
+    resizer.filter = (Element e) => e == corePages.selectedItem;
   }
   
-  void notifyResize() {
-    Element target = ($["#subpages"] as CorePages).items[subpage];
-    resizer.notifyResize(target);
+  void ready() {
+    corePages = $["subpages"] as CorePages;
+  }
+  
+  void coreSelect(event, detail, target) {
+    if (detail["isSelected"]) resizer.notifyResize(detail["item"]);
   }
   
   void changePage(Event event, int detail) {

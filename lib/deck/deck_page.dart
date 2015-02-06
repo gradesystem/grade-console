@@ -3,9 +3,22 @@ part of deck;
 @CustomTag("deck-page") 
 class DeckPage extends Polybase {
   
+  CoreResizer resizer;
   
-  DeckPage.created() : super.createWith(DeckPageModel);
+  DeckPage.created() : super.createWith(DeckPageModel) {
+    resizer = new CoreResizer(this);
+  }
 
+  void attached() {
+    super.attached();
+    resizer.resizerAttachedHandler();
+  }
+
+  void detached() {
+    super.detached();
+    resizer.resizerDetachedHandler();
+  }
+  
   void domReady() {
     fire("area-ready");
   }

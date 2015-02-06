@@ -1,7 +1,7 @@
 part of datasets;
 
 @CustomTag("dataset-list") 
-class DatasetList extends ResizerPolymerElement with Filters {
+class DatasetList extends PolymerElement with Filters {
   
   @published
   String kfilter = '';
@@ -13,10 +13,20 @@ class DatasetList extends ResizerPolymerElement with Filters {
   
   FilterFunction itemFilter = (Dataset item, String term) => item.title != null && item.title.toLowerCase().contains(term.toLowerCase());
   
+  CoreResizable resizable;
+  
   DatasetList.created() : super.created() {
-    addEventListener("core-resize", (_){print('core-resize DatasetList');});
-    
-    addEventListener("core-resize", (_)=>list.updateSize());
+    resizable = new CoreResizable(this);
+  }
+  
+  void attached() {
+    super.attached();
+    resizable.resizableAttachedHandler((_)=>list.updateSize());
+  }
+  
+  void detached() {
+    super.detached();
+    resizable.resizableDetachedHandler();
   }
   
   void ready() {

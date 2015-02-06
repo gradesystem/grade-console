@@ -1,7 +1,7 @@
 part of deck;
 
 @CustomTag("running-tasks-panel")
-class RunningTasksPanel extends PolymerElement with Filters, Dependencies {
+class RunningTasksPanel extends ResizerPolymerElement with Filters, Dependencies {
 
   @observable
   String kfilter = '';

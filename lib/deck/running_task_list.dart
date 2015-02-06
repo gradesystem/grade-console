@@ -18,25 +18,39 @@ class RunningTaskList extends PolymerElement with Filters {
                                     (item.execution.task.label.toLowerCase().contains(term.toLowerCase())
                                      || 
                                      item.execution.status.toLowerCase().contains(term.toLowerCase()));
+
+  CoreResizable resizable;
   
-  RunningTaskList.created() : super.created();
+  RunningTaskList.created() : super.created() {
+    resizable = new CoreResizable(this);
+  }
+  
+  void attached() {
+    super.attached();
+    resizable.resizableAttachedHandler((_)=>list.updateSize());
+  }
+   
+  void detached() {
+    super.detached();
+    resizable.resizableDetachedHandler();
+  }
   
   void ready() {
     list = $['list'] as CoreList;
     list.data.changes.listen((_){selecteFirstItem();});
     
-     onPropertyChange(listitems, #selected, syncSelection);
-   }
+    onPropertyChange(listitems, #selected, syncSelection);
+  }
    
-   void syncSelection() {
-     if (listitems.selected!= null && listitems.selected != list.selection) {
-       if (listitems.selected == null) list.clearSelection();
-       else {
-         int index = listitems.data.indexOf(listitems.selected);
-         list.selectItem(index);
-       }
-     }
-   }  
+  void syncSelection() {
+    if (listitems.selected!= null && listitems.selected != list.selection) {
+      if (listitems.selected == null) list.clearSelection();
+      else {
+        int index = listitems.data.indexOf(listitems.selected);
+        list.selectItem(index);
+      }
+    }
+  }  
    
   void selecteFirstItem() {
     if (list.data != null && list.data.isNotEmpty && !list.data.contains(listitems.selected)) {

@@ -3,9 +3,7 @@ part of prod;
 @CustomTag("prod-page") 
 class ProdPage extends ResizerPolymerElement {
   
-  ProdPage.created() : super.created(){
-    addEventListener("core-resize", (_){print('core-resize ProdPage');});
-  }
+  ProdPage.created() : super.created();
 
   void domReady() {
     fire("area-ready");

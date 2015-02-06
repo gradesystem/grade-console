@@ -29,7 +29,12 @@ class CoreResizable {
 
   StreamSubscription _resizeSubscription;
 
-  CoreResizable(this.element);
+  CoreResizable(this.element) {
+    /*this.element.addEventListener("core-resize", (CustomEvent e){
+      if (e.detail == element) print('$element: received event core-resize target: ${e.target} detail: ${e.detail}');
+      else print('skipping event core-resize detail: ${e.detail} ');
+      });*/
+  }
 
   /**
    * User must call from `attached` callback
@@ -69,7 +74,7 @@ class CoreResizable {
   // preventDefault was called, indicating that children should not
   // be resized
   _notifyResizeSelf(_) {
-    return element.fire('core-resize', onNode: element, canBubble: false).defaultPrevented;
+    return element.fire('core-resize', detail: element, onNode: element, canBubble: false).defaultPrevented;
   }
 }
 
@@ -78,8 +83,9 @@ class CoreResizer extends CoreResizable {
   var _boundResizeRequested;
   var _resizerListener;
   List resizeRequestors = [];
+  var filter;
 
-  CoreResizer(PolymerElement element) : super(element);
+  CoreResizer(PolymerElement element, [this.filter]) : super(element);
 
   /**
     * User must call from `attached` callback
@@ -109,7 +115,7 @@ class CoreResizer extends CoreResizable {
     * @method notifyResize
     */
   notifyResize([target]) {
-    //print('notifyResize target: $target');
+    //print('$element: notifyResize target: $target resizeRequestors: $resizeRequestorsTarget');
 
     // Notify self
     if (!this._notifyResizeSelf(null)) {
@@ -118,17 +124,20 @@ class CoreResizer extends CoreResizable {
       if (target == element) target = null;
 
       // Notify requestors if default was not prevented
-      resizeRequestors.forEach((requestor) {
+      resizeRequestors
+        .where((requestor)=>filter==null || filter(requestor["target"]))
+        .forEach((requestor) {
 
-        if ((target != null && target == requestor["target"]) || target == null) {
-
-          requestor["callback"](requestor["target"]);
-        }
-
+          if ((target != null && target == requestor["target"]) || target == null) {
+            //print('$element: notifying requestor ${requestor["target"]}');
+            requestor["callback"](requestor["target"]);
+          }
 
       });
-    } else print('not propagating');
+    }
   }
+  
+  List<String> get resizeRequestorsTarget => resizeRequestors.map((requestor)=> requestor["target"]).toList();
 
 
   /**
@@ -148,7 +157,7 @@ class CoreResizer extends CoreResizable {
       return;
     }
     
-    print('$element registering resizable $target ${e.detail}');
+    //print('$element registering resizable $target ${e.detail}');
 
     this.resizeRequestors.add({
       "target": target,

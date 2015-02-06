@@ -19,7 +19,6 @@ class DatasetsPanel extends ResizerPolymerElement with Filters, Dependencies {
   EndpointSubPageModel endpointsModel;
 
   DatasetsPanel.created() : super.created() {
-    addEventListener("core-resize", (_){print('core-resize DatasetsPanel');});
     if (page == null) throw new Exception("Page attribute not specified");
     
     Type pageAnnotation = typeCalled(page);

@@ -1,7 +1,7 @@
 part of endpoints;
 
 @CustomTag("endpoints-panel") 
-class EndpointsPanel extends PolymerElement with Filters, Dependencies {
+class EndpointsPanel extends ResizerPolymerElement with Filters, Dependencies {
   
   @published
   String page;

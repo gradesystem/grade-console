@@ -18,8 +18,22 @@ class TaskList extends PolymerElement with Filters {
           Filters.containsIgnoreCase(item.model.get(Task.K.transform), term) || 
           Filters.containsIgnoreCase(item.model.get(Task.K.diff), term);
 
-  TaskList.created() : super.created();
+  CoreResizable resizable;
 
+  TaskList.created() : super.created() {
+    resizable = new CoreResizable(this);
+  }
+  
+  void attached() {
+    super.attached();
+    resizable.resizableAttachedHandler((_)=>list.updateSize());
+  }
+   
+  void detached() {
+    super.detached();
+    resizable.resizableDetachedHandler();
+  }
+  
   void ready() {
     list = $['list'] as CoreList;
 

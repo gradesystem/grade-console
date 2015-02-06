@@ -1,7 +1,7 @@
 part of tasks;
 
 @CustomTag("tasks-panel")
-class TasksPanel extends PolymerElement with Filters, Dependencies {
+class TasksPanel extends ResizerPolymerElement with Filters, Dependencies {
 
   @observable
   int area = 0;

@@ -13,6 +13,7 @@ import '../../common.dart';
 
 import '../lists/lists.dart';
 import '../editables/editables.dart';
+import '../components/core_resizable.dart';
 
 part 'endpoints_model.dart';
 part 'endpoint_details.dart';

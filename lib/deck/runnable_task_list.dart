@@ -17,8 +17,22 @@ class RunnableTaskList extends PolymerElement with Filters {
                                 =>  !item.newModel && !item.edit && 
                                     item.model.label != null && 
                                     item.model.label.toLowerCase().contains(term.toLowerCase());
+
+  CoreResizable resizable;
   
-  RunnableTaskList.created() : super.created();
+  RunnableTaskList.created() : super.created() {
+    resizable = new CoreResizable(this);
+  }
+  
+  void attached() {
+    super.attached();
+    resizable.resizableAttachedHandler((_)=>list.updateSize());
+  }
+   
+  void detached() {
+    super.detached();
+    resizable.resizableDetachedHandler();
+  }
   
   void ready() {
     list = $['list'] as CoreList;

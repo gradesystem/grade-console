@@ -1,7 +1,7 @@
 part of queries;
 
 @CustomTag("query-list") 
-class QueryList extends ResizerPolymerElement with Filters {
+class QueryList extends PolymerElement with Filters {
   
   @published
   String kfilter = '';
@@ -18,14 +18,26 @@ class QueryList extends ResizerPolymerElement with Filters {
                     || Filters.containsIgnoreCase(item.model.get(Query.K.expression), term)
                     || Filters.containsIgnoreCase(item.model.status, term);
   
-  QueryList.created() : super.created();
+  CoreResizable resizable;
+  
+  QueryList.created() : super.created() {
+    resizable = new CoreResizable(this);
+  }
+  
+  void attached() {
+    super.attached();
+    resizable.resizableAttachedHandler((_)=>list.updateSize());
+  }
+   
+  void detached() {
+    super.detached();
+    resizable.resizableDetachedHandler();
+  }
   
   void ready() {
     list = $['list'] as CoreList;
     
     onPropertyChange(listitems, #selected, syncSelection);
-    
-    addEventListener("core-resize", (_)=>list.updateSize());
   }
   
   void syncSelection() {
