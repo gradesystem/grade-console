@@ -9,16 +9,25 @@ class GraphKeys {
   final String size = "http://gradesystem.io/onto#size";
 }
 
-class Graph extends GradeEntity {
+class Graph extends GradeEntity with Observable {
   
   static GraphKeys K = new GraphKeys();
   
-  Graph(String uri, String label) : super({K.uri:uri, K.label:label});
+  Graph(String uri, String label) : this.fromBean({K.uri:uri, K.label:label});
   
-  Graph.fromBean(Map bean) : super(bean);
+  Graph.fromBean(Map bean) : super(bean) {
+    onBeanChange([K.label], () => notifyPropertyChange(#label, null, label));
+  }
   
   String get uri => get(K.uri);
+  
+  @observable
   String get label => get(K.label);
+  set label(String value)  {
+    set(K.label, value);
+    notifyPropertyChange(#label, null, value);
+  }
+  
   String get size => get(K.size);
   
   String toString() => "Graph label: $label uri: $uri size: $size";
@@ -77,7 +86,7 @@ class Endpoint extends EditableGradeEntity with Filters {
   }
   
   @observable
-  get graphs => _graphs;
+  List<Graph> get graphs => _graphs;
   set graphs(List<Graph> newgraphs) {
     _graphs.clear();
     if (newgraphs!=null) _graphs.addAll(newgraphs);
@@ -190,6 +199,34 @@ class EndpointSubPageModel extends SubPageEditableModel<Endpoint> {
       editableModel.loadingGraphs = false;
     });
   }
+  
+  void editEndpointGraph(EditableEndpoint editableModel, Graph oldGraph, Graph newGraph) {
+
+      Timer timer = new Timer(new Duration(milliseconds: 200), () {
+        editableModel.loadingGraphs = true;
+      });
+
+      endpointService.addEndpointGraph(editableModel.model, newGraph).then((bool result) {
+        oldGraph.label = newGraph.label;
+      }).catchError((e) => onError(e, () => editEndpointGraph(editableModel, oldGraph, newGraph))).whenComplete(() {
+        timer.cancel();
+        editableModel.loadingGraphs = false;
+      });
+    }
+  
+  void moveEndpointGraph(EditableEndpoint editableModel, Graph oldGraph, Graph newGraph, EditableEndpoint oldEndpoint, String newEndpointId) {
+
+      /*Timer timer = new Timer(new Duration(milliseconds: 200), () {
+        editableModel.loadingGraphs = true;
+      });
+
+      endpointService.addEndpointGraph(editableModel.model, newGraph).then((bool result) {
+        oldGraph.label = newGraph.label;
+      }).catchError((e) => onError(e, () => editEndpointGraph(editableModel, oldGraph, newGraph))).whenComplete(() {
+        timer.cancel();
+        editableModel.loadingGraphs = false;
+      });*/
+    }
 }
 
 class EditableEndpoint extends EditableModel<Endpoint> {

@@ -1,0 +1,84 @@
+<link rel="import" href="../../../../packages/polymer/polymer.html">
+
+<link rel="import" href="../../../../packages/paper_elements/paper_item.html">
+<link rel="import" href="../../../../packages/paper_elements/paper_input.html">
+<link rel="import" href="../../../../packages/paper_elements/paper_button.html">
+
+<link rel="import" href="../components/grade_dialog.html">
+<link rel="import" href="../components/grade_dropdown_menu.html">
+<link rel="import" href="../components/grade_input.html">
+<link rel="import" href="../components/grade_item.html">
+<link rel="import" href="../components/grade_uri.html">
+<link rel="import" href="../components/grade_fascia.html">
+<link rel="import" href="../components/grade_file_input.html">
+<link rel="import" href="../components/grade_error.html">
+<link rel="import" href="../components/infinite_progress.html">
+
+<link rel="import" href="endpoints.html">
+         
+<polymer-element name="graph-dialog"> 
+  <template> 
+  
+    <style>
+			[item] {
+			 margin-bottom:15px;
+			}
+			
+			[hide] {
+			 display: none;
+			}
+    </style>
+    <grade-dialog opened={{opened}} heading="{{dialogTitle}}" autoCloseDisabled=true>
+      <div main vertical layout style="width: 320px; padding-bottom: 10px">
+
+        <grade-fascia item>
+ 
+          <grade-input fascia-title
+                          label="uri" 
+                          required
+                          disabled="{{!canEditUri}}"
+                          invalid="{{ uriInvalid }}"
+                          inputValue="{{ uri }}"
+                          type="URL">
+          </grade-input>
+
+            <grade-uri fascia-subtitle value={{K.uri}}></grade-uri>
+     
+         </grade-fascia>
+	       
+         <grade-fascia item>
+          
+           <grade-input fascia-title
+                        label="label" 
+                        required
+                        invalid="{{ labelInvalid }}"
+                        inputValue="{{ label }}"
+                        >
+           </grade-input>
+             
+           <grade-uri fascia-subtitle value={{K.label}}></grade-uri>
+               
+         </grade-fascia>
+	        
+	        <grade-fascia item hidden?={{!requireEndpoint}}>
+            <grade-dropdown-menu fascia-title
+                         selected="{{ endpoint }}"
+                         label="endpoint" 
+                         required
+                         invalid="{{ endpointInvalid }}"
+                         >
+              <template repeat="{{target in endpoints.synchedData}}">
+                <paper-item truncate dropitem="{{target.model.id}}">{{target.model.name}}</paper-item>
+              </template>
+            </grade-dropdown-menu>
+            <grade-uri fascia-subtitle value="HTTP://GRADESYSTEM.IO/ONTO#ENDPOINT"></grade-uri>
+          </grade-fascia>
+	      </div>
+
+      
+      <paper-button fg dismissive option>CANCEL</paper-button>
+      <paper-button fg affirmative option autofocus on-click={{save}} disabled={{invalid}}>Save</paper-button>
+    </grade-dialog>
+              
+  </template> 
+</polymer-element>

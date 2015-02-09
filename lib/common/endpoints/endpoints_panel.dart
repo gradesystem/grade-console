@@ -86,12 +86,26 @@ class EndpointsPanel extends ResizerPolymerElement with Filters, Dependencies {
   }
   
   void onRemoveGraph(event, detail, target) {
-    dialogCallback = (){model.removeEndpointGraph(items.selected, detail);};
-    removedDialogHeader = "Remove ${detail.label}";
-    removeDialogOpened = true;
+    Graph graph = detail as Graph;
+    if (graph.size != null && int.parse(graph.size)>0) {
+      dialogCallback = (){model.removeEndpointGraph(items.selected, graph);};
+      removedDialogHeader = "Remove ${graph.label}";
+      removeDialogOpened = true;
+    } else {
+      model.removeEndpointGraph(items.selected, graph);
+    }
   }
   
-  void onAddGraph(event, detail, target) {
+  void onAddedGraph(event, detail, target) {
     model.addEndpointGraph(items.selected, detail);
   }
+  
+  void onEditedGraph(event, detail, target) {
+    model.editEndpointGraph(items.selected, detail["old-graph"], detail["new-graph"]);
+  }
+  
+  void onMovedGraph(event, detail, target) {
+    model.moveEndpointGraph(items.selected, detail["old-graph"], detail["new-graph"], detail["old-endpoint"], detail["new-endpoint-id"]);
+  }
+
 }

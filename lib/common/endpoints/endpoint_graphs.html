@@ -10,6 +10,7 @@
 <link rel="import" href="../components/grade_button.html">
 
 <link rel="import" href="graph_details_summary.html">
+<link rel="import" href="graph_dialog.html">
 
 <link rel="import" href="endpoints.html">
 
@@ -54,11 +55,21 @@
 					               label="reload graphs" 
 					               on-click={{refreshGraphs}} >
 					  </grade-button>
+					  
+					  <!-- add -->
+					   <grade-button
+                  sidebutton
+                  action 
+                  icon="add" 
+                  on-click={{addGraph}} 
+                  tooltip=left
+                  label="create new graph">
+            </grade-button>
 					
 					</div>
              
 					<!-- graph list -->
-					<loading-panel list wired rounded relative loading="{{item.loadingGraphs}}" message="loading graphs">
+					<loading-panel list wired rounded relative flex loading="{{item.loadingGraphs}}" message="loading graphs">
 						<div fit style="overflow-y: auto;" spaced>
 						
 							<core-selector selectedAttribute="fg">
@@ -66,7 +77,7 @@
 								<template repeat="{{graph in item.model.graphs | filter(kfilter, itemFilter) | sort(graphSorter)}}">
 									
 					        <!-- entry and remove button -->
-					        <graph-details-summary pointer graph={{graph}}></graph-details-summary>
+					        <graph-details-summary pointer graph={{graph}} on-edit-graph={{editGraph}} on-move-graph={{moveGraph}}></graph-details-summary>
 									  
 								</template>
 							
@@ -75,57 +86,12 @@
 						</div>
 					
 					</loading-panel>
-          
-	        <!-- new graph -->
-	        <div horizontal layout style="margin-top:30px;">
-			      <div vertical layout flex>
-			      
-			        <grade-item>
-			          <grade-fascia truncate flex>
-			   
-									<grade-input fascia-title
-									                label="uri" 
-									                invalid="{{ newUrlInvalid }}"
-									                inputValue="{{ newUrl }}"
-									                type="URL">
-									</grade-input>
-			
-		                <grade-uri fascia-subtitle value={{K.uri}}></grade-uri>
-			       
-		              </grade-fascia>
-		            </grade-item>
-		         
-		          <grade-item>
-								<grade-fascia truncate flex>
-								 
-								  <grade-input fascia-title
-								               label="label" 
-								               invalid="{{ newLabelInvalid }}"
-								               inputValue="{{ newLabel }}"
-								               >
-								  </grade-input>
-								    
-								  <grade-uri fascia-subtitle value={{K.label}}></grade-uri>
-								      
-								</grade-fascia>
-		          </grade-item>
-	          </div>
-              
-		        <grade-button
-		              sidebutton
-		              action 
-		              disabled?="{{newUrlInvalid || newUrl.isEmpty || newLabelInvalid || newLabel.isEmpty}}"
-		              icon="add" 
-		              on-click={{addGraph}} 
-		              tooltip=left
-		              label="create new graph">
-		        </grade-button>
-			            
-		      </div>
-	          
+
         </div>  
       </loading-panel>
     </template>
+    
+    <graph-dialog id="graphDialog" endpoints={{items}}></graph-dialog>
 		
   </template> 
 </polymer-element>

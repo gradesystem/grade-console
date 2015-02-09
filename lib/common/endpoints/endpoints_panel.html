@@ -54,7 +54,14 @@
 					
 					<core-animated-pages main flex selected="{{area}}">
             <endpoint-details items={{items}} spaced></endpoint-details> 
-            <endpoint-graphs items={{items}} on-refresh-graphs={{onRefreshGraphs}} on-remove-graph={{onRemoveGraph}} on-add-graph={{onAddGraph}} spaced></endpoint-graphs> 
+            <endpoint-graphs items={{items}} 
+            on-refresh-graphs={{onRefreshGraphs}} 
+            on-remove-graph={{onRemoveGraph}} 
+            on-added-graph={{onAddedGraph}} 
+            on-edited-graph={{onEditedGraph}}
+            on-moved-graph={{onMovedGraph}}
+            spaced>
+            </endpoint-graphs> 
           </core-animated-pages>
 	      </grade-header-panel>
 	

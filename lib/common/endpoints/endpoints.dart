@@ -25,6 +25,7 @@ part 'endpoint_graphs.dart';
 part 'endpoint_utils.dart';
 part 'graph_details_summary.dart';
 part 'graph_selector.dart';
+part 'graph_dialog.dart';
 
 part 'endpoints_service.dart';
 

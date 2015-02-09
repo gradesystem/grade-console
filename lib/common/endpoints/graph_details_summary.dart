@@ -8,8 +8,18 @@ class GraphDetailsSummary extends PolymerElement with Filters {
   
   GraphDetailsSummary.created() : super.created();
   
+  void editGraph() {
+    fire("edit-graph", detail:graph);
+  }
+
+  void moveGraph() {
+    fire("move-graph", detail:graph);
+  }
+  
   void removeGraph() {
     fire("remove-graph", detail:graph);
   }
+  
+
  
 }

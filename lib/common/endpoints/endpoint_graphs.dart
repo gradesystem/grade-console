@@ -23,19 +23,13 @@ class EndpointGraphs extends PolymerElement with Filters {
   @ComputedProperty('items.selected')
   EditableEndpoint get item => items==null?null:items.selected;
   
-  @observable
-  bool newUrlInvalid = false;
-  
-  @observable
-  String newUrl = "";
-  
-  @observable
-  bool newLabelInvalid = false;
-  
-  @observable
-  String newLabel = "";
+  GraphDialog graphDialog;
   
   EndpointGraphs.created() : super.created();
+  
+  void ready() {
+    graphDialog = $["graphDialog"];
+  }
   
   @ComputedProperty("item.synching")
   bool get loading => item!=null && item.synching;
@@ -45,9 +39,15 @@ class EndpointGraphs extends PolymerElement with Filters {
   }
   
   void addGraph() {
-    fire("add-graph", detail:new Graph(newUrl.trim(), newLabel));
-    newUrl = "";
-    newLabel = "";
+    graphDialog.openAdd();
+  }
+  
+  void editGraph(event,detail,target) {
+    graphDialog.openEdit(detail);
+  }
+  
+  void moveGraph(event,detail,target) {
+    graphDialog.openMove(detail, item);
   }
   
   void removeGraph(event, detail, target) {
