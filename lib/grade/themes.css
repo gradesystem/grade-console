@@ -113,6 +113,9 @@
 :host /deep/ paper-item /deep/ .button-content {
   padding: 0 !important;
 }
+:host /deep/ [grade-darker-grey] {
+  color: #c3c3c3;
+}
 .home-scaffold {
   background: #26699a;
   color: #fff;

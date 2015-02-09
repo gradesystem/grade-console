@@ -11,11 +11,14 @@
   <template>
     <style>
       :host [starts-hidden] { display:none }
+      [triples] {
+        vertical-align: middle;
+      }
     </style>
     
       <grade-item flex>
         <grade-fascia flex truncate>
-          <div fascia-title>{{ graph.label !=null?graph.label:suffix(graph.uri) }} <span small>({{graph.size}})</span></div>
+          <div fascia-title>{{ graph.label !=null?graph.label:suffix(graph.uri) }} <span small grade-darker-grey triples>({{graph.size}}T)</span></div>
           <grade-uri fascia-subtitle smaller flex value={{graph.uri}}></grade-uri>
         </grade-fascia>
         
