@@ -16,7 +16,7 @@ class DatasetUploadDialog extends PolymerElement with Filters {
   @observable
   List<String> encodings = [DEFAULT_ENCODING, "UTF-16"];
 
-  @published
+  @observable
   bool opened = false;
   
   @published
@@ -84,13 +84,19 @@ class DatasetUploadDialog extends PolymerElement with Filters {
   ErrorResponse error = null;
 
   DatasetUploadDialog.created() : super.created();
+  
+  void open() {
+    reset();
+    opened = true;
+  }
+  
+  void openWithFile(File file) {
+    reset();
+    opened = true;
+    this.file = file; 
+  }
 
   void ready() {
-    
-    onPropertyChange(this, #opened, (){
-      if (opened) reset();      
-    });
-    
     onPropertyChange(this, #file, _onFileSelected);
   }
   

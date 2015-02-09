@@ -10,6 +10,13 @@
 <polymer-element name="dataset-list" vertical layout> 
 
  <template>
+  <style>
+       .hover {
+        background-color: #def;
+        border-color: #777;
+        color: #777;
+      }
+  </style>
 
   <list-panel loading="{{listitems.loading}}" empty={{listitems.data.isEmpty}} flex>
 

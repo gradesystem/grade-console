@@ -9,6 +9,9 @@ class DatasetList extends PolymerElement with Filters {
   @published
   ListItems listitems;
   
+  @published
+  bool ddEnabled = false;
+  
   CoreList list;
   
   FilterFunction itemFilter = (Dataset item, String term) => item.title != null && item.title.toLowerCase().contains(term.toLowerCase());
@@ -36,6 +39,27 @@ class DatasetList extends PolymerElement with Filters {
     onPropertyChange(listitems.data, #isEmpty, (){
       async((_)=>list.updateSize());
     });
+    
+    if (ddEnabled) {
+      onDragOver.listen(_onDragOver);
+      onDragEnter.listen((e) => classes.add('hover'));
+      onDragLeave.listen((e) => classes.remove('hover'));
+      onDrop.listen(_onDrop);
+    }
+  }
+  
+  void _onDragOver(MouseEvent event) {
+    event.stopPropagation();
+    event.preventDefault();
+    event.dataTransfer.dropEffect = 'copy';
+  }
+
+  void _onDrop(MouseEvent event) {
+    event.stopPropagation();
+    event.preventDefault();
+    classes.remove('hover');
+    List<File> files = event.dataTransfer.files;
+    if (files != null && files.isNotEmpty) fire("file-drop", detail:files.first);
   }
   
   void syncSelection() {

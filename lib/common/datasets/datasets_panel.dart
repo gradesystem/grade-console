@@ -12,11 +12,10 @@ class DatasetsPanel extends ResizerPolymerElement with Filters, Dependencies {
   @published
   bool uploadEnabled = false;
   
-  @observable
-  bool uploadDialogOpened = false;
-  
   DatasetsPageModel model;
   EndpointSubPageModel endpointsModel;
+  
+  DatasetUploadDialog uploadDialog;
 
   DatasetsPanel.created() : super.created() {
     if (page == null) throw new Exception("Page attribute not specified");
@@ -24,6 +23,10 @@ class DatasetsPanel extends ResizerPolymerElement with Filters, Dependencies {
     Type pageAnnotation = typeCalled(page);
     model = instanceOf(DatasetsPageModel, pageAnnotation);
     endpointsModel = instanceOf(EndpointSubPageModel, pageAnnotation);
+  }
+  
+  void ready() {
+    uploadDialog = $["uploadDialog"];
   }
   
   Datasets get datasets => model.storage;
@@ -34,7 +37,11 @@ class DatasetsPanel extends ResizerPolymerElement with Filters, Dependencies {
   }
   
   void upload() {
-    uploadDialogOpened = true;
+    uploadDialog.open();
+  }
+  
+  void onFileDrop(event, detail, target) {
+    uploadDialog.openWithFile(detail);
   }
  
 }
