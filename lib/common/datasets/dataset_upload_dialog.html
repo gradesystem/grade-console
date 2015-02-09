@@ -39,7 +39,7 @@
         
 	        <grade-fascia item>
 	          <grade-input fascia-title
-	           label="{{ 'name' }} ?" 
+	           label="name ?" 
 	           required
 	           validators={{[validate_name]}}
 	           invalid="{{ nameInvalid }}"
@@ -58,20 +58,17 @@
 	        
 	        <grade-fascia item>
 	          <grade-input fascia-title
-	           label="{{ 'author' }} ?" 
-	           required
+	           label="uploaded by ?" 
 	           invalid="{{ authorInvalid }}"
 	           inputValue="{{ author  }}"
 	           ></grade-input>
-	          <grade-uri fascia-subtitle value="HTTP://GRADE.IO/PEOPLE/#AUTHOR"></grade-uri>
+	          <grade-uri fascia-subtitle value="HTTP://GRADE.IO/PEOPLE/#UPLOADEDBY"></grade-uri>
 	        </grade-fascia>
-	
 
-	        
 	        <grade-fascia item>
 	          <grade-dropdown-menu fascia-title 
 	             selected="{{ mimeType }}"
-	             label="{{ 'mime type' }}" 
+	             label="type" 
 	             required
 	             invalid="{{ mimeTypeInvalid }}"
 	             >
@@ -79,13 +76,13 @@
 		            <paper-item truncate dropitem="{{target.value}}">{{target.label}}</paper-item>
 		          </template>
 		        </grade-dropdown-menu>
-	          <grade-uri fascia-subtitle value="HTTP://GRADESYSTEM.IO/ONTO#MIMETYPE"></grade-uri>
+	          <grade-uri fascia-subtitle value="HTTP://GRADESYSTEM.IO/ONTO#TYPE"></grade-uri>
 	        </grade-fascia>
 	
 	        <grade-fascia item>
 	          <grade-dropdown-menu fascia-title
 	                       selected="{{ endpoint }}"
-	                       label="{{ 'endpoint' }}" 
+	                       label="endpoint" 
 	                       required
 	                       invalid="{{ endpointInvalid }}"
 	                       >
@@ -99,7 +96,7 @@
 	        <div vertical layout hidden?={{!isTypeCSV}}>
 	          <grade-fascia item>
 		          <grade-input fascia-title 
-		             label="{{ 'delimiter' }} ?" 
+		             label="delimiter ?" 
 		             required
 		             invalid="{{ delimiterInvalid }}"
 		             inputValue="{{ delimiter  }}"
@@ -112,7 +109,7 @@
 		        <grade-fascia item>
 		          <grade-dropdown-menu fascia-title 
 		                  selected="{{ encoding }}"
-		                  label="{{ 'encoding' }}" 
+		                  label="encoding" 
 		                  required
 		                  invalid="{{ encodingInvalid }}"
 		                  >
@@ -125,7 +122,7 @@
 		        
 		        <grade-fascia item>
 		          <grade-input fascia-title 
-			             label="{{ 'quote' }} ?" 
+			             label="quote ?" 
 			             required
 			             invalid="{{ quoteInvalid }}"
 			             inputValue="{{ quote  }}"
