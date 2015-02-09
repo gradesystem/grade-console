@@ -9,8 +9,11 @@ class ResultBreadcrumb extends PolymerElement {
   
   ResultBreadcrumb.created() : super.created();
   
-  void onUriClick(event,detail,target) {
-    String index = target.attributes['uri-index'];
-    fire("go-uri", detail:index);
+  void onCrumbClick(event,detail,target) {
+    String index = target.attributes['crumb-index'];
+    fire("go-crumb", detail:index);
   }
+  
+  String label(Crumb crumb) => crumb is DescribeCrumb?crumb.uri:"path:";
+  
 }

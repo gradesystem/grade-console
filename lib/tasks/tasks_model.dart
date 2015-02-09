@@ -255,7 +255,7 @@ class TasksModel extends SubPageEditableModel<Task> {
   
   void retrieveResult(RunningTask runningTask, Future<ResulTable> retriever(RunningTask, [uri]), Result result, [Crumb crumb]) {
     result.loading = true;
-    retriever(runningTask.execution, crumb!=null?crumb.uri:null)
+    retriever(runningTask.execution, crumb is DescribeCrumb?crumb.uri:null)
     .then((ResulTable resultQuery){
       result.value = resultQuery;
     }).catchError((e) => onError(e, null)).whenComplete(() {

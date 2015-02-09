@@ -77,12 +77,6 @@ class QueryPlayground extends PolymerElement with Filters {
   }
   
   void onRun() {
-    editableQuery.lastResult.history.clear();
-    fire("run", detail:editableQuery);
-    resultTab = 0;
-  }
-  
-  void onRunStart() {
     fire("run", detail:editableQuery);
     resultTab = 0;
   }
@@ -101,7 +95,7 @@ class QueryPlayground extends PolymerElement with Filters {
   
   void onEatCrumb(event, detail, target) {
     event.stopImmediatePropagation();
-    fire("describe-result", detail:{"crumb":detail, "query":editableQuery});
+    fire("eat-crumb", detail:{"crumb":detail, "query":editableQuery});
   }
   
   void showErrorDetails() {

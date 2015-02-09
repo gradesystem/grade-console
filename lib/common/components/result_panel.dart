@@ -48,10 +48,9 @@ class ResultPanel extends PolymerElement {
     fire("eat-crumb", detail:crumb);
   }
   
-  void onResultGoUri(event, detail, target) {
+  void onResultGoCrumb(event, detail, target) {
     int index = int.parse(detail);
     Crumb crumb = result.history.goIndex(index);
-    if (crumb!=null) fire("eat-crumb", detail:crumb);
-    else fire("run-query");
+    fire("eat-crumb", detail:crumb);
   }
 }

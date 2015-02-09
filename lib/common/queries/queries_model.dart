@@ -144,22 +144,17 @@ class QuerySubPageModel extends SubPageEditableModel<Query> {
 
   QueryService get queryService => service;
 
-  void runQueryByName(EditableQuery editableQuery, [RawFormat format = RawFormat.JSON]) 
-   => _run(editableQuery, editableQuery.model, editableQuery.parametersValues, queryService.runQueryByName, format);
-
-  void runQuery(EditableQuery editableQuery, [RawFormat format = RawFormat.JSON])
-    => _run(editableQuery, editableQuery.model, editableQuery.parametersValues, queryService.runQuery, format);
-
-  void describeResult(EditableQuery editableQuery, Crumb crumb, [RawFormat format = RawFormat.JSON]) {
-    
+  void runQuery(EditableQuery editableQuery, [RawFormat format = RawFormat.JSON]) {
+    editableQuery.lastResult.history.clear(editableQuery.model);
+    _run(editableQuery, editableQuery.model, editableQuery.parametersValues, queryService.runQuery, format);
+  }
+  
+  void eatCrumb(EditableQuery editableQuery, Crumb crumb, [RawFormat format = RawFormat.JSON]) {
     Query resultQuery = editableQuery.model.clone();
-    String expression =  _generateDescribeExpression(crumb);
-    print('expression $expression');
-    resultQuery.set(Query.K.expression, expression);
-    
-    resultQuery.set(Query.K.graph, []);
-    
-    _run(editableQuery, resultQuery, {}, queryService.runQuery, format);
+    resultQuery.set(Query.K.expression, crumb.expression);
+    resultQuery.set(Query.K.graph, crumb.graphs);
+       
+    _run(editableQuery, resultQuery, editableQuery.lastResult.lastParameters, queryService.runQuery, format);
   }
   
   void loadRaw(EditableQuery editableQuery, RawFormat format) {
@@ -185,12 +180,6 @@ class QuerySubPageModel extends SubPageEditableModel<Query> {
     runner(query, parameters)
       .then((String result) => editableQuery.queryResult(format, result))
       .catchError((e) => editableQuery.queryFailed(e));
-  }
-
-  String _generateDescribeExpression(Crumb crumb) {
-    if (crumb.type == DescribeType.DESCRIBE_BY_SUBJECT) return "select ?graph ?subject ?predicate ?object where { graph ?graph {?subject ?predicate ?object} . filter (?subject = <${crumb.uri}>)}";
-    if (crumb.type == DescribeType.DESCRIBE_BY_OBJECT) return "select ?graph ?subject ?predicate ?object where { graph ?graph {?subject ?predicate ?object} . filter (?object = <${crumb.uri}>)}";
-    return "describe <${crumb.uri}>";
   }
 }
 
@@ -398,7 +387,12 @@ class ResultHistory extends Observable {
 
   Crumb go(String uri, [DescribeType type = DescribeType.DESCRIBE_BY_SUBJECT]) {
     crumbs = toObservable(crumbs.sublist(0, currentIndex >= 0 ? currentIndex + 1 : 0));
-    Crumb crumb = new Crumb(uri, type);
+    
+    String expression = "describe <${uri}>";
+    if (type == DescribeType.DESCRIBE_BY_SUBJECT) expression = "select ?graph ?subject ?predicate ?object where { graph ?graph {?subject ?predicate ?object} . filter (?subject = <${uri}>)}";
+    if (type == DescribeType.DESCRIBE_BY_OBJECT) expression = "select ?graph ?subject ?predicate ?object where { graph ?graph {?subject ?predicate ?object} . filter (?object = <${uri}>)}";
+    
+    Crumb crumb = new DescribeCrumb(uri, expression, type);
     crumbs.add(crumb);
     currentIndex++;
     _notifyChanges();
@@ -412,9 +406,13 @@ class ResultHistory extends Observable {
     return currentCrumb;
   }
   
-  void clear() {
-    currentIndex = -1;
+  void clear([Query query]) {
     crumbs.clear();
+    
+    Crumb start = (query!=null)? new Crumb(query.get(Query.K.expression), query.get(Query.K.graph), true): new Crumb(null, [], true);
+    crumbs.add(start);
+
+    currentIndex = 0;
     _notifyChanges();
   }
 
@@ -423,28 +421,33 @@ class ResultHistory extends Observable {
 
     notifyPropertyChange(#canGoBack, null, canGoBack);
     notifyPropertyChange(#canGoForward, null, canGoForward);
-    notifyPropertyChange(#currentUri, null, currentUri);
     notifyPropertyChange(#currentCrumb, null, currentCrumb);
-    notifyPropertyChange(#isQueryUrl, null, isQueryUrl);
     notifyPropertyChange(#empty, null, empty);
   }
 
   bool get canGoBack => currentIndex >= 0;
   bool get canGoForward => crumbs.isNotEmpty && currentIndex < crumbs.length - 1;
-  String get currentUri => currentIndex >= 0 ? crumbs[currentIndex].uri : null;
   Crumb get currentCrumb => currentIndex >= 0 ? crumbs[currentIndex] : null;
-  bool get isQueryUrl => currentIndex == -1;
   bool get empty => crumbs.isEmpty;
 }
 
 class Crumb {
+  String expression;
+  List<String> graphs;
+  bool start;
+  
+  Crumb(this.expression, this.graphs, this.start);
+  
+  toString() => 'Crumb';
+}
+
+class DescribeCrumb extends Crumb {
   String uri;
   DescribeType type;
   
-  Crumb(this.uri, this.type);
+  DescribeCrumb(this.uri, String expression, this.type):super(expression,[],false);
   
-  toString() => 'Crumb $uri $type';
-  
+  toString() => 'DescribeCrumb $uri $type';
 }
 
 class DescribeType {

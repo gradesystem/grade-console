@@ -89,8 +89,8 @@ class QueriesPanel extends ResizerPolymerElement with Filters, Dependencies {
     model.runQuery(detail);
   }
   
-  void onDescribeResult(event, detail, target) {
-    model.describeResult(detail["query"], detail["crumb"]);
+  void onEatCrumb(event, detail, target) {
+    model.eatCrumb(detail["query"], detail["crumb"]);
   }
   
   void onLoadRaw(event, detail, target) {

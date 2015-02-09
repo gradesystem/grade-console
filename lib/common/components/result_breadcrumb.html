@@ -31,11 +31,10 @@
 			}
     </style>
         
-    <div horizontal layout fg breadcrumb center lighter>
-      <span uri-index={{-1}} on-click={{onUriClick}} crumb smaller current-crumb?="{{history.isQueryUrl}}" path hidden?={{history.empty}}>path:</span>
-      <template repeat="{{crumb in history.crumbs | enumerate}}">
-        <span bolder spacer>&gt;</span>
-        <span uri-index={{crumb.index}} on-click={{onUriClick}} crumb smaller current-crumb?="{{history.currentIndex == crumb.index}}">{{crumb.value.uri}}</span>
+    <div horizontal layout fg breadcrumb center lighter hidden?="{{history.crumbs.length==1}}">
+      <template repeat="{{crumb in history.crumbs | enumerate}}" >
+        <span bolder spacer hidden?="{{crumb.index==0}}">&gt;</span>
+        <span crumb-index={{crumb.index}} on-click={{onCrumbClick}} crumb smaller current-crumb?="{{history.currentIndex == crumb.index}}" path?="{{crumb.index==0}}">{{crumb.value | label}}</span>
       </template>
     </div>
     <script type="application/dart" src="result_breadcrumb.dart"></script> 
