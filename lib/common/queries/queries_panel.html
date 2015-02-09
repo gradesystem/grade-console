@@ -7,12 +7,13 @@
 <link rel="import" href="../components/grade_header_panel.html">
 <link rel="import" href="../components/grade_input.html">
 <link rel="import" href="../components/grade_button.html">
+<link rel="import" href="../components/grade_dropdown_button.html">
 <link rel="import" href="../components/grade_dialog.html">
 
 <link rel="import" href="query_list.html">
 <link rel="import" href="query_details.html">
-
 <link rel="import" href="query_playground.html">
+<link rel="import" href="query_filter_menu.html">
 
 <link rel="import" href="queries.html">
 
@@ -30,15 +31,16 @@
 	
 	            <grade-input toolbar
 	                        smaller 
-	                        style="width:120px; margin-right:10px" 
+	                        style="width:120px;" 
 	                        label="filter"
 	                        inputValue={{kfilter}}>
 	            </grade-input>
+	            <query-filter-menu toolbar on-button-click="{{refresh}}" filters={{filters}}></query-filter-menu>
 	            
 	            <grade-button toolbar icon="refresh" label="refresh list" on-click="{{refresh}}"></grade-button>
 	            <grade-button toolbar icon="add" label="add query" on-click={{addQuery}}></grade-button>
 	   
-	        <query-list main flex listitems="{{queries}}" kfilter="{{kfilter}}" on-remove-item={{removeItem}}  on-clone-item={{cloneItem}}></query-list>
+	        <query-list main flex listitems="{{queries}}" kfilter="{{kfilter}}" on-remove-item={{removeItem}}  on-clone-item={{cloneItem}} filters={{filters}}></query-list>
 	        
 	      </grade-header-panel>
 	      

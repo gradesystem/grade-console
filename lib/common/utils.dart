@@ -9,6 +9,12 @@ class ObservedItemList<E extends Observable> extends ObservableList<E> {
   @observable
   E get lastChangedItem => _lastChangedItem;
   
+  ObservedItemList([int length]):super(length);
+  
+  factory ObservedItemList.from(Iterable<E> other) =>
+      new ObservedItemList<E>()..addAll(other);
+  
+  
   void setAll(int index, Iterable<E> iterable) {
     if (iterable is! List && iterable is! Set) {
       iterable = iterable.toList();

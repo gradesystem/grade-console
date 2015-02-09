@@ -1,0 +1,42 @@
+<link rel="import" href="../../../../packages/polymer/polymer.html">
+
+<link rel="import" href="../../../../packages/core_elements/core_icons.html">
+
+<link rel="import" href="../../../../packages/paper_elements/paper_item.html">
+
+<link rel="import" href="../components/grade_dropdown_button.html">
+
+<link rel="import" href="queries.html">
+
+
+<polymer-element name="query-filter-menu" >
+  
+  <template>
+
+    <style>
+
+      .icon {
+        margin-right: 8px;
+      }
+      
+      [spacer] {
+        width: 24px;
+        height: 24px;
+        margin-right: 8px;
+      } 
+							    
+    </style>
+    
+		<grade-dropdown-button toolbar on-button-click="{{refresh}}" style="margin-right:2px">
+		  <template repeat="{{filter in filters | enumerate}}">
+		    <paper-item smallish fg-alt filter-index="{{filter.index}}" on-tap="{{onTap}}">
+		      <core-icon class="icon" icon="check" hidden?="{{!filter.value.active}}"></core-icon>
+		      <span spacer hidden?="{{filter.value.active}}">&nbsp;</span>
+		      {{filter.value.label}}
+		    </paper-item>
+		  </template>
+		</grade-dropdown-button>
+		
+  </template>
+  
+</polymer-element>

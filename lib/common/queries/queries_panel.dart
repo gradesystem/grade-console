@@ -7,6 +7,9 @@ class QueriesPanel extends ResizerPolymerElement with Filters, Dependencies {
   String page;
 
   QueryKeys K = const QueryKeys();
+  
+  @observable
+  ObservableList<QueryFilter> filters;
 
   @observable
   int area = 0;

@@ -25,6 +25,7 @@ part 'queries_panel.dart';
 part 'query_list.dart';
 part 'query_playground.dart';
 part 'raw_result_panel.dart';
+part 'query_filter_menu.dart';
 
 part 'queries_service.dart';
 

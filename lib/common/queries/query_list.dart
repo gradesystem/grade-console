@@ -7,6 +7,9 @@ class QueryList extends PolymerElement with Filters {
   String kfilter = '';
   
   @published
+  ObservableList<QueryFilter> filters;
+  
+  @published
   ListItems listitems;
   
   CoreList list;
@@ -17,6 +20,8 @@ class QueryList extends PolymerElement with Filters {
                     => Filters.containsIgnoreCase(item.model.name, term)
                     || Filters.containsIgnoreCase(item.model.get(Query.K.expression), term)
                     || Filters.containsIgnoreCase(item.model.status, term);
+  
+  applyFilters(List<QueryFilter> filters, _) => (List items) => toObservable(items.where((EditableModel<Query> item) => filters.any((filter)=>filter.active && filter.filter(item))).toList());
   
   CoreResizable resizable;
   
@@ -47,8 +52,8 @@ class QueryList extends PolymerElement with Filters {
     if (listitems.selected!= null && listitems.selected != list.selection) {
       if (listitems.selected == null) list.clearSelection();
       else {
-        int index = listitems.data.indexOf(listitems.selected);
-        list.selectItem(index);
+        Map index = list.indexesForData(listitems.selected);
+        if (index['virtual']>=0) list.selectItem(index['virtual']);
       }
       
     }

@@ -1,0 +1,36 @@
+<link rel="import" href="../../../../packages/polymer/polymer.html">
+
+<link rel="import" href="../../../../packages/core_elements/core_tooltip.html">
+<link rel="import" href="../../../../packages/core_elements/core_icons.html">
+<link rel="import" href="../../../../packages/core_elements/core_menu.html">
+
+<link rel="import" href="../../../../packages/paper_elements/paper_dropdown.html">
+<link rel="import" href="../../../../packages/paper_elements/paper_menu_button.html">
+
+<link rel="import" href="grade_button.html">
+
+
+<polymer-element name="grade-dropdown-button" >
+  
+  <template>
+
+    <style>
+    
+	    
+							    
+    </style>
+
+	  <paper-menu-button>
+      <core-icon id="arrow" icon="{{opened ? 'arrow-drop-up' : 'arrow-drop-down'}}"></core-icon>
+      <paper-dropdown class="dropdown" transition="" opened="{{opened}}">
+        <core-menu id ="menu" class="menu" selected={{selected}} selectedAttribute="{{selectedAttribute}}" valueattr="dropitem">
+          <content select="*"></content>
+        </core-menu>
+      </paper-dropdown>
+    </paper-menu-button>
+		
+  </template>
+  
+  <script type="application/dart" src="grade_dropdown_button.dart"></script> 
+  
+</polymer-element>
