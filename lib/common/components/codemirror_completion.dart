@@ -104,11 +104,16 @@ HintResults sparqlCompletion(CodeMirror editor, [HintsOptions options]) {
 
 void fillGraphs(Set<HintResult> suggestions, Iterable<EditableEndpoint> endpoints) {
   
-  List<Graph> graphs = endpoints.map((EditableEndpoint e) => e.model.graphs).expand((List<Graph> graphs) => graphs).toList();
-  graphs.sort(compareGraphs);
- 
-  graphs.map((Graph g) => new HintResult("<${g.uri}>", displayText: "${g.label} - ${g.uri}"))
-  .forEach((HintResult hr) => suggestions.add(hr));
+  List<EditableEndpoint> sortedEndpoints = endpoints.toList();
+  sortedEndpoints.sort(compareEndpoints);
+  
+  sortedEndpoints.forEach((EditableEndpoint e){
+    List<Graph> graphs = new List.from(e.model.graphs);
+    graphs.sort(compareGraphs);
+    graphs.map((Graph g) => new HintResult("<${g.uri}>", displayText: "${e.model.name} - ${g.label}"))
+      .forEach((HintResult hr) => suggestions.add(hr));
+    
+  });
 }
 
 void fillServices(Set<HintResult> suggestions, Iterable<EditableEndpoint> endpoints) {
