@@ -30,7 +30,6 @@
 			
 			[derived] {
 			 padding-top: 5px;
-			 color: lightgrey;
 			}
 			
 			[hide] {
@@ -38,7 +37,7 @@
 			}
     </style>
     <grade-dialog opened={{opened}} heading="Upload" autoCloseDisabled=true closeSelector="[dismissive]">
-      <div subheading derived smaller>{{ uri }}</div>
+      <div subheading derived smaller fg>{{ uri }}</div>
       <div main vertical layout style="width: 320px; padding-bottom: 10px">
         <div hidden?="{{uploading || failed}}" vertical layout>
         

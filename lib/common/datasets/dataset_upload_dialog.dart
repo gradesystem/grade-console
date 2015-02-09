@@ -123,9 +123,10 @@ class DatasetUploadDialog extends PolymerElement with Filters {
   void _onFileSelected() {
     
     if (file != null) {
+      print('file.type ${file.type}');
       MediaType fileType = MediaType.parse(file.type);
       mimeTypeInvalid = !acceptedFormats.any((Format f)=>f.type == fileType); 
-      mimeType = fileType.value;
+      mimeType = (fileType!=null)?fileType.value:null;
       _calculateName();
     } else {
       mimeTypeInvalid = null;
