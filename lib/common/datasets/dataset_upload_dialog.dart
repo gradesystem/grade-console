@@ -112,7 +112,7 @@ class DatasetUploadDialog extends PolymerElement with Filters {
   }
   
   String validate_name(String s) 
-    => s==null || !valid_name_exp.hasMatch(s)?"Invalid name...":null;
+    => s!=null && s.isNotEmpty && !valid_name_exp.hasMatch(s)?"Invalid name...":null;
 
   void _onFileSelected() {
     
