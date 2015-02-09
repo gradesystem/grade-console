@@ -31,6 +31,12 @@
     <grade-dialog opened={{opened}} heading="Upload" autoCloseDisabled=true closeSelector="[dismissive]">
       <div main vertical layout style="width: 320px; padding-bottom: 10px">
         <div hidden?="{{uploading || failed}}" vertical layout>
+        
+          <grade-fascia item>
+            <grade-file-input file={{file}} invalid={{fileInvalid}} fascia-title></grade-file-input>
+            <grade-uri fascia-subtitle value="HTTP://GRADESYSTEM.IO/ONTO#FILE"></grade-uri>
+          </grade-fascia>        
+        
 	        <grade-fascia item>
 	          <grade-input fascia-title
 	           label="{{ 'name' }} ?" 
@@ -57,13 +63,10 @@
 	           invalid="{{ authorInvalid }}"
 	           inputValue="{{ author  }}"
 	           ></grade-input>
-	          <grade-uri fascia-subtitle value="HTTP://GRADESYSTEM.IO/ONTO#AUTHOR"></grade-uri>
+	          <grade-uri fascia-subtitle value="HTTP://GRADE.IO/PEOPLE/#AUTHOR"></grade-uri>
 	        </grade-fascia>
 	
-	        <grade-fascia item>
-	          <grade-file-input file={{file}} invalid={{fileInvalid}} fascia-title></grade-file-input>
-	          <grade-uri fascia-subtitle value="HTTP://GRADESYSTEM.IO/ONTO#FILE"></grade-uri>
-	        </grade-fascia>
+
 	        
 	        <grade-fascia item>
 	          <grade-dropdown-menu fascia-title 

@@ -4,6 +4,7 @@ part of datasets;
 class DatasetUploadDialog extends PolymerElement with Filters {
   
   static final RegExp valid_name_exp = new RegExp(r"^[A-Za-z0-9-_.!~*'()]*$");
+  static final RegExp name_exp = new RegExp(r"[^A-Za-z0-9-_.!~*'()]");
 
   static String DEFAULT_DELIMITER = ",";
   static String DEFAULT_QUOTE = '"';
@@ -119,6 +120,7 @@ class DatasetUploadDialog extends PolymerElement with Filters {
       MediaType fileType = MediaType.parse(file.type);
       mimeTypeInvalid = !acceptedFormats.any((Format f)=>f.type == fileType); 
       mimeType = fileType.value;
+      _calculateName();
     } else {
       mimeTypeInvalid = null;
       mimeType = null;
@@ -126,11 +128,20 @@ class DatasetUploadDialog extends PolymerElement with Filters {
     
   }
   
+  void _calculateName() {
+    if ((name == null || name.isEmpty) && file!=null) {
+      String fileName = file.name;
+      int dotIndex = fileName.indexOf(".");
+      if (dotIndex>0) fileName = fileName.substring(0,dotIndex);
+      name = fileName.replaceAll(name_exp, "-");
+    }
+  }
+  
   @ComputedProperty("mimeType")
   bool get isTypeCSV => mimeType == MediaType.CSV.value;
   
   @ComputedProperty("name")
-  String get uri => name!=null && name.isNotEmpty ?"http://gradesystem.io/staging/graph/$name":"http://gradesystem.io/staging/graph/~missing~";
+  String get uri => name!=null && name.isNotEmpty ?"http://grade.io/staging/graphs/$name":"http://grade.io/staging/graphs/~missing~";
   
   @ComputedProperty("error")
   String get errorMessage {
