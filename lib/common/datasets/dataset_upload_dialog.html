@@ -24,11 +24,21 @@
 			 margin-bottom:15px;
 			}
 			
+			grade-dialog::shadow [main] {
+        margin-top:20px !important;
+      }
+			
+			[derived] {
+			 padding-top: 5px;
+			 color: lightgrey;
+			}
+			
 			[hide] {
 			 display: none;
 			}
     </style>
     <grade-dialog opened={{opened}} heading="Upload" autoCloseDisabled=true closeSelector="[dismissive]">
+      <div subheading derived smaller>{{ uri }}</div>
       <div main vertical layout style="width: 320px; padding-bottom: 10px">
         <div hidden?="{{uploading || failed}}" vertical layout>
         
@@ -46,14 +56,6 @@
 	           inputValue="{{ name  }}"
 	           ></grade-input>
 	          <grade-uri fascia-subtitle value="HTTP://WWW.W3.ORG/2000/01/RDF-SCHEMA#LABEL"></grade-uri>
-	        </grade-fascia>
-	        
-	        <grade-fascia item>
-	          <grade-input fascia-title truncate smaller
-	           disabled
-	           inputValue="{{ uri  }}"
-	           ></grade-input>
-	          <grade-uri fascia-subtitle value="HTTP://GRADESYSTEM.IO/ONTO#URI"></grade-uri>
 	        </grade-fascia>
 	        
 	        <grade-fascia item>
