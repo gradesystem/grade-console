@@ -42,6 +42,7 @@ class GradeInput extends PolymerElement {
   void ready() {
     decorator = $["decorator"] as PaperInputDecorator;
     input = $["input"];
+    onModelChange();
   }
   
   void set error(String e) {
