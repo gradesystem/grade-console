@@ -104,7 +104,7 @@ HintResults sparqlCompletion(CodeMirror editor, [HintsOptions options]) {
 
 void fillGraphs(Set<HintResult> suggestions, Iterable<EditableEndpoint> endpoints) {
   
-  List<EditableEndpoint> sortedEndpoints = endpoints.toList();
+  List<EditableEndpoint> sortedEndpoints = endpoints.where((EditableEndpoint e)=>!e.model.predefined).toList();
   sortedEndpoints.sort(compareEndpoints);
   
   sortedEndpoints.forEach((EditableEndpoint e){
