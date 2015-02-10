@@ -30,7 +30,6 @@ class ListFilter extends Observable {
   @observable
   bool active;
   
-  var filter;
+  ListFilter(this.label, this.active);
   
-  ListFilter(this.label, this.active, this.filter);
 }

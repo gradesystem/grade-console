@@ -6,12 +6,12 @@ class QueryList extends PolymerElement with Filters {
   @published
   String kfilter = '';
   
+  ListFilter servicesFilter = new ListFilter("SERVICES", true);
+  ListFilter internalFilter = new ListFilter("INTERNAL", true);
+  ListFilter systemFilter = new ListFilter("SYSTEM", false);
+  
   @published
-  ObservableList<ListFilter> filters = new ObservedItemList.from([
-                               new ListFilter("SERVICES", true, (EditableModel<Query> item)=>item.model.status == Query.K.status_service),
-                               new ListFilter("INTERNAL", true, (EditableModel<Query> item)=>item.model.status == Query.K.status_internal),
-                               new ListFilter("PREDEFINED", false, (EditableModel<Query> item)=>item.model.predefined)
-                               ]);
+  ObservableList<ListFilter> filters = new ObservedItemList.from([]);
   
   @published
   ListItems listitems;
@@ -25,12 +25,22 @@ class QueryList extends PolymerElement with Filters {
                     || Filters.containsIgnoreCase(item.model.get(Query.K.expression), term)
                     || Filters.containsIgnoreCase(item.model.status, term);
   
-  applyFilters(List<ListFilter> filters, _) => (List items) => toObservable(items.where((EditableModel<Query> item) => filters.any((filter)=>filter.active && filter.filter(item))).toList());
+  applyFilters(List<ListFilter> filters, _) => (List items) {
+    
+    return toObservable(items.where((item) {
+      
+      bool statusAccept = (servicesFilter.active && item.model.status == Query.K.status_service)
+          || (internalFilter.active && item.model.status == Query.K.status_internal);
+      
+      return (systemFilter.active == item.model.predefined && statusAccept);
+    }).toList());
+  };
   
   CoreResizable resizable;
   
   QueryList.created() : super.created() {
     resizable = new CoreResizable(this);
+    filters.addAll([servicesFilter, internalFilter, systemFilter]);
   }
   
   void attached() {
