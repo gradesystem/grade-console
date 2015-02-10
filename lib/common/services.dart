@@ -1,6 +1,5 @@
 part of common;
 
-
 class GradeService {
   Duration timeLimit = new Duration(minutes: 3);
 
@@ -23,29 +22,26 @@ class GradeService {
     }
   }
 
-  Future get(String path, {MediaType acceptedMediaType:MediaType.JSON, Map<String, String> parameters}) {
-    Uri url = new Uri.http("", "$base_path/$path", parameters);
-    return HttpService.getString(url.toString(), acceptedMediaType:acceptedMediaType).timeout(timeLimit).catchError(_onError);
-  }
+  Future get(String path, {MediaType acceptedMediaType:MediaType.JSON, Map<String, String> parameters}) 
+    => HttpService.getString(toUri(path, parameters), acceptedMediaType:acceptedMediaType).timeout(timeLimit).catchError(_onError);
 
-  Future<String> post(String path, dynamic content, {MediaType acceptedMediaType:MediaType.JSON, MediaType contentType : MediaType.JSON, Map<String, String> parameters}) {
-    Uri url = new Uri.http("", "$base_path/$path", parameters);
-    return HttpService.post(url.toString(), content, acceptedMediaType:acceptedMediaType, contentType: contentType).timeout(timeLimit).then((xhr) => xhr.responseText).catchError(_onError);
-  }
+  Future<String> post(String path, dynamic content, {MediaType acceptedMediaType:MediaType.JSON, MediaType contentType : MediaType.JSON, Map<String, String> parameters}) 
+    => HttpService.request(toUri(path, parameters), method:'POST', sendData: content, acceptedMediaType:acceptedMediaType, contentType: contentType).timeout(timeLimit).then((xhr) => xhr.responseText).catchError(_onError);
   
-  Future<dynamic> postJSon(String path, String content, {MediaType acceptedMediaType:MediaType.JSON, Map<String, String> parameters}) {
-    return post(path, content, acceptedMediaType:acceptedMediaType, parameters:parameters).then(decode);
-  }
+  Future<String> put(String path, dynamic content, {MediaType acceptedMediaType:MediaType.JSON, MediaType contentType : MediaType.JSON, Map<String, String> parameters}) 
+    => HttpService.request(toUri(path, parameters), method:'PUT', sendData: content, acceptedMediaType:acceptedMediaType, contentType: contentType).timeout(timeLimit).then((xhr) => xhr.responseText).catchError(_onError);
   
-  Future<String> postFormData(String path, FormData data, Map<String, String> parameters) {
-    Uri url = new Uri.http("", "$base_path/$path", parameters);
-    return HttpService.request(url.toString(), method: 'POST', sendData: data).timeout(timeLimit).then((xhr) => xhr.responseText).catchError(_onError);
-  }
+  Future<dynamic> postJSon(String path, String content, {MediaType acceptedMediaType:MediaType.JSON, Map<String, String> parameters}) 
+    => post(path, content, acceptedMediaType:acceptedMediaType, parameters:parameters).then(decode);
+  
+  Future<String> postFormData(String path, FormData data, Map<String, String> parameters) 
+    => HttpService.request(toUri(path, parameters), method: 'POST', sendData: data).timeout(timeLimit).then((xhr) => xhr.responseText).catchError(_onError);
 
-  Future<String> delete(String path, [Map<String, String> parameters]) {
-    Uri url = new Uri.http("", "$base_path/$path", parameters);
-    return HttpService.delete(url.toString()).timeout(timeLimit).then((xhr) => xhr.responseText).catchError(_onError);
-  }
+  Future<String> delete(String path, [Map<String, String> parameters]) 
+    => HttpService.request(toUri(path, parameters), method:'DELETE',contentType: MediaType.JSON, acceptedMediaType: MediaType.SPARQL_JSON).timeout(timeLimit).then((xhr) => xhr.responseText).catchError(_onError);
+  
+  String toUri(String path, [Map<String, String> parameters])
+    => new Uri.http("", "$base_path/$path", parameters).toString();
 
   ErrorResponse _onError(e) {
     if (e is HttpRequestException) {
@@ -106,32 +102,10 @@ class ErrorResponse {
 
 class HttpService {
 
-  static String MEDIA_TYPE_JSON = "application/json; charset=UTF-8";
-  static String MEDIA_TYPE_SPARQL_JSON = "application/sparql-results+json";
-
-  static Future<HttpRequest> delete(String url, {bool withCredentials, String responseType, Map<String, String> requestHeaders, void onProgress(ProgressEvent e)}) {
-
-    return request(url, method: 'DELETE', withCredentials: withCredentials, responseType: responseType, requestHeaders: {
-      'Content-Type': MEDIA_TYPE_JSON,
-      'Accept': MEDIA_TYPE_SPARQL_JSON
-    }, onProgress: onProgress);
-  }
-
-  static Future<HttpRequest> post(String url, dynamic content, {bool withCredentials, String responseType, MediaType acceptedMediaType : MediaType.JSON, MediaType contentType : MediaType.JSON, void onProgress(ProgressEvent e)}) {
-    return request(url, method: 'POST', withCredentials: withCredentials, responseType: responseType, requestHeaders: {
-      'Content-Type': contentType.value,
-      'Accept': acceptedMediaType.value
-    }, sendData: content, onProgress: onProgress);
-  }
-
-  static Future<String> getString(String url, {bool withCredentials, MediaType acceptedMediaType : MediaType.JSON, void onProgress(ProgressEvent e)}) {
-    return request(url, withCredentials: withCredentials, onProgress: onProgress, requestHeaders: {
-      'Content-Type': MEDIA_TYPE_JSON,
-      'Accept': acceptedMediaType.value
-    }).then((xhr) => xhr.responseText);
-  }
-
-  static Future<HttpRequest> request(String url, {String method, bool withCredentials, String responseType, String mimeType, Map<String, String> requestHeaders, sendData, void onProgress(ProgressEvent e)}) {
+  static Future<String> getString(String url, {bool withCredentials, MediaType acceptedMediaType : MediaType.JSON, MediaType contentType : MediaType.JSON, void onProgress(ProgressEvent e)}) 
+    => request(url, method: 'GET', withCredentials: withCredentials, onProgress: onProgress, acceptedMediaType: acceptedMediaType, contentType:contentType).then((xhr) => xhr.responseText);
+  
+  static Future<HttpRequest> request(String url, {String method, bool withCredentials, String responseType, String mimeType, Map<String, String> requestHeaders, sendData, MediaType acceptedMediaType, MediaType contentType, void onProgress(ProgressEvent e)}) {
     var completer = new Completer<HttpRequest>();
 
     var xhr = new HttpRequest();
@@ -156,6 +130,14 @@ class HttpService {
       requestHeaders.forEach((header, value) {
         xhr.setRequestHeader(header, value);
       });
+    }
+    
+    if (contentType != null) {
+      xhr.setRequestHeader('Content-Type', contentType.value);
+    }
+    
+    if (acceptedMediaType != null) {
+      xhr.setRequestHeader('Accept', acceptedMediaType.value);
     }
 
     if (onProgress != null) {
