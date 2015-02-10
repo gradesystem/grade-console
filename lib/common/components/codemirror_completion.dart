@@ -117,7 +117,7 @@ void fillGraphs(Set<HintResult> suggestions, Iterable<EditableEndpoint> endpoint
 }
 
 void fillServices(Set<HintResult> suggestions, Iterable<EditableEndpoint> endpoints) {
-  List<EditableEndpoint> sortedEndpoints = endpoints.toList();
+  List<EditableEndpoint> sortedEndpoints = endpoints.where((EditableEndpoint e)=>!e.model.predefined).toList();
   sortedEndpoints.sort(compareEndpoints);
   
   sortedEndpoints.map((EditableEndpoint e) => new HintResult("[${e.model.name}]", displayText: e.model.name))
