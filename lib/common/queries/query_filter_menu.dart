@@ -5,9 +5,9 @@ class QueryFilterMenu extends PolymerElement {
   
   @published
   ObservableList<QueryFilter> filters = new ObservedItemList.from([
-                               new QueryFilter("services", true, (EditableModel<Query> item)=>item.model.status == Query.K.status_service),
-                               new QueryFilter("internal", true, (EditableModel<Query> item)=>item.model.status == Query.K.status_internal),
-                               new QueryFilter("predefined", false, (EditableModel<Query> item)=>item.model.predefined)
+                               new QueryFilter("SERVICES", true, (EditableModel<Query> item)=>item.model.status == Query.K.status_service),
+                               new QueryFilter("INTERNAL", true, (EditableModel<Query> item)=>item.model.status == Query.K.status_internal),
+                               new QueryFilter("PREDEFINED", false, (EditableModel<Query> item)=>item.model.predefined)
                                ]);
   
   @published
@@ -15,7 +15,7 @@ class QueryFilterMenu extends PolymerElement {
 
   QueryFilterMenu.created() : super.created();
 
-  void onTap(event, detail, target) {
+  void onTap(Event event, detail, target) {
     String index = target.attributes['filter-index'];
     int filterIndex = int.parse(index);
     filters[filterIndex].active = !filters[filterIndex].active;

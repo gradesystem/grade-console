@@ -2,6 +2,7 @@ library queries;
 
 import 'dart:async';
 import 'dart:collection';
+import 'dart:html';
 import 'dart:convert' show JSON;
 
 import 'package:polymer/polymer.dart';
