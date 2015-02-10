@@ -206,7 +206,7 @@ class EndpointSubPageModel extends SubPageEditableModel<Endpoint> {
         editableModel.loadingGraphs = true;
       });
 
-      endpointService.addEndpointGraph(editableModel.model, newGraph).then((bool result) {
+      endpointService.editEndpointGraph(editableModel.model, newGraph).then((bool result) {
         oldGraph.label = newGraph.label;
       }).catchError((e) => onError(e, () => editEndpointGraph(editableModel, oldGraph, newGraph))).whenComplete(() {
         timer.cancel();
