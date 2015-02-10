@@ -8,7 +8,7 @@ class QueryList extends PolymerElement with Filters {
   
   ListFilter servicesFilter = new ListFilter("SERVICES", true);
   ListFilter internalFilter = new ListFilter("INTERNAL", true);
-  ListFilter systemFilter = new ListFilter("SYSTEM", false);
+  ListFilter systemFilter = new ListFilter("SYSTEM", true);
   
   @published
   ObservableList<ListFilter> filters = new ObservedItemList.from([]);
@@ -27,12 +27,12 @@ class QueryList extends PolymerElement with Filters {
   
   applyFilters(List<ListFilter> filters, _) => (List items) {
     
-    return toObservable(items.where((item) {
+    return toObservable(items.where((EditableQuery item) {
       
       bool statusAccept = (servicesFilter.active && item.model.status == Query.K.status_service)
           || (internalFilter.active && item.model.status == Query.K.status_internal);
       
-      return (systemFilter.active == item.model.predefined && statusAccept);
+      return item.edit || (systemFilter.active == item.model.predefined && statusAccept);
     }).toList());
   };
   

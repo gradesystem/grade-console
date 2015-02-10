@@ -6,6 +6,11 @@ class EndpointList extends PolymerElement with Filters {
   @published
   String kfilter = '';
   
+  ListFilter systemFilter = new ListFilter("SYSTEM", true);
+  
+  @published
+  ObservableList<ListFilter> filters = new ObservedItemList.from([]);
+  
   @published
   ListItems listitems;
   
@@ -17,10 +22,18 @@ class EndpointList extends PolymerElement with Filters {
                     => item.model.name != null && 
                        item.model.name.toLowerCase().contains(term.toLowerCase());
   
+  applyFilters(List<ListFilter> filters, _) => (List items) {
+      
+      return toObservable(items.where((item) {
+        return item.edit || (systemFilter.active && item.model.predefined);
+      }).toList());
+    };
+  
   CoreResizable resizable;
   
   EndpointList.created() : super.created() {
     resizable = new CoreResizable(this);
+    filters.addAll([systemFilter]);
   }
   
   void attached() {
@@ -48,8 +61,8 @@ class EndpointList extends PolymerElement with Filters {
     if (listitems.selected!= null && listitems.selected != list.selection) {
       if (listitems.selected == null) list.clearSelection();
       else {
-        int index = listitems.data.indexOf(listitems.selected);
-        list.selectItem(index);
+        Map index = list.indexesForData(listitems.selected);
+        if (index['virtual']>=0) list.selectItem(index['virtual']);
       }
     }
   }

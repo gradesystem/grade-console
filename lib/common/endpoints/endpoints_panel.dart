@@ -13,6 +13,9 @@ class EndpointsPanel extends ResizerPolymerElement with Filters, Dependencies {
   String kfilter = '';
   
   @observable
+  ObservableList<ListFilter> filters;
+  
+  @observable
   bool removeDialogOpened = false;
   
   @observable

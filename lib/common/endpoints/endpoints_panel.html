@@ -10,6 +10,7 @@
 <link rel="import" href="../components/grade_input.html">
 <link rel="import" href="../components/grade_button.html">
 <link rel="import" href="../components/grade_dialog.html">
+<link rel="import" href="../components/list_filter_menu.html">
 
 <link rel="import" href="endpoint_list.html">
 <link rel="import" href="endpoint_details.html">
@@ -29,15 +30,16 @@
 	
 	            <grade-input toolbar
 	                        smaller 
-	                        style="width:120px; margin-right:10px" 
+	                        style="width:120px;" 
 	                        label="filter"
 	                        inputValue={{kfilter}}>
 	            </grade-input>
+	            <list-filter-menu toolbar filters={{filters}}></list-filter-menu>
 	            
 	            <grade-button toolbar icon="refresh" label="refresh list" on-click="{{refresh}}"></grade-button>
 	            <grade-button toolbar icon="add" label="add endpoint" on-click={{addEndpoint}}></grade-button>
 	   
-	        <endpoint-list main flex listitems="{{items}}" kfilter="{{kfilter}}" on-remove-item={{removeItem}}  on-clone-item={{cloneItem}}></endpoint-list>
+	        <endpoint-list main flex listitems="{{items}}" kfilter="{{kfilter}}" on-remove-item={{removeItem}}  on-clone-item={{cloneItem}} filters={{filters}}></endpoint-list>
 	        
 	      </grade-header-panel>
 	      

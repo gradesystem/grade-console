@@ -8,6 +8,9 @@ class TasksPanel extends ResizerPolymerElement with Filters, Dependencies {
 
   @observable
   String kfilter = '';
+  
+  @observable
+  ObservableList<ListFilter> filters;
 
   @observable
   bool removeDialogOpened = false;

@@ -15,6 +15,7 @@
 <link rel="import" href="task_details.html">
 <link rel="import" href="task_list.html">
 <link rel="import" href="task_playground.html">
+<link rel="import" href="../common/components/list_filter_menu.html">
 
 <link rel="import" href="tasks.html">
 
@@ -32,15 +33,16 @@
 	
 	        <grade-input toolbar
 	                    smaller 
-	                    style="width:120px; margin-right:10px" 
+	                    style="width:120px;" 
 	                    label="filter"
 	                    inputValue={{kfilter}}>
 	        </grade-input>
+	        <list-filter-menu toolbar filters={{filters}}></list-filter-menu>
 	        
           <grade-button toolbar icon="refresh" label="refresh list" on-click="{{refresh}}"></grade-button>
           <grade-button toolbar icon="add" label="add task" on-click={{addTask}}></grade-button>
 
-	        <task-list main flex listitems="{{items}}" kfilter="{{kfilter}}" on-remove-item={{removeItem}} on-clone-item={{cloneItem}}  style="/*border: 1px solid blue*/"></task-list>
+	        <task-list main flex listitems="{{items}}" kfilter="{{kfilter}}" on-remove-item={{removeItem}} on-clone-item={{cloneItem}} filters={{filters}}></task-list>
 	        
 	      </grade-header-panel>
 	      
