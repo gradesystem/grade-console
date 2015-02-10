@@ -29,7 +29,7 @@ class GraphDialog extends PolymerElement with Filters {
   Endpoints endpoints;
   
   @observable
-  String endpoint;
+  String endpointName;
   
   EditableEndpoint oldEndpoint;
   
@@ -77,7 +77,7 @@ class GraphDialog extends PolymerElement with Filters {
     label = graph.label;
     uri = graph.uri + "-${new DateTime.now().millisecondsSinceEpoch}";
     mode = GraphDialogMode.MOVE;
-    endpoint = endpoints.synchedData.any((EditableEndpoint e)=>e.model.id == currentEndpoint.model.id)?currentEndpoint.model.id:null;
+    endpointName = endpoints.synchedData.any((EditableEndpoint e)=>e.model.id == currentEndpoint.model.id)?currentEndpoint.model.name:null;
     
     opened = true;
   }
@@ -91,7 +91,7 @@ class GraphDialog extends PolymerElement with Filters {
     switch (mode) {
       case GraphDialogMode.ADD: fire("added-graph", detail: new Graph(uri.trim(), label)); break;
       case GraphDialogMode.EDIT: fire("edited-graph", detail: {"old-graph":oldGraph, "new-graph":new Graph(uri.trim(), label)}); break;
-      case GraphDialogMode.MOVE: fire("moved-graph", detail: {"old-graph":oldGraph, "new-graph":new Graph(uri.trim(), label), "old-endpoint":oldEndpoint, "new-endpoint-id":endpoint}); break;
+      case GraphDialogMode.MOVE: fire("moved-graph", detail: {"old-graph":oldGraph, "new-graph":new Graph(uri.trim(), label), "old-endpoint":oldEndpoint, "new-endpoint-name":endpointName}); break;
     }
    
   }

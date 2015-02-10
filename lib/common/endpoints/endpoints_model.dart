@@ -214,18 +214,18 @@ class EndpointSubPageModel extends SubPageEditableModel<Endpoint> {
       });
     }
   
-  void moveEndpointGraph(EditableEndpoint editableModel, Graph oldGraph, Graph newGraph, EditableEndpoint oldEndpoint, String newEndpointId) {
+  void moveEndpointGraph(EditableEndpoint editableModel, Graph oldGraph, Graph newGraph, EditableEndpoint oldEndpoint, String newEndpointName) {
 
-      /*Timer timer = new Timer(new Duration(milliseconds: 200), () {
+      Timer timer = new Timer(new Duration(milliseconds: 200), () {
         editableModel.loadingGraphs = true;
       });
 
-      endpointService.addEndpointGraph(editableModel.model, newGraph).then((bool result) {
-        oldGraph.label = newGraph.label;
-      }).catchError((e) => onError(e, () => editEndpointGraph(editableModel, oldGraph, newGraph))).whenComplete(() {
+      endpointService.moveEndpointGraph(editableModel.model, oldGraph, newGraph, newEndpointName).then((bool result) {
+        loadAll();
+      }).catchError((e) => onError(e, () => moveEndpointGraph(editableModel, oldGraph, newGraph, oldEndpoint, newEndpointName))).whenComplete(() {
         timer.cancel();
         editableModel.loadingGraphs = false;
-      });*/
+      });
     }
 }
 

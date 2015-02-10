@@ -2,6 +2,7 @@ library endpoints;
 
 import 'dart:async';
 import 'dart:collection';
+import 'dart:convert' show JSON;
 
 import 'package:polymer/polymer.dart';
 import 'package:core_elements/core_list_dart.dart';

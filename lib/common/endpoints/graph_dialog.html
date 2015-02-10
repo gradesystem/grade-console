@@ -62,13 +62,13 @@
 	        
 	        <grade-fascia item hidden?={{!requireEndpoint}}>
             <grade-dropdown-menu fascia-title
-                         selected="{{ endpoint }}"
+                         selected="{{ endpointName }}"
                          label="endpoint" 
                          required
                          invalid="{{ endpointInvalid }}"
                          >
               <template repeat="{{target in endpoints.synchedData}}">
-                <paper-item truncate dropitem="{{target.model.id}}">{{target.model.name}}</paper-item>
+                <paper-item truncate dropitem="{{target.model.name}}">{{target.model.name}}</paper-item>
               </template>
             </grade-dropdown-menu>
             <grade-uri fascia-subtitle value="HTTP://GRADESYSTEM.IO/ONTO#ENDPOINT"></grade-uri>
