@@ -7,7 +7,11 @@ class QueryList extends PolymerElement with Filters {
   String kfilter = '';
   
   @published
-  ObservableList<QueryFilter> filters;
+  ObservableList<ListFilter> filters = new ObservedItemList.from([
+                               new ListFilter("SERVICES", true, (EditableModel<Query> item)=>item.model.status == Query.K.status_service),
+                               new ListFilter("INTERNAL", true, (EditableModel<Query> item)=>item.model.status == Query.K.status_internal),
+                               new ListFilter("PREDEFINED", false, (EditableModel<Query> item)=>item.model.predefined)
+                               ]);
   
   @published
   ListItems listitems;
@@ -21,7 +25,7 @@ class QueryList extends PolymerElement with Filters {
                     || Filters.containsIgnoreCase(item.model.get(Query.K.expression), term)
                     || Filters.containsIgnoreCase(item.model.status, term);
   
-  applyFilters(List<QueryFilter> filters, _) => (List items) => toObservable(items.where((EditableModel<Query> item) => filters.any((filter)=>filter.active && filter.filter(item))).toList());
+  applyFilters(List<ListFilter> filters, _) => (List items) => toObservable(items.where((EditableModel<Query> item) => filters.any((filter)=>filter.active && filter.filter(item))).toList());
   
   CoreResizable resizable;
   

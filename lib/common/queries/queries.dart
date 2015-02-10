@@ -2,7 +2,6 @@ library queries;
 
 import 'dart:async';
 import 'dart:collection';
-import 'dart:html';
 import 'dart:convert' show JSON;
 
 import 'package:polymer/polymer.dart';
@@ -18,6 +17,7 @@ import '../endpoints/endpoints.dart';
 import '../editables/editables.dart';
 import '../components/codemirror_input.dart';
 import '../components/core_resizable.dart';
+import '../components/list_filter_menu.dart';
 
 part 'queries_model.dart';
 part 'query_details.dart';
@@ -26,7 +26,6 @@ part 'queries_panel.dart';
 part 'query_list.dart';
 part 'query_playground.dart';
 part 'raw_result_panel.dart';
-part 'query_filter_menu.dart';
 
 part 'queries_service.dart';
 

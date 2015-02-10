@@ -13,7 +13,7 @@
 <link rel="import" href="query_list.html">
 <link rel="import" href="query_details.html">
 <link rel="import" href="query_playground.html">
-<link rel="import" href="query_filter_menu.html">
+<link rel="import" href="../components/list_filter_menu.html">
 
 <link rel="import" href="queries.html">
 
@@ -35,7 +35,7 @@
 	                        label="filter"
 	                        inputValue={{kfilter}}>
 	            </grade-input>
-	            <query-filter-menu toolbar on-button-click="{{refresh}}" filters={{filters}}></query-filter-menu>
+	            <list-filter-menu toolbar filters={{filters}}></list-filter-menu>
 	            
 	            <grade-button toolbar icon="refresh" label="refresh list" on-click="{{refresh}}"></grade-button>
 	            <grade-button toolbar icon="add" label="add query" on-click={{addQuery}}></grade-button>
