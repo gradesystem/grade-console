@@ -156,7 +156,7 @@
 	                      <template repeat="{{areaEndpoints in endpoints.areaEndpoints}}">
 	                        <template repeat="{{item in areaEndpoints.endpointsStorage.synchedData}}">
 	                            <paper-item truncate label="{{item.model.name}}" dropitem="{{item.model.id}}">
-	                               <div trace>:{{areaEndpoints.area}}</div>
+	                               <div trace>{{areaEndpoints.area}}</div>
 	                            </paper-item>
 	                        </template>
 	                      </template>
