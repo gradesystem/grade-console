@@ -43,7 +43,7 @@
         
           <grade-fascia item>
             <grade-file-input file={{file}} invalid={{fileInvalid}} fascia-title></grade-file-input>
-            <grade-uri fascia-subtitle value="HTTP://GRADESYSTEM.IO/ONTO#FILE"></grade-uri>
+            <grade-uri fascia-subtitle value="http://data.gradesystem.eu/onto#FILE"></grade-uri>
           </grade-fascia>        
         
 	        <grade-fascia item>
@@ -63,7 +63,7 @@
 	           invalid="{{ authorInvalid }}"
 	           inputValue="{{ author  }}"
 	           ></grade-input>
-	          <grade-uri fascia-subtitle value="HTTP://GRADE.IO/PEOPLE/#UPLOADEDBY"></grade-uri>
+	          <grade-uri fascia-subtitle value="http://data.gradesystem.eu/onto#UPLOADEDBY"></grade-uri>
 	        </grade-fascia>
 
 	        <grade-fascia item>
@@ -77,7 +77,7 @@
 		            <paper-item truncate dropitem="{{target.value}}">{{target.label}}</paper-item>
 		          </template>
 		        </grade-dropdown-menu>
-	          <grade-uri fascia-subtitle value="HTTP://GRADESYSTEM.IO/ONTO#TYPE"></grade-uri>
+	          <grade-uri fascia-subtitle value="http://data.gradesystem.eu/onto#TYPE"></grade-uri>
 	        </grade-fascia>
 	
 	        <grade-fascia item>
@@ -91,7 +91,7 @@
 	              <paper-item truncate dropitem="{{target.model.id}}">{{target.model.name}}</paper-item>
 	            </template>
 	          </grade-dropdown-menu>
-	          <grade-uri fascia-subtitle value="HTTP://GRADESYSTEM.IO/ONTO#ENDPOINT"></grade-uri>
+	          <grade-uri fascia-subtitle value="http://data.gradesystem.eu/onto#ENDPOINT"></grade-uri>
 	        </grade-fascia>
 	        
 	        <div vertical layout hidden?={{!isTypeCSV}}>
@@ -104,7 +104,7 @@
 		             maxlength=1
 		             >
 		          </grade-input>
-	            <grade-uri fascia-subtitle value="HTTP://GRADESYSTEM.IO/ONTO#DELIMITER"></grade-uri>
+	            <grade-uri fascia-subtitle value="http://data.gradesystem.eu/onto#DELIMITER"></grade-uri>
 	          </grade-fascia>
 	          
 		        <grade-fascia item>
@@ -118,7 +118,7 @@
 			            <paper-item truncate dropitem="{{target}}">{{target}}</paper-item>
 			          </template>
 			        </grade-dropdown-menu>
-		          <grade-uri fascia-subtitle value="HTTP://GRADESYSTEM.IO/ONTO#ENCODING"></grade-uri>
+		          <grade-uri fascia-subtitle value="http://data.gradesystem.eu/onto#ENCODING"></grade-uri>
 		        </grade-fascia>
 		        
 		        <grade-fascia item>
@@ -130,7 +130,7 @@
 			             maxlength=1
 			             >
 			        </grade-input>
-		          <grade-uri fascia-subtitle value="HTTP://GRADESYSTEM.IO/ONTO#QUOTE"></grade-uri>
+		          <grade-uri fascia-subtitle value="http://data.gradesystem.eu/onto#QUOTE"></grade-uri>
 		        </grade-fascia>
 	        
 	        </div>

@@ -4,16 +4,16 @@ class QueryKeys {
 
   const QueryKeys();
 
-  final String id = "http://gradesystem.io/onto#id";
-  final String endpoint = "http://gradesystem.io/onto/query.owl#endpoint";
-  final String name = "http://gradesystem.io/onto/query.owl#name";
-  final String note = "http://gradesystem.io/onto/query.owl#note";
-  final String target = "http://gradesystem.io/onto/query.owl#target";
-  final String graph = "http://gradesystem.io/onto/query.owl#graph";
-  final String expression = "http://gradesystem.io/onto/query.owl#expression";
-  final String parameters = "http://gradesystem.io/onto/query.owl#parameters";
-  final String predefined = "http://gradesystem.io/onto/query.owl#predefined";
-  final String status = "http://gradesystem.io/onto/query.owl#status";
+  final String id = "http://data.gradesystem.eu/onto#id";
+  final String endpoint = "http://data.gradesystem.eu/onto/query.owl#endpoint";
+  final String name = "http://data.gradesystem.eu/onto/query.owl#name";
+  final String note = "http://data.gradesystem.eu/onto/query.owl#note";
+  final String target = "http://data.gradesystem.eu/onto/query.owl#target";
+  final String graph = "http://data.gradesystem.eu/onto/query.owl#graph";
+  final String expression = "http://data.gradesystem.eu/onto/query.owl#expression";
+  final String parameters = "http://data.gradesystem.eu/onto/query.owl#parameters";
+  final String predefined = "http://data.gradesystem.eu/onto/query.owl#predefined";
+  final String status = "http://data.gradesystem.eu/onto/query.owl#status";
   
   final String status_service = "service";
   final String status_internal = "internal";

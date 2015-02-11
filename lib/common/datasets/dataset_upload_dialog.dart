@@ -148,7 +148,7 @@ class DatasetUploadDialog extends PolymerElement with Filters {
   bool get isTypeCSV => mimeType == MediaType.CSV.value;
   
   @ComputedProperty("name")
-  String get uri => name!=null && name.isNotEmpty ?"http://grade.io/staging/graphs/$name":"http://grade.io/staging/graphs/~missing~";
+  String get uri => name!=null && name.isNotEmpty ?"http://data.gradesystem.eu/graphs/upload/$name":"http://data.gradesystem.eu/graphs/upload/~missing~";
   
   @ComputedProperty("error")
   String get errorMessage {
