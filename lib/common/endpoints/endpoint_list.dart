@@ -7,6 +7,7 @@ class EndpointList extends PolymerElement with Filters {
   String kfilter = '';
   
   ListFilter dataFilter = new ListFilter("DATA", true);
+  ListFilter lockedFilter = new ListFilter("LOCKED", true);
   ListFilter systemFilter = new ListFilter("SYSTEM", true);
   
   @published
@@ -28,6 +29,7 @@ class EndpointList extends PolymerElement with Filters {
       return toObservable(items.where((item) {
         return item.edit 
             || (dataFilter.active && !item.model.predefined)
+            || (lockedFilter.active && item.model.locked)
             || (systemFilter.active && item.model.predefined);
       }).toList());
     };
@@ -36,7 +38,7 @@ class EndpointList extends PolymerElement with Filters {
   
   EndpointList.created() : super.created() {
     resizable = new CoreResizable(this);
-    filters.addAll([dataFilter, systemFilter]);
+    filters.addAll([dataFilter, lockedFilter, systemFilter]);
   }
   
   void attached() {
