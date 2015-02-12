@@ -1,8 +1,7 @@
 <link rel="import" href="../../../../packages/polymer/polymer.html">
 <link rel="import" href="../../../../packages/core_elements/core_icon.html">
 <link rel="import" href="../../../../packages/paper_elements/paper_item.html">
-<link rel="import" href="../../../../packages/paper_elements/paper_radio_button.html">
-<link rel="import" href="../../../../packages/paper_elements/paper_radio_group.html"> 
+<link rel="import" href="../../../../packages/paper_elements/paper_toggle_button.html"> 
 
 <link rel="import" href="../components/grade_input.html">
 <link rel="import" href="../components/grade_dropdown_menu.html">
@@ -38,6 +37,14 @@
       [graphs-area] { min-height:130px; margin-top:15px }
       
       [derived-fields-area] { padding:10px;margin-top: 30px; color: lightgrey}
+      
+      [service] { 
+        height:45px;
+      }
+      
+      [service-label] { 
+        padding-right:15px;
+      }
 		  
     </style>
 		
@@ -48,13 +55,14 @@
         <div style="overflow-y: auto;">
         
          <!-- status --> 
-          <div smaller radios layout vertical center>
-            <paper-radio-group fascia-title selected="{{ item.model.status }}">
-            
-              <paper-radio-button name="{{K.status_internal}}" label="INTERNAL"  disabled?="{{!editable}}"></paper-radio-button>
-              <paper-radio-button name="{{K.status_service}}"     label="SERVICE"      disabled?="{{!editable}}"></paper-radio-button>
-             
-            </paper-radio-group>
+         <div smaller service layout horizontal center-justified hidden?={{item.model.predefined}}>
+            <div center horizontal layout>
+              <div flex fg service-label bolder>SERVICE</div>
+	              <paper-toggle-button fg 
+	              checked={{service}}
+	              disabled="{{ !editable }}" >
+	              </paper-toggle-button>
+            </div>
           </div>
 
           <!-- name -->
