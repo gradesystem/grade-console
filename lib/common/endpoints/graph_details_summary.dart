@@ -6,6 +6,9 @@ class GraphDetailsSummary extends PolymerElement with Filters {
   @published
   Graph graph;
   
+  @published
+  bool removeEnabled;
+  
   GraphDetailsSummary.created() : super.created();
   
   void editGraph() {
@@ -19,7 +22,5 @@ class GraphDetailsSummary extends PolymerElement with Filters {
   void removeGraph() {
     fire("remove-graph", detail:graph);
   }
-  
-
  
 }

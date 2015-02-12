@@ -44,6 +44,7 @@ class EndpointKeys {
   final String update_uri = "http://data.gradesystem.eu/onto/endpoint.owl#update_uri";
   final String graphs = "http://data.gradesystem.eu/onto/endpoint.owl#graph";
   final String predefined = "http://data.gradesystem.eu/onto/endpoint.owl#predefined";
+  final String locked = "http://data.gradesystem.eu/onto/endpoint.owl#locked";
 }
 
 class Endpoint extends EditableGradeEntity with Filters {
@@ -69,7 +70,8 @@ class Endpoint extends EditableGradeEntity with Filters {
         K.uri: "",
         K.update_uri: "",
         K.graphs: [],
-        K.predefined: false
+        K.predefined: false,
+        K.locked:false
       });
 
   void _listenChanges() {
@@ -77,6 +79,7 @@ class Endpoint extends EditableGradeEntity with Filters {
     onBeanChange([K.name], () => notifyPropertyChange(#name, null, name));
     onBeanChange([K.uri], () => notifyPropertyChange(#uri, null, uri));
     onBeanChange([K.update_uri], () => notifyPropertyChange(#updateUri, null, updateUri));
+    onBeanChange([K.locked], () => notifyPropertyChange(#locked, null, locked));
     //we don't support graphs in bean map writing
   }
   
@@ -122,6 +125,13 @@ class Endpoint extends EditableGradeEntity with Filters {
   }
 
   bool get predefined => get(K.predefined);
+  
+  @observable
+  bool get locked => get(K.locked);
+  set locked(bool value) {
+    set(K.locked, value);
+    notifyPropertyChange(#locked, null, locked);
+  }
 
   Endpoint clone() {
     return new Endpoint._clone(new Map.from(bean));

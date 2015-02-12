@@ -1,5 +1,6 @@
 <link rel="import" href="../../../../packages/polymer/polymer.html">
 <link rel="import" href="../../../../packages/core_elements/core_icon.html">
+<link rel="import" href="../../../../packages/paper_elements/paper_toggle_button.html"> 
 
 <link rel="import" href="../components/grade_input.html">
 <link rel="import" href="../components/grade_item.html">
@@ -16,6 +17,14 @@
     
 		<style>
 		
+		  [lock] { 
+		    height:45px;
+		  }
+		  
+		  [lock-label] { 
+        padding-right:15px;
+      }
+		
       grade-input::shadow textarea {
         max-height: 150px;
 			}
@@ -27,7 +36,17 @@
 	   
 	      <div style="overflow-y: auto;">
 	      
-	      <grade-item icon=chevron-right>
+		      <div smaller lock layout horizontal center-justified>
+		        <div center horizontal layout>
+              <div flex fg lock-label bolder>LOCKED</div>
+              <paper-toggle-button fg 
+              checked={{item.model.bean[K.locked]}}
+              disabled="{{ !editable }}" >
+              </paper-toggle-button>
+			      </div>
+			    </div>
+	      
+          <grade-item icon=chevron-right>
 	          
 	          <grade-fascia flex truncate>
 	                   
