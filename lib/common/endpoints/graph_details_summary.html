@@ -19,7 +19,7 @@
       <grade-item flex>
         <grade-fascia flex truncate>
           <div fascia-title>{{ graph.label !=null?graph.label:suffix(graph.uri) }} <span small grade-dark-grey triples>({{graph.size}}T)</span></div>
-          <grade-uri fascia-subtitle smaller flex value={{graph.uri}}></grade-uri>
+          <div fascia-subtitle smaller flex truncate fg bolder>{{graph.uri}}</div>
         </grade-fascia>
         
         <grade-button
