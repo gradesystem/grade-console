@@ -25,11 +25,11 @@
 	     
 	       <grade-fascia flex truncate>
 	         <div fascia-title>{{ name }}</div>
-	         <grade-uri fascia-subtitle value="{{ item.model.uri }}"></grade-uri>
+	         <div fascia-subtitle fg bolder>{{ item.model.uri }}</div>
 	       </grade-fascia>
 	       
 	       <grade-button action onhover hidden?="{{ item.edit || !selected }}" smallicon icon="content-copy" tooltip="left" label="clone endpoint" on-click={{cloneItem}}></grade-button>
-	       <grade-button action hidden?="{{ !item.model.predefined }}" smallicon tooltip="left" label="predefined endpoint" icon="lock"></grade-button>
+	       <grade-button action hidden?="{{ !item.model.locked }}" smallicon tooltip="left" label="locked endpoint" icon="lock"></grade-button>
          <grade-button action onhover hidden?="{{ item.edit || !selected || item.model.predefined || item.model.locked}}" smallicon tooltip="left" label="remove endpoint" icon="delete" on-click={{removeItem}}></grade-button>
          <grade-button action hidden?="{{ !item.edit }}" smallicon icon="save" tooltip="left" label="there are pending changes"></grade-button>
          <grade-button action hidden?="{{ item.valid }}" smallicon icon="warning" tooltip="left" label="there are errors"></grade-button>
