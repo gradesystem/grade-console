@@ -39,7 +39,7 @@ class Query extends EditableGradeEntity with Filters, Observable {
         K.name: "",
         K.expression: "",
         K.predefined: false,
-        K.status:K.status_service,
+        K.status:K.status_internal,
         K.graph: []
       });
 
