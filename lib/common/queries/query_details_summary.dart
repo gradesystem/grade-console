@@ -13,7 +13,7 @@ class QueryDetailsSummary extends PolymerElement with Filters {
   
   QueryDetailsSummary.created() : super.created();
 
-  bool get predefined => item.model.bean[K.predefined]==true;
+  bool get predefined => item.model.isSystem;
   
   @ComputedProperty("item.model.bean[K.name]")
   String get name {

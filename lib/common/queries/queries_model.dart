@@ -12,11 +12,11 @@ class QueryKeys {
   final String graph = "graph";
   final String expression = "expression";
   final String parameters = "parameters";
-  final String predefined = "predefined";
   final String status = "status";
   
   final String status_service = "service";
   final String status_internal = "internal";
+  final String status_system = "system";
 }
 
 class Query extends EditableGradeEntity with Filters, Observable {
@@ -38,7 +38,6 @@ class Query extends EditableGradeEntity with Filters, Observable {
   Query(String base_url, String repo_path) : this.fromBean(base_url, repo_path, {
         K.name: "",
         K.expression: "",
-        K.predefined: false,
         K.status:K.status_internal,
         K.graph: []
       });
@@ -78,7 +77,8 @@ class Query extends EditableGradeEntity with Filters, Observable {
     notifyPropertyChange(#graphs, null, _graphs);
   }
 
-  bool get predefined => get(K.predefined);
+  bool get predefined => isSystem;
+  bool get isSystem => get(K.status) == K.status_system;
 
   Query clone() => new Query.fromBean(base_url, repo_path, new Map.from(bean));
 
@@ -138,7 +138,7 @@ class QuerySubPageModel extends SubPageEditableModel<Query> {
 
   static EditableQuery generate(Query query) {
     //we are cloning
-    if (query.id == null) query.bean[Query.K.predefined] = false;
+    if (query.id == null) query.bean[Query.K.status] = Query.K.status_internal;
     return new EditableQuery(query);
   }
 
