@@ -53,17 +53,6 @@
       <loading-panel loading="{{loading}}" message="saving the query">
 	   
         <div style="overflow-y: auto;">
-        
-         <!-- status --> 
-         <div smaller service layout horizontal center-justified hidden?={{item.model.predefined}}>
-            <div center horizontal layout>
-              <div flex fg service-label bolder>SERVICE</div>
-	              <paper-toggle-button fg 
-	              checked={{service}}
-	              disabled="{{ !editable }}" >
-	              </paper-toggle-button>
-            </div>
-          </div>
 
           <!-- name -->
           <grade-item icon=chevron-right>
@@ -166,10 +155,21 @@
 				    
 	        </grade-item>
 	        
+	       <!-- status --> 
+         <div smaller service layout horizontal center-justified hidden?={{item.model.predefined}}>
+            <div center horizontal layout>
+              <div flex fg service-label bolder>SERVICE</div>
+                <paper-toggle-button fg 
+                checked={{service}}
+                disabled="{{ !editable }}" >
+                </paper-toggle-button>
+            </div>
+          </div>
+	        
 	        <!-- derived fields -->
-          <div derived-fields-area rounded>
+          <div derived-fields-area rounded hidden?={{!item.model.isService}}>
           
-            <!-- ednpoint -->
+            <!-- endpoint -->
             <div layout vertical center>
                 <div smaller>available at:</div>
                <div fg bolder larger>{{ item.model.endpoint }}</div>
@@ -177,6 +177,9 @@
             </div>
           
           </div>
+          
+                  
+
 	          
 	      </div>
 	    </loading-panel>

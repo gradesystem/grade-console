@@ -46,7 +46,12 @@ class Query extends EditableGradeEntity with Filters, Observable {
     onBeanChange([K.name, K.expression], () => notifyPropertyChange(#endpoint, null, endpoint));
     onBeanChange([K.expression], () => notifyPropertyChange(#parameters, null, parameters));
     onBeanChange([K.name], () => notifyPropertyChange(#name, null, name));
-    onBeanChange([K.status], () => notifyPropertyChange(#status, null, status)); 
+    onBeanChange([K.status], () {
+      notifyPropertyChange(#status, null, status);
+      notifyPropertyChange(#predefined, null, predefined);
+      notifyPropertyChange(#isSystem, null, isSystem);
+      notifyPropertyChange(#isService, null, isService);
+    }); 
     //we don't support graphs in bean map writing
   }
 
@@ -77,8 +82,14 @@ class Query extends EditableGradeEntity with Filters, Observable {
     notifyPropertyChange(#graphs, null, _graphs);
   }
 
+  @observable
   bool get predefined => isSystem;
+  
+  @observable
   bool get isSystem => get(K.status) == K.status_system;
+  
+  @observable
+  bool get isService => get(K.status) == K.status_service;
 
   Query clone() => new Query.fromBean(base_url, repo_path, new Map.from(bean));
 
