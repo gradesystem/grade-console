@@ -4,7 +4,7 @@ class TaskKeys {
 
   const TaskKeys();
 
-  final String uri = "http://data.gradesystem.eu/onto#uri";
+  final String uri = "uri";
   final String label = "http://www.w3.org/2000/01/rdf-schema#label";
 
   final String op = "http://data.gradesystem.eu/onto/task.owl#operation";
@@ -276,7 +276,7 @@ class TaskExecutionLists {
 
 class TaskExecutionKeys {
 
-  final String id = "http://data.gradesystem.eu/onto#id";
+  final String id = "id";
 
   final String startTime =  "http://data.gradesystem.eu/onto/taskexecution.owl#startTime";
   final String endTime = "http://data.gradesystem.eu/onto/taskexecution.owl#endTime";

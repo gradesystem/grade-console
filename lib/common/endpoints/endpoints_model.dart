@@ -4,9 +4,9 @@ class GraphKeys {
 
   const GraphKeys();
   
-  final String label = "http://www.w3.org/2000/01/rdf-schema#label";
-  final String uri = "http://data.gradesystem.eu/onto#uri";
-  final String size = "http://data.gradesystem.eu/onto#size";
+  final String label = "label";
+  final String uri = "uri";
+  final String size = "size";
 }
 
 class Graph extends GradeEntity with Observable {
@@ -38,13 +38,13 @@ class EndpointKeys {
 
   const EndpointKeys();
   
-  final String id = "http://data.gradesystem.eu/onto#id";
-  final String name = "http://data.gradesystem.eu/onto/endpoint.owl#name";
-  final String uri = "http://data.gradesystem.eu/onto/endpoint.owl#uri";
-  final String update_uri = "http://data.gradesystem.eu/onto/endpoint.owl#update_uri";
-  final String graphs = "http://data.gradesystem.eu/onto/endpoint.owl#graph";
-  final String predefined = "http://data.gradesystem.eu/onto/endpoint.owl#predefined";
-  final String locked = "http://data.gradesystem.eu/onto/endpoint.owl#locked";
+  final String id = "id";
+  final String name = "name";
+  final String uri = "uri";
+  final String update_uri = "update_uri";
+  final String graphs = "graph";
+  final String predefined = "predefined";
+  final String locked = "locked";
 }
 
 class Endpoint extends EditableGradeEntity with Filters {

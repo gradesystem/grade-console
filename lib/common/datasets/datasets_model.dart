@@ -4,7 +4,7 @@ class Dataset extends GradeEntity {
 
   Dataset(Map bean) : super(bean);
   
-   static final String id = "http://data.gradesystem.eu/onto#uri";
+   static final String id = "uri";
    static final List<String> labels = [
                                        "label",
                                        "http://www.w3.org/2000/01/rdf-schema#label",
