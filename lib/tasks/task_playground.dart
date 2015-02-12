@@ -24,8 +24,6 @@ class TaskPlayground extends PolymerElement with Filters, Dependencies {
      if (name == "active") isactive =  attributes.containsKey('active');
    }
   
-  String get publish_operation => 'http://gradesystem.io/onto/task.owl#publish';
-  
   @ComputedProperty("editableTask.model.bean[K.transform]") 
   String get transformQuery => editableTask!=null?editableTask.model.bean[K.transform]:"";
   void set transformQuery(String exp) {if (editableTask!=null) editableTask.model.bean[K.transform] = exp;}
@@ -35,7 +33,7 @@ class TaskPlayground extends PolymerElement with Filters, Dependencies {
   void set differenceQuery(String exp) {if (editableTask!=null) editableTask.model.bean[K.diff] = exp;}
   
   @ComputedProperty("editableTask.model.bean[K.op]") 
-  bool get hideDifferenceQuery => editableTask!=null?editableTask.model.bean[K.op] == publish_operation:false;
+  bool get hideDifferenceQuery => editableTask!=null?editableTask.model.bean[K.op] == K.publish_op:false;
   
   @ComputedProperty("editableTask.model.bean[K.label]")  
   String get paneltitle => editableTask!=null?(editableTask.model.label == null || editableTask.model.label.isEmpty?"(label?)":editableTask.model.label):"";
