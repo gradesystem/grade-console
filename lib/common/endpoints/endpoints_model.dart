@@ -41,7 +41,7 @@ class EndpointKeys {
   final String id = "id";
   final String name = "name";
   final String uri = "uri";
-  final String update_uri = "update_uri";
+  final String update_uri = "update uri";
   final String graphs = "graph";
   final String predefined = "predefined";
   final String locked = "locked";

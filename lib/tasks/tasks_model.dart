@@ -5,24 +5,25 @@ class TaskKeys {
   const TaskKeys();
 
   final String uri = "uri";
-  final String label = "http://www.w3.org/2000/01/rdf-schema#label";
+  final String label = "label";
 
-  final String op = "http://data.gradesystem.eu/onto/task.owl#operation";
+  final String op = "operation";
+  
   final String publish_op = 'http://data.gradesystem.eu/onto/task.owl#publish';
   final String add_op = 'http://data.gradesystem.eu/onto/task.owl#add';
   final String remove_op = 'http://data.gradesystem.eu/onto/task.owl#remove';
 
-  final String source_endpoint = "http://data.gradesystem.eu/onto/task.owl#source_endpoint";
-  final String source_graph = "http://data.gradesystem.eu/onto/task.owl#source_graph";
+  final String source_endpoint = "source endpoint";
+  final String source_graph = "source graph";
 
-  final String target_endpoint = "http://data.gradesystem.eu/onto/task.owl#target_endpoint";
-  final String target_graph = "http://data.gradesystem.eu/onto/task.owl#target_graph";
+  final String target_endpoint = "target endpoint";
+  final String target_graph = "target graph";
 
-  final String transform = "http://data.gradesystem.eu/onto/task.owl#transform";
-  final String diff = "http://data.gradesystem.eu/onto/task.owl#difference";
+  final String transform = "transform";
+  final String diff = "difference";
 
-  final String note = "http://www.w3.org/2004/02/skos/core#editorialNote";
-  final String creator = "http://purl.org/dc/terms/creator";
+  final String note = "note";
+  final String creator = "author";
 
 }
 
@@ -278,37 +279,37 @@ class TaskExecutionKeys {
 
   final String id = "id";
 
-  final String startTime =  "http://data.gradesystem.eu/onto/taskexecution.owl#startTime";
-  final String endTime = "http://data.gradesystem.eu/onto/taskexecution.owl#endTime";
+  final String startTime =  "start time";
+  final String endTime = "end time";
   
-  final String task = "http://data.gradesystem.eu/onto/task.owl#Task";
+  final String task = "task";
 
-  final String status = "http://data.gradesystem.eu/onto/taskexecution.owl#status";
+  final String status = "status";
   
-  final String status_submitted = "http://data.gradesystem.eu/onto/taskexecution.owl#submitted";
-  final String status_started = "http://data.gradesystem.eu/onto/taskexecution.owl#started";
-  final String status_transformed = "http://data.gradesystem.eu/onto/taskexecution.owl#transformed";
-  final String status_modified = "http://data.gradesystem.eu/onto/taskexecution.owl#modified";
-  final String status_failed =  "http://data.gradesystem.eu/onto/taskexecution.owl#failed";
-  final String status_completed =  "http://data.gradesystem.eu/onto/taskexecution.owl#completed";
-  final String status_stopped =  "http://data.gradesystem.eu/onto/taskexecution.owl#stopped";
+  final String status_submitted = "submitted";
+  final String status_started = "started";
+  final String status_transformed = "transformed";
+  final String status_modified = "modified";
+  final String status_failed =  "failed";
+  final String status_completed =  "completed";
+  final String status_stopped =  "stopped";
 
   const TaskExecutionKeys();
    
     
-  final String phase = "http://data.gradesystem.eu/onto/taskexecution.owl#phase";
+  final String phase = "phase";
   
-  final String phase_startup = "http://data.gradesystem.eu/onto/taskexecution.owl#startup";
-  final String phase_transformation = "http://data.gradesystem.eu/onto/taskexecution.owl#transformation";
-  final String phase_difference = "http://data.gradesystem.eu/onto/taskexecution.owl#difference";
-  final String phase_writeout = "http://data.gradesystem.eu/onto/taskexecution.owl#writeout";
+  final String phase_startup = "startup";
+  final String phase_transformation = "transformation";
+  final String phase_difference = "difference";
+  final String phase_writeout = "writeout";
   
-  final String source = "http://data.gradesystem.eu/onto/taskexecution.owl#source";
-  final String target = "http://data.gradesystem.eu/onto/taskexecution.owl#target";
+  final String source = "source";
+  final String target = "target";
   
-  final String error = "http://data.gradesystem.eu/onto/taskexecution.owl#error";
-  final String log = "http://data.gradesystem.eu/onto/taskexecution.owl#log";
-  final String duration = "http://data.gradesystem.eu/onto/taskexecution.owl#duration";
+  final String error = "error";
+  final String log = "log";
+  final String duration = "duration";
  
 }
 
