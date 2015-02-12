@@ -16,6 +16,11 @@ class EndpointsPanel extends ResizerPolymerElement with Filters, Dependencies {
   ObservableList<ListFilter> filters;
   
   @observable
+  String graphkfilter;
+  
+  GraphDialog graphDialog;
+  
+  @observable
   bool removeDialogOpened = false;
   
   @observable
@@ -39,6 +44,7 @@ class EndpointsPanel extends ResizerPolymerElement with Filters, Dependencies {
   
   void ready() {
     propertiesTabs = $["propertiesTabs"] as PaperTabs;
+    graphDialog = $["graphDialog"];
   }
   
   Endpoints get items => model.storage;
@@ -85,7 +91,7 @@ class EndpointsPanel extends ResizerPolymerElement with Filters, Dependencies {
   }
   
   void onRefreshGraphs(event, detail, target) {
-    model.refreshGraphs(detail);
+    model.refreshGraphs(items.selected);
   }
   
   void onRemoveGraph(event, detail, target) {
@@ -97,6 +103,18 @@ class EndpointsPanel extends ResizerPolymerElement with Filters, Dependencies {
     } else {
       model.removeEndpointGraph(items.selected, graph);
     }
+  }
+  
+  void addGraph() {
+    graphDialog.openAdd();
+  }
+  
+  void editGraph(event,detail,target) {
+    graphDialog.openEdit(detail);
+  }
+  
+  void moveGraph(event,detail,target) {
+    graphDialog.openMove(detail, items.selected);
   }
   
   void onAddedGraph(event, detail, target) {

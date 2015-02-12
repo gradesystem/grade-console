@@ -2,96 +2,44 @@
 <link rel="import" href="../../../../packages/core_elements/core_icon.html">
 <link rel="import" href="../../../../packages/core_elements/core_selector.html">
 
-<link rel="import" href="../components/grade_input.html">
-<link rel="import" href="../components/grade_item.html">
-<link rel="import" href="../components/grade_uri.html">
-<link rel="import" href="../components/grade_fascia.html">
 <link rel="import" href="../components/loading_panel.html">
-<link rel="import" href="../components/grade_button.html">
 
 <link rel="import" href="graph_details_summary.html">
-<link rel="import" href="graph_dialog.html">
-
 <link rel="import" href="endpoints.html">
 
 <polymer-element name="endpoint-graphs" layout vertical> 
   <template>
     
 		<style>
-		
-		  :host [sidebutton] {  padding-left:5px }
-		  
-       
+
       :host [fg] /deep/ [onhover-selected] { display: inline }
       
       :host [list] { min-height:200px; padding:5px; overflow-y:auto }
       
-      :host [item] { height:20px}
-      
       :host [pointer] { cursor:pointer }
-      
       
     </style>
 
     <template if="{{item!=null && !item.newModel}}">
-	   
-	    <loading-panel loading="{{loading}}" message="saving endpoint" flex>
-					
-				<div fit vertical layout>
-	           
-	          <!-- graphs filter and refresh -->
-					<div horizontal layout end-justified spaced>
-					
-					  <grade-input 
-					            style="width:120px; margin-right:10px" 
-					            label="filter"
-					            inputValue={{kfilter}}>
-					  </grade-input>
-					
-					         
-					  <!-- refresh -->
-					  <grade-button sidebutton icon=refresh
-					               tooltip=left
-					               label="reload graphs" 
-					               on-click={{refreshGraphs}} >
-					  </grade-button>
-					  
-					  <!-- add -->
-					   <grade-button
-                  sidebutton
-                  action 
-                  icon="add" 
-                  on-click={{addGraph}} 
-                  tooltip=left
-                  label="create new graph">
-            </grade-button>
-					
-					</div>
-             
-					<!-- graph list -->
-					<loading-panel list wired rounded relative flex loading="{{item.loadingGraphs}}" message="loading graphs">
-						<div fit style="overflow-y: auto;" spaced>
-						
-							<core-selector selectedAttribute="fg">
-							
-								<template repeat="{{graph in item.model.graphs | filter(kfilter, itemFilter) | sort(graphSorter)}}">
-									
-					        <!-- entry and remove button -->
-					        <graph-details-summary pointer graph={{graph}} on-edit-graph={{editGraph}} on-move-graph={{moveGraph}}></graph-details-summary>
-									  
-								</template>
-							
-							</core-selector>
-						
-						</div>
-					
-					</loading-panel>
 
-        </div>  
-      </loading-panel>
+			<!-- graph list -->
+			<loading-panel flex list wired rounded relative loading="{{loading || item.loadingGraphs}}" message="{{loading?'saving endpoint':'loading graphs'}}">
+				<div fit style="overflow-y: auto;" spaced>
+				
+					<core-selector selectedAttribute="fg">
+					
+						<template repeat="{{graph in item.model.graphs | filter(kfilter, itemFilter) | sort(graphSorter)}}">
+							
+			        <graph-details-summary pointer graph={{graph}}></graph-details-summary>
+							  
+						</template>
+					
+					</core-selector>
+				
+				</div>
+			
+			</loading-panel>
     </template>
-    
-    <graph-dialog id="graphDialog" endpoints={{items}}></graph-dialog>
-		
+
   </template> 
 </polymer-element>

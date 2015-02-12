@@ -17,6 +17,7 @@
 <link rel="import" href="endpoint_graphs.html">
 
 <link rel="import" href="endpoints.html">
+<link rel="import" href="graph_dialog.html">
 
 <polymer-element name="endpoints-panel" horizontal layout>
 
@@ -54,21 +55,44 @@
 					<grade-button toolbar icon="cancel" label="discard changes" on-click="{{onCancel}}" hidden?="{{ area == 1 || !items.selected.edit}}" tooltip="left"></grade-button>
 					<grade-button toolbar icon="save" label="save changes" on-click="{{onSave}}" hidden?="{{ area == 1 || !items.selected.edit}}" disabled={{!items.selected.valid}} tooltip="left"></grade-button>
 					
+					<!-- filter graphs -->
+					<grade-input toolbar hidden?="{{  area == 0 }}"
+                        smaller style="width:120px; margin-right:10px" 
+                        label="filter"
+                        inputValue={{graphkfilter}}>
+          </grade-input>
+
+					<!-- refresh graphs -->
+					<grade-button toolbar hidden?="{{  area == 0 }}"
+					               sidebutton icon=refresh
+			                   tooltip=left
+					               label="refresh graphs" 
+				                 on-click={{onRefreshGraphs}} >
+					</grade-button>
+            
+          <!-- add graph -->
+          <grade-button toolbar hidden?="{{  area == 0 }}"
+                        sidebutton
+				                action 
+				                icon="add" 
+				                on-click={{addGraph}} 
+				                tooltip=left
+				                label="create new graph">
+          </grade-button>
+					
 					<core-animated-pages main flex selected="{{area}}">
             <endpoint-details items={{items}} spaced></endpoint-details> 
             <endpoint-graphs items={{items}} 
-            on-refresh-graphs={{onRefreshGraphs}} 
-            on-remove-graph={{onRemoveGraph}} 
-            on-added-graph={{onAddedGraph}} 
-            on-edited-graph={{onEditedGraph}}
-            on-moved-graph={{onMovedGraph}}
-            spaced>
+									            kfilter={{graphkfilter}}
+									            on-remove-graph={{onRemoveGraph}} 
+									            on-edit-graph={{editGraph}} 
+									            on-move-graph={{moveGraph}}
+									            spaced>
             </endpoint-graphs> 
           </core-animated-pages>
 	      </grade-header-panel>
 	
       </grade-scaffold>
-
 	  
 	  <grade-dialog opened={{removeDialogOpened}} heading={{removedDialogHeader}}>
 	    <div main>There is no going back here.</div>
@@ -76,6 +100,13 @@
 	    <paper-button fg dismissive option>NO</paper-button>
 	    <paper-button fg affirmative option autofocus on-click={{dialogAffermative}}>YES</paper-button>
 	  </grade-dialog>
+	  
+	  <graph-dialog id="graphDialog" endpoints={{items}}
+              on-added-graph={{onAddedGraph}} 
+              on-edited-graph={{onEditedGraph}}
+              on-moved-graph={{onMovedGraph}}
+	  ></graph-dialog>
+	  
   
   </template>
   
