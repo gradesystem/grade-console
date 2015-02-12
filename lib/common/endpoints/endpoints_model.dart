@@ -43,8 +43,10 @@ class EndpointKeys {
   final String uri = "uri";
   final String update_uri = "update uri";
   final String graphs = "graph";
-  final String predefined = "predefined";
   final String locked = "locked";
+  final String status = "status";
+  final String status_data = "data";
+  final String status_system = "system";
 }
 
 class Endpoint extends EditableGradeEntity with Filters {
@@ -70,7 +72,7 @@ class Endpoint extends EditableGradeEntity with Filters {
         K.uri: "",
         K.update_uri: "",
         K.graphs: [],
-        K.predefined: false,
+        K.status: K.status_data,
         K.locked:false
       });
 
@@ -124,7 +126,10 @@ class Endpoint extends EditableGradeEntity with Filters {
     notifyPropertyChange(#updateUri, null, value);
   }
 
-  bool get predefined => get(K.predefined);
+  bool get predefined => isSystem;
+  
+  bool get isSystem => get(K.status) == K.status_system;
+  bool get isData => get(K.status) == K.status_data;
   
   @observable
   bool get locked => get(K.locked);
@@ -164,7 +169,7 @@ class EndpointSubPageModel extends SubPageEditableModel<Endpoint> {
     if (item == null) return new EditableEndpoint(new Endpoint());
     
     //we are cloning
-    if (item.id == null) item.bean[Endpoint.K.predefined]=false;
+    if (item.id == null) item.bean[Endpoint.K.status]=Endpoint.K.status_data;
     return new EditableEndpoint(item);
   }
 
