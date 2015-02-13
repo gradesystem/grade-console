@@ -48,11 +48,11 @@
 		  
     </style>
 		
-    <div hidden?="{{item==null}}">
+    <div flex hidden?="{{item==null}}" vertical layout>
 
-      <loading-panel loading="{{loading}}" message="saving the query">
+      <loading-panel flex loading="{{loading}}" message="saving the query">
 	   
-        <div style="overflow-y: auto;">
+        <div fit style="overflow-y: auto;" spaced>
 
           <!-- name -->
           <grade-item icon=chevron-right>
