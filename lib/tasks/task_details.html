@@ -101,7 +101,7 @@
 	                     <!-- to separate selection (ids) from display (names) we need a 'label'-ed polymer -->
 	                     <!-- paper-item (or core-item) are ready. we can also rollout our own if we must -->
 	                     <paper-item truncate dropitem="{{item.model.id}}">
-	                       <div trace>{{item.model.name}} {{areaEndpoints.area }}</div>
+	                       <div trace>{{item.model.name}} - {{areaEndpoints.area }}</div>
 	                     </paper-item>
 	                   </template>
 	                 </template>
@@ -148,7 +148,7 @@
 	                      <template repeat="{{areaEndpoints in endpoints.areaEndpoints}}">
 	                        <template repeat="{{item in areaEndpoints.endpointsStorage.synchedData}}">
 	                            <paper-item truncate dropitem="{{item.model.id}}">
-	                               <div trace>{{item.model.name}} {{areaEndpoints.area}}</div>
+	                               <div trace>{{item.model.name}} - {{areaEndpoints.area}}</div>
 	                            </paper-item>
 	                        </template>
 	                      </template>
