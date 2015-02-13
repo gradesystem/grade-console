@@ -31,7 +31,7 @@
 	       </grade-fascia>
 	       
 	       <grade-button action onhover hidden?="{{ item.edit || !selected }}" smallicon icon="content-copy" tooltip="left" label="clone query" on-click={{cloneItem}}></grade-button>
-	       <grade-button action hidden?="{{ !item.model.isSystem }}" smallicon tooltip="left" label="system query" icon="lock"></grade-button>
+	       <grade-button action hidden?="{{ !item.model.isSystem }}" smallicon tooltip="left" label="system query" icon="settings"></grade-button>
          <grade-button action onhover hidden?="{{ item.edit || !selected || item.model.isSystem }}" smallicon tooltip="left" label="remove query" icon="delete" on-click={{removeItem}}></grade-button>
          <grade-button action hidden?="{{ !item.edit }}" smallicon icon="save" tooltip="left" label="there are pending changes"></grade-button>
 	 
