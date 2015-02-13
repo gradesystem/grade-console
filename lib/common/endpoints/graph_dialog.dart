@@ -15,6 +15,8 @@ class GraphDialog extends PolymerElement with Filters {
 
   @observable
   String uri;
+  
+  bool uriModifiedByUser = false;
 
   @observable
   bool uriInvalid;
@@ -28,6 +30,9 @@ class GraphDialog extends PolymerElement with Filters {
   @published
   Endpoints endpoints;
   
+  @published
+  EditableEndpoint currentEndpoint;
+  
   @observable
   String endpointName;
   
@@ -37,6 +42,12 @@ class GraphDialog extends PolymerElement with Filters {
   bool endpointInvalid = false;
 
   GraphDialog.created() : super.created();
+  
+  void ready() {
+    (($["uriInput"] as Element).shadowRoot.querySelector("input") as InputElement).onKeyPress.listen((_){
+      uriModifiedByUser = true;
+    });
+  }
 
   @ComputedProperty("mode")
   String get dialogTitle {
@@ -59,11 +70,13 @@ class GraphDialog extends PolymerElement with Filters {
 
   void openAdd() {
     reset();
+    uri = calculateAddUri();
     opened = true;
     mode = GraphDialogMode.ADD;
   }
 
   void openEdit(Graph graph) {
+    reset();
     oldGraph = graph;
     label = graph.label;
     uri = graph.uri;
@@ -72,14 +85,27 @@ class GraphDialog extends PolymerElement with Filters {
   }
 
   void openMove(Graph graph, EditableEndpoint currentEndpoint) {
+    
+    reset();
     oldGraph = graph;
     oldEndpoint = currentEndpoint;
     label = graph.label;
-    uri = graph.uri + "-${new DateTime.now().millisecondsSinceEpoch}";
     mode = GraphDialogMode.MOVE;
-    endpointName = endpoints.synchedData.any((EditableEndpoint e)=>e.model.id == currentEndpoint.model.id)?currentEndpoint.model.name:null;
     
+    uriModifiedByUser = false;
+    
+    endpointName = endpoints.synchedData.any((EditableEndpoint e)=>e.model.id == currentEndpoint.model.id)?currentEndpoint.model.name:null;
+    calculateUri();
+
     opened = true;
+  }
+  
+  @ObserveProperty("endpointName")
+  void calculateUri() {
+    if (mode == GraphDialogMode.MOVE && !uriModifiedByUser) {
+      uriInvalid = false;
+      uri = calculateMoveUri(oldGraph.uri);
+    }
   }
 
   void reset() {
@@ -98,6 +124,62 @@ class GraphDialog extends PolymerElement with Filters {
 
   @ComputedProperty("labelInvalid || uriInvalid")
   bool get invalid => readValue(#invalid, () => false);
+  
+  String calculateMoveUri(String current) {
+    if (endpointName == currentEndpoint.model.name) return "$current/latest";
+    
+    String local = getLocal(current);
+    EditableEndpoint targetEndpoint = endpoints.findByName(endpointName);
+    
+    if (targetEndpoint.model.graphs.isEmpty) return "${endpointDefaultUri(targetEndpoint)}/$local/latest";
+    String prefix = endpointPrefix(targetEndpoint);
+    return "$prefix$local/latest";
+  }
+  
+  String getLocal(String uri) {
+    int slashIndex = uri.lastIndexOf("/");
+    if (slashIndex>=0 && slashIndex<uri.length) return uri.substring(slashIndex+1);
+    return uri;
+  }
+  
+  String calculateAddUri() {
+    if (currentEndpoint.model.graphs.isEmpty) return endpointDefaultUri(currentEndpoint);
+    return endpointPrefix(currentEndpoint);
+  }
+  
+  String endpointPrefix(EditableEndpoint endpoint)  {
+    List<String> uris = endpoint.model.graphs.map((Graph graph)=>graph.uri.toLowerCase()).toList();
+    
+    String prefix = "";
+    
+    if (uris.length == 1) {
+      //if there is only one graph in the endpoint, we remove the local part from the uri in order to obtain the prefix
+      prefix = uris.first;
+      int slashIndex = prefix.lastIndexOf("/");
+      if (slashIndex>=0) prefix = prefix.substring(0, slashIndex);
+    } else prefix = longestCommonPrefix(uris);
+    
+    if (!prefix.endsWith("/")) prefix = prefix + "/";
+    return prefix;
+  }
+  
+  String endpointDefaultUri(EditableEndpoint endpoint) => "http://data.gradesystem.eu/graphs/${endpoint.model.name}"; 
+  
+  String longestCommonPrefix(List<String> strings) {
+      if (strings.isEmpty) return "";
+
+      String candidate = strings[0];
+      for (int prefixLen = 0; prefixLen < candidate.length; prefixLen++) {
+          int c = candidate.codeUnitAt(prefixLen);
+          for (int i = 1; i < strings.length; i++) {
+              if (prefixLen >= strings[i].length 
+                  || strings[i].codeUnitAt(prefixLen) != c) {
+                  return strings[i].substring(0, prefixLen);
+              }
+          }
+      }
+      return candidate;
+  }
 
 }
 

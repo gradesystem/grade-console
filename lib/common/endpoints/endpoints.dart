@@ -1,6 +1,7 @@
 library endpoints;
 
 import 'dart:async';
+import 'dart:html';
 import 'dart:collection';
 import 'dart:convert' show JSON;
 

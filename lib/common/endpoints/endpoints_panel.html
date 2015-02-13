@@ -101,7 +101,9 @@
 	    <paper-button fg affirmative option autofocus on-click={{dialogAffermative}}>YES</paper-button>
 	  </grade-dialog>
 	  
-	  <graph-dialog id="graphDialog" endpoints={{items}}
+	  <graph-dialog id="graphDialog" 
+	            endpoints={{items}}
+	            currentEndpoint={{items.selected}}
               on-added-graph={{onAddedGraph}} 
               on-edited-graph={{onEditedGraph}}
               on-moved-graph={{onMovedGraph}}
