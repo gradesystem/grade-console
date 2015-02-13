@@ -44,11 +44,11 @@
 	        
 	      </grade-header-panel>
 	      
-	      <grade-header-panel side fit>
+	      <grade-header-panel side fit fixedmain="true">
 	      
           <paper-tabs id="propertiesTabs" menu style="width:200px" selected="{{ area }}" hidden?="{{items.selected==null}}">
             <paper-tab>PROPERTIES</paper-tab>
-            <paper-tab hide?="{{items.selected.newModel || items.selected.edit}}">GRAPHS</paper-tab>
+            <paper-tab hide?="{{items.selected.newModel || items.selected.edit || items.selected.synching}}">GRAPHS</paper-tab>
           </paper-tabs>
 					
 					<grade-button toolbar icon="create" label="edit endpoint" on-click="{{onEdit}}" hidden?="{{  area == 1 || items.selected==null || items.selected.edit}}" tooltip="left"></grade-button>
@@ -81,7 +81,7 @@
           </grade-button>
 					
 					<core-animated-pages main flex selected="{{area}}">
-            <endpoint-details items={{items}} spaced></endpoint-details> 
+            <endpoint-details items={{items}}></endpoint-details> 
             <endpoint-graphs items={{items}} 
 									            kfilter={{graphkfilter}}
 									            on-remove-graph={{onRemoveGraph}} 
