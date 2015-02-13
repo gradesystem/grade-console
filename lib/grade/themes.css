@@ -84,6 +84,7 @@
 :host /deep/ [truncate] * {
   overflow: hidden;
   text-overflow: ellipsis;
+  white-space: nowrap;
 }
 :host /deep/ [truncate] /deep/ * {
   overflow: hidden;
