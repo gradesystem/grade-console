@@ -12,8 +12,6 @@ class EndpointDetailsSummary extends PolymerElement with Filters {
   bool selected;
   
   EndpointDetailsSummary.created() : super.created();
-
-  bool get predefined => item.model.isSystem;
   
   @ComputedProperty("item.model.bean[K.name]")
   String get name {

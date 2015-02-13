@@ -48,7 +48,6 @@ class Query extends EditableGradeEntity with Filters, Observable {
     onBeanChange([K.name], () => notifyPropertyChange(#name, null, name));
     onBeanChange([K.status], () {
       notifyPropertyChange(#status, null, status);
-      notifyPropertyChange(#predefined, null, predefined);
       notifyPropertyChange(#isSystem, null, isSystem);
       notifyPropertyChange(#isService, null, isService);
     }); 
@@ -81,9 +80,6 @@ class Query extends EditableGradeEntity with Filters, Observable {
     if (newgraphs != null) _graphs.addAll(newgraphs);
     notifyPropertyChange(#graphs, null, _graphs);
   }
-
-  @observable
-  bool get predefined => isSystem;
   
   @observable
   bool get isSystem => get(K.status) == K.status_system;

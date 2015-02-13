@@ -30,8 +30,8 @@ class QueryList extends PolymerElement with Filters {
     return toObservable(items.where((EditableQuery item) {
       return item.edit 
           || (servicesFilter.active && item.model.status == Query.K.status_service)
-          || (internalFilter.active && (item.model.status == Query.K.status_internal && !item.model.predefined))
-          || (systemFilter.active && item.model.predefined);
+          || (internalFilter.active && (item.model.status == Query.K.status_internal && !item.model.isSystem))
+          || (systemFilter.active && item.model.isSystem);
     }).toList());
   };
   
