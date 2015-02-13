@@ -156,12 +156,12 @@
 	        </grade-item>
 	        
 	       <!-- status --> 
-         <div smaller service layout horizontal center-justified hidden?={{item.model.predefined}}>
+         <div smaller service layout horizontal center-justified>
             <div center horizontal layout>
               <div flex fg service-label bolder>SERVICE</div>
                 <paper-toggle-button fg 
                 checked={{service}}
-                disabled="{{ !editable }}" >
+                disabled="{{ !editable || item.model.isSystem}}" >
                 </paper-toggle-button>
             </div>
           </div>
