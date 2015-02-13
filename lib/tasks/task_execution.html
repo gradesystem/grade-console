@@ -72,7 +72,7 @@
           <div layout horizontal justified>
          
               <grade-fascia>
-                <div large lighter fascia-title>{{ execution.bean[K.status] | suffix | lowercase }}</div>
+                <div large lighter fascia-title>{{ execution.bean[K.status] | lowercase }}</div>
                 <div fascia-subtitle style="top:-3px"> status</div>
               </grade-fascia>
               
@@ -92,7 +92,7 @@
 	                <div flex endpoint lighter smaller truncate> {{target | uppercase}}</div>
                 
                 </div>
-                <div small hidden?="{{ execution.bean[K.status] == K.status_completed }}">{{ execution.bean[K.phase] | suffix | uppercase}}...</div>
+                <div small hidden?="{{ execution.bean[K.status] == K.status_completed }}">{{ execution.bean[K.phase] | uppercase}}...</div>
           
           </div>
           
