@@ -1,6 +1,7 @@
 import 'package:polymer/polymer.dart';
 import 'package:core_elements/core_selector.dart';
 import "dart:html";
+import "dart:js";
 
 @CustomTag('grade-selector')
 class GradeSelector extends PolymerElement {
@@ -30,9 +31,8 @@ class GradeSelector extends PolymerElement {
 
   void ready() {
     
-    internalSelected = multi?toObservable([]):null;
-    
-    $["selector"].selected = internalSelected;
+    //JsArray used as workaround to https://github.com/dart-lang/core-elements/issues/192
+    internalSelected = multi?new JsArray():null;
 
     onPropertyChange(this, #selected, _syncInternalSelection);
 
