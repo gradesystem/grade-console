@@ -40,10 +40,10 @@
     </style>
  
  
-    <div hidden?="{{editable==null}}">
+    <div flex hidden?="{{editable==null}}" layout vertical>
       
-      <loading-panel loading="{{loading}}" message="saving the task">
-        <div style="overflow-y: auto">
+      <loading-panel flex loading="{{loading}}" message="saving the task">
+        <div fit style="overflow-y:auto" spaced>
 	       
           <!-- operation --> 
 	        <div smaller radios layout vertical center>

@@ -1,47 +1,33 @@
 <link rel="import" href="../../../../packages/polymer/polymer.html">
-
-
 <link rel="import" href="../../../../packages/core_elements/core_icon.html">
 
-
 <polymer-element name="grade-item" attributes="icon" noscript>
-
-    <template>
-
-
-      <style>  
+  <template>
+    <style>
       
-        :host [item] {
-          margin-bottom:15px;
-        }
-        
-        :host core-icon {
-          margin: 3px;
-        }
-      
-      
-	      :host [actions] {
+	    :host {
+	      display: block;
+	    }
+	    
+	    :host [item] {
+	      margin-bottom:15px;
+	    }
 	      
-    	     margin-right:5px;
-	         margin-left:5px;
-	      }
- 
-	      
-      </style>
-      
-        <div item layout horizontal>
-
-           <core-icon self-start fg icon="{{icon}}"></core-icon>
-	
-		       <content select="*:not([action])"></content>
-		       
-	        <div actions self-end center layout horizontal>
-              <content select="*[action]"></content>
-           </div>
-             
-        </div>
-    
-    </template>
-
-
+	    :host core-icon {
+	      margin: 3px;
+	    }
+	    
+	    :host [actions] {
+	 	   margin-right:5px;
+	      margin-left:5px;
+	    }
+    </style>
+    <div item layout horizontal>
+      <core-icon self-start fg icon="{{icon}}"></core-icon>
+      <content select="*:not([action])"></content>
+      <div actions self-end center layout horizontal>
+        <content select="*[action]"></content>
+      </div>   
+    </div>
+  </template>
 </polymer-element>
