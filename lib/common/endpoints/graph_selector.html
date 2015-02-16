@@ -27,10 +27,10 @@
 			                       valueattr="item" 
 			                       selectedAttribute="fg">
 			         <template repeat="{{graph in endpoint.model.graphs | sort(graphSorter)}}">
-			           <div smaller pointer?={{editable}} item={{graph.uri}}>{{graph.label !=null?graph.label:suffix(graph.uri)}} <span grade-dark-grey>({{graph.size}}T)</span></div>
+			           <div pointer?={{editable}} item={{graph.uri}}>{{graph.label !=null?graph.label:suffix(graph.uri)}} <span smaller grade-dark-grey>({{graph.size}}T)</span></div>
 			         </template>
 			         <template repeat="{{graphUri in invalidGraphUris }}">
-			           <div smaller pointer?={{editable}} item={{graphUri}} invalid-graph>{{suffixIfPresent(graphUri)}}</div>
+			           <div pointer?={{editable}} item={{graphUri}} invalid-graph>{{suffixIfPresent(graphUri)}}</div>
 			         </template>
 			       </grade-selector>
 		       </div>
