@@ -120,6 +120,8 @@ class Query extends EditableGradeEntity with Filters, Observable {
 
     return params;
   }
+  
+  String toString() => 'Query $name';
 }
 
 int compareQueries(EditableQuery eq1, EditableQuery eq2) {
@@ -307,6 +309,7 @@ class EditableQuery extends EditableModel<Query> with Keyed {
     return endpoint;
   }
 
+  String toString() => 'EditableQuery $model';
 }
 
 class ResulTable extends Delegate {
