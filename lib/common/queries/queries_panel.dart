@@ -8,6 +8,9 @@ class QueriesPanel extends ResizerPolymerElement with Filters, Dependencies {
   
   @published
   bool statusEditEnabled = true;
+  
+  @published
+  String paneltitle = "QUERIES";
 
   QueryKeys K = const QueryKeys();
   
