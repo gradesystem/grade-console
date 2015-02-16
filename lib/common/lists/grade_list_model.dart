@@ -4,6 +4,8 @@ abstract class ListItems<T extends Observable> extends Observable {
   
   Comparator<T> _comparator;
   
+  StreamController<SelectionChange<T>> _selectionChanges;
+  
   @observable
   T selected = null;
   
@@ -13,7 +15,23 @@ abstract class ListItems<T extends Observable> extends Observable {
   @observable
   bool loading = false;
   
-  ListItems([this._comparator]);
+  ListItems([this._comparator]) {
+    _selectionChanges = new StreamController.broadcast(sync: false);
+  }
+  
+  void select(T value) {
+    _selectionChanges.add(new SelectionChange<T>(value));
+  }
+  
+  void selectFirst() {
+    _selectionChanges.add(new SelectionChange<T>.first());
+  }
+  
+  void clearSelection() {
+    _selectionChanges.add(new SelectionChange<T>(null));
+  }
+  
+  Stream<SelectionChange<T>> get selection => _selectionChanges.stream;
   
   void setData(List<T> items, [bool selectFirst = true]) {
 
@@ -22,7 +40,7 @@ abstract class ListItems<T extends Observable> extends Observable {
     if (_comparator!=null) items.sort(_comparator);
     data.addAll(items);
 
-    if (selectFirst && data.isNotEmpty) selected = data.first;
+    if (selectFirst && data.isNotEmpty) this.selectFirst();
   }
   
   void addItem(T item) {
@@ -42,6 +60,19 @@ abstract class ListItems<T extends Observable> extends Observable {
     notifyPropertyChange(#selected, null, selected);
   }
   
+}
+
+class SelectionChange<T> {
+  bool selectFirst = false;
+  T item;
+  
+  SelectionChange.first() {
+    selectFirst = true;
+  }
+  
+  SelectionChange(this.item);
+  
+  String toString() => "SelectionChange selectFirst: $selectFirst item: $item";
 }
 
 class ListsUnion<T> extends Observable {

@@ -11,8 +11,6 @@ class RunningTaskList extends PolymerElement with Filters {
   
   CoreList list;
   
-  bool clickflag = false;
-  
   FilterFunction itemFilter = (RunningTask item, String term) 
                                 =>  item.execution.task.label != null && 
                                     (item.execution.task.label.toLowerCase().contains(term.toLowerCase())
@@ -37,44 +35,27 @@ class RunningTaskList extends PolymerElement with Filters {
   
   void ready() {
     list = $['list'] as CoreList;
-    list.data.changes.listen((_){selecteFirstItem();});
     
-    onPropertyChange(listitems, #selected, syncSelection);
+    listitems.selection.listen(syncSelected);
+    
+    onPropertyChange(list, #selection, (){listitems.selected = list.selection;});
+    
     onPropertyChange(listitems.data, #isEmpty, (){
       async((_)=>list.updateSize());
     });
   }
-   
-  void syncSelection() {
-    if (listitems.selected!= null && listitems.selected != list.selection) {
-      if (listitems.selected == null) list.clearSelection();
-      else {
-        int index = listitems.data.indexOf(listitems.selected);
-        list.selectItem(index);
-      }
-    }
-  }  
-   
-  void selecteFirstItem() {
-    if (list.data != null && list.data.isNotEmpty && !list.data.contains(listitems.selected)) {
-      
-      list.selectItem(0);
-      //we are not notified about the selection
-      listitems.selected = list.selection;
-    }
-  }
   
-  void selectItem(event) {
-    //workaround to https://github.com/dart-lang/core-elements/issues/160
-    if (!clickflag) listitems.selected = list.selection;
-    else {
-      syncSelection();
-      clickflag = false;
-    }
-  }
-
-  void setClickFlag() {
-    clickflag = true;
+  void syncSelected(SelectionChange change) {
+    async((_) {
+      var selected = change.selectFirst && list.data.isNotEmpty?list.data.first:change.item;
+      if (selected != list.selection) {
+        if (selected == null) list.clearSelection();
+        else {
+          Map index = list.indexesForData(selected);
+          if (index['virtual']>=0) list.selectItem(index['virtual']);
+        }
+      }
+    });
   }
  
 }

@@ -14,11 +14,11 @@
  
    <list-panel loading="{{listitems.loading}}" empty={{listitems.data.isEmpty}} emptyMessage="Run some task ?" flex>
 
-	  <core-list-dart id="list" data="{{listitems.data | filter(kfilter, itemFilter)}}" height="48" extraItems="1000" on-core-activate={{selectItem}} fit>
+	  <core-list-dart id="list" data="{{listitems.data | filter(kfilter, itemFilter)}}" height="48" fit>
 	    
 	    <template>
 
-	     <running-task-details-summary flex item="{{model}}" selected="{{ selected==true }}" on-remove-execution={{setClickFlag}}></running-task-details-summary>
+	     <running-task-details-summary flex item="{{model}}" selected="{{ selected==true }}"></running-task-details-summary>
 
 	    </template>
 	  

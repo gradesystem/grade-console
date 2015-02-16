@@ -28,9 +28,8 @@ abstract class SubPageEditableModel<T extends EditableGradeEntity> {
     EditableModel<T> editableModel = generator();
     editableModel.newModel = true;
 
-    //order required for core-list selection sync
-    storage.selected = editableModel;
     storage.addItem(editableModel);
+    storage.select(editableModel);
     
     editableModel.startEdit();
   }
@@ -38,7 +37,7 @@ abstract class SubPageEditableModel<T extends EditableGradeEntity> {
   void cancelEditing(EditableModel<T> item) {
     item.cancel();
     if (item.newModel) {
-      storage.selected = null;
+      storage.clearSelection();
       storage.data.remove(item);
     }
   }
@@ -51,9 +50,8 @@ abstract class SubPageEditableModel<T extends EditableGradeEntity> {
     EditableModel<T> editableModel = generator(cloned);
     editableModel.newModel = true;
     
-    //order required for core-list selection sync
-    storage.selected = editableModel;
     storage.addItem(editableModel);
+    storage.select(editableModel);
     editableModel.startEdit();
   }
   
@@ -96,8 +94,8 @@ abstract class SubPageEditableModel<T extends EditableGradeEntity> {
     });
 
     service.delete(editableModel.model).then((bool result) {
+      storage.clearSelection();
       storage.data.remove(editableModel);
-      storage.selected = null;
     }).catchError((e) => onError(e, () => remove(editableModel))).whenComplete(() {
       timer.cancel();
       editableModel.synched();
@@ -107,7 +105,7 @@ abstract class SubPageEditableModel<T extends EditableGradeEntity> {
 
   void loadAll([bool selectFirst = true]) {
     storage.loading = true;
-    storage.selected = null;
+    storage.clearSelection();
     service.getAll()
     .then((List<T> items){
       storage.setData(items.map((T q) => generator(q)).toList(), selectFirst);

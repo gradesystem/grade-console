@@ -35,7 +35,10 @@ class DatasetList extends PolymerElement with Filters {
   void ready() {
     list = $['list'] as CoreList;
     
-    onPropertyChange(listitems, #selected, syncSelection);
+    listitems.selection.listen(syncSelected);
+    
+    onPropertyChange(list, #selection, (){listitems.selected = list.selection;});
+    
     onPropertyChange(listitems.data, #isEmpty, (){
       async((_)=>list.updateSize());
     });
@@ -62,18 +65,17 @@ class DatasetList extends PolymerElement with Filters {
     if (files != null && files.isNotEmpty) fire("file-drop", detail:files.first);
   }
   
-  void syncSelection() {
-    if (listitems.selected!= null && listitems.selected != list.selection) {
-      if (listitems.selected == null) list.clearSelection();
-      else {
-        int index = listitems.data.indexOf(listitems.selected);
-        list.selectItem(index);
-      }
-    }
-  } 
-  
-  void selectDataset(event) {
-    listitems.selected = list.selection;
+  void syncSelected(SelectionChange change) {
+    async((_) {
+      var selected = change.selectFirst && list.data.isNotEmpty?list.data.first:change.item;
+      if (selected != list.selection) {
+        if (selected == null) list.clearSelection();
+        else {
+          Map index = list.indexesForData(selected);
+          if (index['virtual']>=0) list.selectItem(index['virtual']);
+          }
+        }
+    });
   }
  
 }

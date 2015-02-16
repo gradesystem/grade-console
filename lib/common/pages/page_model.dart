@@ -14,7 +14,7 @@ abstract class SubPageModel<T extends GradeEntity> {
  
   void loadAll() {
     storage.loading = true;
-    storage.selected = null;
+    storage.clearSelection();
     service.getAll()
     .then(_setData)
     .catchError((e)=>onError(e, loadAll))

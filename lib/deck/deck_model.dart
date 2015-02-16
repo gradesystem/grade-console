@@ -59,6 +59,7 @@ class DeckPageModel {
 
     _clear();
     storage.data.addAll(items.map(_toRunningTask));
+    storage.selectFirst();
     storage.loading = false;
 
   }

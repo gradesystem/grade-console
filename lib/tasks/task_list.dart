@@ -18,8 +18,6 @@ class TaskList extends PolymerElement with Filters {
 
   CoreList list;
 
-  bool clickflag = false;
-
   FilterFunction itemFilter = (EditableModel<Task> item, String term) 
       => Filters.containsIgnoreCase(item.model.label, term) || 
           Filters.containsIgnoreCase(item.model.get(Task.K.transform), term) || 
@@ -54,34 +52,28 @@ class TaskList extends PolymerElement with Filters {
   
   void ready() {
     list = $['list'] as CoreList;
-
-    onPropertyChange(listitems, #selected, syncSelection);
+    
+    listitems.selection.listen(syncSelected);
+    
+    onPropertyChange(list, #selection, (){listitems.selected = list.selection;});
+    
     onPropertyChange(listitems.data, #isEmpty, (){
       async((_)=>list.updateSize());
     });
   }
 
-  void syncSelection() {
-    if (listitems.selected != null && listitems.selected != list.selection) {
-      if (listitems.selected == null) list.clearSelection(); 
-      else {
-        Map index = list.indexesForData(listitems.selected);
-        if (index['virtual']>=0) list.selectItem(index['virtual']);
+  
+  void syncSelected(SelectionChange change) {
+    async((_) {
+      var selected = change.selectFirst && list.data.isNotEmpty?list.data.first:change.item;
+      if (selected != list.selection) {
+        if (selected == null) list.clearSelection();
+        else {
+          Map index = list.indexesForData(selected);
+          if (index['virtual']>=0) list.selectItem(index['virtual']);
+        }
       }
-    }
-  }
-
-  void selectItem(event) {
-    //workaround to https://github.com/dart-lang/core-elements/issues/160
-    if (!clickflag) listitems.selected = list.selection; 
-    else {
-      syncSelection();
-      clickflag = false;
-    }
-  }
-
-  void setClickFlag() {
-    clickflag = true;
+    });
   }
 
 }
