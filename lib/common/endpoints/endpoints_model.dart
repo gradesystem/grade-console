@@ -236,7 +236,7 @@ class EndpointSubPageModel extends SubPageEditableModel<Endpoint> {
         editableModel.loadingGraphs = true;
       });
 
-      endpointService.moveEndpointGraph(editableModel.model, oldGraph, newGraph, newEndpointName).then((bool result) {
+      endpointService.moveEndpointGraph(editableModel.model, oldGraph, newGraph, oldEndpoint.model.name).then((bool result) {
         refreshGraphs(storage.findByName(newEndpointName));
       }).catchError((e) => onError(e, () => moveEndpointGraph(editableModel, oldGraph, newGraph, oldEndpoint, newEndpointName))).whenComplete(() {
         timer.cancel();
