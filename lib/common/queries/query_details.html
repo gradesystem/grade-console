@@ -156,15 +156,17 @@
 	        </grade-item>
 	        
 	       <!-- status --> 
-         <div smaller service layout horizontal center-justified>
-            <div center horizontal layout>
-              <div flex fg service-label bolder>SERVICE</div>
-                <paper-toggle-button fg 
-                checked={{service}}
-                disabled="{{ !editable || item.model.isSystem}}" >
-                </paper-toggle-button>
-            </div>
-          </div>
+	       <template if={{statusEditEnabled}}>
+	         <div smaller service layout horizontal center-justified>
+	            <div center horizontal layout>
+	              <div flex fg service-label bolder>SERVICE</div>
+	                <paper-toggle-button fg 
+	                checked={{service}}
+	                disabled="{{ !editable || item.model.isSystem}}" >
+	                </paper-toggle-button>
+	            </div>
+	          </div>
+          </template>
 	        
 	        <!-- derived fields -->
           <div derived-fields-area rounded hidden?={{!item.model.isService}}>

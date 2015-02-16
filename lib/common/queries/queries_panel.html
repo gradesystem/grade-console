@@ -49,7 +49,7 @@
 	          <grade-button toolbar icon="cancel" label="discard changes" on-click="{{onCancel}}" hidden?="{{ !queries.selected.edit}}" tooltip="left"></grade-button>
 	          <grade-button toolbar icon="save" label="save changes" on-click="{{onSave}}" hidden?="{{ !queries.selected.edit }}" disabled={{!queries.selected.valid}} tooltip="left"></grade-button>
 	          <grade-button toolbar icon="arrow-forward" label="run query" on-click="{{onQueryPlayground}}" hidden?="{{ queries.selected==null }}" tooltip="left"></grade-button>
-	          <query-details main flex queries={{queries}} endpoints={{endpoints}} endpointRefresh={{endpointRefresh}}></query-details> 
+	          <query-details main flex queries={{queries}} endpoints={{endpoints}} endpointRefresh={{endpointRefresh}} statusEditEnabled={{statusEditEnabled}}></query-details> 
 	      </grade-header-panel>
 	
 	  </grade-scaffold>

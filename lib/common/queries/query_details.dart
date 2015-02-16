@@ -20,6 +20,9 @@ class QueryDetails extends View {
   @published
   Refresh endpointRefresh;
   
+  @published
+  bool statusEditEnabled;
+  
   @observable
   List<Validator> nameValidators = [];
   
