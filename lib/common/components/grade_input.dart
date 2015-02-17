@@ -1,4 +1,3 @@
-import 'dart:html';
 import 'package:polymer/polymer.dart';
 import 'package:paper_elements/paper_input_decorator.dart';
 import 'package:grade_console/common.dart';

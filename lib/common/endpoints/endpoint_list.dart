@@ -3,26 +3,18 @@ part of endpoints;
 @CustomTag("endpoint-list") 
 class EndpointList extends GradeList {
   
-  ListFilter dataFilter = new ListFilter("DATA", true);
-  ListFilter systemFilter = new ListFilter("SYSTEM", true);
-  ListFilter lockedFilter = new ListFilter("LOCKED", true);
+  ListFilter dataFilter = new ListFilter("DATA", true, (EditableModel<Endpoint> item)=>item.model.isData);
+  ListFilter systemFilter = new ListFilter("SYSTEM", true, (EditableModel<Endpoint> item)=>item.model.isSystem);
+  ListFilter lockedFilter = new ListFilter("LOCKED", true, (EditableModel<Endpoint> item)=>item.model.locked);
+  ListFilter underEditAlwaysVisibleFilter = new ListFilter.hidden((EditableModel item)=>item.edit, false);
   
-  FilterFunction itemFilter = (EditableModel<Endpoint> item, String term) 
+  KeywordFilterFunction itemFilter = (EditableModel<Endpoint> item, String term) 
                     => item.model.name != null && 
                        item.model.name.toLowerCase().contains(term.toLowerCase());
   
-  applyFilters(List<ListFilter> filters, _) => (List items) {
-      
-      return toObservable(items.where((EditableEndpoint item) {
-        return item.edit 
-            || (lockedFilter.active && item.model.locked)
-            || (dataFilter.active && item.model.isData)
-            || (systemFilter.active && item.model.isSystem);
-      }).toList());
-    };
-  
   EndpointList.created() : super.created('list') {
-    filters.addAll([dataFilter, systemFilter, lockedFilter]);
+    filters.addAll([dataFilter, systemFilter, lockedFilter, underEditAlwaysVisibleFilter]);
+    setupKeywordFilter(itemFilter);
   }
 
 }

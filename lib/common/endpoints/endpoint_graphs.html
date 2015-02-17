@@ -28,7 +28,7 @@
 				
 					<core-selector selectedAttribute="fg">
 					
-						<template repeat="{{graph in item.model.graphs | filter(kfilter, itemFilter) | sort(graphSorter)}}">
+						<template repeat="{{graph in item.model.graphs | filter(kfilter) | sort(graphSorter)}}">
 							
 			        <graph-details-summary pointer graph={{graph}} removeEnabled={{!item.model.locked}}></graph-details-summary>
 							  

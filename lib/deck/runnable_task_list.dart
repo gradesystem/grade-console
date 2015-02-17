@@ -3,12 +3,14 @@ part of deck;
 @CustomTag("runnable-task-list") 
 class RunnableTaskList extends GradeList {
 
-  FilterFunction itemFilter = (EditableModel<Task> item, String term) 
+  KeywordFilterFunction itemFilter = (EditableModel<Task> item, String term) 
                                 =>  !item.newModel && !item.edit && 
                                     item.model.label != null && 
                                     item.model.label.toLowerCase().contains(term.toLowerCase());
   
-  RunnableTaskList.created() : super.created('list');
+  RunnableTaskList.created() : super.created('list') {
+    setupKeywordFilter(itemFilter, false);
+  }
   
   //we don't want to sync selection from list to model
   void ready() {

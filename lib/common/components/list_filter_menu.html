@@ -29,7 +29,7 @@
     </style>
     
 		<grade-dropdown-button toolbar on-button-click="{{refresh}}" style="margin-right:2px">
-		  <template repeat="{{filter in filters | enumerate}}">
+		  <template repeat="{{filter in filters | onlyVisible | enumerate}}">
 		    <paper-item smallish fg-alt filter-index="{{filter.index}}" on-tap="{{onTap}}">
 		      <core-icon class="icon" icon="check" hidden?="{{!filter.value.active}}"></core-icon>
 		      <span spacer hidden?="{{filter.value.active}}">&nbsp;</span>

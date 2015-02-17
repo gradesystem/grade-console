@@ -14,7 +14,7 @@
  
    <list-panel loading="{{listitems.loading}}" empty={{listitems.data.isEmpty}} emptyMessage="Run some task ?" flex>
 
-	  <core-list-dart id="list" data="{{listitems.data | filter(kfilter, itemFilter)}}" height="48" fit>
+	  <core-list-dart id="list" data="{{listitems.data | filter(filtersUpdated)}}" height="48" fit>
 	    
 	    <template>
 

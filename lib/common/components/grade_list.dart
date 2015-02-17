@@ -19,12 +19,39 @@ class GradeList extends PolymerElement with Filters {
   @published
   ListItems listitems;
   
+  @observable
+  bool filtersUpdated = false;
+  
   String listId;
   CoreList list;
   CoreResizable resizable;
 
   GradeList.created(this.listId) : super.created() {
     resizable = new CoreResizable(this);
+    onPropertyChange(filters, #lastChangedItem, (){
+          filtersUpdated = true;
+        });
+  }
+  
+  filter(_) {
+    filtersUpdated = false;
+    return (List items) => items == null || items.isEmpty ? items : toObservable(applyFilters(items)); 
+  }
+  
+  applyFilters(List items) => items.where((item)=>applyExclusiveFilter(item) && applyOtherFilter(item)).toList();
+  
+  applyExclusiveFilter(dynamic item) => filters.where(exclusiveFilter).every((ListFilter filter)=>filter.accept(item));
+  exclusiveFilter(ListFilter filter) => filter.active && filter.exclusive;
+  
+  applyOtherFilter(dynamic item) => filters.isNotEmpty ? filters.where(otherFilter).any((ListFilter filter)=>filter.accept(item)) : true;
+  otherFilter(ListFilter filter) => filter.active && !filter.exclusive;
+  
+  void setupKeywordFilter(KeywordFilterFunction filter, [bool exclusive = true]) {
+    ListFilter keywordFilter = new ListFilter.hidden((dynamic item)=>filter(item,kfilter), exclusive);
+    filters.add(keywordFilter);
+    onPropertyChange(this, #kfilter, (){
+      filtersUpdated = true;
+    });
   }
     
   void ready() {
@@ -69,3 +96,5 @@ class GradeList extends PolymerElement with Filters {
     });
   }
 }
+
+typedef bool KeywordFilterFunction(dynamic item, String term);

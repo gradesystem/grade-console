@@ -6,9 +6,11 @@ class DatasetList extends GradeList {
   @published
   bool ddEnabled = false;
   
-  FilterFunction itemFilter = (Dataset item, String term) => item.title != null && item.title.toLowerCase().contains(term.toLowerCase());
+  KeywordFilterFunction itemFilter = (Dataset item, String term) => item.title != null && item.title.toLowerCase().contains(term.toLowerCase());
 
-  DatasetList.created() : super.created('list');
+  DatasetList.created() : super.created('list') {
+    setupKeywordFilter(itemFilter, false);
+  }
   
   void ready() {
     super.ready();

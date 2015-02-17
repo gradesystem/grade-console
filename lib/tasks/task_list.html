@@ -13,7 +13,7 @@
  <template>
    <list-panel loading="{{listitems.loading}}" empty={{listitems.data.isEmpty}} flex style="/*border: 5px solid red*/">
 
-	  <core-list-dart id="list" data="{{listitems.data | filter(kfilter, itemFilter) | applyFilters(filters, filters.lastChangedItem)}}" height="48" fit>
+	  <core-list-dart id="list" data="{{listitems.data | filter(filtersUpdated)}}" height="48" fit>
 	    
 	    <template>
 	     <task-details-summary flex item="{{model}}" selected="{{ selected==true }}"></task-details-summary>

@@ -7,17 +7,19 @@ import 'package:polymer/polymer.dart';
 class ListFilterMenu extends PolymerElement {
   
   @published
-  ObservableList filters;
+  ObservableList<ListFilter> filters;
   
   @published
   bool disabled;
+  
+  onlyVisible(ObservableList filters) => filters == null || filters.isEmpty ? filters : toObservable(filters.where((ListFilter filter)=>filter.visible).toList());
 
   ListFilterMenu.created() : super.created();
 
   void onTap(Event event, detail, target) {
     String index = target.attributes['filter-index'];
     int filterIndex = int.parse(index);
-    filters[filterIndex].active = !filters[filterIndex].active;
+    onlyVisible(filters)[filterIndex].active = !filters[filterIndex].active;
     fire('filter-updated');
   }
   
@@ -30,6 +32,18 @@ class ListFilter extends Observable {
   @observable
   bool active;
   
-  ListFilter(this.label, this.active);
+  FilterFunction function;
+  
+  bool visible;
+  
+  bool exclusive;
+  
+  ListFilter(this.label, this.active, this.function, [this.visible = true, this.exclusive = false]);
+  
+  ListFilter.hidden(FilterFunction function, bool exclusive):this(null, true, function, false, exclusive);
+
+  bool accept(dynamic item) => function(item);
   
 }
+
+typedef bool FilterFunction(dynamic item);

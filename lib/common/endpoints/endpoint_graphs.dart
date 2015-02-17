@@ -8,9 +8,12 @@ class EndpointGraphs extends PolymerElement with Filters {
   @published
   String kfilter;
   
-  FilterFunction itemFilter = (Graph item, String term) 
-                    => item.label != null && 
-                       item.label.toLowerCase().contains(term.toLowerCase());
+  filter(String term) {
+     return (List items) => items == null || items.isEmpty || term == null || term.isEmpty ? items : 
+       toObservable(items.where((Graph item) 
+           => item.label != null && 
+              item.label.toLowerCase().contains(term.toLowerCase())).toList()); 
+   }
   
   @published
   Endpoints items;
