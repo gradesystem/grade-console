@@ -21,7 +21,7 @@
 	
      <paper-item trim bg-selected?="{{selected}}">
            
-	     <grade-item smallicon icon="cloud-circle" flex>
+	     <grade-item smallicon icon="{{item.model.updateUri == null || item.model.updateUri.isEmpty?'cloud-circle':'cloud-upload'}}" flex>
 	     
 	       <grade-fascia flex truncate>
 	         <div fascia-title>{{ name }}</div>
@@ -29,7 +29,7 @@
 	       </grade-fascia>
 	       
 	       <grade-button action onhover hidden?="{{ item.edit || !selected }}" smallicon icon="content-copy" tooltip="left" label="clone endpoint" on-click={{cloneItem}}></grade-button>
-	       <grade-button action hidden?="{{ !item.model.locked }}" smallicon tooltip="left" label="locked endpoint" icon="lock"></grade-button>
+	       <grade-button action hidden?="{{ !item.model.locked }}" smallicon tooltip="left" label="protected endpoint" icon="lock"></grade-button>
          <grade-button action hidden?="{{ !item.model.isSystem }}" smallicon tooltip="left" label="system endpoint" icon="settings"></grade-button>
          
          <grade-button action onhover hidden?="{{ item.edit || !selected || item.model.isSystem || item.model.locked}}" smallicon tooltip="left" label="remove endpoint" icon="delete" on-click={{removeItem}}></grade-button>
