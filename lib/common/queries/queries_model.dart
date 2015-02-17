@@ -14,7 +14,7 @@ class QueryKeys {
   final String parameters = "parameters";
   final String status = "status";
   
-  final String status_service = "published,";
+  final String status_service = "published";
   final String status_internal = "unpublished";
   final String status_system = "system";
 }
