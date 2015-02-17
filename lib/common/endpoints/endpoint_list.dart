@@ -5,7 +5,6 @@ class EndpointList extends GradeList {
   
   ListFilter dataFilter = new ListFilter("DATA", true, (EditableModel<Endpoint> item)=>item.model.isData);
   ListFilter systemFilter = new ListFilter("SYSTEM", true, (EditableModel<Endpoint> item)=>item.model.isSystem);
-  ListFilter lockedFilter = new ListFilter("PROTECTED", true, (EditableModel<Endpoint> item)=>item.model.locked);
   ListFilter underEditAlwaysVisibleFilter = new ListFilter.hidden((EditableModel item)=>item.edit, false);
   
   KeywordFilterFunction itemFilter = (EditableModel<Endpoint> item, String term) 
@@ -13,7 +12,7 @@ class EndpointList extends GradeList {
                        item.model.name.toLowerCase().contains(term.toLowerCase());
   
   EndpointList.created() : super.created('list') {
-    filters.addAll([dataFilter, systemFilter, lockedFilter, underEditAlwaysVisibleFilter]);
+    filters.addAll([dataFilter, systemFilter, underEditAlwaysVisibleFilter]);
     setupKeywordFilter(itemFilter);
   }
 
