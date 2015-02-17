@@ -3,6 +3,9 @@ part of endpoints;
 @CustomTag("endpoints-panel") 
 class EndpointsPanel extends ResizerPolymerElement with Filters, Dependencies {
   
+  int GRAPHS_AREA = 0;
+  int PROPERTIES_AREA = 1;
+  
   @published
   String page;
     
@@ -51,7 +54,10 @@ class EndpointsPanel extends ResizerPolymerElement with Filters, Dependencies {
   
   @ObserveProperty("model.storage.selected")
   void updateArea() {
-    if (model!=null && (model.storage.selected!=null && model.storage.selected.newModel) || model.storage.selected == null) area = 0; 
+    if (model!=null && (model.storage.selected!=null && model.storage.selected.newModel) || model.storage.selected == null) {
+      area = PROPERTIES_AREA; 
+      propertiesTabs.updateBar();
+    }
   }
   
   void refresh() {

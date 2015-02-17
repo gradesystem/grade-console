@@ -22,7 +22,7 @@
 <polymer-element name="endpoints-panel" horizontal layout>
 
   <template>
- 
+
       <grade-scaffold flex>
 	  
 	      <grade-header-panel main fit paneltitle="ENDPOINTS" fixedmain="true">
@@ -47,23 +47,23 @@
 	      <grade-header-panel side fit fixedmain="true">
 	      
           <paper-tabs id="propertiesTabs" menu style="width:200px" selected="{{ area }}" hidden?="{{items.selected==null}}">
+            <paper-tab>GRAPHS</paper-tab>
             <paper-tab>PROPERTIES</paper-tab>
-            <paper-tab hide?="{{items.selected.newModel || items.selected.edit || items.selected.synching}}">GRAPHS</paper-tab>
           </paper-tabs>
 					
-					<grade-button toolbar icon="create" label="edit endpoint" on-click="{{onEdit}}" hidden?="{{  area == 1 || items.selected==null || items.selected.edit}}" tooltip="left"></grade-button>
-					<grade-button toolbar icon="cancel" label="discard changes" on-click="{{onCancel}}" hidden?="{{ area == 1 || !items.selected.edit}}" tooltip="left"></grade-button>
-					<grade-button toolbar icon="save" label="save changes" on-click="{{onSave}}" hidden?="{{ area == 1 || !items.selected.edit}}" disabled={{!items.selected.valid}} tooltip="left"></grade-button>
+					<grade-button toolbar icon="create" label="edit endpoint" on-click="{{onEdit}}" hidden?="{{ area == GRAPHS_AREA || items.selected==null || items.selected.edit}}" tooltip="left"></grade-button>
+					<grade-button toolbar icon="cancel" label="discard changes" on-click="{{onCancel}}" hidden?="{{ area == GRAPHS_AREA || !items.selected.edit}}" tooltip="left"></grade-button>
+					<grade-button toolbar icon="save" label="save changes" on-click="{{onSave}}" hidden?="{{ area == GRAPHS_AREA || !items.selected.edit}}" disabled={{!items.selected.valid}} tooltip="left"></grade-button>
 					
 					<!-- filter graphs -->
-					<grade-input toolbar hidden?="{{  area == 0 }}"
+					<grade-input toolbar hidden?="{{ area == PROPERTIES_AREA || items.selected.edit}}"
                         smaller style="width:120px; margin-right:10px" 
                         label="filter"
                         inputValue={{graphkfilter}}>
           </grade-input>
 
 					<!-- refresh graphs -->
-					<grade-button toolbar hidden?="{{  area == 0 }}"
+					<grade-button toolbar hidden?="{{ area == PROPERTIES_AREA || items.selected.edit}}"
 					               sidebutton icon=refresh
 			                   tooltip=left
 					               label="refresh graphs" 
@@ -71,7 +71,7 @@
 					</grade-button>
             
           <!-- add graph -->
-          <grade-button toolbar hidden?="{{  area == 0 }}"
+          <grade-button toolbar hidden?="{{ area == PROPERTIES_AREA  || items.selected.edit}}"
                         sidebutton
 				                action 
 				                icon="add" 
@@ -81,7 +81,6 @@
           </grade-button>
 					
 					<core-animated-pages main flex selected="{{area}}">
-            <endpoint-details items={{items}}></endpoint-details> 
             <endpoint-graphs items={{items}} 
 									            kfilter={{graphkfilter}}
 									            on-remove-graph={{onRemoveGraph}} 
@@ -89,6 +88,7 @@
 									            on-move-graph={{moveGraph}}
 									            spaced>
             </endpoint-graphs> 
+            <endpoint-details items={{items}}></endpoint-details> 
           </core-animated-pages>
 	      </grade-header-panel>
 	
