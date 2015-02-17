@@ -24,6 +24,9 @@ class QueryPlayground extends PolymerElement with Filters {
   @observable
   bool isactive;
   
+  @published
+  bool statusEditEnabled = true;
+  
   CodemirrorInput expressionEditor;
   
   QueryPlayground.created() : super.created();
