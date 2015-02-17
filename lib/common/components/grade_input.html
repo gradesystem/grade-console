@@ -1,6 +1,7 @@
 <link rel="import" href="../../../../packages/polymer/polymer.html">
 
 <link rel="import" href="../../../../packages/paper_elements/paper_input_decorator.html">
+<link rel="import" href="../../../../packages/paper_elements/paper_autogrow_textarea.html">
 <link rel="import" href="../../../../packages/core_elements/core_input.html">
 
 <polymer-element name="grade-input">
@@ -61,7 +62,6 @@
 			}
         
     </style>
-
 		<paper-input-decorator id="decorator"
 		      disabled?={{disabled}}
 		        label={{label}} 
@@ -70,9 +70,17 @@
 			<template if={{!multiline}}>
 			  <input id="input" is="core-input" value={{inputValue}} committedValue={{value}} disabled?={{disabled}} type={{type}} maxlength={{maxlength}}>
 			</template>
-			<template if={{multiline}}>
+			
+			<template if="{{autogrow && multiline}}">
+			   <paper-autogrow-textarea id="autogrow">
+			     <textarea id="input" value={{inputValue}} committedValue={{value}} disabled?={{disabled}}></textarea>
+			   </paper-autogrow-textarea>
+			</template>
+			
+			<template if="{{multiline && !autogrow}}">
 			  <textarea id="input" value={{inputValue}} committedValue={{value}} disabled?={{disabled}}></textarea>
 			</template>
+			
     </paper-input-decorator>
  
     <script type="application/dart" src="grade_input.dart"></script> 

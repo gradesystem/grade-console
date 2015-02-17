@@ -1,5 +1,6 @@
 import 'package:polymer/polymer.dart';
 import 'package:paper_elements/paper_input_decorator.dart';
+import 'package:paper_elements/paper_autogrow_textarea.dart';
 import 'package:grade_console/common.dart';
 
 @CustomTag("grade-input")
@@ -13,6 +14,9 @@ class GradeInput extends PolymerElement {
   
   @published
   bool multiline;
+  
+  @published
+  bool autogrow = false;
 
   @published
   String label;
@@ -36,10 +40,12 @@ class GradeInput extends PolymerElement {
   List<Validator> validators = [];
   
   PaperInputDecorator decorator;
+  PaperAutogrowTextarea autogrowTextarea;
   var input;
   
   void ready() {
     decorator = $["decorator"] as PaperInputDecorator;
+    autogrowTextarea = $["autogrow"] as PaperAutogrowTextarea;
     input = $["input"];
     onModelChange();
   }
@@ -52,6 +58,16 @@ class GradeInput extends PolymerElement {
   Validator missing_validator = ($) => $==null || $.isEmpty? "Please fill in this field.":null;
 
   GradeInput.created() : super.created();
+  
+  @ObserveProperty('inputValue')
+  void onInputUpdate() {
+    if (autogrow) {
+      async((_){
+        //workaround to https://github.com/dart-lang/paper-elements/issues/79
+        autogrowTextarea.jsElement.callMethod('update', [input]);
+      });
+    }
+  }
   
   @ObserveProperty('inputValue') 
   onModelChange() {
