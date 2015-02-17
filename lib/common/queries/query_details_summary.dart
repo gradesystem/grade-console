@@ -31,12 +31,12 @@ class QueryDetailsSummary extends PolymerElement with Filters {
   }
   
   void removeItem(event) {
-    event.stopImmediatePropagation();
+    //event.stopImmediatePropagation();
     fire("remove-item", detail:item);
   }
   
   void cloneItem(event) {
-    event.stopImmediatePropagation();
+    //event.stopImmediatePropagation();
     fire("clone-item", detail:item);
   }
   

@@ -1,5 +1,6 @@
 library grade_list;
 
+import 'dart:html';
 import 'package:polymer/polymer.dart';
 import 'package:grade_console/common.dart';
 import 'package:grade_console/common/lists/lists.dart';
@@ -28,13 +29,16 @@ class GradeList extends PolymerElement with Filters {
     
   void ready() {
     list = $[listId] as CoreList;
-    
+
+    //workaround to issue https://github.com/dart-lang/core-elements/issues/160
+    Element viewport = list.shadowRoot.querySelector('#viewport');
+    viewport.addEventListener('tap', (Event e){
+      if ((e.path[0] as Element).localName == 'paper-icon-button') e.stopImmediatePropagation();
+    });
+
     listitems.selection.listen(syncSelected);
     
-    onPropertyChange(list, #selection, (){
-      print('list.selection ${list.selection}');
-      listitems.selected = list.selection;
-      });
+    onPropertyChange(list, #selection, (){listitems.selected = list.selection;});
     
     onPropertyChange(listitems.data, #isEmpty, (){
       async((_)=>list.updateSize());
@@ -44,6 +48,7 @@ class GradeList extends PolymerElement with Filters {
   void attached() {
     super.attached();
     resizable.resizableAttachedHandler((_)=>list.updateSize());
+
   }
    
   void detached() {
@@ -52,7 +57,6 @@ class GradeList extends PolymerElement with Filters {
   }
   
   void syncSelected(SelectionChange change) {
-    print('syncSelected change $change');
     async((_) {
       var selected = change.selectFirst && list.data.isNotEmpty?list.data.first:change.item;
       if (selected != list.selection) {
