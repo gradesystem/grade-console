@@ -84,12 +84,14 @@
             </grade-fascia>   
           </grade-item>
 
-	        <grade-item icon=chevron-right>
+          <div horizontal layout>
+          <!-- source -->
+	        <grade-item icon=chevron-right flex>
 	      
-	         <div layout vertical flex>
+            <div layout vertical flex>
 	         
-	          <grade-fascia>
-	            <grade-dropdown-menu fascia-title flex
+              <grade-fascia>
+                <grade-dropdown-menu fascia-title flex
 	                  
 	                   required invalid="{{ editable.fieldsInvalidity[K.source_endpoint] }}"
 	                   disabled="{{ !editable.edit }}" 
@@ -106,14 +108,14 @@
 	                   </template>
 	                 </template>
 	                 
-	              </grade-dropdown-menu>
+                </grade-dropdown-menu>
 	              
 	              <grade-uri fascia-subtitle value="{{K.source_endpoint}}"></grade-uri>
 	            
-	          </grade-fascia>   
+              </grade-fascia>   
 	        
-	         <!-- source graphs -->
-	           <grade-fascia truncate>
+              <!-- source graphs -->
+              <grade-fascia truncate>
 	           
 	              <graph-selector graphs-area flex fascia-title
 	                   endpoint={{source}} 
@@ -123,60 +125,61 @@
 	                   on-refresh-endpoint={{refreshSourceGraphs}}
 	                   multi
 	                 >
-	                 </graph-selector>
+                </graph-selector>
 	            
-	             <grade-uri fascia-subtitle value="{{K.source_graph}}"></grade-uri>
+                <grade-uri fascia-subtitle value="{{K.source_graph}}"></grade-uri>
 	             
-	           </grade-fascia>   
+              </grade-fascia>   
 	          
-	          </div>
+            </div>
 	     </grade-item>
 	
-	     <grade-item icon=chevron-right>
+	     <!-- target -->
+	     <grade-item icon=chevron-right flex>
 	        
 	          <div layout vertical flex>
 	          
-	                  <grade-fascia>
-	          
-	                    <!-- target endpoint -->
-	                    <grade-dropdown-menu fascia-title flex
-	                        required invalid="{{ editable.fieldsInvalidity[K.target_endpoint] }}"
-	                         disabled="{{ !editable.edit }}" 
-	                         selected="{{ editable.model.bean[K.target_endpoint] }}"
-	                         label="target endpoint ?">
-	                         
-	                      <template repeat="{{areaEndpoints in endpoints.areaEndpoints}}">
-	                        <template repeat="{{item in areaEndpoints.endpointsStorage.synchedData}}">
-	                            <paper-item truncate dropitem="{{item.model.id}}">
-	                               <div trace>{{item.model.name}} - {{areaEndpoints.area}}</div>
-	                            </paper-item>
-	                        </template>
-	                      </template>
-	                    
-	                    </grade-dropdown-menu>
-	                    
-	                   <grade-uri fascia-subtitle value={{K.target_endpoint}}></grade-uri> 
-	                  
-	                  </grade-fascia>   
-	                
-	                 <!-- target graph -->
-	                 <grade-fascia truncat>
-	                 
-		                  <graph-selector graphs-area flex fascia-title
-			                   endpoint={{target}} 
-			                   graphs={{targetGraphs}} 
-			                   editable={{editable.edit}}
-			                   invalid="{{ editable.fieldsInvalidity[K.target_graph] }}"
-			                   on-refresh-endpoint={{refreshTargetGraphs}}
-			                 >
-			                 </graph-selector>
-	                    
-	                    <grade-uri fascia-subtitle value={{K.target_graph}}></grade-uri>  
-	                    
-	                  </grade-fascia> 
-	             </div>
-	           </grade-item>
-	
+               <grade-fascia>
+       
+                 <!-- target endpoint -->
+                 <grade-dropdown-menu fascia-title flex
+                     required invalid="{{ editable.fieldsInvalidity[K.target_endpoint] }}"
+                      disabled="{{ !editable.edit }}" 
+                      selected="{{ editable.model.bean[K.target_endpoint] }}"
+                      label="target endpoint ?">
+                      
+                   <template repeat="{{areaEndpoints in endpoints.areaEndpoints}}">
+                     <template repeat="{{item in areaEndpoints.endpointsStorage.synchedData}}">
+                         <paper-item truncate dropitem="{{item.model.id}}">
+                            <div trace>{{item.model.name}} - {{areaEndpoints.area}}</div>
+                         </paper-item>
+                     </template>
+                   </template>
+                 
+                 </grade-dropdown-menu>
+                 
+                <grade-uri fascia-subtitle value={{K.target_endpoint}}></grade-uri> 
+               
+               </grade-fascia>   
+             
+              <!-- target graph -->
+              <grade-fascia truncat>
+              
+                <graph-selector graphs-area flex fascia-title
+                  endpoint={{target}} 
+                  graphs={{targetGraphs}} 
+                  editable={{editable.edit}}
+                  invalid="{{ editable.fieldsInvalidity[K.target_graph] }}"
+                  on-refresh-endpoint={{refreshTargetGraphs}}
+                >
+                </graph-selector>
+                 
+                 <grade-uri fascia-subtitle value={{K.target_graph}}></grade-uri>  
+                 
+               </grade-fascia> 
+          </div>
+        </grade-item>
+	     </div>
 	        
 	        <!-- transform query -->
 	        <grade-item icon=chevron-right>
