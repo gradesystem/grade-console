@@ -70,7 +70,7 @@
             <grade-fascia flex>
               <div smaller wired rounded inset fascia-title >          
 	              <grade-input disabled="{{ !editable }}" 
-	                           multiline small-area
+	                           multiline autogrow
 	                           label="{{ K.note | suffix }} ?" 
 	                           invalid="{{ item.fieldsInvalidity[K.note] }}"
 	                           inputValue="{{ item.model.bean[K.note]  }}">
