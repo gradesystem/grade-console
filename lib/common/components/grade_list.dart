@@ -47,7 +47,8 @@ class GradeList extends PolymerElement with Filters {
   otherFilter(ListFilter filter) => filter.active && !filter.exclusive;
   
   void setupKeywordFilter(KeywordFilterFunction filter, [bool exclusive = true]) {
-    ListFilter keywordFilter = new ListFilter.hidden((dynamic item)=>filter(item,kfilter), exclusive);
+    ListFilter keywordFilter = new ListFilter.hidden(
+        (dynamic item)=>(kfilter == null || kfilter.isEmpty) || filter(item,kfilter), exclusive);
     filters.add(keywordFilter);
     onPropertyChange(this, #kfilter, (){
       filtersUpdated = true;
