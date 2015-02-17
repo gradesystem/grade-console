@@ -10,8 +10,8 @@ class TaskList extends GradeList {
     
   KeywordFilterFunction itemFilter = (EditableModel<Task> item, String term) 
       => Filters.containsIgnoreCase(item.model.label, term) || 
-          Filters.containsIgnoreCase(item.model.get(Task.K.transform), term) || 
-          Filters.containsIgnoreCase(item.model.get(Task.K.diff), term);
+         Filters.containsIgnoreCase(item.model.get(Task.K.transform), term) || 
+         Filters.containsIgnoreCase(item.model.get(Task.K.diff), term);
 
   TaskList.created() : super.created('list') {
     filters.addAll([publishFilter, addFilter, removeFilter, underEditAlwaysVisibleFilter]);
