@@ -23,7 +23,7 @@ class DeckPageModel {
   void runTask(EditableTask editableTask) {
     RunningTask runningTask = tasksModel.runTask(editableTask);
     storage.data.add(runningTask);
-    storage.selected = runningTask;
+    storage.select(runningTask);
   }
   
   void cancelExecution(RunningTask runningTask) {
@@ -35,7 +35,7 @@ class DeckPageModel {
     storage.data.remove(runningTask);
     
     //required for core-list issue https://github.com/dart-lang/core-elements/issues/160
-    if (storage.data.isEmpty) storage.selected = null;
+    if (storage.data.isEmpty) storage.clearSelection();
   }
   
   void loadRunnable() {
@@ -51,7 +51,7 @@ class DeckPageModel {
 
   void loadAll() {
     storage.loading = true;
-    storage.selected = null;
+    storage.clearSelection();
     executionsService.getAll().then(_setData).catchError((e) => _onError(e, loadAll));
   }
 
@@ -119,5 +119,3 @@ class RunningTasks extends ListItems<RunningTask> {
     
 
 }
-
-

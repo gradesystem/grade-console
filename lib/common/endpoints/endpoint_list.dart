@@ -1,22 +1,11 @@
 part of endpoints;
 
 @CustomTag("endpoint-list") 
-class EndpointList extends PolymerElement with Filters {
-  
-  @published
-  String kfilter = '';
+class EndpointList extends GradeList {
   
   ListFilter dataFilter = new ListFilter("DATA", true);
   ListFilter systemFilter = new ListFilter("SYSTEM", true);
   ListFilter lockedFilter = new ListFilter("LOCKED", true);
-  
-  @published
-  ObservableList<ListFilter> filters = new ObservedItemList.from([]);
-  
-  @published
-  ListItems listitems;
-  
-  CoreList list;
   
   FilterFunction itemFilter = (EditableModel<Endpoint> item, String term) 
                     => item.model.name != null && 
@@ -32,45 +21,8 @@ class EndpointList extends PolymerElement with Filters {
       }).toList());
     };
   
-  CoreResizable resizable;
-  
-  EndpointList.created() : super.created() {
-    resizable = new CoreResizable(this);
+  EndpointList.created() : super.created('list') {
     filters.addAll([dataFilter, systemFilter, lockedFilter]);
   }
-  
-  void attached() {
-     super.attached();
-     resizable.resizableAttachedHandler((_)=>list.updateSize());
-   }
-   
-   void detached() {
-     super.detached();
-     resizable.resizableDetachedHandler();
-   }
-  
-  void ready() {
-    list = $['list'] as CoreList;
-    
-    listitems.selection.listen(syncSelected);
-    
-    onPropertyChange(list, #selection, (){listitems.selected = list.selection;});
-    
-    onPropertyChange(listitems.data, #isEmpty, (){
-      async((_)=>list.updateSize());
-    });
-  }
-  
-  void syncSelected(SelectionChange change) {
-    async((_) {
-      var selected = change.selectFirst && list.data.isNotEmpty?list.data.first:change.item;
-      if (selected != list.selection) {
-        if (selected == null) list.clearSelection();
-        else {
-          Map index = list.indexesForData(selected);
-          if (index['virtual']>=0) list.selectItem(index['virtual']);
-        }
-      }
-    });
-  }
+
 }

@@ -6,7 +6,6 @@ import 'dart:collection';
 import 'dart:convert' show JSON;
 
 import 'package:polymer/polymer.dart';
-import 'package:core_elements/core_list_dart.dart';
 import 'package:paper_elements/paper_tabs.dart';
 import 'package:event_bus/event_bus.dart';
 import 'package:logging/logging.dart';
@@ -14,10 +13,10 @@ import 'package:di/di.dart';
 
 import '../../common.dart';
 
-import '../lists/lists.dart';
 import '../editables/editables.dart';
 import '../components/core_resizable.dart';
 import '../components/list_filter_menu.dart';
+import '../components/grade_list.dart';
 
 part 'endpoints_model.dart';
 part 'endpoint_details.dart';

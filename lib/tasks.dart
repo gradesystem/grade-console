@@ -10,7 +10,6 @@ import 'package:logging/logging.dart';
 import 'package:di/di.dart';
 import 'package:di/annotations.dart';
 import 'package:event_bus/event_bus.dart';
-import 'package:core_elements/core_list_dart.dart';
 import 'package:core_elements/core_collapse.dart';
 
 import 'common.dart';
@@ -20,6 +19,7 @@ import 'common/endpoints/endpoints.dart';
 import 'common/editables/editables.dart';
 import 'common/components/core_resizable.dart';
 import 'common/components/list_filter_menu.dart';
+import 'common/components/grade_list.dart';
 
 part 'tasks/tasks_page.dart';
 part 'tasks/task_details.dart';

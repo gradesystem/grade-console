@@ -1,22 +1,11 @@
 part of queries;
 
 @CustomTag("query-list") 
-class QueryList extends PolymerElement with Filters {
-  
-  @published
-  String kfilter = '';
+class QueryList extends GradeList {
   
   ListFilter servicesFilter = new ListFilter("SERVICES", true);
   ListFilter internalFilter = new ListFilter("INTERNAL", true);
   ListFilter systemFilter = new ListFilter("SYSTEM", false);
-  
-  @published
-  ObservableList<ListFilter> filters = new ObservedItemList.from([]);
-  
-  @published
-  ListItems listitems;
-  
-  CoreList list;
   
   FilterFunction itemFilter = (EditableModel<Query> item, String term) 
                     => Filters.containsIgnoreCase(item.model.name, term)
@@ -32,46 +21,8 @@ class QueryList extends PolymerElement with Filters {
     }).toList());
   };
   
-  CoreResizable resizable;
-  
-  QueryList.created() : super.created() {
-    resizable = new CoreResizable(this);
+  QueryList.created() : super.created('list') {
     filters.addAll([servicesFilter, internalFilter, systemFilter]);
-  }
-  
-  void attached() {
-    super.attached();
-    resizable.resizableAttachedHandler((_)=>list.updateSize());
-  }
-   
-  void detached() {
-    super.detached();
-    resizable.resizableDetachedHandler();
-  }
-  
-  void ready() {
-    list = $['list'] as CoreList;
-    
-    listitems.selection.listen(syncSelected);
-    
-    onPropertyChange(list, #selection, (){listitems.selected = list.selection;});
-    
-    onPropertyChange(listitems.data, #isEmpty, (){
-      async((_)=>list.updateSize());
-    });
-  }
-  
-  void syncSelected(SelectionChange change) {
-    async((_) {
-      var selected = change.selectFirst && list.data.isNotEmpty?list.data.first:change.item;
-      if (selected != list.selection) {
-        if (selected == null) list.clearSelection();
-        else {
-          Map index = list.indexesForData(selected);
-          if (index['virtual']>=0) list.selectItem(index['virtual']);
-        }
-      }
-    });
   }
  
 }

@@ -30,11 +30,13 @@ class QueryDetailsSummary extends PolymerElement with Filters {
       
   }
   
-  void removeItem() {
+  void removeItem(event) {
+    event.stopImmediatePropagation();
     fire("remove-item", detail:item);
   }
   
-  void cloneItem() {
+  void cloneItem(event) {
+    event.stopImmediatePropagation();
     fire("clone-item", detail:item);
   }
   
