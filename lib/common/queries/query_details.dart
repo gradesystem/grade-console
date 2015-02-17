@@ -40,8 +40,8 @@ class QueryDetails extends View {
   bool get loading => item!=null && item.synching;
   
   @ComputedProperty("item.model.bean[K.status]")
-  bool get service => get(item,K.status) == K.status_service;
-  set service(bool value) {set(item,K.status,value?K.status_service:K.status_internal);}
+  bool get service => get(item,K.status) == K.status_published;
+  set service(bool value) {set(item,K.status,value?K.status_published:K.status_unpublished);}
   
   @ComputedProperty("item.model.bean[K.target]")
   String get targetId => get(item, K.target);

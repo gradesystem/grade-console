@@ -14,8 +14,8 @@ class QueryKeys {
   final String parameters = "parameters";
   final String status = "status";
   
-  final String status_service = "published";
-  final String status_internal = "unpublished";
+  final String status_published = "published";
+  final String status_unpublished = "unpublished";
   final String status_system = "system";
 }
 
@@ -38,7 +38,7 @@ class Query extends EditableGradeEntity with Filters, Observable {
   Query(String base_url, String repo_path) : this.fromBean(base_url, repo_path, {
         K.name: "",
         K.expression: "",
-        K.status:K.status_internal,
+        K.status:K.status_unpublished,
         K.graph: []
       });
 
@@ -49,7 +49,7 @@ class Query extends EditableGradeEntity with Filters, Observable {
     onBeanChange([K.status], () {
       notifyPropertyChange(#status, null, status);
       notifyPropertyChange(#isSystem, null, isSystem);
-      notifyPropertyChange(#isService, null, isService);
+      notifyPropertyChange(#isPublished, null, isPublished);
     }); 
     //we don't support graphs in bean map writing
   }
@@ -85,7 +85,10 @@ class Query extends EditableGradeEntity with Filters, Observable {
   bool get isSystem => get(K.status) == K.status_system;
   
   @observable
-  bool get isService => get(K.status) == K.status_service;
+  bool get isPublished => get(K.status) == K.status_published;
+  
+  @observable
+  bool get isUnpublished => get(K.status) == K.status_unpublished;
 
   Query clone() => new Query.fromBean(base_url, repo_path, new Map.from(bean));
 
@@ -147,7 +150,7 @@ class QuerySubPageModel extends SubPageEditableModel<Query> {
 
   static EditableQuery generate(Query query) {
     //we are cloning
-    if (query.id == null) query.bean[Query.K.status] = Query.K.status_internal;
+    if (query.id == null) query.bean[Query.K.status] = Query.K.status_unpublished;
     return new EditableQuery(query);
   }
 
