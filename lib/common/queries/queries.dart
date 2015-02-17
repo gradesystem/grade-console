@@ -6,6 +6,7 @@ import 'dart:convert' show JSON;
 
 import 'package:polymer/polymer.dart';
 import 'package:core_elements/core_collapse.dart';
+import 'package:paper_elements/paper_tabs.dart';
 import 'package:event_bus/event_bus.dart';
 import 'package:logging/logging.dart';
 
@@ -20,6 +21,7 @@ import '../components/grade_list.dart';
 
 part 'queries_model.dart';
 part 'query_details.dart';
+part 'query_publish.dart';
 part 'query_details_summary.dart';
 part 'queries_panel.dart';
 part 'query_list.dart';

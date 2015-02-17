@@ -35,16 +35,6 @@
 		  }
 		        
       [graphs-area] { min-height:130px; margin-top:15px }
-      
-      [derived-fields-area] { padding:10px;margin-top: 30px; color: lightgrey}
-      
-      [service] { 
-        height:45px;
-      }
-      
-      [service-label] { 
-        padding-right:15px;
-      }
 		  
     </style>
 		
@@ -154,35 +144,7 @@
             </div>
 				    
 	        </grade-item>
-	        
-	       <!-- status --> 
-	       <template if={{statusEditEnabled}}>
-	         <div smaller service layout horizontal center-justified>
-	            <div center horizontal layout>
-	              <div flex fg service-label bolder>SERVICE</div>
-	                <paper-toggle-button fg 
-	                checked={{service}}
-	                disabled="{{ !editable || item.model.isSystem}}" >
-	                </paper-toggle-button>
-	            </div>
-	          </div>
-          </template>
-	        
-	        <!-- derived fields -->
-          <div derived-fields-area rounded hidden?={{!item.model.isPublished}}>
-          
-            <!-- endpoint -->
-            <div layout vertical center>
-                <div smaller>available at:</div>
-               <div fg bolder larger>{{ item.model.endpoint }}</div>
-               <div smaller hidden?="{{parameters == null || parameters.isEmpty}}">requires: {{ parameters }}</div>
-            </div>
-          
-          </div>
-          
-                  
 
-	          
 	      </div>
 	    </loading-panel>
     </div>

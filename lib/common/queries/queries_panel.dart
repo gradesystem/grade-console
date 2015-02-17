@@ -6,6 +6,9 @@ class QueriesPanel extends ResizerPolymerElement with Filters, Dependencies {
   @published
   String page;
   
+  @observable
+  int subArea = 0;
+  
   @published
   bool statusEditEnabled = true;
   
@@ -43,6 +46,7 @@ class QueriesPanel extends ResizerPolymerElement with Filters, Dependencies {
 
   Refresh endpointRefresh;
 
+  PaperTabs propertiesTabs;
 
   QueriesPanel.created() : super.created() {
     if (page == null) throw new Exception("Page attribute not specified");
@@ -52,6 +56,11 @@ class QueriesPanel extends ResizerPolymerElement with Filters, Dependencies {
     endpoints = instanceOf(Endpoints, pageAnnotation);
     endpointRefresh = (instanceOf(EndpointSubPageModel, pageAnnotation) as EndpointSubPageModel).refreshGraphs;
 
+  }
+  
+  void ready() {
+    propertiesTabs = $["propertiesTabs"] as PaperTabs;
+    addResizeListener((_)=>propertiesTabs.updateBar());
   }
 
   Queries get queries => model.storage;

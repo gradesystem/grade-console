@@ -1,0 +1,72 @@
+<link rel="import" href="../../../../packages/polymer/polymer.html">
+<link rel="import" href="../../../../packages/core_elements/core_icon.html">
+<link rel="import" href="../../../../packages/paper_elements/paper_item.html">
+<link rel="import" href="../../../../packages/paper_elements/paper_toggle_button.html"> 
+
+<link rel="import" href="../components/grade_input.html">
+<link rel="import" href="../components/grade_dropdown_menu.html">
+<link rel="import" href="../components/grade_item.html">
+<link rel="import" href="../components/grade_fascia.html">
+<link rel="import" href="../components/loading_panel.html">
+<link rel="import" href="../components/grade_uri.html">
+<link rel="import" href="../components/grade_button.html">
+
+<link rel="import" href="../endpoints/graph_selector.html">
+
+<link rel="import" href="queries.html">
+
+<polymer-element name="query-publish" layout vertical> 
+
+  <template>
+  
+		<style>
+
+      [derived-fields-area] { padding:10px;margin-top: 30px; color: lightgrey}
+      
+      [service] { 
+        height:45px;
+      }
+      
+      [service-label] { 
+        padding-right:15px;
+      }
+		  
+    </style>
+		
+    <div flex hidden?="{{item==null}}" vertical layout>
+
+      <loading-panel flex loading="{{loading}}" message="saving the query">
+	   
+        <div fit style="overflow-y: auto;" spaced>
+
+	       <!-- status --> 
+	       <template if={{statusEditEnabled}}>
+	         <div smaller service layout horizontal center-justified>
+	            <div center horizontal layout>
+	              <div flex fg service-label bolder>SERVICE</div>
+	                <paper-toggle-button fg 
+	                checked={{service}}
+	                disabled="{{ !editable || item.model.isSystem}}" >
+	                </paper-toggle-button>
+	            </div>
+	          </div>
+          </template>
+	        
+	        <!-- derived fields -->
+          <div derived-fields-area rounded hidden?={{!item.model.isPublished}}>
+          
+            <!-- endpoint -->
+            <div layout vertical center>
+                <div smaller>available at:</div>
+               <div fg bolder larger>{{ item.model.endpoint }}</div>
+               <div smaller hidden?="{{parameters == null || parameters.isEmpty}}">requires: {{ parameters }}</div>
+            </div>
+          
+          </div>
+
+	      </div>
+	    </loading-panel>
+    </div>
+		
+  </template> 
+</polymer-element>

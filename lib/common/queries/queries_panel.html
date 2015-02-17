@@ -2,6 +2,8 @@
 
 <link rel="import" href="../../../../packages/core_elements/core_pages.html">
 <link rel="import" href="../../../../packages/core_elements/core_animated_pages.html">
+<link rel="import" href="../../../../packages/paper_elements/paper_tabs.html">
+<link rel="import" href="../../../../packages/paper_elements/paper_tab.html">
 
 <link rel="import" href="../components/grade_scaffold.html">
 <link rel="import" href="../components/grade_header_panel.html">
@@ -12,6 +14,7 @@
 
 <link rel="import" href="query_list.html">
 <link rel="import" href="query_details.html">
+<link rel="import" href="query_publish.html">
 <link rel="import" href="query_playground.html">
 <link rel="import" href="../components/list_filter_menu.html">
 
@@ -44,12 +47,22 @@
 	        
 	      </grade-header-panel>
 	      
-	      <grade-header-panel side fit paneltitle="PROPERTIES" fixedmain="true">
+	      <grade-header-panel side fit fixedmain="true" paneltitle="{{statusEditEnabled?null:'PROPERTIES'}}">
+					<paper-tabs id="propertiesTabs" menu style="width:200px" selected="{{ subArea }}" hidden?="{{queries.selected==null || !statusEditEnabled}}">
+					  <paper-tab>PROPERTIES</paper-tab>
+					  <paper-tab>PUBLISH</paper-tab>
+					</paper-tabs>
+	      
 	          <grade-button toolbar icon="create" label="edit query" on-click="{{onEdit}}" hidden?="{{ queries.selected==null || queries.selected.edit}}"></grade-button>
 	          <grade-button toolbar icon="cancel" label="discard changes" on-click="{{onCancel}}" hidden?="{{ !queries.selected.edit}}" tooltip="left"></grade-button>
 	          <grade-button toolbar icon="save" label="save changes" on-click="{{onSave}}" hidden?="{{ !queries.selected.edit }}" disabled={{!queries.selected.valid}} tooltip="left"></grade-button>
 	          <grade-button toolbar icon="arrow-forward" label="run query" on-click="{{onQueryPlayground}}" hidden?="{{ queries.selected==null }}" tooltip="left"></grade-button>
-	          <query-details main flex queries={{queries}} endpoints={{endpoints}} endpointRefresh={{endpointRefresh}} statusEditEnabled={{statusEditEnabled}}></query-details> 
+	          
+	          <core-animated-pages main flex selected="{{subArea}}">
+              <query-details flex queries={{queries}} endpoints={{endpoints}} endpointRefresh={{endpointRefresh}} statusEditEnabled={{statusEditEnabled}}></query-details>
+              <query-publish flex queries={{queries}} statusEditEnabled={{statusEditEnabled}}></query-publish>
+            </core-animated-pages>
+	           
 	      </grade-header-panel>
 	
 	  </grade-scaffold>

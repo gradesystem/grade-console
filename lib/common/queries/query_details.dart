@@ -20,9 +20,6 @@ class QueryDetails extends View {
   @published
   Refresh endpointRefresh;
   
-  @published
-  bool statusEditEnabled;
-  
   @observable
   List<Validator> nameValidators = [];
   
@@ -53,21 +50,6 @@ class QueryDetails extends View {
  
   refreshTargetGraphs() {
     endpointRefresh(target);
-  }
-
-  @ComputedProperty("item.model.parameters")
-  String get parameters {
-    
-    String params = '';
-    
-    if (item!=null) {
-      
-      List<String> parameters = item.model.parameters;
-      params = parameters.isEmpty? params :parameters.toString();
-    }
-    
-    return params;
-    
   }
   
 }
