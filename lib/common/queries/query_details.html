@@ -34,7 +34,7 @@
 		    text-overflow: ellipsis;
 		  }
 		        
-      [graphs-area] { min-height:130px; margin-top:15px }
+      [graphs-area] { min-height:200px; margin-top:15px }
 		  
     </style>
 		
@@ -77,26 +77,6 @@
 	              </grade-input>
               </div>       
               <grade-uri fascia-subtitle value={{K.note}}></grade-uri>
-              
-            </grade-fascia>
-              
-          </grade-item>
-          
-          <!-- expression -->
-          <grade-item icon=chevron-right>
-            
-            <grade-fascia flex>
-              <div smaller wired rounded inset fascia-title >       
-	              <grade-input disabled="{{ !editable }}" 
-	                           multiline large-area
-	                           required
-	                           label="{{ K.expression | suffix }} ?" 
-	                           invalid="{{ item.fieldsInvalidity[K.expression] }}"
-	                           inputValue="{{ item.model.bean[K.expression]  }}">
-	              </grade-input>
-              </div>
-                     
-              <grade-uri fascia-subtitle value={{K.expression}}></grade-uri>
               
             </grade-fascia>
               
@@ -144,6 +124,26 @@
             </div>
 				    
 	        </grade-item>
+	        
+	        <!-- expression -->
+          <grade-item icon=chevron-right>
+            
+            <grade-fascia flex>
+              <div smaller wired rounded inset fascia-title >       
+                <grade-input disabled="{{ !editable }}" 
+                             multiline large-area
+                             required
+                             label="{{ K.expression | suffix }} ?" 
+                             invalid="{{ item.fieldsInvalidity[K.expression] }}"
+                             inputValue="{{ item.model.bean[K.expression]  }}">
+                </grade-input>
+              </div>
+                     
+              <grade-uri fascia-subtitle value={{K.expression}}></grade-uri>
+              
+            </grade-fascia>
+              
+          </grade-item>
 
 	      </div>
 	    </loading-panel>

@@ -43,9 +43,9 @@
 	       <template if={{statusEditEnabled}}>
 	         <div smaller service layout horizontal center-justified>
 	            <div center horizontal layout>
-	              <div flex fg service-label bolder>SERVICE</div>
+	              <div flex fg service-label bolder>PUBLISH</div>
 	                <paper-toggle-button fg 
-	                checked={{service}}
+	                checked={{ispublished}}
 	                disabled="{{ !editable || item.model.isSystem}}" >
 	                </paper-toggle-button>
 	            </div>

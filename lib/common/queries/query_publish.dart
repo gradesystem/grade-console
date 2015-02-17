@@ -23,8 +23,8 @@ class QueryPublish extends View {
   bool get loading => item!=null && item.synching;
   
   @ComputedProperty("item.model.bean[K.status]")
-  bool get service => get(item,K.status) == K.status_published;
-  set service(bool value) {set(item,K.status,value?K.status_published:K.status_unpublished);}
+  bool get ispublished => get(item,K.status) == K.status_published;
+  set ispublished(bool value) {set(item,K.status,value?K.status_published:K.status_unpublished);}
   
   @ComputedProperty("item.model.parameters")
   String get parameters {

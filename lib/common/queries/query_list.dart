@@ -3,8 +3,8 @@ part of queries;
 @CustomTag("query-list") 
 class QueryList extends GradeList {
   
-  ListFilter servicesFilter = new ListFilter("SERVICES", true, (EditableQuery item)=>(item.model.status == Query.K.status_published));
-  ListFilter internalFilter = new ListFilter("INTERNAL", true, (EditableQuery item)=>(item.model.status == Query.K.status_unpublished && !item.model.isSystem));
+  ListFilter servicesFilter = new ListFilter("PUBLISHED", true, (EditableQuery item)=>(item.model.status == Query.K.status_published));
+  ListFilter internalFilter = new ListFilter("UNPUBLISHED", true, (EditableQuery item)=>(item.model.status == Query.K.status_unpublished && !item.model.isSystem));
   ListFilter systemFilter = new ListFilter("SYSTEM", false, (EditableQuery item)=>(item.model.isSystem));
   ListFilter underEditAlwaysVisibleFilter = new ListFilter.hidden((EditableModel item)=>item.edit, false);
   
@@ -17,5 +17,4 @@ class QueryList extends GradeList {
     filters.addAll([servicesFilter, internalFilter, systemFilter, underEditAlwaysVisibleFilter]);
     setupKeywordFilter(itemFilter);
   }
- 
 }
