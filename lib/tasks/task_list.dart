@@ -15,5 +15,6 @@ class TaskList extends GradeList {
 
   TaskList.created() : super.created('list') {
     filters.addAll([publishFilter, addFilter, removeFilter, underEditAlwaysVisibleFilter]);
+    setupKeywordFilter(itemFilter);
   }
 }
