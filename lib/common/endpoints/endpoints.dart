@@ -7,7 +7,6 @@ import 'dart:convert' show JSON;
 
 import 'package:polymer/polymer.dart';
 import 'package:paper_elements/paper_tabs.dart';
-import 'package:event_bus/event_bus.dart';
 import 'package:logging/logging.dart';
 import 'package:di/di.dart';
 

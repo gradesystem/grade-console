@@ -3,7 +3,6 @@ library editables;
 import 'dart:async';
 
 import 'package:polymer/polymer.dart';
-import 'package:event_bus/event_bus.dart';
 import 'package:logging/logging.dart';
 
 import '../../common.dart';

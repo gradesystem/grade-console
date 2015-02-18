@@ -5,7 +5,6 @@ import 'dart:async';
 import 'dart:convert' show JSON;
 
 import 'package:polymer/polymer.dart';
-import 'package:event_bus/event_bus.dart';
 
 import '../../common.dart';
 import '../lists/lists.dart';
