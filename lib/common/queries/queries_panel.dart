@@ -55,7 +55,6 @@ class QueriesPanel extends ResizerPolymerElement with Filters, Dependencies {
     model = instanceOf(QuerySubPageModel, pageAnnotation);
     endpoints = instanceOf(Endpoints, pageAnnotation);
     endpointRefresh = (instanceOf(EndpointSubPageModel, pageAnnotation) as EndpointSubPageModel).refreshGraphs;
-
   }
   
   void ready() {

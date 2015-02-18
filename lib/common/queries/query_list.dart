@@ -8,13 +8,22 @@ class QueryList extends GradeList {
   ListFilter systemFilter = new ListFilter("SYSTEM", false, (EditableQuery item)=>(item.model.isSystem));
   ListFilter underEditAlwaysVisibleFilter = new ListFilter.hidden((EditableModel item)=>item.edit, false);
   
+  @published
+  bool statusEditEnabled;
+  
   KeywordFilterFunction itemFilter = (EditableModel<Query> item, String term) 
                     => Filters.containsIgnoreCase(item.model.name, term)
                     || Filters.containsIgnoreCase(item.model.get(Query.K.expression), term)
                     || Filters.containsIgnoreCase(item.model.status, term);
   
   QueryList.created() : super.created('list') {
-    filters.addAll([servicesFilter, internalFilter, systemFilter, underEditAlwaysVisibleFilter]);
+     
     setupKeywordFilter(itemFilter);
+  }
+  
+  void ready() {
+    super.ready();
+    filters.addAll(statusEditEnabled?[servicesFilter, internalFilter, systemFilter, underEditAlwaysVisibleFilter]
+    :[systemFilter, underEditAlwaysVisibleFilter]);
   }
 }

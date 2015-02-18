@@ -19,8 +19,7 @@ class ListFilterMenu extends PolymerElement {
   void onTap(Event event, detail, target) {
     String index = target.attributes['filter-index'];
     int filterIndex = int.parse(index);
-    onlyVisible(filters)[filterIndex].active = !filters[filterIndex].active;
-    fire('filter-updated');
+    onlyVisible(filters)[filterIndex].toggle();
   }
   
 }
@@ -43,6 +42,8 @@ class ListFilter extends Observable {
   ListFilter.hidden(FilterFunction function, bool exclusive):this(null, true, function, false, exclusive);
 
   bool accept(dynamic item) => function(item);
+  
+  void toggle() {active = !active;}
   
 }
 

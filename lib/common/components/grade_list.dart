@@ -29,8 +29,8 @@ class GradeList extends PolymerElement with Filters {
   GradeList.created(this.listId) : super.created() {
     resizable = new CoreResizable(this);
     onPropertyChange(filters, #lastChangedItem, (){
-          filtersUpdated = true;
-        });
+      filtersUpdated = true;
+    });
   }
   
   filter(_) {
