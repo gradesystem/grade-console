@@ -40,21 +40,25 @@ class TasksAnnotation {
 
 init() {
   
+  String page = "tasks";
+  
   String base_url = window.location.origin;
   
-  Dependencies.bind("tasks", TasksAnnotation);
+  Dependencies.bind(page, TasksAnnotation);
   
   var module = new Module()
+  
+          ..bind(PageEventBus, toFactory: (bus) => new PageEventBus(page, bus), withAnnotation: const TasksAnnotation(), inject: [EventBus])
           
           ..bind(TasksService)
           ..bind(TaskExecutionsService)
           ..bind(TasksModel)
           ..bind(Tasks)
           
-          ..bind(QuerySubPageModel, toFactory: (bus) => new QuerySubPageModel(bus, new QueryService(base_url, _service_path), new Queries()), withAnnotation: const TasksAnnotation(), inject: [EventBus])
+          ..bind(QuerySubPageModel, toFactory: (bus) => new QuerySubPageModel(bus, new QueryService(base_url, _service_path), new Queries()), withAnnotation: const TasksAnnotation(), inject: [new Key(PageEventBus, const TasksAnnotation())])
 
           ..bind(Endpoints, toValue: new Endpoints(), withAnnotation: const TasksAnnotation())
-          ..bind(EndpointSubPageModel, toFactory: (bus, endpoints) => new EndpointSubPageModel(bus, new EndpointsService(_service_path), endpoints), withAnnotation: const TasksAnnotation(), inject: [EventBus, new Key(Endpoints, const TasksAnnotation())]);
+          ..bind(EndpointSubPageModel, toFactory: (bus, endpoints) => new EndpointSubPageModel(bus, new EndpointsService(_service_path), endpoints), withAnnotation: const TasksAnnotation(), inject: [new Key(PageEventBus, const TasksAnnotation()), new Key(Endpoints, const TasksAnnotation())]);
   
   Dependencies.add(module);
 }

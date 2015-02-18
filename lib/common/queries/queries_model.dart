@@ -142,7 +142,7 @@ class Queries extends EditableListItems<EditableQuery> {
 
 class QuerySubPageModel extends SubPageEditableModel<Query> {
 
-  QuerySubPageModel(EventBus bus, QueryService service, Queries storage) : super(bus, service, storage, ([Query query]) => generate(query != null ? query : new Query(service.base_url, service.path))) {
+  QuerySubPageModel(PageEventBus bus, QueryService service, Queries storage) : super(bus, service, storage, ([Query query]) => generate(query != null ? query : new Query(service.base_url, service.path))) {
     bus.on(ApplicationReady).listen((_) {
       loadAll();
     });

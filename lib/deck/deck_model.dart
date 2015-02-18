@@ -3,13 +3,13 @@ part of deck;
 @Injectable()
 class DeckPageModel {
 
-  EventBus bus;
+  PageEventBus bus;
 
   TasksModel tasksModel;
   TaskExecutionsService executionsService;
   RunningTasks storage;
 
-  DeckPageModel(this.bus, this.storage, this.tasksModel, this.executionsService) {
+  DeckPageModel(@DeckAnnotation() this.bus, this.storage, this.tasksModel, this.executionsService) {
     bus.on(ApplicationReady).listen((_) {
       loadAll();
     });

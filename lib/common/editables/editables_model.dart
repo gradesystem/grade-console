@@ -15,7 +15,7 @@ abstract class SubPageEditableModel<T extends EditableGradeEntity> {
   static String CLONED_NAME_SUFFIX = "_cloned";
   RegExp CLONED_NAME_REGEXP = new RegExp(r'(.*)_cloned(\d*)$');
 
-  EventBus bus;
+  PageEventBus bus;
   EditableListService<T> service;
   EditableListItems<EditableModel<T>> storage;
   

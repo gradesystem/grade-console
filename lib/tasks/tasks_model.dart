@@ -173,7 +173,7 @@ class TasksModel extends SubPageEditableModel<Task> {
   
   TaskExecutionsService executionsService; 
 
-  TasksModel(EventBus bus, TasksService service, this.executionsService, Tasks storage) : super(bus, service, storage, generate) {
+  TasksModel(@TasksAnnotation() PageEventBus bus, TasksService service, this.executionsService, Tasks storage) : super(bus, service, storage, generate) {
     bus.on(ApplicationReady).listen((_) {
       loadAll();
     });

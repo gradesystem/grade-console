@@ -2,7 +2,7 @@ part of pages;
 
 abstract class SubPageModel<T extends GradeEntity> {
   
-  EventBus bus;
+  PageEventBus bus;
   ListService<T> service;
   ListItems<T> storage;
   

@@ -29,9 +29,20 @@ part 'deck/running_task_details_summary.dart';
 
 final Logger log = new Logger('grade.deck');
 
+
+class DeckAnnotation {
+  const DeckAnnotation();
+}
+
 init() {
   
+  String page = "deck";
+  
+  Dependencies.bind(page, DeckAnnotation);
+  
   var module = new Module()
+          ..bind(PageEventBus, toFactory: (bus) => new PageEventBus(page, bus), withAnnotation: const DeckAnnotation(), inject: [EventBus])
+  
           ..bind(RunningTasks)
           ..bind(DeckPageModel);
 
