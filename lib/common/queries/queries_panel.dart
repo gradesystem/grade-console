@@ -61,6 +61,7 @@ class QueriesPanel extends ResizerPolymerElement with Filters, Dependencies {
   void ready() {
     propertiesTabs = $["propertiesTabs"] as PaperTabs;
     addResizeListener((_)=>propertiesTabs.updateBar());
+    subArea = statusEditEnabled?0:1;
   }
 
   Queries get queries => model.storage;

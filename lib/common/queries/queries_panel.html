@@ -49,8 +49,8 @@
 	      
 	      <grade-header-panel side fit fixedmain="true" paneltitle="{{statusEditEnabled?null:'PROPERTIES'}}">
 					<paper-tabs id="propertiesTabs" menu style="width:200px" selected="{{ subArea }}" hidden?="{{queries.selected==null || !statusEditEnabled}}">
-					  <paper-tab>PROPERTIES</paper-tab>
 					  <paper-tab>PUBLISH</paper-tab>
+					  <paper-tab>PROPERTIES</paper-tab>
 					</paper-tabs>
 	      
 	          <grade-button toolbar icon="create" label="edit query" on-click="{{onEdit}}" hidden?="{{ queries.selected==null || queries.selected.edit}}"></grade-button>
@@ -59,8 +59,8 @@
 	          <grade-button toolbar icon="arrow-forward" label="run query" on-click="{{onQueryPlayground}}" hidden?="{{ queries.selected==null }}" tooltip="left"></grade-button>
 	          
 	          <core-animated-pages main flex selected="{{subArea}}">
+	            <query-publish flex queries={{queries}} statusEditEnabled={{statusEditEnabled}}></query-publish>
               <query-details flex queries={{queries}} endpoints={{endpoints}} endpointRefresh={{endpointRefresh}} statusEditEnabled={{statusEditEnabled}}></query-details>
-              <query-publish flex queries={{queries}} statusEditEnabled={{statusEditEnabled}}></query-publish>
             </core-animated-pages>
 	           
 	      </grade-header-panel>
