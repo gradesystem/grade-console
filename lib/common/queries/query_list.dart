@@ -6,6 +6,7 @@ class QueryList extends GradeList {
   ListFilter servicesFilter = new ListFilter("PUBLISHED", true, (EditableQuery item)=>(item.model.status == Query.K.status_published));
   ListFilter internalFilter = new ListFilter("UNPUBLISHED", true, (EditableQuery item)=>(item.model.status == Query.K.status_unpublished && !item.model.isSystem));
   ListFilter systemFilter = new ListFilter("SYSTEM", false, (EditableQuery item)=>(item.model.isSystem));
+  ListFilter notSystemFilter = new ListFilter.hidden((EditableModel item)=>!item.model.isSystem, false);
   ListFilter underEditAlwaysVisibleFilter = new ListFilter.hidden((EditableModel item)=>item.edit, false);
   
   @published
@@ -24,6 +25,6 @@ class QueryList extends GradeList {
   void ready() {
     super.ready();
     filters.addAll(statusEditEnabled?[servicesFilter, internalFilter, systemFilter, underEditAlwaysVisibleFilter]
-    :[systemFilter, underEditAlwaysVisibleFilter]);
+    :[systemFilter, notSystemFilter, underEditAlwaysVisibleFilter]);
   }
 }
