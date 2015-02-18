@@ -275,7 +275,7 @@ grade-classes = {
     "[grade-dark-grey]" : {
       color: grade-dark-grey
     }
-   
+    
 }
 
 theme-classes = {
@@ -412,10 +412,6 @@ theme-classes = {
       background-color: grade-light-red
   }
   
-  "paper-input-decorator.invalid::shadow .cursor" : {
-      background-color: grade-light-red
-  }
-  
   //result table
       
   "[result-table]" : {
@@ -425,6 +421,20 @@ theme-classes = {
   "[result-table-disabled]" : {
     background : grade-light-grey
     color : grade-darker-grey
+  }
+  
+  //slider
+  
+  "paper-slider::shadow #sliderKnobInner" : {
+    background-color: "primary"
+  }
+  
+  "paper-slider::shadow #sliderKnobInner::before" : {
+    background-color: "primary"
+  }
+  
+  "paper-slider::shadow #sliderBar::shadow #activeProgress" : {
+    background-color: "primary"
   }
 }
 

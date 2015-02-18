@@ -29,6 +29,9 @@ class QueryPlayground extends PolymerElement with Filters {
   
   CodemirrorInput expressionEditor;
   
+  @observable
+  int resultsLimit = 0;
+  
   QueryPlayground.created() : super.created();
   
   void ready() {
@@ -36,9 +39,9 @@ class QueryPlayground extends PolymerElement with Filters {
   }
   
   void attributeChanged(name, oldValue, newValue) {
-     super.attributeChanged(name, oldValue, newValue);
-     if (name == "active") isactive =  attributes.containsKey('active');
-   }
+    super.attributeChanged(name, oldValue, newValue);
+    if (name == "active") isactive =  attributes.containsKey('active');
+  }
   
   @ComputedProperty("editableQuery.model.bean[K.expression]") 
   String get expression => editableQuery!=null?editableQuery.get(K.expression):"";
@@ -80,7 +83,7 @@ class QueryPlayground extends PolymerElement with Filters {
   }
   
   void onRun() {
-    fire("run", detail:editableQuery);
+    fire("run", detail:{"query":editableQuery,"limit":resultsLimit});
     resultTab = 0;
   }
   
@@ -98,7 +101,7 @@ class QueryPlayground extends PolymerElement with Filters {
   
   void onEatCrumb(event, detail, target) {
     event.stopImmediatePropagation();
-    fire("eat-crumb", detail:{"crumb":detail, "query":editableQuery});
+    fire("eat-crumb", detail:{"crumb":detail, "limit":resultsLimit, "query":editableQuery});
   }
   
   void showErrorDetails() {
@@ -112,7 +115,7 @@ class QueryPlayground extends PolymerElement with Filters {
   
   void onLoadRawResult(event, detail, target) {
     event.stopImmediatePropagation();
-    fire("load-raw", detail:{"query":editableQuery, "format":detail});
+    fire("load-raw", detail:{"query":editableQuery, "limit":resultsLimit, "format":detail});
   }
   
 }

@@ -224,6 +224,15 @@
   background: #fafafa;
   color: #c3c3c3;
 }
+:host /deep/ .home /deep/ paper-slider::shadow #sliderKnobInner {
+  background-color: #26699a;
+}
+:host /deep/ .home /deep/ paper-slider::shadow #sliderKnobInner::before {
+  background-color: #26699a;
+}
+:host /deep/ .home /deep/ paper-slider::shadow #sliderBar::shadow #activeProgress {
+  background-color: #26699a;
+}
 .prod-scaffold {
   background: #00bcd4;
   color: #fff;
@@ -327,6 +336,15 @@
 :host /deep/ .prod /deep/ [result-table-disabled] {
   background: #fafafa;
   color: #c3c3c3;
+}
+:host /deep/ .prod /deep/ paper-slider::shadow #sliderKnobInner {
+  background-color: #00bcd4;
+}
+:host /deep/ .prod /deep/ paper-slider::shadow #sliderKnobInner::before {
+  background-color: #00bcd4;
+}
+:host /deep/ .prod /deep/ paper-slider::shadow #sliderBar::shadow #activeProgress {
+  background-color: #00bcd4;
 }
 .deck-scaffold {
   background: #6fa6bc;
@@ -432,6 +450,15 @@
   background: #fafafa;
   color: #c3c3c3;
 }
+:host /deep/ .deck /deep/ paper-slider::shadow #sliderKnobInner {
+  background-color: #6fa6bc;
+}
+:host /deep/ .deck /deep/ paper-slider::shadow #sliderKnobInner::before {
+  background-color: #6fa6bc;
+}
+:host /deep/ .deck /deep/ paper-slider::shadow #sliderBar::shadow #activeProgress {
+  background-color: #6fa6bc;
+}
 .tasks-scaffold {
   background: #e41c23;
   color: #fff;
@@ -536,6 +563,15 @@
   background: #fafafa;
   color: #c3c3c3;
 }
+:host /deep/ .tasks /deep/ paper-slider::shadow #sliderKnobInner {
+  background-color: #e41c23;
+}
+:host /deep/ .tasks /deep/ paper-slider::shadow #sliderKnobInner::before {
+  background-color: #e41c23;
+}
+:host /deep/ .tasks /deep/ paper-slider::shadow #sliderBar::shadow #activeProgress {
+  background-color: #e41c23;
+}
 .stage-scaffold {
   background: #009587;
   color: #fff;
@@ -639,6 +675,15 @@
 :host /deep/ .stage /deep/ [result-table-disabled] {
   background: #fafafa;
   color: #c3c3c3;
+}
+:host /deep/ .stage /deep/ paper-slider::shadow #sliderKnobInner {
+  background-color: #009587;
+}
+:host /deep/ .stage /deep/ paper-slider::shadow #sliderKnobInner::before {
+  background-color: #009587;
+}
+:host /deep/ .stage /deep/ paper-slider::shadow #sliderBar::shadow #activeProgress {
+  background-color: #009587;
 }
 :host {
   height: 100%;

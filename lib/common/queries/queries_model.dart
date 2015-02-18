@@ -156,25 +156,25 @@ class QuerySubPageModel extends SubPageEditableModel<Query> {
 
   QueryService get queryService => service;
 
-  void runQuery(EditableQuery editableQuery, [RawFormat format = RawFormat.JSON]) {
+  void runQuery(EditableQuery editableQuery, int limit, [RawFormat format = RawFormat.JSON]) {
     editableQuery.lastResult.history.clear(editableQuery.model);
-    _run(editableQuery, editableQuery.model, editableQuery.parametersValues, queryService.runQuery, format);
+    _run(editableQuery, editableQuery.model, editableQuery.parametersValues, queryService.runQuery, limit:limit, format:format);
   }
   
-  void eatCrumb(EditableQuery editableQuery, Crumb crumb, [RawFormat format = RawFormat.JSON]) {
+  void eatCrumb(EditableQuery editableQuery, Crumb crumb, int limit, [RawFormat format = RawFormat.JSON]) {
     Query resultQuery = editableQuery.model.clone();
     resultQuery.set(Query.K.expression, crumb.expression);
     resultQuery.set(Query.K.graph, crumb.graphs);
        
-    _run(editableQuery, resultQuery, editableQuery.lastResult.lastParameters, queryService.runQuery, format);
+    _run(editableQuery, resultQuery, editableQuery.lastResult.lastParameters, queryService.runQuery, limit:limit, format:format);
   }
   
-  void loadRaw(EditableQuery editableQuery, RawFormat format) {
+  void loadRaw(EditableQuery editableQuery, int limit, RawFormat format) {
     Result result = editableQuery.lastResult;
     Query resultQuery = editableQuery.model.clone();
     resultQuery.set(Query.K.expression, result.lastExpression);
     result.loadingRaw = true;
-    queryService.runQuery(resultQuery, result.lastParameters, format)
+    queryService.runQuery(resultQuery, result.lastParameters, limit, format)
       .then((String raw){
       result.raws[format] = raw;
       result.loadingRaw = false;
@@ -185,11 +185,11 @@ class QuerySubPageModel extends SubPageEditableModel<Query> {
     });
   }
   
-  void _run(EditableQuery editableQuery, Query query, Map parameters, Future<String> runner(Query query, Map<String, String> parameters), [RawFormat format = RawFormat.JSON]) {
+  void _run(EditableQuery editableQuery, Query query, Map parameters, Future<String> runner(Query query, Map<String, String> parameters, int limit), {int limit : 100, RawFormat format : RawFormat.JSON}) {
     editableQuery.runQuery();
     editableQuery.lastResult.lastExpression = query.get(Query.K.expression);
     editableQuery.lastResult.lastParameters = parameters;
-    runner(query, parameters)
+    runner(query, parameters, limit)
       .then((String result) => editableQuery.queryResult(format, result))
       .catchError((e) => editableQuery.queryFailed(e));
   }

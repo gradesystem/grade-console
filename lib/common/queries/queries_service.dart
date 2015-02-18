@@ -19,17 +19,13 @@ class QueryService extends EditableListService<Query> {
     return http.get(path, parameters:uriParameters, acceptedMediaType: format.value);
   }
 
-  Future<String> runQuery(Query query, Map<String, String> parameters, [RawFormat format=RawFormat.JSON]) {
+  Future<String> runQuery(Query query, Map<String, String> parameters, int limit, [RawFormat format=RawFormat.JSON]) {
 
     Map<String, String> uriParameters = _getQueryParameters(query, parameters);
     
-    //tmp workaround to limit the result size
-    Map bean = new Map.from(query.bean);
-    
-    if (bean[Query.K.expression]!=null && !(bean[Query.K.expression] as String).toLowerCase().contains(" limit "))
-       bean[Query.K.expression] = bean[Query.K.expression]+ " limit 100";
+    uriParameters["grade_limit"] = "$limit";
 
-    return http.post(SUBMIT_PATH, JSON.encode(bean), acceptedMediaType: format.value, parameters:uriParameters);
+    return http.post(SUBMIT_PATH, JSON.encode(query.bean), acceptedMediaType: format.value, parameters:uriParameters);
   }
   
   dynamic _decode(String json) {

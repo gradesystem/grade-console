@@ -21,6 +21,7 @@
 <link rel="import" href="../../../../packages/paper_elements/paper_tabs.html">
 <link rel="import" href="../../../../packages/paper_elements/paper_tab.html">
 <link rel="import" href="../../../../packages/paper_elements/paper_input.html">
+<link rel="import" href="../../../../packages/paper_elements/paper_slider.html">
 
 <link rel="import" href="raw_result_panel.html">
 
@@ -78,10 +79,16 @@
     <div style="height:60%;" wired rounded spaced layout vertical>
       <grade-header-panel flex paneltitle={{paneltitle}} >
         <grade-button menu icon="arrow-back" on-click="{{onBack}}"></grade-button>
+				
+				<div toolbar horizontal layout center style="padding-right:10px">
+				  <paper-slider pin min="25" max="300" value="{{resultsLimit}}"></paper-slider>
+				  <span smaller>results</span>
+				</div>
 				<grade-button toolbar icon="create" label="edit query" on-click="{{onEdit}}" hidden?="{{ editableQuery.edit}}" tooltip="left"></grade-button>
 				<grade-button toolbar icon="cancel" label="discard changes" on-click="{{onCancel}}" hidden?="{{ !editableQuery.edit}}" tooltip="left"></grade-button>
 				<grade-button toolbar icon="save" label="save changes" on-click="{{onSave}}" hidden?="{{ !editableQuery.edit }}" disabled={{!editableQuery.valid}} tooltip="left"></grade-button>
-				     
+				
+				
 				<loading-panel main flex loading="{{loading}}" message="saving the query">      
 	        <div fit layout vertical>
 	          <div flex wired rounded spaced layout horizontal style="overflow-y:hidden;">
