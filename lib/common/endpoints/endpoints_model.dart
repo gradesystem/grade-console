@@ -174,6 +174,9 @@ class EndpointSubPageModel extends SubPageEditableModel<Endpoint> {
     if (item.id == null) item.bean[Endpoint.K.status]=Endpoint.K.status_data;
     return new EditableEndpoint(item);
   }
+  
+  void fireEndpointOperation() => bus.fireInPage(const EndpointOperation());
+  void fireGraphOperation() => bus.fireInPage(const GraphOperation());
 
   void refreshGraphs(EditableEndpoint editableModel) {
 
@@ -195,6 +198,7 @@ class EndpointSubPageModel extends SubPageEditableModel<Endpoint> {
 
     endpointService.deleteEndpointGraph(editableModel.model, graph).then((bool result) {
       editableModel.model.graphs.remove(graph);
+      fireGraphOperation();
     }).catchError((e) => onError(e, () => removeEndpointGraph(editableModel, graph))).whenComplete(() {
       timer.cancel();
       editableModel.loadingGraphs = false;
@@ -210,6 +214,7 @@ class EndpointSubPageModel extends SubPageEditableModel<Endpoint> {
 
     endpointService.addEndpointGraph(editableModel.model, graph).then((bool result) {
       editableModel.model.graphs.add(graph);
+      fireGraphOperation();
     }).catchError((e) => onError(e, () => addEndpointGraph(editableModel, graph))).whenComplete(() {
       timer.cancel();
       editableModel.loadingGraphs = false;
@@ -218,31 +223,42 @@ class EndpointSubPageModel extends SubPageEditableModel<Endpoint> {
   
   void editEndpointGraph(EditableEndpoint editableModel, Graph oldGraph, Graph newGraph) {
 
-      Timer timer = new Timer(new Duration(milliseconds: 200), () {
-        editableModel.loadingGraphs = true;
-      });
+    Timer timer = new Timer(new Duration(milliseconds: 200), () {
+      editableModel.loadingGraphs = true;
+    });
 
-      endpointService.editEndpointGraph(editableModel.model, newGraph).then((bool result) {
-        oldGraph.label = newGraph.label;
-      }).catchError((e) => onError(e, () => editEndpointGraph(editableModel, oldGraph, newGraph))).whenComplete(() {
-        timer.cancel();
-        editableModel.loadingGraphs = false;
-      });
-    }
+    endpointService.editEndpointGraph(editableModel.model, newGraph).then((bool result) {
+      oldGraph.label = newGraph.label;
+      fireGraphOperation();
+    }).catchError((e) => onError(e, () => editEndpointGraph(editableModel, oldGraph, newGraph))).whenComplete(() {
+      timer.cancel();
+      editableModel.loadingGraphs = false;
+    });
+  }
   
   void moveEndpointGraph(EditableEndpoint editableModel, Graph oldGraph, Graph newGraph, EditableEndpoint oldEndpoint, String newEndpointName) {
 
-      Timer timer = new Timer(new Duration(milliseconds: 200), () {
-        editableModel.loadingGraphs = true;
-      });
+    Timer timer = new Timer(new Duration(milliseconds: 200), () {
+      editableModel.loadingGraphs = true;
+    });
 
-      endpointService.moveEndpointGraph(editableModel.model, oldGraph, newGraph, oldEndpoint.model.name).then((bool result) {
-        refreshGraphs(storage.findByName(newEndpointName));
-      }).catchError((e) => onError(e, () => moveEndpointGraph(editableModel, oldGraph, newGraph, oldEndpoint, newEndpointName))).whenComplete(() {
-        timer.cancel();
-        editableModel.loadingGraphs = false;
-      });
-    }
+    endpointService.moveEndpointGraph(editableModel.model, oldGraph, newGraph, oldEndpoint.model.name).then((bool result) {
+      refreshGraphs(storage.findByName(newEndpointName));
+      fireGraphOperation();
+    }).catchError((e) => onError(e, () => moveEndpointGraph(editableModel, oldGraph, newGraph, oldEndpoint, newEndpointName))).whenComplete(() {
+      timer.cancel();
+      editableModel.loadingGraphs = false;
+    });
+  }
+  
+  void saved(EditableEndpoint ee) {
+    fireEndpointOperation();
+  }
+  
+  void removed(EditableEndpoint ee) {
+    fireEndpointOperation();
+  }
+  
 }
 
 class EditableEndpoint extends EditableModel<Endpoint> {

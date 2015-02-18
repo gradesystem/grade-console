@@ -79,6 +79,7 @@ abstract class SubPageEditableModel<T extends EditableGradeEntity> {
     .then((T result) {
       editableModel.save(result);
       storage.sortItem(editableModel);
+      saved(editableModel);
     })
     .catchError((e) => onError(e, () => save(editableModel)))
     .whenComplete(() {
@@ -86,6 +87,9 @@ abstract class SubPageEditableModel<T extends EditableGradeEntity> {
       editableModel.synched();
     });
 
+  }
+  
+  void saved(EditableModel<T> editableModel) {
   }
 
   void remove(EditableModel<T> editableModel) {
@@ -96,11 +100,15 @@ abstract class SubPageEditableModel<T extends EditableGradeEntity> {
     service.delete(editableModel.model).then((bool result) {
       storage.clearSelection();
       storage.data.remove(editableModel);
+      removed(editableModel);
     }).catchError((e) => onError(e, () => remove(editableModel))).whenComplete(() {
       timer.cancel();
       editableModel.synched();
     });
 
+  }
+  
+  void removed(EditableModel<T> editableModel) {
   }
 
   void loadAll([bool selectFirst = true]) {

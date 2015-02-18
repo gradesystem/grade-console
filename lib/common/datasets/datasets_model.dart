@@ -54,7 +54,10 @@ class Datasets extends ListItems<Dataset> {
 
 class DatasetsPageModel extends SubPageModel<Dataset> {
   
-  DatasetsPageModel(PageEventBus bus, ListService<Dataset> service, ListItems<Dataset> storage):super(bus, service, storage);
+  DatasetsPageModel(PageEventBus bus, ListService<Dataset> service, ListItems<Dataset> storage):super(bus, service, storage) {
+    bus.on(GraphOperation).listen((_)=>loadAll());
+    bus.on(EndpointOperation).listen((_)=>loadAll());
+  }
   
   DatasetService get datasetService => service;
   
