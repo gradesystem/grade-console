@@ -246,9 +246,12 @@ class EndpointSubPageModel extends SubPageEditableModel<Endpoint> {
     Timer timer = new Timer(new Duration(milliseconds: 200), () {
       editableModel.loadingGraphs = true;
     });
-
-    endpointService.moveEndpointGraph(editableModel.model, oldGraph, newGraph, oldEndpoint.model.name).then((bool result) {
-      refreshGraphs(storage.findByName(newEndpointName));
+    
+    EditableEndpoint targetEndpoint = storage.findByName(newEndpointName);
+    
+    endpointService.moveEndpointGraph(targetEndpoint.model, oldGraph, newGraph, oldEndpoint.model.name).then((bool result) {
+      refreshGraphs(targetEndpoint);
+      refreshGraphs(oldEndpoint);
       fireGraphOperation();
     }).catchError((e) => onError(e, () => moveEndpointGraph(editableModel, oldGraph, newGraph, oldEndpoint, newEndpointName))).whenComplete(() {
       timer.cancel();
@@ -349,3 +352,7 @@ class DatasetUploaded {
   String endpoint;
   DatasetUploaded(this.endpoint);
 }
+
+
+
+
