@@ -21,15 +21,6 @@
 <polymer-element name="task-details" layout vertical> 
   <template>
     <style>
-    
-      [small-area] /deep/ textarea  {
-        height: 50px;
-      }
-      
-      [large-area] /deep/ textarea  {
-        height: 250px;
-      }
-
         
         :host [radios] { height:45px; position: relative; top:-8px }
         
@@ -187,7 +178,7 @@
 	             <div smaller wired rounded inset fascia-title >
 	              <grade-input 
 	                            disabled="{{!editable.edit}}" 
-	                            multiline large-area
+	                            multiline autogrow rows=6
 	                            required invalid= "{{ editable.fieldsInvalidity[K.transform]}}"
 	                            label="SPARQL transform query ?" 
 	                            inputValue="{{ editable.model.bean[K.transform] }}">
@@ -204,7 +195,7 @@
 	             <div smaller wired rounded inset fascia-title >
 	              <grade-input style="min-height:150px; height:150px"
 	                            disabled="{{!editable.edit}}" 
-	                            multiline large-area
+	                            multiline autogrow rows=6
 	                            validators="{{[ conditionalRequiredDiff ]}}" invalid= "{{ editable.fieldsInvalidity[K.diff]}}"
 	                            label="SPARQL difference query ?" 
 	                            inputValue="{{editable.model.bean[K.diff] }}">

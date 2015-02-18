@@ -17,6 +17,9 @@ class GradeInput extends PolymerElement {
   
   @published
   bool autogrow = false;
+  
+  @published
+  int rows;
 
   @published
   String label;

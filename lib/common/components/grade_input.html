@@ -72,7 +72,7 @@
 			</template>
 			
 			<template if="{{autogrow && multiline}}">
-			   <paper-autogrow-textarea id="autogrow">
+			   <paper-autogrow-textarea id="autogrow" rows={{rows}}>
 			     <textarea id="input" value={{inputValue}} committedValue={{value}} disabled?={{disabled}}></textarea>
 			   </paper-autogrow-textarea>
 			</template>

@@ -20,15 +20,7 @@
   <template>
   
 		<style>
-		
-		  [small-area] /deep/ textarea  {
-         height: 50px;
-      }
-		  
-		 [large-area] /deep/ textarea  {
-         height: 200px;
-      }
-		  
+
 		  [truncate] {
 		    overflow: hidden;
 		    text-overflow: ellipsis;
@@ -131,7 +123,7 @@
             <grade-fascia flex>
               <div smaller wired rounded inset fascia-title >       
                 <grade-input disabled="{{ !editable }}" 
-                             multiline large-area
+                             multiline autogrow rows=6
                              required
                              label="{{ K.expression | suffix }} ?" 
                              invalid="{{ item.fieldsInvalidity[K.expression] }}"
