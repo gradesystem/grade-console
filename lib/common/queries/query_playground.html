@@ -73,6 +73,10 @@
           padding-right: 10px;
           padding-bottom: 10px;
         }
+        
+        [hide] {
+        visibility: hidden;
+        }
    
     </style>
     
@@ -80,12 +84,12 @@
       <grade-header-panel flex paneltitle={{paneltitle}} >
         <grade-button menu icon="arrow-back" on-click="{{onBack}}"></grade-button>
 				
-				<div toolbar horizontal layout center style="padding-right:10px">
+				<div toolbar horizontal layout center style="padding-right:50px">
+				  <span smallish>results</span>
 				  <paper-slider pin min="25" max="300" value="{{resultsLimit}}"></paper-slider>
-				  <span smaller>results</span>
 				</div>
 				<grade-button toolbar icon="create" label="edit query" on-click="{{onEdit}}" hidden?="{{ editableQuery.edit}}" tooltip="left"></grade-button>
-				<grade-button toolbar icon="cancel" label="discard changes" on-click="{{onCancel}}" hidden?="{{ !editableQuery.edit}}" tooltip="left"></grade-button>
+				<grade-button toolbar icon="cancel" label="discard changes" on-click="{{onCancel}}" hide?="{{ !editableQuery.edit}}" tooltip="left"></grade-button>
 				<grade-button toolbar icon="save" label="save changes" on-click="{{onSave}}" hidden?="{{ !editableQuery.edit }}" disabled={{!editableQuery.valid}} tooltip="left"></grade-button>
 				
 				
