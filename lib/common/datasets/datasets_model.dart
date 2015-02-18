@@ -65,6 +65,7 @@ class DatasetsPageModel extends SubPageModel<Dataset> {
     return datasetService.upload(metadata, file)
     .then((_){
       loadAll();
+      bus.fireInPage(new DatasetUploaded(metadata.endpointId));
       return true;
     });
   }
@@ -75,10 +76,10 @@ class DatasetUploadMetadata {
   String name;
   String author;
   MediaType type;
-  String endpoint;
+  String endpointId;
   CSVConfiguration csvConfiguration;
   
-  DatasetUploadMetadata(this.name, this.author, this.type, this.endpoint, [this.csvConfiguration]);
+  DatasetUploadMetadata(this.name, this.author, this.type, this.endpointId, [this.csvConfiguration]);
 }
 
 class CSVConfiguration {

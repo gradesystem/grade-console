@@ -163,6 +163,11 @@ class EndpointSubPageModel extends SubPageEditableModel<Endpoint> {
     bus.on(ApplicationReady).listen((_) {
       loadAll(true);
     });
+    
+    bus.on(DatasetUploaded).listen((DatasetUploaded event) {
+      EditableEndpoint endpoint = storage.findById(event.endpoint);
+      refreshGraphs(endpoint);
+    });
   }
   
   EndpointsService get endpointService => service;
@@ -338,4 +343,9 @@ class AreaEndpoints {
   String area;
 
   AreaEndpoints(this.endpointsStorage, this.refresh, this.area);
+}
+
+class DatasetUploaded {
+  String endpoint;
+  DatasetUploaded(this.endpoint);
 }

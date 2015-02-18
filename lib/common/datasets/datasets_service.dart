@@ -11,7 +11,7 @@ class DatasetService extends ListService<Dataset> {
   Future<String> upload(DatasetUploadMetadata metadata, File file) {
     
     String type = getTypeLabel(metadata.type);
-    String path = "endpoint/${metadata.endpoint}/dropin/$type/${metadata.name}";
+    String path = "endpoint/${metadata.endpointId}/dropin/$type/${metadata.name}";
         
     if (metadata.type == MediaType.CSV && metadata.csvConfiguration!=null) {
       
