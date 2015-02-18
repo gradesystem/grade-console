@@ -17,15 +17,20 @@ class PageEventBus {
   }
   
   Stream on([Type eventType]) {
-    return bus.on(eventType).where((event)=>
-    event is PageEvent && (event as PageEvent).page == page
-    || !(event is PageEvent)
-    );
+    return bus.on()
+        //checks if is page specific and in the case if we want it
+        .where((event)=>event is PageEvent && (event as PageEvent).page == page || !(event is PageEvent))
+        //if necessary extracts the event
+        .map((event)=>event is PageEvent?(event as PageEvent).event:event)
+        //checks if is listening for the right event type
+        .where((event) => eventType == null || event.runtimeType == eventType);
   }
   
   void destroy() {
     bus.destroy();
   }
+  
+  String toString()=> 'PageEventBus($hashCode) page: $page bus: ${bus.hashCode}';
   
 }
 
@@ -34,6 +39,8 @@ class PageEvent {
   var event;
   
   PageEvent(this.page, this.event);
+  
+  String toString()=>'PageEvent page: $page event: $event';
 }
 
 class PolymerReady {
@@ -46,6 +53,14 @@ class ApplicationInitialized {
 
 class ApplicationReady {
   const ApplicationReady();
+}
+
+class EndpointOperation {
+  const EndpointOperation();
+}
+
+class GraphOperation {
+  const GraphOperation();
 }
 
 typedef ToastCallback(Map data);
