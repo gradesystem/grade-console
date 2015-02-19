@@ -8,11 +8,11 @@ class EndpointDetails extends PolymerElement with Filters, Validators {
   @published
   Endpoints items;
   
-  @ComputedProperty('item.edit')
-  bool get editable => item==null?false:item.edit;
-  
   @ComputedProperty('items.selected')
   EditableEndpoint get item => items==null?null:items.selected;
+  
+  @ComputedProperty('item.edit')
+  bool get editable => item==null?false:item.edit;
   
   List<Validator> get name_validators => [($) => $!=null && items.containsName($)?"Not original enough, try again.":null];
   
@@ -20,5 +20,9 @@ class EndpointDetails extends PolymerElement with Filters, Validators {
   
   @ComputedProperty("item.synching")
   bool get loading => item!=null && item.synching;
+  
+  void protectChanged() {
+    if (item!=null) fire("save", detail:item);
+  }
   
 }

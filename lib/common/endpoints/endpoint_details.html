@@ -41,7 +41,9 @@
               <div flex fg lock-label bolder>PROTECT</div>
               <paper-toggle-button fg 
               checked={{item.model.bean[K.locked]}}
-              disabled="{{ !editable }}" >
+              on-change={{protectChanged}}
+              
+              >
               </paper-toggle-button>
 			      </div>
 			    </div>
