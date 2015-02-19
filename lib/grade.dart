@@ -46,13 +46,13 @@ init() {
       _initModules();
       bus.fire(const PolymerReady());
       _hideLoader();
-      _initVersionChecker();
     });
   });
 
   bus.on(ApplicationInitialized).listen((_) {
     log.info("areas ready, firing application ready...");
     bus.fire(const ApplicationReady());
+    _initVersionChecker();
   });
 }
 
