@@ -159,7 +159,7 @@ class DatasetUploadDialog extends PolymerElement with Filters {
   
   }
   
-  List<EditableEndpoint> writable(List<EditableEndpoint> endpoints) => endpoints.where((EditableEndpoint ee)=>ee.model.canWrite).toList();
+  List<EditableEndpoint> writable(List<EditableEndpoint> endpoints) => endpoints.where((EditableEndpoint ee)=>ee.model.canWrite&& !ee.model.locked).toList();
   
   void upload() {
     
