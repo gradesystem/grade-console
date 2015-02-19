@@ -477,6 +477,9 @@ int compareTasks(EditableModel<Task> et1, EditableModel<Task> et2) {
   return compareIgnoreCase(et1.model.label, et2.model.label);
 }
 
+KeywordFilterFunction filterTask = (EditableModel<Task> item, String term) 
+    => Filters.containsIgnoreCase(item.model.label, term);
+
 
 @Injectable()
 class Tasks extends EditableListItems<EditableModel<Task>> {
@@ -500,3 +503,5 @@ class Tasks extends EditableListItems<EditableModel<Task>> {
   List<EditableModel<Task>> get invalid => data.where((EditableModel<Task> et)=>!et.edit && !et.valid).toList();
      
 }
+
+

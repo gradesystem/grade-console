@@ -5,8 +5,7 @@ class RunnableTaskList extends GradeList {
 
   KeywordFilterFunction itemFilter = (EditableModel<Task> item, String term) 
                                 =>  !item.newModel && !item.edit && 
-                                    item.model.label != null && 
-                                    item.model.label.toLowerCase().contains(term.toLowerCase());
+                                    filterTask(item, term);
   
   RunnableTaskList.created() : super.created('list') {
     setupKeywordFilter(itemFilter, false);
