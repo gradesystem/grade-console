@@ -474,7 +474,22 @@ int compareTasks(EditableModel<Task> et1, EditableModel<Task> et2) {
 @Injectable()
 class Tasks extends EditableListItems<EditableModel<Task>> {
   
-  Tasks():super(compareTasks);
+  Tasks():super(compareTasks) {
+    onPropertyChange(data, #lastChangedItem, _notifyDerivedChanged);
+    onPropertyChange(data, #length, _notifyDerivedChanged);
+  }
+  
+  void _notifyDerivedChanged() {
+    notifyPropertyChange(#valid, null, valid);
+    notifyPropertyChange(#invalid, null, invalid);
+  }
   
   containsLabel($) => data.any((EditableTask eq)=>eq!=selected && eq.model.label!=null && eq.model.label.toLowerCase() == $.toLowerCase());
+  
+  @observable
+  ObservableList<EditableModel<Task>> get valid => toObservable(data.where((EditableModel<Task> et)=>!et.edit && et.valid).toList());
+  
+  @observable
+  List<EditableModel<Task>> get invalid => data.where((EditableModel<Task> et)=>!et.edit && !et.valid).toList();
+     
 }
