@@ -40,6 +40,8 @@ class Dataset extends GradeEntity with Filters {
     if (zIndex >= 0) return value.substring(zIndex);
     return "";
   }
+  
+  String toString() => 'Dataset $title';
 
 }
 
