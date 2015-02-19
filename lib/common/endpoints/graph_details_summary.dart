@@ -11,6 +11,9 @@ class GraphDetailsSummary extends PolymerElement with Filters {
   
   GraphDetailsSummary.created() : super.created();
   
+  @ComputedProperty("graph.size")
+  String get size => graph.size!=null ? graph.size>0?"(${graph.size}T)":"(empty)":"n/a";
+  
   void editGraph() {
     fire("edit-graph", detail:graph);
   }

@@ -44,4 +44,6 @@ class GraphSelector extends PolymerElement with Filters {
   
   @ComputedProperty("invalid")
   String get invalidMessage => invalidGraphUris.isNotEmpty?"Some graph are no longer a valid choice, pick another.":"Please make a choice.";
+  
+  String size(int size) => size!=null ? size>0?"(${size}T)":"(empty)":"n/a";
 }

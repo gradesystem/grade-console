@@ -28,7 +28,7 @@ class Graph extends GradeEntity with Observable {
     notifyPropertyChange(#label, null, value);
   }
   
-  String get size => get(K.size);
+  int get size => get(K.size);
   
   String toString() => "Graph label: $label uri: $uri size: $size";
   
