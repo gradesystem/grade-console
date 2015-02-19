@@ -30,7 +30,7 @@ class QueryPlayground extends PolymerElement with Filters {
   CodemirrorInput expressionEditor;
   
   @observable
-  int resultsLimit = 0;
+  int resultsLimit = 25;
   
   QueryPlayground.created() : super.created();
   
