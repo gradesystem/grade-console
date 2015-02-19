@@ -3,6 +3,7 @@ library common;
 import 'dart:html';
 import 'dart:async';
 import 'dart:collection';
+import 'dart:js' as js;
 import 'dart:convert' show JSON;
 
 import 'package:di/di.dart';

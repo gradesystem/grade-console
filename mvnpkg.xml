@@ -15,12 +15,18 @@
       <excludes>
           <exclude>service/**</exclude>
           <exclude>index.html</exclude>
+          <exclude>version.json</exclude>
       </excludes>
     </fileSet>
   </fileSets>
   <files>
     <file>
       <source>build/web/index.html</source>
+      <outputDirectory>/</outputDirectory>
+      <filtered>true</filtered>
+    </file>
+    <file>
+      <source>build/web/version.json</source>
       <outputDirectory>/</outputDirectory>
       <filtered>true</filtered>
     </file>

@@ -13,6 +13,9 @@ class GradeConsole extends PolymerElement with Dependencies, Filters {
 
   @observable
   bool creditsDialogOpened = false;
+  
+  @observable
+  bool versionDialogOpen = false;
 
   @observable
   bool showLoadingProgress = false;
@@ -52,6 +55,10 @@ class GradeConsole extends PolymerElement with Dependencies, Filters {
         progressMessage = "loading home...";
         instantiateConsole = true;
       });
+    });
+    
+    bus.on(ApplicationNewVersionAvailable).listen((_){
+      versionDialogOpen = true;
     });
     
     onPropertyChange(this, #page, notifyResize);

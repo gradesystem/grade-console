@@ -51,6 +51,10 @@ class ApplicationInitialized {
   const ApplicationInitialized();
 }
 
+class ApplicationNewVersionAvailable {
+  const ApplicationNewVersionAvailable();
+}
+
 class ApplicationReady {
   const ApplicationReady();
 }

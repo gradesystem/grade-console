@@ -46,7 +46,7 @@ init() {
       _initModules();
       bus.fire(const PolymerReady());
       _hideLoader();
-
+      _initVersionChecker();
     });
   });
 
@@ -102,3 +102,9 @@ _initModules() {
 
   log.finer("modules ready");
 }
+
+_initVersionChecker() {
+  VersionChecker checker = new VersionChecker(bus);
+  checker.start();
+}
+

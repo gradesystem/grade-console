@@ -140,3 +140,35 @@ class GradeListPathObserver<E, P> extends ChangeNotifier {
 }
 
 int compareIgnoreCase(String s1, String s2) => s1.toLowerCase().compareTo(s2.toLowerCase());
+
+
+class VersionChecker {
+
+  EventBus bus;
+  Timer timer;
+  
+  VersionChecker(this.bus);
+  
+  void start() {
+    timer = new Timer.periodic(new Duration(hours: 1), _getVersion);
+    _getVersion(null);
+  }
+
+  _getVersion(_) {
+    HttpRequest.getString("version.json?${new DateTime.now().millisecondsSinceEpoch}").then(_checkVersion);
+  }
+
+  _checkVersion(String versionFile) {
+    Map versionInfo = JSON.decode(versionFile);
+    String currentBuildNumber = js.context["buildNumber"];
+    String currentBuildTimestamp = js.context["buildTimestamp"];
+    
+    String lastBuildNumber = versionInfo["version"];
+    String lastBuildTimestamp = versionInfo["timestamp"];
+    
+    print('currentBuildNumber $currentBuildNumber currentBuildTimestamp $currentBuildTimestamp');
+    print('lastBuildNumber $lastBuildNumber lastBuildTimestamp $lastBuildTimestamp');
+    
+    if (currentBuildNumber != lastBuildNumber) bus.fire(const ApplicationNewVersionAvailable());
+  }
+}
