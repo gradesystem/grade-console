@@ -30,7 +30,7 @@
 		      
 		        <grade-fascia truncate>
 		          <div fascia-title>{{model.title}}</div>
-		          <div fascia-subtitle>{{model.formatDate(model.creationDate)}}</div>
+		          <div fascia-subtitle>{{model.creationDate != null?model.creationDate:model.modifiedDate}}</div>
 		        </grade-fascia>
 		        
 		      </grade-item>

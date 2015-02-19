@@ -6,7 +6,7 @@ class Filters {
   
   static DateFormat time_formatter = new DateFormat('HH:mm:ss.SSS');
   
-  static DateFormat date_formatter = new DateFormat('d MMM yyyy H:m:s');
+  static DateFormat date_formatter = new DateFormat('d MMM yyyy HH:mm:ss');
   
   static RegExp suffix_start_exp = new RegExp(r'(/|#)');
   

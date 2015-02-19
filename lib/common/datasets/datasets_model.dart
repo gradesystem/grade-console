@@ -3,8 +3,10 @@ part of datasets;
 class Dataset extends GradeEntity with Filters {
 
   Dataset(Map bean) : super(bean);
-  
+
   static final String CREATION_DATE_FIELD = "http://purl.org/dc/terms/created";
+
+  static final String MODIFIED_DATE_FIELD = "http://purl.org/dc/terms/modified";
 
   static final String id = "uri";
   static final List<String> labels = ["label", "http://www.w3.org/2000/01/rdf-schema#label", "http://purl.org/dc/terms/title"];
@@ -19,7 +21,25 @@ class Dataset extends GradeEntity with Filters {
     return get(id);
   }
 
-  DateTime get creationDate => getDate(CREATION_DATE_FIELD);
+  String get creationDate => extractAndFormatDate(CREATION_DATE_FIELD);
+  String get modifiedDate => extractAndFormatDate(MODIFIED_DATE_FIELD);
+
+
+  String extractAndFormatDate(String key) {
+    
+    String value = get(key);
+    if (value == null) return null;
+    
+    String timeZone = getTimeZone(value);
+
+    return "${formatDate(getDate(key))} $timeZone";
+  }
+
+  String getTimeZone(String value) {
+    int zIndex = value.toLowerCase().lastIndexOf('Z');
+    if (zIndex >= 0) return value.substring(zIndex);
+    return "";
+  }
 
 }
 
