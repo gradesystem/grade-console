@@ -102,7 +102,7 @@ class EndpointsPanel extends ResizerPolymerElement with Filters, Dependencies {
   
   void onRemoveGraph(event, detail, target) {
     Graph graph = detail as Graph;
-    if (graph.size != null && int.parse(graph.size)>0) {
+    if (graph.size != null && graph.size>0) {
       dialogCallback = (){model.removeEndpointGraph(items.selected, graph);};
       removedDialogHeader = "Remove ${graph.label}";
       removeDialogOpened = true;
