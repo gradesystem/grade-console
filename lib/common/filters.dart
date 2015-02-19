@@ -25,7 +25,7 @@ class Filters {
   String suffix(String str, [String alternative]) {
     if (str == null) return null;
     int index = str.lastIndexOf(suffix_start_exp);
-    if (index<0) return alternative!=null?alternative:"";
+    if (index<0 || index == str.length-1) return alternative!=null?alternative:"";
     return str.substring(index+1);
   }
   
