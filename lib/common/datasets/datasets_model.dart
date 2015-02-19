@@ -46,9 +46,9 @@ class Dataset extends GradeEntity with Filters {
 }
 
 int compareDatasets(Dataset d1, Dataset d2) {
-  if (d1 == null || d1.title == null) return 1;
-  if (d2 == null || d2.title == null) return -1;
-  return compareIgnoreCase(d1.title, d2.title);
+  if (d1 == null || d1.modifiedDate == null) return 1;
+  if (d2 == null || d2.modifiedDate == null) return -1;
+  return d2.modifiedDate.compareTo(d1.modifiedDate);
 }
 
 
