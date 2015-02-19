@@ -136,19 +136,26 @@ class GraphDialog extends PolymerElement with Filters {
   bool get invalid => readValue(#invalid, () => false);
   
   String calculateMoveUri(String current) {
-    if (endpointName == currentEndpoint.model.name) return "$current/latest";
-    
+
     String local = getLocal(current);
     EditableEndpoint targetEndpoint = endpoints.findByName(endpointName);
     
-    if (targetEndpoint.model.graphs.isEmpty) return "${endpointDefaultUri(targetEndpoint)}/$local/latest";
+    if (endpointName == currentEndpoint.model.name) return "${getPrefixLocal(current)}/<version>/$local";
+    
+    if (targetEndpoint.model.graphs.isEmpty) return "${endpointDefaultUri(targetEndpoint)}/$local";
     String prefix = endpointPrefix(targetEndpoint);
-    return "$prefix$local/latest";
+    return "$prefix$local";
   }
   
   String getLocal(String uri) {
     int slashIndex = uri.lastIndexOf("/");
     if (slashIndex>=0 && slashIndex<uri.length) return uri.substring(slashIndex+1);
+    return uri;
+  }
+  
+  String getPrefixLocal(String uri) {
+    int slashIndex = uri.lastIndexOf("/");
+    if (slashIndex>=0 && slashIndex<uri.length) return uri.substring(0,slashIndex);
     return uri;
   }
   
