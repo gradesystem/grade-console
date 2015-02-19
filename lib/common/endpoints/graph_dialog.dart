@@ -72,8 +72,10 @@ class GraphDialog extends PolymerElement with Filters {
   @ComputedProperty("mode")
   bool get isMove => mode == GraphDialogMode.MOVE;
   
-  @ComputedProperty("isMove && oldEndpoint.model.updateUri != null && oldEndpoint.model.updateUri.isNotEmpty")
+  @ComputedProperty("isMove && oldEndpoint.model.canWrite")
   bool get canMove => readValue(#canMove, ()=>false);
+  
+  List<EditableEndpoint> writable(List<EditableEndpoint> endpoints) => endpoints.where((EditableEndpoint ee)=>ee.model.canWrite).toList();
 
   void openAdd() {
     reset();

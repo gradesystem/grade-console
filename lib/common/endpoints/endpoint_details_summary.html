@@ -21,7 +21,7 @@
 	
      <paper-item trim bg-selected?="{{selected}}">
            
-	     <grade-item smallicon icon="{{item.model.updateUri == null || item.model.updateUri.isEmpty?'cloud-circle':'cloud-upload'}}" flex>
+	     <grade-item smallicon icon="{{item.model.canWrite?'cloud-upload':'cloud-circle'}}" flex>
 	     
 	       <grade-fascia flex truncate>
 	         <div fascia-title>{{ name }}</div>

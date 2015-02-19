@@ -68,7 +68,7 @@
                          required
                          invalid="{{ endpointInvalid }}"
                          >
-              <template repeat="{{target in endpoints.synchedData}}">
+              <template repeat="{{target in endpoints.synchedData | writable}}">
                 <paper-item truncate dropitem="{{target.model.name}}">{{target.model.name}}</paper-item>
               </template>
             </grade-dropdown-menu>
