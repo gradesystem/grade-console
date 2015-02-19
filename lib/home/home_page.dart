@@ -79,12 +79,15 @@ class HomePage extends PolymerElement with Dependencies {
 
   @ObserveProperty('tasks.loading')
   @ObserveProperty('tasks.data')
+  @ObserveProperty('tasks.invalid')
   onTasksChange() {
 
     tasks_stats.loaded = !tasks.loading;
     tasks_stats.count = tasks.data.length;
     tasks_stats.date = new DateTime.now();
 
+    tasks_stats.notifications.clear();
+    if (tasks.invalid.isNotEmpty) tasks_stats.notifications.add("error");
   }
 
   @ObserveProperty('runningTasks.loading')
