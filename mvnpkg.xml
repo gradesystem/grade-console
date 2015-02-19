@@ -14,7 +14,15 @@
       <useDefaultExcludes>true</useDefaultExcludes>
       <excludes>
           <exclude>service/**</exclude>
+          <exclude>index.html</exclude>
       </excludes>
     </fileSet>
   </fileSets>
+  <files>
+    <file>
+      <source>build/web/index.html</source>
+      <outputDirectory>/</outputDirectory>
+      <filtered>true</filtered>
+    </file>
+  </files>
 </assembly>
