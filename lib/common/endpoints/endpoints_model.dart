@@ -358,7 +358,10 @@ class EndpointValidator extends Observable {
   EditableModel editable;
   String endpointIdKey;
   String graphsKey;
-  Endpoints endpoints;
+  
+  
+  List<Endpoints> endpointsLists = [];
+  List<StreamSubscription> endpointsListsSubscriptions = [];
   
   StreamSubscription editableEndpointSubscription;
   StreamSubscription endpointSubscription;
@@ -368,19 +371,46 @@ class EndpointValidator extends Observable {
   @observable
   bool valid = false;
   
-  EndpointValidator(this.editable, this.endpointIdKey, this.graphsKey, this.endpoints) {
+  EndpointValidator(this.editable, this.endpointIdKey, this.graphsKey, Endpoints endpoints) {
     
     //model listening
     onPropertyChange(editable, #model, listenAndValidate);
     
-    //endpoints listening
-    onPropertyChange(endpoints.data, #lastChangedItem, listenAndValidate);
+    //listen for changes in the enpoints list
+    bindEndpointsLists(new List.filled(1, endpoints));
     
     listenAndValidate();
   }
   
+  EndpointValidator.gradeendpoints(this.editable, this.endpointIdKey, this.graphsKey, GradeEnpoints gradeEndpoints) {
+   
+    //model listening
+    onPropertyChange(editable, #model, listenAndValidate);
+
+    //listen to all endpoints added to gradeendpoints
+    gradeEndpoints.areaEndpoints.listChanges.listen((_)=>bindGradeEndpoints(gradeEndpoints));
+    bindGradeEndpoints(gradeEndpoints);    
+    
+    listenAndValidate();
+  }
+  
+  void bindGradeEndpoints(GradeEnpoints gradeEndpoints) {
+    bindEndpointsLists(gradeEndpoints.areaEndpoints.map((AreaEndpoints ae)=>ae.endpointsStorage).toList());
+  }
+  
+  void bindEndpointsLists(List<Endpoints> lists) {
+    
+    endpointsListsSubscriptions.forEach((StreamSubscription s)=>s.cancel());
+    
+    lists.forEach((Endpoints e){
+      endpointsListsSubscriptions.add(onPropertyChange(e.data, #lastChangedItem, listenAndValidate));
+    });
+    
+    endpointsLists = lists;
+  }
+  
+  
   void listenAndValidate() {
-    print('listenAndValidate for $editable');
     //listen to model endpoint
     listenEditableEndpoint();
     validate();
@@ -412,28 +442,30 @@ class EndpointValidator extends Observable {
   EditableEndpoint getEditableEndpoint() {
     Delegate model = editable.model;
     String endpointId = model.get(endpointIdKey);
-    return endpoints.findById(endpointId);
+
+    for (Endpoints endpoints in endpointsLists) {
+      EditableEndpoint ee = endpoints.findById(endpointId);
+      if (ee != null) return ee;
+    }
+
+    return null;
   }
   
   void validate() {
-    print('validating editable $editable');
-    
+   
     if (!editable.edit) {
       EditableEndpoint endpoint = getEditableEndpoint();
       if (endpoint == null) {
         valid = false;
-        print('valid: $valid');
         return;
       }
       
       List<Graph> endpointGraphs = endpoint.model.graphs;
       var modelGraphs = editable.model.get(graphsKey);
+      
       if (modelGraphs is List<String>) valid = modelGraphs.every((uri)=>endpointGraphs.any((Graph g)=>g.uri == uri));
       if (modelGraphs is String) valid = endpointGraphs.any((Graph g)=>g.uri == modelGraphs);
-            
-      print('valid: $valid');
     }
-    
     
   }
 

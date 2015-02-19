@@ -96,8 +96,17 @@ class EditableTask extends EditableModel<Task> with Keyed {
   RunningTask playgroundRunningTask;
 
   bool _dirty = false;
+  
+  EndpointValidator sourceEndpointValidator;
+  EndpointValidator targetEndpointValidator;
 
-  EditableTask(Task task) : super(task) {
+  EditableTask(Task task, GradeEnpoints endpoints) : super(task) {
+    
+    sourceEndpointValidator = new EndpointValidator.gradeendpoints(this, Task.K.source_endpoint, Task.K.source_graph, endpoints);
+    onPropertyChange(sourceEndpointValidator, #valid, ()=>notifyPropertyChange(#valid, null, valid));
+    
+    targetEndpointValidator = new EndpointValidator.gradeendpoints(this, Task.K.target_endpoint, Task.K.target_endpoint, endpoints);
+    onPropertyChange(targetEndpointValidator, #valid, ()=>notifyPropertyChange(#valid, null, valid));
     
     playgroundRunningTask = new RunningTask(model);
 
@@ -112,6 +121,9 @@ class EditableTask extends EditableModel<Task> with Keyed {
 
   get(key) => model.get(key);
   set(key, value) => model.set(key, value);
+  
+  @observable
+  bool get valid => super.valid && (edit || sourceEndpointValidator.valid || targetEndpointValidator.valid); 
 
   bool calculateFieldsValidity() => fieldsInvalidity.keys//we skip the diff query if the operation is publish
   .where((String field) => !(field == K.diff && get(K.op) == K.publish_op)).map((String field) => fieldsInvalidity[field])//we are watching invalidity
@@ -173,7 +185,8 @@ class TasksModel extends SubPageEditableModel<Task> {
   
   TaskExecutionsService executionsService; 
 
-  TasksModel(@TasksAnnotation() PageEventBus bus, TasksService service, this.executionsService, Tasks storage) : super(bus, service, storage, generate) {
+  TasksModel(@TasksAnnotation() PageEventBus bus, TasksService service, this.executionsService, Tasks storage, GradeEnpoints endpoints) : super(bus, service, storage, 
+      ([Task task])=>generate(endpoints,task)) {
     bus.on(ApplicationReady).listen((_) {
       loadAll();
     });
@@ -181,9 +194,9 @@ class TasksModel extends SubPageEditableModel<Task> {
 
   TasksService get taskService => service;
 
-  static EditableTask generate([Task item]) {
-    if (item == null) return new EditableTask(new Task());
-    return new EditableTask(item);
+  static EditableTask generate(GradeEnpoints endpoints, [Task item]) {
+    if (item == null) return new EditableTask(new Task(), endpoints);
+    return new EditableTask(item, endpoints);
   }
   
   RunningTask runTask(EditableTask editableTask) {
