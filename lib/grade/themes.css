@@ -233,6 +233,12 @@
 :host /deep/ .home /deep/ paper-slider::shadow #sliderBar::shadow #activeProgress {
   background-color: #26699a;
 }
+:host /deep/ .home /deep/ paper-checkbox::shadow #ink[checked] {
+  color: #26699a;
+}
+:host /deep/ .home /deep/ paper-checkbox::shadow #checkbox.checked {
+  border-color: #26699a;
+}
 .prod-scaffold {
   background: #00bcd4;
   color: #fff;
@@ -345,6 +351,12 @@
 }
 :host /deep/ .prod /deep/ paper-slider::shadow #sliderBar::shadow #activeProgress {
   background-color: #00bcd4;
+}
+:host /deep/ .prod /deep/ paper-checkbox::shadow #ink[checked] {
+  color: #00bcd4;
+}
+:host /deep/ .prod /deep/ paper-checkbox::shadow #checkbox.checked {
+  border-color: #00bcd4;
 }
 .deck-scaffold {
   background: #6fa6bc;
@@ -459,6 +471,12 @@
 :host /deep/ .deck /deep/ paper-slider::shadow #sliderBar::shadow #activeProgress {
   background-color: #6fa6bc;
 }
+:host /deep/ .deck /deep/ paper-checkbox::shadow #ink[checked] {
+  color: #6fa6bc;
+}
+:host /deep/ .deck /deep/ paper-checkbox::shadow #checkbox.checked {
+  border-color: #6fa6bc;
+}
 .tasks-scaffold {
   background: #e41c23;
   color: #fff;
@@ -572,6 +590,12 @@
 :host /deep/ .tasks /deep/ paper-slider::shadow #sliderBar::shadow #activeProgress {
   background-color: #e41c23;
 }
+:host /deep/ .tasks /deep/ paper-checkbox::shadow #ink[checked] {
+  color: #e41c23;
+}
+:host /deep/ .tasks /deep/ paper-checkbox::shadow #checkbox.checked {
+  border-color: #e41c23;
+}
 .stage-scaffold {
   background: #009587;
   color: #fff;
@@ -684,6 +708,12 @@
 }
 :host /deep/ .stage /deep/ paper-slider::shadow #sliderBar::shadow #activeProgress {
   background-color: #009587;
+}
+:host /deep/ .stage /deep/ paper-checkbox::shadow #ink[checked] {
+  color: #009587;
+}
+:host /deep/ .stage /deep/ paper-checkbox::shadow #checkbox.checked {
+  border-color: #009587;
 }
 :host {
   height: 100%;

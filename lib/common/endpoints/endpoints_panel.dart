@@ -132,7 +132,7 @@ class EndpointsPanel extends ResizerPolymerElement with Filters, Dependencies {
   }
   
   void onMovedGraph(event, detail, target) {
-    model.moveEndpointGraph(items.selected, detail["old-graph"], detail["new-graph"], detail["old-endpoint"], detail["new-endpoint-name"]);
+    model.moveEndpointGraph(items.selected, detail["old-graph"], detail["new-graph"], detail["old-endpoint"], detail["new-endpoint-name"], detail["delete-original"]);
   }
 
 }

@@ -3,6 +3,7 @@
 <link rel="import" href="../../../../packages/paper_elements/paper_item.html">
 <link rel="import" href="../../../../packages/paper_elements/paper_input.html">
 <link rel="import" href="../../../../packages/paper_elements/paper_button.html">
+<link rel="import" href="../../../../packages/paper_elements/paper_checkbox.html">
 
 <link rel="import" href="../components/grade_dialog.html">
 <link rel="import" href="../components/grade_dropdown_menu.html">
@@ -60,7 +61,7 @@
                
          </grade-fascia>
 	        
-	        <grade-fascia item hidden?={{!requireEndpoint}}>
+	        <grade-fascia item hidden?={{!isMove}}>
             <grade-dropdown-menu fascia-title
                          selected="{{ endpointName }}"
                          label="endpoint" 
@@ -71,8 +72,12 @@
                 <paper-item truncate dropitem="{{target.model.name}}">{{target.model.name}}</paper-item>
               </template>
             </grade-dropdown-menu>
-            <grade-uri fascia-subtitle value="http://data.gradesystem.eu/onto/<class>.owl#ENDPOINT"></grade-uri>
+            <grade-uri fascia-subtitle value="http://data.gradesystem.eu/onto/owl#ENDPOINT"></grade-uri>
           </grade-fascia>
+          
+          <div item horizontal layout hidden?={{!isMove}}>
+           <paper-checkbox checked={{deleteOriginal}} disabled={{!canMove}} label="delete original"></paper-checkbox>
+          </div>
 	      </div>
 
       

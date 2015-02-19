@@ -16,11 +16,12 @@ class EndpointsService extends EditableListService<Endpoint> {
     return http.delete(getGraphPath(endpoint.name), {"uri":graph.uri}).then((response) => true);
   }
   
-  Future<bool> moveEndpointGraph(Endpoint destinationEndpoint, Graph oldGraph, Graph newGraph, String sourceEndpointName) {
+  Future<bool> moveEndpointGraph(Endpoint destinationEndpoint, Graph oldGraph, Graph newGraph, String sourceEndpointName, bool deleteOriginal) {
     
     Map newBean = new Map.from(newGraph.bean);
     newBean["source"] = sourceEndpointName;
     newBean["sourceGraph"] = oldGraph.uri;
+    newBean["move"] = deleteOriginal;
     
     return http.post(getGraphPath(destinationEndpoint.name), JSON.encode(newBean)).then((_) => true);
   }

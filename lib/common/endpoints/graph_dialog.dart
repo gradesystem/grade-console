@@ -36,10 +36,14 @@ class GraphDialog extends PolymerElement with Filters {
   @observable
   String endpointName;
   
+  @observable
   EditableEndpoint oldEndpoint;
   
   @observable
   bool endpointInvalid = false;
+  
+  @observable
+  bool deleteOriginal;
 
   GraphDialog.created() : super.created();
   
@@ -57,7 +61,7 @@ class GraphDialog extends PolymerElement with Filters {
       case GraphDialogMode.EDIT:
         return "Edit graph";
       case GraphDialogMode.MOVE:
-        return "Move graph";
+        return "Copy/Move graph";
     }
     return "";
   }
@@ -66,7 +70,10 @@ class GraphDialog extends PolymerElement with Filters {
   bool get canEditUri => mode != GraphDialogMode.EDIT;
   
   @ComputedProperty("mode")
-  bool get requireEndpoint => mode == GraphDialogMode.MOVE;
+  bool get isMove => mode == GraphDialogMode.MOVE;
+  
+  @ComputedProperty("isMove && oldEndpoint.model.updateUri != null && oldEndpoint.model.updateUri.isNotEmpty")
+  bool get canMove => readValue(#canMove, ()=>false);
 
   void openAdd() {
     reset();
@@ -91,6 +98,7 @@ class GraphDialog extends PolymerElement with Filters {
     oldEndpoint = currentEndpoint;
     label = graph.label;
     mode = GraphDialogMode.MOVE;
+    deleteOriginal = false;
     
     uriModifiedByUser = false;
     
@@ -117,7 +125,7 @@ class GraphDialog extends PolymerElement with Filters {
     switch (mode) {
       case GraphDialogMode.ADD: fire("added-graph", detail: new Graph(uri.trim(), label)); break;
       case GraphDialogMode.EDIT: fire("edited-graph", detail: {"old-graph":oldGraph, "new-graph":new Graph(uri.trim(), label)}); break;
-      case GraphDialogMode.MOVE: fire("moved-graph", detail: {"old-graph":oldGraph, "new-graph":new Graph(uri.trim(), label), "old-endpoint":oldEndpoint, "new-endpoint-name":endpointName}); break;
+      case GraphDialogMode.MOVE: fire("moved-graph", detail: {"old-graph":oldGraph, "new-graph":new Graph(uri.trim(), label), "old-endpoint":oldEndpoint, "new-endpoint-name":endpointName, "delete-original":deleteOriginal}); break;
     }
    
   }

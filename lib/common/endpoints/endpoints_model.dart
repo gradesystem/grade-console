@@ -241,7 +241,7 @@ class EndpointSubPageModel extends SubPageEditableModel<Endpoint> {
     });
   }
   
-  void moveEndpointGraph(EditableEndpoint editableModel, Graph oldGraph, Graph newGraph, EditableEndpoint oldEndpoint, String newEndpointName) {
+  void moveEndpointGraph(EditableEndpoint editableModel, Graph oldGraph, Graph newGraph, EditableEndpoint oldEndpoint, String newEndpointName, bool deleteOriginal) {
 
     Timer timer = new Timer(new Duration(milliseconds: 200), () {
       editableModel.loadingGraphs = true;
@@ -249,11 +249,11 @@ class EndpointSubPageModel extends SubPageEditableModel<Endpoint> {
     
     EditableEndpoint targetEndpoint = storage.findByName(newEndpointName);
     
-    endpointService.moveEndpointGraph(targetEndpoint.model, oldGraph, newGraph, oldEndpoint.model.name).then((bool result) {
+    endpointService.moveEndpointGraph(targetEndpoint.model, oldGraph, newGraph, oldEndpoint.model.name, deleteOriginal).then((bool result) {
       refreshGraphs(targetEndpoint);
       refreshGraphs(oldEndpoint);
       fireGraphOperation();
-    }).catchError((e) => onError(e, () => moveEndpointGraph(editableModel, oldGraph, newGraph, oldEndpoint, newEndpointName))).whenComplete(() {
+    }).catchError((e) => onError(e, () => moveEndpointGraph(editableModel, oldGraph, newGraph, oldEndpoint, newEndpointName, deleteOriginal))).whenComplete(() {
       timer.cancel();
       editableModel.loadingGraphs = false;
     });
