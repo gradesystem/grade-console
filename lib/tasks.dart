@@ -46,6 +46,8 @@ init() {
   
   Dependencies.bind(page, TasksAnnotation);
   
+  Endpoints endpoints = new Endpoints();
+  
   var module = new Module()
   
           ..bind(PageEventBus, toFactory: (bus) => new PageEventBus(page, bus), withAnnotation: const TasksAnnotation(), inject: [EventBus])
@@ -55,9 +57,9 @@ init() {
           ..bind(TasksModel)
           ..bind(Tasks)
           
-          ..bind(QuerySubPageModel, toFactory: (bus) => new QuerySubPageModel(bus, new QueryService(base_url, _service_path), new Queries()), withAnnotation: const TasksAnnotation(), inject: [new Key(PageEventBus, const TasksAnnotation())])
+          ..bind(QuerySubPageModel, toFactory: (bus) => new QuerySubPageModel(bus, new QueryService(base_url, _service_path), new Queries(), endpoints), withAnnotation: const TasksAnnotation(), inject: [new Key(PageEventBus, const TasksAnnotation())])
 
-          ..bind(Endpoints, toValue: new Endpoints(), withAnnotation: const TasksAnnotation())
+          ..bind(Endpoints, toValue: endpoints, withAnnotation: const TasksAnnotation())
           ..bind(EndpointSubPageModel, toFactory: (bus, endpoints) => new EndpointSubPageModel(bus, new EndpointsService(_service_path), endpoints), withAnnotation: const TasksAnnotation(), inject: [new Key(PageEventBus, const TasksAnnotation()), new Key(Endpoints, const TasksAnnotation())]);
   
   Dependencies.add(module);

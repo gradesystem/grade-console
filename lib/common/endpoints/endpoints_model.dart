@@ -49,7 +49,7 @@ class EndpointKeys {
   final String status_system = "system";
 }
 
-class Endpoint extends EditableGradeEntity with Filters {
+class Endpoint extends EditableGradeEntity with Filters, Observable {
 
   static EndpointKeys K = const EndpointKeys();
 
@@ -95,7 +95,7 @@ class Endpoint extends EditableGradeEntity with Filters {
   }
   
   @observable
-  List<Graph> get graphs => _graphs;
+  ObservableList<Graph> get graphs => _graphs;
   set graphs(List<Graph> newgraphs) {
     _graphs.clear();
     if (newgraphs!=null) _graphs.addAll(newgraphs);
@@ -353,6 +353,90 @@ class DatasetUploaded {
   DatasetUploaded(this.endpoint);
 }
 
+class EndpointValidator extends Observable {
+  
+  EditableModel editable;
+  String endpointIdKey;
+  String graphsKey;
+  Endpoints endpoints;
+  
+  StreamSubscription editableEndpointSubscription;
+  StreamSubscription endpointSubscription;
+  
+  StreamSubscription modelSubscription;
+  
+  @observable
+  bool valid = false;
+  
+  EndpointValidator(this.editable, this.endpointIdKey, this.graphsKey, this.endpoints) {
+    
+    //model listening
+    onPropertyChange(editable, #model, listenAndValidate);
+    
+    //endpoints listening
+    onPropertyChange(endpoints.data, #lastChangedItem, listenAndValidate);
+    
+    listenAndValidate();
+  }
+  
+  void listenAndValidate() {
+    print('listenAndValidate for $editable');
+    //listen to model endpoint
+    listenEditableEndpoint();
+    validate();
+  }
+  
+  void listenEditableEndpoint() {
+    
+    EditableEndpoint editableEndpoint = getEditableEndpoint();
+    
+    //stop listening old editable endpoint
+    if (editableEndpointSubscription != null) editableEndpointSubscription.cancel();
+    
+    //stop listening old endpoint
+    if (endpointSubscription != null) endpointSubscription.cancel();
+    
+    //start listening new one if present
+    if (editableEndpoint!=null) {
+      editableEndpointSubscription = onPropertyChange(editableEndpoint, #model, (){
+        //stop listening old endpoint
+        if (endpointSubscription != null) endpointSubscription.cancel();
+        //start listening new endpoint
+        endpointSubscription = onPropertyChange(editableEndpoint.model.graphs, #length, validate);
+      });
+      endpointSubscription = onPropertyChange(editableEndpoint.model.graphs, #length, validate);
+    }
+  }
 
+  
+  EditableEndpoint getEditableEndpoint() {
+    Delegate model = editable.model;
+    String endpointId = model.get(endpointIdKey);
+    return endpoints.findById(endpointId);
+  }
+  
+  void validate() {
+    print('validating editable $editable');
+    
+    if (!editable.edit) {
+      EditableEndpoint endpoint = getEditableEndpoint();
+      if (endpoint == null) {
+        valid = false;
+        print('valid: $valid');
+        return;
+      }
+      
+      List<Graph> endpointGraphs = endpoint.model.graphs;
+      var modelGraphs = editable.model.get(graphsKey);
+      if (modelGraphs is List<String>) valid = modelGraphs.every((uri)=>endpointGraphs.any((Graph g)=>g.uri == uri));
+      if (modelGraphs is String) valid = endpointGraphs.any((Graph g)=>g.uri == modelGraphs);
+            
+      print('valid: $valid');
+    }
+    
+    
+  }
+
+}
 
 

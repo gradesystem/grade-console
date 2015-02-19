@@ -142,16 +142,16 @@ class Queries extends EditableListItems<EditableQuery> {
 
 class QuerySubPageModel extends SubPageEditableModel<Query> {
 
-  QuerySubPageModel(PageEventBus bus, QueryService service, Queries storage) : super(bus, service, storage, ([Query query]) => generate(query != null ? query : new Query(service.base_url, service.path))) {
+  QuerySubPageModel(PageEventBus bus, QueryService service, Queries storage, Endpoints endpoints) : super(bus, service, storage, ([Query query]) => generate(query != null ? query : new Query(service.base_url, service.path), endpoints)) {
     bus.on(ApplicationReady).listen((_) {
       loadAll();
     });
   }
 
-  static EditableQuery generate(Query query) {
+  static EditableQuery generate(Query query, Endpoints endpoints) {
     //we are cloning
     if (query.id == null) query.bean[Query.K.status] = Query.K.status_unpublished;
-    return new EditableQuery(query);
+    return new EditableQuery(query, endpoints);
   }
 
   QueryService get queryService => service;
@@ -215,8 +215,14 @@ class EditableQuery extends EditableModel<Query> with Keyed {
   bool _validParameters = true;
 
   bool _dirty = false;
+  
+  EndpointValidator endpointValidator;
 
-  EditableQuery(Query query) : super(query) {
+  EditableQuery(Query query, Endpoints endpoints) : super(query) {
+    
+    endpointValidator = new EndpointValidator(this, Query.K.target, Query.K.graph, endpoints);
+    onPropertyChange(endpointValidator, #valid, ()=>notifyPropertyChange(#valid, null, valid));
+    
     //we want to listen on parameters value changes
     parametersInvalidity.changes.listen(_updateParametersValidity);
 
@@ -235,6 +241,9 @@ class EditableQuery extends EditableModel<Query> with Keyed {
 
   get(key) => model.get(key);
   set(key, value) => model.set(key, value);
+  
+  @observable
+  bool get valid => super.valid && (edit || endpointValidator.valid); 
 
   void _listenNewModel() {
     //when parameters list change we re-calculate the parameters validity
