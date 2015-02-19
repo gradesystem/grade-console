@@ -1,7 +1,7 @@
 part of datasets;
 
 @CustomTag("dataset-list") 
-class DatasetList extends GradeList {
+class DatasetList extends GradeList with Filters {
   
   @published
   bool ddEnabled = false;

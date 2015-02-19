@@ -2,7 +2,7 @@ part of common;
 
 typedef T Generator<T>(Map data);
 
-DateFormat JSON_DATE_FORMAT = new DateFormat('yyyy/MM/dd');
+DateFormat JSON_DATE_FORMAT = new DateFormat('y-M-dTH:m:s.SZ');
 
 
 abstract class Keyed {
@@ -24,7 +24,7 @@ abstract class Delegate extends Keyed {
   ObservableMap get bean => _bean;
   
   get(String l) => _bean[l];
-  DateTime getDate(String l) => JSON_DATE_FORMAT.parse(get(l));
+  DateTime getDate(String l) => bean.containsKey(l)?JSON_DATE_FORMAT.parse(get(l)):null;
   
   set(String l, value) => _bean[l] = value;
     

@@ -6,6 +6,8 @@ class Filters {
   
   static DateFormat time_formatter = new DateFormat('HH:mm:ss.SSS');
   
+  static DateFormat date_formatter = new DateFormat('d MMM yyyy H:m:s');
+  
   static RegExp suffix_start_exp = new RegExp(r'(/|#)');
   
   uppercase(o) => o is String && o != null ? o.toUpperCase() : o;
@@ -18,6 +20,7 @@ class Filters {
   static containsIgnoreCase(String s1, String s2) => (s1 != null && s2 != null && s1.toLowerCase().contains(s2.toLowerCase())) || (s1 == s2);
   
   String format(DateTime date) => formatter.format(date);
+  String formatDate(DateTime date) => date!=null?date_formatter.format(date): null;
   String formatEpoch(int milliseconds) => milliseconds != null  ? time_formatter.format(new DateTime.fromMillisecondsSinceEpoch(milliseconds)):milliseconds;
   
   String suffixIfPresent(String s) => suffix(s, s);
