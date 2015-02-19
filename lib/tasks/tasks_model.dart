@@ -100,13 +100,15 @@ class EditableTask extends EditableModel<Task> with Keyed {
   EndpointValidator sourceEndpointValidator;
   EndpointValidator targetEndpointValidator;
 
-  EditableTask(Task task, GradeEnpoints endpoints) : super(task) {
+  EditableTask(Task task, [GradeEnpoints endpoints]) : super(task) {
     
-    sourceEndpointValidator = new EndpointValidator.gradeendpoints(this, Task.K.source_endpoint, Task.K.source_graph, endpoints);
-    onPropertyChange(sourceEndpointValidator, #valid, ()=>notifyPropertyChange(#valid, null, valid));
-    
-    targetEndpointValidator = new EndpointValidator.gradeendpoints(this, Task.K.target_endpoint, Task.K.target_endpoint, endpoints);
-    onPropertyChange(targetEndpointValidator, #valid, ()=>notifyPropertyChange(#valid, null, valid));
+    if (endpoints!=null) {
+      sourceEndpointValidator = new EndpointValidator.gradeendpoints(this, Task.K.source_endpoint, Task.K.source_graph, endpoints);
+      onPropertyChange(sourceEndpointValidator, #valid, ()=>notifyPropertyChange(#valid, null, valid));
+      
+      targetEndpointValidator = new EndpointValidator.gradeendpoints(this, Task.K.target_endpoint, Task.K.target_endpoint, endpoints);
+      onPropertyChange(targetEndpointValidator, #valid, ()=>notifyPropertyChange(#valid, null, valid));
+    }
     
     playgroundRunningTask = new RunningTask(model);
 
@@ -123,7 +125,9 @@ class EditableTask extends EditableModel<Task> with Keyed {
   set(key, value) => model.set(key, value);
   
   @observable
-  bool get valid => super.valid && (edit || sourceEndpointValidator.valid || targetEndpointValidator.valid); 
+  bool get valid => super.valid && (edit 
+      || (sourceEndpointValidator != null && sourceEndpointValidator.valid) 
+      || (targetEndpointValidator !=null && targetEndpointValidator.valid)); 
 
   bool calculateFieldsValidity() => fieldsInvalidity.keys//we skip the diff query if the operation is publish
   .where((String field) => !(field == K.diff && get(K.op) == K.publish_op)).map((String field) => fieldsInvalidity[field])//we are watching invalidity
