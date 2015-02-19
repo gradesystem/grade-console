@@ -15,6 +15,7 @@ class TaskDetails extends View {
   
   Validator conditionalRequiredDiff ;
   Validator uniqueLabel;
+  Validator creatorValidator = ($) =>  $!=null && $ == Task.K.default_creator?"Please complete the field.":null;
   
   //we need this list for the graphs panel
   @observable

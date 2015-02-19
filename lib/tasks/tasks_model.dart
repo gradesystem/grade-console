@@ -24,6 +24,9 @@ class TaskKeys {
 
   final String note = "note";
   final String creator = "author";
+  
+  final String default_creator = "http://data.gradesystem.eu/people/<your.name>";
+  
 }
 
 class Task extends EditableGradeEntity with Filters {
@@ -39,7 +42,7 @@ class Task extends EditableGradeEntity with Filters {
 
   Task() : this.fromBean({
     K.op:K.publish_op,
-    K.creator:"http://data.gradesystem.eu/people",
+    K.creator:K.default_creator,
     K.source_graph:[]
   });
   
