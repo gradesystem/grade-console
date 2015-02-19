@@ -364,7 +364,6 @@ class EndpointValidator extends Observable {
   String endpointIdKey;
   String graphsKey;
   
-  
   List<Endpoints> endpointsLists = [];
   List<StreamSubscription> endpointsListsSubscriptions = [];
   
@@ -414,7 +413,6 @@ class EndpointValidator extends Observable {
     endpointsLists = lists;
   }
   
-  
   void listenAndValidate() {
     //listen to model endpoint
     listenEditableEndpoint();
@@ -443,7 +441,6 @@ class EndpointValidator extends Observable {
     }
   }
 
-  
   EditableEndpoint getEditableEndpoint() {
     Delegate model = editable.model;
     String endpointId = model.get(endpointIdKey);
@@ -475,5 +472,80 @@ class EndpointValidator extends Observable {
   }
 
 }
+
+class EndpointProvider extends Observable {
+  
+  EditableModel editable;
+  String endpointIdKey;
+  String graphsKey;
+  
+  List<Endpoints> endpointsLists = [];
+  List<StreamSubscription> endpointsListsSubscriptions = [];
+  
+  StreamSubscription editableEndpointSubscription;
+  StreamSubscription endpointSubscription;
+  
+  StreamSubscription modelSubscription;
+  
+  @observable
+  EditableEndpoint editableEndpoint;
+  
+  EndpointProvider(this.editable, this.endpointIdKey, this.graphsKey, Endpoints endpoints) {
+    
+    //model listening
+    onPropertyChange(editable, #model, setEndpoint);
+    
+    //listen for changes in the enpoints list
+    bindEndpointsLists(new List.filled(1, endpoints));
+    
+    setEndpoint();
+  }
+  
+  EndpointProvider.gradeendpoints(this.editable, this.endpointIdKey, this.graphsKey, GradeEnpoints gradeEndpoints) {
+   
+    //model listening
+    onPropertyChange(editable, #model, setEndpoint);
+
+    //listen to all endpoints added to gradeendpoints
+    gradeEndpoints.areaEndpoints.listChanges.listen((_)=>bindGradeEndpoints(gradeEndpoints));
+    bindGradeEndpoints(gradeEndpoints);    
+    
+    setEndpoint();
+  }
+  
+  void bindGradeEndpoints(GradeEnpoints gradeEndpoints) {
+    bindEndpointsLists(gradeEndpoints.areaEndpoints.map((AreaEndpoints ae)=>ae.endpointsStorage).toList());
+  }
+  
+  void bindEndpointsLists(List<Endpoints> lists) {
+    
+    endpointsListsSubscriptions.forEach((StreamSubscription s)=>s.cancel());
+    
+    lists.forEach((Endpoints e){
+      endpointsListsSubscriptions.add(onPropertyChange(e.data, #lastChangedItem, setEndpoint));
+    });
+    
+    endpointsLists = lists;
+  }
+  
+  void setEndpoint() {
+    editableEndpoint = getEditableEndpoint();
+  }
+ 
+  EditableEndpoint getEditableEndpoint() {
+    Delegate model = editable.model;
+    String endpointId = model.get(endpointIdKey);
+
+    for (Endpoints endpoints in endpointsLists) {
+      EditableEndpoint ee = endpoints.findById(endpointId);
+      if (ee != null) return ee;
+    }
+
+    return null;
+  }
+  
+
+}
+
 
 

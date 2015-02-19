@@ -27,7 +27,7 @@
 	     
 	       <grade-fascia flex truncate>
 	         <div fascia-title>{{ name }}</div>
-	         <div fascia-subtitle></div>
+	         <div fascia-subtitle>{{item.targetEndpoint.model.name}}</div>
 	       </grade-fascia>
 	       
 	       <grade-button action onhover hidden?="{{ item.edit || !selected }}" smallicon icon="content-copy" tooltip="left" label="clone query" on-click={{cloneItem}}></grade-button>

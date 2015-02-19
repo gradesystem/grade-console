@@ -217,11 +217,16 @@ class EditableQuery extends EditableModel<Query> with Keyed {
   bool _dirty = false;
   
   EndpointValidator endpointValidator;
+  
+  EndpointProvider endpointProvider;
 
   EditableQuery(Query query, Endpoints endpoints) : super(query) {
     
     endpointValidator = new EndpointValidator(this, Query.K.target, Query.K.graph, endpoints);
     onPropertyChange(endpointValidator, #valid, ()=>notifyPropertyChange(#valid, null, valid));
+    
+    endpointProvider = new EndpointProvider(this, Query.K.target, Query.K.graph, endpoints);
+    onPropertyChange(endpointProvider, #editableEndpoint, ()=>notifyPropertyChange(#targetEndpoint, null, targetEndpoint));
     
     //we want to listen on parameters value changes
     parametersInvalidity.changes.listen(_updateParametersValidity);
@@ -241,6 +246,8 @@ class EditableQuery extends EditableModel<Query> with Keyed {
 
   get(key) => model.get(key);
   set(key, value) => model.set(key, value);
+  
+  EditableEndpoint get targetEndpoint => endpointProvider.editableEndpoint;
   
   @observable
   bool get valid => super.valid && (edit || endpointValidator.valid); 
