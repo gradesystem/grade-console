@@ -5,6 +5,9 @@ class HomePage extends PolymerElement with Dependencies {
 
   @observable
   Datasets prod;
+  
+  @observable
+  Queries prodQueries;
 
   @observable
   Datasets stage;
@@ -35,6 +38,7 @@ class HomePage extends PolymerElement with Dependencies {
   HomePage.created() : super.created() {
 
     prod = instanceOf(Datasets, ProdAnnotation);
+    prodQueries = instanceOf(Queries, ProdAnnotation);
     prod_stats = new PageStatistics(prod.data.length, new DateTime.now());
 
     stage = instanceOf(Datasets, StageAnnotation);
@@ -59,11 +63,15 @@ class HomePage extends PolymerElement with Dependencies {
 
   @ObserveProperty('prod.loading')
   @ObserveProperty('prod.data')
+  @ObserveProperty('prodQueries.invalidPublished')
   onProdChange() {
 
     prod_stats.loaded = !prod.loading;
     prod_stats.count = prod.data.length;
     prod_stats.date = new DateTime.now();
+    
+    prod_stats.notifications.clear();
+    if (prodQueries.invalidPublished.isNotEmpty) prod_stats.notifications.add("error");
 
   }
 

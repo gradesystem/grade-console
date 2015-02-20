@@ -11,7 +11,7 @@ class DatasetDetails extends PolymerElement with Filters {
   DatasetDetails.created() : super.created();
   
   //we pass value in order to trigger the change in the view
-  String getValue(String key, value) => isDate(key)?item.extractAndFormatDate(key):trim(value);
+  String getValue(String key, value) => isDate(key) && item != null?item.extractAndFormatDate(key):trim(value);
   
   bool isDate(String key) => key!=null && dateFields.contains(key);
   

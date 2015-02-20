@@ -135,9 +135,21 @@ int compareQueries(EditableQuery eq1, EditableQuery eq2) {
 
 class Queries extends EditableListItems<EditableQuery> {
   
-  Queries():super(compareQueries);
+  Queries():super(compareQueries) {
+    onPropertyChange(data, #lastChangedItem, _notifyDerivedChanged);
+    onPropertyChange(data, #length, _notifyDerivedChanged);
+  }
+  
+  void _notifyDerivedChanged() {
+    notifyPropertyChange(#invalidPublished, null, invalidPublished);
+  }
 
   bool containsName(String name) => data.any((EditableQuery eq) => eq != selected && eq.model.name != null && eq.model.name.toLowerCase() == name.toLowerCase());
+  
+  @observable
+  List<EditableModel<Query>> get invalidPublished => data.where((EditableModel<Query> et)=>!et.edit && !et.valid && et.model.isPublished).toList();
+ 
+  
 }
 
 class QuerySubPageModel extends SubPageEditableModel<Query> {
