@@ -54,7 +54,7 @@
 		             disabled?={{!removeEnabled}}
 				         smallicon 
 				         tooltip="left" 
-				         label="remove graph" 
+				         label="{{removeEnabled?'remove graph':'endpoint protected'}}" 
 				         icon="delete" 
 				         on-click={{removeGraph}} 
 				         >
