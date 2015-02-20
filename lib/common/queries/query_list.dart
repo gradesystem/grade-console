@@ -3,11 +3,11 @@ part of queries;
 @CustomTag("query-list") 
 class QueryList extends GradeList {
   
-  ListFilter servicesFilter = new ListFilter("PUBLISHED", true, (EditableQuery item)=>(item.model.status == Query.K.status_published));
-  ListFilter internalFilter = new ListFilter("UNPUBLISHED", true, (EditableQuery item)=>(item.model.status == Query.K.status_unpublished && !item.model.isSystem));
-  ListFilter invalidFilter = new ListFilter("INVALID", false, (EditableQuery item)=>!item.valid && item.model.isPublished, true, true);
-  ListFilter systemFilter = new ListFilter("SYSTEM", false, (EditableQuery item)=>(item.model.isSystem));
-  ListFilter dataSystemFilter = new ListFilter("DATA", true, (EditableModel item)=>!item.model.isSystem);
+  ListFilter servicesFilter = new ListFilter("PUBLISHED", true, (EditableQuery item)=>(item.model.status == Query.K.status_published) && item.valid);
+  ListFilter internalFilter = new ListFilter("UNPUBLISHED", true, (EditableQuery item)=>(item.model.status == Query.K.status_unpublished && !item.model.isSystem && item.valid));
+  ListFilter invalidFilter = new ListFilter("INVALID", true, (EditableQuery item)=>!item.valid && item.model.isPublished);
+  ListFilter systemFilter = new ListFilter("SYSTEM", false, (EditableQuery item)=>(item.model.isSystem && item.valid));
+  ListFilter dataSystemFilter = new ListFilter("DATA", true, (EditableModel item)=>!item.model.isSystem && item.valid);
   ListFilter underEditAlwaysVisibleFilter = new ListFilter.hidden((EditableModel item)=>item.edit, false);
   
   @published
@@ -26,6 +26,6 @@ class QueryList extends GradeList {
   void ready() {
     super.ready();
     filters.addAll(statusEditEnabled?[servicesFilter, internalFilter, invalidFilter, systemFilter, underEditAlwaysVisibleFilter]
-    :[dataSystemFilter, systemFilter, underEditAlwaysVisibleFilter]);
+    :[dataSystemFilter, invalidFilter, systemFilter, underEditAlwaysVisibleFilter]);
   }
 }
