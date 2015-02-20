@@ -5,15 +5,16 @@ class Dataset extends GradeEntity with Filters {
   Dataset(Map bean) : super(bean);
 
   static final String CREATION_DATE_FIELD = "http://purl.org/dc/terms/created";
-
   static final String MODIFIED_DATE_FIELD = "http://purl.org/dc/terms/modified";
+  static final String URI_FIELD = "uri";
 
   static final String id = "uri";
-  static final List<String> labels = ["label", "http://www.w3.org/2000/01/rdf-schema#label", "http://purl.org/dc/terms/title"];
-
+  static final List<String> titles_keys = ["label", "http://www.w3.org/2000/01/rdf-schema#label", "http://purl.org/dc/terms/title"];
+  static final List<String> subtitles_keys = [CREATION_DATE_FIELD, MODIFIED_DATE_FIELD, URI_FIELD];
+  
   String get title {
 
-    for (String lbl in labels) {
+    for (String lbl in titles_keys) {
       String label = get(lbl);
       if (label != null) return label;
     }
@@ -23,6 +24,11 @@ class Dataset extends GradeEntity with Filters {
 
   String get creationDate => extractAndFormatDate(CREATION_DATE_FIELD);
   String get modifiedDate => extractAndFormatDate(MODIFIED_DATE_FIELD);
+  
+  String get subtitle {
+    for (String key in subtitles_keys) if (bean.containsKey(key)) return get(key);
+    return null;
+  }
 
 
   String extractAndFormatDate(String key) {
