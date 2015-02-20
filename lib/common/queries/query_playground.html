@@ -86,7 +86,7 @@
 				
 				<div toolbar horizontal layout center style="padding-right:50px">
 				  <span smallish>LIMIT</span>
-				  <paper-slider pin min="0" step="25" max="300" value="{{resultsLimit}}"></paper-slider>
+				  <paper-slider pin min="1" step="25" max="300" value="{{resultsLimit}}"></paper-slider>
 				</div>
 				<grade-button toolbar icon="create" label="edit query" on-click="{{onEdit}}" hidden?="{{ editableQuery.edit}}" tooltip="left"></grade-button>
 				<grade-button toolbar icon="cancel" label="discard changes" on-click="{{onCancel}}" hide?="{{ !editableQuery.edit}}" tooltip="left"></grade-button>
