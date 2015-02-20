@@ -71,7 +71,7 @@
 					</grade-button>
             
           <!-- add graph -->
-          <grade-button toolbar hidden?="{{ area == PROPERTIES_AREA  || items.selected.edit}}"
+          <grade-button toolbar hidden?="{{ area == PROPERTIES_AREA  || items.selected.edit || !items.selected.model.writable}}"
                         sidebutton
 				                action 
 				                icon="add" 

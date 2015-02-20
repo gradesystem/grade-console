@@ -82,7 +82,7 @@ class Endpoint extends EditableGradeEntity with Filters, Observable {
     onBeanChange([K.uri], () => notifyPropertyChange(#uri, null, uri));
     onBeanChange([K.update_uri], () {
       notifyPropertyChange(#updateUri, null, updateUri);
-      notifyPropertyChange(#canWrite, null, canWrite);
+      notifyPropertyChange(#writable, null, writable);
     });
     onBeanChange([K.locked], () => notifyPropertyChange(#locked, null, locked));
     onBeanChange([K.status], () {
@@ -133,7 +133,7 @@ class Endpoint extends EditableGradeEntity with Filters, Observable {
     notifyPropertyChange(#updateUri, null, value);
   }
   
-  bool get canWrite => updateUri!=null && updateUri.isNotEmpty;
+  bool get writable => updateUri!=null && updateUri.isNotEmpty;
   
   bool get isSystem => get(K.status) == K.status_system;
   bool get isData => get(K.status) == K.status_data;
