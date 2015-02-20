@@ -22,8 +22,8 @@ class Dataset extends GradeEntity with Filters {
     return get(id);
   }
 
-  String get creationDate => extractAndFormatDate(CREATION_DATE_FIELD);
-  String get modifiedDate => extractAndFormatDate(MODIFIED_DATE_FIELD);
+  DateTime get creationDate => getDate(CREATION_DATE_FIELD);
+  DateTime get modifiedDate => getDate(MODIFIED_DATE_FIELD);
   
   String get subtitle {
     for (String key in subtitles_keys) if (bean.containsKey(key)) return get(key);
@@ -52,9 +52,13 @@ class Dataset extends GradeEntity with Filters {
 }
 
 int compareDatasets(Dataset d1, Dataset d2) {
-  if (d1 == null || d1.modifiedDate == null) return 1;
-  if (d2 == null || d2.modifiedDate == null) return -1;
-  return d2.modifiedDate.compareTo(d1.modifiedDate);
+  if (d1 == null) return 1;
+  DateTime date1 = d1.modifiedDate != null?d1.modifiedDate:d1.creationDate;
+  if (date1 == null) return 1;
+  if (d2 == null) return -1;
+  DateTime date2 = d2.modifiedDate != null?d2.modifiedDate:d2.creationDate;
+  if (date2 == null) return -1;
+  return date2.compareTo(date1);
 }
 
 
