@@ -65,6 +65,8 @@ class HomePage extends PolymerElement with Dependencies {
   @ObserveProperty('prod.data')
   @ObserveProperty('prodQueries.invalidPublished')
   onProdChange() {
+    
+    print('onProdChange tile update');
 
     prod_stats.loaded = !prod.loading;
     prod_stats.count = prod.data.length;
@@ -73,6 +75,7 @@ class HomePage extends PolymerElement with Dependencies {
     prod_stats.notifications.clear();
     if (prodQueries.invalidPublished.isNotEmpty) prod_stats.notifications.add("error");
 
+    print('prod_stats.notifications: ${prod_stats.notifications}');
   }
 
   @ObserveProperty('stage.loading')
