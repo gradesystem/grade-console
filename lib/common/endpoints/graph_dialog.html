@@ -37,6 +37,7 @@
           <grade-input id="uriInput" fascia-title
                           label="uri" 
                           required
+                          grade-dark-grey?="{{!canEditUri}}"
                           disabled="{{!canEditUri}}"
                           invalid="{{ uriInvalid }}"
                           inputValue="{{ uri }}"
