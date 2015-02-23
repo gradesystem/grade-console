@@ -416,7 +416,6 @@ class EndpointValidator extends Observable {
   }
   
   void listenAndValidate() {
-    print('listenAndValidate $editable');
     //listen to model endpoint
     listenEditableEndpoint();
     validate();
