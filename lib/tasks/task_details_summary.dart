@@ -14,7 +14,7 @@ class TaskDetailsSummary extends View {
   TaskKeys K = const TaskKeys();
 
   @ComputedProperty("item.model.bean[K.target_graph]")
-  String get target =>get(item,K.target_graph);
+  String get target =>getOrNull(item,K.target_graph, "n/a");
   
   @ComputedProperty("item.model.bean[K.label]")
   String get label => get(item,K.label);
