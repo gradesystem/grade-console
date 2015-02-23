@@ -40,6 +40,7 @@ class HomePage extends PolymerElement with Dependencies {
     prod = instanceOf(Datasets, ProdAnnotation);
     prodQueries = instanceOf(Queries, ProdAnnotation);
     prod_stats = new PageStatistics(prod.data.length, new DateTime.now());
+    onPropertyChange(prodQueries, #invalidPublished, onProdChange);
 
     stage = instanceOf(Datasets, StageAnnotation);
     stage_stats = new PageStatistics(stage.data.length, new DateTime.now());
@@ -63,7 +64,6 @@ class HomePage extends PolymerElement with Dependencies {
 
   @ObserveProperty('prod.loading')
   @ObserveProperty('prod.data')
-  @ObserveProperty('prodQueries.invalidPublished.isNotEmpty')
   onProdChange() {
     
     print('onProdChange tile update');

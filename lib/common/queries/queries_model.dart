@@ -141,7 +141,7 @@ class Queries extends EditableListItems<EditableQuery> {
   }
   
   void _notifyDerivedChanged() {
-    print('notifying invalidPublished $invalidPublished');
+    print('notifying invalidPublished $invalidPublished $hasObservers');
     notifyPropertyChange(#invalidPublished, null, invalidPublished);
   }
 
