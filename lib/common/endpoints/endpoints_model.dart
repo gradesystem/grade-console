@@ -173,6 +173,7 @@ class EndpointSubPageModel extends SubPageEditableModel<Endpoint> {
       EditableEndpoint endpoint = storage.findById(event.endpoint);
       refreshGraphs(endpoint);
     });
+    onPropertyChange(storage, #data, ()=>print('endpoints storage.data changed'));
   }
   
   EndpointsService get endpointService => service;
@@ -408,12 +409,14 @@ class EndpointValidator extends Observable {
     
     lists.forEach((Endpoints e){
       endpointsListsSubscriptions.add(onPropertyChange(e.data, #lastChangedItem, listenAndValidate));
+      endpointsListsSubscriptions.add(onPropertyChange(e, #data, listenAndValidate));
     });
     
     endpointsLists = lists;
   }
   
   void listenAndValidate() {
+    print('listenAndValidate $editable');
     //listen to model endpoint
     listenEditableEndpoint();
     validate();

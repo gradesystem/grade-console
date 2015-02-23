@@ -141,6 +141,7 @@ class Queries extends EditableListItems<EditableQuery> {
   }
   
   void _notifyDerivedChanged() {
+    print('notifying invalidPublished $invalidPublished');
     notifyPropertyChange(#invalidPublished, null, invalidPublished);
   }
 
@@ -235,7 +236,11 @@ class EditableQuery extends EditableModel<Query> with Keyed {
   EditableQuery(Query query, Endpoints endpoints) : super(query) {
     
     endpointValidator = new EndpointValidator(this, Query.K.target, Query.K.graph, endpoints);
-    onPropertyChange(endpointValidator, #valid, ()=>notifyPropertyChange(#valid, null, valid));
+    onPropertyChange(endpointValidator, #valid, (){
+      print('endpointValidator valid changed ${endpointValidator.valid}');
+      notifyPropertyChange(#valid, null, valid);
+        
+    });
     
     endpointProvider = new EndpointProvider(this, Query.K.target, Query.K.graph, endpoints);
     onPropertyChange(endpointProvider, #editableEndpoint, ()=>notifyPropertyChange(#targetEndpoint, null, targetEndpoint));
