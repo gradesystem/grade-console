@@ -212,8 +212,9 @@ class TasksModel extends SubPageEditableModel<Task> {
     return runningTask;
   }
 
-  void runSandboxTask(EditableTask editableTask) {
+  void runSandboxTask(EditableTask editableTask, int limit) {
     if (editableTask.playgroundRunningTask.execution!=null) executionsService.delete(editableTask.playgroundRunningTask.execution);
+    editableTask.playgroundRunningTask.resultsLimit = limit;
     _run(editableTask.playgroundRunningTask, editableTask.model, taskService.runSandboxTask);
   }
   
@@ -268,17 +269,17 @@ class TasksModel extends SubPageEditableModel<Task> {
   }
   
   void retrieveTargetResult(RunningTask runningTask, [Crumb crumb])
-    => retrieveResult(runningTask, executionsService.getTargetResult, runningTask.target, crumb);
+    => retrieveResult(runningTask, executionsService.getTargetResult, runningTask.target, crumb:crumb, limit:runningTask.resultsLimit);
   
   void retrieveDifferenceResult(RunningTask runningTask, [Crumb crumb])
-    => retrieveResult(runningTask, executionsService.getDifferenceResult, runningTask.diff, crumb);
+    => retrieveResult(runningTask, executionsService.getDifferenceResult, runningTask.diff, crumb:crumb, limit:runningTask.resultsLimit);
 
   void retrieveTransformResult(RunningTask runningTask, [Crumb crumb])
-    => retrieveResult(runningTask, executionsService.getTransformResult, runningTask.transform, crumb);
+    => retrieveResult(runningTask, executionsService.getTransformResult, runningTask.transform, crumb:crumb, limit:runningTask.resultsLimit);
   
-  void retrieveResult(RunningTask runningTask, Future<ResulTable> retriever(RunningTask, [uri]), Result result, [Crumb crumb]) {
+  void retrieveResult(RunningTask runningTask, Future<ResulTable> retriever(RunningTask, {uri,limit}), Result result, {Crumb crumb, int limit}) {
     result.loading = true;
-    retriever(runningTask.execution, crumb is DescribeCrumb?crumb.uri:null)
+    retriever(runningTask.execution, uri:crumb is DescribeCrumb?crumb.uri:null, limit:limit)
     .then((ResulTable resultQuery){
       result.value = resultQuery;
     }).catchError((e) => onError(e, null)).whenComplete(() {
@@ -389,6 +390,8 @@ class RunningTask extends Observable {
   
   @observable
   bool canCancel = false;
+  
+  int resultsLimit = null;
 
   @observable
   Result transform = new Result();

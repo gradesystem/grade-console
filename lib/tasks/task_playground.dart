@@ -14,6 +14,9 @@ class TaskPlayground extends PolymerElement with Filters, Dependencies {
   @observable
   GradeEnpoints gradeEndpoints;
   
+  @observable
+  int resultsLimit = 25;
+  
   TaskPlayground.created() : super.created(){
     
     gradeEndpoints = instanceOf(GradeEnpoints);
@@ -59,7 +62,7 @@ class TaskPlayground extends PolymerElement with Filters, Dependencies {
   
   void onButtonClick() {
     if (editableTask.playgroundRunningTask.running) fire("cancel", detail:editableTask);
-    else fire("run", detail:editableTask);
+    else fire("run", detail:{"limit":resultsLimit, "task":editableTask});
   }
 
 }

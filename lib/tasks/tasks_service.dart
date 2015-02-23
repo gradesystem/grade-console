@@ -44,19 +44,25 @@ class TaskExecutionsService extends ListService<TaskExecution> {
   Future<TaskExecution> stopTaskExecution(TaskExecution execution) 
     => http.postJSon(getItemPath(execution.id), "").then(generator);
 
-  Future<ResulTable> getTransformResult(TaskExecution execution, [String uri])     
-    => _getResult(execution, "transform", uri);
+  Future<ResulTable> getTransformResult(TaskExecution execution, {String uri, int limit})     
+    => _getResult(execution, "transform", uri:uri,limit:limit);
 
-  Future<ResulTable> getDifferenceResult(TaskExecution execution, [String uri])     
-    => _getResult(execution, "difference", uri); 
+  Future<ResulTable> getDifferenceResult(TaskExecution execution, {String uri, int limit})     
+    => _getResult(execution, "difference", uri:uri,limit:limit); 
   
-  Future<ResulTable> getTargetResult(TaskExecution execution, [String uri])     
-    => _getResult(execution, "target", uri);
+  Future<ResulTable> getTargetResult(TaskExecution execution, {String uri, int limit})     
+    => _getResult(execution, "target", uri:uri,limit:limit);
   
-  Future<ResulTable> _getResult(TaskExecution execution, String resultpath, [String uri])     
-     => http.get("${getItemPath(execution.id)}/results/$resultpath", acceptedMediaType:MediaType.SPARQL_JSON, parameters: uri!=null?{"uri":uri}:{})
+  Future<ResulTable> _getResult(TaskExecution execution, String resultpath, {String uri, int limit})     
+     => http.get("${getItemPath(execution.id)}/results/$resultpath", acceptedMediaType:MediaType.SPARQL_JSON, parameters: getParameters(uri:uri,limit:limit))
      .then((response) => new ResulTable(http.decode(response)));
   
+  Map getParameters({String uri, int limit}) {
+    Map parameters = {};
+    if (uri!=null) parameters["uri"] = uri;
+    if (limit!=null) parameters["grade_limit"] = "$limit";
+    return parameters;
+  }
  
   Future<bool> delete(TaskExecution execution) {
     return http.delete(getItemPath(execution.id)).then((response) => true);

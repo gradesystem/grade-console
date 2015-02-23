@@ -76,7 +76,7 @@ class TasksPanel extends ResizerPolymerElement with Filters, Dependencies {
   }
   
   void onRunTask(event, detail, target) {
-    model.runSandboxTask(detail);
+    model.runSandboxTask(detail["task"],detail["limit"]);
   }
   
   void onCancelTask(event, detail, target) {

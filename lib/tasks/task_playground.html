@@ -7,6 +7,7 @@
 <link rel="import" href="../../../packages/core_elements/av_icons.html">
 <link rel="import" href="../../../packages/core_elements/core_splitter.html">
 <link rel="import" href="../../../packages/paper_elements/paper_fab.html">
+<link rel="import" href="../../../packages/paper_elements/paper_slider.html">
 
 <link rel="import" href="running_task_panel.html">
 <link rel="import" href="tasks.html">
@@ -57,6 +58,10 @@
     <div style="height:60%;" wired rounded spaced layout vertical>
       <grade-header-panel flex paneltitle={{paneltitle}}>
         <grade-button menu icon="arrow-back" on-click="{{onBack}}"></grade-button>
+        <div toolbar horizontal layout center style="padding-right:50px">
+          <span smallish>LIMIT</span>
+          <paper-slider pin min="1" step="25" max="300" value="{{resultsLimit}}"></paper-slider>
+        </div>
         <grade-button toolbar icon="create" label="edit task" on-click="{{onEdit}}" hidden?="{{  editableTask==null || editableTask.edit}}" tooltip="left"></grade-button>
         <grade-button toolbar icon="cancel" label="discard changes" on-click="{{onCancel}}" hidden?="{{ !editableTask.edit}}"  tooltip="left"></grade-button>
         <grade-button toolbar icon="save" label="save changes" on-click="{{onSave}}" hidden?="{{ !editableTask.edit}}" disabled={{!editableTask.valid}}  tooltip="left"></grade-button>
