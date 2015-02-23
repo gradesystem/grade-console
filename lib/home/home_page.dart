@@ -63,7 +63,7 @@ class HomePage extends PolymerElement with Dependencies {
 
   @ObserveProperty('prod.loading')
   @ObserveProperty('prod.data')
-  @ObserveProperty('prodQueries.invalidPublished')
+  @ObserveProperty('prodQueries.invalidPublished.isNotEmpty')
   onProdChange() {
     
     print('onProdChange tile update');
