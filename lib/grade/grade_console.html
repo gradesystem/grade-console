@@ -141,7 +141,7 @@
 			</core-pages>
           
 			<div class="{{ pages[page].style}}-scaffold" small layout horizontal center>   
-			  <div>Last deployed: ${build-timestamp}</div>
+			  <div>${project.version}</div>
 			  <div flex layout horizontal center-justified center on-click={{showCredits}} style="cursor:pointer" tinyicon>
 			    <div>Copyright 2014-2015 GRADE all rights reserved</div>
 			  </div>
@@ -217,7 +217,7 @@
 			      <div fascia-subtitle>Tech Lead, Manager</div>
 			    </grade-fascia>
 			  </grade-item>
-			  <div small>Grade build: ${buildNumber}</div>
+			  <div small>Grade ${project.version} build: ${buildNumber}</div>
 			</div>
     </grade-dialog>
     
