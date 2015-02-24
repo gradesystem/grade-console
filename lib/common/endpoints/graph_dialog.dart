@@ -125,14 +125,11 @@ class GraphDialog extends PolymerElement with Filters {
   
   @ObserveProperty("label endpointName")
   void calculateLabelError() {
-    print('calculateLabelError endpointName: $endpointName label: $label');
     if (endpointName == null || label == null) return;
     
     EditableEndpoint targetEndpoint = endpoints.findByName(endpointName);
     if (targetEndpoint.model.graphs.any((Graph graph)=>graph.label == label)) labelInput.error = ERROR_MESSAGE;
     else if (labelInput.error == ERROR_MESSAGE) labelInput.error = "";
-    
-    print('calculateLabelError labelInput.error: ${labelInput.error}');
   }
 
   void reset() {
