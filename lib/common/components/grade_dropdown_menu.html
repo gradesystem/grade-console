@@ -65,22 +65,14 @@
 	      margin-top: 8px;
 	      margin-bottom: 8px;
 	    }
-
-			.error-text {
-			  font-size: 0.75em;
-			  padding: 0.5em 0;
-			  color: #757575;
-			}
-			
-			.error-icon {
-			  height: 20px;
-			  width: 20px;
-			  color: #757575;
-			}
+	    
+	    [empty-msg] {
+	     color: #757575;
+	    }
 
 		</style>
 		
-    <paper-dropdown-menu id="dropdownmenu" label={{label}} disabled?={{disabled}}>
+    <paper-dropdown-menu id="dropdownmenu" label={{label}} disabled?={{disabled}} hidden?={{showEmptyMenuMsg}}>
       <paper-dropdown id="dropdownpanel" class="dropdown" transition="">
         <core-menu id ="menu" class="menu" selected={{selected}} selectedAttribute="{{selectedAttribute}}" valueattr="dropitem">
           <content select="*"></content>
@@ -88,7 +80,9 @@
       </paper-dropdown>
 		</paper-dropdown-menu>
 		
-		<field-error show="{{invalid}}">{{errorMsg}}</field-error>
+		<div empty-msg hidden?={{!showEmptyMenuMsg}}>{{emptyMenuMsg}}</div>
+		
+		<field-error show="{{invalid && !showEmptyMenuMsg}}">{{errorMsg}}</field-error>
     
 	</template>
 	      

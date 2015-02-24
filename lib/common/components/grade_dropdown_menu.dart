@@ -27,9 +27,15 @@ class GradeDropdownMenu extends PolymerElement {
 
   @observable
   String errorMsg;
-  
+
   @published
   List<Validator> validators = [];
+  
+  @published
+  String emptyMenuMsg = "No selection available";
+  
+  @observable
+  bool showEmptyMenuMsg = false;
   
   CoreMenu menu;
   PaperDropdown dropdown;
@@ -54,9 +60,13 @@ class GradeDropdownMenu extends PolymerElement {
         //forces to recalculate the dropdown size
         dropdown.shadowRoot.querySelector("#scroller").style.height = "";
         
+        updateEmptyMessage();
+        
         onModelChange();
       })
       .observe(this.parentNode, childList:true, subtree:true);
+   
+   updateEmptyMessage();
   }
 
   bool isItem(String val) {
@@ -66,6 +76,10 @@ class GradeDropdownMenu extends PolymerElement {
           return true;
     
     return false;
+  }
+  
+  void updateEmptyMessage() {
+    showEmptyMenuMsg = this.querySelectorAll("[dropitem]").isEmpty;
   }
   
   @ObserveProperty("invalid")
