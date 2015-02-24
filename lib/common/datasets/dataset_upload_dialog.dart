@@ -13,6 +13,18 @@ class DatasetUploadDialog extends PolymerElement with Filters {
   @observable
   List<Format> acceptedFormats = [new Format("CSV",MediaType.CSV), new Format("JSON", MediaType.JSON), new Format("XML", MediaType.XML)];
   
+  List<String> delimiters = [
+                             {"label":"comma","value":","},
+                             {"label":"tab","value":"\t"},
+                             {"label":"semicolon","value":";"},
+                             {"label":"space","value":" "}
+                            ];
+
+  List<String> quotes = [
+                             {"label":"\"","value":"\""},
+                             {"label":"'","value":"'"}
+                             ];
+  
   @observable
   List<String> encodings = [DEFAULT_ENCODING, "UTF-16"];
 

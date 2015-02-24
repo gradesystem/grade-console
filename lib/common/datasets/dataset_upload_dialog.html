@@ -69,7 +69,7 @@
 	        <grade-fascia item>
 	          <grade-dropdown-menu fascia-title 
 	             selected="{{ mimeType }}"
-	             label="type" 
+	             label="type ?" 
 	             required
 	             invalid="{{ mimeTypeInvalid }}"
 	             >
@@ -83,7 +83,7 @@
 	        <grade-fascia item>
 	          <grade-dropdown-menu fascia-title
 	                       selected="{{ endpoint }}"
-	                       label="endpoint" 
+	                       label="endpoint ?" 
 	                       required
 	                       invalid="{{ endpointInvalid }}"
 	                       >
@@ -96,21 +96,23 @@
 	        
 	        <div vertical layout hidden?={{!isTypeCSV}}>
 	          <grade-fascia item>
-		          <grade-input fascia-title 
-		             label="delimiter ?" 
-		             required
-		             invalid="{{ delimiterInvalid }}"
-		             inputValue="{{ delimiter  }}"
-		             maxlength=2
-		             >
-		          </grade-input>
+		          <grade-dropdown-menu fascia-title 
+                      selected="{{ delimiter }}"
+                      label="delimiter ?" 
+                      required
+                      invalid="{{ delimiterInvalid }}"
+                      >
+                <template repeat="{{delimiter in delimiters}}">
+                  <paper-item truncate dropitem="{{delimiter['value']}}">{{delimiter['label']}}</paper-item>
+                </template>
+              </grade-dropdown-menu>
 	            <grade-uri fascia-subtitle value="http://data.gradesystem.eu/onto#DELIMITER"></grade-uri>
 	          </grade-fascia>
 	          
 		        <grade-fascia item>
 		          <grade-dropdown-menu fascia-title 
 		                  selected="{{ encoding }}"
-		                  label="encoding" 
+		                  label="encoding ?" 
 		                  required
 		                  invalid="{{ encodingInvalid }}"
 		                  >
@@ -122,14 +124,16 @@
 		        </grade-fascia>
 		        
 		        <grade-fascia item>
-		          <grade-input fascia-title 
-			             label="quote ?" 
-			             required
-			             invalid="{{ quoteInvalid }}"
-			             inputValue="{{ quote  }}"
-			             maxlength=1
-			             >
-			        </grade-input>
+			        <grade-dropdown-menu fascia-title 
+                      selected="{{ quote }}"
+                      label="quote ?" 
+                      required
+                      invalid="{{ quoteInvalid }}"
+                      >
+                <template repeat="{{quote in quotes}}">
+                  <paper-item truncate dropitem="{{quote['value']}}">{{quote['label']}}</paper-item>
+                </template>
+              </grade-dropdown-menu>
 		          <grade-uri fascia-subtitle value="http://data.gradesystem.eu/onto#QUOTE"></grade-uri>
 		        </grade-fascia>
 	        
