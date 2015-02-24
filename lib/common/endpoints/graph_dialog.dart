@@ -104,7 +104,7 @@ class GraphDialog extends PolymerElement with Filters {
     
     uriModifiedByUser = false;
     
-    endpointName = endpoints.synchedData.any((EditableEndpoint e)=>e.model.id == currentEndpoint.model.id)?currentEndpoint.model.name:null;
+    endpointName = endpoints.synchedData.any((EditableEndpoint e)=>e.model.writable && e.model.id == currentEndpoint.model.id)?currentEndpoint.model.name:null;
     calculateUri();
 
     opened = true;
@@ -137,10 +137,13 @@ class GraphDialog extends PolymerElement with Filters {
   
   String calculateMoveUri(String current) {
 
+    if (endpointName == null) return current;
+    
     String local = getLocal(current);
-    EditableEndpoint targetEndpoint = endpoints.findByName(endpointName);
     
     if (endpointName == currentEndpoint.model.name) return "${getPrefixLocal(current)}/<version>/$local";
+    
+    EditableEndpoint targetEndpoint = endpoints.findByName(endpointName);
     
     if (targetEndpoint.model.graphs.isEmpty) return "${endpointDefaultUri(targetEndpoint)}/$local";
     String prefix = endpointPrefix(targetEndpoint);
