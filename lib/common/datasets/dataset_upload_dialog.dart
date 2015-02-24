@@ -126,7 +126,7 @@ class DatasetUploadDialog extends PolymerElement with Filters {
     failed = false;
     error = null;
     
-    if (endpoints.synchedData.length == 1) endpoint = endpoints.synchedData.first.model.id;
+    if (writable(endpoints.synchedData).length == 1) endpoint = writable(endpoints.synchedData).first.model.id;
   }
   
   String validate_name(String s) 
