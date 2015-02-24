@@ -28,6 +28,8 @@
 			
 			:host paper-dropdown-menu::shadow #label { max-height:21px;}
 			:host paper-dropdown-menu::shadow #label > div { padding: 0px }
+			
+			[item-label]::shadow #label { color:rgba(0, 0, 0, 0.870588);}
 
 			:host paper-dropdown-menu::shadow #arrow { 
 				margin: 0px; 
@@ -72,7 +74,7 @@
 
 		</style>
 		
-    <paper-dropdown-menu id="dropdownmenu" label={{label}} disabled?={{disabled}} hidden?={{showEmptyMenuMsg}}>
+    <paper-dropdown-menu id="dropdownmenu" label={{label}} disabled?={{disabled}} hidden?={{showEmptyMenuMsg}} item-label?="{{selected!=null}}">
       <paper-dropdown id="dropdownpanel" class="dropdown" transition="">
         <core-menu id ="menu" class="menu" selected={{selected}} selectedAttribute="{{selectedAttribute}}" valueattr="dropitem">
           <content select="*"></content>
