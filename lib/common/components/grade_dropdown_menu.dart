@@ -43,7 +43,7 @@ class GradeDropdownMenu extends PolymerElement {
   ready() {
     
     menu = $["menu"] as CoreMenu;
-    dropdown = $["dropdown"] as PaperDropdown;
+    dropdown = $["dropdownpanel"] as PaperDropdown;
     
     unknown_validator = (sel) => (!isItem(sel))? "Current value '${sel}' is no longer a valid choice.":null;    
    
