@@ -146,7 +146,7 @@ class GraphDialog extends PolymerElement with Filters {
    
   }
 
-  @ComputedProperty("labelInvalid || uriInvalid")
+  @ComputedProperty("labelInvalid || uriInvalid || (isMove && endpointInvalid)")
   bool get invalid => readValue(#invalid, () => false);
   
   String calculateMoveUri(String current) {
