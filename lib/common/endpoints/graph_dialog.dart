@@ -26,6 +26,9 @@ class GraphDialog extends PolymerElement with Filters {
 
   @observable
   bool labelInvalid;
+  
+  @observable
+  String labelError;
 
   @published
   Endpoints endpoints;
@@ -117,9 +120,19 @@ class GraphDialog extends PolymerElement with Filters {
       uri = calculateMoveUri(oldGraph.uri);
     }
   }
+  
+  @ObserveProperty("label endpointName")
+  void calculateLabelError() {
+    if (endpointName == null || label == null) return;
+    
+    EditableEndpoint targetEndpoint = endpoints.findByName(endpointName);
+    if (targetEndpoint.model.graphs.any((Graph graph)=>graph.label == label)) labelError = "Not original enough, try again.";
+    else labelError = "";
+  }
 
   void reset() {
     label = null;
+    labelError = "";
     uri = null;
   }
 
