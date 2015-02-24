@@ -68,6 +68,7 @@
                          selected="{{ endpointName }}"
                          label="endpoint" 
                          required
+                         emptyMenuMsg = "No writable endpoints available"
                          invalid="{{ endpointInvalid }}"
                          >
               <template repeat="{{target in endpoints.synchedData | writable}}">
