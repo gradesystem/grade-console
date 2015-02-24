@@ -16,6 +16,7 @@ import '../editables/editables.dart';
 import '../components/core_resizable.dart';
 import '../components/list_filter_menu.dart';
 import '../components/grade_list.dart';
+import '../components/grade_input.dart';
 
 part 'endpoints_model.dart';
 part 'endpoint_details.dart';

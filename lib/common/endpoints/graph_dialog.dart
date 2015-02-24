@@ -2,6 +2,8 @@ part of endpoints;
 
 @CustomTag("graph-dialog")
 class GraphDialog extends PolymerElement with Filters {
+  
+  static String ERROR_MESSAGE = "Not original enough, try again.";
 
   GraphKeys K = new GraphKeys();
 
@@ -27,9 +29,6 @@ class GraphDialog extends PolymerElement with Filters {
   @observable
   bool labelInvalid;
   
-  @observable
-  String labelError;
-
   @published
   Endpoints endpoints;
   
@@ -47,6 +46,8 @@ class GraphDialog extends PolymerElement with Filters {
   
   @observable
   bool deleteOriginal;
+  
+  GradeInput labelInput;
 
   GraphDialog.created() : super.created();
   
@@ -54,6 +55,7 @@ class GraphDialog extends PolymerElement with Filters {
     (($["uriInput"] as Element).shadowRoot.querySelector("input") as InputElement).onKeyPress.listen((_){
       uriModifiedByUser = true;
     });
+    labelInput = $["labelInput"];
   }
 
   @ComputedProperty("mode")
@@ -127,14 +129,14 @@ class GraphDialog extends PolymerElement with Filters {
     if (endpointName == null || label == null) return;
     
     EditableEndpoint targetEndpoint = endpoints.findByName(endpointName);
-    if (targetEndpoint.model.graphs.any((Graph graph)=>graph.label == label)) labelError = "Not original enough, try again.";
-    else labelError = "";
-    print('calculateLabelError labelError: $labelError');
+    if (targetEndpoint.model.graphs.any((Graph graph)=>graph.label == label)) labelInput.error = ERROR_MESSAGE;
+    else if (labelInput.error == ERROR_MESSAGE) labelInput.error = "";
+    
+    print('calculateLabelError labelInput.error: ${labelInput.error}');
   }
 
   void reset() {
     label = null;
-    labelError = "";
     uri = null;
   }
 
