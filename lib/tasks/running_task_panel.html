@@ -48,6 +48,11 @@
 						         two = {{runningTask.error.message}}
 						         three = {{runningTask.error.stacktrace}}>
 				</grade-error>
+				
+				<!-- LAUNCHING PANEL -->
+        <div style="overflow:hidden" horizontal center-justified center layout>
+          launching the task...
+        </div>
       
         <!--  EXECUTION TAB -->
         <core-animated-pages selected="{{executionArea}}" fit spaced hide?="{{runningTask.execution==null}}">
