@@ -25,6 +25,11 @@ class TasksPanel extends ResizerPolymerElement with Filters, Dependencies {
   TasksPanel.created() : super.created(){
     model = instanceOf(TasksModel);
   }
+  
+  @ObserveProperty("area")
+  void resizeList() {
+    if (area == 0) resizer.notifyResize($["tasklist"]);
+  }
 
   Tasks get items => model.storage;
 
@@ -49,7 +54,6 @@ class TasksPanel extends ResizerPolymerElement with Filters, Dependencies {
     removedDialogHeader = "Remove ${task.bean[Endpoint.K.name]}";
     removeDialogOpened = true;
   }
-
 
   void onEdit() {
     items.selected.startEdit();

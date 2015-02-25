@@ -62,6 +62,11 @@ class QueriesPanel extends ResizerPolymerElement with Filters, Dependencies {
     addResizeListener((_)=>propertiesTabs.updateBar());
     subArea = statusEditEnabled?0:1;
   }
+  
+  @ObserveProperty("area")
+  void resizeList() {
+    if (area == 0) resizer.notifyResize($["querylist"]);
+  }
 
   Queries get queries => model.storage;
 
