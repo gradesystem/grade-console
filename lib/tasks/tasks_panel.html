@@ -11,6 +11,7 @@
 <link rel="import" href="../common/components/grade_input.html">
 <link rel="import" href="../common/components/page_menu.html">
 <link rel="import" href="../common/components/grade_dialog.html">
+<link rel="import" href="../common/components/grade_badge.html">
 
 <link rel="import" href="task_details.html">
 <link rel="import" href="task_list.html">
@@ -44,6 +45,10 @@
 
 	        <task-list id="tasklist" main flex listitems="{{items}}" kfilter="{{kfilter}}" on-remove-item={{removeItem}} on-clone-item={{cloneItem}} filters={{filters}}></task-list>
 	        
+	        <grade-badge icon="subject" value="{{items.data.length}}" footer></grade-badge>
+	        <grade-badge icon="warning" value="{{items.invalid.length}}" footer></grade-badge>
+<!-- 	        <grade-badge icon="save" value="{{items.data.length}}" footer></grade-badge> -->
+<!-- 	        <grade-badge icon="av:play-circle-fill" value="{{items.data.length}}" footer></grade-badge> -->
 	      </grade-header-panel>
 	      
 	      <grade-header-panel side fit paneltitle="PROPERTIES" fixedmain="true">

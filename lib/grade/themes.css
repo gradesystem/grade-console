@@ -153,6 +153,10 @@
   background: #f4f4f4;
   color: #26699a;
 }
+:host /deep/ .home /deep/ [footer-band] {
+  background: #f4f4f4;
+  color: #26699a;
+}
 :host /deep/ .home /deep/ [wired-fg] {
   border: 1px solid;
   border-color: #26699a;
@@ -269,6 +273,10 @@
   color: #fff;
 }
 :host /deep/ .prod /deep/ [header] {
+  background: #f4f4f4;
+  color: #00bcd4;
+}
+:host /deep/ .prod /deep/ [footer-band] {
   background: #f4f4f4;
   color: #00bcd4;
 }
@@ -391,6 +399,10 @@
   background: #f4f4f4;
   color: #6fa6bc;
 }
+:host /deep/ .deck /deep/ [footer-band] {
+  background: #f4f4f4;
+  color: #6fa6bc;
+}
 :host /deep/ .deck /deep/ [wired-fg] {
   border: 1px solid;
   border-color: #6fa6bc;
@@ -510,6 +522,10 @@
   background: #f4f4f4;
   color: #e41c23;
 }
+:host /deep/ .tasks /deep/ [footer-band] {
+  background: #f4f4f4;
+  color: #e41c23;
+}
 :host /deep/ .tasks /deep/ [wired-fg] {
   border: 1px solid;
   border-color: #e41c23;
@@ -626,6 +642,10 @@
   color: #fff;
 }
 :host /deep/ .stage /deep/ [header] {
+  background: #f4f4f4;
+  color: #009587;
+}
+:host /deep/ .stage /deep/ [footer-band] {
   background: #f4f4f4;
   color: #009587;
 }

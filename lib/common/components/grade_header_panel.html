@@ -4,12 +4,17 @@
 <link rel="import" href="../../../../packages/core_elements/core_header_panel.html">
 <link rel="import" href="../../../../packages/core_elements/core_toolbar.html">
 
-<polymer-element name="grade-header-panel" vertical layout noscript attributes="paneltitle, panelsubtitle, fixedmain">
+<polymer-element name="grade-header-panel" vertical layout>
   <template>
   
     <style>
       [subtitle] {
         font-size: small;
+      }
+      
+      polyfill-next-selector { content: '#footer > *' }
+      ::content > * { 
+        padding-right: 10px;
       }
     </style>
     
@@ -35,8 +40,14 @@
         <content select="[main]"></content>
   
       </div>
+      
+       <div id="footer" horizontal layout footer-band center style="height:32px" hidden?="{{hideFooter}}">
+          <content select="[footer]"></content>
+      </div>
               
     </div>
+
+    <script type="application/dart" src="grade_header_panel.dart"></script> 
 
   </template>
   

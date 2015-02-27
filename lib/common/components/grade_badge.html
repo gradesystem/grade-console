@@ -1,0 +1,15 @@
+<link rel="import" href="../../../../packages/polymer/polymer.html">
+<link rel="import" href="../../../../packages/core_elements/core_icon.html">
+
+<polymer-element name="grade-badge" attributes="icon, value" noscript>
+  <template>
+    <style>
+    :host {
+      display: block;
+    }
+
+    </style>
+      <core-icon icon="{{icon}}"></core-icon>
+      <span>{{value}}</span>
+  </template>
+</polymer-element>

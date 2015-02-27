@@ -4,6 +4,7 @@
 <link rel="import" href="../components/grade_header_panel.html">
 <link rel="import" href="../components/grade_input.html">
 <link rel="import" href="../components/grade_button.html">
+<link rel="import" href="../components/grade_badge.html">
 
 <link rel="import" href="dataset_list.html">
 <link rel="import" href="dataset_details.html">
@@ -37,6 +38,8 @@
             <grade-button hidden?={{!uploadEnabled}} toolbar icon="cloud-upload" label="upload dataset" on-click="{{upload}}" spaced-button></grade-button>
        
             <dataset-list main flex listitems="{{datasets}}" kfilter="{{kfilter}}" on-file-drop={{onFileDrop}} ddEnabled={{uploadEnabled}}></dataset-list>
+            
+            <grade-badge icon="subject" value="{{datasets.data.length}}" footer></grade-badge>
             
           </grade-header-panel>
           
