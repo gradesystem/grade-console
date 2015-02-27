@@ -13,6 +13,7 @@ dependencies:
   collection: any
   codemirror: "0.1.6+4.12.0"
   script_inliner: any
+  csv_configuration_guesser: any
   
 dependency_overrides: 
   args: any #workaround to pub infinite loop

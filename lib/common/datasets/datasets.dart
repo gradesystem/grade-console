@@ -5,6 +5,7 @@ import 'dart:async';
 import 'dart:convert' show JSON;
 
 import 'package:polymer/polymer.dart';
+import 'package:csv_configuration_guesser/csv_configuration_guesser.dart' as csvguesser;
 
 import '../../common.dart';
 import '../lists/lists.dart';

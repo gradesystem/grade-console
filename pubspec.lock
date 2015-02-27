@@ -41,6 +41,10 @@ packages:
     description: csslib
     source: hosted
     version: "0.11.0+4"
+  csv_configuration_guesser:
+    description: csv_configuration_guesser
+    source: hosted
+    version: "0.0.1"
   custom_element_apigen:
     description: custom_element_apigen
     source: hosted

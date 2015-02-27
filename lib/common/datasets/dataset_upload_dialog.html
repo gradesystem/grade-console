@@ -94,7 +94,7 @@
 	          <grade-uri fascia-subtitle value="http://data.gradesystem.eu/onto#ENDPOINT"></grade-uri>
 	        </grade-fascia>
 	        
-	        <div vertical layout hidden?={{!isTypeCSV}}>
+	        <div vertical layout hidden?="{{!isTypeCSV || guessingCSVConfig}}">
 	          <grade-fascia item>
 		          <grade-dropdown-menu fascia-title 
                       selected="{{ delimiter }}"
@@ -137,6 +137,10 @@
 		          <grade-uri fascia-subtitle value="http://data.gradesystem.eu/onto#QUOTE"></grade-uri>
 		        </grade-fascia>
 	        
+	        </div>
+	        <div flex hidden?="{{!guessingCSVConfig}}" layout vertical center center-justified>
+	          <infinite-progress run="{{guessingCSVConfig!=null && guessingCSVConfig"></infinite-progress>
+	          <div small fg>analizying CSV file</div>
 	        </div>
         </div>
         <div flex hidden?="{{!uploading || failed}}" layout vertical center center-justified>
