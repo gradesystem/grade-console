@@ -23,7 +23,7 @@
     <template if="{{item!=null && !item.newModel}}">
 
 			<!-- graph list -->
-			<loading-panel flex list wired rounded relative loading="{{loading || item.loadingGraphs}}" message="{{loading?'saving endpoint':'loading graphs'}}">
+			<loading-panel flex relative loading="{{loading || item.loadingGraphs}}" message="{{loading?'saving endpoint':'loading graphs'}}">
 				<div fit style="overflow-y: auto;" spaced>
 				
 					<core-selector selectedAttribute="fg">
