@@ -135,13 +135,26 @@ int compareQueries(EditableQuery eq1, EditableQuery eq2) {
 
 class Queries extends EditableListItems<EditableQuery> {
   
-  Queries():super(compareQueries) {
-    onPropertyChange(data, #lastChangedItem, _notifyDerivedChanged);
-    onPropertyChange(data, #length, _notifyDerivedChanged);
+  @observable
+  int unpublished = 0;
+  
+  @observable
+  int published = 0;
+  
+  @observable
+  int withErrors = 0;
+  
+  Queries():super.sorted(compareQueries) {
+    onPropertyChange(data, #lastChangedItem, _notifyDerivedChangedAndCalculateStatistics);
+    onPropertyChange(data, #length, _notifyDerivedChangedAndCalculateStatistics);
   }
   
-  void _notifyDerivedChanged() {
+  void _notifyDerivedChangedAndCalculateStatistics() {
     notifyPropertyChange(#invalidPublished, null, invalidPublished);
+    
+    unpublished = data.where((EditableModel<Query> et)=>et.model.isUnpublished).length;
+    published = data.where((EditableModel<Query> et)=>et.model.isPublished).length;
+    withErrors = data.where((EditableModel<Query> et)=>!et.valid).length;
   }
 
   bool containsName(String name) => data.any((EditableQuery eq) => eq != selected && eq.model.name != null && eq.model.name.toLowerCase() == name.toLowerCase());

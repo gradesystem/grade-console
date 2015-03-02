@@ -126,6 +126,9 @@
 :host /deep/ [grade-light-grey] {
   color: #fafafa;
 }
+:host /deep/ [disabled-icon] /deep/ core-icon {
+  color: #808080 !important;
+}
 .home-scaffold {
   background: #26699a;
   color: #fff;

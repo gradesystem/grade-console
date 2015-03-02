@@ -11,6 +11,7 @@
 <link rel="import" href="../components/grade_button.html">
 <link rel="import" href="../components/grade_dropdown_button.html">
 <link rel="import" href="../components/grade_dialog.html">
+<link rel="import" href="../components/grade_badge.html">
 
 <link rel="import" href="query_list.html">
 <link rel="import" href="query_details.html">
@@ -45,6 +46,12 @@
 	   
 	        <query-list id="querylist" main flex listitems="{{queries}}" kfilter="{{kfilter}}" on-remove-item={{removeItem}} on-clone-item={{cloneItem}} filters={{filters}}
 	        statusEditEnabled={{statusEditEnabled}}></query-list>
+	        
+          <grade-badge icon="search" value="{{queries.published}}" footer></grade-badge>
+          <template if={{statusEditEnabled}}>
+            <grade-badge icon="search" value="{{queries.unpublished}}" disabled-icon footer></grade-badge>
+          </template>
+          <grade-badge icon="warning" value="{{queries.withErrors}}" footer></grade-badge>
 	        
 	      </grade-header-panel>
 	      
