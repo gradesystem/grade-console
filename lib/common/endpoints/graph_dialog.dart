@@ -111,7 +111,10 @@ class GraphDialog extends PolymerElement with Filters {
     
     endpointName = endpoints.synchedData.any((EditableEndpoint e)=>e.model.writable && e.model.id == currentEndpoint.model.id)?currentEndpoint.model.name:null;
     calculateUri();
-    calculateLabelError();
+    async((_){
+      calculateLabelError();
+    });
+    
 
     opened = true;
   }
