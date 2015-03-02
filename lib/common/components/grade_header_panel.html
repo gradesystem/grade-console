@@ -16,6 +16,11 @@
       ::content > * { 
         padding-right: 10px;
       }
+      
+      [band] {
+        height:24px;
+        padding-left: 8px;
+      }
     </style>
     
     <div vertical layout flex>
@@ -41,7 +46,7 @@
   
       </div>
       
-       <div id="footer" horizontal layout footer-band center style="height:32px" hidden?="{{hideFooter}}">
+       <div id="footer" horizontal layout footer-band center band hidden?="{{hideFooter}}">
           <content select="[footer]"></content>
       </div>
               
