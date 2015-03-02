@@ -4,6 +4,7 @@
 <link rel="import" href="../components/grade_uri.html">
 <link rel="import" href="../components/grade_item.html">
 <link rel="import" href="../components/grade_fascia.html">
+<link rel="import" href="../../../../packages/core_elements/device_icons.html">
 
 <link rel="import" href="endpoints.html">
 
@@ -16,7 +17,7 @@
       }
     </style>
     
-      <grade-item flex>
+      <grade-item flex  smallicon icon="device:storage">
         <grade-fascia flex truncate>
           <div fascia-title>{{ graph.label !=null?graph.label:suffix(graph.uri) }} <span small grade-dark-grey triples>{{size}}</span></div>
           <div fascia-subtitle smaller flex truncate fg bolder>{{graph.uri}}</div>
