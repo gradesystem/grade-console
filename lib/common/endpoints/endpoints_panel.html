@@ -89,10 +89,15 @@
 									            on-remove-graph={{onRemoveGraph}} 
 									            on-edit-graph={{editGraph}} 
 									            on-move-graph={{moveGraph}}
-									            spaced>
+									            >
             </endpoint-graphs> 
             <endpoint-details items={{items}} on-save={{onSave}}></endpoint-details> 
           </core-animated-pages>
+          
+          <template if="{{area == GRAPHS_AREA}}">
+            <grade-badge icon="device:storage" value="{{items.selected.model.graphs.length}}" footer></grade-badge>
+          </template>
+          
 	      </grade-header-panel>
 	
       </grade-scaffold>
