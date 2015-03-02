@@ -1,15 +1,19 @@
 <link rel="import" href="../../../../packages/polymer/polymer.html">
 <link rel="import" href="../../../../packages/core_elements/core_icon.html">
 
-<polymer-element name="grade-badge" attributes="icon, value" noscript>
+<polymer-element name="grade-badge" attributes="icon, value" noscript smallicon horizontal layout center>
   <template>
     <style>
     :host {
       display: block;
     }
+    
+    [value] {
+      padding-left:5px;
+    }
 
     </style>
       <core-icon icon="{{icon}}"></core-icon>
-      <span>{{value}}</span>
+      <span value>{{value}}</span>
   </template>
 </polymer-element>
