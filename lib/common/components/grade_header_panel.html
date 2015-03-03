@@ -12,14 +12,14 @@
         font-size: small;
       }
       
-      polyfill-next-selector { content: '#footer > *' }
-      ::content > * { 
-        padding-right: 10px;
-      }
-      
       [band] {
         height:20px;
       }
+      
+      polyfill-next-selector { content: '.footer > [footer]'; }
+			::content >  [footer] {
+        padding-right: 10px;
+			}
     </style>
     
     <div vertical layout flex>
@@ -45,7 +45,7 @@
   
       </div>
       
-       <div id="footer" horizontal layout center center-justified footer-band band hidden?="{{hideFooter}}">
+       <div class="footer" horizontal layout center center-justified footer-band band hidden?="{{hideFooter}}">
           <content select="[footer]"></content>
       </div>
               
