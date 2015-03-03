@@ -30,6 +30,7 @@ abstract class SubPageModel<T extends GradeEntity> {
   
   void onError(e, callback) {
     storage.data.clear();
-    bus.fire(new ToastMessage.alert("Ops we are having some problems communicating with the server", callback));
+    String message = "Ops we are having some problems communicating with the server";
+    bus.fire(new ToastMessage.alert(message, callback, new GradeError(message, e.message, e.stacktrace)));
   }
 }
