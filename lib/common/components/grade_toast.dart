@@ -1,6 +1,9 @@
+import 'dart:html';
+
 import 'package:event_bus/event_bus.dart';
 import '../../common.dart';
 import 'package:polymer/polymer.dart';
+import 'package:paper_elements/paper_action_dialog.dart';
 
 @CustomTag("grade-toast")
 class GradeToast extends PolymerElement with Dependencies {
@@ -16,6 +19,14 @@ class GradeToast extends PolymerElement with Dependencies {
   
   @observable
   Function callback;
+  
+  @observable
+  GradeError error;
+  
+  @observable
+  bool errorDialogOpen = false;
+  
+  PaperActionDialog dialog;
 
   GradeToast.created() : super.created()
   {
@@ -23,11 +34,20 @@ class GradeToast extends PolymerElement with Dependencies {
     bus.on(ToastMessage).listen(onToastMessage);
   }
   
+  void ready() {
+    dialog = ($['errorDialog'] as Element).shadowRoot.querySelector("paper-action-dialog") as PaperActionDialog;
+  }
+  
+  void onLevelUp() {
+    dialog.jsElement.callMethod("updateTargetDimensions");
+  }
+  
   void onToastMessage(ToastMessage message) {
     
     text = message.message;
     role = message.type;
     callback = message.callback;
+    error = message.error;
     
     opened = true;
   }
@@ -36,6 +56,8 @@ class GradeToast extends PolymerElement with Dependencies {
    Function.apply(callback, []);
   }
   
-
+  void onDetails() {
+    errorDialogOpen = true;
+  }
   
 }

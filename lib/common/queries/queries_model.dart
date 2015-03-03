@@ -216,7 +216,13 @@ class QuerySubPageModel extends SubPageEditableModel<Query> {
     editableQuery.lastResult.lastParameters = parameters;
     runner(query, parameters, limit)
       .then((String result) => editableQuery.queryResult(format, result))
-      .catchError((e) => editableQuery.queryFailed(e));
+      .catchError((ErrorResponse e) {
+      editableQuery.queryFailed(e);
+      String title = e.isClientError()?
+          "Uhm, may be this query is broken? Make sure it's a well-formed SELECT, CONSTRUCT, or DESCRIBE.":
+          "Ouch. Something went horribly wrong...";
+      bus.fire(new ToastMessage.alert("Query execution failed", null, new GradeError(title, e.message, e.stacktrace)));
+    });
   }
 }
 

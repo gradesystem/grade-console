@@ -1,8 +1,8 @@
-
 import 'package:polymer/polymer.dart';
+import 'package:grade_console/common.dart';
 
 @CustomTag("grade-error")
-class GradeError extends PolymerElement {
+class GradeErrorElement extends PolymerElement {
 
   @published
   String one;
@@ -12,22 +12,28 @@ class GradeError extends PolymerElement {
 
   @published
   String three;
-
   
+  @published
+  GradeError error;
+
   @observable
   int level=1;
   
-  GradeError.created() : super.created();
+  GradeErrorElement.created() : super.created();
   
   void ready() {
     onPropertyChange(this, #one, (){level=1;});
+    onPropertyChange(this, #error, (){
+      level=1;
+      one = error.title;
+      two = error.description;
+      three = error.details;
+    });
   }
 
   levelUp() {
     level++;
+    fire("level-up");
   }
-  
-  
-
   
 }

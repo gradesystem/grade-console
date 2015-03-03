@@ -1,11 +1,19 @@
 <link rel="import" href="../../../../packages/polymer/polymer.html">
 <link rel="import" href="../../../../packages/paper_elements/paper_toast.html">
 
+<link rel="import" href="grade_dialog.html">
+<link rel="import" href="grade_error.html">
+
 <polymer-element name="grade-toast">
     <template>
-	    <paper-toast role="{{role}}" text="{{text}}" opened={{opened}}>
+	    <paper-toast role="{{role}}" text="{{text}}" opened={{opened}} duration=6000>
 	      <div hidden?="{{callback==null}}" style="color: #eeff41;" on-click="{{onRetry}}">Retry</div>
+	      <div hidden?="{{error==null}}" style="color: #eeff41;" on-click="{{onDetails}}">Details</div>
 	    </paper-toast>
+	    <grade-dialog id="errorDialog" opened={{errorDialogOpen}} heading="Error details" sizingTarget="{{$['errorPanel']}}">
+        <grade-error id="errorPanel" main error={{error}} on-level-up={{onLevelUp}}>
+        </grade-error>
+	    </grade-dialog>
     </template>
   <script type="application/dart" src="grade_toast.dart"></script> 
 </polymer-element>

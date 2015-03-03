@@ -74,8 +74,9 @@ class ToastMessage {
   String message;
   String type  = "status";
   Function callback;
+  GradeError error;
   
-  ToastMessage.alert(this.message, this.callback) : type = "alert";
+  ToastMessage.alert(this.message, this.callback, [this.error]) : type = "alert";
   
   ToastMessage.info(this.message);
   

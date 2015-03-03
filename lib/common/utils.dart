@@ -172,3 +172,12 @@ class VersionChecker {
     if (currentBuildNumber != lastBuildNumber) bus.fire(const ApplicationNewVersionAvailable());
   }
 }
+
+class GradeError {
+  
+  String title;
+  String description;
+  String details;
+  
+  GradeError(this.title, this.description, this.details);
+}
