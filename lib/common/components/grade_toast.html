@@ -5,36 +5,39 @@
 <link rel="import" href="grade_dialog.html">
 
 <polymer-element name="grade-toast">
-    <template>
+  <template>
     <style>
+      paper-toast /deep/ .toast-text {
+        line-height: 24px;
+      }
+    
+      [error-title] {
+      
+        width:40px;
+        height:40px;
+        color: #E41C23;
+        margin-right: 5px;
+      }
+     
+      [error-description] {        
+        margin-top:10px; 
+      }
+       
+      [error-details] {
+        margin-top:10px;        
+        border-radius:5px;
         
-          [error-title] {
-          
-            width:40px;
-            height:40px;
-            color: #E41C23;
-            margin-right: 5px;
-          }
-         
-          [error-description] {        
-            margin-top:10px; 
-          }
-           
-          [error-details] {
-            margin-top:10px;        
-            border-radius:5px;
-            
-            background: #fafafa;
-            padding: 10px;
-            
-            max-height: 200px;
-            overflow: auto; 
-          }
-           
-        </style>
+        background: #fafafa;
+        padding: 10px;
+        
+        max-height: 200px;
+        overflow: auto; 
+      }
+       
+    </style>
 	    <paper-toast role="{{role}}" text="{{text}}" opened={{opened}} duration=6000>
 	      <div hidden?="{{callback==null}}" style="color: #eeff41;" on-click="{{onRetry}}">Retry</div>
-	      <core-icon hidden?="{{error==null}}" icon="more-vert" on-click="{{onDetails}}"></core-icon>
+	      <core-icon hidden?="{{error==null}}"  style="color: #eeff41;" icon="more-vert" on-click="{{onDetails}}"></core-icon>
 	    </paper-toast>
 	    <grade-dialog id="errorDialog" opened={{errorDialogOpen}} heading="Error details" sizingTarget="{{$['errorPanel']}}">
         <div layout vertical center spaced>
