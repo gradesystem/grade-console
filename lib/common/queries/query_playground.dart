@@ -4,8 +4,7 @@ part of queries;
 class QueryPlayground extends PolymerElement with Filters {
   
   int WHITE_PANEL = 0;
-  int ERROR_PANEL = 1;
-  int TABS_PANEL = 2;
+  int TABS_PANEL = 1;
 
   QueryKeys K = const QueryKeys();
   
@@ -53,27 +52,17 @@ class QueryPlayground extends PolymerElement with Filters {
   @ComputedProperty("editableQuery.model.name")  
   String get paneltitle => editableQuery!=null?(editableQuery.model.name == null || editableQuery.model.name.isEmpty?"(name?)":editableQuery.model.name):"";
   
-  @ComputedProperty("editableQuery.lastError")
-  String get errorMessage {
-  
-    return editableQuery!=null && editableQuery.lastError != null && editableQuery.lastError.isClientError()?
-                      "Uhm, may be this query is broken? Make sure it's a well-formed SELECT, CONSTRUCT, or DESCRIBE.":
-                      "Ouch. Something went horribly wrong...";
-  
-  }
-  
   @ComputedProperty("editableQuery.synching")
   bool get loading => editableQuery!=null && editableQuery.synching;
   
   @ComputedProperty("resultArea == TABS_PANEL")
   bool get showTabs => readValue(#showTabs, ()=>false);
   
-  @ObserveProperty("editableQuery editableQuery.lastError editableQuery.lastResult.value")
+  @ObserveProperty("editableQuery editableQuery.lastResult.value")
   void updateResultArea() {
     resultArea = WHITE_PANEL;
     
     if (editableQuery != null) {
-      if (editableQuery.lastError!=null) resultArea = ERROR_PANEL;
       if (editableQuery.lastResult.hasValue) resultArea = TABS_PANEL;
     }
   }
