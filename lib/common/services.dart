@@ -32,7 +32,7 @@ class GradeService {
     => HttpService.request(toUri(path, parameters), method:'PUT', sendData: content, acceptedMediaType:acceptedMediaType, contentType: contentType).timeout(timeLimit).then((xhr) => xhr.responseText).catchError(_onError);
   
   Future<dynamic> postJSon(String path, String content, {MediaType acceptedMediaType:MediaType.JSON, Map<String, String> parameters}) 
-    => post(path, content, acceptedMediaType:acceptedMediaType, parameters:parameters).then(decode);
+    => post(path, content, acceptedMediaType:acceptedMediaType, parameters:parameters).then(decode).catchError(_onError);
   
   Future<String> postFormData(String path, FormData data, Map<String, String> parameters) 
     => HttpService.request(toUri(path, parameters), method: 'POST', sendData: data).timeout(timeLimit).then((xhr) => xhr.responseText).catchError(_onError);
@@ -53,6 +53,7 @@ class GradeService {
       if (json != null && json is Map && json.containsKey("code")) throw new ErrorResponse.fromJSon(json); 
       else throw new ErrorResponse(e.status, e.statusText, e.responseText);
     }
+    if (e is Error) throw new ErrorResponse(-1, e.toString(), e.stackTrace.toString());
     throw new ErrorResponse(-1, "", e.toString());
   }
 

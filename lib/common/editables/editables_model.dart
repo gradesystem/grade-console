@@ -130,8 +130,8 @@ abstract class SubPageEditableModel<T extends EditableGradeEntity> {
     log.warning("error (source: $this): $e");
     String message = "Ops we are having some problems communicating with the server";
     if (e is ErrorResponse) bus.fire(new ToastMessage.alert(message, callback, new GradeError(message, e.message, e.stacktrace)));
-    if (e is Error) bus.fire(new ToastMessage.alert(message, callback, new GradeError("$e", "$e", e.stackTrace.toString())));
-    bus.fire(new ToastMessage.alert(message, callback, new GradeError("Unknow error type", "Unknow error type", "$e")));
+    else if (e is Error) bus.fire(new ToastMessage.alert(message, callback, new GradeError("$e", "$e", e.stackTrace.toString())));
+    else bus.fire(new ToastMessage.alert(message, callback, new GradeError("Unknow error type", "Unknow error type", "$e")));
   }
 }
 
