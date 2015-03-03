@@ -226,7 +226,13 @@ class TasksModel extends SubPageEditableModel<Task> {
           updateTaskExecution(runningTask, update);
          listenTaskExecution(runningTask);
         })
-      .catchError((e) => runningTask.taskFailed(e));
+      .catchError((e) {
+        runningTask.taskFailed(e);
+        String message = e.isClientError()?
+            "Uhm, may be the task queries are broken ?":
+            "Ouch. Something went horribly wrong...";
+        bus.fire(new ToastMessage.alert(message, null, new GradeError(message, e.message, e.stacktrace)));
+    });
   }
   
   void stopTask(EditableTask editableTask) {
