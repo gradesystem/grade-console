@@ -20,7 +20,7 @@
 	
      <paper-item trim bg-selected?="{{selected}}">
            
-	     <grade-item smallicon icon=search flex disabled-icon?="{{item.model.isUnpublished}}">
+	     <grade-item smallicon icon="{{item.model.isPublish?'social:public':'search'}}" flex>
 	     
 	       <grade-fascia flex truncate>
 	         <div fascia-title>{{ name }}</div>

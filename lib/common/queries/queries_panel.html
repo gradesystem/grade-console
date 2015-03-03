@@ -47,9 +47,9 @@
 	        <query-list id="querylist" main flex listitems="{{queries}}" kfilter="{{kfilter}}" on-remove-item={{removeItem}} on-clone-item={{cloneItem}} filters={{filters}}
 	        statusEditEnabled={{statusEditEnabled}}></query-list>
 	        
-          <grade-badge icon="search" value="{{queries.published}}" footer></grade-badge>
+          <grade-badge icon="search" value="{{queries.data.length}}" footer></grade-badge>
           <template if={{statusEditEnabled}}>
-            <grade-badge icon="search" value="{{queries.unpublished}}" disabled-icon footer></grade-badge>
+            <grade-badge icon="social:public" value="{{queries.published}}" disabled-icon footer></grade-badge>
           </template>
           <grade-badge icon="warning" value="{{queries.withErrors}}" footer></grade-badge>
 	        
