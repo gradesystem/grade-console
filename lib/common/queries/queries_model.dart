@@ -218,10 +218,10 @@ class QuerySubPageModel extends SubPageEditableModel<Query> {
       .then((String result) => editableQuery.queryResult(format, result))
       .catchError((ErrorResponse e) {
       editableQuery.queryFailed(e);
-      String title = e.isClientError()?
+      String message = e.isClientError()?
           "Uhm, may be this query is broken? Make sure it's a well-formed SELECT, CONSTRUCT, or DESCRIBE.":
           "Ouch. Something went horribly wrong...";
-      bus.fire(new ToastMessage.alert("Query execution failed", null, new GradeError(title, e.message, e.stacktrace)));
+      bus.fire(new ToastMessage.alert(message, null, new GradeError(message, e.message, e.stacktrace)));
     });
   }
 }
