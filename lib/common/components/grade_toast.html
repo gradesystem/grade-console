@@ -35,7 +35,7 @@
       }
        
     </style>
-	    <paper-toast role="{{role}}" text="{{text}}" opened={{opened}} duration=6000>
+	    <paper-toast id="toast" role="{{role}}" text="{{text}}" opened={{opened}} duration=6000>
 	      <div hidden?="{{callback==null}}" style="color: #eeff41;" on-click="{{onRetry}}">Retry</div>
 	      <core-icon hidden?="{{error==null}}"  style="color: #eeff41;" icon="more-vert" on-click="{{onDetails}}"></core-icon>
 	    </paper-toast>

@@ -32,6 +32,10 @@ class GradeToast extends PolymerElement with Dependencies {
     bus.on(ToastMessage).listen(onToastMessage);
   }
   
+  void ready() {
+    ($['toast'] as Element).shadowRoot.querySelector(".toast-action").attributes.addAll({"horizontal":"","layout":""});
+  }
+  
   void onToastMessage(ToastMessage message) {
     
     text = message.message;
