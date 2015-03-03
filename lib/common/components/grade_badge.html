@@ -1,15 +1,17 @@
 <link rel="import" href="../../../../packages/polymer/polymer.html">
 <link rel="import" href="../../../../packages/core_elements/core_icon.html">
 
-<polymer-element name="grade-badge" attributes="icon, value" noscript smallicon horizontal layout center grade-dark-grey>
+<polymer-element name="grade-badge" attributes="icon, value" noscript smallericon horizontal layout center>
   <template>
     <style>
     :host {
       display: block;
+      color: grey;
     }
     
     [value] {
       padding-left:5px;
+      font-size: 14px;
     }
 
     </style>
