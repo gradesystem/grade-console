@@ -39,17 +39,17 @@ class HomePage extends PolymerElement with Dependencies {
 
     prod = instanceOf(Datasets, ProdAnnotation);
     prodQueries = instanceOf(Queries, ProdAnnotation);
-    prod_stats = new PageStatistics(prod.data.length, new DateTime.now());
+    prod_stats = new PageStatistics(prod.data.length, null);
     onPropertyChange(prodQueries, #invalidPublished, onProdChange);
 
     stage = instanceOf(Datasets, StageAnnotation);
-    stage_stats = new PageStatistics(stage.data.length, new DateTime.now());
+    stage_stats = new PageStatistics(stage.data.length, null);
 
     tasks = instanceOf(Tasks);
-    tasks_stats = new PageStatistics(tasks.data.length, new DateTime.now());
+    tasks_stats = new PageStatistics(tasks.data.length, null);
 
     runningTasks = instanceOf(RunningTasks);
-    deck_stats = new PageStatistics(runningTasks.running.length, new DateTime.now());
+    deck_stats = new PageStatistics(runningTasks.running.length, null);
 
     bus = instanceOf(EventBus);
     bus.on(ApplicationInitialized).listen((_) {
@@ -67,7 +67,6 @@ class HomePage extends PolymerElement with Dependencies {
   onProdChange() {
     prod_stats.loaded = !prod.loading;
     prod_stats.count = prod.data.length;
-    prod_stats.date = new DateTime.now();
     
     prod_stats.notifications.clear();
     if (prodQueries.invalidPublished.isNotEmpty) prod_stats.notifications.add("error");
@@ -79,7 +78,6 @@ class HomePage extends PolymerElement with Dependencies {
 
     stage_stats.loaded = !stage.loading;
     stage_stats.count = stage.data.length;
-    stage_stats.date = new DateTime.now();
 
   }
 
@@ -90,8 +88,6 @@ class HomePage extends PolymerElement with Dependencies {
 
     tasks_stats.loaded = !tasks.loading;
     tasks_stats.count = tasks.data.length;
-    tasks_stats.date = new DateTime.now();
-
     tasks_stats.notifications.clear();
     if (tasks.invalid.isNotEmpty) tasks_stats.notifications.add("error");
   }
@@ -103,7 +99,6 @@ class HomePage extends PolymerElement with Dependencies {
 
     deck_stats.loaded = !runningTasks.loading;
     deck_stats.count = runningTasks.running.length;
-    deck_stats.date = new DateTime.now();
 
     deck_stats.notifications.clear();
     if (runningTasks.failed.isNotEmpty) deck_stats.notifications.add("error");
