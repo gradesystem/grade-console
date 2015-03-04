@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:codemirror/codemirror.dart';
 import 'package:codemirror/hints.dart';
 
@@ -14,7 +16,7 @@ void installCompletion() {
 }
 
 void installHints() {
-  Hints.registerHintsHelper("sparql", sparqlCompletion);
+  Hints.registerHintsHelperAsync("sparql", sparqlCompletion);
 }
 
 Map<String, String> PREFIXES = {
@@ -44,12 +46,15 @@ Map<String, String> SELECT_TEMPLATES = {
                                   "creator(s) of graphs":"distinct ?creator where {?s http://purl.org/dc/terms/creator ?creator}"
                                   };
 
-HintResults sparqlCompletion(CodeMirror editor, [HintsOptions options]) {
+Future<HintResults> sparqlCompletion(CodeMirror editor, [HintsOptions options]) {
 
   CodemirrorInput cmInput = editor.getOption("CodemirrorInput");
   Iterable<EditableEndpoint> endpoints = cmInput.endpoints;
   if (endpoints == null) return null;
-
+  
+  Future<List<String>> propertiesProvider = cmInput.properties;
+  
+  
   Position cursorPosition = editor.getCursor();
 
   String line = editor.getLine(cursorPosition.line);
@@ -64,9 +69,19 @@ HintResults sparqlCompletion(CodeMirror editor, [HintsOptions options]) {
   if (lastSpaceIndex >= 0) currWord = subline.substring(lastSpaceIndex + 1, subline.length);
   //print('currWord >$currWord<');
 
+  if (currWord.startsWith("<") && propertiesProvider!=null) {
+    //async
+    return fillPropertiesSuggestions(propertiesProvider, currWord.substring(1)).then((List<HintResult> results)=>new HintResults.fromHints(results,
+         cursorPosition, cursorPosition));
+  }
+  
+  //sync
+  Completer<HintResults> completer = new Completer.sync();
+
   Set<HintResult> suggestions = new Set<HintResult>();
 
-  if (currWord.isNotEmpty) fillMatchingKeywords(suggestions, currWord); else {
+  if (currWord.isNotEmpty) fillMatchingKeywords(suggestions, currWord);
+  else {
 
     lastSpaceIndex = lastSpaceIndex >= 0 ? lastSpaceIndex : 0;
 
@@ -98,8 +113,11 @@ HintResults sparqlCompletion(CodeMirror editor, [HintsOptions options]) {
     }
   }
   
-  return new HintResults.fromHints(suggestions.toList(),
-      cursorPosition, cursorPosition);
+  //sync
+  completer.complete(new HintResults.fromHints(suggestions.toList(),
+      cursorPosition, cursorPosition));
+  
+  return completer.future;
 }
 
 void fillGraphs(Set<HintResult> suggestions, Iterable<EditableEndpoint> endpoints) {
@@ -143,3 +161,10 @@ void fillSelectTemplates(Set<HintResult> suggestions) {
   SELECT_TEMPLATES.keys.map((String key) =>  new HintResult(SELECT_TEMPLATES[key], displayText: key))
     .forEach((HintResult hr) => suggestions.add(hr));
 }
+
+Future<List<HintResult>> fillPropertiesSuggestions(Future<List<String>> propertiesProvider, String prefix) 
+  => propertiesProvider.then((List<String> properties)
+  => properties
+  .where((String property)=> prefix.isEmpty || property.startsWith(prefix))
+  .map((String property)=>new HintResult(property.substring(prefix.length)+">", displayText: property)).toList());
+

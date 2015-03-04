@@ -167,16 +167,16 @@ class Queries extends EditableListItems<EditableQuery> {
 
 class QuerySubPageModel extends SubPageEditableModel<Query> {
 
-  QuerySubPageModel(PageEventBus bus, QueryService service, Queries storage, Endpoints endpoints) : super(bus, service, storage, ([Query query]) => generate(query != null ? query : new Query(service.base_url, service.path), endpoints)) {
+  QuerySubPageModel(PageEventBus bus, QueryService service, Queries storage, Endpoints endpoints) : super(bus, service, storage, ([Query query]) => generate(query != null ? query : new Query(service.base_url, service.path), endpoints, service)) {
     bus.on(ApplicationReady).listen((_) {
       loadAll();
     });
   }
 
-  static EditableQuery generate(Query query, Endpoints endpoints) {
+  static EditableQuery generate(Query query, Endpoints endpoints, QueryService service) {
     //we are cloning
     if (query.id == null) query.bean[Query.K.status] = Query.K.status_unpublished;
-    return new EditableQuery(query, endpoints);
+    return new EditableQuery(query, endpoints, service);
   }
 
   QueryService get queryService => service;
@@ -250,14 +250,22 @@ class EditableQuery extends EditableModel<Query> with Keyed {
   EndpointValidator endpointValidator;
   
   EndpointProvider endpointProvider;
+  
+  @observable
+  PropertiesCache propertiesCache;
 
-  EditableQuery(Query query, Endpoints endpoints) : super(query) {
+  EditableQuery(Query query, Endpoints endpoints, QueryService service) : super(query) {
     
     endpointValidator = new EndpointValidator(this, Query.K.target, Query.K.graph, endpoints);
     onPropertyChange(endpointValidator, #valid, ()=> notifyPropertyChange(#valid, null, valid));
     
     endpointProvider = new EndpointProvider(this, Query.K.target, Query.K.graph, endpoints);
     onPropertyChange(endpointProvider, #editableEndpoint, ()=>notifyPropertyChange(#targetEndpoint, null, targetEndpoint));
+    
+    propertiesCache = new PropertiesCache(service);
+    onPropertyChange(this, #edit, (){
+      if (edit) updatePropertiesCache();
+      });
     
     //we want to listen on parameters value changes
     parametersInvalidity.changes.listen(_updateParametersValidity);
@@ -273,6 +281,10 @@ class EditableQuery extends EditableModel<Query> with Keyed {
     //when query or parameters are edited we reset the last error
     onPropertyChange(this, #dirty, resetLastError);
 
+  }
+  
+  void updatePropertiesCache() {
+    propertiesCache.refresh(model);
   }
 
   get(key) => model.get(key);
@@ -300,6 +312,9 @@ class EditableQuery extends EditableModel<Query> with Keyed {
     onPropertyChange(model, #graphs, () => _setDirty(true));
 
     onPropertyChange(this, #model, () => _setDirty(false));
+    
+    onPropertyChange(model, #graphs, updatePropertiesCache);
+    onPropertyChange(model.graphs, #length, updatePropertiesCache);
   }
 
   void _setDirty(bool dirty) {
@@ -524,4 +539,29 @@ class DescribeType {
 
   static const DESCRIBE_BY_SUBJECT = const DescribeType._internal('subject');
   static const DESCRIBE_BY_OBJECT = const DescribeType._internal('object');
+}
+
+class PropertiesCache extends Observable {
+  QueryService service;
+  Completer<List<String>> _cache;
+  
+  PropertiesCache(this.service);
+  
+  void refresh(Query target) {
+    print('updating properties cache');
+    _cache = new Completer();
+    notifyPropertyChange(#properties, null, properties);
+    
+    Query query = target.clone();
+    query.set(Query.K.expression, "select distinct ?p {?s ?p ?o}");
+    service.runQuery(query, {}, 30).then((String result){
+      Map json = JSON.decode(result);
+      List bindings = json["results"]["bindings"];
+      List<String> properties = bindings.map((binding)=>binding["p"]["value"]).toList();
+      _cache.complete(properties);
+    }).catchError((e)=>_cache.completeError(e));
+  }
+  
+  @observable
+  Future<List<String>> get properties => _cache!=null?_cache.future:null;
 }

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:polymer/polymer.dart';
 import 'package:codemirror/codemirror.dart';
 
@@ -24,6 +26,9 @@ class CodemirrorInput extends PolymerElement {
   
   @published
   Iterable<EditableEndpoint> endpoints;
+  
+  @published
+  Future<List<String>> properties;
 
   CodeMirror editor;
 
