@@ -127,7 +127,7 @@ class GraphDialog extends PolymerElement with Filters {
     }
   }
   
-  @ObserveProperty("label endpointName")
+  @ObserveProperty("label endpointName deleteOriginal")
   void calculateLabelError() {
     if (endpointName == null || label == null) return;
     
