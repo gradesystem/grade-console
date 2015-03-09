@@ -57,7 +57,7 @@ abstract class ListItems<T extends Observable> extends Observable {
   void sortItem(T item) {
     data.remove(item);
     _insertSorted(item);
-    notifyPropertyChange(#selected, null, selected);
+    select(selected);
   }
   
 }
