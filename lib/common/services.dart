@@ -11,7 +11,7 @@ class GradeService {
 
   Future getJSon(String path, {MediaType acceptedMediaType:MediaType.JSON, Map<String, String> parameters}) {
     Uri url = new Uri.http("", "$base_path/$path", parameters);
-    return HttpService.getString(url.toString(), acceptedMediaType:acceptedMediaType).timeout(timeLimit).then(decode).catchError(_onError);
+    return HttpService.getString(url.toString(), acceptedMediaType:acceptedMediaType).timeout(timeLimit, onTimeout:timeout).then(decode).catchError(_onError);
   }
 
   dynamic decode(String json) {
@@ -23,22 +23,22 @@ class GradeService {
   }
 
   Future get(String path, {MediaType acceptedMediaType:MediaType.JSON, Map<String, String> parameters}) 
-    => HttpService.getString(toUri(path, parameters), acceptedMediaType:acceptedMediaType).timeout(timeLimit).catchError(_onError);
+    => HttpService.getString(toUri(path, parameters), acceptedMediaType:acceptedMediaType).timeout(timeLimit, onTimeout:timeout).catchError(_onError);
 
   Future<String> post(String path, dynamic content, {MediaType acceptedMediaType:MediaType.JSON, MediaType contentType : MediaType.JSON, Map<String, String> parameters}) 
-    => HttpService.request(toUri(path, parameters), method:'POST', sendData: content, acceptedMediaType:acceptedMediaType, contentType: contentType).timeout(timeLimit).then((xhr) => xhr.responseText).catchError(_onError);
+    => HttpService.request(toUri(path, parameters), method:'POST', sendData: content, acceptedMediaType:acceptedMediaType, contentType: contentType).timeout(timeLimit, onTimeout:timeout).then((xhr) => xhr.responseText).catchError(_onError);
   
   Future<String> put(String path, dynamic content, {MediaType acceptedMediaType:MediaType.JSON, MediaType contentType : MediaType.JSON, Map<String, String> parameters}) 
-    => HttpService.request(toUri(path, parameters), method:'PUT', sendData: content, acceptedMediaType:acceptedMediaType, contentType: contentType).timeout(timeLimit).then((xhr) => xhr.responseText).catchError(_onError);
+    => HttpService.request(toUri(path, parameters), method:'PUT', sendData: content, acceptedMediaType:acceptedMediaType, contentType: contentType).timeout(timeLimit, onTimeout:timeout).then((xhr) => xhr.responseText).catchError(_onError);
   
   Future<dynamic> postJSon(String path, String content, {MediaType acceptedMediaType:MediaType.JSON, Map<String, String> parameters}) 
     => post(path, content, acceptedMediaType:acceptedMediaType, parameters:parameters).then(decode).catchError(_onError);
   
   Future<String> postFormData(String path, FormData data, Map<String, String> parameters) 
-    => HttpService.request(toUri(path, parameters), method: 'POST', sendData: data).timeout(timeLimit).then((xhr) => xhr.responseText).catchError(_onError);
+    => HttpService.request(toUri(path, parameters), method: 'POST', sendData: data).timeout(timeLimit, onTimeout:timeout).then((xhr) => xhr.responseText).catchError(_onError);
 
   Future<String> delete(String path, [Map<String, String> parameters]) 
-    => HttpService.request(toUri(path, parameters), method:'DELETE',contentType: MediaType.JSON, acceptedMediaType: MediaType.SPARQL_JSON).timeout(timeLimit).then((xhr) => xhr.responseText).catchError(_onError);
+    => HttpService.request(toUri(path, parameters), method:'DELETE',contentType: MediaType.JSON, acceptedMediaType: MediaType.SPARQL_JSON).timeout(timeLimit, onTimeout:timeout).then((xhr) => xhr.responseText).catchError(_onError);
   
   String toUri(String path, [Map<String, String> parameters])
     => new Uri.http("", "$base_path/$path", parameters).toString();
@@ -55,6 +55,10 @@ class GradeService {
     }
     if (e is Error) throw new ErrorResponse(-1, e.toString(), e.stackTrace.toString());
     throw new ErrorResponse(-1, "", e.toString());
+  }
+  
+  void timeout() {
+    throw new ErrorResponse(-1, "This is taking too long, longer than the network can wait. It's a timeout.", "This is taking too long, longer than the network can wait. It's a timeout.");
   }
 
 }
