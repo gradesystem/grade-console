@@ -29,7 +29,7 @@ init() {
   
   Dependencies.bind("prod", ProdAnnotation);
 
-  String base_url = window.location.origin;
+  String base_url = window.location.href;
   
   Endpoints endpoints = new Endpoints();
   

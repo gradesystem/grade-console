@@ -103,8 +103,13 @@ class Query extends EditableGradeEntity with Filters, Observable {
     Uri base = Uri.parse(base_url);
     String namePath = name!=null && name.isNotEmpty ? name:"~missing~";
     print('base.authority ${base.authority}');
-    print('base.authority ${base.path}');
-    Uri uri = new Uri.http(base.authority, '${base.path}/service/${repo_path}/query/$namePath/results', endpointParameters);
+    print('base.path ${base.path}');
+    print('base.path ${base.pathSegments}');
+    List<String> pathSegments = base.pathSegments;
+    if (pathSegments.isNotEmpty) pathSegments = pathSegments.sublist(0,pathSegments.length - 1);
+    String path = pathSegments.join("/");
+    print('path $path');
+    Uri uri = new Uri.http(base.authority, '${path}/service/${repo_path}/query/$namePath/results', endpointParameters);
 
     String endpoint = uri.toString();
 

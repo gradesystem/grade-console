@@ -27,7 +27,7 @@ init() {
   
   String page = "stage";
   
-  String base_url = window.location.origin;
+  String base_url = window.location.href;
   
   Dependencies.bind(page, StageAnnotation);
   
