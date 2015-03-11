@@ -91,6 +91,24 @@ class Query extends EditableGradeEntity with Filters, Observable {
   bool get isUnpublished => get(K.status) == K.status_unpublished;
 
   Query clone() => new Query.fromBean(base_url, repo_path, new Map.from(bean));
+  
+  String calculateEndpointBase(Map<String,String> parameters) {
+    Uri base = Uri.parse(base_url);
+    
+    String namePath = name!=null && name.isNotEmpty ? name:"~missing~";
+
+    List<String> pathSegments = base.pathSegments;
+    if (pathSegments.isNotEmpty) pathSegments = pathSegments.sublist(0,pathSegments.length - 1);
+    String path = pathSegments.join("/");
+    
+    Uri uri = new Uri.http(base.authority, '${path}/service/${repo_path}/query/$namePath/results', parameters);
+    String endpoint = uri.toString();
+    
+    //we remove the final question mark
+    if (endpoint.endsWith("?")) endpoint = endpoint.substring(0, endpoint.length - 1);
+    
+    return endpoint;
+  }
 
   //calculates endpoint
   @observable
@@ -99,24 +117,7 @@ class Query extends EditableGradeEntity with Filters, Observable {
     Map<String, String> endpointParameters = {};
     for (String parameter in parameters) endpointParameters[parameter] = "...";
 
-    print('base_url: $base_url');
-    Uri base = Uri.parse(base_url);
-    String namePath = name!=null && name.isNotEmpty ? name:"~missing~";
-    print('base.authority ${base.authority}');
-    print('base.path ${base.path}');
-    print('base.path ${base.pathSegments}');
-    List<String> pathSegments = base.pathSegments;
-    if (pathSegments.isNotEmpty) pathSegments = pathSegments.sublist(0,pathSegments.length - 1);
-    String path = pathSegments.join("/");
-    print('path $path');
-    Uri uri = new Uri.http(base.authority, '${path}/service/${repo_path}/query/$namePath/results', endpointParameters);
-
-    String endpoint = uri.toString();
-
-    //we remove the final question mark
-    if (endpoint.endsWith("?")) endpoint = endpoint.substring(0, endpoint.length - 1);
-
-    return endpoint;
+    return calculateEndpointBase(endpointParameters);
   }
 
   @observable
@@ -371,15 +372,7 @@ class EditableQuery extends EditableModel<Query> with Keyed {
     Map<String, String> endpointParameters = {};
     for (String parameter in model.parameters) endpointParameters[parameter] = parametersValues[parameter]!=null && parametersValues[parameter].isNotEmpty ?parametersValues[parameter]:"~missing~";
 
-    Uri base = Uri.parse(model.base_url);
-    Uri uri = new Uri.http(base.authority, '${base.path}/service/${model.repo_path}/query/${model.bean[Query.K.name]}/results', endpointParameters);
-
-    String endpoint = uri.toString();
-
-    //we remove the final question mark
-    if (endpoint.endsWith("?")) endpoint = endpoint.substring(0, endpoint.length - 1);
-
-    return endpoint;
+    return model.calculateEndpointBase(endpointParameters);
   }
 
   String toString() => 'EditableQuery $model';
