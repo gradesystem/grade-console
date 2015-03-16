@@ -383,7 +383,7 @@ class ResulTable extends Delegate {
   ResulTable(Map bean) : super(bean);
 
   List<String> get headers => get("head")["vars"];
-  List<Map<String, String>> get rows => get("results")["bindings"];
+  List<Map<String, Map>> get rows => get("results")["bindings"];
 }
 
 class RawFormat {

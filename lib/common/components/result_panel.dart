@@ -28,9 +28,13 @@ class ResultPanel extends PolymerElement {
 
     List<List<Map>> list = [];
 
-    for (Map binding in qresult.rows) {
+    for (Map<String, Map> binding in qresult.rows) {
       List<Map> row = [];
-      for (Map tuple in binding.values) row.add(tuple);
+      for (String header in qresult.headers) {
+        Map tuple = binding[header];
+        if (tuple!=null) row.add(tuple);
+        else row.add({});
+      }
 
       list.add(row);
     }
