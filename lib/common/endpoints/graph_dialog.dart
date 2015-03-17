@@ -48,13 +48,17 @@ class GraphDialog extends PolymerElement with Filters {
   bool deleteOriginal;
   
   GradeInput labelInput;
+  GradeInput uriInput;
 
   GraphDialog.created() : super.created();
   
   void ready() {
-    (($["uriInput"] as Element).shadowRoot.querySelector("input") as InputElement).onKeyPress.listen((_){
+    uriInput = $["uriInput"];
+    
+    (uriInput.shadowRoot.querySelector("input") as InputElement).onKeyPress.listen((_){
       uriModifiedByUser = true;
     });
+    
     labelInput = $["labelInput"];
   }
 
@@ -138,10 +142,24 @@ class GraphDialog extends PolymerElement with Filters {
     ) labelInput.error = ERROR_MESSAGE;
     else if (labelInput.error == ERROR_MESSAGE) labelInput.error = "";
   }
+  
+  @ObserveProperty("uri endpointName mode")
+  void calculateUriError() {
+    if (endpointName == null || uri == null) return;
+    
+    EditableEndpoint targetEndpoint = endpoints.findByName(endpointName);
+    if (
+        mode == GraphDialogMode.MOVE
+        && targetEndpoint.model.graphs.any((Graph graph)=>graph.uri == uri)
+    ) uriInput.error = ERROR_MESSAGE;
+    else if (uriInput.error == ERROR_MESSAGE) uriInput.error = "";
+  }
 
   void reset() {
     label = null;
+    labelInput.error = "";
     uri = null;
+    uriInput.error = "";
   }
 
   void save() {
