@@ -150,7 +150,8 @@ class GraphDialog extends PolymerElement with Filters {
     EditableEndpoint targetEndpoint = endpoints.findByName(endpointName);
     if (
         mode == GraphDialogMode.MOVE
-        && targetEndpoint.model.graphs.any((Graph graph)=>graph.uri == uri)
+        && targetEndpoint.model.graphs.any(
+            (Graph graph)=>graph.uri!=null && uri!=null && graph.uri.toLowerCase() == uri.toLowerCase())
     ) uriInput.error = ERROR_MESSAGE;
     else if (uriInput.error == ERROR_MESSAGE) uriInput.error = "";
   }
