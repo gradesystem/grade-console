@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:js';
 
 import 'package:polymer/polymer.dart';
 import 'package:codemirror/codemirror.dart';
@@ -29,6 +30,9 @@ class CodemirrorInput extends PolymerElement {
   
   @published
   Future<List<String>> properties;
+
+  @published
+  CodeMirrorInputHistory history = new CodeMirrorInputHistory();
 
   CodeMirror editor;
 
@@ -97,5 +101,9 @@ class CodemirrorInput extends PolymerElement {
     }
   }
 
+}
+
+class CodeMirrorInputHistory {
+  JsObject value;
 }
 
