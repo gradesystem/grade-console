@@ -462,6 +462,9 @@ class ResultHistory extends Observable {
   }
 
   Crumb go(String uri, [DescribeType type = DescribeType.DESCRIBE_BY_SUBJECT]) {
+    
+    if (currentCrumb is DescribeCrumb && (currentCrumb as DescribeCrumb).uri == uri && (currentCrumb as DescribeCrumb).type == type) return currentCrumb;
+    
     crumbs = toObservable(crumbs.sublist(0, currentIndex >= 0 ? currentIndex + 1 : 0));
     
     String expression = "describe <${uri}>";
