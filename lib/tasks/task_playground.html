@@ -74,6 +74,7 @@
 																active={{isactive}} 
 																mode="sparql" 
 																value={{transformQuery}}
+																doc={{editableTask.model.transformDoc}}
 																endpoints={{gradeEndpoints}}
 																disabled="{{!editableTask.edit}}"></codemirror-input>
 						</div>
@@ -83,6 +84,7 @@
 											           active={{isactive}} 
 											           mode="sparql" 
 											           value={{differenceQuery}}
+											           doc={{editableTask.model.diffDoc}}
 											           endpoints={{gradeEndpoints}}
 											           disabled="{{!editableTask.edit}}"></codemirror-input>
 	          </div>

@@ -11,6 +11,7 @@ import 'package:di/di.dart';
 import 'package:di/annotations.dart';
 import 'package:event_bus/event_bus.dart';
 import 'package:core_elements/core_collapse.dart';
+import 'package:codemirror/codemirror.dart';
 
 import 'common.dart';
 import 'common/lists/lists.dart';

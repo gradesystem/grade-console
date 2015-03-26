@@ -34,10 +34,17 @@ class Task extends EditableGradeEntity with Filters {
   static TaskKeys K = const TaskKeys();
   
   ObservableList<String> _source_graphs = new ObservableList();
+  
+  @observable
+  Doc transformDoc;
+  Doc diffDoc;
 
   Task.fromBean(Map bean) : super(bean) {
     _installSourceGraphs();
     _listenChanges();
+    
+    transformDoc = bean[K.transform]!=null?new Doc(bean[K.transform], "sparql"):null;
+    diffDoc = bean[K.diff]!=null?new Doc(bean[K.diff], "sparql"):null;
   }
 
   Task() : this.fromBean({
