@@ -93,11 +93,11 @@ class CodemirrorInput extends PolymerElement {
     String selection = editor.getDoc().getSelection();
     if (selection != null && selection.isNotEmpty) {
       //replace selection
-      editor.getDoc().callArgs('replaceSelection', [text]);
+      editor.getDoc().replaceSelection(text);
     } else {
       //insert text
       Position cursorPosition = editor.getDoc().getCursor();
-      editor.getDoc().callArgs('replaceRange', [text, cursorPosition.toProxy(), cursorPosition.toProxy()]);
+      editor.getDoc().replaceRange(text, cursorPosition, cursorPosition);
     }
   }
   
