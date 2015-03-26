@@ -29,10 +29,14 @@ class Query extends EditableGradeEntity with Filters, Observable {
   final String repo_path;
 
   ObservableList<String> _graphs = new ObservableList();
+  
+  @observable
+  Doc expressionDoc;
 
   Query.fromBean(this.base_url, this.repo_path, Map bean) : super(bean) {
     _installGraphs();
     _listenChanges();
+    expressionDoc = new Doc(bean[K.expression], "sparql");
   }
 
   Query(String base_url, String repo_path) : this.fromBean(base_url, repo_path, {

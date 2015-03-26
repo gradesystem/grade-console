@@ -8,6 +8,7 @@ import 'package:polymer/polymer.dart';
 import 'package:core_elements/core_collapse.dart';
 import 'package:paper_elements/paper_tabs.dart';
 import 'package:logging/logging.dart';
+import 'package:codemirror/codemirror.dart';
 
 import '../../common.dart';
 
