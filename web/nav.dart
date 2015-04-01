@@ -164,7 +164,7 @@ class NavigatorService {
   
   Future<String> resolve(String endpoint, String uri, bool inverse, RawFormat format) {
     String path = "$endpoint/resolve";
-    Map parameters = {"uri":uri,"inverse":"$inverse"};
+    Map parameters = {"uri":uri,"backwards":"$inverse"};
     //print('path: $path, parameters: $parameters');
     return http.get(path, parameters:parameters, acceptedMediaType: format.value);
   }
