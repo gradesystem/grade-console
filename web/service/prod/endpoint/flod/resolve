@@ -1,0 +1,54 @@
+{
+  "head": {
+    "vars": [ "subject" , "predicate" , "object" ]
+  } ,
+  "results": {
+    "bindings": [
+      {
+        "subject": { "type": "uri" , "value": "http://www.fao.org/figis/flod/entities/codedentity/e1219c88d7437986321d41310f2cfb5fc78896d9" } ,
+        "predicate": { "type": "uri" , "value": "http://www.w3.org/2004/02/skos/core#prefLabel" } ,
+        "object": { "type": "literal" , "xml:lang": "en" , "value": "North Atlantic Marine Mammal Commission (NAMMCO)" }
+      } ,
+      {
+        "subject": { "type": "uri" , "value": "http://www.fao.org/figis/flod/entities/codedentity/e1219c88d7437986321d41310f2cfb5fc78896d9" } ,
+        "predicate": { "type": "uri" , "value": "http://www.fao.org/figis/flod/onto/report.owl#reportingUnit" } ,
+        "object": { "type": "uri" , "value": "http://www.fao.org/figis/flod/entities/codedentity/9d65b8e0468b64d0c3ce867c176b9728fa0fcf72" }
+      } ,
+      {
+        "subject": { "type": "uri" , "value": "http://www.fao.org/figis/flod/entities/codedentity/e1219c88d7437986321d41310f2cfb5fc78896d9" } ,
+        "predicate": { "type": "uri" , "value": "http://www.fao.org/figis/flod/onto/report.owl#reportingUnit" } ,
+        "object": { "type": "uri" , "value": "http://www.fao.org/figis/flod/entities/codedentity/ae9e0839e7bc10a607889198907973512533df0b" }
+      } ,
+      {
+        "subject": { "type": "uri" , "value": "http://www.fao.org/figis/flod/entities/codedentity/e1219c88d7437986321d41310f2cfb5fc78896d9" } ,
+        "predicate": { "type": "uri" , "value": "http://www.fao.org/figis/flod/onto/report.owl#reportingUnit" } ,
+        "object": { "type": "uri" , "value": "http://www.fao.org/figis/flod/entities/codedentity/cbfab7fded2def155cad2fa77160a073a6b75d48" }
+      } ,
+      {
+        "subject": { "type": "uri" , "value": "http://www.fao.org/figis/flod/entities/codedentity/e1219c88d7437986321d41310f2cfb5fc78896d9" } ,
+        "predicate": { "type": "uri" , "value": "http://www.fao.org/figis/flod/onto/report.owl#reportingUnit" } ,
+        "object": { "type": "uri" , "value": "http://www.fao.org/figis/flod/entities/codedentity/4d99581a0fccd104c3933999e693633f4ae8ad5a" }
+      } ,
+      {
+        "subject": { "type": "uri" , "value": "http://www.fao.org/figis/flod/entities/codedentity/e1219c88d7437986321d41310f2cfb5fc78896d9" } ,
+        "predicate": { "type": "uri" , "value": "http://www.fao.org/figis/flod/onto/codedentityclassification.owl#isClassifiedByCode" } ,
+        "object": { "type": "uri" , "value": "http://www.fao.org/figis/flod/entities/rfbcode/nammco" }
+      } ,
+      {
+        "subject": { "type": "uri" , "value": "http://www.fao.org/figis/flod/entities/codedentity/e1219c88d7437986321d41310f2cfb5fc78896d9" } ,
+        "predicate": { "type": "uri" , "value": "http://purl.org/dc/terms/subject" } ,
+        "object": { "type": "uri" , "value": "http://www.fao.org/figis/flod/entities/rfbcode/nammco" }
+      } ,
+      {
+        "subject": { "type": "uri" , "value": "http://www.fao.org/figis/flod/entities/codedentity/e1219c88d7437986321d41310f2cfb5fc78896d9" } ,
+        "predicate": { "type": "uri" , "value": "http://www.w3.org/2000/01/rdf-schema#label" } ,
+        "object": { "type": "literal" , "xml:lang": "en" , "value": "North Atlantic Marine Mammal Commission (NAMMCO)" }
+      } ,
+      {
+        "subject": { "type": "uri" , "value": "http://www.fao.org/figis/flod/entities/codedentity/e1219c88d7437986321d41310f2cfb5fc78896d9" } ,
+        "predicate": { "type": "uri" , "value": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type" } ,
+        "object": { "type": "uri" , "value": "http://www.fao.org/figis/flod/onto/codedentity.owl#CodedEntity" }
+      }
+    ]
+  }
+}

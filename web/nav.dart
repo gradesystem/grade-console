@@ -73,8 +73,9 @@ class Navigator extends PolymerElement {
   bool sameOrigin(String url) => originUrl!=null && url.startsWith(originUrl);
   
   String extractEndpoint(String url) {
-    if (originUrl==null) return "";
-    String urlPart = url.substring(originUrl.length);
+    if (originUrl==null || originUrl.length>url.length) return "";
+    
+    String urlPart = url.substring(originUrl.length + 1);
     int index = urlPart.indexOf("/");
     return index>=0?urlPart.substring(0,index):urlPart;
   }
@@ -164,6 +165,7 @@ class Navigator extends PolymerElement {
         if (sameOrigin(uri)) {
           
           String endpoint = extractEndpoint(uri);
+          print("endpoint: $endpoint");
           
           pushState(endpoint, uri, inverse);
           result.clean();
