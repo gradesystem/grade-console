@@ -56,6 +56,8 @@ class Navigator extends PolymerElement {
     String uriParam = parameters["uri"];
     String endpoint = parameters["endpoint"];
     
+    if (uriParam == null || endpoint == null) return;
+    
     String uri = Uri.parse(uriParam).toString();
     
     print('uri: $uri');
@@ -87,6 +89,8 @@ class Navigator extends PolymerElement {
   }
   
   void resolveUri(String endpoint, String uri, bool inverse, [RawFormat format = RawFormat.JSON]) {
+    
+    if (uri == null || endpoint == null) return;
     
     this.endpoint = endpoint;
     this.uri = uri;
