@@ -58,12 +58,14 @@ class Navigator extends PolymerElement {
     
     if (uriParam == null || endpoint == null) return;
     
-    String uri = Uri.parse(uriParam).toString();
+    Uri uri = Uri.parse(uriParam);
+    String uriValue = Uri.parse(uriParam).toString();
     
-    print('uri: $uri');
+    print('uriValue: $uriValue');
     
-    int endpointIndex = uri.indexOf("/$endpoint/");
-    if (endpointIndex>=0) originUrl = uri.substring(endpointIndex);
+    int endpointIndex = uriValue.indexOf("/$endpoint/");
+    if (endpointIndex>=0) originUrl = uriValue.substring(0,endpointIndex);
+    else originUrl = uri.authority;
     
     print('originUrl $originUrl');
   }
