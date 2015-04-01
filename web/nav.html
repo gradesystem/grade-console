@@ -1,90 +1,79 @@
 <!DOCTYPE html>
-
 <html>
-<head>
-
-	<meta charset="utf-8">
+  <head>
+		<meta charset="utf-8">
+		<title>Grade Navigator</title>
+		
+		<link href="//fonts.googleapis.com/css?family=Roboto:100,300,400" rel="stylesheet">
+		
+		<link rel="import" href="packages/polymer/polymer.html">
 	
-	<title>Grade Navigator</title>
+	  <link rel="import" href="packages/core_elements/core_toolbar.html">
+	  <link rel="import" href="packages/paper_elements/paper_tab.html">
+	  <link rel="import" href="packages/paper_elements/paper_tabs.html">
+	   
+	  <link rel="import" href="packages/grade_console/common/components/result_panel.html">
+	  <link rel="import" href="packages/grade_console/common/components/grade_header_panel.html">
+	  <link rel="import" href="packages/grade_console/common/queries/raw_result_panel.html">
+	  
+	  <script async src="js/codemirror-compressed.js"></script>
 	
-	<link href="//fonts.googleapis.com/css?family=Roboto:100,300,400" rel="stylesheet">
+	  <script type="application/dart" src="nav.dart"></script>
+	  <script type="text/javascript" src="packages/browser/dart.js"></script>
+	  
+	</head>
 	
-	<link rel="import" href="packages/polymer/polymer.html">
-
-  <link rel="import" href="packages/core_elements/core_toolbar.html">
-  <link rel="import" href="packages/paper_elements/paper_tab.html">
-  <link rel="import" href="packages/paper_elements/paper_tabs.html">
-   
-  <link rel="import" href="packages/grade_console/common/components/result_panel.html">
-  <link rel="import" href="packages/grade_console/common/components/grade_header_panel.html">
-
-  <script type="application/dart" src="nav.dart"></script>
-  <script type="text/javascript" src="packages/browser/dart.js"></script>
-  
-</head>
-
-<body fullbleed>
-
-  <polymer-element vertical layout name="grade-nav"> 
+	<body fullbleed>
 	
-	   <template>
+    <polymer-element vertical layout name="grade-nav"> 
+      <template>
+        <style>
+        </style>
+
+		    <link rel="stylesheet" href="packages/grade_console/grade/themes.css">
+
+			  <core-toolbar class="prod-scaffold" >
+          <div flex large light><span>GRADE</span><span style="color:#0097A7">NAV</span></div>
+			  </core-toolbar>
+	  
+	      <div flex wired rounded spaced layout vertical>
+	      
+          <grade-header-panel class="prod" flex paneltitle="{{uri}}">
+		      
+						<paper-tabs toolbar style="width:200px; display: inline-block;" selected="{{resultTab}}" >
+						  <paper-tab>Table</paper-tab>
+						  <paper-tab>Other</paper-tab>
+						</paper-tabs>
 	
-		  	<style>
-		    
-		    </style>
-    
-    
-    
-    
-	   <link rel="stylesheet" href="packages/grade_console/grade/themes.css">
-  
-      
-		  <core-toolbar class="prod-scaffold" >
-		       <div flex large light><span>GRADE</span><span style="color:#0097A7">NAV</span></div>
-		  </core-toolbar>
-  
-      <div flex wired rounded spaced layout vertical>
-      
-      <grade-header-panel class="prod" flex paneltitle="{{uri}}">
-      
-        <paper-tabs toolbar style="width:200px; display: inline-block;" selected="{{resultTab}}" >
-          <paper-tab>Table</paper-tab>
-          <paper-tab>Other</paper-tab>
-        </paper-tabs>
-
-        <loading-panel main flex loading="false" message="retrieving data">
-
-        <!--<core-animated-pages selected="{{resultTab}}">
-
- 
-              <result-panel spaced
+            <loading-panel main flex loading="false" message="retrieving data">
+              <core-animated-pages fit selected="{{resultTab}}">
+                <result-panel spaced
+                result={{result}} 
                 disabled={{false}} 
                 contentCopyEnabled={{false}}
-                
+                on-eat-crumb={{onEatCrumb}}
                 uriDescribeEnabled={{true}}
-                ></result-panel>
-              
-              <raw-result-panel partial-spaced id="raw-result" result={{editableQuery.lastResult}} on-load-raw={{onLoadRawResult}}>
-              </raw-result-panel> 
-            
-            </core-animated-pages>-->
-
-        </loading-panel>
-      </grade-header-panel>
-     </div>
-
+	                >
+                </result-panel>
+	              
+	              <raw-result-panel partial-spaced id="raw-result" result={{result}} on-load-raw={{onLoadRawResult}}>
+	              </raw-result-panel> 
+	            
+              </core-animated-pages>
+            </loading-panel>
+          </grade-header-panel>
+	     </div>
+	
 			<div class="prod-scaffold" small layout horizontal center center-justified>   
-	          <div>Copyright 2014-2015 GRADE all rights reserved</div>
-			 </div>
-			 		
-		</template> 
-		
- </polymer-element>
- 
-
-       
- <grade-nav></grade-nav>
-  
-</body>
+			  <div>Copyright 2014-2015 GRADE all rights reserved</div>
+			</div>
+				 		
+    </template> 
+	 </polymer-element>
+	 
+	       
+	 <grade-nav></grade-nav>
+	  
+	</body>
 
 </html>
