@@ -24,6 +24,8 @@ class Navigator extends PolymerElement {
   Result result = new Result();
   
   @observable
+  String label;
+  
   String uri;
   String endpoint;
   bool inverse;
@@ -62,12 +64,19 @@ class Navigator extends PolymerElement {
     this.uri = uri;
     this.inverse = inverse;
     
+    this.label = uri;
+    
     result.loading = true;
     result.loadingRaw = true;
     
     service.resolve(endpoint, uri, inverse, format).then((String response) {
       //print('response: $response');
-      if (format == RawFormat.JSON) result.value = new ResulTable(JSON.decode(response));
+      
+      if (format == RawFormat.JSON) {
+        NavResultTable resultTable = new NavResultTable(JSON.decode(response));
+        result.value = resultTable;
+        if (resultTable.label!=null) this.label = resultTable.label;
+      }
       result.raws[format] = response;
     }).whenComplete(() {
       result.loading = false;
@@ -117,6 +126,30 @@ class Navigator extends PolymerElement {
     result.history.goIndex(index);
   }
      
+}
+
+class NavResultTable extends ResulTable {
+  
+  static final String PROPERTY = "Property";
+  static final String VALUE = "Value";
+  
+  List<Map<String, Map>> rows;
+  String label;
+  
+  NavResultTable(Map bean) : super(bean) {
+    this.rows = super.rows.map((Map<String, Map> row){
+      Map predicate = row["predicate"];
+      Map object = row["object"];
+      if (predicate["value"] == "http://www.w3.org/2000/01/rdf-schema#label") label = object["value"];
+      return {
+        PROPERTY:predicate,
+        VALUE:object
+      };
+    }).toList();
+  }
+  
+  List<String> get headers => [PROPERTY,VALUE];
+  
 }
 
 
