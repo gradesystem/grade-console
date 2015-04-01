@@ -108,7 +108,11 @@ class Navigator extends PolymerElement {
         if (label!=null) this.label = label;
       }
       result.raws[format] = response;
-    }).whenComplete(() {
+    })
+    .catchError((ErrorResponse error){
+      if (error.code == 404) redirectTo(uri);
+    })
+    .whenComplete(() {
       result.loading = false;
       result.loadingRaw = false;
     });
@@ -160,10 +164,14 @@ class Navigator extends PolymerElement {
           resolveUri(endpoint, uri, inverse);
         } else {
           result.history.removeLastCrumb();
-          window.open(uri, "");
+          redirectTo(uri);
         }
       }
     }
+  }
+  
+  void redirectTo(String uri) {
+    window.open(uri, "");
   }
   
   void onLoadRawResult(event, detail, target) {
