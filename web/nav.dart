@@ -101,15 +101,46 @@ class Navigator extends PolymerElement {
       //print('response: $response');
       
       if (format == RawFormat.JSON) {
-        NavResultTable resultTable = new NavResultTable(JSON.decode(response));
+        Map json = JSON.decode(response);
+        NavResultTable resultTable = new NavResultTable(json);
         result.value = resultTable;
-        if (resultTable.label!=null) this.label = resultTable.label;
+        String label = getLabel(json);
+        if (label!=null) this.label = label;
       }
       result.raws[format] = response;
     }).whenComplete(() {
       result.loading = false;
       result.loadingRaw = false;
     });
+  }
+  
+  String getLabel(Map json) {
+    List<Map<String, Map>> rows = json["results"]["bindings"];
+    
+    String label;
+    
+    bool isPref = false;
+    bool isEng = false;
+    
+    rows.forEach((Map<String, Map> row){
+      Map predicate = row["predicate"];
+      Map object = row["object"];
+      
+      if (predicate["value"] == "http://www.w3.org/2004/02/skos/core#prefLabel" && (!isPref || !isEng)) {
+        label = object["value"];
+        isPref = true;
+        isEng = object["xml:lang"] == "en";
+      }
+      
+      if (predicate["value"] == "http://www.w3.org/2000/01/rdf-schema#label" && !isPref && (label!=null && !isEng || label==null)) {
+        label = object["value"];
+        isEng = object["xml:lang"] == "en";
+      }
+      
+    });
+    
+    return label;
+
   }
   
   void onEatCrumb(event, detail, target) {
@@ -171,16 +202,12 @@ class NavResultTable extends ResulTable {
   static final String VALUE = "Value";
   
   List<Map<String, Map>> rows;
-  String label;
   
   NavResultTable(Map bean) : super(bean) {
     this.rows = super.rows.map((Map<String, Map> row){
-      Map predicate = row["predicate"];
-      Map object = row["object"];
-      if (predicate["value"] == "http://www.w3.org/2000/01/rdf-schema#label") label = object["value"];
       return {
-        PROPERTY:predicate,
-        VALUE:object
+        PROPERTY:row["predicate"],
+        VALUE:row["object"]
       };
     }).toList();
   }

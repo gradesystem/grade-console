@@ -492,7 +492,6 @@ class ResultHistory extends Observable {
   void removeLastCrumb() {
     if (currentIndex>0) {
       currentIndex--;
-      print('crumbs $crumbs currentIndex: $currentIndex');
       crumbs = toObservable(crumbs.sublist(0, currentIndex + 1));
       _notifyChanges();
     }
