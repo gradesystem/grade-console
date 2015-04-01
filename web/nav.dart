@@ -34,17 +34,26 @@ class Navigator extends PolymerElement {
   
   void ready() {
     service = new NavigatorService();
+    window.onPopState.listen(onPopState);
+    
     navigateCurrentParameters();
   }
   
   void navigateCurrentParameters() {
+    var parameters = getUrlParameters();
+    result.history.init(new DescribeCrumb(parameters["uri"], "", parameters["inverse"]?DescribeType.DESCRIBE_BY_OBJECT:DescribeType.DESCRIBE_BY_SUBJECT));
+    resolveUri(parameters["endpoint"], parameters["uri"], parameters["inverse"]);
+  }
+  
+  Map getUrlParameters() {
     Location location = document.window.location; 
     Uri locationUri = Uri.parse(location.href);
     String uri = locationUri.queryParameters["uri"];
     String endpoint = locationUri.queryParameters["endpoint"];
-    
-    result.clean();
-    resolveUri(endpoint, uri, false);
+    String inverse = locationUri.queryParameters["inverse"];
+    bool inv = inverse !=null && inverse.toLowerCase() == "true";
+    String index = locationUri.queryParameters["index"];
+    return {"endpoint":endpoint, "uri":uri,"inverse":inv, "index":index};
   }
   
   void resolveUri(String endpoint, String uri, bool inverse, [RawFormat format = RawFormat.JSON]) {
@@ -57,7 +66,7 @@ class Navigator extends PolymerElement {
     result.loadingRaw = true;
     
     service.resolve(endpoint, uri, inverse, format).then((String response) {
-      print('response: $response');
+      //print('response: $response');
       if (format == RawFormat.JSON) result.value = new ResulTable(JSON.decode(response));
       result.raws[format] = response;
     }).whenComplete(() {
@@ -69,8 +78,14 @@ class Navigator extends PolymerElement {
   void onEatCrumb(event, detail, target) {
     Crumb crumb = detail;
     if (crumb is DescribeCrumb) {
-      result.clean();
-      resolveUri(endpoint, crumb.uri, crumb.type == DescribeType.DESCRIBE_BY_OBJECT);
+      String uri = crumb.uri;
+      bool inverse = crumb.type == DescribeType.DESCRIBE_BY_OBJECT;
+      
+      if (this.uri != uri || this.inverse != inverse) {
+        pushState(endpoint, uri, inverse);
+        result.clean();
+        resolveUri(endpoint, uri, inverse);
+      }
     }
   }
   
@@ -78,8 +93,32 @@ class Navigator extends PolymerElement {
     RawFormat format = detail;
     resolveUri(endpoint, uri, inverse, format);
   }
+  
+  void pushState(String endpoint, String uri, bool inverse) {
+    print('pushState endpoint: $endpoint uri: $uri inverse: $inverse');
+    
+    Location location = document.window.location; 
+    Uri locationUri = Uri.parse(location.href);
+    int index = result.history.currentIndex;
+    Uri url = locationUri.replace(queryParameters: {"endpoint":endpoint, "uri":uri,"inverse":"$inverse", "index":"$index"});
+
+    window.history.pushState(null, title, url.toString());
+  }
+  
+  void onPopState(PopStateEvent event) {
+
+    var parameters = getUrlParameters();
+    print('onPopState parameters $parameters state: ${event.state} ${event}');
+
+    resolveUri(parameters["endpoint"], parameters["uri"], parameters["inverse"]);
+    
+    String indexParam = parameters["index"];
+    int index = indexParam!=null?int.parse(indexParam):0;
+    result.history.goIndex(index);
+  }
      
 }
+
 
 class NavigatorService {
   
@@ -93,7 +132,7 @@ class NavigatorService {
   Future<String> resolve(String endpoint, String uri, bool inverse, RawFormat format) {
     String path = "$endpoint/resolve";
     Map parameters = {"uri":uri,"inverse":"$inverse"};
-    print('path: $path, parameters: $parameters');
+    //print('path: $path, parameters: $parameters');
     return http.get(path, parameters:parameters, acceptedMediaType: format.value);
   }
   

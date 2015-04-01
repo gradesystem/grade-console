@@ -490,14 +490,19 @@ class ResultHistory extends Observable {
   }
   
   void clear([Query query]) {
-    crumbs.clear();
-    
     Crumb start = (query!=null)? new Crumb(query.get(Query.K.expression), query.get(Query.K.graph), true): new Crumb(null, [], true);
-    crumbs.add(start);
 
-    currentIndex = 0;
-    _notifyChanges();
+    init(start);
   }
+  
+  void init(Crumb start) {
+      crumbs.clear();
+      
+      crumbs.add(start);
+
+      currentIndex = 0;
+      _notifyChanges();
+    }
 
   void _notifyChanges() {
     //print('canGoBack: $canGoBack canGoForward: $canGoForward currentIndex: $currentIndex uris: $uris');
