@@ -29,6 +29,8 @@ class Navigator extends PolymerElement {
   String uri;
   String endpoint;
   bool inverse;
+  
+  String originUrl;
  
   NavigatorService service;
   
@@ -42,9 +44,35 @@ class Navigator extends PolymerElement {
   }
   
   void navigateCurrentParameters() {
+
     var parameters = getUrlParameters();
+    calculateOriginUrl(parameters);
+    
     result.history.init(new DescribeCrumb(parameters["uri"], "", parameters["inverse"]?DescribeType.DESCRIBE_BY_OBJECT:DescribeType.DESCRIBE_BY_SUBJECT));
     resolveUri(parameters["endpoint"], parameters["uri"], parameters["inverse"]);
+  }
+  
+  void calculateOriginUrl(Map parameters) {
+    String uriParam = parameters["uri"];
+    String endpoint = parameters["endpoint"];
+    
+    String uri = Uri.parse(uriParam).toString();
+    
+    print('uri: $uri');
+    
+    int endpointIndex = uri.indexOf("/$endpoint/");
+    if (endpointIndex>=0) originUrl = uri.substring(endpointIndex);
+    
+    print('originUrl $originUrl');
+  }
+  
+  bool sameOrigin(String url) => originUrl!=null && url.startsWith(originUrl);
+  
+  String extractEndpoint(String url) {
+    if (originUrl==null) return "";
+    String urlPart = url.substring(originUrl.length);
+    int index = urlPart.indexOf("/");
+    return index>=0?urlPart.substring(0,index):urlPart;
   }
   
   Map getUrlParameters() {
@@ -89,11 +117,20 @@ class Navigator extends PolymerElement {
     if (crumb is DescribeCrumb) {
       String uri = crumb.uri;
       bool inverse = crumb.type == DescribeType.DESCRIBE_BY_OBJECT;
-      
+
       if (this.uri != uri || this.inverse != inverse) {
-        pushState(endpoint, uri, inverse);
-        result.clean();
-        resolveUri(endpoint, uri, inverse);
+        
+        if (sameOrigin(uri)) {
+          
+          String endpoint = extractEndpoint(uri);
+          
+          pushState(endpoint, uri, inverse);
+          result.clean();
+          resolveUri(endpoint, uri, inverse);
+        } else {
+          result.history.removeLastCrumb();
+          window.open(uri, "");
+        }
       }
     }
   }

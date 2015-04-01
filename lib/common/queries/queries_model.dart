@@ -489,6 +489,15 @@ class ResultHistory extends Observable {
     return currentCrumb;
   }
   
+  void removeLastCrumb() {
+    if (currentIndex>0) {
+      currentIndex--;
+      print('crumbs $crumbs currentIndex: $currentIndex');
+      crumbs = toObservable(crumbs.sublist(0, currentIndex + 1));
+      _notifyChanges();
+    }
+  }
+  
   void clear([Query query]) {
     Crumb start = (query!=null)? new Crumb(query.get(Query.K.expression), query.get(Query.K.graph), true): new Crumb(null, [], true);
 
