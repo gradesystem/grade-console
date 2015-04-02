@@ -32,6 +32,7 @@ class Navigator extends PolymerElement {
   @observable
   String endpoint;
   
+  @observable
   bool inverse;
   
   String originUrl;
