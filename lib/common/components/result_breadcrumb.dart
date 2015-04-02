@@ -36,9 +36,9 @@ class ResultBreadcrumb extends PolymerElement {
           }
         }
         
-      } else return "path:";
+      } else return "start:";
       return uri;
-    } else return "path:";
+    } else return "start:";
     
   };
   
