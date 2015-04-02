@@ -39,12 +39,12 @@
           <div flex large light><span>GRADE</span><span style="color:#0097A7">NAV</span></div>
 			  </core-toolbar>
 	  
-	      <div flex wired rounded spaced layout vertical style="margin-top:20px;margin-bottom:20px;">
+	      <div flex wired rounded spaced layout vertical style="margin:20px 15px">
 	      
           <grade-header-panel class="prod" flex paneltitle="{{label!=null?label:uri}}">
 		      
 		        <div subtitle><template if="{{label!=null && !inverse}}">{{uri}}</template> 
-		        <template if="{{inverse}}">references in</template> 
+		        <template if="{{inverse}}">references available in</template> 
 		        <template if="{{!inverse}}">at</template> 
 		        <span bolder>{{endpoint}}</span></div>
 		      
