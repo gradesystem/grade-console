@@ -1,5 +1,6 @@
 <link rel="import" href="../../../../packages/polymer/polymer.html">
 <link rel="import" href="../../../../packages/core_elements/core_tooltip.html">
+<link rel="import" href="../../../../packages/core_elements/maps_icons.html">
 
 <link rel="import" href="grade_uri.html">
 
@@ -29,6 +30,7 @@
 			       
 			[spacer] {
 			  margin-right: 5px;
+			  line-height: 15px;
 			}
 			
 			[inverse-icon] {
@@ -36,16 +38,22 @@
         min-height: 13px;
         width: 13px;
         min-width: 13px;
+        cursor: pointer;
         /*padding-left: 5px;*/
       }
     </style>
         
     <div horizontal layout fg breadcrumb start lighter hidden?="{{history.crumbs.length==1}}" wrap>
       <template repeat="{{crumb in history.crumbs | enumerate}}">
-        <span bolder spacer hidden?="{{crumb.index==0}}">&gt;</span>
-        <span crumb-index={{crumb.index}} on-click={{onCrumbClick}} crumb smaller current-crumb?="{{history.currentIndex == crumb.index}}" path?="{{crumb.index==0}}">{{crumb.value | label(crumb.index)}}
-        <core-icon inverse-icon icon="arrow-back" hide?="{{!isInverse(crumb.value)}}"></core-icon>
-        </span>
+        <template if="{{crumb.index == 0}}">
+          <core-icon icon="maps:place" inverse-icon crumb-index={{crumb.index}} on-click={{onCrumbClick}}></core-icon>
+        </template>
+        <template if="{{crumb.index != 0}}">
+	        <span bolder spacer hidden?="{{crumb.index==0}}">&gt;</span>
+	        <span crumb-index={{crumb.index}} on-click={{onCrumbClick}} crumb smaller current-crumb?="{{history.currentIndex == crumb.index}}" path?="{{crumb.index==0}}">{{crumb.value | label(crumb.index)}}
+	        </span>
+        </template>
+
       </template>
     </div>
     <script type="application/dart" src="result_breadcrumb.dart"></script> 

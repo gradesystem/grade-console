@@ -15,7 +15,7 @@ class ResultBreadcrumb extends PolymerElement {
     fire("go-crumb", detail:index);
   }
   
-  isInverse(Crumb crumb) => crumb is DescribeCrumb && crumb.type == DescribeType.DESCRIBE_BY_OBJECT;
+  bool isInverse(Crumb crumb) => crumb is DescribeCrumb && crumb.type == DescribeType.DESCRIBE_BY_OBJECT;
   
   label(int index)=>(Crumb crumb) {
     
@@ -25,21 +25,23 @@ class ResultBreadcrumb extends PolymerElement {
         Crumb prev = history.crumbs[index-1];
         if (prev is DescribeCrumb) {
           String prevUri = prev.uri;
-          print('prevUri $prevUri');
           
           String commonPrefix = longestCommonPrefix([prevUri, uri]);
-          print('commonPrefix $commonPrefix');
 
           if (commonPrefix.length>0 && commonPrefix!='${Uri.parse(uri).scheme}://') {
             String uriSuffix = uri.substring(commonPrefix.length);
+            if (isInverse(crumb)) uriSuffix += " (B)";
             return "...$uriSuffix";
           }
         }
         
       } else return "start:";
+      if (isInverse(crumb)) uri += " (B)";
       return uri;
     } else return "start:";
     
   };
+
+  
   
 }
