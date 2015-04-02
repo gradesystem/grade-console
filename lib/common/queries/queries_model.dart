@@ -361,7 +361,7 @@ class EditableQuery extends EditableModel<Query> with Keyed {
 
   void queryResult(RawFormat rawFormat, String result) {
     queryRunning = false;
-    if (rawFormat == RawFormat.JSON) lastResult.value = new ResulTable(JSON.decode(result));
+    if (rawFormat == RawFormat.JSON) lastResult.value = new ResultTable(JSON.decode(result));
     lastResult.raws[rawFormat] = result;
   }
 
@@ -382,9 +382,9 @@ class EditableQuery extends EditableModel<Query> with Keyed {
   String toString() => 'EditableQuery $model';
 }
 
-class ResulTable extends Delegate {
+class ResultTable extends Delegate {
 
-  ResulTable(Map bean) : super(bean);
+  ResultTable(Map bean) : super(bean);
 
   List<String> get headers => get("head")["vars"];
   List<Map<String, Map>> get rows => get("results")["bindings"];
@@ -418,7 +418,7 @@ class RawFormat {
 class Result extends Observable {
   
   @observable
-  ResulTable value;
+  ResultTable value;
 
   @observable
   bool loading = false;

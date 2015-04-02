@@ -109,7 +109,7 @@ class Navigator extends PolymerElement {
       
       if (format == RawFormat.JSON) {
         Map json = JSON.decode(response);
-        ResulTable resultTable = new ResulTable(json);
+        ResultTable resultTable = new ResultTable(json);
        // addUriInformation(resultTable);
         result.value = resultTable;
         String label = getLabel(json);

@@ -290,10 +290,10 @@ class TasksModel extends SubPageEditableModel<Task> {
   void retrieveTransformResult(RunningTask runningTask, [Crumb crumb])
     => retrieveResult(runningTask, executionsService.getTransformResult, runningTask.transform, crumb:crumb, limit:runningTask.resultsLimit);
   
-  void retrieveResult(RunningTask runningTask, Future<ResulTable> retriever(RunningTask, {uri,limit}), Result result, {Crumb crumb, int limit}) {
+  void retrieveResult(RunningTask runningTask, Future<ResultTable> retriever(RunningTask, {uri,limit}), Result result, {Crumb crumb, int limit}) {
     result.loading = true;
     retriever(runningTask.execution, uri:crumb is DescribeCrumb?crumb.uri:null, limit:limit)
-    .then((ResulTable resultQuery){
+    .then((ResultTable resultQuery){
       result.value = resultQuery;
     }).catchError((e) => onError(e, null)).whenComplete(() {
       result.loading = false;

@@ -24,7 +24,7 @@ class ResultPanel extends PolymerElement {
     
   ResultPanel.created() : super.created();
   
-  List toTable(ResulTable qresult) {
+  List toTable(ResultTable qresult) {
 
     List<List<Map>> list = [];
 

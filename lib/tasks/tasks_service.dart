@@ -44,18 +44,18 @@ class TaskExecutionsService extends ListService<TaskExecution> {
   Future<TaskExecution> stopTaskExecution(TaskExecution execution) 
     => http.postJSon(getItemPath(execution.id), "").then(generator);
 
-  Future<ResulTable> getTransformResult(TaskExecution execution, {String uri, int limit})     
+  Future<ResultTable> getTransformResult(TaskExecution execution, {String uri, int limit})     
     => _getResult(execution, "transform", uri:uri,limit:limit);
 
-  Future<ResulTable> getDifferenceResult(TaskExecution execution, {String uri, int limit})     
+  Future<ResultTable> getDifferenceResult(TaskExecution execution, {String uri, int limit})     
     => _getResult(execution, "difference", uri:uri,limit:limit); 
   
-  Future<ResulTable> getTargetResult(TaskExecution execution, {String uri, int limit})     
+  Future<ResultTable> getTargetResult(TaskExecution execution, {String uri, int limit})     
     => _getResult(execution, "target", uri:uri,limit:limit);
   
-  Future<ResulTable> _getResult(TaskExecution execution, String resultpath, {String uri, int limit})     
+  Future<ResultTable> _getResult(TaskExecution execution, String resultpath, {String uri, int limit})     
      => http.get("${getItemPath(execution.id)}/results/$resultpath", acceptedMediaType:MediaType.SPARQL_JSON, parameters: getParameters(uri:uri,limit:limit))
-     .then((response) => new ResulTable(http.decode(response)));
+     .then((response) => new ResultTable(http.decode(response)));
   
   Map getParameters({String uri, int limit}) {
     Map parameters = {};
