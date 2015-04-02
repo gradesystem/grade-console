@@ -105,11 +105,11 @@ class Navigator extends PolymerElement {
     result.loadingRaw = true;
     
     service.resolve(endpoint, uri, inverse, format).then((String response) {
-      //print('response: $response');
+      print('response: $response');
       
       if (format == RawFormat.JSON) {
         Map json = JSON.decode(response);
-        NavResultTable resultTable = new NavResultTable(json);
+        ResulTable resultTable = new ResulTable(json);
        // addUriInformation(resultTable);
         result.value = resultTable;
         String label = getLabel(json);
@@ -117,8 +117,9 @@ class Navigator extends PolymerElement {
       }
       result.raws[format] = response;
     })
-    .catchError((ErrorResponse error){
-      if (error.code == 404) redirectTo(uri);
+    .catchError((error){
+      print("$error");
+     // if (error.code == 404) redirectTo(uri);
     })
     .whenComplete(() {
       result.loading = false;
@@ -137,6 +138,8 @@ class Navigator extends PolymerElement {
     rows.forEach((Map<String, Map> row){
       Map predicate = row["predicate"];
       Map object = row["object"];
+      
+      if (predicate == null || object == null) return;
       
       if (predicate["value"] == "http://www.w3.org/2004/02/skos/core#prefLabel" && (!isPref || !isEng)) {
         label = object["value"];
@@ -229,41 +232,42 @@ class Navigator extends PolymerElement {
      
 }
 
-class NavResultTable extends ResulTable {
-  
-  static final String PROPERTY = "Property";
-  static final String VALUE = "Value";
-  
-  List<Map<String, Map>> rows;
-  
-  NavResultTable(Map bean) : super(bean) {
-    this.rows = super.rows.map((Map<String, Map> row){
-      return {
-        PROPERTY:row["predicate"],
-        VALUE:row["object"]
-      };
-    }).toList();
-  }
-  
-  List<String> get headers => [PROPERTY,VALUE];
-  
-}
-
-
 class NavigatorService {
   
-  GradeService http;
+  QueryService queryService;
   
   NavigatorService() {
-    String base_url = "prod/endpoint";
-    http = new GradeService(base_url);
+    queryService = new QueryService("", "prod");
   }
   
   Future<String> resolve(String endpoint, String uri, bool inverse, RawFormat format) {
-    String path = "$endpoint/resolve";
-    Map parameters = {"uri":uri,"backwards":"$inverse"};
-    //print('path: $path, parameters: $parameters');
-    return http.get(path, parameters:parameters, acceptedMediaType: format.value);
+       
+    String expression = calculateExpression(uri, inverse);
+        
+    Query query = new Query.fromBean("", "", {
+      Query.K.target:endpoint,
+      Query.K.expression:expression,
+      Query.K.graph:[]
+    });
+    return queryService.runQuery(query, {}, 1000, format);
+  }
+  
+  String calculateExpression(String uri, bool inverse) {
+    if (!inverse) {
+      return """select ?Property ?Value {
+                  graph ?g {
+                    <$uri> ?Property ?Value
+                 }
+                }
+                order by ?Property""";
+    } else {
+      return """select ?Resource ?Value {
+                  graph ?g {
+                    ?Resource ?Value <$uri>
+                 }
+                }
+                order by ?Value""";
+    }
   }
   
 }
