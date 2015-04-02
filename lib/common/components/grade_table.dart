@@ -24,11 +24,13 @@ class GradeTable extends View {
   isUri(Map m) => m is Map && m != null && m['type'] == "uri";
 
   void uriClick(event, detail, target) {
+    print('uriClick $target');
     //we filter not clickable uri
     if (target.attributes['cell-type'] == "uri") fire("uri-click", detail:target.attributes['cell-value']);
   }
   
   void uriDescribe(event, detail, target) {
+    print('uriDescribe $target');
     //we filter not clickable uri
     if (target.attributes['cell-type'] == "uri") fire("uri-describe", detail:target.attributes['cell-value']);
   }

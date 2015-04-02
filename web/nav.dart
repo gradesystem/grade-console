@@ -110,6 +110,7 @@ class Navigator extends PolymerElement {
       if (format == RawFormat.JSON) {
         Map json = JSON.decode(response);
         NavResultTable resultTable = new NavResultTable(json);
+       // addUriInformation(resultTable);
         result.value = resultTable;
         String label = getLabel(json);
         if (label!=null) this.label = label;
@@ -154,7 +155,21 @@ class Navigator extends PolymerElement {
 
   }
   
+  /*void addUriInformation(ResulTable result) {
+    for (Map<String, Map> row in result.rows) {
+      for (String header in result.headers) {
+        Map cell = row[header];
+        String type = cell["type"];
+        String value = cell["value"];
+        if (type != null && type == "uri" && value !=null) {
+          cell["internal-uri"] = sameOrigin(uri);
+        }
+      }
+    }
+  }*/
+  
   void onEatCrumb(event, detail, target) {
+    print('onEatCrumb $detail');
     Crumb crumb = detail;
     if (crumb is DescribeCrumb) {
       String uri = crumb.uri;
@@ -162,9 +177,11 @@ class Navigator extends PolymerElement {
 
       if (this.uri != uri || this.inverse != inverse) {
         
-        if (sameOrigin(uri)) {
+        print('originUrl $originUrl');
+        
+        if (sameOrigin(uri) || inverse) {
           
-          String endpoint = extractEndpoint(uri);
+          String endpoint = sameOrigin(uri)?extractEndpoint(uri):this.endpoint;
           print("endpoint: $endpoint");
           
           pushState(endpoint, uri, inverse);

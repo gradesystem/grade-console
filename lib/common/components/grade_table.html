@@ -54,10 +54,10 @@
 	    }
 	    
 	    [result-icon] {
-	      height: 12px;
-	      min-height: 12px;
-        width: 12px;
-        min-width: 12px;
+	      height: 14px;
+	      min-height: 14px;
+        width: 14px;
+        min-width: 14px;
         padding-left: 5px;
 	    }
 	    
@@ -85,7 +85,7 @@
                 <span fg?="{{ (cell['value'] | suffix) == ''}}" start>{{cell['value'] | start }}</span><span fg>{{ cell['value'] | suffix}}</span>
               </div>
               
-               <core-icon onhover result-icon icon="bookmark-outline" on-click={{uriDescribe}} hide?="{{!uriDescribeEnabled || !isUri(cell)}}" cell-value="{{cell['value']}}" cell-type="{{cell['type']}}"></core-icon>
+               <core-icon onhover result-icon icon="arrow-back" on-click={{uriDescribe}} hide?="{{!uriDescribeEnabled || !isUri(cell)}}" cell-value="{{cell['value']}}" cell-type="{{cell['type']}}"></core-icon>
                <core-icon onhover result-icon icon="content-copy" on-click={{copyContent}} cell-value="{{cell['value']}}" hide?="{{!contentCopyEnabled}}"></core-icon>
                
             </div>
