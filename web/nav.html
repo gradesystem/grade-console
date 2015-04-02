@@ -28,8 +28,8 @@
     <polymer-element vertical layout name="grade-nav"> 
       <template>
         <style>
-          [endpoint] {
-            color: cyan;
+          [subtitle] {
+            font-size: 12px;
           }
         </style>
 
@@ -43,10 +43,10 @@
 	      
           <grade-header-panel class="prod" flex paneltitle="{{label!=null?label:uri}}">
 		      
-		        <div subtitle smallish><template if="{{label!=null && !inverse}}">{{uri}}</template> 
+		        <div subtitle><template if="{{label!=null && !inverse}}">{{uri}}</template> 
 		        <template if="{{inverse}}">references in</template> 
 		        <template if="{{!inverse}}">at</template> 
-		        <span endpoint>{{endpoint}}</span></div>
+		        <span bolder>{{endpoint}}</span></div>
 		      
 						<paper-tabs toolbar style="width:200px; display: inline-block;" selected="{{resultTab}}" >
 						  <paper-tab>Table</paper-tab>
