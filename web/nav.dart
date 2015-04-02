@@ -133,7 +133,6 @@ class Navigator extends PolymerElement {
   
   String getLabel(Map json) {
     List<Map<String, Map>> rows = json["results"]["bindings"];
-    print('getLabel rows: $rows');
     
     String label;
     
@@ -143,10 +142,6 @@ class Navigator extends PolymerElement {
     rows.forEach((Map<String, Map> row){
       Map predicate = row.containsKey("Property")?row["Property"]:row["Resource"];
       Map object = row["Value"];
-      
-      print('forEach label $label isPref: $isPref isEng: $isEng');
-      print('predicate: $predicate');
-      print('object: $object');
       
       if (predicate == null || object == null) return;
       
@@ -166,19 +161,6 @@ class Navigator extends PolymerElement {
     return label;
 
   }
-  
-  /*void addUriInformation(ResulTable result) {
-    for (Map<String, Map> row in result.rows) {
-      for (String header in result.headers) {
-        Map cell = row[header];
-        String type = cell["type"];
-        String value = cell["value"];
-        if (type != null && type == "uri" && value !=null) {
-          cell["internal-uri"] = sameOrigin(uri);
-        }
-      }
-    }
-  }*/
   
   void onEatCrumb(event, detail, target) {
     print('onEatCrumb $detail');
