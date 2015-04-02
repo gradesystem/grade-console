@@ -224,22 +224,6 @@ class GraphDialog extends PolymerElement with Filters {
   }
   
   String endpointDefaultUri(EditableEndpoint endpoint) => "http://data.gradesystem.eu/graphs/${endpoint.model.name}"; 
-  
-  String longestCommonPrefix(List<String> strings) {
-      if (strings.isEmpty) return "";
-
-      String candidate = strings[0];
-      for (int prefixLen = 0; prefixLen < candidate.length; prefixLen++) {
-          int c = candidate.codeUnitAt(prefixLen);
-          for (int i = 1; i < strings.length; i++) {
-              if (prefixLen >= strings[i].length 
-                  || strings[i].codeUnitAt(prefixLen) != c) {
-                  return strings[i].substring(0, prefixLen);
-              }
-          }
-      }
-      return candidate;
-  }
 
 }
 

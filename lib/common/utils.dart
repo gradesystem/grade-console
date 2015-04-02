@@ -141,6 +141,22 @@ class GradeListPathObserver<E, P> extends ChangeNotifier {
 
 int compareIgnoreCase(String s1, String s2) => s1.toLowerCase().compareTo(s2.toLowerCase());
 
+String longestCommonPrefix(List<String> strings) {
+      if (strings.isEmpty) return "";
+
+      String candidate = strings[0];
+      for (int prefixLen = 0; prefixLen < candidate.length; prefixLen++) {
+          int c = candidate.codeUnitAt(prefixLen);
+          for (int i = 1; i < strings.length; i++) {
+              if (prefixLen >= strings[i].length 
+                  || strings[i].codeUnitAt(prefixLen) != c) {
+                  return strings[i].substring(0, prefixLen);
+              }
+          }
+      }
+      return candidate;
+  }
+
 
 class VersionChecker {
 

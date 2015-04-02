@@ -1,5 +1,6 @@
 import 'package:polymer/polymer.dart';
 import 'package:grade_console/common/queries/queries.dart';
+import 'package:grade_console/common.dart';
 
 @CustomTag("result-breadcrumb")
 class ResultBreadcrumb extends PolymerElement {
@@ -14,6 +15,29 @@ class ResultBreadcrumb extends PolymerElement {
     fire("go-crumb", detail:index);
   }
   
-  String label(Crumb crumb) => crumb is DescribeCrumb?crumb.uri:"path:";
+  label(int index)=>(Crumb crumb) {
+    
+    if (crumb is DescribeCrumb) {
+      String uri = crumb.uri;
+      if (index > 0) {
+        Crumb prev = history.crumbs[index-1];
+        if (prev is DescribeCrumb) {
+          String prevUri = prev.uri;
+          print('prevUri $prevUri');
+          
+          String commonPrefix = longestCommonPrefix([prevUri, uri]);
+          print('commonPrefix $commonPrefix');
+
+          if (commonPrefix.length>0 && commonPrefix!='${Uri.parse(uri).scheme}://') {
+            String uriSuffix = uri.substring(commonPrefix.length);
+            return "...$uriSuffix";
+          }
+        }
+        
+      }
+      return uri;
+    } else return "path:";
+    
+  };
   
 }
