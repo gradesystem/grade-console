@@ -55,14 +55,28 @@
 	
             <loading-panel main flex loading="false" message="retrieving data">
               <core-animated-pages fit selected="{{resultTab}}">
-                <result-panel spaced
-                result={{result}} 
-                disabled={{false}} 
-                contentCopyEnabled={{false}}
-                on-eat-crumb={{onEatCrumb}}
-                uriDescribeEnabled={{true}}
-	                >
-                </result-panel>
+                <div fit>
+	                <template if="{{result.value.rows.isEmpty}}">
+	                  <div fit vertical center-justified layout center>
+	                     <div>
+	                       No much information about this resource in <span bolder>{{endpoint}}</span>.</div>
+	                       <div>Connect with us to grow our knowledge base.
+	                     </div>
+	                  </div>
+	                </template>
+	                <template if="{{result.value.rows.isNotEmpty}}">
+		                 <result-panel spaced fit 
+				                result={{result}} 
+				                disabled={{false}} 
+				                contentCopyEnabled={{false}}
+				                on-eat-crumb={{onEatCrumb}}
+				                uriDescribeEnabled={{true}}
+				                  >
+			                </result-panel>
+	                </template>
+                </div>
+                
+               
 	              
 	              <raw-result-panel partial-spaced id="raw-result" result={{result}} on-load-raw={{onLoadRawResult}}>
 	              </raw-result-panel> 
