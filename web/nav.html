@@ -28,6 +28,9 @@
     <polymer-element vertical layout name="grade-nav"> 
       <template>
         <style>
+          [endpoint] {
+            color: cyan;
+          }
         </style>
 
 		    <link rel="stylesheet" href="packages/grade_console/grade/themes.css">
@@ -38,7 +41,9 @@
 	  
 	      <div flex wired rounded spaced layout vertical style="margin-top:20px;margin-bottom:20px;">
 	      
-          <grade-header-panel class="prod" flex paneltitle="{{label}}">
+          <grade-header-panel class="prod" flex paneltitle="{{label!=null?label:uri}}">
+		      
+		        <div subtitle smallish><template if="{{label!=null}}">{{uri}}</template> at <span endpoint>{{endpoint}}</span></div>
 		      
 						<paper-tabs toolbar style="width:200px; display: inline-block;" selected="{{resultTab}}" >
 						  <paper-tab>Table</paper-tab>

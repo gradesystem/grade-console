@@ -26,8 +26,12 @@ class Navigator extends PolymerElement {
   @observable
   String label;
   
+  @observable
   String uri;
+  
+  @observable
   String endpoint;
+  
   bool inverse;
   
   String originUrl;
@@ -99,7 +103,7 @@ class Navigator extends PolymerElement {
     this.uri = uri;
     this.inverse = inverse;
     
-    this.label = uri;
+    this.label = null;
     
     result.loading = true;
     result.loadingRaw = true;
@@ -112,8 +116,7 @@ class Navigator extends PolymerElement {
         ResultTable resultTable = new ResultTable(json);
        // addUriInformation(resultTable);
         result.value = resultTable;
-        String label = getLabel(json);
-        if (label!=null) this.label = label;
+        this.label = getLabel(json);
       }
       result.raws[format] = response;
     })
@@ -136,8 +139,8 @@ class Navigator extends PolymerElement {
     bool isEng = false;
     
     rows.forEach((Map<String, Map> row){
-      Map predicate = row["predicate"];
-      Map object = row["object"];
+      Map predicate = row.containsKey("Property")?row["Property"]:row["Resource"];
+      Map object = row["Value"];
       
       if (predicate == null || object == null) return;
       
