@@ -22,15 +22,22 @@ class GradeTable extends View {
   GradeTable.created() : super.created();
   
   isUri(Map m) => m is Map && m != null && m['type'] == "uri";
+  
+  bool sawBefore(int rowIndex, int cellIndex) => rowIndex>0 && areLeftCellEquals(rowIndex, cellIndex);
+  
+  bool areLeftCellEquals(int rowIndex, int cellIndex) {
+    for (int i = 0; i<cellIndex+1; i++) {
+      if (data[rowIndex][i]['value'] != data[rowIndex-1][i]['value']) return false;
+    }
+    return true;
+  }
 
   void uriClick(event, detail, target) {
-    print('uriClick $target');
     //we filter not clickable uri
     if (target.attributes['cell-type'] == "uri") fire("uri-click", detail:target.attributes['cell-value']);
   }
   
   void uriDescribe(event, detail, target) {
-    print('uriDescribe $target');
     //we filter not clickable uri
     if (target.attributes['cell-type'] == "uri") fire("uri-describe", detail:target.attributes['cell-value']);
   }
