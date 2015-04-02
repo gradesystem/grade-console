@@ -27,14 +27,6 @@ class QueryService extends EditableListService<Query> {
 
     return http.post(SUBMIT_PATH, JSON.encode(query.bean), acceptedMediaType: format.value, parameters:uriParameters);
   }
-  
-  dynamic _decode(String json) {
-    try {
-      return JSON.decode(json);
-    } catch(e) {
-      throw new ErrorResponse(-1, "Failed parsing response", "Response: $json");
-    }
-  }
 
   Map<String, String> _getQueryParameters(Query query, Map<String, String> parameters) {
     Map<String, String> uriParameters = {};

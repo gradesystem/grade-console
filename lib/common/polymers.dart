@@ -8,8 +8,6 @@ abstract class Polybase extends PolymerElement with Dependencies, Filters {
   
   @observable var model;
   
-  Type _type;
-  
   Polybase.created() : this.createWith(null);
   
   Polybase.createWith(Type type) : super.created() {
@@ -35,8 +33,6 @@ abstract class Polybase extends PolymerElement with Dependencies, Filters {
   }
   
   _initFromName() {
-    
-    _type = dynamic;
     
     String modelname = attributes[model_attr];
          
