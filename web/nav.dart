@@ -105,7 +105,7 @@ class Navigator extends PolymerElement {
     result.loadingRaw = true;
     
     service.resolve(endpoint, uri, inverse, format).then((String response) {
-      print('response: $response');
+      //print('response: $response');
       
       if (format == RawFormat.JSON) {
         Map json = JSON.decode(response);
@@ -118,8 +118,8 @@ class Navigator extends PolymerElement {
       result.raws[format] = response;
     })
     .catchError((error){
-      print("$error");
-     // if (error.code == 404) redirectTo(uri);
+      print('error $error');
+      if (error is ErrorResponse && error.code == 404) redirectTo(uri);
     })
     .whenComplete(() {
       result.loading = false;
