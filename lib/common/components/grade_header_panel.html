@@ -30,7 +30,10 @@
         
         <div flex>
           <div bolder>{{paneltitle}}</div>
-          <div subtitle>{{panelsubtitle}}</div>
+          <template if="{{panelsubtitle!=null}}"  >
+            <div smallish>{{panelsubtitle}}</div>
+          </template>
+          <content select="[subtitle]"></content>
         </div>
 
         <div layout horizontal center>            
