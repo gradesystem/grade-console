@@ -8,6 +8,7 @@
     <style>  
 
 			[breadcrumb] {
+			 height: 38px;
 			}
 			
 			[path] {
@@ -39,7 +40,7 @@
       }
     </style>
         
-    <div horizontal layout fg breadcrumb center lighter hidden?="{{history.crumbs.length==1}}" wrap>
+    <div horizontal layout fg breadcrumb start lighter hidden?="{{history.crumbs.length==1}}" wrap>
       <template repeat="{{crumb in history.crumbs | enumerate}}">
         <span bolder spacer hidden?="{{crumb.index==0}}">&gt;</span>
         <span crumb-index={{crumb.index}} on-click={{onCrumbClick}} crumb smaller current-crumb?="{{history.currentIndex == crumb.index}}" path?="{{crumb.index==0}}">{{crumb.value | label(crumb.index)}}
