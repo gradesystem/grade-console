@@ -29,12 +29,22 @@
 			[spacer] {
 			  margin-right: 5px;
 			}
+			
+			[inverse-icon] {
+        height: 13px;
+        min-height: 13px;
+        width: 13px;
+        min-width: 13px;
+        /*padding-left: 5px;*/
+      }
     </style>
         
-    <div horizontal layout fg breadcrumb center lighter hidden?="{{history.crumbs.length==1}}">
-      <template repeat="{{crumb in history.crumbs | enumerate}}" >
+    <div horizontal layout fg breadcrumb center lighter hidden?="{{history.crumbs.length==1}}" wrap>
+      <template repeat="{{crumb in history.crumbs | enumerate}}">
         <span bolder spacer hidden?="{{crumb.index==0}}">&gt;</span>
-        <span crumb-index={{crumb.index}} on-click={{onCrumbClick}} crumb smaller current-crumb?="{{history.currentIndex == crumb.index}}" path?="{{crumb.index==0}}">{{crumb.value | label(crumb.index)}}</span>
+        <span crumb-index={{crumb.index}} on-click={{onCrumbClick}} crumb smaller current-crumb?="{{history.currentIndex == crumb.index}}" path?="{{crumb.index==0}}">{{crumb.value | label(crumb.index)}}
+        <core-icon inverse-icon icon="arrow-back" hide?="{{!isInverse(crumb.value)}}"></core-icon>
+        </span>
       </template>
     </div>
     <script type="application/dart" src="result_breadcrumb.dart"></script> 

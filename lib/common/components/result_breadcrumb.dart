@@ -15,6 +15,8 @@ class ResultBreadcrumb extends PolymerElement {
     fire("go-crumb", detail:index);
   }
   
+  isInverse(Crumb crumb) => crumb is DescribeCrumb && crumb.type == DescribeType.DESCRIBE_BY_OBJECT;
+  
   label(int index)=>(Crumb crumb) {
     
     if (crumb is DescribeCrumb) {
@@ -34,7 +36,7 @@ class ResultBreadcrumb extends PolymerElement {
           }
         }
         
-      }
+      } else return "path:";
       return uri;
     } else return "path:";
     
