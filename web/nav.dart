@@ -132,6 +132,7 @@ class Navigator extends PolymerElement {
   
   String getLabel(Map json) {
     List<Map<String, Map>> rows = json["results"]["bindings"];
+    print('getLabel rows: $rows');
     
     String label;
     
@@ -141,6 +142,10 @@ class Navigator extends PolymerElement {
     rows.forEach((Map<String, Map> row){
       Map predicate = row.containsKey("Property")?row["Property"]:row["Resource"];
       Map object = row["Value"];
+      
+      print('forEach label $label isPref: $isPref isEng: $isEng');
+      print('predicate: $predicate');
+      print('object: $object');
       
       if (predicate == null || object == null) return;
       
