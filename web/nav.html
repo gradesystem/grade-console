@@ -56,15 +56,15 @@
             <loading-panel main flex loading="false" message="retrieving data">
               <core-animated-pages fit selected="{{resultTab}}">
                 <div fit>
-<!-- 	                <template if="{{result.value.rows.isEmpty}}"> -->
-<!-- 	                  <div fit vertical center-justified layout center> -->
-<!-- 	                     <div> -->
-<!-- 	                       No much information about this resource in <span bolder>{{endpoint}}</span>.</div> -->
-<!-- 	                       <div>Connect with us to grow our knowledge base. -->
-<!-- 	                     </div> -->
-<!-- 	                  </div> -->
-<!-- 	                </template> -->
-<!-- 	                <template if="{{result.value.rows.isNotEmpty}}"> -->
+	                <template if="{{result.value.rows.isEmpty}}">
+	                  <div fit vertical center-justified layout center>
+	                     <div>
+	                       No much information about this resource in <span bolder>{{endpoint}}</span>.</div>
+	                       <div>Connect with us to grow our knowledge base.
+	                     </div>
+	                  </div>
+	                </template>
+	                <template if="{{result.value.rows.isNotEmpty}}">
 		                 <result-panel spaced fit 
 				                result={{result}} 
 				                disabled={{false}} 
@@ -73,7 +73,7 @@
 				                uriDescribeEnabled={{true}}
 				                  >
 			                </result-panel>
-<!-- 	                </template> -->
+	                </template>
                 </div>
                 
                

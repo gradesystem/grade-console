@@ -1,4 +1,0 @@
-{
-  "version":"${buildNumber}",
-  "timestamp":"${build-timestamp}"
-}
