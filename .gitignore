@@ -2,6 +2,19 @@
 build/
 packages/
 web/packages
+web/css/packages
+web/images/packages
+web/js/packages
+web/service/catalogue/endpoint/packages
+web/service/catalogue/packages
+web/service/packages
+web/service/prod/endpoint/packages
+web/service/prod/packages
+web/service/prod/query/all_datasets/packages
+web/service/prod/query/packages
+web/service/stage/endpoint/packages
+web/service/stage/packages
+
 target/
 
 # Or the files created by dart2js.
