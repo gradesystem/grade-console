@@ -1,0 +1,9 @@
+[ {
+  "http://gradesystem.io/onto#id" : "d87e6e6e-908a-4fa2-a909-3de2362bae95",
+  "http://gradesystem.io/onto/query.owl#name" : "all_datasets",
+  "http://gradesystem.io/onto/query.owl#target" : "staging",
+  "http://gradesystem.io/onto/query.owl#graph" : [ ],
+  "http://gradesystem.io/onto/query.owl#expression" : "construct {?g ?p ?o . ?g <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://gradesystem.io/onto#root>}  where {graph ?g {?g ?p ?o}}",
+  "http://gradesystem.io/onto/query.owl#note" : null,
+  "http://gradesystem.io/onto/query.owl#predefined" : true
+} ]
